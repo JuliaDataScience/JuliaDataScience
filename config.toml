@@ -1,0 +1,9 @@
+[projects]
+
+  [projects.default]
+  contents = [
+    "preface",
+    "julia"
+  ]
+  port = 8004
+  output_filename = "juliadatascience"

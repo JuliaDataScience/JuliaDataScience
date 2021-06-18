@@ -30,7 +30,7 @@ jobs:
             ${{ runner.os }}-test-
             ${{ runner.os }}-
 
-      # Updates in the registry usually takes hours to propagate.
+      # Enforce most recent version.
       - name: Install Books.jl#main
         run: julia --project -e 'using Pkg;
           Pkg.add(url="https://github.com/rikhuijzer/Books.jl#main");'

@@ -1,13 +1,13 @@
 ---
 title: Julia Data Science
-subtitle: Automate work and manage complexity
+subtitle: No subtitle yet.
 book: true
 author: Rik Huijzer & Jose Storopoli
-html-license: <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
-tex-license: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+html-license: <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+tex-license: Creative Commons Attribution-NonCommerical-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 lang: en-US
-tags: [pandoc, Books.jl, tools, science, Git, JuliaLang]
-repo: https://github.com/rikhuijzer/tools
+tags: [pandoc, science, Git, JuliaLang]
+repo: https://github.com/JuliaDataScience/JuliaDataScience
 geometry:
   - top=20mm
   - left=24mm

@@ -1,11 +1,15 @@
 module JuliaDataScience
 
+import Books
+
 using AlgebraOfGraphics
 using CairoMakie
 using Makie
 using Plots
 
-greet() = print("Hello World!")
+plot = Plots.plot
+
+include("plots.jl")
 
 function myplot()
     I = 1:30
@@ -14,11 +18,15 @@ function myplot()
     draw(xy)
 end
 
-# TODO: Add workaround.
+"""
+    build()
 
-function myplots()
-    p = Plots.plot(rand(10, 10))
-    savefig(p, "tmp.svg")
+This method is called during CI.
+"""
+function build()
+    println("Building tools")
+    Books.gen(; M=JuliaDataScience, fail_on_error=true)
+    Books.build_all()
 end
 
 end # module

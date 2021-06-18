@@ -6,7 +6,7 @@ author: Rik Huijzer & Jose Storopoli
 html-license: <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
 tex-license: Creative Commons Attribution-NonCommerical-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 lang: en-US
-tags: [pandoc, science, Git, JuliaLang]
+tags: [JuliaLang, Data Science, Data Visualization, Data Manipulation, Data Analysis]
 repo: https://github.com/JuliaDataScience/JuliaDataScience
 geometry:
   - top=20mm

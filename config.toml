@@ -3,8 +3,10 @@
   [projects.default]
   contents = [
     "preface",
-    "julia",
-    "plots_overview",
+    "why_julia",
+    "julia_101",
+    "dataframes_overview",
+    "plots_overview"
   ]
   port = 8004
   output_filename = "juliadatascience"

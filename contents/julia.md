@@ -1,3 +1,0 @@
-# Julia {#sec:julia}
-
-Dolar

@@ -6,14 +6,17 @@ using AlgebraOfGraphics
 using CairoMakie
 using Makie
 using Plots
+using InteractiveUtils
+using Pkg:dependencies
 
 plot = Plots.plot
 
+include("environment.jl")
 include("plots.jl")
 
 function myplot()
     I = 1:30
-    xy = mapping([I] => :x, [I.*2] => :y)
+    xy = mapping([I] => :x, [I .* 2] => :y)
 
     draw(xy)
 end

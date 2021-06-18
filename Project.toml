@@ -1,6 +1,6 @@
 name = "JuliaDataScience"
 uuid = "6c596d62-2771-44f8-8373-3ec4b616ee9d"
-authors = ["Rik Huijzer", "José Storopoli"]
+authors = ["Rik Huijzer", "Jose Storopoli"]
 version = "0.1.0"
 
 [deps]

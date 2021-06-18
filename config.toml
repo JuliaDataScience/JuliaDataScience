@@ -6,7 +6,8 @@
     "why_julia",
     "julia_101",
     "dataframes_overview",
-    "plots_overview"
+    "plots_overview",
+    "appendix"
   ]
   port = 8004
   output_filename = "juliadatascience"

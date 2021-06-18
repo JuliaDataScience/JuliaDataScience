@@ -6,5 +6,5 @@ function pkg_deps()
 	deps = filter(p -> !isnothing(p.version), deps)
 	list = ["$(p.name) $(p.version)" for p in deps]
 	sort!(list)
-	join(list, '\n')
+	Books.code_block(string(join(list, '\n')))
 end

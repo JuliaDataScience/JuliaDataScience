@@ -1,8 +1,7 @@
 module JuliaDataScience
 
-import Books
-
 using AlgebraOfGraphics
+using Books
 using CairoMakie
 using Makie
 using Plots

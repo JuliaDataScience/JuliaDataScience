@@ -4,7 +4,7 @@
 using Plots
 ```
 
-```{.include}
-_gen/plot_line.md
+```jl
+@sco(plot_line)
 ```
 

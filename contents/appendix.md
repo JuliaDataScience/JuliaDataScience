@@ -2,7 +2,10 @@
 
 ## Environment {#sec:environment}
 
-```{.include}
-_gen/julia_version.md
-_gen/pkg_deps.md
+```jl
+julia_version()
+```
+
+```jl
+pkg_deps()
 ```

@@ -1,12 +1,13 @@
 module JuliaDataScience
 
+import Pkg
+
 using AlgebraOfGraphics
 using Books
 using CairoMakie
 using Makie
 using Plots
 using InteractiveUtils
-using Pkg:dependencies
 
 plot = Plots.plot
 

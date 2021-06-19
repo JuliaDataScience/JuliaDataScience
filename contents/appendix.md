@@ -2,9 +2,7 @@
 
 ## Environment {#sec:environment}
 
-```jl
-julia_version()
-```
+This book is built with Julia `jl string(VERSION)` and the following packages:
 
 ```jl
 pkg_deps()

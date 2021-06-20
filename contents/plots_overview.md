@@ -5,6 +5,6 @@ using Plots
 ```
 
 ```jl
-@sco(plot_line)
+@sco plot_line
 ```
 

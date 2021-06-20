@@ -35,7 +35,7 @@ Well, let us contemplate some plausible scenarios.
 Well, **in Julia Python or R minutes can be translated to seconds**^[and sometimes milliseconds.].
 We reserved @sec:julia_wild for displaying successful Julia usecases in both academia and industry.
 
-1. tried to do something different than `numpy`/`dplyr` conventions and discovered that your code is slow and you'll probably have to learn black magic^[`numba`, or even `Rcpp` or `cython`?] to make it faster?
+1. tried to do something different than `numpy`/`dplyr` conventions and discovered that your code is slow and you'll probably have to learn dark magic^[`numba`, or even `Rcpp` or `cython`?] to make it faster?
 **In Julia you can do your custom different stuff without loss of performance**.
 
 2. had to debug code and somehow you see yourself reading a Fortran or C/C++ source code and having no idea what you are trying to accomplish?
@@ -44,11 +44,15 @@ This is called the "two-language problem" (see @sec:two_language).
 It also covers the usecase for when "you had an interesting idea and wanted to contribute to an opensource package and gave up because almost everything is not in Python or R but in C/C++ or Fortran"^[have a look at some deep learning libraries in GitHub and you'll be surprised that Python is only 25%-33% of the codebase.].
 
 3. wanted to use a data structure defined in a package in another package and found that doesn't work and you'll probably need to build an interface^[this is most a Python ecosystem problem, while R doesn't suffer heavily from this is not blue skies either.].
-**Julia allows users to easily share an reuse code from different packages.**
+**Julia allows users to easily share and reuse code from different packages.**
 Most of Julia user-defined types and functions work right out of the bat^[or with little effort necessary.] and some users are even marvelled upon discovering how their packages are being used by other libraries in ways that they could not have imagined.
 We have some examples in @sec:multiple_dispatch.
 
-If we got you attention by exposing somewhat familiar or plausible situations, you might be interesting to learn more about this new kid in the block called Julia.
+4. needed to have a better project management, with dependecies and version control tightly controlled, manageable and replicable?
+**Julia has an amazing project management solution allied to a great package manager**.
+We'll talk more about how to manage your projects and packages in (we need to discuss where to put this).
+
+If we got you attention by exposing somewhat familiar or plausible situations, you might be interested to learn more about this new kid in the block called Julia.
 Let's proceed them!
 
 ## What Julia tries to accomplish? {#sec:julia_accomplish}

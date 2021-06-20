@@ -7,6 +7,8 @@ version = "0.1.0"
 AlgebraOfGraphics = "cbdf2221-f076-402e-a563-3d30da359d67"
 Books = "939d5c6b-51ae-42e7-97ca-7564d0d4ad91"
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
 Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 

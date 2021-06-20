@@ -5,12 +5,14 @@ import Pkg
 using AlgebraOfGraphics
 using Books
 using CairoMakie
+using DataFrames
 using Makie
 using Plots
 using InteractiveUtils
 
 plot = Plots.plot
 
+include("df.jl")
 include("environment.jl")
 include("plots.jl")
 

@@ -1,6 +1,8 @@
 # Welcome {-}
 
-[//]: # (This file is only included on the website.)
+```{=comment}
+This file is only included on the website.
+```
 
 This website shows the book Julia Data Science and is also available as [**PDF**](/juliadatascience.pdf){target="_blank"}.
 

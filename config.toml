@@ -9,5 +9,5 @@
     "plots_overview",
     "appendix"
   ]
-  port = 8004
+  port = 8006
   output_filename = "juliadatascience"

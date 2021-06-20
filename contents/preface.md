@@ -23,3 +23,8 @@ Data literacy as a competitive skill. Some references (wikipedia has a nice one)
 As data collection and data sharing become routine and data analysis and big data become common ideas in the news, business,[2] government[3] and society,[4] it becomes more and more important for students, citizens, and readers to have some data literacy.
 ```
 
+## Data Science as Robust Software Development {#sec:robust_dev}
+
+```{=comment}
+Rik you should begin writing our idea here. That will guide me into writing the Julia 101 Stuff and also will help me revise your DataFrames work.
+```

@@ -19,19 +19,19 @@ As data collection and data sharing become routine and data analysis and big dat
 
 ## Software engineering and data science {#sec:engineering}
 
-Unlike most books on data science, this book lays more emphasis on properly structuring code.
+Unlike most books on data science, this book lays more emphasis on **properly structuring code**.
 The reason for this is that we noticed that many data scientists simply place their code in one large file and run all the statements sequentially.
 You can think of this as writing a book for someone and forcing that person to read it from beginning to start.
-This works great for small projects, but the bigger the project becomes, the more problems will start to arise.
-For example, with a well written book, the book is split into well named chapters and sections and contains many references to other parts inside the book.
-The software equivalent of this is splitting code into functions.
+This works great for small and simple projects, but the bigger or more complex the project becomes, more problems will start to arise.
+For example, with a well written book: the book is split into distinctly named chapters and sections which contains several references to other parts in the book.
+The software equivalent of this is **splitting code into functions**.
 Each function has a name and some contents.
-With functions, you can basically tell the computer at one point in your code to jump to some other place and continue there.
-This allows you to more easily re-use code between projects, update code and see the big picture.
+With functions, you can basically tell the computer at any point in your code to jump to some other place and continue from there.
+This allows you to more easily re-use code between projects, update code, share code, collaborate and see big picture.
 Hence, with functions, you can **save time**.
 
-So, when reading this book, you will get accustomed to reading and using functions.
-As another benefit, this will allow you to more easily read the source code for the packages that you're using, which is greatly beneficial when you are debugging your code or wonder how the code that your using is working exactly.
-Finally, you can rest assured that we do not came up with this emphasis on functions ourselves at all.
-In industry, it is common practise to encourage developers to use functions instead of comments.
-That means that, instead of writing a comment for humans and some code for the computer, the developers write a function which is read by humans and computers.
+So, when reading this book, you eventually will get accustomed to reading and using functions.
+Also, another benefit of having good software engineering skills is that it will allow you to more easily read packages's source code that you're using, which could be greatly beneficial when you are debugging your code or wonder how exactly the code works.
+Finally, you can rest assured that we do not att all invented ourselves this emphasis on functions.
+In industry, it is common practice to encourage developers to use **"functions instead of comments"**.
+That means that, instead of writing a comment for humans and some code for the computer, the developers write a function which is universally read by humans and computers.

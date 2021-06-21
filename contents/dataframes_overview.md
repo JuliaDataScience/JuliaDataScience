@@ -30,5 +30,34 @@ Or, if you want to have the grade for Alice, you first need to figure out in wha
 and, then, we can get the value
 
 ```jl
-@sco(value_alice)
+value_alice()
+```
+
+# src/df.jl
+```pretend this is in jl file
+# STUPID IDEA NOT WORKING, cannot define struct at top level.
+function P()
+    struct Point
+        a::Int
+        b::Int
+    end
+end
+
+function call_P()
+    Point = P() # hide
+    Point(1, 2)
+end
+```
+
+
+```jl
+# @sf(P)
+struct Point
+    a::Int
+    b::Int
+end
+```
+
+```jl
+
 ```

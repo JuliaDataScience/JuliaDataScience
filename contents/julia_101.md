@@ -8,7 +8,7 @@ We should include a nice warning box here saying:
 In this chapter we will cover the basic of Julia as a programming language.
 Please note that this is not *strictly necessary* for you to use Julia as a tool of data manipulation and data visualization.
 Having a basic understanding of Julia will definitely make you more *effective* and *efficient* in using Julia.
-You can skip to the Chapter [-@sec:dataframes_overview] without any significant disadvantages (we better word than disadvantages).
+However, if you prefer to get started straight away, you can jump to Chapter [-@sec:dataframes_overview].
 
 ---
 

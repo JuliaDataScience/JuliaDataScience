@@ -5,3 +5,6 @@ Manifest.toml
 
 # VS Code Stuff
 .vscode/
+
+# MacOS annoying files
+.DS_Store

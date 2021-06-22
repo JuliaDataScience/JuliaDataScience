@@ -1,6 +1,7 @@
 # Why Julia? {#sec:why_julia}
 
 The world of data science is already filled with different programming languages.
+
 Industry has mostly adopted Python and academia have adopted R and MATLAB.
 **Why bother learning other language?**
 To answer this question, we will address two common backgrounds:
@@ -13,7 +14,8 @@ To answer this question, we will address two common backgrounds:
 
 In the first background, the common underlying story is the following.
 Data science has captivated you, making you interested in learning what is it all about and how can you use it to build your career in academia or industry.
-Then, you try to find resources to learn this new craft and you stumble into a world of intricate acronyms: `pandas`, `dplyr`, `data.table`, `numpy`, `matplotlib`, `ggplot2`, `bokeh`, and the list goes on and on... Out of the blue you hear a name: "Julia".
+Then, you try to find resources to learn this new craft and you stumble into a world of intricate acronyms: `pandas`, `dplyr`, `data.table`, `numpy`, `matplotlib`, `ggplot2`, `bokeh`, and the list goes on and on...
+Out of the blue you hear a name: "Julia".
 What is this?
 How is it any different from other stuff that I've been told that you ought use to do data science?
 Why should I dedicate my precious time into learning a language that is almost never mentioned in any job listing, lab position, postdoc offer or academic job description?
@@ -39,7 +41,9 @@ Well, let us contemplate some plausible scenarios.
 Well, **in Julia Python or R minutes can be translated to seconds**^[and sometimes milliseconds.].
 We reserved @sec:julia_wild for displaying successful Julia usecases in both academia and industry.
 
-1. Tried to do something different than `numpy`/`dplyr` conventions and discovered that your code is slow and you'll probably have to learn black magic^[`numba`, or even `Rcpp` or `cython`?] to make it faster?
+
+1. Tried to do something different than `numpy`/`dplyr` conventions and discovered that your code is slow and you'll probably have to learn dark magic^[`numba`, or even `Rcpp` or `cython`?] to make it faster?
+
 **In Julia you can do your custom different stuff without loss of performance**.
 
 2. Had to debug code and somehow you see yourself reading a Fortran or C/C++ source code and having no idea what you are trying to accomplish?
@@ -48,11 +52,19 @@ This is called the "two-language problem" (see @sec:two_language).
 It also covers the usecase for when "you had an interesting idea and wanted to contribute to an opensource package and gave up because almost everything is not in Python or R but in C/C++ or Fortran"^[have a look at some deep learning libraries in GitHub and you'll be surprised that Python is only 25%-33% of the codebase.].
 
 3. Wanted to use a data structure defined in a package in another package and found that doesn't work and you'll probably need to build an interface^[this is most a Python ecosystem problem, while R doesn't suffer heavily from this is not blue skies either.].
-**Julia allows users to easily share an reuse code from different packages.**
+**Julia allows users to easily share and reuse code from different packages.**
 Most of Julia user-defined types and functions work right out of the bat^[or with little effort necessary.] and some users are even marvelled upon discovering how their packages are being used by other libraries in ways that they could not have imagined.
 We have some examples in @sec:multiple_dispatch.
 
-If we got you attention by exposing somewhat familiar or plausible situations, you might be interesting to learn more about this new kid in the block called Julia.
+4. needed to have a better project management, with dependecies and version control tightly controlled, manageable and replicable?
+**Julia has an amazing project management solution allied to a great package manager**.
+Unlike traditional package managers, which install and manage a single global set of packages.
+Julia package manager is designed around “environments”: independent sets of packages that can be local to an individual project or shared.
+Each project maintains its own independent set of package versions.
+We'll talk more about how to manage your projects and packages in the Appendix [-@sec:project_management].
+
+If we got you attention by exposing somewhat familiar or plausible situations, you might be interested to learn more about this new kid in the block called Julia.
+
 Let's proceed then!
 
 ## What Julia tries to accomplish? {#sec:julia_accomplish}

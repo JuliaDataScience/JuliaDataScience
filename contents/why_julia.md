@@ -61,7 +61,7 @@ We have some examples in @sec:multiple_dispatch.
 Unlike traditional package managers, which install and manage a single global set of packages.
 Julia package manager is designed around “environments”: independent sets of packages that can be local to an individual project or shared.
 Each project maintains its own independent set of package versions.
-We'll talk more about how to manage your projects and packages in (we need to discuss where to put this: appendix?).
+We'll talk more about how to manage your projects and packages in the Appendix [-@sec:project_management].
 
 If we got you attention by exposing somewhat familiar or plausible situations, you might be interested to learn more about this new kid in the block called Julia.
 

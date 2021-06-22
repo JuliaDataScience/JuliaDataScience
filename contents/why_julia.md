@@ -1,9 +1,10 @@
 # Why Julia? {#sec:why_julia}
 
 The world of data science is already filled with different programming languages.
-Industry has mostly adopted Python and academia adopted R and MATLAB.
+
+Industry has mostly adopted Python and academia have adopted R and MATLAB.
 **Why bother learning other language?**
-To answer this question, we will address two common backgrounds that someone has when beginning their data science journey:
+To answer this question, we will address two common backgrounds:
 
 1. **Did not program before** -- see @sec:non-programmers.
 
@@ -40,7 +41,9 @@ Well, let us contemplate some plausible scenarios.
 Well, **in Julia Python or R minutes can be translated to seconds**^[and sometimes milliseconds.].
 We reserved @sec:julia_wild for displaying successful Julia usecases in both academia and industry.
 
+
 1. Tried to do something different than `numpy`/`dplyr` conventions and discovered that your code is slow and you'll probably have to learn dark magic^[`numba`, or even `Rcpp` or `cython`?] to make it faster?
+
 **In Julia you can do your custom different stuff without loss of performance**.
 
 2. Had to debug code and somehow you see yourself reading a Fortran or C/C++ source code and having no idea what you are trying to accomplish?
@@ -61,6 +64,7 @@ Each project maintains its own independent set of package versions.
 We'll talk more about how to manage your projects and packages in (we need to discuss where to put this: appendix?).
 
 If we got you attention by exposing somewhat familiar or plausible situations, you might be interested to learn more about this new kid in the block called Julia.
+
 Let's proceed then!
 
 ## What Julia tries to accomplish? {#sec:julia_accomplish}

@@ -1,0 +1,16 @@
+# LaTeX Stuff
+*.bib text
+
+# Site
+_build/* text
+
+# Serialisation
+*.json  text
+*.toml  text
+*.xml   text
+*.yaml  text
+*.yml   text
+*.html  text
+
+# Data files
+*.csv   text

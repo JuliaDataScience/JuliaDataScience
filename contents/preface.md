@@ -1,6 +1,5 @@
 # Preface {#sec:preface}
 
-
 ## Why Data Science? {#sec:why_data_science}
 
 ### Data is Everywhere {#sec:data_everywhere}

@@ -20,7 +20,7 @@ Or in BibTeX format for $\LaTeX$:
 @book{huijzerstoropoli2021juliadatascience,
       title = {Julia Data Science},
       author = {Huijzer, Rik and Storopoli, Jose},
-      url = {ttps://juliadatascience.io},
+      url = {https://juliadatascience.io},
       year = {2021}
     }
 ```

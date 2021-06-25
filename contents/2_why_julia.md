@@ -42,21 +42,20 @@ Well, **in Julia Python or R minutes can be translated to seconds**^[and sometim
 We reserved @sec:julia_wild for displaying successful Julia usecases in both academia and industry.
 
 
-1. Tried to do something different than `numpy`/`dplyr` conventions and discovered that your code is slow and you'll probably have to learn dark magic^[`numba`, or even `Rcpp` or `cython`?] to make it faster?
-
+2. Tried to do something different than `numpy`/`dplyr` conventions and discovered that your code is slow and you'll probably have to learn dark magic^[`numba`, or even `Rcpp` or `cython`?] to make it faster?
 **In Julia you can do your custom different stuff without loss of performance**.
 
-2. Had to debug code and somehow you see yourself reading a Fortran or C/C++ source code and having no idea what you are trying to accomplish?
+3. Had to debug code and somehow you see yourself reading a Fortran or C/C++ source code and having no idea what you are trying to accomplish?
 **In Julia you only read Julia code[^readable], no need to learn another language to make your original language fast**.
 This is called the "two-language problem" (see @sec:two_language).
 It also covers the usecase for when "you had an interesting idea and wanted to contribute to an opensource package and gave up because almost everything is not in Python or R but in C/C++ or Fortran"^[have a look at some deep learning libraries in GitHub and you'll be surprised that Python is only 25%-33% of the codebase.].
 
-3. Wanted to use a data structure defined in a package in another package and found that doesn't work and you'll probably need to build an interface^[this is most a Python ecosystem problem, while R doesn't suffer heavily from this is not blue skies either.].
+4. Wanted to use a data structure defined in a package in another package and found that doesn't work and you'll probably need to build an interface^[this is most a Python ecosystem problem, while R doesn't suffer heavily from this is not blue skies either.].
 **Julia allows users to easily share and reuse code from different packages.**
 Most of Julia user-defined types and functions work right out of the bat^[or with little effort necessary.] and some users are even marvelled upon discovering how their packages are being used by other libraries in ways that they could not have imagined.
 We have some examples in @sec:multiple_dispatch.
 
-4. needed to have a better project management, with dependecies and version control tightly controlled, manageable and replicable?
+5. needed to have a better project management, with dependecies and version control tightly controlled, manageable and replicable?
 **Julia has an amazing project management solution allied to a great package manager**.
 Unlike traditional package managers, which install and manage a single global set of packages.
 Julia package manager is designed around “environments”: independent sets of packages that can be local to an individual project or shared.

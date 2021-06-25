@@ -1,4 +1,4 @@
-# Plots.jl Overview {#sec:plots_overview}
+# Data Visualization with Plots.jl {#sec:plots}
 
 ```
 using Plots

@@ -2,13 +2,21 @@
 
   [projects.default]
   contents = [
-    "preface",
-    "why_julia",
-    "julia_101",
-    "dataframes_overview",
-    "plots_overview",
-    "appendix",
+    "1_preface",
+    "2_why_julia",
+    "3_julia_101",
+    "4_dataframes",
+    "5_plots",
+    "6_makie",
+    "7_appendix",
     "references"
   ]
+
+  # Extra directories to be copied.
+  extra_directories = [
+    "images",
+    "files"
+  ]
+
   port = 8004
   output_filename = "juliadatascience"

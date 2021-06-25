@@ -17,10 +17,10 @@ Storopoli & Huijzer (2021). Julia Data Science. https://juliadatascience.io.
 Or in BibTeX format for $\LaTeX$:
 
 ```bibtex
-@book{huijzerstoropoli2021juliadatascience,
-      title = {Julia Data Science},
-      author = {Storopoli, Jose and Huijzer, Rik},
-      url = {https://juliadatascience.io},
-      year = {2021}
-    }
+@book{storopolihuijzer2021juliadatascience,
+  title = {Julia Data Science},
+  author = {Storopoli, Jose and Huijzer, Rik},
+  url = {https://juliadatascience.io},
+  year = {2021}
+}
 ```

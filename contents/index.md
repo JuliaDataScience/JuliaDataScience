@@ -11,7 +11,7 @@ The source code is available at [GitHub](https://github.com/JuliaDataScience/Jul
 To cite the content, please use:
 
 ```plaintext
-Rik & Storopoli (2021). Julia Data Science. https://juliadatascience.io.
+Storopoli & Huijzer (2021). Julia Data Science. https://juliadatascience.io.
 ```
 
 Or in BibTeX format for $\LaTeX$:
@@ -19,7 +19,7 @@ Or in BibTeX format for $\LaTeX$:
 ```bibtex
 @book{huijzerstoropoli2021juliadatascience,
       title = {Julia Data Science},
-      author = {Huijzer, Rik and Storopoli, Jose},
+      author = {Storopoli, Jose and Huijzer, Rik},
       url = {https://juliadatascience.io},
       year = {2021}
     }

@@ -88,6 +88,17 @@ We don't know any other serious language that would want to be hard and slow, so
 
 ![Scientific Computing Language Comparisons](images/language_comparisons.svg){#fig:language_comparison}
 
+**Julia is fast!
+Very fast!**
+It was made for speed from the drawing board.
+It accomplishes this by exposing native machine code to the compiler.
+The compiler in turns does what it does best: optimizes machine code^[if you like to learn more about how Julia is designed you should definitely check @bezanson2017julia.].
+You can find [benchmarks](https://julialang.org/benchmarks/) for a range of common code patterns, such as function calls, string parsing, sorting, numerical loops, random number generation, recursion, and array operations comparing Julia with several other languages such as C, R, Python and FORTRAN.
+@fig:benchmarks was taken from [Julia's website benchmarks section^[please note that the Julia results depicted above do not include compile time.]](https://julialang.org/benchmarks/).
+As you can see Julia is **indeed** fast.
+
+![Julia versus other programming languages](images/benchmarks.svg){#fig:benchmarks}
+
 We really believe in Julia (otherwise we wouldn't be writing this book).
 We think that Julia is the **future in scientific computing and scientific data analysis**.
 It enables the user to develop rapid and powerful code with a simple syntax.
@@ -297,7 +308,7 @@ my_fox + my_chicken
 This is the power of multiple dispatch: **we don't need everything from scratch for our custom-defined user types**.
 If you are excited as much as we are by multiple dispatch, here are two more in-depth examples.
 The first is a [fast and elegant implementation of a one-hot vector](https://storopoli.io/Bayesian-Julia/pages/1_why_Julia/#example_one-hot_vector) by @storopoli2021bayesianjulia.
-The second is an interview of [Christopher Rackauckas](https://www.chrisrackauckas.com/) at [Tanmay Bakshi YouTube's Channel](https://youtu.be/moyPIhvw4Nk?list=PLpTXaEnTpmwNHVg-yWEBkzx-pTxykFMMx&t=2107) (see from 35:07) [@tanmaybakshiBakingKnowledgeMachine2021].
+The second is an interview of [Christopher Rackauckas](https://www.chrisrackauckas.com/) at [Tanmay Bakshi YouTube's Channel](https://youtu.be/moyPIhvw4Nk?t=2107) (see from time 35:07 onwards) [@tanmaybakshiBakingKnowledgeMachine2021].
 Chris mentions that, while using [`DifferentialEquations.jl`](https://diffeq.sciml.ai/dev/), a package that he developed and currently maintains, a user reported that Julia has the best GPU-based quaternion ODE Solver and he said that he had no idea because he didn't even implemented it.
 Most of the merit is due to multiple dispatch and high user code/type sharing.
 
@@ -309,6 +320,8 @@ To conclude, we think that multiple dispatch is best explained by one of the cre
 
 ```{=comment}
 TODO
+
+Insert the benchmark Figure
 
 Nice Examples of Julia. We have some NASA stuff, the FAA Julia system. SciML's Pfizer drug development speedup.
 ```

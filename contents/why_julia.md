@@ -68,17 +68,51 @@ Let's proceed then!
 
 ## What Julia tries to accomplish? {#sec:julia_accomplish}
 
-Julia [@bezanson2017julia].
+Julia [@bezanson2017julia] is a relatively new language, first released in 2012, aims to be **both easy and fast**.
+It "runs like C^[sometimes even faster than C.] but reads like Python" [@perkelJuliaComeSyntax2019].
+It was made for scientific computing, capable handling **large amounts of data and computation** while still being fairly **easy to manipulate, create and protype code**.
 
-```{=comment}
-My figure from [https://storopoli.io/Bayesian-Julia/pages/images/language_comparisons.svg] (I have it in .drawio and .svg)
-```
+In [@fig:language_comparison] is a highly opinionated representation that divides the main opensource scientific computing languages in a 2x2 diagram with two axes: Slow-Fast and Easy-Hard.
+
+We've put C++ and FORTRAN in the hard and fast quadrant.
+Being static languages that needs compilation, type checking and other professional care and attention, they are really hard to learn and slow to prototype.
+The advantage is that they are **really fast** languages.
+
+R and Python goes into the easy and slow quadrant.
+They are dynamic languages that are not compiled and executes in runtime.
+Because of this they are really easy to learn and fast to prototype.
+Of course, this come with a disadvantage: they are **really slow** languages.
+
+Julia is the only language in the easy and fast quadrant.
+We don't know any other serious language that would want to be hard and slow, so this quadrant is left empty.
+
+![Scientific Computing Language Comparisons](images/language_comparisons.svg){#fig:language_comparison}
+
+We really believe in Julia (otherwise we wouldn't be writing this book).
+We think that Julia is the **future in scientific computing and scientific data analysis**.
+It enables the user to develop rapid and powerful code with a simple syntax.
+Usually, researchers develop code by prototyping using a very easy, but slow, language.
+Once the code is assured to run correct and fulfill its goal, then begins the process of converting the code to a fast, but hard, language.
+This is known as the "Two-Language Problem" and we discuss next.
 
 ### The Two-Language Problem {#sec:two_language}
 
-```{=comment}
-Alan Edelman TEDX talk @tedxtalksProgrammingLanguageHeal2020
-```
+The "Two-Language Problem" is a very typical situation in scientific computing where a researcher devises an algorithm or a solution to tackle a desired problem or analysis at hand.
+The solution is, then, prototyped in an easy to code language (like Python or R).
+If the prototype works, the researcher  would code in a fast language that would not be easy to prototype (C++ or FORTRAN).
+Thus, we have two languages involved in the process of of developing a new solution.
+One which is easy to prototype but is not suited for implementation (mostly due to being slow).
+And another one which is not so easy to code (and, consequently, not easy to prototype) but suited for implementation (mostly because it is fast).
+Julia comes to eliminate such situations by being the **same language that you prototype (ease of use) and implement the solution (speed)**.
+
+Also, Julia lets you use **unicode characters as variables or parameters**.
+This means no more using `sigma` or `sigma_i`, and instead just use `σ` or `σᵢ` as you would in mathematical notation.
+When you see code for an algorithm or for a mathematical equation you see almost the same notation and idiom.
+We call this feature **"One-To-One Code and Math Relation"**, while usually downplayed can be a powerful feature.
+
+We think that the "Two-Language problem" and the o"One-To-One Code and Math Relation" are best described by one of the creators of Julia, Alan Edelman, in a TEDx Talk [@tedxtalksProgrammingLanguageHeal2020] (if you reading the printed book or a static PDF please click on the link to go the video or check the citation):
+
+<iframe width="698" height="393" src="https://www.youtube.com/embed/qGW0GT1rCvs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Multiple Dispatch {#sec:multiple_dispatch}
 
@@ -237,34 +271,39 @@ struct chicken end
 ```
 
 I want to define addition for both `fox` and `chicken` new types.
-We proceed by defining a new function signature of the `+` from the `Base` module of Julia:
+We proceed by defining a new function signature of the `+` from the `Base` module of Julia^[this is just an example for teaching purposes. Don't do this... Rik help me out here, I forgot the name of the thing. It was "type" something, right?]:
 
 ```jl
 sco(
 """
 import Base: +
-Base.+(F::fox, C::chicken) = "trouble"
++(F::fox, C::chicken) = "trouble"
 """
 )
 ```
 
+Now let us call addition with the `+` sign in an instantiated `fox` and `chicken` objects:
 
-
-```{=comment}
-TODO
-
-Example adding `dogs`, `foxes` and `chickens` overloading the `Base.+` function with a footnote of warning.
+```jl
+sco(
+"""
+my_fox = fox()
+my_chicken = chicken()
+my_fox + my_chicken
+"""
+)
 ```
 
-```{=comment}
-TODO
+This is the power of multiple dispatch: **we don't need everything from scratch for our custom-defined user types**.
+If you are excited as much as we are by multiple dispatch, here are two more in-depth examples.
+The first is a [fast and elegant implementation of a one-hot vector](https://storopoli.io/Bayesian-Julia/pages/1_why_Julia/#example_one-hot_vector) by @storopoli2021bayesianjulia.
+The second is an interview of [Christopher Rackauckas](https://www.chrisrackauckas.com/) at [Tanmay Bakshi YouTube's Channel](https://youtu.be/moyPIhvw4Nk?list=PLpTXaEnTpmwNHVg-yWEBkzx-pTxykFMMx&t=2107) (see from 35:07) [@tanmaybakshiBakingKnowledgeMachine2021].
+Chris mentions that, while using [`DifferentialEquations.jl`](https://diffeq.sciml.ai/dev/), a package that he developed and currently maintains, a user reported that Julia has the best GPU-based quaternion ODE Solver and he said that he had no idea because he didn't even implemented it.
+Most of the merit is due to multiple dispatch and high user code/type sharing.
 
-This section should also include how Julian allows for code sharing and code reuse.
+To conclude, we think that multiple dispatch is best explained by one of the creators of Julia, [Stefan Karpinski, at JuliaCon 2019](https://youtu.be/kc9HwsxE1OY) [@thejuliaprogramminglanguageJuliaCon2019Unreasonable2019] (if you reading the printed book or a static PDF please click on the link to go the video or check the citation):
 
-Also include youtubevideo from Karpinski [https://youtu.be/kc9HwsxE1OY]
-
-There is also the YouTube video from Rackaukas saying that someone said that Julia has the best GPU-based quaternion ODE Solver and he said that he had no idea because he didn't even implemented it (https://youtu.be/moyPIhvw4Nk?list=PLpTXaEnTpmwNHVg-yWEBkzx-pTxykFMMx&t=2107) !
-```
+<iframe width="698" height="393" src="https://www.youtube.com/embed/kc9HwsxE1OY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Julia in the Wild {#sec:julia_wild}
 

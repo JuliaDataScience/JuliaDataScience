@@ -83,8 +83,8 @@ Alan Edelman TEDX talk @tedxtalksProgrammingLanguageHeal2020
 ### Multiple Dispatch {#sec:multiple_dispatch}
 
 To explain multiple dispatch, we'll give an illustrative example in **Python**.
-Suppose that you want to have different types of researcher that will inherent from a "base" type `Researcher`.
-The base type `Researcher` would define the initial common values for every derived type: `name` and `age`:
+Suppose that you want to have different types of researcher that will inherent from a "base" class `Researcher`.
+The base class `Researcher` would define the initial common values for every derived class: `name` and `age`:
 
 ```python
 class Researcher:
@@ -93,8 +93,8 @@ class Researcher:
         self.age = age
 ```
 
-Now let us define a `Linguist` type that will inherent from the `Researcher` type.
-We will also define a method that returns the citation style that is mostly used in his research field.
+Now let us define a `Linguist` class that will inherent from the `Researcher` class.
+We will also define a method that returns the citation style that is mostly used in the linguistics research field.
 
 ```python
 class Linguist(Researcher):
@@ -102,7 +102,7 @@ class Linguist(Researcher):
         return "APA"
 ```
 
-We do the same for the `ComputerScientist` type, but with different citation style:
+We do the same for the `ComputerScientist` class, but with different citation style:
 
 ```python
 class ComputerScientist(Researcher):
@@ -146,7 +146,13 @@ Single dispatch just act on the first argument of a function.
 Since both of our researchers `noam` and `judea` are instantiate as types inherited from the same base type `Researcher` we cannot implement what we are trying to do in Python.
 You would need to change your approach with a substancial loss of simplicity (you would probably need to create different functions with different names).
 
-**Now let's do this in Julia**. First we'll create the base type `Researcher`:
+**Now let's do this in Julia**.
+
+In Julia, we don't have classes but we have structures (`struct`) that are meant to be "structured data": they define the kind of information that is embedded in the structure, that is a set of fields (i.e. "properties" or "attributes" in other languages), and then individual instances (or "objects") can be produced each with its own specific values for the fields defined by the structure.
+They differ from the primitive types that are by default defined already inside the core of Julia.
+Because of this, `structs`s are composite types, and usually defined by the user.
+
+First we'll create an `abstract type` named `Researcher`:
 
 ```jl
 sc(
@@ -156,7 +162,7 @@ abstract type Researcher end
 )
 ```
 
-We proceed, similar as before, by creating two derived types from the `Researcher` type:
+We proceed, similar as before, by creating two derived `struct`s from the `Researcher` abstract type:
 
 ```jl
 sc(
@@ -180,7 +186,7 @@ end
 )
 ```
 
-The final step is to define two new functions that will behave differently depending on which derived type of `Researcher` are the first or second argument:
+The final step is to define two new functions that will behave differently depending on which derived `struct` of `Researcher` are the first or second argument:
 
 ```jl
 sco(
@@ -219,26 +225,29 @@ Multiple dispatch acts on all arguments of a function and defines function behav
 
 Multiple dispatch is a powerful feature that allows us also to extend existing functions or to define custom and complex behavior to new types.
 To show how this works, we'll use another example.
-Suppose you want to define new types based on a supertype called `Animal`:
+Suppose you want to define two new `struct`s based on a animals:
 
 ```jl
 sc(
-"""
-abstract type Animal end
-"""
-)
-```
-
-Next, we create three subtypes from the `Animal` supertype:
-
-```jl
-sco(
 """
 struct fox end
 struct chicken end
 """
 )
 ```
+
+I want to define addition for both `fox` and `chicken` new types.
+We proceed by defining a new function signature of the `+` from the `Base` module of Julia:
+
+```jl
+sco(
+"""
+import Base: +
+Base.+(F::fox, C::chicken) = "trouble"
+"""
+)
+```
+
 
 
 ```{=comment}

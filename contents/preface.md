@@ -23,7 +23,7 @@ In 2020, the average person created every person created **1.7 MB of data per se
 A recent report predicted that almost **two thirds (65%) of national GDPs will will have undergone digitization by 2022** [@fitzgerald2020idc].
 
 Every profession will be impacted not only by the increasing availability of data but also by data's increased importance [@chen2014big; @khan2014big].
-This is why you should become competent in data skills.
+This is why data skills are important.
 In order to become the researcher or professional that the world is demanding right now you need to feel comfortable around data.
 You need to become a **data literate**.
 

@@ -192,9 +192,6 @@ approaches(cs::ComputerScientist, li::Linguist) = "Hey \$(li.name), wanna do a p
 )
 ```
 
-
-
-
 Finally, let's instantiate our two researchers, `noam` and `judea`:
 
 ```jl
@@ -216,12 +213,17 @@ approaches(noam, judea)
 )
 ```
 
-
 Perfect! It behaves just as we wanted! This is **multiple dispatch** and it is an important feature in Julia. Multiple dispatch acts on all arguments of a function and defines function behavior based on all argument's types.
 
+```{=comment}
+TODO
+
 Example adding `dogs`, `foxes` and `chickens` overloading the `Base.+` function with a footnote of warning.
+```
 
 ```{=comment}
+TODO
+
 This section should also include how Julian allows for code sharing and code reuse.
 
 Also include youtubevideo from Karpinski [https://youtu.be/kc9HwsxE1OY]
@@ -232,6 +234,8 @@ There is also the YouTube video from Rackaukas saying that someone said that Jul
 ## Julia in the Wild {#sec:julia_wild}
 
 ```{=comment}
+TODO
+
 Nice Examples of Julia. We have some NASA stuff, the FAA Julia system. SciML's Pfizer drug development speedup.
 ```
 

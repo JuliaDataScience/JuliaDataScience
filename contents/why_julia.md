@@ -86,7 +86,7 @@ Of course, this come with a disadvantage: they are **really slow** languages.
 Julia is the only language in the easy and fast quadrant.
 We don't know any other serious language that would want to be hard and slow, so this quadrant is left empty.
 
-![Scientific Computing Language Comparisons](images/language_comparisons.svg){#fig:language_comparison}
+![Scientific Computing Language Comparisons](images/language_comparisons.png){#fig:language_comparison}
 
 **Julia is fast!
 Very fast!**
@@ -97,7 +97,7 @@ You can find [benchmarks](https://julialang.org/benchmarks/) for a range of comm
 @fig:benchmarks was taken from [Julia's website benchmarks section^[please note that the Julia results depicted above do not include compile time.]](https://julialang.org/benchmarks/).
 As you can see Julia is **indeed** fast.
 
-![Julia versus other programming languages](images/benchmarks.svg){#fig:benchmarks}
+![Julia versus other programming languages](images/benchmarks.png){#fig:benchmarks}
 
 We really believe in Julia (otherwise we wouldn't be writing this book).
 We think that Julia is the **future in scientific computing and scientific data analysis**.

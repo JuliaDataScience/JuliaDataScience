@@ -213,7 +213,33 @@ approaches(noam, judea)
 )
 ```
 
-Perfect! It behaves just as we wanted! This is **multiple dispatch** and it is an important feature in Julia. Multiple dispatch acts on all arguments of a function and defines function behavior based on all argument's types.
+Perfect! It behaves just as we wanted!
+This is **multiple dispatch** and it is an important feature in Julia.
+Multiple dispatch acts on all arguments of a function and defines function behavior based on all argument's types.
+
+Multiple dispatch is a powerful feature that allows us also to extend existing functions or to define custom and complex behavior to new types.
+To show how this works, we'll use another example.
+Suppose you want to define new types based on a supertype called `Animal`:
+
+```jl
+sc(
+"""
+abstract type Animal end
+"""
+)
+```
+
+Next, we create three subtypes from the `Animal` supertype:
+
+```jl
+sco(
+"""
+struct fox end
+struct chicken end
+"""
+)
+```
+
 
 ```{=comment}
 TODO

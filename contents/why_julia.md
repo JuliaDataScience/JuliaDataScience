@@ -82,6 +82,129 @@ Alan Edelman TEDX talk @tedxtalksProgrammingLanguageHeal2020
 
 ### Multiple Dispatch {#sec:multiple_dispatch}
 
+To explain multiple dispatch, we'll give an illustrative example in **Python**.
+Suppose that you want to have different types of researcher that will inherent from a "base" type `Researcher`.
+The base type `Researcher` would define the initial common values for every derived type: `name` and `age`:
+
+```python
+class Researcher:
+    def __init__(self, name: str, age: int):
+        self.name = name
+        self.age = age
+```
+
+Now let us define a `Psychologist` type that will inherent from the `Researcher` type.
+We will also define a method that returns the citation style that is mostly used in his research field.
+
+```python
+class Psychologist(Researcher):
+    def citation(self):
+        return "APA"
+```
+
+We do the same for the `ComputerScientist` type, but with different citation style:
+
+```python
+class ComputerScientist(Researcher):
+   def citation(self):
+       return "IEEE"
+```
+
+Now let's instantiate our two researchers, Jose and Rik:
+
+```python
+rik = Psychologist("Rik", 27)
+jose = ComputerScientist("Jose", 33)
+```
+
+Now suppose you want to define a function that will behave *different behaviors* depending on the *argument's types*.
+For example, a psychologist researcher might approach a computer scientist researcher and ask him to collaborate on a new paper.
+The approach would be different if the situation were the opposite: a computer scientist researcher approaching the psychologist researcher.
+Below, you'll see that we defined two functions that should behave differently in both approaches:
+
+```python
+def approaches(psy: Psychologist, cs: ComputerScientist):
+   print(f"Hey {cs.name}, wanna do a paper together? We need to use {cs.citation()} style.")
+
+def approaches(cs:ComputerScientist, psy: Psychologist):
+    print(f"Hey {psy.name}, wanna do a paper together? We need to use {psy.citation()} style.")
+```
+
+Now lets say Rik approaches Jose with a paper idea:
+
+```python
+approaches(rik, jose)
+```
+
+```plaintext
+Hey Jose, wanna do a paper? We need to use IEEE style.
+```
+
+That was not what `rik` as a `Psychologist` type would say to `jose`, a `ComputerScientist` type.
+This is **single dispatch** and is the default feature available on most object-oriented languages, like Python or C++.
+Single dispatch just act on the first argument of a function.
+Since both of our researchers `rik` and `jose` are instantiate as types inherited from the same base type `Researcher` we cannot implement what we are trying to do in Python.
+You would need to change your approach with a substancial loss of simplicity (you would probably need to create different functions with different names).
+
+**Now let's do this in Julia**. First we'll create the base type `Researcher`:
+
+```jl
+sc(
+"""
+abstract type Researcher end
+"""
+)
+```
+
+We proceed, similar as before, by creating two derived types from the `Researcher` type:
+
+```jl
+sc(
+"""
+struct Psychologist <: Researcher
+    name::AbstractString
+    age::Int64
+end
+"""
+)
+```
+
+```jl
+sc(
+"""
+struct ComputerScientist <: Researcher
+    name::AbstractString
+    age::Int64
+end
+"""
+)
+```
+
+The final step is to define two new functions that will behave differently depending on which derived type of `Researcher` are the first or second argument:
+
+```jl
+sco(
+"""
+approaches(psy::Psychologist, cs::ComputerScientist) = "Hey $(cs.name), wanna do a paper? We need to use APA style."
+approaches(cs::ComputerScientist, psy::Psychologist) = "Hey $(psy.name), wanna do a paper? We need to use IEE style."
+"""
+)
+```
+
+Now let's see what Rik will say when he approaches Jose with a paper idea:
+
+```jl
+sco(
+"""
+approaches(rik, jose)
+"""
+)
+```
+
+Perfect! It behaves just as we wanted! This is **multiple dispatch** and it is an important feature in Julia. Multiple dispatch acts on all arguments of a function and defines function behavior based on all argument's types.
+
+Example adding `dogs`, `foxes` and `chickens` overloading the `Base.+` function with a footnote of warning.
+
 ```{=comment}
 This section should also include how Julian allows for code sharing and code reuse.
 

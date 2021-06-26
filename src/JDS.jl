@@ -37,6 +37,16 @@ function build()
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());  gtag('config', 'G-2RKMTDS1S8');
     </script>
+
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.0.1/build/styles/default.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.0.1/build/highlight.min.js"></script>
+    <!-- and it's easy to individually load additional languages -->
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.0.1/build/languages/julia.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.0.1/build/languages/julia-repl.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.0.1/build/languages/python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.0.1/build/languages/python-repl.min.js"></script>
+    <script>hljs.highlightAll();</script>
     """
     Books.build_all(; extra_head)
 end

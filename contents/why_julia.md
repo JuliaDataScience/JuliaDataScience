@@ -93,11 +93,11 @@ class Researcher:
         self.age = age
 ```
 
-Now let us define a `Psychologist` type that will inherent from the `Researcher` type.
+Now let us define a `Linguist` type that will inherent from the `Researcher` type.
 We will also define a method that returns the citation style that is mostly used in his research field.
 
 ```python
-class Psychologist(Researcher):
+class Linguist(Researcher):
     def citation(self):
         return "APA"
 ```
@@ -110,40 +110,40 @@ class ComputerScientist(Researcher):
        return "IEEE"
 ```
 
-Now let's instantiate our two researchers, Jose and Rik:
+Finally, let's instantiate our two researchers, [Noam Chomsky](https://en.wikipedia.org/wiki/Noam_Chomsky) and [Judea Pearl](https://en.wikipedia.org/wiki/Judea_Pearl):
 
 ```python
-rik = Psychologist("Rik", 27)
-jose = ComputerScientist("Jose", 33)
+noam = Linguist("Noam Chomsky", 92)
+judea = ComputerScientist("Judea Pearl", 84)
 ```
 
 Now suppose you want to define a function that will behave *different behaviors* depending on the *argument's types*.
-For example, a psychologist researcher might approach a computer scientist researcher and ask him to collaborate on a new paper.
-The approach would be different if the situation were the opposite: a computer scientist researcher approaching the psychologist researcher.
+For example, a linguist researcher might approach a computer scientist researcher and ask him to collaborate on a new paper.
+The approach would be different if the situation were the opposite: a computer scientist researcher approaching the linguist researcher.
 Below, you'll see that we defined two functions that should behave differently in both approaches:
 
 ```python
-def approaches(psy: Psychologist, cs: ComputerScientist):
+def approaches(li: Linguist, cs: ComputerScientist):
    print(f"Hey {cs.name}, wanna do a paper together? We need to use {cs.citation()} style.")
 
-def approaches(cs:ComputerScientist, psy: Psychologist):
-    print(f"Hey {psy.name}, wanna do a paper together? We need to use {psy.citation()} style.")
+def approaches(cs:ComputerScientist, li: Linguist):
+    print(f"Hey {li.name}, wanna do a paper together? We need to use {li.citation()} style.")
 ```
 
-Now lets say Rik approaches Jose with a paper idea:
+Now lets say Noam Chomsky approaches Judea Pearl with a paper idea:
 
 ```python
-approaches(rik, jose)
+approaches(noam, judea)
 ```
 
 ```plaintext
-Hey Jose, wanna do a paper? We need to use IEEE style.
+Hey Judea Pearl, wanna do a paper? We need to use IEEE style.
 ```
 
-That was not what `rik` as a `Psychologist` type would say to `jose`, a `ComputerScientist` type.
+That was not what `judea` as a `Linguist` type would say to `noam`, a `ComputerScientist` type.
 This is **single dispatch** and is the default feature available on most object-oriented languages, like Python or C++.
 Single dispatch just act on the first argument of a function.
-Since both of our researchers `rik` and `jose` are instantiate as types inherited from the same base type `Researcher` we cannot implement what we are trying to do in Python.
+Since both of our researchers `noam` and `judea` are instantiate as types inherited from the same base type `Researcher` we cannot implement what we are trying to do in Python.
 You would need to change your approach with a substancial loss of simplicity (you would probably need to create different functions with different names).
 
 **Now let's do this in Julia**. First we'll create the base type `Researcher`:
@@ -161,7 +161,7 @@ We proceed, similar as before, by creating two derived types from the `Researche
 ```jl
 sc(
 """
-struct Psychologist <: Researcher
+struct Linguist <: Researcher
     name::AbstractString
     age::Int64
 end
@@ -185,21 +185,37 @@ The final step is to define two new functions that will behave differently depen
 ```jl
 sco(
 """
-approaches(psy::Psychologist, cs::ComputerScientist) = "Hey $(cs.name), wanna do a paper? We need to use APA style."
-approaches(cs::ComputerScientist, psy::Psychologist) = "Hey $(psy.name), wanna do a paper? We need to use IEE style."
+approaches(li::Linguist, cs::ComputerScientist) = "Hey \$(cs.name), wanna do a paper? We need to use APA style."
+
+approaches(cs::ComputerScientist, li::Linguist) = "Hey \$(li.name), wanna do a paper? We need to use IEE style."
 """
 )
 ```
 
-Now let's see what Rik will say when he approaches Jose with a paper idea:
+
+
+
+Finally, let's instantiate our two researchers, `noam` and `judea`:
+
+```jl
+sc(
+"""
+noam = Linguist("Noam Chomsky", 92)
+judea = ComputerScientist("Judea Pearl", 84)
+"""
+)
+```
+
+Again, let's see what Noam Chomsky will say when he approaches Judea Pearl with a paper idea:
 
 ```jl
 sco(
 """
-approaches(rik, jose)
+approaches(noam, judea)
 """
 )
 ```
+
 
 Perfect! It behaves just as we wanted! This is **multiple dispatch** and it is an important feature in Julia. Multiple dispatch acts on all arguments of a function and defines function behavior based on all argument's types.
 

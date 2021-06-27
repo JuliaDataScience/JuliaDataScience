@@ -1,14 +1,13 @@
-module JuliaDataScience
+module JDS
 
 import Pkg
 
-using AlgebraOfGraphics
-using Books
-using CairoMakie
-using DataFrames
-using Makie
-using Plots
-using InteractiveUtils
+using Reexport
+@reexport using AlgebraOfGraphics
+@reexport using Books
+@reexport using CairoMakie
+@reexport using Makie
+@reexport using Plots
 
 plot = Plots.plot
 
@@ -29,8 +28,8 @@ end
 This method is called during CI.
 """
 function build()
-    println("Building JuliaDataScience")
-    Books.gen(; M=JuliaDataScience, fail_on_error=true)
+    println("Building JDS")
+    Books.gen(; fail_on_error=true)
     extra_head = """
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RKMTDS1S8"></script>

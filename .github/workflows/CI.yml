@@ -39,7 +39,7 @@ jobs:
         run: julia --project -e 'using Pkg; Pkg.instantiate();
                 using Books; Books.install_dependencies()'
 
-      - run: julia --project -e 'using JuliaDataScience; JuliaDataScience.build()'
+      - run: julia --project -e 'using JDS; JDS.build()'
 
       - name: Deploy to secondary branch
         if: ${{ github.event_name != 'pull_request' }}

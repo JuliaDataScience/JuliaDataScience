@@ -279,6 +279,8 @@ Perfect! It behaves just as we wanted!
 This is **multiple dispatch** and it is an important feature in Julia.
 Multiple dispatch acts on all arguments of a function and defines function behavior based on all argument's types.
 
+---
+
 Multiple dispatch is a powerful feature that allows us also to extend existing functions or to define custom and complex behavior to new types.
 To show how this works, we'll use another example.
 Suppose you want to define two new `struct`s based on a animals:
@@ -300,6 +302,7 @@ sco(
 """
 import Base: +
 +(F::fox, C::chicken) = "trouble"
++(C1::chicken, C2::chicken) = "safe"
 """
 )
 ```
@@ -315,6 +318,20 @@ my_fox + my_chicken
 """
 )
 ```
+
+And, as expected, adding two `chicken` objects together signals that they are safe:
+
+```jl
+sco(
+"""
+chicken_1 = chicken()
+chicken_2 = chicken()
+chicken_1 + chicken_2
+"""
+)
+```
+
+---
 
 This is the power of multiple dispatch: **we don't need everything from scratch for our custom-defined user types**.
 If you are excited as much as we are by multiple dispatch, here are two more in-depth examples.

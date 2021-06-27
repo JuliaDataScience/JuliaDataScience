@@ -99,7 +99,7 @@ Very fast!**
 It was made for speed from the drawing board.
 It accomplishes this by exposing native machine code to the compiler.
 The compiler in turns does what it does best: optimizes machine code^[if you like to learn more about how Julia is designed you should definitely check @bezanson2017julia.].
-You can find [benchmarks](https://julialang.org/benchmarks/) for a range of common code patterns, such as function calls, string parsing, sorting, numerical loops, random number generation, recursion, and array operations comparing Julia with several other languages such as C, R, Python and FORTRAN.
+You can find [benchmarks](https://julialang.org/benchmarks/) for Julia and several other languages here.
 @fig:benchmarks was taken from [Julia's website benchmarks section^[please note that the Julia results depicted above do not include compile time.]](https://julialang.org/benchmarks/).
 As you can see Julia is **indeed** fast.
 

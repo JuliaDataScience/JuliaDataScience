@@ -43,15 +43,3 @@ function value_alice()
     i = row_alice()
     grades[i]
 end
-
-function P()
-    struct Point
-        a::Int
-        b::Int
-    end
-end
-
-function call_P()
-    Point = P() # hide
-    Point(1, 2)
-end

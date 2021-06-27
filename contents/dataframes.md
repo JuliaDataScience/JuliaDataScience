@@ -1,4 +1,4 @@
-# DataFrames.jl {#sec:dataframes_overview}
+# DataFrames.jl {#sec:dataframes}
 
 Most data is formatted as a table.
 By a table, we mean that the data consists of rows and columns, and the columns are usually of the same data type, whereas rows have different types.
@@ -209,7 +209,7 @@ This should be able to take an argument.
 ```
 
 ```jl
-@sco(JDS.grades_row(1))
+@sco(JDS.grades_row)
 ```
 
 Continuing on this, we can also get only `names` for the first 2 rows:

@@ -59,9 +59,10 @@ function Books.convert_output(path, expr, out::DataFrameRow)
     Books.convert_output(path, expr, DataFrame(out))
 end
 
-function grades_row(row::Int)
+# function grades_row(row::Int)
+function grades_row()
     df = grades_2020()
-    df[row, :]
+    df[2, :]
 end
 
 function grades_indexing()

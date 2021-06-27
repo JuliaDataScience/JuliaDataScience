@@ -1,8 +1,8 @@
 # Why Julia? {#sec:why_julia}
 
-The world of data science is already filled with different programming languages.
+The world of data science is already filled with different open source programming languages.
 
-Industry has mostly adopted Python and academia have adopted R and MATLAB.
+Industry has mostly adopted Python and academia have adopted R.
 **Why bother learning other language?**
 To answer this question, we will address two common backgrounds:
 
@@ -13,14 +13,18 @@ To answer this question, we will address two common backgrounds:
 ## For non-programmers {#sec:non-programmers}
 
 In the first background, the common underlying story is the following.
+
 Data science has captivated you, making you interested in learning what is it all about and how can you use it to build your career in academia or industry.
 Then, you try to find resources to learn this new craft and you stumble into a world of intricate acronyms: `pandas`, `dplyr`, `data.table`, `numpy`, `matplotlib`, `ggplot2`, `bokeh`, and the list goes on and on...
+
 Out of the blue you hear a name: "Julia".
 What is this?
 How is it any different from other stuff that I've been told that you ought use to do data science?
+
 Why should I dedicate my precious time into learning a language that is almost never mentioned in any job listing, lab position, postdoc offer or academic job description?
 The answer is that **Julia is a fresh approach** both to programming and data science.
 Everything that you do in Python or in R, you can do it in Julia, with the advantage of using readable[^readable], fast, and powerful code syntax.
+
 So, **if you don't have any programming background knowledge, we highly encourage you to take up Julia** as a first programming language and data science framework.
 
 ## For programmers {#sec:programmers}
@@ -31,10 +35,12 @@ You are well-versed (or even fluent) in Python or R.
 You've heard about this new flashy thing called "data science" and you wanna jump on the bandwagon.
 You begin to learn how to do stuff in `numpy`, how to manipulate `DataFrames` in `pandas` and how to plot things in `matplotlib`.
 Or maybe you've learned all that in R by using the tidyverse and `tibbles`, `data.frames`, `%>%` (pipes) and `geom_*`...
+
 Then, from someone or somewhere you become aware about this new language called "Julia".
 Why bother?
 You are already proficient in Python or R and you can do everything that you need.
 Well, let us contemplate some plausible scenarios.
+
 **Have you ever in Python or R:**
 
 1. Done something and had to wait minutes for it to finish?
@@ -42,21 +48,20 @@ Well, **in Julia Python or R minutes can be translated to seconds**^[and sometim
 We reserved @sec:julia_wild for displaying successful Julia usecases in both academia and industry.
 
 
-1. Tried to do something different than `numpy`/`dplyr` conventions and discovered that your code is slow and you'll probably have to learn dark magic^[`numba`, or even `Rcpp` or `cython`?] to make it faster?
-
+2. Tried to do something different than `numpy`/`dplyr` conventions and discovered that your code is slow and you'll probably have to learn dark magic^[`numba`, or even `Rcpp` or `cython`?] to make it faster?
 **In Julia you can do your custom different stuff without loss of performance**.
 
-2. Had to debug code and somehow you see yourself reading a Fortran or C/C++ source code and having no idea what you are trying to accomplish?
+3. Had to debug code and somehow you see yourself reading a Fortran or C/C++ source code and having no idea what you are trying to accomplish?
 **In Julia you only read Julia code[^readable], no need to learn another language to make your original language fast**.
 This is called the "two-language problem" (see @sec:two_language).
 It also covers the usecase for when "you had an interesting idea and wanted to contribute to an opensource package and gave up because almost everything is not in Python or R but in C/C++ or Fortran"^[have a look at some deep learning libraries in GitHub and you'll be surprised that Python is only 25%-33% of the codebase.].
 
-3. Wanted to use a data structure defined in a package in another package and found that doesn't work and you'll probably need to build an interface^[this is most a Python ecosystem problem, while R doesn't suffer heavily from this is not blue skies either.].
+4. Wanted to use a data structure defined in a package in another package and found that doesn't work and you'll probably need to build an interface^[this is most a Python ecosystem problem, while R doesn't suffer heavily from this is not blue skies either.].
 **Julia allows users to easily share and reuse code from different packages.**
 Most of Julia user-defined types and functions work right out of the bat^[or with little effort necessary.] and some users are even marvelled upon discovering how their packages are being used by other libraries in ways that they could not have imagined.
 We have some examples in @sec:multiple_dispatch.
 
-4. needed to have a better project management, with dependecies and version control tightly controlled, manageable and replicable?
+5. needed to have a better project management, with dependecies and version control tightly controlled, manageable and replicable?
 **Julia has an amazing project management solution allied to a great package manager**.
 Unlike traditional package managers, which install and manage a single global set of packages.
 Julia package manager is designed around “environments”: independent sets of packages that can be local to an individual project or shared.
@@ -69,32 +74,294 @@ Let's proceed then!
 
 ## What Julia tries to accomplish? {#sec:julia_accomplish}
 
-Julia [@bezanson2017julia].
+> **_NOTE:_**
+> In this section we will explain the bells and whistles about what makes Julia shine as a programming language.
+> If it becomes too technical for you, you can skip and go straight to [@sec:dataframes] to learn about tabular data with DataFrames.jl.
 
-```{=comment}
-My figure from [https://storopoli.io/Bayesian-Julia/pages/images/language_comparisons.svg] (I have it in .drawio and .svg)
-```
+Julia [@bezanson2017julia] is a relatively new language, first released in 2012, aims to be **both easy and fast**.
+It "runs like C^[sometimes even faster than C.] but reads like Python" [@perkelJuliaComeSyntax2019].
+It was made for scientific computing, capable handling **large amounts of data and computation** while still being fairly **easy to manipulate, create and protype code**.
+
+In [@fig:language_comparison] is a highly opinionated representation that divides the main opensource scientific computing languages in a 2x2 diagram with two axes: Slow-Fast and Easy-Hard.
+
+We've put C++ and FORTRAN in the hard and fast quadrant.
+Being static languages that needs compilation, type checking and other professional care and attention, they are really hard to learn and slow to prototype.
+The advantage is that they are **really fast** languages.
+
+R and Python goes into the easy and slow quadrant.
+They are dynamic languages that are not compiled and executes in runtime.
+Because of this they are really easy to learn and fast to prototype.
+Of course, this come with a disadvantage: they are **really slow** languages.
+
+Julia is the only language in the easy and fast quadrant.
+We don't know any other serious language that would want to be hard and slow, so this quadrant is left empty.
+
+![Scientific Computing Language Comparisons: logos for FORTRAN, C++, Python, R and Julia.](images/language_comparisons.png){#fig:language_comparison}
+
+**Julia is fast!
+Very fast!**
+It was made for speed from the drawing board.
+It accomplishes this by exposing native machine code to the compiler.
+The compiler in turns does what it does best: optimizes machine code^[if you like to learn more about how Julia is designed you should definitely check @bezanson2017julia.].
+You can find [benchmarks](https://julialang.org/benchmarks/) for Julia and several other languages here.
+@fig:benchmarks was taken from [Julia's website benchmarks section^[please note that the Julia results depicted above do not include compile time.]](https://julialang.org/benchmarks/).
+As you can see Julia is **indeed** fast.
+
+![Julia versus other programming languages.](images/benchmarks.png){#fig:benchmarks}
+
+We really believe in Julia.
+(Otherwise, we wouldn't be writing this book.)
+We think that Julia is the **future in scientific computing and scientific data analysis**.
+It enables the user to develop rapid and powerful code with a simple syntax.
+Usually, researchers develop code by prototyping using a very easy, but slow, language.
+Once the code is assured to run correct and fulfill its goal, then begins the process of converting the code to a fast, but hard, language.
+This is known as the "Two-Language Problem" and we discuss next.
 
 ### The Two-Language Problem {#sec:two_language}
 
-```{=comment}
-Alan Edelman TEDX talk @tedxtalksProgrammingLanguageHeal2020
-```
+The "Two-Language Problem" is a very typical situation in scientific computing where a researcher devises an algorithm or a solution to tackle a desired problem or analysis at hand.
+The solution is, then, prototyped in an easy to code language (like Python or R).
+If the prototype works, the researcher  would code in a fast language that would not be easy to prototype (C++ or FORTRAN).
+Thus, we have two languages involved in the process of of developing a new solution.
+One which is easy to prototype but is not suited for implementation (mostly due to being slow).
+And another one which is not so easy to code (and, consequently, not easy to prototype) but suited for implementation (mostly because it is fast).
+Julia comes to eliminate such situations by being the **same language that you prototype (ease of use) and implement the solution (speed)**.
+
+Also, Julia lets you use **unicode characters as variables or parameters**.
+This means no more using "sigma" or "sigma_i", and instead just use "σ" or "σᵢ" as you would in mathematical notation.
+When you see code for an algorithm or for a mathematical equation you see almost the same notation and idiom.
+We call this feature **"One-To-One Code and Math Relation"**, while usually downplayed can be a powerful feature.
+
+We think that the "Two-Language problem" and the o"One-To-One Code and Math Relation" are best described by one of the creators of Julia, Alan Edelman, in a TEDx Talk [@tedxtalksProgrammingLanguageHeal2020] (if you reading the printed book or a static PDF please click on the link to go the video or check the citation):
+
+<iframe width="698" height="393" src="https://www.youtube.com/embed/qGW0GT1rCvs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Multiple Dispatch {#sec:multiple_dispatch}
 
-```{=comment}
-This section should also include how Julian allows for code sharing and code reuse.
+To explain multiple dispatch, we'll give an illustrative example in **Python**.
+Suppose that you want to have different types of researcher that will inherent from a "base" class `Researcher`.
+The base class `Researcher` would define the initial common values for every derived class: `name` and `age`:
 
-Also include youtubevideo from Karpinski [https://youtu.be/kc9HwsxE1OY]
-
-There is also the YouTube video from Rackaukas saying that someone said that Julia has the best GPU-based quaternion ODE Solver and he said that he had no idea because he didn't even implemented it (https://youtu.be/moyPIhvw4Nk?list=PLpTXaEnTpmwNHVg-yWEBkzx-pTxykFMMx&t=2107) !
+```python
+class Researcher:
+    def __init__(self, name: str, age: int):
+        self.name = name
+        self.age = age
 ```
+
+Now let us define a `Linguist` class that will inherent from the `Researcher` class.
+We will also define a method that returns the citation style that is mostly used in the linguistics research field.
+
+```python
+class Linguist(Researcher):
+    def citation(self):
+        return "APA"
+```
+
+We do the same for the `ComputerScientist` class, but with different citation style:
+
+```python
+class ComputerScientist(Researcher):
+   def citation(self):
+       return "IEEE"
+```
+
+Finally, let's instantiate our two researchers, [Noam Chomsky](https://en.wikipedia.org/wiki/Noam_Chomsky) and [Judea Pearl](https://en.wikipedia.org/wiki/Judea_Pearl):
+
+```python
+noam = Linguist("Noam Chomsky", 92)
+judea = ComputerScientist("Judea Pearl", 84)
+```
+
+Now suppose you want to define a function that will behave *different behaviors* depending on the *argument's types*.
+For example, a linguist researcher might approach a computer scientist researcher and ask him to collaborate on a new paper.
+The approach would be different if the situation were the opposite: a computer scientist researcher approaching the linguist researcher.
+Below, you'll see that we defined two functions that should behave differently in both approaches:
+
+```python
+def approaches(li: Linguist, cs: ComputerScientist):
+   print(f"Hey {cs.name}, wanna do a paper together? We need to use {cs.citation()} style.")
+
+def approaches(cs:ComputerScientist, li: Linguist):
+    print(f"Hey {li.name}, wanna do a paper together? We need to use {li.citation()} style.")
+```
+
+Now lets say Noam Chomsky approaches Judea Pearl with a paper idea:
+
+```python
+approaches(noam, judea)
+```
+
+```plaintext
+Hey Judea Pearl, wanna do a paper? We need to use IEEE style.
+```
+
+That was not what `judea` as a `Linguist` type would say to `noam`, a `ComputerScientist` type.
+This is **single dispatch** and is the default feature available on most object-oriented languages, like Python or C++.
+Single dispatch just act on the first argument of a function.
+Since both of our researchers `noam` and `judea` are instantiate as types inherited from the same base type `Researcher` we cannot implement what we are trying to do in Python.
+You would need to change your approach with a substancial loss of simplicity (you would probably need to create different functions with different names).
+
+**Now let's do this in Julia**.
+
+In Julia, we don't have classes but we have structures (`struct`) that are meant to be "structured data": they define the kind of information that is embedded in the structure, that is a set of fields (i.e. "properties" or "attributes" in other languages), and then individual instances (or "objects") can be produced each with its own specific values for the fields defined by the structure.
+They differ from the primitive types that are by default defined already inside the core of Julia.
+Because of this, `structs`s are composite types, and usually defined by the user.
+
+First we'll create an `abstract type` named `Researcher`:
+
+```jl
+sc(
+"""
+abstract type Researcher end
+"""
+)
+```
+
+We proceed, similar as before, by creating two derived `struct`s from the `Researcher` abstract type:
+
+```jl
+sc(
+"""
+struct Linguist <: Researcher
+    name::AbstractString
+    age::Int64
+end
+"""
+)
+```
+
+```jl
+sc(
+"""
+struct ComputerScientist <: Researcher
+    name::AbstractString
+    age::Int64
+end
+"""
+)
+```
+
+The final step is to define two new functions that will behave differently depending on which derived `struct` of `Researcher` are the first or second argument:
+
+```jl
+sco(
+"""
+approaches(li::Linguist, cs::ComputerScientist) = "Hey \$(cs.name), wanna do a paper? We need to use APA style."
+
+approaches(cs::ComputerScientist, li::Linguist) = "Hey \$(li.name), wanna do a paper? We need to use IEE style."
+"""
+)
+```
+
+Finally, let's instantiate our two researchers, `noam` and `judea`:
+
+```jl
+sc(
+"""
+noam = Linguist("Noam Chomsky", 92)
+judea = ComputerScientist("Judea Pearl", 84)
+"""
+)
+```
+
+Again, let's see what Noam Chomsky will say when he approaches Judea Pearl with a paper idea:
+
+```jl
+sco(
+"""
+approaches(noam, judea)
+"""
+)
+```
+
+Perfect! It behaves just as we wanted!
+This is **multiple dispatch** and it is an important feature in Julia.
+Multiple dispatch acts on all arguments of a function and defines function behavior based on all argument's types.
+
+---
+
+Multiple dispatch is a powerful feature that allows us also to extend existing functions or to define custom and complex behavior to new types.
+To show how this works, we'll use another example.
+Suppose you want to define two new `struct`s based on a animals:
+
+```jl
+sc(
+"""
+struct fox end
+struct chicken end
+"""
+)
+```
+
+I want to define addition for both `fox` and `chicken` new types.
+We proceed by defining a new function signature of the `+` from the `Base` module of Julia^[this is just an example for teaching purposes. Doing something similar as this example will probably result in a [method invalidation](https://julialang.org/blog/2020/08/invalidations/).]:
+
+```jl
+sco(
+"""
+import Base: +
++(F::fox, C::chicken) = "trouble"
++(C1::chicken, C2::chicken) = "safe"
+"""
+)
+```
+
+Now let us call addition with the `+` sign in an instantiated `fox` and `chicken` objects:
+
+```jl
+sco(
+"""
+my_fox = fox()
+my_chicken = chicken()
+my_fox + my_chicken
+"""
+)
+```
+
+And, as expected, adding two `chicken` objects together signals that they are safe:
+
+```jl
+sco(
+"""
+chicken_1 = chicken()
+chicken_2 = chicken()
+chicken_1 + chicken_2
+"""
+)
+```
+
+---
+
+This is the power of multiple dispatch: **we don't need everything from scratch for our custom-defined user types**.
+If you are excited as much as we are by multiple dispatch, here are two more in-depth examples.
+The first is a [fast and elegant implementation of a one-hot vector](https://storopoli.io/Bayesian-Julia/pages/1_why_Julia/#example_one-hot_vector) by @storopoli2021bayesianjulia.
+The second is an interview of [Christopher Rackauckas](https://www.chrisrackauckas.com/) at [Tanmay Bakshi YouTube's Channel](https://youtu.be/moyPIhvw4Nk?t=2107) (see from time 35:07 onwards) [@tanmaybakshiBakingKnowledgeMachine2021].
+Chris mentions that, while using [`DifferentialEquations.jl`](https://diffeq.sciml.ai/dev/), a package that he developed and currently maintains, a user reported that Julia has the best GPU-based quaternion ODE Solver and he said that he had no idea because he didn't even implemented it.
+Most of the merit is due to multiple dispatch and high user code/type sharing.
+
+To conclude, we think that multiple dispatch is best explained by one of the creators of Julia, [Stefan Karpinski, at JuliaCon 2019](https://youtu.be/kc9HwsxE1OY) [@thejuliaprogramminglanguageJuliaCon2019Unreasonable2019] (if you reading the printed book or a static PDF please click on the link to go the video or check the citation):
+
+<iframe width="698" height="393" src="https://www.youtube.com/embed/kc9HwsxE1OY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Julia in the Wild {#sec:julia_wild}
 
-```{=comment}
-Nice Examples of Julia. We have some NASA stuff, the FAA Julia system. SciML's Pfizer drug development speedup.
-```
+In @sec:julia_accomplish, we exposed why we think Julia is such a unique programming language.
+We showed simple examples about the main features of Julia.
+If you would like to have a deep dive on how Julia is being used, we have some **interesting use cases**:
+
+1. NASA uses Julia in a supercomputer to analyze the ["Largest Batch of Earth-Sized Planets Ever Found"](https://exoplanets.nasa.gov/news/1669/seven-rocky-trappist-1-planets-may-be-made-of-similar-stuff/) and achieve a whopping **1,000x speedup** to catalog 188 million astronomical objects in 15 minutes.
+2. [The Climate Modeling Alliance (CliMa)](https://clima.caltech.edu/) is using mostly Julia to **model climate in the GPU and CPU**.
+Launched in 2018 in collaboration with researchers at Caltech, the NASA Jet Propulsion Laboratory, and the Naval Postgraduate School, CliMA is utilizing recent progress in computational science to develop an Earth system model that can predict droughts, heat waves, and rainfall with unprecedented precision.
+3. [US Federal Aviation Administration (FAA) is developing an **Airborne Collision Avoidance System (ACAS-X)** using Julia](https://youtu.be/19zm1Fn0S9M).
+This is a nice example of the "Two-Language Problem" (see @sec:julia_accomplish).
+Previous solutions used Matlab to develop the algorithms and C++ for a fast implementation.
+Now, FAA is using one language to do all this: Julia.
+4. [**175x speedup** for Pfizer's pharmacology models using GPUs in Julia](https://juliacomputing.com/case-studies/pfizer/).
+It was presented as a [poster](https://chrisrackauckas.com/assets/Posters/ACoP11_Poster_Abstracts_2020.pdf) in the 11th American Conference of Pharmacometrics (ACoP11) and [won a quality award](https://web.archive.org/web/20210121164011/https://www.go-acop.org/abstract-awards).
+5. [The Attitude and Orbit Control Subsystem (AOCS) of the Brazilian satellite Amazonia-1 is **written 100% in Julia**](https://discourse.julialang.org/t/julia-and-the-satellite-amazonia-1/57541) by [Ronan Arraes Jardim Chagas](https://ronanarraes.com/)
+6. [Brazil's national development bank (BNDES) ditched a paid solution and opted for opensource Julia modeling and gained a **10x speedup**.](https://youtu.be/NY0HcGqHj3g)
+
+If this is not enough, there are more case studies in [Julia Computing website](https://juliacomputing.com/case-studies/).
 
 [^readable]: no C++ or FORTRAN API calls.

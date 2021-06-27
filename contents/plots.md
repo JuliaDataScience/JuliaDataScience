@@ -1,4 +1,4 @@
-# Plots.jl Overview {#sec:plots_overview}
+# Plots.jl {#sec:plots}
 
 ```
 using Plots

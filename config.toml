@@ -5,10 +5,18 @@
     "preface",
     "why_julia",
     "julia_101",
-    "dataframes_overview",
-    "plots_overview",
+    "dataframes",
+    "plots",
+    "makie",
     "appendix",
     "references"
   ]
   port = 8006
+
+  # Extra directories to be copied.
+  extra_directories = [
+    "images",
+    "files"
+  ]
+
   output_filename = "juliadatascience"

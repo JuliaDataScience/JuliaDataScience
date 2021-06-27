@@ -342,7 +342,8 @@ Previous solutions used Matlab to develop the algorithms and C++ for a fast impl
 Now, FAA is using one language to do all this: Julia.
 4. [**175x speedup** for Pfizer's pharmacology models using GPUs in Julia](https://juliacomputing.com/case-studies/pfizer/).
 It was presented as a [poster](https://chrisrackauckas.com/assets/Posters/ACoP11_Poster_Abstracts_2020.pdf) in the 11th American Conference of Pharmacometrics (ACoP11) and [won a quality award](https://web.archive.org/web/20210121164011/https://www.go-acop.org/abstract-awards).
-5. [Brazil's national development bank (BNDES) ditched a paid solution and opted for opensource Julia modeling and gained a **10x speedup**.](https://youtu.be/NY0HcGqHj3g)
+5. [The Attitude and Orbit Control Subsystem (AOCS) of the Brazilian satellite Amazonia-1 is **written 100% in Julia**](https://discourse.julialang.org/t/julia-and-the-satellite-amazonia-1/57541) by [Ronan Arraes Jardim Chagas](https://ronanarraes.com/)
+6. [Brazil's national development bank (BNDES) ditched a paid solution and opted for opensource Julia modeling and gained a **10x speedup**.](https://youtu.be/NY0HcGqHj3g)
 
 If this is not enough, there are more case studies in [Julia Computing website](https://juliacomputing.com/case-studies/).
 

@@ -3,7 +3,7 @@
 In this preface, we discuss two important aspects of data analysis.
 Actually, there is a third one, Julia, but it deserves a whole chapter (see Chapter -@sec:why_julia).
 
-First, we emphasize the **"data" part of Data Science** and why data skills are, and will be, in **high demand** both in industry and academia.
+First, we emphasize the **"data" part of Data Science** and why data skills are, and will remain, in **high demand** both in industry and academia.
 
 Second, we make an argument for **incorporate software engineering practices into data science** which should reduce friction in updating and sharing code with collaborators.
 Most of data analyses are a collaborative endeavor, these practices should come in handy.

@@ -109,7 +109,8 @@ As you can see Julia is **indeed** fast.
 
 ![Julia versus other programming languages.](images/benchmarks.png){#fig:benchmarks}
 
-We really believe in Julia (otherwise we wouldn't be writing this book).
+We really believe in Julia.
+(Otherwise, we wouldn't be writing this book.)
 We think that Julia is the **future in scientific computing and scientific data analysis**.
 It enables the user to develop rapid and powerful code with a simple syntax.
 Usually, researchers develop code by prototyping using a very easy, but slow, language.

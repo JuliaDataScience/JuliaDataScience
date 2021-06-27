@@ -11,11 +11,17 @@ using Reexport
 @reexport using Makie
 @reexport using Plots
 
+export without_caption_label
+
 plot = Plots.plot
 
 include("df.jl")
 include("environment.jl")
 include("plots.jl")
+
+function without_caption_label(x::Any)
+    Options(x; caption=nothing, label=nothing)
+end
 
 function myplot()
     I = 1:30

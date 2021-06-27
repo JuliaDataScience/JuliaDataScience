@@ -102,7 +102,7 @@ sco("""
 name = ["Sally", "Bob", "Alice", "Hank"]
 grade_2020 = [1, 5, 8.5, 4]
 df = DataFrame(; name, grade_2020)
-Options(df; caption=nothing, label=nothing) # hide
+without_caption_label(df) # hide
 """)
 
 ```
@@ -157,7 +157,7 @@ and still get the original data back without any problem
 ```jl
 sco("""
 df = JDS.grades_2020()
-Options(df; caption=nothing, label=nothing) # hide
+without_caption_label(df) # hide
 """)
 ```
 
@@ -168,15 +168,54 @@ Also, we won't always be using functions, but if we don't then you can rest assu
 
 So, back to `DataFrames`.
 As you might have seen, the way to create one is simply to pass vectors into `DataFrame`.
-You can come up with anything and it will work as long as the vectors have the same length.
-Even duplicates and very precise numbers are fine
+You can come up with any valid Julia vector and it will work as long as the vectors have the same length.
+Duplicates, unicode symbols and not so round numbers are fine:
 
 ```jl
 sco("""
-Options( # hide
-DataFrame(σ = ["a", "a", "a"], δ = [pi, pi/2, pi/3])
-; caption=nothing, label=nothing) # hide
+without_caption_label( # hide
+DataFrame(σ = ["a", "a", "a"], δ = [π, π/2, π/3])
+) # hide
 """)
+```
+
+## Indexing
+
+Let's go back to the example data defined above
+
+```jl
+sco("""
+df = JDS.grades_2020()
+without_caption_label(df) # hide
+""")
+```
+
+To get a the **vector** for `name` back, we can use
+
+```jl
+@sco(JDS.names_grades1)
+```
+
+or
+
+```jl
+@sco(JDS.names_grades2)
+```
+
+For the **row**, say the second row, we can use
+
+```{=comment}
+This should be able to take an argument.
+```
+
+```jl
+@sco(JDS.grades_row(1))
+```
+
+Continuing on this, we can also get only `names` for the first 2 rows:
+
+```jl
+@sco(JDS.grades_indexing)
 ```
 
 ## Select and Filter {#sec:select_filter}

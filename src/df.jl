@@ -43,3 +43,28 @@ function value_alice()
     i = row_alice()
     grades[i]
 end
+
+function names_grades1()
+    df = grades_2020()
+    df.name
+end
+
+function names_grades2()
+    df = grades_2020()
+    df[!, :name]
+end
+
+# Should fix this in Books.jl
+function Books.convert_output(path, expr, out::DataFrameRow)
+    Books.convert_output(path, expr, DataFrame(out))
+end
+
+function grades_row(row::Int)
+    df = grades_2020()
+    df[row, :]
+end
+
+function grades_indexing()
+    df = grades_2020()
+    df[1:2, :name]
+end

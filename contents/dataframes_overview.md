@@ -1,4 +1,4 @@
-# Tabular data {#sec:dataframes_overview}
+# DataFrames.jl {#sec:dataframes_overview}
 
 Most data is formatted as a table.
 By a table, we mean that the data consists of rows and columns, and the columns are usually of the same data type, whereas rows have different types.
@@ -20,14 +20,14 @@ Options(tv_shows; label="tv_shows")
 
 Here, the dots mean that this could be a very long table and we only show a few rows.
 While doing research, questions on this data start to arise.
+For large tables, computers would be able to answer these kinds of questions much quicker than you could do it by hand.
 Examples of, so called _queries_, for this data could be:
 
 - Which show did I give the highest rating?
 - Which shows are made in America?
 - Which shows where in the same country?
 
-For large tables, computers would be able to answer these kinds of questions much quicker than you could do it by hand.
-But, as a researcher, the real science often starts with having multiple tables.
+But, as a researcher, the real science often starts with having multiple tables or data sources.
 For example, if we also have the table containing the ratings given by someone else (@tbl:ratings),
 
 ```jl
@@ -91,9 +91,96 @@ and, then, we can get the value
 @sco(JDS.value_alice)
 ```
 
-These kinds of problems are what is solved by DataFrames.
+These kinds of problems are what is solved by DataFrames, which we can load with
+```
+using DataFrames
+```
+With DataFrames.jl, we can define
+
+```jl
+sco("""
+name = ["Sally", "Bob", "Alice", "Hank"]
+grade_2020 = [1, 5, 8.5, 4]
+df = DataFrame(; name, grade_2020)
+Options(df; caption=nothing, label=nothing) # hide
+""")
+
+```
+
+which gives us a variable `df` containing our table.
+
+```{=comment}
+Although this section is a duplicate of earlier chapters, I do think it might be a good idea to keep the duplicate.
+According to MIT instructor Patrick Winston (https://youtu.be/Unzc731iCUY), convincing someone of something means repeating it a few times.
+With this section, people who already understand it, understand it a bit better and people who didn't understand it yet might understand it here.
+```
+
+This works, but there is one thing that we need to change straight away.
+In this example, we defined the variables `name`, `grade_2020` and `df` in global scope.
+This means that these variables can be accessed and edited from anywhere.
+If we would continue writing the book like this, we would have a few hundred variables at the end of the book even though the data that we put into the variable `name` should only be accessed via `DataFrames`!
+The variables `name` and `grade_2020` where never meant to be kept for long!
+Now, imagine that we would change the contents of `grade_2020` a few times in this book.
+Given only the book as PDF, it could be a stand alone research project to figure out the contents of the variable by the end.
+
+We can solve this very easily by using functions.
+Lets do the same thing as before but now in a function.
+
+```jl
+@sco(JDS.grades_2020)
+```
+
+Note that `name` and `grade_2020` are destroyed after the function returns, that is, they are only available in the function.
+There are two other benefits of doing this.
+Firstly, it is now clear to the reader where `name` and `grade_2020` belong to, they below to the grades of 2020.
+Secondly, it is easy to determine what the output of `grades_2020()` would be at any point in the book.
+For example, we can now put the data in a variable
+
+```jl
+sco("""
+df = JDS.grades_2020()
+Options(df; caption=nothing, label=nothing) # hide
+""")
+```
+
+change the content of the variable
+
+```jl
+sco("""
+df = DataFrame(name = ["Malice"], grade_2020 = ["10"])
+Options(df; caption=nothing, label=nothing) # hide
+""")
+```
+
+and still get the original data back without any problem
+
+```jl
+sco("""
+df = JDS.grades_2020()
+Options(df; caption=nothing, label=nothing) # hide
+""")
+```
+
+This assumes that the function is not re-defined, of course.
+We promise to not do that in this book, because it is a bad idea exactly for this reason.
+Instead of "changing" a function, we will make a new one and give it a clear name.
+Also, we won't always be using functions, but if we don't then you can rest assured that we won't reuse it much later in the book.
+
+So, back to `DataFrames`.
+As you might have seen, the way to create one is simply to pass vectors into `DataFrame`.
+You can come up with anything and it will work as long as the vectors have the same length.
+Even duplicates and very precise numbers are fine
+
+```jl
+sco("""
+Options( # hide
+DataFrame(σ = ["a", "a", "a"], δ = [pi, pi/2, pi/3])
+; caption=nothing, label=nothing) # hide
+""")
+```
 
 ## Select and Filter {#sec:select_filter}
+
 
 ## Missing Data {#sec:missing_data}
 

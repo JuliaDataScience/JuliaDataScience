@@ -4,7 +4,7 @@
 This file is only included on the website.
 ```
 
-Welcome! This is an opensource and openaccess book on how to do **Data Science using [Julia](https://julialang.org)**.
+Welcome! This is an open source and open access book on how to do **Data Science using [Julia](https://julialang.org)**.
 Our target audience are PhD candidates from all fields of applied sciences.
 Industry analysts, upcoming and established researchers are also welcome as readers.
 

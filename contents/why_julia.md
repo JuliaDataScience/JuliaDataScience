@@ -1,8 +1,8 @@
 # Why Julia? {#sec:why_julia}
 
-The world of data science is already filled with different programming languages.
+The world of data science is already filled with different opensource programming languages.
 
-Industry has mostly adopted Python and academia have adopted R and MATLAB.
+Industry has mostly adopted Python and academia have adopted R.
 **Why bother learning other language?**
 To answer this question, we will address two common backgrounds:
 
@@ -13,14 +13,18 @@ To answer this question, we will address two common backgrounds:
 ## For non-programmers {#sec:non-programmers}
 
 In the first background, the common underlying story is the following.
+
 Data science has captivated you, making you interested in learning what is it all about and how can you use it to build your career in academia or industry.
 Then, you try to find resources to learn this new craft and you stumble into a world of intricate acronyms: `pandas`, `dplyr`, `data.table`, `numpy`, `matplotlib`, `ggplot2`, `bokeh`, and the list goes on and on...
+
 Out of the blue you hear a name: "Julia".
 What is this?
 How is it any different from other stuff that I've been told that you ought use to do data science?
+
 Why should I dedicate my precious time into learning a language that is almost never mentioned in any job listing, lab position, postdoc offer or academic job description?
 The answer is that **Julia is a fresh approach** both to programming and data science.
 Everything that you do in Python or in R, you can do it in Julia, with the advantage of using readable[^readable], fast, and powerful code syntax.
+
 So, **if you don't have any programming background knowledge, we highly encourage you to take up Julia** as a first programming language and data science framework.
 
 ## For programmers {#sec:programmers}
@@ -31,10 +35,12 @@ You are well-versed (or even fluent) in Python or R.
 You've heard about this new flashy thing called "data science" and you wanna jump on the bandwagon.
 You begin to learn how to do stuff in `numpy`, how to manipulate `DataFrames` in `pandas` and how to plot things in `matplotlib`.
 Or maybe you've learned all that in R by using the tidyverse and `tibbles`, `data.frames`, `%>%` (pipes) and `geom_*`...
+
 Then, from someone or somewhere you become aware about this new language called "Julia".
 Why bother?
 You are already proficient in Python or R and you can do everything that you need.
 Well, let us contemplate some plausible scenarios.
+
 **Have you ever in Python or R:**
 
 1. Done something and had to wait minutes for it to finish?
@@ -282,7 +288,7 @@ struct chicken end
 ```
 
 I want to define addition for both `fox` and `chicken` new types.
-We proceed by defining a new function signature of the `+` from the `Base` module of Julia^[this is just an example for teaching purposes. Don't do this... Rik help me out here, I forgot the name of the thing. It was "type" something, right?]:
+We proceed by defining a new function signature of the `+` from the `Base` module of Julia^[this is just an example for teaching purposes. Doing something similar as this example will probably result in a [method invalidation](https://julialang.org/blog/2020/08/invalidations/).]:
 
 ```jl
 sco(
@@ -318,12 +324,21 @@ To conclude, we think that multiple dispatch is best explained by one of the cre
 
 ## Julia in the Wild {#sec:julia_wild}
 
-```{=comment}
-TODO
+In @sec:julia_accomplish, we exposed why we think Julia is such a unique programming language.
+We showed simple examples about the main features of Julia.
+If you would like to have a deep dive on how Julia is being used, we have some **interesting use cases**:
 
-Insert the benchmark Figure
+1. NASA uses Julia in a supercomputer to analyze the ["Largest Batch of Earth-Sized Planets Ever Found"](https://exoplanets.nasa.gov/news/1669/seven-rocky-trappist-1-planets-may-be-made-of-similar-stuff/) and achieve a whopping **1,000x speedup** to catalog 188 million astronomical objects in 15 minutes.
+2. [The Climate Modeling Alliance (CliMa)](https://clima.caltech.edu/) is using mostly Julia to **model climate in the GPU and CPU**.
+Launched in 2018 in collaboration with researchers at Caltech, the NASA Jet Propulsion Laboratory, and the Naval Postgraduate School, CliMA is utilizing recent progress in computational science to develop an Earth system model that can predict droughts, heat waves, and rainfall with unprecedented precision.
+3. [US Federal Aviation Administration (FAA) is developing an **Airborne Collision Avoidance System (ACAS-X)** using Julia](https://youtu.be/19zm1Fn0S9M).
+This is a nice example of the "Two-Language Problem" (see @sec:julia_accomplish).
+Previous solutions used Matlab to develop the algorithms and C++ for a fast implementation.
+Now, FAA is using one language to do all this: Julia.
+4. [**175x speedup** for Pfizer's pharmacology models using GPUs in Julia](https://juliacomputing.com/case-studies/pfizer/).
+It was presented as a [poster](https://chrisrackauckas.com/assets/Posters/ACoP11_Poster_Abstracts_2020.pdf) in the 11th American Conference of Pharmacometrics (ACoP11) and [won a quality award](https://web.archive.org/web/20210121164011/https://www.go-acop.org/abstract-awards).
+5. [Brazil's national development bank (BNDES) ditched a paid solution and opted for opensource Julia modeling and gained a **10x speedup**.](https://youtu.be/NY0HcGqHj3g)
 
-Nice Examples of Julia. We have some NASA stuff, the FAA Julia system. SciML's Pfizer drug development speedup.
-```
+If this is not enough, there are more case studies in [Julia Computing website](https://juliacomputing.com/case-studies/).
 
 [^readable]: no C++ or FORTRAN API calls.

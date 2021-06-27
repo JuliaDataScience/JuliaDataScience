@@ -1,5 +1,13 @@
 # Preface {#sec:preface}
 
+In this preface our intent is to outline two main ideas that should be the backbone of modern data analyses.
+Actually, there is a third one, Julia, but it deserves a whole chapter (see Chapter -@sec:why_julia).
+
+First, we emphasize the **"data" part of Data Science** and why data skills are, and will be, in **high demand** both in industry and academia.
+
+Second, we make an argument for **incorporate software engineering practices into data science** which should reduce friction in updating and sharing code with collaborators.
+Most of data analyses are a collaborative endeavor, these practices should come in handy.
+
 ## Why Data Science? {#sec:why_data_science}
 
 Data Science is not only machine learning and statistics, also it is not all about prediction, alas, it is not even a discipline fully contained within STEM (Science, Technology, Engineering, and Mathematics) fields [@Meng2019Data].

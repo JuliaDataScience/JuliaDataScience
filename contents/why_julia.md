@@ -1,6 +1,6 @@
 # Why Julia? {#sec:why_julia}
 
-The world of data science is already filled with different opensource programming languages.
+The world of data science is already filled with different open source programming languages.
 
 Industry has mostly adopted Python and academia have adopted R.
 **Why bother learning other language?**

@@ -1,6 +1,6 @@
 # Preface {#sec:preface}
 
-In this preface our intent is to outline two main ideas that should be the backbone of modern data analyses.
+In this preface, we discuss two important aspects of data analysis.
 Actually, there is a third one, Julia, but it deserves a whole chapter (see Chapter -@sec:why_julia).
 
 First, we emphasize the **"data" part of Data Science** and why data skills are, and will be, in **high demand** both in industry and academia.

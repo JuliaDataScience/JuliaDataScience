@@ -1,20 +1,58 @@
 # Preface {#sec:preface}
 
+In this preface, we discuss two important aspects of data analysis.
+Actually, there is a third one, Julia, but it deserves a whole chapter (see [@sec:why_julia]).
+
+First, we emphasize the **"data" part of Data Science** and why data skills are, and will remain, in **high demand** both in industry and academia.
+
+Second, we make an argument for **incorporate software engineering practices into data science** which should reduce friction in updating and sharing code with collaborators.
+Most of data analyses are a collaborative endeavor, these practices should come in handy.
+
 ## Why Data Science? {#sec:why_data_science}
+
+Data Science is not only machine learning and statistics, also it is not all about prediction, alas, it is not even a discipline fully contained within STEM (Science, Technology, Engineering, and Mathematics) fields [@Meng2019Data].
+But one thing we can assure with highly confidence is that **data is always involved**.
+Our aim in this book is two-fold:
+
+* First, we want to focus on the backbone of data science: data.
+* Second, we want you to use Julia.
+
+We will cover why we think you should use Julia in [@sec:why_julia].
+For now, let's turn our attention towards data.
 
 ### Data is Everywhere {#sec:data_everywhere}
 
-```{=comment}
-The abundance of data and what this means to almost every knowledge worker. (Drucker 1959)
-```
+![Yes, data is the new black.](images/data-everywhere.png){#fig:data_everywhere}
+
+**Data is abundant** and will be even more in the near future.
+A report from the end of 2012 concluded that from 2005 to 2020, the amount of data stored digitally will **grow by a factor of 300, from 130 exabyes^[1 exabyte (EB) = 1,000,000 terabyte (TB).] to a whooping 40,000 exabytes** [@gantz2012digital].
+This is equal to 40 trillion gigabytes and, to put in perspective, more than **5,200 gigabytes for every living human currently in this planet!**
+In 2020, the average person created every person created **1.7 MB of data per second** [@domo2018data].
+A recent report predicted that almost **two thirds (65%) of national GDPs will will have undergone digitization by 2022** [@fitzgerald2020idc].
+
+Every profession will be impacted not only by the increasing availability of data but also by data's increased importance [@chen2014big; @khan2014big].
+This is why data skills are important.
+In order to become the researcher or professional that the world is demanding right now you need to feel comfortable around data.
+You need to become a **data literate**.
 
 ### Data Literacy {#sec:data_literacy}
 
-```{=comment}
-Data literacy as a competitive skill. Some references (wikipedia has a nice one) [https://en.wikipedia.org/wiki/Data_literacy]
+According to [Wikipedia](https://en.wikipedia.org/wiki/Data_literacy), the formal definition of **data literacy is "the ability to read, understand, create, and communicate data as information."**.
+We also like the informal idea that, as a data literate, you won't feel overwhelmed by data, quite the contrary, you would feel empowered by it.
 
-As data collection and data sharing become routine and data analysis and big data become common ideas in the news, business,[2] government[3] and society,[4] it becomes more and more important for students, citizens, and readers to have some data literacy.
-```
+Data literacy can be seen as a highly competitive skill to possess.
+In this book we'll cover two aspects of data literacy:
+
+1. **Data Manipulation** with DataFrames.jl ([@sec:dataframes]).
+In this chapter you will learn how to:
+    1. Read CSV and Excel data from disk and from the internet
+    2. ...
+    3. ...
+1. **Data Visualization** with Plots.jl and Makie.jl ([@sec:plots] and [@sec:makie]).
+In these chapter you will learn how to:
+    1. ...
+    2. ...
+    3. ...
 
 ## Software engineering and data science {#sec:engineering}
 

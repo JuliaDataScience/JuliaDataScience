@@ -32,4 +32,6 @@ Or in BibTeX format for $\LaTeX$:
 
 ```{=comment}
 Once the book is launched in Amazon we should add something like: "You can also buy this book in printed version at Amazon.com"
+
+We need a nice cover image...
 ```

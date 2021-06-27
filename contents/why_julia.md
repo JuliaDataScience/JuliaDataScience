@@ -123,7 +123,7 @@ And another one which is not so easy to code (and, consequently, not easy to pro
 Julia comes to eliminate such situations by being the **same language that you prototype (ease of use) and implement the solution (speed)**.
 
 Also, Julia lets you use **unicode characters as variables or parameters**.
-This means no more using `sigma` or `sigma_i`, and instead just use `σ` or `σᵢ` as you would in mathematical notation.
+This means no more using "sigma" or "sigma_i", and instead just use "σ" or "σᵢ" as you would in mathematical notation.
 When you see code for an algorithm or for a mathematical equation you see almost the same notation and idiom.
 We call this feature **"One-To-One Code and Math Relation"**, while usually downplayed can be a powerful feature.
 

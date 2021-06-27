@@ -1,1 +1,1 @@
-# Data Visualization with Makie.jl {#sec:makie}
+# Makie.jl {#sec:makie}

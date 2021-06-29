@@ -1,6 +1,6 @@
 # DataFrames.jl {#sec:dataframes}
 
-Most data is formatted as a table.
+Data comes mostly in a tabular format.
 By a table, we mean that the data consists of rows and columns, and the columns are usually of the same data type, whereas rows have different types.
 The rows, in practise, denote measurements and columns denote variables.
 For example, we can have a table of tv shows, which country it was produced, and our own rating for the shows, see @tbl:tv_shows.

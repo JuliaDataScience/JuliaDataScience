@@ -11,6 +11,7 @@
     "appendix",
     "references"
   ]
+  port = 8006
 
   # Extra directories to be copied.
   extra_directories = [
@@ -18,5 +19,4 @@
     "files"
   ]
 
-  port = 8004
   output_filename = "juliadatascience"

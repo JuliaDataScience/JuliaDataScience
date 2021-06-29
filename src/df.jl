@@ -69,3 +69,8 @@ function grades_indexing()
     df = grades_2020()
     df[1:2, :name]
 end
+
+function grades_2020(names::Vector{Int})
+    df = grades_2020()
+    df[names, :]
+end

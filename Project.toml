@@ -16,7 +16,7 @@ Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 
 [compat]
 AlgebraOfGraphics = "0.4"
-Books = "0.6"
+Books = "0.7"
 CairoMakie = "0.6"
 DataFrames = "1.1"
 Makie = "0.14"

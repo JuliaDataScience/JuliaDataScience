@@ -4,6 +4,7 @@ function grades_ages()
     DataFrame(; name, age)
 end
 
+export grades_2020
 function grades_2020()
     name = ["Sally", "Bob", "Alice", "Hank"]
     grade_2020 = [1, 5, 8.5, 4]
@@ -55,14 +56,21 @@ function names_grades2()
 end
 
 # Should fix this in Books.jl
-function Books.convert_output(path, expr, out::DataFrameRow)
-    Books.convert_output(path, expr, DataFrame(out))
+export convert_output
+function Books.convert_output(path, expr, out::DataFrameRow; kwargs...)
+    Books.convert_output(path, expr, DataFrame(out); kwargs...)
 end
 
-# function grades_row(row::Int)
-function grades_row()
+export grade_2020
+function grade_2020(i::Int)
     df = grades_2020()
-    df[2, :]
+    df[i, :]
+end
+
+function grade_2020(name::String)
+    df = grades_2020()
+    dic = Dict(zip(df.name, df.grade_2020))
+    dic[name]
 end
 
 function grades_indexing()
@@ -74,3 +82,6 @@ function grades_2020(names::Vector{Int})
     df = grades_2020()
     df[names, :]
 end
+
+export equals_alice
+equals_alice(n::String) = n == "Alice"

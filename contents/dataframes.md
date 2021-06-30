@@ -46,7 +46,7 @@ Now, questions that we could ask ourselves could be:
 
 In the rest of this chapter, we will show you how you can easily answer these questions in Julia.
 To do so, we first show, in @sec:why_dataframes, why we need a Julia package called DataFrames.jl.
-Next, we answer queries on single tables in @sec:select_filter.
+Next, we answer queries on single tables in @sec:filter_select.
 After this, we have to discuss how to handle missing data in @sec:missing_data, which unfortunately happens a lot.
 Then, we are ready to answer queries on multiple tables in @sec:join.
 Finally, we discuss how to aggregate groups (rows) for things like taking the mean in @sec:groupby.
@@ -72,25 +72,25 @@ These basics are great for many things, but not for tables.
 To show that we need more, lets try to store the tabular data in arrays:
 
 ```jl
-@sc(JDS.grades_array())
+@sc JDS.grades_array()
 ```
 
 Now, the data is stored in, so called, column-major, which is cumbersome when we want to get data from a row:
 
 ```jl
-@sco(JDS.second_row())
+@sco JDS.second_row()
 ```
 
 Or, if you want to have the grade for Alice, you first need to figure out in what row Alice is,
 
 ```jl
-@sco(JDS.row_alice())
+@sco JDS.row_alice()
 ```
 
 and, then, we can get the value
 
 ```jl
-@sco(JDS.value_alice())
+@sco JDS.value_alice()
 ```
 
 DataFrames.jl can easily solve these kinds of issues.
@@ -104,9 +104,9 @@ With DataFrames.jl, we can define
 
 ```jl
 sco("""
-name = ["Sally", "Bob", "Alice", "Hank"]
-grade_2020 = [1, 5, 8.5, 4]
-df = DataFrame(; name, grade_2020)
+names = ["Sally", "Bob", "Alice", "Hank"]
+grades = [1, 5, 8.5, 4]
+df = DataFrame(; name=names, grade_2020=grades)
 without_caption_label(df) # hide
 """)
 ```
@@ -125,13 +125,13 @@ This means that these variables can be accessed and edited from anywhere.
 If we would continue writing the book like this, we would have a few hundred variables at the end of the book even though the data that we put into the variable `name` should only be accessed via `DataFrames`!
 The variables `name` and `grade_2020` where never meant to be kept for long!
 Now, imagine that we would change the contents of `grade_2020` a few times in this book.
-Given only the book as PDF, it could be a stand alone research project to figure out the contents of the variable by the end.
+Given only the book as PDF, it would be near impossible to figure out the contents of the variable by the end.
 
 We can solve this very easily by using functions.
 Lets do the same thing as before but now in a function.
 
 ```jl
-@sco(JDS.grades_2020())
+@sco JDS.grades_2020()
 ```
 
 Note that `name` and `grade_2020` are destroyed after the function returns, that is, they are only available in the function.
@@ -142,8 +142,8 @@ For example, we can now put the data in a variable
 
 ```jl
 sco("""
-df = JDS.grades_2020()
-Options(df; caption=nothing, label=nothing) # hide
+df = grades_2020()
+without_caption_label(df) # hide
 """)
 ```
 
@@ -152,7 +152,7 @@ change the content of the variable
 ```jl
 sco("""
 df = DataFrame(name = ["Malice"], grade_2020 = ["10"])
-Options(df; caption=nothing, label=nothing) # hide
+without_caption_label(df) # hide
 """)
 ```
 
@@ -168,7 +168,7 @@ without_caption_label(df) # hide
 This assumes that the function is not re-defined, of course.
 We promise to not do that in this book, because it is a bad idea exactly for this reason.
 Instead of "changing" a function, we will make a new one and give it a clear name.
-Also, we won't always be using functions, but if we don't then you can rest assured that we won't reuse it much later in the book.
+Also, sometimes we will still be defining variables, but if we do, then you can rest assured that we won't reuse it much later in the book.
 
 So, back to `DataFrames`.
 As you might have seen, the way to create one is simply to pass vectors into `DataFrame`.
@@ -187,7 +187,7 @@ Typically, in your code, you would create a function which wraps around one or m
 For example, we can make a function to get the grades for various `names`:
 
 ```jl
-@sc(JDS.grades_2020([1]))
+@sc JDS.grades_2020([1])
 ```
 
 ```jl
@@ -198,12 +198,13 @@ grades_2020([3, 4])
 """; M=JDS)
 ```
 
-Basically, you can think of programming languages and packages as providers of building blocks.
+This way of using functions to wrap around basic functionality from programming languages and packages is quite common.
+Basically, you can think of Julia and DataFrames as providers of building blocks.
+They provide very **generic** building blocks which allow you to build things for your **specific** use-case like this grades example.
 By using the blocks, you can make a data analysis script, control a robot or whatever you like to build.
-In this function, we use building blocks from Julia and DataFrames.jl to build our own logic.
 
 So far, the examples were quite cumbersome since we had to use indexes.
-In the next sections, we will show more powerful capabilities of DataFrames.jl.
+In the next sections, we will show more powerful building blocks provided by DataFrames.jl.
 
 ## Indexing
 
@@ -211,40 +212,181 @@ Let's go back to the example data defined above
 
 ```jl
 sco("""
-df = JDS.grades_2020()
-without_caption_label(df) # hide
+without_caption_label( # hide
+grades_2020()
+) # hide
 """)
 ```
 
 To get a the **vector** for `name` back, we can use
 
+```{=comment}
+These two functions cannot be replaced by inline code due to
+`df.name` being converted to the same filename as `df[!, :name]` in Books.jl.
+I need to fix it.
+```
+
 ```jl
-@sco(JDS.names_grades1())
+@sco JDS.names_grades1()
 ```
 
 or
 
 ```jl
-@sco(JDS.names_grades2())
+@sco JDS.names_grades2()
 ```
 
 For the **row**, say the second row, we can use
 
-```{=comment}
-This should be able to take an argument.
+```jl
+sco("""
+df[2, :]
+df = DataFrame(df[2, :]) # hide
+without_caption_label(df) # hide
+""")
+```
+
+or create a function to give us row `i`
+
+```jl
+@sc JDS.grade_2020(1)
 ```
 
 ```jl
-@sco(JDS.grades_row())
+sco("""
+without_caption_label( # hide
+grade_2020(2)
+) # hide
+""")
 ```
 
 Continuing on this, we can also get only `names` for the first 2 rows:
 
 ```jl
-@sco(JDS.grades_indexing())
+@sco JDS.grades_indexing()
 ```
 
-## Select and Filter {#sec:select_filter}
+If we assume that all names in the table are unique, we can also write a function to obtain the grade for a person via their `name`.
+To do this, we convert the table back to one of Julia's basic data structures which is capable of creating a mappings, namely dictionaries:
+
+```jl
+@sc grade_2020("")
+```
+
+```jl
+sco("""
+grade_2020("Bob")
+""")
+```
+
+which works because `zip` loops through `df.name` and `df.grade_2020` at the same time like a zipper:
+
+```jl
+sco("""
+df = grades_2020()
+collect(zip(df.name, df.grade_2020))
+""")
+```
+
+However, converting a DataFrame to a Dictionary is only useful when the elements are unique.
+When that is not the case, it is time to `filter` (@sec:filter_select).
+
+## Filter and Select {#sec:filter_select}
+
+Continuing from the earlier mentioned table.
+
+```jl
+sco("""
+without_caption_label( # hide
+grades_2020()
+) # hide
+""")
+```
+
+We can filter rows by using `filter(f::Function, df)`.
+Working with a function `f` for filtering can be a bit difficult to use in practice, but it is very powerful.
+As a simple example, we can create a function which checks whether it's input equals "Alice":
+
+```jl
+@sc JDS.equals_alice("")
+```
+
+```jl
+sco("""
+equals_alice("Bob")
+""")
+```
+
+```jl
+sco("""
+equals_alice("Alice")
+""")
+```
+
+With this function, we can now filter out all the rows for which `name` equals "Alice"
+
+```jl
+sco("""
+without_caption_label( # hide
+filter(:name => equals_alice, grades_2020())
+) # hide
+""")
+```
+
+For most people, this is a bit too verbose.
+Instead, we can also use an anonymous function:
+
+```jl
+sco("""
+without_caption_label( # hide
+filter(:name => n -> n == "Alice", grades_2020())
+) # hide
+""")
+```
+
+This line can be read as "for each element in the column `:name`, let's call this thing `n`, check whether `n` equals Alice".
+For some people, this is still to verbose.
+Luckily, Julia has added a partial function application of `==`.
+The details of this are not important to know, only that you can use it via
+
+```jl
+sco("""
+without_caption_label( # hide
+filter(:name => ==("Alice"), grades_2020())
+) # hide
+""")
+```
+
+To get all the rows which are **not** Alice, `==` can be replaced by `!=` in all previous examples:
+
+```jl
+sco("""
+without_caption_label( # hide
+filter(:name => !=("Alice"), grades_2020())
+) # hide
+""")
+```
+
+Now, to show why these functions are so powerful, we can come up with a more complex filter.
+In this filter, we want to have the people whos name start with A or B, **and** who have a grade above a 6.
+
+```jl
+sc("""
+function complex_filter(name, grade)::Bool
+    interesting_name = startswith(name, 'A') || startswith(name, 'B')
+    interesting_grade = 6 < grade
+    interesting_name && interesting_grade
+end
+""")
+```
+
+```jl
+sco("""
+without_caption_label( # hide
+filter([:name, :grade_2020] => complex_filter, grades_2020())
+) # hide
+""")
+```
 
 
 ## Missing Data {#sec:missing_data}

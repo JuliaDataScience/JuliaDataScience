@@ -150,7 +150,7 @@ class Researcher:
 ```
 
 Now let us define a `Linguist` class that will inherent from the `Researcher` class.
-We will also define a method that returns the citation style that is mostly used in the linguistics research field.
+We will also define a method `citation()` that returns the citation style that is mostly used in the linguistics research field.
 
 ```python
 class Linguist(Researcher):
@@ -193,7 +193,7 @@ approaches(noam, judea)
 ```
 
 ```plaintext
-Hey Judea Pearl, wanna do a paper? We need to use IEEE style.
+Hey Judea Pearl, wanna do a paper? We need to use APA style.
 ```
 
 That was not what `judea` as a `Linguist` type would say to `noam`, a `ComputerScientist` type.
@@ -206,9 +206,10 @@ You would need to change your approach with a substancial loss of simplicity (yo
 
 In Julia, we don't have classes but we have structures (`struct`) that are meant to be "structured data": they define the kind of information that is embedded in the structure, that is a set of fields (i.e. "properties" or "attributes" in other languages), and then individual instances (or "objects") can be produced each with its own specific values for the fields defined by the structure.
 They differ from the primitive types (e.g. integer and floats) that are by default defined already inside the core of Julia language.
-Because of this, `structs`s are known as composite types, and usually defined by the user.
+The user can only create new `abstract type`s or `struct`s (which are also known as composite types).
+In Julia, all `struct`s are final and may only have `abstract type`s as their supertypes.
 
-First we'll create an `abstract type` named `Researcher`:
+First we'll create an `abstract type` named `Researcher`.
 
 ```jl
 sc(
@@ -219,7 +220,9 @@ abstract type Researcher end
 ```
 
 We proceed, similar as before, by creating two derived `struct`s from the `Researcher` abstract type.
-Note that the `<:` operator is the subtype operator to assign that a `struct` or `type` is a subtype of another `struct` or `type`, which in turns would become a supertype (and we have the analogous `>:` operator):
+Note that the `<:` operator is the subtype operator to assign that a `struct` or `type` is a subtype of another `struct` or `type`, which in turns would become a supertype (and we have the analogous `>:` operator).
+We also create two field names, one for the researcher `name` and other for `age`.
+They are represented as strings and 64-bit integers, respectively:
 
 ```jl
 sc(
@@ -243,7 +246,8 @@ end
 )
 ```
 
-The final step is to define two new functions that will behave differently depending on which derived `struct` of `Researcher` are the first or second argument:
+The final step is to define two new functions that will behave differently depending on which derived `struct` of `Researcher` are the first or second argument.
+We also use `$` for string interpolation of the researcher's `name`:
 
 ```jl
 sco(
@@ -255,7 +259,7 @@ approaches(cs::ComputerScientist, li::Linguist) = "Hey \$(li.name), wanna do a p
 )
 ```
 
-Finally, let's instantiate our two researchers, `noam` and `judea`:
+Finally, let's instantiate our two researchers, `noam` and `judea`, as we did before in the Python case:
 
 ```jl
 sc(

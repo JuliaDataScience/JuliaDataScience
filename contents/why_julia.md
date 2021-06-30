@@ -140,7 +140,7 @@ We think that the "Two-Language problem" and the o"One-To-One Code and Math Rela
 
 To explain multiple dispatch, we'll give an illustrative example in **Python**.
 Suppose that you want to have different types of researcher that will inherent from a "base" class `Researcher`.
-The base class `Researcher` would define the initial common values for every derived class: `name` and `age`:
+The base class `Researcher` would define the initial common values for every derived class, namely `name` and `age`. These would go inside the default constructor method `__init__`:
 
 ```python
 class Researcher:
@@ -166,7 +166,7 @@ class ComputerScientist(Researcher):
        return "IEEE"
 ```
 
-Finally, let's instantiate our two researchers, [Noam Chomsky](https://en.wikipedia.org/wiki/Noam_Chomsky) and [Judea Pearl](https://en.wikipedia.org/wiki/Judea_Pearl):
+Finally, let's instantiate our two researchers, [Noam Chomsky](https://en.wikipedia.org/wiki/Noam_Chomsky) a linguist and [Judea Pearl](https://en.wikipedia.org/wiki/Judea_Pearl) a computer scientist with their respective ages:
 
 ```python
 noam = Linguist("Noam Chomsky", 92)
@@ -180,10 +180,10 @@ Below, you'll see that we defined two functions that should behave differently i
 
 ```python
 def approaches(li: Linguist, cs: ComputerScientist):
-   print(f"Hey {cs.name}, wanna do a paper together? We need to use {cs.citation()} style.")
+   print(f"Hey {cs.name}, wanna do a paper together? We need to use {li.citation()} style.")
 
 def approaches(cs:ComputerScientist, li: Linguist):
-    print(f"Hey {li.name}, wanna do a paper together? We need to use {li.citation()} style.")
+    print(f"Hey {li.name}, wanna do a paper together? We need to use {cs.citation()} style.")
 ```
 
 Now lets say Noam Chomsky approaches Judea Pearl with a paper idea:
@@ -205,8 +205,8 @@ You would need to change your approach with a substancial loss of simplicity (yo
 **Now let's do this in Julia**.
 
 In Julia, we don't have classes but we have structures (`struct`) that are meant to be "structured data": they define the kind of information that is embedded in the structure, that is a set of fields (i.e. "properties" or "attributes" in other languages), and then individual instances (or "objects") can be produced each with its own specific values for the fields defined by the structure.
-They differ from the primitive types that are by default defined already inside the core of Julia.
-Because of this, `structs`s are composite types, and usually defined by the user.
+They differ from the primitive types (e.g. integer and floats) that are by default defined already inside the core of Julia language.
+Because of this, `structs`s are known as composite types, and usually defined by the user.
 
 First we'll create an `abstract type` named `Researcher`:
 
@@ -218,7 +218,8 @@ abstract type Researcher end
 )
 ```
 
-We proceed, similar as before, by creating two derived `struct`s from the `Researcher` abstract type:
+We proceed, similar as before, by creating two derived `struct`s from the `Researcher` abstract type.
+Note that the `<:` operator is the subtype operator to assign that a `struct` or `type` is a subtype of another `struct` or `type`, which in turns would become a supertype (and we have the analogous `>:` operator):
 
 ```jl
 sc(
@@ -249,7 +250,7 @@ sco(
 """
 approaches(li::Linguist, cs::ComputerScientist) = "Hey \$(cs.name), wanna do a paper? We need to use APA style."
 
-approaches(cs::ComputerScientist, li::Linguist) = "Hey \$(li.name), wanna do a paper? We need to use IEE style."
+approaches(cs::ComputerScientist, li::Linguist) = "Hey \$(li.name), wanna do a paper? We need to use IEEE style."
 """
 )
 ```
@@ -283,7 +284,8 @@ Multiple dispatch acts on all arguments of a function and defines function behav
 
 Multiple dispatch is a powerful feature that allows us also to extend existing functions or to define custom and complex behavior to new types.
 To show how this works, we'll use another example.
-Suppose you want to define two new `struct`s based on a animals:
+Suppose you want to define two new `struct`s for two different animals.
+For simplicity, we won't be adding fields for the `struct`s:
 
 ```jl
 sc(
@@ -294,8 +296,8 @@ struct chicken end
 )
 ```
 
-I want to define addition for both `fox` and `chicken` new types.
-We proceed by defining a new function signature of the `+` from the `Base` module of Julia^[this is just an example for teaching purposes. Doing something similar as this example will probably result in a [method invalidation](https://julialang.org/blog/2020/08/invalidations/).]:
+Next, we want to define addition for both `fox` and `chicken` new types.
+We proceed by defining a new function signature of the `+` operator from the `Base` module of Julia^[this is just an example for teaching purposes. Doing something similar as this example will probably result in a [method invalidation](https://julialang.org/blog/2020/08/invalidations/).]:
 
 ```jl
 sco(
@@ -307,7 +309,7 @@ import Base: +
 )
 ```
 
-Now let us call addition with the `+` sign in an instantiated `fox` and `chicken` objects:
+Now let us call addition with the `+` sign on instantiated `fox` and `chicken` objects:
 
 ```jl
 sco(

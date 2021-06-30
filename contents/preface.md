@@ -25,9 +25,9 @@ For now, let's turn our attention towards data.
 ![Yes, data is the new black.](images/data-everywhere.png){#fig:data_everywhere}
 
 **Data is abundant** and will be even more in the near future.
-A report from the end of 2012 concluded that from 2005 to 2020, the amount of data stored digitally will **grow by a factor of 300, from 130 exabyes^[1 exabyte (EB) = 1,000,000 terabyte (TB).] to a whooping 40,000 exabytes** [@gantz2012digital].
+A report from the end of 2012 concluded that from 2005 to 2020, the amount of data stored digitally will **grow by a factor of 300, from 130 exabytes^[1 exabyte (EB) = 1,000,000 terabyte (TB).] to a whooping 40,000 exabytes** [@gantz2012digital].
 This is equal to 40 trillion gigabytes and, to put in perspective, more than **5,200 gigabytes for every living human currently in this planet!**
-In 2020, the average person created every person created **1.7 MB of data per second** [@domo2018data].
+In 2020, on average every person created **1.7 MB of data per second** [@domo2018data].
 A recent report predicted that almost **two thirds (65%) of national GDPs will will have undergone digitization by 2022** [@fitzgerald2020idc].
 
 Every profession will be impacted not only by the increasing availability of data but also by data's increased importance [@chen2014big; @khan2014big].

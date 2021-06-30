@@ -46,7 +46,7 @@ Now, questions that we could ask ourselves could be:
 
 In the rest of this chapter, we will show you how you can easily answer these questions in Julia.
 To do so, we first show, in @sec:why_dataframes, why we need a Julia package called DataFrames.jl.
-Next, we answer queries on single tables in @sec:filter_select.
+Next, we answer queries on single tables in @sec:filter.
 After this, we have to discuss how to handle missing data in @sec:missing_data, which unfortunately happens a lot.
 Then, we are ready to answer queries on multiple tables in @sec:join.
 Finally, we discuss how to aggregate groups (rows) for things like taking the mean in @sec:groupby.
@@ -289,9 +289,9 @@ collect(zip(df.name, df.grade_2020))
 ```
 
 However, converting a DataFrame to a Dictionary is only useful when the elements are unique.
-When that is not the case, it is time to `filter` (@sec:filter_select).
+When that is not the case, it is time to `filter` (@sec:filter).
 
-## Filter and Select {#sec:filter_select}
+## Filter {#sec:filter}
 
 Continuing from the earlier mentioned table.
 
@@ -304,6 +304,7 @@ grades_2020()
 ```
 
 We can filter rows by using `filter(f::Function, df)`.
+This function is very similar to the function `filter(f::Function, V::Vector)` from Julia itself.
 Working with a function `f` for filtering can be a bit difficult to use in practice, but it is very powerful.
 As a simple example, we can create a function which checks whether it's input equals "Alice":
 
@@ -333,8 +334,23 @@ filter(:name => equals_alice, grades_2020())
 """)
 ```
 
-For most people, this is a bit too verbose.
-Instead, we can also use an anonymous function:
+Note that this doesn't only work for DataFrames, but also for vectors:
+
+```jl
+sco("""
+filter(equals_alice, ["Alice", "Bob", "Dave"])
+""")
+```
+
+We can make it a bit less verbose by using an anonymous function:
+
+```jl
+sco("""
+filter(n -> n == "Alice", ["Alice", "Bob", "Dave"])
+""")
+```
+
+or, for the table,
 
 ```jl
 sco("""
@@ -346,11 +362,12 @@ filter(:name => n -> n == "Alice", grades_2020())
 
 This line can be read as "for each element in the column `:name`, let's call this thing `n`, check whether `n` equals Alice".
 For some people, this is still to verbose.
-Luckily, Julia has added a partial function application of `==`.
-The details of this are not important to know, only that you can use it via
+Luckily, Julia has added a _partial function application_ of `==`.
+The details of these words are not important, only that you can use it via
 
 ```jl
 sco("""
+s = "Workaround a bug in books" # hide
 without_caption_label( # hide
 filter(:name => ==("Alice"), grades_2020())
 ) # hide
@@ -368,7 +385,7 @@ filter(:name => !=("Alice"), grades_2020())
 ```
 
 Now, to show why these functions are so powerful, we can come up with a more complex filter.
-In this filter, we want to have the people whos name start with A or B, **and** who have a grade above a 6.
+In this filter, we want to have the people whos name start with A or B **and** who have a grade above a 6.
 
 ```jl
 sc("""
@@ -388,6 +405,7 @@ filter([:name, :grade_2020] => complex_filter, grades_2020())
 """)
 ```
 
+## Select {#sec:select}
 
 ## Missing Data {#sec:missing_data}
 

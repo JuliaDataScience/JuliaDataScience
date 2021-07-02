@@ -51,7 +51,7 @@ After this, we have to discuss how to handle missing data in @sec:missing_data, 
 Then, we are ready to answer queries on multiple tables in @sec:join.
 Finally, we discuss how to aggregate groups (rows) for things like taking the mean in @sec:groupby.
 
-## Why DataFrames.jl? {#sec:why_dataframes}
+**Why DataFrames.jl?**
 
 ```{=comment}
 TODO: Add a comparison with Excel to see where Julia is better.
@@ -206,7 +206,17 @@ By using the blocks, you can make a data analysis script, control a robot or wha
 So far, the examples were quite cumbersome since we had to use indexes.
 In the next sections, we will show more powerful building blocks provided by DataFrames.jl.
 
-## Indexing
+## Load and Save Files
+
+```{=comment}
+CSV + Excel
+```
+
+## Indexing and Summarizing
+
+```{=comment}
+summaries
+```
 
 Let's go back to the example data defined above
 
@@ -291,7 +301,7 @@ collect(zip(df.name, df.grade_2020))
 However, converting a DataFrame to a Dictionary is only useful when the elements are unique.
 When that is not the case, it is time to `filter` (@sec:filter).
 
-## Filter {#sec:filter}
+## Filter and Subset {#sec:filter}
 
 Continuing from the earlier mentioned table.
 
@@ -407,8 +417,22 @@ filter([:name, :grade_2020] => complex_filter, grades_2020())
 
 ## Select {#sec:select}
 
-## Missing Data {#sec:missing_data}
+## Types and Missing Data, Categorical {#sec:missing_data}
+
+```{=comment}
+Try to combine with transformations
+```
+
+## Variable Transformations
+
+```{=comment}
+manipulate variables
+DataFrames.transform
+Ifelse and case_when
+```
 
 ## Join {#sec:join}
 
 ## Groupby {#sec:groupby}
+
+## CategoricalArrays.jl

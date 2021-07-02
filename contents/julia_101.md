@@ -33,8 +33,41 @@ rik = Person("Rik", 27)
 ```
 
 ## Native Data Structures {#sec:data_structures}
+
+```{=comment}
+methodswith
+```
+
+### Strings {#sec:strings}
+
+```{=comment}
+interpolation, concatenation, contains, replace, lowercase, uppercase, titlecase, lowercasefirst, startswith, endswith, split, string conversion, parse, tryparse
+
+One example per method
+```
+
+### Tuple {#sec:tuple}
+
+```{=comment}
+the way to get data out of functions
+```
+
+### Named Tuple {#sec:namedtuple}
 ### Array {#sec:array}
 ### Dict {#sec:dict}
-### Tuple {#sec:tuple}
-### Named Tuple {#sec:namedtuple}
 
+## Filesystem {#sec:filesystem}
+
+```{=comment}
+joinpath (windows, Mac, Linux)
+```
+
+## Julia Standard Library {#sec:standardlibrary}
+### Dates {#sec:dates}
+### Random Numbers {#sec:random}
+
+```{=comment}
+seed!, rand and randn
+```
+
+### Downloads {#sec:downloads}

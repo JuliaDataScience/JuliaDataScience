@@ -97,18 +97,12 @@ function write_and_read_grades()
     end
 end
 
-export execute_and_read_csv
-function execute_and_read_csv(f::Function)
-    mktemp() do path, _
-        f(path)
-        text = read(path, String)
-        code_block(text) # hide
-    end
-end
-
 export grades_with_commas
 function grades_with_commas()
     df = grades_2020()
     df[3, :name] = "Alice,"
     df
 end
+
+inside_tempdir(f) = cd(f, mktempdir())
+code_block_inside_tempdir(f) = code_block(inside_tempdir(f))

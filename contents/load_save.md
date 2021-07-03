@@ -40,10 +40,7 @@ and read it from a file after writing it
 ```jl
 sco("""
 JDS.code_block_inside_tempdir() do # hide
-function write_grades_csv()
-    path = "grades.csv"
-    CSV.write(path, grades_2020())
-end
+@sc write_grades_csv()
 path = write_grades_csv()
 read(path, String)
 end # hide
@@ -94,24 +91,24 @@ end # hide
 """)
 ```
 
-You can also come up with other delimiters, such as semicolons ";", spaces " ", or even "π".
+You can also come up with other delimiters, such as semicolons ";", spaces " ", or even something as unusual like "π".
 
 ```jl
 sco("""
 JDS.code_block_inside_tempdir() do # hide
 function write_pi_separated()
     path = "grades-pi-separated.csv"
-    CSV.write(path, grades_2020())
+    CSV.write(path, grades_2020(); delim='π')
 end
 read(write_pi_separated(), String)
 end # hide
 """)
 ```
 
-By convention, we still give files with special delimiters, such as ";", the `.csv` extension.
+By convention, its still best to give files with special delimiters, such as ";", the `.csv` extension.
 
 Loading data in a similar way.
-Now, use `read` and specify in what kind of format you want the output.
+Now, use `CSV.read` and specify in what kind of format you want the output.
 We specify a DataFrame.
 
 ```jl

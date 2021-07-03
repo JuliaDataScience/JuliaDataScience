@@ -82,7 +82,39 @@ Julia [@bezanson2017julia] is a relatively new language, first released in 2012,
 It "runs like C^[sometimes even faster than C.] but reads like Python" [@perkelJuliaComeSyntax2019].
 It was made for scientific computing, capable handling **large amounts of data and computation** while still being fairly **easy to manipulate, create and protype code**.
 
-In [@fig:language_comparison] is a highly opinionated representation that divides the main opensource scientific computing languages in a 2x2 diagram with two axes: Slow-Fast and Easy-Hard.
+The creators of julia explained why they created Julia in a [2012 blogpost](https://julialang.org/blog/2012/02/why-we-created-julia/).
+Their motivations shows how Julia was designed to be:
+
+> We are greedy: we want more.
+> We want a language that’s open source, with a liberal license.
+> We want the speed of C with the dynamism of Ruby.
+> We want a language that’s homoiconic, with true macros like Lisp, but with obvious, familiar mathematical notation like Matlab.
+> We want something as usable for general programming as Python, as easy for statistics as R, as natural for string processing as Perl, as powerful for linear algebra as Matlab, as good at gluing programs together as the shell.
+> Something that is dirt simple to learn, yet keeps the most serious hackers happy.
+> We want it interactive and we want it compiled.
+
+Most users are attracted to Julia because of the **superior speed**.
+After all, Julia is a member of a prestigious and exclusive club.
+The [**petaflop club**](https://www.hpcwire.com/off-the-wire/julia-joins-petaflop-club/) is comprised of languages who can exceed speeds of **one petaflop^[a petaflop is one thousand trillion, or one quadrillion, operations per second.] per second at peak performance**.
+Currently only C, C++, Fortran and Julia belong to the [petaflop club](https://www.nextplatform.com/2017/11/28/julia-language-delivers-petascale-hpc-performance/).
+
+But speed is not all that Julia can deliver.
+The **ease of use**, **unicode support** and a language that makes **code sharing effortless** is some of Julia's features.
+We'll address all those features in this section, but we want to focus on the Julia code sharing feature for now.
+
+Julia ecosystem of packages is something unique.
+It enables not only code sharing but also allows sharing of user-created types.
+For example, Python's `pandas` uses its own `Datetime` type to handle dates.
+The same with R tidyverse's `lubridate` package, which also defines its own `datetime` type to handle dates.
+Julia doesn't need any of this, it has all the date stuff already baked onto its standard library.
+This means that other packages don't have to worry about dates.
+They just have to extend dates type to new functionalities by defining new functions and not having to touch a hair on creating new types.
+Julia's `Dates` can also do some amazing stuff, but we might be getting ahead now.
+Let's talk about the other Julia's features.
+
+### Julia versus other programming languages
+
+In [@fig:language_comparison] is a highly opinionated representation that divides the main opensource^[we have a very strong bias towards opensource and we won't discuss paid programming languages such as Matlab.] scientific computing languages in a 2x2 diagram with two axes: Slow-Fast and Easy-Hard.
 
 We've put C++ and FORTRAN in the hard and fast quadrant.
 Being static languages that needs compilation, type checking and other professional care and attention, they are really hard to learn and slow to prototype.

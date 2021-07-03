@@ -6,6 +6,7 @@ using Reexport
 @reexport using AlgebraOfGraphics
 @reexport using Books
 @reexport using CairoMakie
+@reexport using CSV
 @reexport using DataFrames
 @reexport using Dates
 @reexport using Makie

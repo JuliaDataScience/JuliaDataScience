@@ -45,13 +45,7 @@ Now, questions that we could ask ourselves could be:
 - What TV shows were rated by you but not by the other person?
 
 In the rest of this chapter, we will show you how you can easily answer these questions in Julia.
-To do so, we first show, in @sec:why_dataframes, why we need a Julia package called DataFrames.jl.
-Next, we answer queries on single tables in @sec:filter.
-After this, we have to discuss how to handle missing data in @sec:missing_data, which unfortunately happens a lot.
-Then, we are ready to answer queries on multiple tables in @sec:join.
-Finally, we discuss how to aggregate groups (rows) for things like taking the mean in @sec:groupby.
-
-**Why DataFrames.jl?**
+To do so, we first show why we need a Julia package called DataFrames.jl.
 
 ```{=comment}
 TODO: Add a comparison with Excel to see where Julia is better.
@@ -168,10 +162,9 @@ without_caption_label(df) # hide
 This assumes that the function is not re-defined, of course.
 We promise to not do that in this book, because it is a bad idea exactly for this reason.
 Instead of "changing" a function, we will make a new one and give it a clear name.
-Also, sometimes we will still be defining variables, but if we do, then you can rest assured that we won't reuse it much later in the book.
 
 So, back to `DataFrames`.
-As you might have seen, the way to create one is simply to pass vectors into `DataFrame`.
+As you might have seen, the way to create one is simply to pass vectors as arguments into `DataFrame(...)`.
 You can come up with any valid Julia vector and it will work as long as the vectors have the same length.
 Duplicates, unicode symbols and not so round numbers are fine:
 
@@ -203,16 +196,139 @@ Basically, you can think of Julia and DataFrames as providers of building blocks
 They provide very **generic** building blocks which allow you to build things for your **specific** use-case like this grades example.
 By using the blocks, you can make a data analysis script, control a robot or whatever you like to build.
 
-So far, the examples were quite cumbersome since we had to use indexes.
-In the next sections, we will show more powerful building blocks provided by DataFrames.jl.
+So far, the examples were quite cumbersome, because we had to use indexes.
+In the next sections, we will show how to load and save data, and many powerful building blocks provided by DataFrames.jl.
 
 ## Load and Save Files
 
-```{=comment}
-CSV + Excel
+Having only data inside Julia programs and not being able to load or save it would be very limiting.
+Therefore, we start by mentioning how to store files to disk and how to load files from disk.
+We focus on CSV and Excel since those are the most prevalent.
+
+### CSV
+
+Comma-separated value (CSV) files are are ridiculously effective way to store tables.
+Unlike many competing data storage solutions, CSV files have two advantages.
+Firstly, the name already indicates what it does, namely storing values by separating the columns by commas.
+This abbreviation is, also, used as the file extension.
+So, be sure that you save your files as "myfile.csv".
+To demonstrate how a CSV file looks, we can install the CSV package:
+
+```
+julia> ]
+
+pkg> add CSV
 ```
 
-## Indexing and Summarizing
+and load it via
+
+```
+using CSV
+```
+
+We can, now, take some data:
+
+```jl
+sco("""
+without_caption_label( # hide
+grades_2020()
+) # hide
+""")
+```
+
+and reading it from a temporary file after writing to it:
+
+```jl
+sco("""
+mktemp() do path, _
+    CSV.write(path, grades_2020())
+    text = read(path, String)
+    code_block(text) # hide
+end
+""")
+```
+
+Here, we also see the second benefit of this data format:
+The data can be read by using a text editor.
+Many other solutions to store data require proprietary software.
+
+To demonstrate all kinds of data formats, let us define a convenience function to write our output to a temporary file like done above.
+This way, we can easily show the output of various `CSV.write` settings.
+
+> **Warning**: Building and understanding a function like this is not for beginners.
+> You can skip over it if you want.
+
+```jl
+@sc execute_and_read_csv(identity)
+```
+
+This can give us the same output as above, via
+
+```jl
+sco("""
+function write_grades_csv()
+    path = "grades.csv"
+    CSV.write(path, grades_2020())
+    path
+end
+text = read(write_grades_csv(), String)
+code_block(text) # hide
+""")
+```
+
+This is all nice, of course, but what if our data **contains commas**?
+If we would naively write data with commas, it would make the files very hard to convert back to a table.
+Luckily, CSV solves it for us automatically.
+Consider the following data with commas:
+
+```jl
+@sco grades_with_commas()
+```
+
+If we write this, we get
+
+```jl
+sco("""
+commas_csv(path) = CSV.write(path, grades_with_commas())
+execute_and_read_csv(commas_csv)
+""")
+```
+
+So, CSV adds quotation marks around the comma containing values.
+Another common way to solve this problem, is to write the data to a tab-separated value (TSV) file.
+This assumes that the data doesn't contain tabs, which holds in most cases.
+
+```jl
+sco("""
+write_tsv(path) = CSV.write(path, grades_with_commas(); delim='\\t')
+execute_and_read_csv(write_tsv)
+""")
+```
+
+You can also come up with other delimiters, such as semicolons ";", spaces " ", or even "π".
+
+```jl
+sco("""
+write_psv(path) = CSV.write(path, grades_with_commas(); delim='π')
+execute_and_read_csv(write_psv)
+""")
+```
+
+reading works in a similar way.
+Now, use `read` and specify in what kind of format you want the output.
+We will specify a DataFrame.
+
+```jl
+sco("""
+write_grades_csv(path)
+without_caption_label( # hide
+CSV.read(path, DataFrame)
+) # hide
+end
+""")
+```
+
+## Index and Summarize
 
 ```{=comment}
 summaries

@@ -8,3 +8,6 @@ Manifest.toml
 
 # MacOS annoying files
 .DS_Store
+
+**/*.csv
+**/*.tsv

@@ -85,3 +85,30 @@ end
 
 export equals_alice
 equals_alice(n::String) = n == "Alice"
+
+write_grades(path) = CSV.write(path, grades_2020)
+
+export write_and_read_grades
+function write_and_read_grades()
+    mktemp() do path, _
+        write_grades(path)
+        text = read(path, String)
+        code_block(text) # hide
+    end
+end
+
+export execute_and_read_csv
+function execute_and_read_csv(f::Function)
+    mktemp() do path, _
+        f(path)
+        text = read(path, String)
+        code_block(text) # hide
+    end
+end
+
+export grades_with_commas
+function grades_with_commas()
+    df = grades_2020()
+    df[3, :name] = "Alice,"
+    df
+end

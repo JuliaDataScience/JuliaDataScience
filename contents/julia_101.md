@@ -87,7 +87,7 @@ We would change the variable `name` to the new value:
 ```jl
 scob(
 """
-name = "Julia Scientificus Rapidus"
+name = "Julia Rapidus"
 """
 )
 ```
@@ -139,7 +139,7 @@ Inside each `struct` there is an optional set of fields.
 They differ from the primitive types (e.g. integer and floats) that are by default defined already inside the core of Julia language.
 Since most `struct`s are user-defined they are known as user-defined types.
 
-For example lets create a `struct` to represent scientific opensource programming languages.
+For example lets create a `struct` to represent scientific open-source programming languages.
 We'll also define a set of fields along with the corresponding types inside the `struct`:
 
 ```jl
@@ -165,8 +165,8 @@ Let's instantiate two instances, one for Julia and one for Python with the appro
 ```jl
 scob(
 """
-julia = Language("Julia", "Scientificus Rapidus", 2012, true)
-python = Language("Python", "C/FORTRAN Dependentus Letargicus", 1991, false)
+julia = Language("Julia", "Rapidus", 2012, true)
+python = Language("Python", "Letargicus", 1991, false)
 """
 )
 ```
@@ -187,7 +187,7 @@ mutable struct MutableLanguage
     fast::Bool
 end
 
-julia_mutable = MutableLanguage("Julia", "Scientificus Rapidus", 2012, true)
+julia_mutable = MutableLanguage("Julia", "Rapidus", 2012, true)
 """)
 ```
 

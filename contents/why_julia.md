@@ -54,7 +54,7 @@ We reserved @sec:julia_wild for displaying successful Julia usecases in both aca
 3. Had to debug code and somehow you see yourself reading a Fortran or C/C++ source code and having no idea what you are trying to accomplish?
 **In Julia you only read Julia code[^readable], no need to learn another language to make your original language fast**.
 This is called the "two-language problem" (see @sec:two_language).
-It also covers the usecase for when "you had an interesting idea and wanted to contribute to an opensource package and gave up because almost everything is not in Python or R but in C/C++ or Fortran"^[have a look at some deep learning libraries in GitHub and you'll be surprised that Python is only 25%-33% of the codebase.].
+It also covers the usecase for when "you had an interesting idea and wanted to contribute to an open-source package and gave up because almost everything is not in Python or R but in C/C++ or Fortran"^[have a look at some deep learning libraries in GitHub and you'll be surprised that Python is only 25%-33% of the codebase.].
 
 4. Wanted to use a data structure defined in a package in another package and found that doesn't work and you'll probably need to build an interface^[this is most a Python ecosystem problem, while R doesn't suffer heavily from this is not blue skies either.].
 **Julia allows users to easily share and reuse code from different packages.**
@@ -114,7 +114,7 @@ Let's talk about the other Julia's features.
 
 ### Julia versus other programming languages
 
-In [@fig:language_comparison] is a highly opinionated representation that divides the main opensource^[we have a very strong bias towards open-source and we won't discuss paid programming languages such as Matlab.] scientific computing languages in a 2x2 diagram with two axes: Slow-Fast and Easy-Hard.
+In [@fig:language_comparison] is a highly opinionated representation that divides the main open-source^[we have a very strong bias towards open-source and we won't discuss paid programming languages such as Matlab.] scientific computing languages in a 2x2 diagram with two axes: Slow-Fast and Easy-Hard.
 
 We've put C++ and FORTRAN in the hard and fast quadrant.
 Being static languages that needs compilation, type checking and other professional care and attention, they are really hard to learn and slow to prototype.
@@ -399,7 +399,7 @@ Now, FAA is using one language to do all this: Julia.
 4. [**175x speedup** for Pfizer's pharmacology models using GPUs in Julia](https://juliacomputing.com/case-studies/pfizer/).
 It was presented as a [poster](https://chrisrackauckas.com/assets/Posters/ACoP11_Poster_Abstracts_2020.pdf) in the 11th American Conference of Pharmacometrics (ACoP11) and [won a quality award](https://web.archive.org/web/20210121164011/https://www.go-acop.org/abstract-awards).
 5. [The Attitude and Orbit Control Subsystem (AOCS) of the Brazilian satellite Amazonia-1 is **written 100% in Julia**](https://discourse.julialang.org/t/julia-and-the-satellite-amazonia-1/57541) by [Ronan Arraes Jardim Chagas](https://ronanarraes.com/)
-6. [Brazil's national development bank (BNDES) ditched a paid solution and opted for opensource Julia modeling and gained a **10x speedup**.](https://youtu.be/NY0HcGqHj3g)
+6. [Brazil's national development bank (BNDES) ditched a paid solution and opted for open-source Julia modeling and gained a **10x speedup**.](https://youtu.be/NY0HcGqHj3g)
 
 If this is not enough, there are more case studies in [Julia Computing website](https://juliacomputing.com/case-studies/).
 

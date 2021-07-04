@@ -14,7 +14,7 @@ Especially, if you are aren't familiar with open-source software documentation.
 
 We'll cover the basics of Julia.
 Imagine that Julia is a fancy feature-loaded car, such as a brand-new Tesla.
-We'll just explain you how to "drive the car, park it and how to navigate in traffic".
+We'll just explain to you how to "drive the car, park it and how to navigate in traffic".
 If you want to know what all "buttons in the steering wheel and dashboard do", this is not the resource you are looking for.
 
 ## Language Syntax {#sec:syntax}

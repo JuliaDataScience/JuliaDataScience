@@ -116,7 +116,7 @@ sco("typeof(age)")
 
 The next question then becomes: "What else can I do with integers?"
 There is a nice handy function `methodswith()` that spits out every function available, along with its signature, for a certain type.
-Here I will restrict the output only to the first 5 rows:
+Here I will restrict the output to the first 5 rows:
 
 ```{=comment}
 Since the type is a Vector, Books converts it to multiple output statements.

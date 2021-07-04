@@ -355,7 +355,7 @@ python
 
 #### Multiple Return Values {#sec:function_multiple}
 
-Sometimes a function can return more than a single return value.
+A function can, also, return two or more values.
 See the new function `add_multiply()` below:
 
 ```jl

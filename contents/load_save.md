@@ -28,11 +28,9 @@ using CSV
 We can, now, take some data:
 
 ```jl
-sco("""
-without_caption_label( # hide
+sco("
 grades_2020()
-) # hide
-""")
+"; process=without_caption_label)
 ```
 
 and read it from a file after writing it
@@ -43,7 +41,7 @@ and read it from a file after writing it
 
 ```jl
 sco("""
-JDS.code_block_inside_tempdir() do # hide
+JDS.output_block_inside_tempdir() do # hide
 path = write_grades_csv()
 read(path, String)
 end # hide
@@ -67,7 +65,7 @@ If we write this, we get
 
 ```jl
 sco("""
-JDS.code_block_inside_tempdir() do # hide
+JDS.output_block_inside_tempdir() do # hide
 function write_comma_csv()
     path = "grades-commas.csv"
     CSV.write(path, grades_with_commas())
@@ -84,7 +82,7 @@ This assumes that the data doesn't contain tabs, which holds in most cases.
 
 ```jl
 sco("""
-JDS.code_block_inside_tempdir() do # hide
+JDS.output_block_inside_tempdir() do # hide
 function write_comma_tsv()
     path = "grades-comma.tsv"
     CSV.write(path, grades_with_commas(); delim='\\t')
@@ -98,7 +96,7 @@ You can also come up with other delimiters, such as semicolons ";", spaces "\ ",
 
 ```jl
 sco("""
-JDS.code_block_inside_tempdir() do # hide
+JDS.output_block_inside_tempdir() do # hide
 function write_space_separated()
     path = "grades-space-separated.csv"
     CSV.write(path, grades_2020(); delim=' ')
@@ -118,11 +116,9 @@ We specify a DataFrame.
 sco("""
 JDS.inside_tempdir() do # hide
 path = write_grades_csv()
-without_caption_label( # hide
 CSV.read(path, DataFrame)
-) # hide
 end # hide
-""")
+"""; process=without_caption_label)
 ```
 
 Conveniently, CSV will automatically infer types:
@@ -132,9 +128,8 @@ sco("""
 JDS.inside_tempdir() do # hide
 path = write_grades_csv()
 df = CSV.read(path, DataFrame)
-Books.code_block(df)
 end # hide
-""")
+"""; process=string, post=output_block)
 ```
 
 even for more complex data:
@@ -149,9 +144,8 @@ my_data = \"\"\"
 path = "my_data.csv"
 write(path, my_data)
 df = CSV.read(path, DataFrame)
-Books.code_block(df)
 end # hide
-""")
+"""; process=string, post=output_block)
 ```
 
 These CSV basics should cover most use-cases.
@@ -207,11 +201,9 @@ sco("""
 JDS.inside_tempdir() do # hide
 xf = XLSX.readxlsx(write_grades_xlsx())
 sheet = xf["Sheet1"]
-without_caption_label( # hide
 XLSX.eachtablerow(sheet) |> DataFrame
-) # hide
 end # hide
-""")
+"""; process=without_caption_label)
 ```
 
 For more information and options, see the [XLSX documentation](https://felipenoris.github.io/XLSX.jl/stable/){target="_blank"}.

@@ -78,13 +78,31 @@ Now, the data is stored in, so called, column-major, which is cumbersome when we
 Or, if you want to have the grade for Alice, you first need to figure out in what row Alice is,
 
 ```jl
-@sco JDS.row_alice()
+sco("""
+function row_alice()
+    names = grades_array().name
+    i = findfirst(names .== "Alice")
+end
+row_alice()
+"""; post=output_block)
 ```
 
 and, then, we can get the value
 
+```{=comment}
+Rik: The output isn't going through output_block.
+TODO: I need to update `@sco` to allow this.
+```
+
 ```jl
-@sco JDS.value_alice()
+sco("""
+function value_alice()
+    grades = grades_array().grade_2020
+    i = row_alice()
+    grades[i]
+end
+value_alice()
+"""; post=output_block)
 ```
 
 DataFrames.jl can easily solve these kinds of issues.
@@ -125,7 +143,7 @@ We can solve this very easily by using functions.
 Lets do the same thing as before but now in a function.
 
 ```jl
-@sco JDS.grades_2020()
+@sco grades_2020()
 ```
 
 Note that `name` and `grade_2020` are destroyed after the function returns, that is, they are only available in the function.
@@ -137,8 +155,7 @@ For example, we can now put the data in a variable
 ```jl
 sco("""
 df = grades_2020()
-without_caption_label(df) # hide
-""")
+"""; process=without_caption_label)
 ```
 
 change the content of the variable
@@ -146,17 +163,15 @@ change the content of the variable
 ```jl
 sco("""
 df = DataFrame(name = ["Malice"], grade_2020 = ["10"])
-without_caption_label(df) # hide
-""")
+"""; process=without_caption_label)
 ```
 
 and still get the original data back without any problem
 
 ```jl
 sco("""
-df = JDS.grades_2020()
-without_caption_label(df) # hide
-""")
+df = grades_2020()
+"""; process=without_caption_label)
 ```
 
 This assumes that the function is not re-defined, of course.
@@ -170,10 +185,8 @@ Duplicates, unicode symbols and not so round numbers are fine:
 
 ```jl
 sco("""
-without_caption_label( # hide
 DataFrame(σ = ["a", "a", "a"], δ = [π, π/2, π/3])
-) # hide
-""")
+"""; process=without_caption_label)
 ```
 
 Typically, in your code, you would create a function which wraps around one or more DataFrames functions.
@@ -185,10 +198,8 @@ For example, we can make a function to get the grades for various `names`:
 
 ```jl
 sco("""
-without_caption_label( # hide
 grades_2020([3, 4])
-) # hide
-"""; M=JDS)
+"""; M=JDS, process=without_caption_label)
 ```
 
 This way of using functions to wrap around basic functionality from programming languages and packages is quite common.

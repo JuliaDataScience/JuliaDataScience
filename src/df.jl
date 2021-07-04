@@ -21,6 +21,7 @@ function grades_for_2020()
     innerjoin(grades_ages(), grades_2020(); on=:name)
 end
 
+export grades_array
 function grades_array()
     name = ["Bob", "Sally", "Alice", "Hank"]
     age = [17, 18, 20, 19]
@@ -32,17 +33,6 @@ function second_row()
     name, age, grade_2020 = grades_array()
     i = 2
     row = (name[i], age[i], grade_2020[i])
-end
-
-function row_alice()
-    names = grades_array().name
-    i = findfirst(names .== "Alice")
-end
-
-function value_alice()
-    grades = grades_array().grade_2020
-    i = row_alice()
-    grades[i]
 end
 
 function names_grades1()
@@ -100,7 +90,7 @@ function grades_with_commas()
 end
 
 inside_tempdir(f) = cd(f, mktempdir())
-code_block_inside_tempdir(f) = code_block(inside_tempdir(f))
+output_block_inside_tempdir(f) = output_block(inside_tempdir(f))
 
 export write_xlsx
 function write_xlsx(name, df::DataFrame)

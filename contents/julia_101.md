@@ -25,7 +25,7 @@ The main differences from Julia to other dynamic languages such as R and Python 
 
 First, Julia, contrary to most dynamic-typed languages, **enables the user to specify type declaration**.
 You already saw some types declarations in the [*Why Julia?*](why_julia.html) section: they are those double colon `::` that sometimes comes after variables
-But if you don't want to specify what type are your variables or functions, Julia will gladly deduce it for you.
+But if you don't want to specify what type are your variables or functions, Julia will gladly infer it for you.
 
 Second, Julia also allows users to define function behavior across many combinations of argument types via multiple dispatch.
 We also covered multiple dispatch in [*Why Julia?*](julia_accomplish.html) section.

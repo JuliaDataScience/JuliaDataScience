@@ -127,7 +127,7 @@ In this case, I've enforced to show the output of `Base.show`.
 sco(
 """
 first(methodswith(Int64), 5)
-"""; post=Books.catch_show
+"""; process=Books.catch_show
 )
 ```
 
@@ -163,7 +163,7 @@ To use `struct`s, we must instantiate individual instances (or "objects"), each 
 Let's instantiate two instances, one for Julia and one for Python with the appropriate types as fields inside the `Language()` constructor:
 
 ```jl
-scob(
+sco(
 """
 julia = Language("Julia", "Rapidus", 2012, true)
 python = Language("Python", "Letargicus", 1991, false)
@@ -178,7 +178,7 @@ Whenever possible make everything *immutable*.
 Let's create a `mutable struct`.
 
 ```jl
-scob(
+sco(
 """
 mutable struct MutableLanguage
     name::String
@@ -195,7 +195,7 @@ Suppose that we want to change `julia_mutable`'s title.
 Now we can do this, since `julia_mutable` is an instantiated `mutable struct`:
 
 ```jl
-scob(
+sco(
 """
 julia_mutable.title = "Python Obliteratus"
 
@@ -346,7 +346,7 @@ Base.show(io::IO, l::Language) = print(
 Now let's see how `python` will output:
 
 ```jl
-scob(
+sco(
 """
 python
 """
@@ -374,16 +374,17 @@ In that case we can do two things:
 
 1. We can, analogously as the return values, define two variables to hold the function return values, one for each return value:
    ```jl
-   scob(
+   sco(
    """
    return_1, return_2 = add_multiply(1, 2)
+   return_2
    """
    )
    ```
 
 2. Or we can define just one variable to hold the function return values and access them with either `first()` or `last()`:
    ```jl
-   scob(
+   sco(
    """
    all_returns = add_multiply(1, 2)
    last(all_returns)
@@ -391,7 +392,45 @@ In that case we can do two things:
    )
    ```
 
-#### Optional Arguments {#sec:function_optional_arguments}
+#### Keyword Arguments {#sec:function_keyword_arguments}
+
+Some functions can accept keywords arguments instead of positional arguments.
+These arguments are just like regular arguments, except that they are defined after the regular function's arguments and separated by a semicolon `;`.
+Another difference is that we must supply a **default value** for every keyword argument.
+For example, let's define a `logarithm()` function that by default uses base $e$ (2.2.7182818284590) as a keyword argument.
+Note that here we are using the abstract type `Number` so that we cover all types derived from `Integer` and `AbstractFloat`:
+
+```jl
+sco(
+"""
+function logarithm(x::Number; base::Number=2.7182818284590)
+    return log(base, x)
+end
+"""
+)
+```
+
+It works without specifying the `base` argument:
+
+```jl
+sco(
+"""
+logarithm(10)
+"""
+)
+```
+
+And also with the keyword argument `base` different from its default value:
+
+```jl
+sco(
+"""
+logarithm(10; base=2)
+"""
+)
+```
+
+
 
 ### For Loop {#sec:for}
 ### While Loop {#sec:while}

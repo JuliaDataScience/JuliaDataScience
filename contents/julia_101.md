@@ -10,7 +10,7 @@ This is going to be a very brief and *not* in-depth overview of Julia language.
 If you are already familiar and confortable with other programming languages, we highly encourage you to read [Julia's documentation](https://docs.julialang.org/).
 It is a thoroughly deep dive into Julia.
 It covers all the basics and corner cases, but it can be cumbersome.
-Specially if you are a beginner into programming and haven't yet become familiar with opensource software documentation.
+Especially, if you are aren't familiar with open-source software documentation.
 
 We'll cover the basics of Julia.
 Since we love analogies, imagine that Julia is a fancy feature-loaded car, such as a brand-new Tesla.

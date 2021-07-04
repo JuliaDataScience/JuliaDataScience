@@ -51,7 +51,7 @@ For example:
 ```jl
 sco(
 """
-name = "Julius Scientificus"
+name = "Julia"
 age = 9
 """
 )
@@ -71,7 +71,7 @@ name
 
 If you want to define new values for an existing variable, you can repeat the steps in the assignment.
 Note that Julia will now override the previous variable's value with the new one.
-Supposed Julius' birthday has passed and now he has turned 34:
+Supposed `jl name`'s birthday has passed and now it has turned `jl age+1`:
 
 ```jl
 sco(
@@ -81,18 +81,19 @@ age = 10
 )
 ```
 
-We can do the same with his name, suppose that Julius has earned a new title due to his blazing speed:
+We can do the same with its `name`, suppose that Julia has earned some titles due to its blazing speed.
+We would change the variable `name` to the new value:
 
 ```jl
 sco(
 """
-name = "Julius Scientificus Rapidus"
+name = "Julia Scientificus Rapidus"
 """
 )
 ```
 
 We can also do operations on variables such as addition or division.
-Let's see how much months of age Julius has by multiplying `age` by 12:
+Let's see how much months of age `jl name` has by multiplying `age` by 12:
 
 ```jl
 sco(
@@ -134,7 +135,8 @@ Inside each `struct` there is an optional set of fields.
 They differ from the primitive types (e.g. integer and floats) that are by default defined already inside the core of Julia language.
 Since most `struct`s are user-defined they are known as user-defined types.
 
-For example lets create a `struct` to represent scientific opensource programming languages:
+For example lets create a `struct` to represent scientific opensource programming languages.
+We'll also define a set of fields along with the corresponding types inside the `struct`:
 
 ```jl
 sc(
@@ -190,7 +192,8 @@ julia_mutable = MutableLanguage("Julia", "Scientificus Rapidus", 2012, true)
 """)
 ```
 
-Now we can change `julia_mutable`'s title:
+Suppose that we want to change `julia_mutable`'s title.
+Now we can do this, since `julia_mutable` is an instantiated `mutable struct`:
 
 ```jl
 sco(
@@ -204,12 +207,130 @@ julia_mutable
 
 ### Functions {#sec:function}
 
-Now that we already know how to define variables and custom types as `struct`s, let's ...
-If you want something to function on all Float's and Int's you can use an abtract type as type signature.
+Now that we already know how to define variables and custom types as `struct`s, let's turn our attention to **functions**.
+In Julia, a function is an **object that maps argument's values to a return value**.
+The basic syntax goes something like this:
+
+```julia
+function f_name(arg1, arg2)
+    stuff_done = stuff with the arg1 and arg2
+    return stuff_done
+end
+```
+
+Every function declaration begins with the keyword `function` followed by the function name.
+Then, inside parentheses `()`, we define the arguments separated by a comma `,`.
+Inside the function we specify what we want Julia to do with the parameters we supplied.
+After all the operations that we want the function to do has been performed, we ask Julia to return the result of those operations with the `return` statement.
+Finally, we let Julia know that our function is well-defined and finished with the `end` keyword.
+
+There is also the compact **assignment form**:
+
+```julia
+f_name(arg1, arg2) = stuff with the arg1 and arg2
+```
+
+It is the **same function** as before but with a different, more compact, form.
+Let's dive into some examples.
+
+#### Creating new Functions {#sec:function_example}
+
+Let's create a new function that adds number together:
+
+```jl
+sco(
+"""
+function add_numbers(x, y)
+    return x + y
+end
+"""
+)
+```
+
+Now, we can use our `add_numbers()` function:
+
+```jl
+sco(
+"""
+add_numbers(17, 29)
+"""
+)
+```
+
+And it works also with floats:
+
+```jl
+sco(
+"""
+add_numbers(3.14, 2.72)
+"""
+)
+```
+
+We can also define custom behavior by specifying types declarations.
+Suppose we want to have a `round_number()` function that behaves differently if its argument is either a `Float64` or `Int64`:
+
+```jl
+sco(
+"""
+function round_number(x::Float64)
+    return round(x)
+end
+
+function round_number(x::Int64)
+    return x
+end
+"""
+)
+```
+
+We can see that it is a function with 2 methods:
+
+```jl
+sco(
+"""
+methods(round_number)
+"""
+)
+```
+
+There is one issue: what happens if we want to round a 32-bit float `Float32`?
+Or a 8-bit integer `Int8`?
+
+If you want something to function on all float's and integer's types you can use an abstract type as type signature, such as `AbstractFloat` or `Integer`:
+
+```jl
+sco(
+"""
+function round_number(x::AbstractFloat)
+    return round(x)
+end
+"""
+)
+```
+
+Now it works as expected with any float type:
+
+```jl
+sco(
+"""
+x_32 = Float32(1.1)
+round_number(x_32)
+"""
+)
+```
+
+> **_NOTE:_**
+> We can inspect types with the `supertypes()` and `subtypes()` functions.
+
+Let's go back to our `Language` `struct` that we defined above.
+This is an example of multiple dispatch.
+We will extend the `Base.show()` function that prints the output of instantiated types and `struct`s.
 
 By default a `struct` has a basic output, which you saw above in the `python` case.
-Now, we'll use multiple dispatch to overload the `Base.show()` function, so that we have some nice printing for our programming languages.
-We want to clearly communicate programming languages' names, titles and ages in years of old:
+We can define `Base.show()` function to our `Language` type, so that we have some nice printing for our programming languages instances.
+We want to clearly communicate programming languages' names, titles and ages in years of old.
+The function `Base.show()` accepts as arguments a `IO` type named `io` followed by the type you want to define custom behaviour:
 
 ```jl
 sco(
@@ -219,8 +340,6 @@ Base.show(io::IO, l::Language) = print(
     2021 - l.year_of_birth, ", years old, ",
     "has the following titles: ", l.title
 )
-
-julia
 """
 )
 ```
@@ -235,6 +354,46 @@ python
 )
 ```
 
+#### Multiple Return Values {#sec:function_multiple}
+
+Sometimes a function can return more than a single return value.
+See the new function `add_multiply()` below:
+
+```jl
+sco(
+"""
+function add_multiply(x, y)
+    addition = x + y
+    multiplication = x * y
+    return addition, multiplication
+end
+"""
+)
+```
+
+In that case we can do two things:
+
+1. We can, analogously as the return values, define two variables to hold the function return values, one for each return value:
+   ```jl
+   sco(
+    """
+    return_1, return_2 = add_multiply(1, 2)
+    """
+   )
+   ```
+
+2. Or we can define just one variable to hold the function return values and access them with either `first()` or `last()`:
+    ```jl
+   sco(
+    """
+    all_returns = add_multiply(1, 2)
+    last(all_returns)
+    """
+   )
+   ```
+
+#### Optional Arguments {#sec:function_optional_arguments}
+
 ### For Loop {#sec:for}
 ### While Loop {#sec:while}
 ### Conditional If-Else-Elseif {#sec:conditionals}
@@ -245,7 +404,7 @@ python
 methodswith
 ```
 
-### Strings {#sec:strings}
+### String {#sec:string}
 
 ```{=comment}
 interpolation, concatenation, contains, replace, lowercase, uppercase, titlecase, lowercasefirst, startswith, endswith, split, string conversion, parse, tryparse

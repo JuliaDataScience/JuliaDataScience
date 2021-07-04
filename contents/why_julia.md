@@ -114,7 +114,7 @@ Let's talk about the other Julia's features.
 
 ### Julia versus other programming languages
 
-In [@fig:language_comparison] is a highly opinionated representation that divides the main opensource^[we have a very strong bias towards opensource and we won't discuss paid programming languages such as Matlab.] scientific computing languages in a 2x2 diagram with two axes: Slow-Fast and Easy-Hard.
+In [@fig:language_comparison] is a highly opinionated representation that divides the main opensource^[we have a very strong bias towards open-source and we won't discuss paid programming languages such as Matlab.] scientific computing languages in a 2x2 diagram with two axes: Slow-Fast and Easy-Hard.
 
 We've put C++ and FORTRAN in the hard and fast quadrant.
 Being static languages that needs compilation, type checking and other professional care and attention, they are really hard to learn and slow to prototype.

@@ -173,7 +173,7 @@ python = Language("Python", "C/FORTRAN Dependentus Letargicus", 1991, false)
 
 One thing to note with `struct`s is that we cannot change their values once they are instantiated.
 We can solve this with a `mutable struct`.
-Also note that everything in Julia that we impose mutability will take a performance hit.
+Also, note that mutable objects will, generally, be slower and more error prone.
 Whenever possible make everything *immutable*.
 Let's create a `mutable struct`.
 

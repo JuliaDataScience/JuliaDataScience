@@ -54,7 +54,7 @@ We reserved @sec:julia_wild for displaying successful Julia usecases in both aca
 3. Had to debug code and somehow you see yourself reading a Fortran or C/C++ source code and having no idea what you are trying to accomplish?
 **In Julia you only read Julia code[^readable], no need to learn another language to make your original language fast**.
 This is called the "two-language problem" (see @sec:two_language).
-It also covers the usecase for when "you had an interesting idea and wanted to contribute to an opensource package and gave up because almost everything is not in Python or R but in C/C++ or Fortran"^[have a look at some deep learning libraries in GitHub and you'll be surprised that Python is only 25%-33% of the codebase.].
+It also covers the usecase for when "you had an interesting idea and wanted to contribute to an open-source package and gave up because almost everything is not in Python or R but in C/C++ or Fortran"^[have a look at some deep learning libraries in GitHub and you'll be surprised that Python is only 25%-33% of the codebase.].
 
 4. Wanted to use a data structure defined in a package in another package and found that doesn't work and you'll probably need to build an interface^[this is most a Python ecosystem problem, while R doesn't suffer heavily from this is not blue skies either.].
 **Julia allows users to easily share and reuse code from different packages.**
@@ -82,7 +82,39 @@ Julia [@bezanson2017julia] is a relatively new language, first released in 2012,
 It "runs like C^[sometimes even faster than C.] but reads like Python" [@perkelJuliaComeSyntax2019].
 It was made for scientific computing, capable handling **large amounts of data and computation** while still being fairly **easy to manipulate, create and protype code**.
 
-In [@fig:language_comparison] is a highly opinionated representation that divides the main opensource scientific computing languages in a 2x2 diagram with two axes: Slow-Fast and Easy-Hard.
+The creators of julia explained why they created Julia in a [2012 blogpost](https://julialang.org/blog/2012/02/why-we-created-julia/).
+Their motivations shows how Julia was designed to be:
+
+> We are greedy: we want more.
+> We want a language that’s open source, with a liberal license.
+> We want the speed of C with the dynamism of Ruby.
+> We want a language that’s homoiconic, with true macros like Lisp, but with obvious, familiar mathematical notation like Matlab.
+> We want something as usable for general programming as Python, as easy for statistics as R, as natural for string processing as Perl, as powerful for linear algebra as Matlab, as good at gluing programs together as the shell.
+> Something that is dirt simple to learn, yet keeps the most serious hackers happy.
+> We want it interactive and we want it compiled.
+
+Most users are attracted to Julia because of the **superior speed**.
+After all, Julia is a member of a prestigious and exclusive club.
+The [**petaflop club**](https://www.hpcwire.com/off-the-wire/julia-joins-petaflop-club/) is comprised of languages who can exceed speeds of **one petaflop^[a petaflop is one thousand trillion, or one quadrillion, operations per second.] per second at peak performance**.
+Currently only C, C++, Fortran and Julia belong to the [petaflop club](https://www.nextplatform.com/2017/11/28/julia-language-delivers-petascale-hpc-performance/).
+
+But speed is not all that Julia can deliver.
+The **ease of use**, **unicode support** and a language that makes **code sharing effortless** is some of Julia's features.
+We'll address all those features in this section, but we want to focus on the Julia code sharing feature for now.
+
+Julia ecosystem of packages is something unique.
+It enables not only code sharing but also allows sharing of user-created types.
+For example, Python's `pandas` uses its own `Datetime` type to handle dates.
+The same with R tidyverse's `lubridate` package, which also defines its own `datetime` type to handle dates.
+Julia doesn't need any of this, it has all the date stuff already baked onto its standard library.
+This means that other packages don't have to worry about dates.
+They just have to extend dates type to new functionalities by defining new functions and not having to touch a hair on creating new types.
+Julia's `Dates` can do amazing stuff, but we are getting ahead of ourselves now.
+Let's talk about the other Julia's features.
+
+### Julia versus other programming languages
+
+In [@fig:language_comparison] is a highly opinionated representation that divides the main open-source^[we have a very strong bias towards open-source and we won't discuss paid programming languages such as Matlab.] scientific computing languages in a 2x2 diagram with two axes: Slow-Fast and Easy-Hard.
 
 We've put C++ and FORTRAN in the hard and fast quadrant.
 Being static languages that needs compilation, type checking and other professional care and attention, they are really hard to learn and slow to prototype.
@@ -140,7 +172,7 @@ We think that the "Two-Language problem" and the o"One-To-One Code and Math Rela
 
 To explain multiple dispatch, we'll give an illustrative example in **Python**.
 Suppose that you want to have different types of researcher that will inherent from a "base" class `Researcher`.
-The base class `Researcher` would define the initial common values for every derived class: `name` and `age`:
+The base class `Researcher` would define the initial common values for every derived class, namely `name` and `age`. These would go inside the default constructor method `__init__`:
 
 ```python
 class Researcher:
@@ -150,7 +182,7 @@ class Researcher:
 ```
 
 Now let us define a `Linguist` class that will inherent from the `Researcher` class.
-We will also define a method that returns the citation style that is mostly used in the linguistics research field.
+We will also define a method `citation()` that returns the citation style that is mostly used in the linguistics research field.
 
 ```python
 class Linguist(Researcher):
@@ -166,7 +198,7 @@ class ComputerScientist(Researcher):
        return "IEEE"
 ```
 
-Finally, let's instantiate our two researchers, [Noam Chomsky](https://en.wikipedia.org/wiki/Noam_Chomsky) and [Judea Pearl](https://en.wikipedia.org/wiki/Judea_Pearl):
+Finally, let's instantiate our two researchers, [Noam Chomsky](https://en.wikipedia.org/wiki/Noam_Chomsky) a linguist and [Judea Pearl](https://en.wikipedia.org/wiki/Judea_Pearl) a computer scientist with their respective ages:
 
 ```python
 noam = Linguist("Noam Chomsky", 92)
@@ -180,10 +212,10 @@ Below, you'll see that we defined two functions that should behave differently i
 
 ```python
 def approaches(li: Linguist, cs: ComputerScientist):
-   print(f"Hey {cs.name}, wanna do a paper together? We need to use {cs.citation()} style.")
+   print(f"Hey {cs.name}, wanna do a paper together? We need to use {li.citation()} style.")
 
 def approaches(cs:ComputerScientist, li: Linguist):
-    print(f"Hey {li.name}, wanna do a paper together? We need to use {li.citation()} style.")
+    print(f"Hey {li.name}, wanna do a paper together? We need to use {cs.citation()} style.")
 ```
 
 Now lets say Noam Chomsky approaches Judea Pearl with a paper idea:
@@ -193,7 +225,7 @@ approaches(noam, judea)
 ```
 
 ```plaintext
-Hey Judea Pearl, wanna do a paper? We need to use IEEE style.
+Hey Judea Pearl, wanna do a paper? We need to use APA style.
 ```
 
 That was not what `judea` as a `Linguist` type would say to `noam`, a `ComputerScientist` type.
@@ -205,10 +237,12 @@ You would need to change your approach with a substancial loss of simplicity (yo
 **Now let's do this in Julia**.
 
 In Julia, we don't have classes but we have structures (`struct`) that are meant to be "structured data": they define the kind of information that is embedded in the structure, that is a set of fields (i.e. "properties" or "attributes" in other languages), and then individual instances (or "objects") can be produced each with its own specific values for the fields defined by the structure.
-They differ from the primitive types that are by default defined already inside the core of Julia.
-Because of this, `structs`s are composite types, and usually defined by the user.
+They differ from the primitive types (e.g. integer and floats) that are by default defined already inside the core of Julia language.
+Thus, they are known as user-defined types.
+The user can only create new `abstract type`s or `struct`s (which are also known as composite types).
+In Julia, all `struct`s are final and may only have `abstract type`s as their supertypes.
 
-First we'll create an `abstract type` named `Researcher`:
+First we'll create an `abstract type` named `Researcher`.
 
 ```jl
 sc(
@@ -218,7 +252,10 @@ abstract type Researcher end
 )
 ```
 
-We proceed, similar as before, by creating two derived `struct`s from the `Researcher` abstract type:
+We proceed, similar as before, by creating two derived `struct`s from the `Researcher` abstract type.
+Note that the `<:` operator is the subtype operator to assign that a `struct` or `type` is a subtype of another `struct` or `type`, which in turns would become a supertype (and we have the analogous `>:` operator).
+We also create two field names, one for the researcher `name` and other for `age`.
+They are represented as strings and 64-bit integers, respectively:
 
 ```jl
 sc(
@@ -242,19 +279,20 @@ end
 )
 ```
 
-The final step is to define two new functions that will behave differently depending on which derived `struct` of `Researcher` are the first or second argument:
+The final step is to define two new functions that will behave differently depending on which derived `struct` of `Researcher` are the first or second argument.
+We also use `$` for string interpolation of the researcher's `name`:
 
 ```jl
 sco(
 """
 approaches(li::Linguist, cs::ComputerScientist) = "Hey \$(cs.name), wanna do a paper? We need to use APA style."
 
-approaches(cs::ComputerScientist, li::Linguist) = "Hey \$(li.name), wanna do a paper? We need to use IEE style."
+approaches(cs::ComputerScientist, li::Linguist) = "Hey \$(li.name), wanna do a paper? We need to use IEEE style."
 """
 )
 ```
 
-Finally, let's instantiate our two researchers, `noam` and `judea`:
+Finally, let's instantiate our two researchers, `noam` and `judea`, as we did before in the Python case:
 
 ```jl
 sc(
@@ -283,7 +321,8 @@ Multiple dispatch acts on all arguments of a function and defines function behav
 
 Multiple dispatch is a powerful feature that allows us also to extend existing functions or to define custom and complex behavior to new types.
 To show how this works, we'll use another example.
-Suppose you want to define two new `struct`s based on a animals:
+Suppose you want to define two new `struct`s for two different animals.
+For simplicity, we won't be adding fields for the `struct`s:
 
 ```jl
 sc(
@@ -294,8 +333,8 @@ struct chicken end
 )
 ```
 
-I want to define addition for both `fox` and `chicken` new types.
-We proceed by defining a new function signature of the `+` from the `Base` module of Julia^[this is just an example for teaching purposes. Doing something similar as this example will probably result in a [method invalidation](https://julialang.org/blog/2020/08/invalidations/).]:
+Next, we want to define addition for both `fox` and `chicken` new types.
+We proceed by defining a new function signature of the `+` operator from the `Base` module of Julia^[this is just an example for teaching purposes. Doing something similar as this example will probably result in a [method invalidation](https://julialang.org/blog/2020/08/invalidations/).]:
 
 ```jl
 sco(
@@ -307,10 +346,10 @@ import Base: +
 )
 ```
 
-Now let us call addition with the `+` sign in an instantiated `fox` and `chicken` objects:
+Now let us call addition with the `+` sign on instantiated `fox` and `chicken` objects:
 
 ```jl
-sco(
+scob(
 """
 my_fox = fox()
 my_chicken = chicken()
@@ -322,7 +361,7 @@ my_fox + my_chicken
 And, as expected, adding two `chicken` objects together signals that they are safe:
 
 ```jl
-sco(
+scob(
 """
 chicken_1 = chicken()
 chicken_2 = chicken()
@@ -360,7 +399,7 @@ Now, FAA is using one language to do all this: Julia.
 4. [**175x speedup** for Pfizer's pharmacology models using GPUs in Julia](https://juliacomputing.com/case-studies/pfizer/).
 It was presented as a [poster](https://chrisrackauckas.com/assets/Posters/ACoP11_Poster_Abstracts_2020.pdf) in the 11th American Conference of Pharmacometrics (ACoP11) and [won a quality award](https://web.archive.org/web/20210121164011/https://www.go-acop.org/abstract-awards).
 5. [The Attitude and Orbit Control Subsystem (AOCS) of the Brazilian satellite Amazonia-1 is **written 100% in Julia**](https://discourse.julialang.org/t/julia-and-the-satellite-amazonia-1/57541) by [Ronan Arraes Jardim Chagas](https://ronanarraes.com/)
-6. [Brazil's national development bank (BNDES) ditched a paid solution and opted for opensource Julia modeling and gained a **10x speedup**.](https://youtu.be/NY0HcGqHj3g)
+6. [Brazil's national development bank (BNDES) ditched a paid solution and opted for open-source Julia modeling and gained a **10x speedup**.](https://youtu.be/NY0HcGqHj3g)
 
 If this is not enough, there are more case studies in [Julia Computing website](https://juliacomputing.com/case-studies/).
 

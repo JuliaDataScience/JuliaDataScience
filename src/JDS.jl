@@ -8,6 +8,7 @@ using Reexport
 @reexport using CairoMakie
 @reexport using DataFrames
 @reexport using Dates
+@reexport using InteractiveUtils
 @reexport using Makie
 @reexport using Plots
 

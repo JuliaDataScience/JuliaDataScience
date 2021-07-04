@@ -430,7 +430,7 @@ logarithm(10; base=2)
 )
 ```
 
-
+#### Anonymous Functions {#sec:function_anonymous}
 
 ### For Loop {#sec:for}
 ### While Loop {#sec:while}
@@ -453,12 +453,20 @@ One example per method
 ### Tuple {#sec:tuple}
 
 ```{=comment}
-the way to get data out of functions
+The way to get data out of functions
+
+Also revisit Anonymous Functions with multiple inputs...
 ```
 
 ### Named Tuple {#sec:namedtuple}
 ### Array {#sec:array}
 ### Dict {#sec:dict}
+
+### Symbol {#sec:symbol}
+
+```{=comment}
+They are import for DataFrames and StatsPlots stuff
+```
 
 ## Filesystem {#sec:filesystem}
 

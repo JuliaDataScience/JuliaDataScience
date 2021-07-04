@@ -59,7 +59,7 @@ age = 9
 
 Note that the return output of the last statement (`age`) was printed to the console.
 Here, we are defining two new variables: `name` and `age`.
-We can recover its values by typing its name given in the assignment:
+We can recover their values by typing its name given in the assignment:
 
 ```jl
 scob(

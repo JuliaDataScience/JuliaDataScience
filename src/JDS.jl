@@ -1,5 +1,6 @@
 module JDS
 
+import XLSX
 import Pkg
 
 using Reexport

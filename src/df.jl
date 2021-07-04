@@ -101,3 +101,18 @@ end
 
 inside_tempdir(f) = cd(f, mktempdir())
 code_block_inside_tempdir(f) = code_block(inside_tempdir(f))
+
+export write_xlsx
+function write_xlsx(name, df::DataFrame)
+    path = "$name.xlsx"
+    data = collect(eachcol(df))
+    cols = names(df)
+    XLSX.writetable(path, data, cols)
+end
+
+export write_grades_xlsx
+function write_grades_xlsx()
+    path = "grades"
+    write_xlsx(path, grades_2020())
+    "$path.xlsx"
+end

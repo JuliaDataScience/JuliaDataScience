@@ -2,9 +2,9 @@
 
 Having only data inside Julia programs and not being able to load or save it would be very limiting.
 Therefore, we start by mentioning how to store files to disk and how to load files from disk.
-We focus on CSV and Excel since those are the most prevalent.
+We focus on CSV, see @sec:csv, and Excel, see @sec:excel, since those are the most common.
 
-### CSV
+### CSV {#sec:csv}
 
 Comma-separated value (CSV) files are are ridiculously effective way to store tables.
 Unlike many competing data storage solutions, CSV files have two advantages.
@@ -38,9 +38,12 @@ grades_2020()
 and read it from a file after writing it
 
 ```jl
+@sc write_grades_csv()
+```
+
+```jl
 sco("""
 JDS.code_block_inside_tempdir() do # hide
-@sc write_grades_csv()
 path = write_grades_csv()
 read(path, String)
 end # hide
@@ -91,16 +94,16 @@ end # hide
 """)
 ```
 
-You can also come up with other delimiters, such as semicolons ";", spaces " ", or even something as unusual like "π".
+You can also come up with other delimiters, such as semicolons ";", spaces "\ ", or even something as unusual as "π".
 
 ```jl
 sco("""
 JDS.code_block_inside_tempdir() do # hide
-function write_pi_separated()
-    path = "grades-pi-separated.csv"
-    CSV.write(path, grades_2020(); delim='π')
+function write_space_separated()
+    path = "grades-space-separated.csv"
+    CSV.write(path, grades_2020(); delim=' ')
 end
-read(write_pi_separated(), String)
+read(write_space_separated(), String)
 end # hide
 """)
 ```
@@ -122,3 +125,93 @@ end # hide
 """)
 ```
 
+Conveniently, CSV will automatically infer types:
+
+```jl
+sco("""
+JDS.inside_tempdir() do # hide
+path = write_grades_csv()
+df = CSV.read(path, DataFrame)
+Books.code_block(df)
+end # hide
+""")
+```
+
+even for more complex data:
+
+```jl
+sco("""
+JDS.inside_tempdir() do # hide
+my_data = \"\"\"
+    a,b,c,d,e
+    Kim,2018-02-03,3,4.0,2018-02-03T10:00
+    \"\"\"
+path = "my_data.csv"
+write(path, my_data)
+df = CSV.read(path, DataFrame)
+Books.code_block(df)
+end # hide
+""")
+```
+
+These CSV basics should cover most use-cases.
+For more information, see the [CSV.jl documentation](https://csv.juliadata.org/stable){target="_blank}.
+
+### Excel {#sec:excel}
+
+There are multiple Julia packages to read Excel files.
+In this book, we will only look at [XLSX.jl](https://github.com/felipenoris/XLSX.jl), because we have the best experiences with it.
+XLSX.jl is written in pure Julia, which makes it easy for us to inspect the implementation and to use it.
+
+Install the package via
+
+```
+julia> ]
+
+pkg> add XLSX
+```
+
+and load it via
+
+```jl
+sc("""
+import XLSX
+""")
+```
+
+To write files, we define a little helper function
+
+```jl
+@sc write_xlsx("", DataFrame())
+```
+
+Now, we can easily write the grades to an Excel file
+
+```jl
+@sc write_grades_xlsx()
+```
+
+When reading it back, we will see that XLSX puts the data in a sheet:
+
+```jl
+sco("""
+JDS.inside_tempdir() do # hide
+path = write_grades_xlsx()
+xf = XLSX.readxlsx(path)
+end # hide
+""")
+```
+
+```jl
+sco("""
+JDS.inside_tempdir() do # hide
+xf = XLSX.readxlsx(write_grades_xlsx())
+sheet = xf["Sheet1"]
+without_caption_label( # hide
+XLSX.eachtablerow(sheet) |> DataFrame
+) # hide
+end # hide
+""")
+```
+
+For more information and options, see the [XLSX documentation](https://felipenoris.github.io/XLSX.jl/stable/){target="_blank"}.

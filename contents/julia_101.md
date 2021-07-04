@@ -219,7 +219,7 @@ end
 
 Every function declaration begins with the keyword `function` followed by the function name.
 Then, inside parentheses `()`, we define the arguments separated by a comma `,`.
-Inside the function we specify what we want Julia to do with the parameters we supplied.
+Inside the function, we specify what we want Julia to do with the parameters that we supplied.
 After all the operations that we want the function to do has been performed, we ask Julia to return the result of those operations with the `return` statement.
 Finally, we let Julia know that our function is well-defined and finished with the `end` keyword.
 

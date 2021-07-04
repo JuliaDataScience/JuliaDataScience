@@ -49,7 +49,7 @@ We create new variables by writing the variable name on the left and its value i
 For example:
 
 ```jl
-sco(
+scob(
 """
 name = "Julia"
 age = 9
@@ -62,7 +62,7 @@ Here we are defining two new variables: `name` and `age`.
 We can recover its values by typing its name given in the assignment:
 
 ```jl
-sco(
+scob(
 """
 name
 """
@@ -74,7 +74,7 @@ Note that Julia will now override the previous variable's value with the new one
 Supposed `jl name`'s birthday has passed and now it has turned `jl age+1`:
 
 ```jl
-sco(
+scob(
 """
 age = 10
 """
@@ -85,7 +85,7 @@ We can do the same with its `name`, suppose that Julia has earned some titles du
 We would change the variable `name` to the new value:
 
 ```jl
-sco(
+scob(
 """
 name = "Julia Scientificus Rapidus"
 """
@@ -96,7 +96,7 @@ We can also do operations on variables such as addition or division.
 Let's see how much months of age `jl name` has by multiplying `age` by 12:
 
 ```jl
-sco(
+scob(
 """
 age * 12
 """
@@ -105,27 +105,31 @@ age * 12
 
 We can inspect variables types by using `typeof()` function:
 
-```jl
-sco(
-"""
-typeof(age)
-"""
-)
+```{=comment}
+Rik: I have no idea why `scob` doesn't work here.
+It is overloaded somewhere in the wrong way it seems.
 ```
 
-So age is a `jl typeof(age)`.
+```jl
+sco("typeof(age)")
+```
+
 The next question the becomes: "What else can I do with `jl typeof(age)`?"
 There is a nice handy function `methodswith()` that spits out every function available, along with its signature, for a certain type.
 Here I will restrict the output only to the first 5 rows:
+
+```{=comment}
+Since the type is a Vector, Books converts it to multiple output statements.
+In this case, I've enforced to show the output of `Base.show`.
+```
 
 ```jl
 sco(
 """
 first(methodswith(Int64), 5)
-"""
+"""; post=Books.catch_show
 )
 ```
-
 
 ### User-defined Types {#sec:struct}
 
@@ -139,32 +143,27 @@ For example lets create a `struct` to represent scientific opensource programmin
 We'll also define a set of fields along with the corresponding types inside the `struct`:
 
 ```jl
-sc(
-"""
+sco("""
 struct Language
     name::String
     title::String
     year_of_birth::Int64
     fast::Bool
 end
-""")
+"""; post=x -> "")
 ```
 
 To inspect the field names you can use the `fieldnames()` and passing the desired `struct` as an argument:
 
 ```jl
-sco(
-"""
-fieldnames(Language)
-"""
-)
+sco("fieldnames(Language)")
 ```
 
 To use `struct`s, we must instantiate individual instances (or "objects"), each with its own specific values for the fields defined inside the `struct`.
 Let's instantiate two instances, one for Julia and one for Python with the appropriate types as fields inside the `Language()` constructor:
 
 ```jl
-sco(
+scob(
 """
 julia = Language("Julia", "Scientificus Rapidus", 2012, true)
 python = Language("Python", "C/FORTRAN Dependentus Letargicus", 1991, false)
@@ -179,7 +178,7 @@ Whenever possible make everything *immutable*.
 Let's create a `mutable struct`.
 
 ```jl
-sco(
+scob(
 """
 mutable struct MutableLanguage
     name::String
@@ -196,7 +195,7 @@ Suppose that we want to change `julia_mutable`'s title.
 Now we can do this, since `julia_mutable` is an instantiated `mutable struct`:
 
 ```jl
-sco(
+scob(
 """
 julia_mutable.title = "Python Obliteratus"
 
@@ -250,7 +249,7 @@ end
 Now, we can use our `add_numbers()` function:
 
 ```jl
-sco(
+scob(
 """
 add_numbers(17, 29)
 """
@@ -260,7 +259,7 @@ add_numbers(17, 29)
 And it works also with floats:
 
 ```jl
-sco(
+scob(
 """
 add_numbers(3.14, 2.72)
 """
@@ -284,7 +283,7 @@ end
 )
 ```
 
-We can see that it is a function with 2 methods:
+We can see that it is a function with multiple methods:
 
 ```jl
 sco(
@@ -312,7 +311,7 @@ end
 Now it works as expected with any float type:
 
 ```jl
-sco(
+scob(
 """
 x_32 = Float32(1.1)
 round_number(x_32)
@@ -340,14 +339,14 @@ Base.show(io::IO, l::Language) = print(
     2021 - l.year_of_birth, ", years old, ",
     "has the following titles: ", l.title
 )
-"""
+"""; post=x -> ""
 )
 ```
 
 Now let's see how `python` will output:
 
 ```jl
-sco(
+scob(
 """
 python
 """
@@ -375,20 +374,20 @@ In that case we can do two things:
 
 1. We can, analogously as the return values, define two variables to hold the function return values, one for each return value:
    ```jl
-   sco(
-    """
-    return_1, return_2 = add_multiply(1, 2)
-    """
+   scob(
+   """
+   return_1, return_2 = add_multiply(1, 2)
+   """
    )
    ```
 
 2. Or we can define just one variable to hold the function return values and access them with either `first()` or `last()`:
-    ```jl
-   sco(
-    """
-    all_returns = add_multiply(1, 2)
-    last(all_returns)
-    """
+   ```jl
+   scob(
+   """
+   all_returns = add_multiply(1, 2)
+   last(all_returns)
+   """
    )
    ```
 

@@ -349,7 +349,7 @@ import Base: +
 Now let us call addition with the `+` sign on instantiated `fox` and `chicken` objects:
 
 ```jl
-sco(
+scob(
 """
 my_fox = fox()
 my_chicken = chicken()
@@ -361,7 +361,7 @@ my_fox + my_chicken
 And, as expected, adding two `chicken` objects together signals that they are safe:
 
 ```jl
-sco(
+scob(
 """
 chicken_1 = chicken()
 chicken_2 = chicken()

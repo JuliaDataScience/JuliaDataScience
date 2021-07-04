@@ -13,7 +13,7 @@ It covers all the basics and corner cases, but it can be cumbersome.
 Especially, if you are aren't familiar with open-source software documentation.
 
 We'll cover the basics of Julia.
-Since we love analogies, imagine that Julia is a fancy feature-loaded car, such as a brand-new Tesla.
+Imagine that Julia is a fancy feature-loaded car, such as a brand-new Tesla.
 We'll just explain you how to "drive the car, park it and how to navigate in traffic".
 If you want to know what all "buttons in the steering wheel and dashboard do", this is not the resource you are looking for.
 

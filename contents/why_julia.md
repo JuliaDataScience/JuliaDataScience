@@ -238,6 +238,7 @@ You would need to change your approach with a substancial loss of simplicity (yo
 
 In Julia, we don't have classes but we have structures (`struct`) that are meant to be "structured data": they define the kind of information that is embedded in the structure, that is a set of fields (i.e. "properties" or "attributes" in other languages), and then individual instances (or "objects") can be produced each with its own specific values for the fields defined by the structure.
 They differ from the primitive types (e.g. integer and floats) that are by default defined already inside the core of Julia language.
+Thus, they are known as user-defined types.
 The user can only create new `abstract type`s or `struct`s (which are also known as composite types).
 In Julia, all `struct`s are final and may only have `abstract type`s as their supertypes.
 

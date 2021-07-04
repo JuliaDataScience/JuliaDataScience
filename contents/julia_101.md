@@ -132,6 +132,7 @@ Having variables around without any sort of hierarchy and relationships are not 
 In Julia we can define that kind of structured data with a `struct` (also known as composite types).
 Inside each `struct` there is an optional set of fields.
 They differ from the primitive types (e.g. integer and floats) that are by default defined already inside the core of Julia language.
+Since most `struct`s are user-defined they are known as user-defined types.
 
 For example lets create a `struct` to represent scientific opensource programming languages:
 
@@ -169,6 +170,43 @@ python = Language("Python", "C/FORTRAN Dependentus Letargicus", 1991, false)
 )
 ```
 
+One thing to note with `struct`s is that we cannot change their values once they are instantiated.
+We can solve this with a `mutable struct`.
+Also note that everything in Julia that we impose mutability will take a performance hit.
+Whenever possible make everything *immutable*.
+Let's create a `mutable struct`.
+
+```jl
+sco(
+"""
+mutable struct MutableLanguage
+    name::String
+    title::String
+    year_of_birth::Int64
+    fast::Bool
+end
+
+julia_mutable = MutableLanguage("Julia", "Scientificus Rapidus", 2012, true)
+""")
+```
+
+Now we can change `julia_mutable`'s title:
+
+```jl
+sco(
+"""
+julia_mutable.title = "Python Obliteratus"
+
+julia_mutable
+"""
+)
+```
+
+### Functions {#sec:function}
+
+Now that we already know how to define variables and custom types as `struct`s, let's ...
+If you want something to function on all Float's and Int's you can use an abtract type as type signature.
+
 By default a `struct` has a basic output, which you saw above in the `python` case.
 Now, we'll use multiple dispatch to overload the `Base.show()` function, so that we have some nice printing for our programming languages.
 We want to clearly communicate programming languages' names, titles and ages in years of old:
@@ -196,49 +234,6 @@ python
 """
 )
 ```
-
-One thing to note with `struct`s is that we cannot change their values once they are instantiated.
-We can solve this with a `mutable struct`.
-Also note that everything in Julia that we impose mutability will take a performance hit.
-Whenever possible make everything *immutable*.
-Let's create a `mutable struct`.
-
-```jl
-sco(
-"""
-mutable struct MutableLanguage
-    name::String
-    title::String
-    year_of_birth::Int64
-    fast::Bool
-end
-
-Base.show(io::IO, l::MutableLanguage) = print(
-    io, l.name, " ",
-    2021 - l.year_of_birth, ", years old, ",
-    "has the following titles: ", l.title
-)
-
-julia_mutable = MutableLanguage("Julia", "Scientificus Rapidus", 2012, true)
-""")
-```
-
-Now we can change `julia_mutable`'s title:
-
-```jl
-sco(
-"""
-julia_mutable.title = "Python Obliteratus"
-
-julia_mutable
-"""
-)
-```
-
-### Functions {#sec:function}
-
-Now that we already know how to define variables and custom types as `struct`s, let's ...
-If you want something to function on all Float's and Int's you can use an abtract type as type signature.
 
 ### For Loop {#sec:for}
 ### While Loop {#sec:while}

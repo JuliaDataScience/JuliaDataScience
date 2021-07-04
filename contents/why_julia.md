@@ -109,7 +109,7 @@ The same with R tidyverse's `lubridate` package, which also defines its own `dat
 Julia doesn't need any of this, it has all the date stuff already baked onto its standard library.
 This means that other packages don't have to worry about dates.
 They just have to extend dates type to new functionalities by defining new functions and not having to touch a hair on creating new types.
-Julia's `Dates` can also do some amazing stuff, but we might be getting ahead now.
+Julia's `Dates` can do amazing stuff, but we are getting ahead of ourselves now.
 Let's talk about the other Julia's features.
 
 ### Julia versus other programming languages

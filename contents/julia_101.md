@@ -398,12 +398,20 @@ Some functions can accept keywords arguments instead of positional arguments.
 These arguments are just like regular arguments, except that they are defined after the regular function's arguments and separated by a semicolon `;`.
 Another difference is that we must supply a **default value** for every keyword argument.
 For example, let's define a `logarithm()` function that by default uses base $e$ (2.2.7182818284590) as a keyword argument.
-Note that here we are using the abstract type `Number` so that we cover all types derived from `Integer` and `AbstractFloat`:
+Note that here we are using the abstract type `Real` so that we cover all types derived from `Integer` and `AbstractFloat`, being both themselves subtypes of `Real`:
 
 ```jl
 sco(
 """
-function logarithm(x::Number; base::Number=2.7182818284590)
+AbstractFloat <: Real && Integer <: Real
+"""
+)
+```
+
+```jl
+sco(
+"""
+function logarithm(x::Real; base::Real=2.7182818284590)
     return log(base, x)
 end
 """
@@ -431,6 +439,30 @@ logarithm(10; base=2)
 ```
 
 #### Anonymous Functions {#sec:function_anonymous}
+
+A lot of times we need to quickly use functions without having to define a full-fledged function with the `function ... end` syntax.
+What we need are **anonymous functions**.
+They come a lot in Julia's Data Science workflow.
+For example, when using [`DataFrames.jl`](dataframes.html) or [`Plots.jl`](plots.html), sometimes we need a quick and dirty function to filter data or format plot labels.
+That's when we reach out for anonymous functions.
+They are specially useful when we don't want to create a function and a simple in-place statement would be enough.
+
+The syntax is simple.
+We use the `->` operator.
+On the left of `->` we define the parameter name.
+And on the right of `->` we define what operations we want to perform on the parameter we defined on the left of `->`.
+Here's an example, suppose we want to undo the log transformation by using an exponentiation:
+
+```jl
+sco(
+"""
+map(x -> 2.7182818284590^x, logarithm(2))
+"""
+)
+```
+
+Here we are using the `map()` function to conveniently map the anonymous function (first argument) to `logarithm(2)` (the second argument).
+As a result, we get back the same number, because logarithm and exponentiation are inverse (at least in the base that we've chosen -- 2.7182818284590)
 
 ### For Loop {#sec:for}
 ### While Loop {#sec:while}

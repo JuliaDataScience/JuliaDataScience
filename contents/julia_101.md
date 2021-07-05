@@ -204,6 +204,86 @@ julia_mutable
 )
 ```
 
+### Boolean Operators an Numeric Comparison
+
+Now that we've covered types, we can move to boolean operators and numeric comparison.
+
+We have three boolean operators in Julia:
+
+* `!`: **NOT**
+* `&&`: **AND**
+* `||`: **OR**
+
+Here is a few examples with some of them:
+
+```jl
+scob(
+"""
+!true
+"""
+)
+```
+
+```jl
+scob(
+"""
+(false && true) || (!false)
+"""
+)
+```
+
+```jl
+scob(
+"""
+(6 isa Int64) && (6 isa Real)
+"""
+)
+```
+
+Regarding numeric comparison, Julia have three major types of comparisons:
+
+1. **Equality**: either something is *equal* or *not equal* another
+   * `==`: equality
+   * `!-` or `≠`: inequality
+2. **Less than**: either something is *less than* or *less than or equal to*
+    * `<`: less than
+    * `<=` or `≤`: less than or equal to
+4. **Greater than**: either something is *greater than* or *greater than or equal to*
+    * `>`: greater than
+    * `>=` or `≥`: less than or equal to
+
+Here are some examples:
+
+```jl
+scob(
+"""
+1 == 1
+"""
+)
+```
+
+```jl
+scob(
+"""
+1 >= 10
+"""
+)
+```
+
+It evens works between different types:
+
+```jl
+scob(
+"""
+1 == 1.0
+"""
+)
+```
+
+We can also mix and match boolean operators with numeric comparisons:
+
+
+
 ### Functions {#sec:function}
 
 Now that we already know how to define variables and custom types as `struct`s, let's turn our attention to **functions**.
@@ -464,9 +544,28 @@ map(x -> 2.7182818284590^x, logarithm(2))
 Here we are using the `map()` function to conveniently map the anonymous function (first argument) to `logarithm(2)` (the second argument).
 As a result, we get back the same number, because logarithm and exponentiation are inverse (at least in the base that we've chosen -- 2.7182818284590)
 
-### For Loop {#sec:for}
-### While Loop {#sec:while}
 ### Conditional If-Else-Elseif {#sec:conditionals}
+
+
+### For Loop {#sec:for}
+
+The classical for loop in Julia follow a similar syntax as functions.
+You begin with a keyword, in this case `for`.
+And you finish with the `end` keyword.
+
+So, to make Julia print every number from 1 to 10, you'll need the following for loop:
+
+```jl
+sco(
+"""
+for i ∈ 1:10
+    println(i)
+end
+"""; post=x -> ""
+)
+```
+
+### While Loop {#sec:while}
 
 ## Native Data Structures {#sec:data_structures}
 

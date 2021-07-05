@@ -76,4 +76,7 @@ That means that, instead of writing a comment for humans and some code for the c
 ## Acknowledgements
 
 Many people have contributed directly and indirectly to this book.
-Rik would like to thank his PhD supervisors, [Peter de Jonge](https://www.rug.nl/staff/peter.de.jonge/), [Ruud den Hartigh](https://www.rug.nl/staff/j.r.den.hartigh/) and [Frank Blaauw](https://frankblaauw.nl/), for their support.
+
+Jose Storopoli would like to thank his colleagues, specially [Fernando Serra](https://orcid.org/0000-0002-8178-7313), [Wonder Alexandre Luz Alves](https://orcid.org/0000-0003-0430-950X) and [André Librantz](https://orcid.org/0000-0001-8599-9009), for their encouragement and support.
+
+Rik Huijzer would like to thank his PhD supervisors, [Peter de Jonge](https://www.rug.nl/staff/peter.de.jonge/), [Ruud den Hartigh](https://www.rug.nl/staff/j.r.den.hartigh/) and [Frank Blaauw](https://frankblaauw.nl/), for their support.

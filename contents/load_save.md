@@ -206,4 +206,4 @@ end # hide
 """; process=without_caption_label)
 ```
 
-For more information and options, see the [XLSX documentation](https://felipenoris.github.io/XLSX.jl/stable/){target="_blank"}.
+For more information and options, see the [`XLSX.jl` documentation](https://felipenoris.github.io/XLSX.jl/stable/){target="_blank"}.

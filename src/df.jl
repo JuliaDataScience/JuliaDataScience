@@ -4,6 +4,7 @@ function grades_ages()
     DataFrame(; name, age)
 end
 
+export grades_2020
 function grades_2020()
     name = ["Sally", "Bob", "Alice", "Hank"]
     grade_2020 = [1, 5, 8.5, 4]
@@ -20,6 +21,7 @@ function grades_for_2020()
     innerjoin(grades_ages(), grades_2020(); on=:name)
 end
 
+export grades_array
 function grades_array()
     name = ["Bob", "Sally", "Alice", "Hank"]
     age = [17, 18, 20, 19]
@@ -33,17 +35,6 @@ function second_row()
     row = (name[i], age[i], grade_2020[i])
 end
 
-function row_alice()
-    names = grades_array().name
-    i = findfirst(names .== "Alice")
-end
-
-function value_alice()
-    grades = grades_array().grade_2020
-    i = row_alice()
-    grades[i]
-end
-
 function names_grades1()
     df = grades_2020()
     df.name
@@ -55,14 +46,21 @@ function names_grades2()
 end
 
 # Should fix this in Books.jl
-function Books.convert_output(path, expr, out::DataFrameRow)
-    Books.convert_output(path, expr, DataFrame(out))
+export convert_output
+function Books.convert_output(path, expr, out::DataFrameRow; kwargs...)
+    Books.convert_output(path, expr, DataFrame(out); kwargs...)
 end
 
-# function grades_row(row::Int)
-function grades_row()
+export grade_2020
+function grade_2020(i::Int)
     df = grades_2020()
-    df[2, :]
+    df[i, :]
+end
+
+function grade_2020(name::String)
+    df = grades_2020()
+    dic = Dict(zip(df.name, df.grade_2020))
+    dic[name]
 end
 
 function grades_indexing()
@@ -73,4 +71,38 @@ end
 function grades_2020(names::Vector{Int})
     df = grades_2020()
     df[names, :]
+end
+
+export equals_alice
+equals_alice(n::String) = n == "Alice"
+
+export write_grades_csv
+function write_grades_csv()
+    path = "grades.csv"
+    CSV.write(path, grades_2020())
+end
+
+export grades_with_commas
+function grades_with_commas()
+    df = grades_2020()
+    df[3, :name] = "Alice,"
+    df
+end
+
+inside_tempdir(f) = cd(f, mktempdir())
+output_block_inside_tempdir(f) = output_block(inside_tempdir(f))
+
+export write_xlsx
+function write_xlsx(name, df::DataFrame)
+    path = "$name.xlsx"
+    data = collect(eachcol(df))
+    cols = names(df)
+    XLSX.writetable(path, data, cols)
+end
+
+export write_grades_xlsx
+function write_grades_xlsx()
+    path = "grades"
+    write_xlsx(path, grades_2020())
+    "$path.xlsx"
 end

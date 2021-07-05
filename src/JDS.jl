@@ -1,28 +1,24 @@
 module JDS
 
+import XLSX
 import Pkg
 
 using Reexport
 @reexport using AlgebraOfGraphics
 @reexport using Books
 @reexport using CairoMakie
+@reexport using CSV
 @reexport using DataFrames
 @reexport using Dates
 @reexport using InteractiveUtils
 @reexport using Makie
 @reexport using Plots
 
-export without_caption_label
-
 plot = Plots.plot
 
 include("df.jl")
 include("environment.jl")
 include("plots.jl")
-
-function without_caption_label(x::Any)
-    Options(x; caption=nothing, label=nothing)
-end
 
 function myplot()
     I = 1:30

@@ -8,7 +8,6 @@ Welcome! This is an open source and open access book on how to do **Data Science
 Our target audience are PhD candidates from all fields of applied sciences.
 Industry analysts, upcoming and established researchers are also welcome as readers.
 
-
 The book is also available as [**PDF**](/juliadatascience.pdf){target="_blank"}.
 
 The source code is available at [GitHub](https://github.com/JuliaDataScience/JuliaDataScience){target="_blank"}.

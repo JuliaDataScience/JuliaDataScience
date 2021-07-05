@@ -45,7 +45,7 @@ Now, questions that we could ask ourselves could be:
 - What TV shows were rated by you but not by the other person?
 
 In the rest of this chapter, we will show you how you can easily answer these questions in Julia.
-To do so, we first show why we need a Julia package called DataFrames.jl.
+To do so, we first show why we need a Julia package called `DataFrames.jl`.
 
 ```{=comment}
 TODO: Add a comparison with Excel to see where Julia is better.
@@ -209,4 +209,3 @@ By using the blocks, you can make a data analysis script, control a robot or wha
 
 So far, the examples were quite cumbersome, because we had to use indexes.
 In the next sections, we will show how to load and save data, and many powerful building blocks provided by DataFrames.jl.
-

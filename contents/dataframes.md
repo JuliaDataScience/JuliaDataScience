@@ -105,14 +105,14 @@ value_alice()
 """; post=output_block)
 ```
 
-DataFrames.jl can easily solve these kinds of issues.
-You can start by loading DataFrames.jl:
+`DataFrames.jl` can easily solve these kinds of issues.
+You can start by loading `DataFrames.jl`:
 
 ```
 using DataFrames
 ```
 
-With DataFrames.jl, we can define
+With `DataFrames.jl`, we can define
 
 ```jl
 sco("""
@@ -134,7 +134,7 @@ With this section, people who already understand it, understand it a bit better 
 This works, but there is one thing that we need to change straight away.
 In this example, we defined the variables `name`, `grade_2020` and `df` in global scope.
 This means that these variables can be accessed and edited from anywhere.
-If we would continue writing the book like this, we would have a few hundred variables at the end of the book even though the data that we put into the variable `name` should only be accessed via `DataFrames`!
+If we would continue writing the book like this, we would have a few hundred variables at the end of the book even though the data that we put into the variable `name` should only be accessed via `DataFrame`!
 The variables `name` and `grade_2020` where never meant to be kept for long!
 Now, imagine that we would change the contents of `grade_2020` a few times in this book.
 Given only the book as PDF, it would be near impossible to figure out the contents of the variable by the end.
@@ -178,7 +178,7 @@ This assumes that the function is not re-defined, of course.
 We promise to not do that in this book, because it is a bad idea exactly for this reason.
 Instead of "changing" a function, we will make a new one and give it a clear name.
 
-So, back to `DataFrames`.
+So, back to the `DataFrames` constructor.
 As you might have seen, the way to create one is simply to pass vectors as arguments into `DataFrame(...)`.
 You can come up with any valid Julia vector and it will work as long as the vectors have the same length.
 Duplicates, unicode symbols and not so round numbers are fine:

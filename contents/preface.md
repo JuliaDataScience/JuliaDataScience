@@ -72,3 +72,8 @@ Also, another benefit of having good software engineering skills is that it will
 Finally, you can rest assured that we do not att all invented ourselves this emphasis on functions.
 In industry, it is common practice to encourage developers to use **"functions instead of comments"**.
 That means that, instead of writing a comment for humans and some code for the computer, the developers write a function which is universally read by humans and computers.
+
+## Acknowledgements
+
+Many people have contributed directly and indirectly to this book.
+Rik would like to thank his PhD supervisors, [Peter de Jonge](https://www.rug.nl/staff/peter.de.jonge/), [Ruud den Hartigh](https://www.rug.nl/staff/j.r.den.hartigh/) and [Frank Blaauw](https://frankblaauw.nl/), for their support.

@@ -182,7 +182,7 @@ class Researcher:
 ```
 
 Now let us define a `Linguist` class that will inherent from the `Researcher` class.
-We will also define a method `citation()` that returns the citation style that is mostly used in the linguistics research field.
+We will also define a method `citation` that returns the citation style that is mostly used in the linguistics research field.
 
 ```python
 class Linguist(Researcher):

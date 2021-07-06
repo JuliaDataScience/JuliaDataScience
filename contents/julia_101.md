@@ -103,7 +103,7 @@ age * 12
 )
 ```
 
-We can inspect variables types by using `typeof()` function:
+We can inspect variables types by using `typeof` function:
 
 ```{=comment}
 Rik: I have no idea why `scob` doesn't work here.
@@ -115,7 +115,7 @@ sco("typeof(age)")
 ```
 
 The next question then becomes: "What else can I do with integers?"
-There is a nice handy function `methodswith()` that spits out every function available, along with its signature, for a certain type.
+There is a nice handy function `methodswit` that spits out every function available, along with its signature, for a certain type.
 Here I will restrict the output to the first 5 rows:
 
 ```{=comment}
@@ -153,14 +153,14 @@ end
 """; post=x -> "")
 ```
 
-To inspect the field names you can use the `fieldnames()` and passing the desired `struct` as an argument:
+To inspect the field names you can use the `fieldnames` and passing the desired `struct` as an argument:
 
 ```jl
 sco("fieldnames(Language)")
 ```
 
 To use `struct`s, we must instantiate individual instances (or "objects"), each with its own specific values for the fields defined inside the `struct`.
-Let's instantiate two instances, one for Julia and one for Python with the appropriate types as fields inside the `Language()` constructor:
+Let's instantiate two instances, one for Julia and one for Python with the appropriate types as fields inside the `Language` constructor:
 
 ```jl
 sco(
@@ -332,7 +332,7 @@ end
 )
 ```
 
-Now, we can use our `add_numbers()` function:
+Now, we can use our `add_numbers` function:
 
 ```jl
 scob(
@@ -353,7 +353,7 @@ add_numbers(3.14, 2.72)
 ```
 
 We can also define custom behavior by specifying types declarations.
-Suppose we want to have a `round_number()` function that behaves differently if its argument is either a `Float64` or `Int64`:
+Suppose we want to have a `round_number` function that behaves differently if its argument is either a `Float64` or `Int64`:
 
 ```jl
 sco(
@@ -406,16 +406,16 @@ round_number(x_32)
 ```
 
 > **_NOTE:_**
-> We can inspect types with the `supertypes()` and `subtypes()` functions.
+> We can inspect types with the `supertypes` and `subtypes` functions.
 
 Let's go back to our `Language` `struct` that we defined above.
 This is an example of multiple dispatch.
-We will extend the `Base.show()` function that prints the output of instantiated types and `struct`s.
+We will extend the `Base.show` function that prints the output of instantiated types and `struct`s.
 
 By default a `struct` has a basic output, which you saw above in the `python` case.
-We can define `Base.show()` function to our `Language` type, so that we have some nice printing for our programming languages instances.
+We can define `Base.show` function to our `Language` type, so that we have some nice printing for our programming languages instances.
 We want to clearly communicate programming languages' names, titles and ages in years of old.
-The function `Base.show()` accepts as arguments a `IO` type named `io` followed by the type you want to define custom behavior:
+The function `Base.show` accepts as arguments a `IO` type named `io` followed by the type you want to define custom behavior:
 
 ```jl
 sco(
@@ -442,7 +442,7 @@ python
 #### Multiple Return Values {#sec:function_multiple}
 
 A function can, also, return two or more values.
-See the new function `add_multiply()` below:
+See the new function `add_multiply` below:
 
 ```jl
 sco(
@@ -468,7 +468,7 @@ In that case we can do two things:
    )
    ```
 
-2. Or we can define just one variable to hold the function return values and access them with either `first()` or `last()`:
+2. Or we can define just one variable to hold the function return values and access them with either `first` or `last`:
    ```jl
    scob(
    """
@@ -483,7 +483,7 @@ In that case we can do two things:
 Some functions can accept keywords arguments instead of positional arguments.
 These arguments are just like regular arguments, except that they are defined after the regular function's arguments and separated by a semicolon `;`.
 Another difference is that we must supply a **default value** for every keyword argument.
-For example, let's define a `logarithm()` function that by default uses base $e$ (2.2.7182818284590) as a keyword argument.
+For example, let's define a `logarithm` function that by default uses base $e$ (2.2.7182818284590) as a keyword argument.
 Note that here we are using the abstract type `Real` so that we cover all types derived from `Integer` and `AbstractFloat`, being both themselves subtypes of `Real`:
 
 ```jl
@@ -547,7 +547,7 @@ map(x -> 2.7182818284590^x, logarithm(2))
 )
 ```
 
-Here we are using the `map()` function to conveniently map the anonymous function (first argument) to `logarithm(2)` (the second argument).
+Here we are using the `map` function to conveniently map the anonymous function (first argument) to `logarithm(2)` (the second argument).
 As a result, we get back the same number, because logarithm and exponentiation are inverse (at least in the base that we've chosen -- 2.7182818284590)
 
 ### Conditional If-Else-Elseif {#sec:conditionals}
@@ -582,18 +582,18 @@ end
 )
 ```
 
-We can even wrap this in a function called `test()`:
+We can even wrap this in a function called `test`:
 
 ```jl
 scob(
 """
 function test(a, b)
     if a < b
-        "a is less than b"
+        \"a is less than b\"
     elseif a > b
-        "a is greater than b"
+        \"a is greater than b\"
     else
-        "a is equal to b"
+        \"a is equal to b\"
     end
 end
 
@@ -665,7 +665,7 @@ Since they are collections, they can be *looped* over with the `for` loops.
 
 We will cover `String`, `Tuple`, `NamedTuple`, `Arrays`, `Dict` and `Symbol`.
 
-When you stumble into a data structure in Julia, you can find functions/methods that accept it as an argument with the `methodswith()` function.
+When you stumble into a data structure in Julia, you can find functions/methods that accept it as an argument with the `methodswith` function.
 Just like we did before with types.
 This is a nice thing to have in your bag of tricks.
 We personally use it often.
@@ -696,7 +696,7 @@ sco(
 ```
 
 It also works with functions automatically.
-Remember our `logarithm()` function?
+Remember our `logarithm` function?
 
 ```jl
 sco(
@@ -738,7 +738,7 @@ It is still a \`String\` to Julia.
 
 One nice thing we can do with strings in Julia is **string concatenation**.
 Suppose you want to construct a new string that is the concatenation of two or more strings.
-This is accomplish in julia either with the `*` operator (this is where Julia departs from other scientific open-source programming languages) or the `join()` function:
+This is accomplish in julia either with the `*` operator (this is where Julia departs from other scientific open-source programming languages) or the `join` function:
 
 ```jl
 scob(
@@ -753,7 +753,7 @@ hello * goodbye
 
 As you can see we are missing a space between `hello` and `goodbye`.
 We could concatenate an additional `" "` string with the `*`, but that would be cumbersome for more than two strings.
-That's when the `join()` function comes up.
+That's when the `join` function comes up.
 We just pass as arguments the strings inside the brackets `[]` and the separator:
 
 ```jl
@@ -780,18 +780,18 @@ scob(
 ```
 
 It works even inside functions.
-Let's revisit our `test()` function from [@sec:conditionals]:
+Let's revisit our `test` function from [@sec:conditionals]:
 
 ```jl
 scob(
 """
 function test_interpolated(a, b)
     if a < b
-        "\$a is less than \$b"
+        \"\$a is less than \$b\"
     elseif a > b
-        "\$a is greater than \$b"
+        \"\$a is greater than \$b\"
     else
-        "\$a is equal to \$b"
+        \"\$a is equal to \$b\"
     end
 end
 

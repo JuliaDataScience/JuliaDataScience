@@ -976,17 +976,132 @@ tryparse(Int64, "A very non-numeric string")
 )
 ```
 
-
 ### Tuple {#sec:tuple}
 
-```{=comment}
-The way to get data out of functions
+Julia has a data structure called **tuple**.
+They are really *special* in Julia because they are *closely related* to functions.
+Since functions are a important feature in Julia, every Julia user should know the basics of tuples.
 
-Also revisit Anonymous Functions with multiple inputs...
+A tuple is a **fixed-length container that can hold any type of value**.
+A tuple is an **imutable object**, meaning that it cannot be modified after instantiation.
+To construct a tuple you use parentheses `()` to delimitate the beginning and end, along with commas `,` as value's delimiters:
+
+```jl
+sco(
+"""
+my_tuple = (1, 3.14, "Julia")
+"""
+)
+```
+
+Here we are creating a tuple with three values.
+Each one of the values is a different type.
+We can access them via indexing.
+Like this:
+
+```jl
+sco(
+"""
+my_tuple[2]
+"""
+)
+```
+
+We can also loop over tuples with the `for` keyword.
+And even apply functions to tuples.
+But we can **never change any value of a tuple**, since they are **immutable**.
+
+The relationship between tuples and functions is a very important one.
+Remember functions that return multiple values back in [@sec:function_multiple]?
+Let's inspect what our `add_multiply` function returns:
+
+```jl
+sco(
+"""
+return_multiple = add_multiply(1, 2)
+typeof(return_multiple)
+"""
+)
+```
+
+So, now you can see how they are related.
+**Functions that return multiple arguments do so by returning a `Tuple`** with the types inside the `{}` brackets.
+
+One more thing about tuples.
+**When you want to pass more than one variable to an anonymous function, guess what you would need to use?
+Once again: tuples!**
+
+```jl
+scob(
+"""
+map((x, y) -> x^y, 2, 3)
+"""
+)
+```
+
+Or even more than two arguments:
+
+```jl
+scob(
+"""
+map((x, y, z) -> x^y + z, 2, 3, 1)
+"""
+)
 ```
 
 ### Named Tuple {#sec:namedtuple}
+
+Sometimes you want to name the values in tuples.
+That's when **named tuples** comes in.
+Their functionality is pretty much same the same as tuples: they are **immutable** and can hold **any type of value**.
+
+Named tuple's construction are slightly different from tuples.
+You have the familiar parentheses `()` and comma `,` value separator.
+But now you must **name the values**:
+
+```jl
+sco(
+"""
+my_namedtuple = (i=1, f=3.14, s="Julia")
+"""
+)
+```
+
+We can access a named tuple's values via indexing like regular tuples or, alternatively, **access by their names** with the `.`:
+
+```jl
+scob(
+"""
+my_namedtuple.s
+"""
+)
+```
+
+To finish named tuples, there is one important *quick* syntax that you'll see a lot in Julia code.
+Often Julia users create a tuple by using the familiar parenthesis `()` and commas `,`, but without naming the values.
+To do so you **begin the named tuple construction by specifying first a semicolon `;` before the values**.
+This is specially useful when the values that would compose the named tuple are already defined in variables:
+
+```jl
+sco(
+"""
+i = 1
+f = 3.14
+s="Julia"
+
+my_quick_namedtuple = (; i, f, s)
+"""
+)
+```
+
 ### Array {#sec:array}
+
+```{=comment}
+Serious discussion about indexing `begin` and `end` keywords.
+```
+
+### Pair {#sec:pair}
+
 ### Dict {#sec:dict}
 
 ### Symbol {#sec:symbol}

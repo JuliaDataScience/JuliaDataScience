@@ -657,22 +657,153 @@ Finally, we used also the `+=` operator which is a nice short hand for `n = n + 
 
 ## Native Data Structures {#sec:data_structures}
 
-```{=comment}
-methodswith
+Julia have several native data structures.
+They are abstractions of data that represent somehow structured data.
+We will cover the most used ones.
+They hold homogeneous or heterogeneous data.
+Since they are collections, they can be *looped* over with the `for` loops.
+
+We will cover `String`, `Tuple`, `NamedTuple`, `Arrays`, `Dict` and `Symbol`.
+
+When you stumble into a data structure in Julia, you can find functions/methods that accept it as an argument with the `methodswith()` function.
+Just like we did before with types.
+This is a nice thing to have in your bag of tricks.
+We personally use it often.
+Let's see what we can do with an `String` for example:
+
+```jl
+sco(
+"""
+first(methodswith(String), 5)
+"""; process=Books.catch_show
+)
 ```
+
 
 ### Broadcasting Operators and Functions
 
-For mathematical operation, like `*` (multiplication) or `+` (addition), we can broadcast it ...
+Before we dive into data structures, we need to talk about broadcasting (also known as *vectorization*) and the "dot" operator `.`.
+
+For mathematical operation, like `*` (multiplication) or `+` (addition), we can broadcast it using the dot operator.
+For example, broadcasted addition would imply in changing the `+` to `.+`:
+
+```jl
+sco(
+"""
+[1, 2, 3] .+ 1
+"""
+)
+```
+
+It also works with functions automatically.
+Remember our `logarithm()` function?
+
+```jl
+sco(
+"""
+logarithm.([1, 2, 3])
+"""
+)
+```
 
 ### String {#sec:string}
 
+**Strings** in Julia are represented delimited by double quotes:
+
+```jl
+sco(
+"""
+typeof("This is a string")
+"""
+)
+```
+
+For long strings we can use triple double quotes:
+
+```jl
+sco(
+"""
+typeof(
+\"\"\"
+This is a big multiline string.
+As you can see.
+It is still a \`String\` to Julia.
+\"\"\"
+)
+"""
+)
+```
+
+#### String Concatenation {#sec:string_concatenation}
+
+One nice thing we can do with strings in Julia is **string concatenation**.
+Suppose you want to construct a new string that is the concatenation of two or more strings.
+This is accomplish in julia either with the `*` operator (this is where Julia departs from other scientific open-source programming languages) or the `join()` function:
+
+```jl
+scob(
+"""
+hello = "Hello"
+goodbye = "Goobye"
+
+hello * goodbye
+"""
+)
+```
+
+As you can see we are missing a space between `hello` and `goodbye`.
+We could concatenate an additional `" "` string with the `*`, but that would be cumbersome for more than two strings.
+That's when the `join()` function comes up.
+We just pass as arguments the strings inside the brackets `[]` and the separator:
+
+```jl
+scob(
+"""
+join([hello, goodbye], \" \")
+"""
+)
+```
+
+#### String Interpolation {#sec:string_interpolation}
+
+Concatenating strings can be convoluted.
+We can be much more expressive with **string interpolation**.
+It works like this: you specify whatever you want to be included in you string with the dollar sign `$`.
+Here's the example before but now using interpolation:
+
+```jl
+scob(
+"""
+\"\$hello \$goodbye\"
+"""
+)
+```
+
+It works even inside functions.
+Let's revisit our `test()` function from [@sec:conditionals]:
+
+```jl
+scob(
+"""
+function test_interpolated(a, b)
+    if a < b
+        "\$a is less than \$b"
+    elseif a > b
+        "\$a is greater than \$b"
+    else
+        "\$a is equal to \$b"
+    end
+end
+
+test_interpolated(3.14, 3.14)
+"""
+)
+```
+
 ```{=comment}
-interpolation, concatenation, contains, replace, lowercase, uppercase, titlecase, lowercasefirst, startswith, endswith, split, string conversion, parse, tryparse
+contains, replace, lowercase, uppercase, titlecase, lowercasefirst, startswith, endswith, split, string conversion, parse, tryparse
 
 One example per method
-
-String interpolation, revisit the test function
 ```
 
 ### Tuple {#sec:tuple}

@@ -282,7 +282,13 @@ scob(
 
 We can also mix and match boolean operators with numeric comparisons:
 
-
+```jl
+scob(
+"""
+(1 != 10) || (3.14 <= 2.71)
+"""
+)
+```
 
 ### Functions {#sec:function}
 
@@ -409,7 +415,7 @@ We will extend the `Base.show()` function that prints the output of instantiated
 By default a `struct` has a basic output, which you saw above in the `python` case.
 We can define `Base.show()` function to our `Language` type, so that we have some nice printing for our programming languages instances.
 We want to clearly communicate programming languages' names, titles and ages in years of old.
-The function `Base.show()` accepts as arguments a `IO` type named `io` followed by the type you want to define custom behaviour:
+The function `Base.show()` accepts as arguments a `IO` type named `io` followed by the type you want to define custom behavior:
 
 ```jl
 sco(
@@ -454,7 +460,7 @@ In that case we can do two things:
 
 1. We can, analogously as the return values, define two variables to hold the function return values, one for each return value:
    ```jl
-   sco(
+   scob(
    """
    return_1, return_2 = add_multiply(1, 2)
    return_2
@@ -464,7 +470,7 @@ In that case we can do two things:
 
 2. Or we can define just one variable to hold the function return values and access them with either `first()` or `last()`:
    ```jl
-   sco(
+   scob(
    """
    all_returns = add_multiply(1, 2)
    last(all_returns)
@@ -481,7 +487,7 @@ For example, let's define a `logarithm()` function that by default uses base $e$
 Note that here we are using the abstract type `Real` so that we cover all types derived from `Integer` and `AbstractFloat`, being both themselves subtypes of `Real`:
 
 ```jl
-sco(
+scob(
 """
 AbstractFloat <: Real && Integer <: Real
 """
@@ -501,7 +507,7 @@ end
 It works without specifying the `base` argument:
 
 ```jl
-sco(
+scob(
 """
 logarithm(10)
 """
@@ -511,7 +517,7 @@ logarithm(10)
 And also with the keyword argument `base` different from its default value:
 
 ```jl
-sco(
+scob(
 """
 logarithm(10; base=2)
 """
@@ -534,7 +540,7 @@ And on the right of `->` we define what operations we want to perform on the par
 Here's an example, suppose we want to undo the log transformation by using an exponentiation:
 
 ```jl
-sco(
+scob(
 """
 map(x -> 2.7182818284590^x, logarithm(2))
 """
@@ -546,12 +552,63 @@ As a result, we get back the same number, because logarithm and exponentiation a
 
 ### Conditional If-Else-Elseif {#sec:conditionals}
 
+In most programming languages, the user is allowed to control the computer's flow of execution.
+Depending on the situation, we want the computer to do one thing or another.
+In Julia we can control the flow of execution with `if`, `elseif` and `else` keywords.
+There are known as conditional syntax.
+
+`if` keyword prompts Julia to evaluate an expression and depending whether `true` or `false` certain portions of code will be executed.
+We can compound several `if` conditions with the `elseif`  keyword, for complex an nuanced control flow.
+Finally we can define an alterative portion to be executed if anything inside the `if` or `elseif`s are evaluated as `true`.
+This is the purpose of the `else` keyword.
+Finally, like all the previous keyword operators that we saw, we must tell Julia when the conditional statement is finished with the `end` keyword.
+
+Here's an example with all the `if`-`elseif`-`else` keywords:
+
+```jl
+scob(
+"""
+a = 1
+b = 2
+
+if a < b
+    "a is less than b"
+elseif a > b
+    "a is greater than b"
+else
+    "a is equal to b"
+end
+"""
+)
+```
+
+We can even wrap this in a function called `test()`:
+
+```jl
+scob(
+"""
+function test(a, b)
+    if a < b
+        "a is less than b"
+    elseif a > b
+        "a is greater than b"
+    else
+        "a is equal to b"
+    end
+end
+
+test(3.14, 3.14)
+"""
+)
+```
+
 
 ### For Loop {#sec:for}
 
-The classical for loop in Julia follow a similar syntax as functions.
+The classical for loop in Julia follow a similar syntax as the conditional statements.
 You begin with a keyword, in this case `for`.
-And you finish with the `end` keyword.
+Then you specify what Julia should "loop" for, i.e. a sequence.
+Also, like everything else, you must finish with the `end` keyword.
 
 So, to make Julia print every number from 1 to 10, you'll need the following for loop:
 
@@ -567,11 +624,46 @@ end
 
 ### While Loop {#sec:while}
 
+The while loop is a mix of the previous conditional statements and for loops.
+Here the loop is executed everytime the condition is `true`.
+The syntax follows the same fashion as the previous one.
+We begin with the keyword `while`, followed by the statement to evaluated as either `true`.
+Like previously, you must end with the `end` keyword.
+
+Here's an example:
+
+```jl
+scob(
+"""
+n = 0
+
+while n < 3
+    global n += 1
+end
+
+n
+"""
+)
+```
+
+As you can see we have to use the `global` keyword.
+This is because of **variable scope**.
+Variables defined inside conditional statements, loops and functions exist only inside it.
+This is known as the *scope* of the variable.
+Here we had to tell Julia that the `n` inside `while` loop is in the global scope with the `global` keyword.
+
+Finally, we used also the `+=` operator which is a nice short hand for `n = n + 1`.
+
+
 ## Native Data Structures {#sec:data_structures}
 
 ```{=comment}
 methodswith
 ```
+
+### Broadcasting Operators and Functions
+
+For mathematical operation, like `*` (multiplication) or `+` (addition), we can broadcast it ...
 
 ### String {#sec:string}
 
@@ -579,6 +671,8 @@ methodswith
 interpolation, concatenation, contains, replace, lowercase, uppercase, titlecase, lowercasefirst, startswith, endswith, split, string conversion, parse, tryparse
 
 One example per method
+
+String interpolation, revisit the test function
 ```
 
 ### Tuple {#sec:tuple}

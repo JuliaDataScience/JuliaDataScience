@@ -706,6 +706,39 @@ logarithm.([1, 2, 3])
 )
 ```
 
+#### Functions with a bang `!` {#sec:function_bang}
+
+In Julia syntax is is common to append `!` to names of functions that modify their arguments.
+This is a convention that warns the user that the function is **not pure**, i.e. it has *side effects*.
+Most of the `!` functions' arguments are data structures.
+
+For example, we can create a function that adds 1 to its argument:
+
+```jl
+sc(
+"""
+function add_one!(x)
+    for i in 1:length(x)
+        x[i] += 1
+    end
+    return nothing
+end
+"""
+)
+```
+
+```jl
+sco(
+"""
+my_data = [1, 2, 3]
+
+add_one!(my_data)
+
+my_data
+"""
+)
+```
+
 ### String {#sec:string}
 
 **Strings** in Julia are represented delimited by double quotes:
@@ -800,11 +833,149 @@ test_interpolated(3.14, 3.14)
 )
 ```
 
-```{=comment}
-contains, replace, lowercase, uppercase, titlecase, lowercasefirst, startswith, endswith, split, string conversion, parse, tryparse
+#### String Manipulations {#sec:string_manipulations}
 
-One example per method
+There are several functions to manipulate strings in Julia.
+We will demonstrate the most common ones.
+Also, note that most of these functions accepts a [Regular Expression (RegEx)](https://docs.julialang.org/en/v1/manual/strings/#Regular-Expressions) as arguments.
+We won't cover RegEx in this book, but you are encouraged to learn about them, specially if most of your work uses textual data.
+
+First, let us define a string for us to play around with:
+
+```jl
+scob(
+"""
+julia_string = "Julia is an amazing opensource programming language"
+"""
+)
 ```
+
+
+1. `occursin`, `startswith` and `endswith`: A conditional (returns either `true` or `false`) if the first argument is a:
+    * **substring** of the second argument
+
+       ```jl
+       scob(
+       """
+       occursin("Julia", julia_string)
+
+       """
+       )
+       ```
+
+    * **prefix** of the second argument
+
+       ```jl
+       scob(
+       """
+       startswith("Julia", julia_string)
+       """
+       )
+       ```
+
+    * **suffix** of the second argument
+
+       ```jl
+       scob(
+       """
+       endswith("Julia", julia_string)
+       """
+       )
+       ```
+
+2. `lowercase`, `uppercase`, `titlecase` and `lowercasefirst`:
+
+    ```jl
+    scob(
+    """
+    lowercase(julia_string)
+    """
+    )
+    ```
+
+    ```jl
+    scob(
+    """
+    uppercase(julia_string)
+    """
+    )
+    ```
+
+    ```jl
+    scob(
+    """
+    titlecase(julia_string)
+    """
+    )
+    ```
+
+    ```jl
+    scob(
+    """
+    lowercasefirst(julia_string)
+    """
+    )
+    ```
+
+3. `replace`: introduces a new syntax, called the `Pair`
+
+    ```jl
+    scob(
+    """
+    replace(julia_string, "amazing" => "awesome")
+    """
+    )
+    ```
+
+4. `split`: breaks up a string by a delimiter:
+
+    ```jl
+    sco(
+    """
+    split(julia_string, " ")
+    """
+    )
+    ```
+
+#### String Conversions {#sec:string_conversions}
+
+Often, we need to convert between types in Julia.
+We can use the `string` function:
+
+```jl
+sco(
+"""
+my_number = 123
+typeof(string(my_number))
+"""
+)
+```
+
+Sometimes we want the opposite: convert a string to a number.
+Julia has a handy function for that: `parse`
+
+```jl
+sco(
+"""
+typeof(parse(Int64, "123"))
+"""
+)
+```
+
+Sometimes we want to play safe with these convertions.
+That's when `tryparse` function steps in.
+It has the same functionality as `parse` but returns either a value of the requested type, or `nothing`.
+That makes `tryparse` handy when we want to avoid errors.
+Of course, you would need to deal with all those `nothing` values afterwards.
+
+```jl
+sco(
+"""
+tryparse(Int64, "A very non-numeric string")
+"""
+)
+```
+
 
 ### Tuple {#sec:tuple}
 

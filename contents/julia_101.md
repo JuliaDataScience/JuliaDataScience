@@ -240,17 +240,17 @@ scob(
 )
 ```
 
-Regarding numeric comparison, Julia have three major types of comparisons:
+Regarding numeric comparison, Julia has three major types of comparisons:
 
 1. **Equality**: either something is *equal* or *not equal* another
-   * `==`: equality
-   * `!-` or `≠`: inequality
-2. **Less than**: either something is *less than* or *less than or equal to*
-    * `<`: less than
-    * `<=` or `≤`: less than or equal to
-4. **Greater than**: either something is *greater than* or *greater than or equal to*
-    * `>`: greater than
-    * `>=` or `≥`: less than or equal to
+    * == "equal"
+    * != or ≠ "not equal"
+1. **Less than**: either something is *less than* or *less than or equal to*
+    * <  "less than"
+    * <= or ≤ "less than or equal to"
+1. **Greater than**: either something is *greater than* or *greater than or equal to*
+    * \> "greater than"
+    * \>= or ≥ "greater than or equal to"
 
 Here are some examples:
 

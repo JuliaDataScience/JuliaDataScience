@@ -1257,39 +1257,507 @@ sco(
 )
 ```
 
-```{=comment}
-Array comprehensions
-cat vcat hcat hvcat
+Another powerful way to create arrays are **array comprehensions**.
+You specify what you want to do inside the `[]` brackets.
+For example, say we want to create a vector of squares from 1 to 100:
+
+```jl
+sco(
+"""
+[x^2 for x in 1:10]
+"""
+)
 ```
+
+They also support multiple inputs:
+
+```jl
+sco(
+"""
+[x*y for x in 1:10 for y in 1:2]
+"""
+)
+```
+
+And conditionals:
+
+```jl
+sco(
+"""
+[x^2 for x in 1:10 if isodd(x)]
+"""
+)
+```
+
+As with array literals you can specify your desired type before the `[]` brackets:
+
+
+```jl
+sco(
+"""
+Float64[x^2 for x in 1:10 if isodd(x)]
+"""
+)
+```
+
+Finally, we can also create arrays with **concatenation functions**:
+
+* `cat`: concatenate input arrays along a specific dimension `dims`
+
+    ```jl
+    sco(
+    """
+    cat(ones(2), zeros(2), dims=1)
+    """
+    )
+    ```
+
+    ```jl
+    sco(
+    """
+    cat(ones(2), zeros(2), dims=2)
+    """
+    )
+    ```
+
+* `vcat`: vertical concatenation, a shorthand for `cat(...; dims=1)`
+
+    ```jl
+    sco(
+    """
+    vcat(ones(2), zeros(2))
+    """
+    )
+    ```
+
+* `hcat`: horizontal concatenation, a shorthand for `cat(...; dims=2)`
+
+    ```jl
+    sco(
+    """
+    hcat(ones(2), zeros(2))
+    """
+    )
+    ```
 
 #### Array Inspection {#sec:array_inspection}
 
-```{=comment}
-eltype
-length
-ndims
-size
+Once we have arrays, the next logical step is to inspect them.
+There are a lot of handy functions that allows the user to have an inner insight into any array.
+
+It is most useful to know what **type of elements** are inside an array.
+We can do this with `eltype`:
+
+```jl
+sco(
+"""
+eltype(my_matrix_π)
+"""
+)
 ```
+
+After knowing its types, one might be interested in array dimensions.
+Julia has several functions to inspect array dimensions:
+
+* `length`: total number of elements
+
+    ```jl
+    scob(
+    """
+    length(my_matrix_π)
+    """
+    )
+    ```
+
+* `ndims`: number of dimensions
+
+    ```jl
+    scob(
+    """
+    ndims(my_matrix_π)
+    """
+    )
+    ```
+
+* `size`: this one is a little tricky.
+    By default it will return a tuple containing the array's dimensions.
+
+    ```jl
+    sco(
+    """
+    size(my_matrix_π)
+    """
+    )
+    ```
+
+    You can get a specific dimension with a second argument to `size`
+
+    ```jl
+    scob(
+    """
+    size(my_matrix_π, 2) # columns
+    """
+    )
+    ```
+
 
 #### Array Indexing and Slicing {#sec:array_indexing}
 
-```{=comment}
-Serious discussion about indexing `begin` and `end` keywords.
+Sometimes we want to only inspect certain parts of an array.
+This is called **indexing** and **slicing**.
+If you want a particular observation of a vector, or a row or column of a matrix; you'll probably need to **index an array**.
+
+First, I will create an example vector and matrix to play around:
+
+```jl
+sc(
+"""
+my_example_vector = [1, 2, 3, 4, 5]
+
+my_example_matrix = [[1 2 3]
+                     [4 5 6]
+                     [7 8 9]]
+"""
+)
+```
+
+Let's see first an example with vectors.
+Suppose you want the second element of a vector.
+You append `[]` brackets with the desired **index** inside:
+
+```jl
+scob(
+"""
+my_example_vector[2]
+"""
+)
+```
+
+The same syntax follows with matrices.
+But, since matrices are 2-dimensional arrays, we have to specify *both* rows and columns.
+Let's retrieve the element from the second row (first dimension) and first column (second dimension):
+
+```jl
+scob(
+"""
+my_example_matrix[2, 1]
+"""
+)
+```
+
+Julia also have conventional keywords for the first and last elements of an array: `begin` and `end`.
+For example, the second to last element of a vector can be retrieved as:
+
+```jl
+scob(
+"""
+my_example_vector[end-1]
+"""
+)
+```
+
+It also work for matrices.
+Let's retrieve the element of the last row and second column:
+
+```jl
+scob(
+"""
+my_example_matrix[end, begin+1]
+"""
+)
+```
+
+Often, we are not only interested in just one array element, but in a whole **subset of array elements**.
+We can accomplish this by **slicing** an array.
+It uses the same index syntax, but with the added colon `:` to denote the boundaries that we are slicing through the array.
+For example, suppose we want to get the 2nd to 4th element of a vector:
+
+```jl
+sco(
+"""
+my_example_vector[2:4]
+"""
+)
+```
+
+We could do the same with matrices.
+Particularly with matrices if we want to select all elements in a following dimension we can do so with just a colon `:`.
+For example, all elements in the second row:
+
+```jl
+sco(
+"""
+my_example_matrix[2, :]
+"""
+)
+```
+
+You can interpret this with something like "take 2nd row and all columns".
+
+It also supports `begin` and `end`:
+
+```jl
+sco(
+"""
+my_example_matrix[begin+1:end, end]
+"""
+)
 ```
 
 #### Array Manipulations {#sec:array_manipulation}
 
-```{=comment}
-index assignment
-reshape
-fill
-broadcasting functions and operators
-map
-mapslices
+There are several ways we could manipulate an array.
+The first would be to manipulate a **singular element of the array**.
+We just index the array by the desired element and proceed with an assignment `=`:
+
+```jl
+sco(
+"""
+my_example_matrix[2, 2] = 42
+my_example_matrix
+"""
+)
+```
+
+Or you can manipulate a certain **subset of elements of the array**.
+In this case, we need to slice the array and then assign with `=`:
+
+```jl
+sco(
+"""
+my_example_matrix[3, :] = [17, 16, 15]
+my_example_matrix
+"""
+)
+```
+
+Note that we had to assign a vector because we our sliced array is of type `Vector`:
+
+```jl
+sco(
+"""
+typeof(my_example_matrix[3, :])
+"""
+)
+```
+
+The second way we could manipulate an array is to **alter its shape**.
+Suppose you have a 6-element vector and you want to make it a 3x2 matrix.
+You can do so with `reshape`, by using the array as first argument and a tuple of dimensions as second argument:
+
+```jl
+sco(
+"""
+six_vector = [1, 2, 3, 4, 5, 6]
+tree_two_matrix = reshape(six_vector, (3, 2))
+tree_two_matrix
+"""
+)
+```
+
+You can do the reverse, convert it back to a vector, by specifying a tuple with only one dimension as second argument:
+
+```jl
+sco(
+"""
+reshape(tree_two_matrix, (6, ))
+"""
+)
+```
+
+The third way we could manipulate an array is to **apply a function over every array element**.
+This is where the familiar broadcasting "dot" operator `.` comes in.
+
+```jl
+sco(
+"""
+logarithm.(my_example_matrix)
+"""
+)
+```
+
+We also broadcast operators:
+
+```jl
+sco(
+"""
+my_example_matrix .+ 100
+"""
+)
+```
+
+We can use also `map` to apply a function to every element of an array:
+
+```jl
+sco(
+"""
+map(logarithm, my_example_matrix)
+"""
+)
+```
+
+It also accepts an anonymous function:
+
+```jl
+sco(
+"""
+map(x -> x*3, my_example_matrix)
+"""
+)
+```
+
+It also works with slicing:
+
+```jl
+sco(
+"""
+map(x -> x + 100, my_example_matrix[:, 3])
+"""
+)
+```
+
+Finally, sometimes, and specially when dealing with tabular data, we want to apply a **function over all elements in a specific array dimension**.
+This can be done with the `mapslices` function.
+Similar to `map`, the first argument is the function and the second argument is the array.
+The only change is that we need to specify the `dims` argument to flag what dimension we want to transform the elements.
+
+For example let's use `mapslice` with the `sum` function on both rows (`dims=1`) and columns (`dims=2`):
+
+```jl
+sco(
+"""
+# rows
+mapslices(sum, my_example_matrix; dims=1)
+"""
+)
+```
+
+```jl
+sco(
+"""
+# columns
+mapslices(sum, my_example_matrix; dims=2)
+"""
+)
 ```
 
 #### Array Iteration {#sec:array_iteration}
 
+One common operation is to **iterate over an array with a `for` loop**.
+The **regular `for` loop over an array returns each element**.
+
+The simplest example is with a vector.
+
+```jl
+sco(
+"""
+simple_vector = [1, 2, 3]
+
+empty_vector = Int64[]
+
+for i in simple_vector
+    push!(empty_vector, i + 1)
+end
+
+empty_vector
+"""
+)
+```
+
+Sometimes you don't want to loop over each element, but actually over each array index.
+**We can `eachindex` function combined with a `for` loop to iterate over each array index**.
+
+Again, let's show an example with a vector:
+
+```jl
+sco(
+"""
+forty_two_vector = [42, 42, 42]
+
+empty_vector = Int64[]
+
+for i in eachindex(forty_two_vector)
+    push!(empty_vector, i)
+end
+
+empty_vector
+"""
+)
+```
+
+In this example the `eachindex(forty_two_vector)` iterator inside the `for` loop returns not `forty_two_vector`'s values but its indices: `[1, 2, 3]`.
+
+Iterating over matrices involves more details.
+The standard `for` loop goes first over columns then over rows.
+It will first traverse all elements in column 1, from the first row to the last row, then it will move to column 2 in a similar fashion until it has covered all columns.
+
+Those familiar with other programming languages, Julia, like most scientific programming languages, is "column-major".
+This means that arrays are stored contiguously using a column orientation.
+If any time you are seeing problems of performance and there is an array `for` loop involved, chances are that you are mismatching Julia's native column-major storage orientation.
+
+Ok, let's show this in an example:
+
+```jl
+sc(
+"""
+column_major = [[1 2]
+                [3 4]]
+
+row_major = [[1 3]
+             [2 4]]
+"""
+)
+```
+
+```jl
+sco(
+"""
+empty_vector = Int64[]
+
+for i in column_major
+    push!(empty_vector, i)
+end
+
+empty_vector
+"""
+)
+```
+
+```jl
+sco(
+"""
+empty_vector = Int64[]
+
+for i in row_major
+    push!(empty_vector, i)
+end
+
+empty_vector
+"""
+)
+```
+
+There are some handy functions to iterate over matrices.
+
+* `eachcol`: iterates over an array column first
+
+    ```jl
+    sco(
+    """
+    first(eachcol(column_major))
+    """
+    )
+    ```
+
+* `eachrow`: iterates over an array row first
+
+    ```jl
+    sco(
+    """
+    first(eachrow(column_major))
+    """
+    )
+    ```
 
 ```{=comment}
 for a in A

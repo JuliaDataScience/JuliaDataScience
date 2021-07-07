@@ -663,7 +663,7 @@ We will cover the most used ones.
 They hold homogeneous or heterogeneous data.
 Since they are collections, they can be *looped* over with the `for` loops.
 
-We will cover `String`, `Tuple`, `NamedTuple`, `Arrays`, `Dict` and `Symbol`.
+We will cover `String`, `Tuple`, `NamedTuple`, `Arrays`, `Pair`, `Dict`, `Symbol`.
 
 When you stumble into a data structure in Julia, you can find functions/methods that accept it as an argument with the `methodswith` function.
 Just like we did before with types.
@@ -1759,29 +1759,173 @@ There are some handy functions to iterate over matrices.
     )
     ```
 
-```{=comment}
-for a in A
-    # Do something with the element a
-end
+### Pair {#sec:pair}
 
-for i in eachindex(A)
-    # Do something with i and/or A[i]
-end
+Compared to the huge section on arrays, this section on pairs will be brief.
+**`Pair` is a data structure that holds two types**.
+How we construct a pair in Julia is using the following syntax:
 
-For Loops
-eachindex
-eachcol
-eachrow
+```jl
+sco(
+"""
+my_pair = Pair("Julia", 42)
+"""
+)
 ```
 
-### Pair {#sec:pair}
+Alternatively, we can create a pir by specifying both values and in between we use the pair `=>` operator:
+
+```jl
+sco(
+"""
+my_pair = "Julia" => 42
+"""
+)
+```
+
+The elements are stored in the fields `first` and `second`.
+
+```jl
+scob(
+"""
+my_pair.first
+"""
+)
+```
+
+```jl
+scob(
+"""
+my_pair.second
+"""
+)
+```
+
+Pairs will be used a lot in data manipulation and data visualization since both [`DataFrames.jl`](dataframes.html) and [`Plots.jl`](plots.html) main functions depends on `Pair` as type arguments.
 
 ### Dict {#sec:dict}
 
+If you understood what a `Pair` is, then `Dict` won't be a problem.
+**`Dict` in Julia is just a "hash table" with pairs of `key` and `value`**.
+`key`s must be a string and `value`s can be of any type.
+
+There are two ways to construct `Dict`s in Julia.
+The first is using the **default constructor `Dict` and passing a vector of tuples composed of `(key, value)`**:
+
+```jl
+sco(
+"""
+my_dict = Dict([("one", 1), ("two", 2)])
+"""
+)
+```
+
+We *prefer* the second way of constructing `Dict`s.
+It offers a much elegant and expressive syntax.
+You use the same **default constructor `Dict`**, but now you pass **`pair`s of `key` and `value`**:
+
+
+```jl
+sco(
+"""
+my_dict = Dict("one" => 1, "two" => 2)
+"""
+)
+```
+
+You can retrieve a `Dict`s `value` by indexing it by the corresponding `key`:
+
+```jl
+scob(
+"""
+my_dict["one"]
+"""
+)
+```
+
+Similarly, to add a new entry you index the `Dict` by the desired `key` and assign a `value` with the assignment `=` operator:
+
+```jl
+scob(
+"""
+my_dict["three"] = 3
+"""
+)
+```
+
+If you want to check if a `Dict` has a certain `key` you can use the `haskey` function:
+
+```jl
+scob(
+"""
+haskey(my_dict, "two")
+"""
+)
+```
+
+To delete a `key` you can use either the `delete!` function:
+
+```jl
+sco(
+"""
+delete!(my_dict, "three")
+"""
+)
+```
+
+Or to delete a `key` while retuning its `value` you can use the `pop!` function:
+
+```jl
+scob(
+"""
+popped_value = pop!(my_dict, "two")
+"""
+)
+```
+
+Now our `my_dict` has only one `key`:
+
+```jl
+scob(
+"""
+length(my_dict)
+"""
+)
+```
+
+```jl
+sco(
+"""
+my_dict
+"""
+)
+```
+
+`Dict`s are also used in data manipulations by [`DataFrames.jl`](dataframes.html) and data visualization by [`Plots.jl`](plots.html).
+So it is important to know their basic functionality.
+
 ### Symbol {#sec:symbol}
 
+`Symbol` is actually *not* a data structure.
+It is a type.
+But an important one.
+We use `Symbol`s a lot in data manipulations with [`DataFrames.jl`](dataframes.html) and also data visualization with [`StatsPlots.jl`](plots.html).
+
+`Symbol` is a string with a colon `:` as a prefix:
+
+```jl
+sco(
+"""
+typeof(:my_symbol)
+"""
+)
+```
+
+They are a concise way to represent columns in `DataFrame`s and also makes easier to supply plot arguments to `StatsPlots.jl`.
+
 ```{=comment}
-They are import for DataFrames and StatsPlots stuff
+@rikhuijzer I might need some help here.
+Do you think we should add more stuff about Symbols?
 ```
 
 ## Filesystem {#sec:filesystem}

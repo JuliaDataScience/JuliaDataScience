@@ -34,7 +34,7 @@ We defined a different type behavior by defining new function signatures for dif
 ### Variables {#sec:variable}
 
 Variables are values that you tell the computer to store with an specific name, so that you can later recover or change its value.
-Julia have several type of variables but what we most use in Data Science are:
+Julia have several type of variables but what we most use in data science are:
 
 * Integers: `Int64`
 * Real Numbers: `Float64`
@@ -528,7 +528,7 @@ logarithm(10; base=2)
 
 A lot of times we need to quickly use functions without having to define a full-fledged function with the `function ... end` syntax.
 What we need are **anonymous functions**.
-They come a lot in Julia's Data Science workflow.
+They come a lot in Julia's data science workflow.
 For example, when using [`DataFrames.jl`](dataframes.html) or [`Plots.jl`](plots.html), sometimes we need a quick and dirty function to filter data or format plot labels.
 That's when we reach out for anonymous functions.
 They are specially useful when we don't want to create a function and a simple in-place statement would be enough.
@@ -589,11 +589,11 @@ scob(
 """
 function test(a, b)
     if a < b
-        \"a is less than b\"
+        "a is less than b"
     elseif a > b
-        \"a is greater than b\"
+        "a is greater than b"
     else
-        \"a is equal to b\"
+        "a is equal to b"
     end
 end
 
@@ -760,7 +760,7 @@ typeof(
 \"\"\"
 This is a big multiline string.
 As you can see.
-It is still a \`String\` to Julia.
+It is still a String to Julia.
 \"\"\"
 )
 """
@@ -792,7 +792,7 @@ We just pass as arguments the strings inside the brackets `[]` and the separator
 ```jl
 scob(
 """
-join([hello, goodbye], \" \")
+join([hello, goodbye], " ")
 """
 )
 ```
@@ -807,7 +807,7 @@ Here's the example before but now using interpolation:
 ```jl
 scob(
 """
-\"\$hello \$goodbye\"
+"\$hello \$goodbye"
 """
 )
 ```
@@ -820,11 +820,11 @@ scob(
 """
 function test_interpolated(a, b)
     if a < b
-        \"\$a is less than \$b\"
+        "\$a is less than \$b"
     elseif a > b
-        \"\$a is greater than \$b\"
+        "\$a is greater than \$b"
     else
-        \"\$a is equal to \$b\"
+        "\$a is equal to \$b"
     end
 end
 
@@ -1096,8 +1096,214 @@ my_quick_namedtuple = (; i, f, s)
 
 ### Array {#sec:array}
 
+Arrays are a **systematic arrangement of similar objects, usually in _rows_ and _columns_**.
+They are the "bread and butter" of data scientist, because arrays are what constitutes most of **data manipulation** and **data visualization** workflows.
+
+**Arrays are a powerful data structure**. They are one of the main features that makes Julia blazing fast.
+
+#### Array Types {#sec:array_types}
+
+Let's start with arrays types.
+There are several, but we will focus on two the most used in data science:
+
+* `Vector{T}`: **one-dimensional** array. Alias for `Array{T, 1}`.
+* `Matrix{T}`: **two-dimensional** array. Alias for `Array{T, 2}`.
+
+Note here that `T` is the type of the underlying array.
+So, for example, `Vector{Int64}` is a `Vector` which all elements are `Int64`s and `Matrix{AbstractFloat}` is a `Matrix` which all elements are subtypes of `AbstractFloat`.
+
+Most of the time, specially when dealing with tabular data, we are using either one- or two-dimensional arrays.
+They are both `Array` types for Julia.
+But we can use the handy aliases `Vector` and `Matrix` for clear and concise syntax.
+
+#### Array Construction {#sec:array_construction}
+
+How do we construct an array?
+The simplest answer is to use the **default constructor**.
+It accepts the element type as the type parameter inside the `{}` brackets and inside the constructor you'll pass the element type followed by the desired dimensions.
+It is common to initialize vector and matrices with undefined elements by using the `undef` argument for type.
+A vector of 10 `undef` `Float64` elements can be constructed as:
+
+```jl
+sco(
+"""
+my_vector = Vector{Float64}(undef, 10)
+"""
+)
+```
+
+For matrices, since we are dealing with two-dimensional objects, we need to pass two dimensions arguments inside the constructor: one for **rows** and another for **columns**.
+For example, a matrix with 10 rows, 2 columns and `undef` elements can be instantiate as:
+
+```jl
+sco(
+"""
+my_matrix = Matrix{Float64}(undef, 10, 2)
+"""
+)
+```
+
+We also have some **syntax aliases** for the most common elements in array construction:
+
+* `zeros` for all elements being initialized to value zero.
+  Note that the default type is `Float64` which can be changed if necessary:
+
+    ```jl
+    sco(
+    """
+    my_vector_zeros = zeros(10)
+    """
+    )
+    ```
+
+    ```jl
+    sco(
+    """
+    my_matrix_zeros = zeros(Int64, 10, 2)
+    """
+    )
+    ```
+
+* `ones` for all elements being initialized to value one:
+
+    ```jl
+    sco(
+    """
+    my_vector_ones = ones(Int64, 10)
+    """
+    )
+    ```
+
+    ```jl
+    sco(
+    """
+    my_matrix_ones = ones(10, 2)
+    """
+    )
+    ```
+
+For other elements we can first intantiate an array with `undef` elements and use the `fill!` function to fill all elements of an array with the desired element.
+Here's an example with `3.14` ($\pi$):
+
+```jl
+sco(
+"""
+my_matrix_π = Matrix{Float64}(undef, 2, 2)
+fill!(my_matrix_π, 3.14)
+"""
+)
+```
+
+We can also create arrays with **arrays literals**.
+For example a 2x2 matrix of integers:
+
+```jl
+sco(
+"""
+[[1 2]
+ [3 4]]
+"""
+)
+```
+
+Array literals also accept a type specification before the `[]` brackets.
+So, if we want the same 2x2 array as before but now as floats, we can do so:
+
+```jl
+sco(
+"""
+Float64[[1 2]
+        [3 4]]
+"""
+)
+```
+
+It also works for vectors:
+
+```jl
+sco(
+"""
+Bool[0, 1, 0, 1]
+"""
+)
+```
+
+You can even **mixmatch** array literals with the constructors:
+
+```jl
+sco(
+"""
+[ones(Int, 2, 2) zeros(Int, 2, 2)]
+"""
+)
+```
+
+```jl
+sco(
+"""
+[zeros(Int, 2, 2)
+ ones(Int, 2, 2)]
+"""
+)
+```
+
+
+```jl
+sco(
+"""
+[ones(Int, 2, 2) [1; 2]
+ [3 4]            5]
+"""
+)
+```
+
+```{=comment}
+Array comprehensions
+cat vcat hcat hvcat
+```
+
+#### Array Inspection {#sec:array_inspection}
+
+```{=comment}
+eltype
+length
+ndims
+size
+```
+
+#### Array Indexing and Slicing {#sec:array_indexing}
+
 ```{=comment}
 Serious discussion about indexing `begin` and `end` keywords.
+```
+
+#### Array Manipulations {#sec:array_manipulation}
+
+```{=comment}
+index assignment
+reshape
+fill
+broadcasting functions and operators
+map
+mapslices
+```
+
+#### Array Iteration {#sec:array_iteration}
+
+
+```{=comment}
+for a in A
+    # Do something with the element a
+end
+
+for i in eachindex(A)
+    # Do something with i and/or A[i]
+end
+
+For Loops
+eachindex
+eachcol
+eachrow
 ```
 
 ### Pair {#sec:pair}

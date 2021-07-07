@@ -3,14 +3,14 @@
 In this preface, we discuss two important aspects of data analysis.
 Actually, there is a third one, Julia, but it deserves a whole chapter (see [@sec:why_julia]).
 
-First, we emphasize the **"data" part of Data Science** and why data skills are, and will remain, in **high demand** both in industry and academia.
+First, we emphasize the **"data" part of data science** and why data skills are, and will remain, in **high demand** both in industry and academia.
 
 Second, we make an argument for **incorporate software engineering practices into data science** which should reduce friction in updating and sharing code with collaborators.
 Most of data analyses are a collaborative endeavor, these practices should come in handy.
 
 ## Why Data Science? {#sec:why_data_science}
 
-Data Science is not only machine learning and statistics, also it is not all about prediction, alas, it is not even a discipline fully contained within STEM (Science, Technology, Engineering, and Mathematics) fields [@Meng2019Data].
+Data science is not only machine learning and statistics, also it is not all about prediction, alas, it is not even a discipline fully contained within STEM (Science, Technology, Engineering, and Mathematics) fields [@Meng2019Data].
 But one thing we can assure with highly confidence is that **data is always involved**.
 Our aim in this book is two-fold:
 

@@ -1989,7 +1989,400 @@ Always make sure that your code can run anywhere.
 Note to include Julia's `Filesystem` utilities in your data science workflow.
 
 ## Julia Standard Library {#sec:standardlibrary}
+
+Julia's standard library ships with *every* Julia installation.
+Contrary to everything that we have seen so far, e.g. types, data structures and filesystem; you **must import standard library modules into your environment** to use a particular module or function.
+
+This is done with the `using` keyword:
+
+```julia
+using ModuleName
+```
+
+Now you can access all functions and types inside `ModuleName`.
+
 ### Dates {#sec:dates}
+
+How to handle dates and timestamps is something quite important in data science.
+Like we said in [*Why Julia?*](why_julia.html) section, Python's `pandas` uses its own `Datetime` type to handle dates.
+The same with R tidyverse's `lubridate` package, which also defines its own `datetime` type to handle dates.
+Julia doesn't need any of this, it has all the **date stuff already baked onto its standard library, in a module named `Dates`**.
+
+To begin, let's import the `Dates` module:
+
+```julia
+using Dates
+```
+
+#### `Date` and `DateTime` Types {#sec:dates_types}
+
+The `Dates` standard library module has **two types for working with dates**:
+
+1. `Date`: representing time in days; and
+2. `DateTime`: representing time in millisecond precision.
+
+We can construct `Date` and `DateTime` with the default constructor either by specifying an integer to represent year, month, day, hours and so on:
+
+```jl
+sco(
+"""
+Date(1987) # year
+"""
+)
+```
+
+```jl
+sco(
+"""
+Date(1987, 9) # month
+"""
+)
+```
+
+```jl
+sco(
+"""
+Date(1987, 9, 13) # day
+"""
+)
+```
+
+```jl
+sco(
+"""
+DateTime(1987, 9, 13, 21) # hour
+"""
+)
+```
+
+```jl
+sco(
+"""
+DateTime(1987, 9, 13, 21, 21) # minute
+"""
+)
+```
+
+For the curious, September 13th 1987, 21:21 is the official time of birth of the first author, Jose.
+
+
+We can also pass `Period` types to the default constructor.
+**`Period` types are the human-equivalent representation of time** for the computer.
+Julia's `Dates` have the following `Period` abstract subtypes:
+
+```jl
+sco(
+"""
+subtypes(Period)
+"""
+)
+```
+
+Which divide into the following concrete types, they are pretty much self-explanatory:
+
+```jl
+sco(
+"""
+subtypes(DatePeriod)
+"""
+)
+```
+
+```jl
+sco(
+"""
+subtypes(TimePeriod)
+"""
+)
+```
+
+So we could alternatively construct Jose's official time of birth as:
+
+```jl
+sco(
+"""
+DateTime(Year(1987), Month(9), Day(13), Hour(21), Minute(21))
+"""
+)
+```
+
+#### Parsing Dates {#sec:dates_parsing}
+
+Most of the time we won't be constructing `Date` or `DateTime` instances from scratch.
+Actually, we probably will be **parsing strings as `Date` or `DateTime` types**.
+
+The `Date` and `DateTime` constructors can be fed a string and a format string.
+For example, the string `"20210101"` representing January 1st can be parsed with:
+
+```jl
+sco(
+"""
+Date("19870913", "yyyymmdd")
+"""
+)
+```
+
+Notice that the second argument is a string representation of the format.
+We have the first four digits representing year `y`, followed by two digits for month `m` and finally two digits for day `d`.
+
+It also works for timestamps with `DateTime`:
+
+```jl
+sco(
+"""
+DateTime("1987-09-13T21:21:00", "yyyy-mm-ddTHH:MM:SS")
+"""
+)
+```
+
+You can find more on how to specify different format as strings in the [Julia `Dates`' documentation](https://docs.julialang.org/en/v1/stdlib/Dates/#Dates.DateFormat).
+Don't worry if you have to revisit it all the time, we ourselves have to do it all the time when working with dates and timestamps.
+
+According to [Julia `Dates`' documentation](https://docs.julialang.org/en/v1/stdlib/Dates/#Constructors), using the `Date(date_string,format_string)` function is fine if only called a few times.
+If there are many similarly formatted date strings to parse however, it is much more efficient to first create a `DateFormat` type, and then pass it instead of a raw format string.
+So our previous example would become:
+
+```jl
+sco(
+"""
+format = DateFormat("yyyymmdd")
+Date("19870913", format)
+"""
+)
+```
+
+Alternatively, without loss of performance, you can use the string literal prefix `dateformat"..."`:
+
+```jl
+sco(
+"""
+Date("19870913", dateformat"yyyymmdd")
+"""
+)
+```
+
+#### Extracting Date Information {#sec:dates_information}
+
+It is easy to **extract desired information from `Date` and `DateTime` objects**.
+First, let's create an instance of a very special date:
+
+```jl
+sco(
+"""
+my_birthday = Date("1987-09-13")
+"""
+)
+```
+
+We can extract anything we want from `my_birthday`:
+
+```jl
+scob(
+"""
+year(my_birthday)
+"""
+)
+```
+
+```jl
+scob(
+"""
+month(my_birthday)
+"""
+)
+```
+
+```jl
+scob(
+"""
+day(my_birthday)
+"""
+)
+```
+
+Julia's `Dates` module also have **compound functions that returns a tuple of values**:
+
+```jl
+sco(
+"""
+yearmonth(my_birthday)
+"""
+)
+```
+
+```jl
+sco(
+"""
+monthday(my_birthday)
+"""
+)
+```
+
+```jl
+sco(
+"""
+yearmonthday(my_birthday)
+"""
+)
+```
+
+We can also see day of the week and other handy stuff:
+
+```jl
+scob(
+"""
+dayofweek(my_birthday)
+"""
+)
+```
+
+```jl
+scob(
+"""
+dayname(my_birthday)
+"""
+)
+```
+
+```jl
+scob(
+"""
+dayofweekofmonth(my_birthday) # second sunday
+"""
+)
+```
+
+Yep, Jose was born on the second sunday of September.
+
+> **_NOTE_**:
+> Here's a handy tip to just recover weekdays from `Dates` instances.
+> Just use a `filter` on `dayofweek(your_date) <= 5`.
+> For business day you can check the package [`BusinessDays.jl`](https://github.com/JuliaFinance/BusinessDays.jl).
+
+#### Date Operations {#sec:dates_operations}
+
+We can perform **operations** in `Dates` instances.
+For example, we can add days to a `Date` or `DateTime` instance.
+Notice that Julia's `Dates` will automatically perform the adjustments necessary for leapyears, of months with 30 or 31 days (this is known as *calendrical* arithmetic).
+
+```jl
+sco(
+"""
+my_birthday + Day(90)
+"""
+)
+```
+
+We can add as many as we like:
+
+```jl
+sco(
+"""
+my_birthday + Day(90) + Month(2) + Year(1)
+"""
+)
+```
+
+To get **date duration**, we just use the **subtraction** `-` operator.
+Let's see how many days Jose is old:
+
+```jl
+sco(
+"""
+today() - my_birthday
+"""
+)
+```
+
+The **default duration** of `Date` types is a `Day` instance.
+For the `DateTime`, the default duration is `Millisecond` instance:
+
+```jl
+sco(
+"""
+DateTime(today()) - DateTime(my_birthday)
+"""
+)
+```
+
+#### Date Intervals {#sec:dates_intervals}
+
+One nice thing about `Dates` module is that we can also easily construct date and time intervals.
+For example suppose you want to create a `Day` interval.
+This is easy done with the colon `:` operator:
+
+```jl
+sco(
+"""
+Date("2021-01-01"):Day(1):Date("2021-01-07")
+"""
+)
+```
+
+There is nothing special in using `Day(1)` as interval, we can **use whatever `Period` type** as interval.
+For example using 3 days as intervals:
+
+```jl
+sco(
+"""
+Date("2021-01-01"):Day(3):Date("2021-01-07")
+"""
+)
+```
+
+Or even months:
+
+```jl
+sco(
+"""
+Date("2021-01-01"):Month(1):Date("2021-03-01")
+"""
+)
+```
+
+Note that the **type of this interval is a `StepRange` with the `Date` and concrete `Period` type** we used as interval inside the colon `:` operator:
+
+```jl
+sco(
+"""
+my_date_interval = Date("2021-01-01"):Month(1):Date("2021-03-01")
+typeof(my_date_interval)
+"""
+)
+```
+
+We can convert this to a **vector** with the `collect` function:
+
+```jl
+sco(
+"""
+my_date_interval_vector = collect(my_date_interval)
+"""
+)
+```
+
+And have all the **array functionalities available**, like, for example, indexing:
+
+```jl
+sco(
+"""
+my_date_interval_vector[end]
+"""
+)
+```
+
+We can also **broadcast date operations** to our vector of `Date`s:
+
+```jl
+sco(
+"""
+my_date_interval_vector .+ Day(10)
+"""
+)
+```
+
+All we've done with `Date` types can be extended to `DateTime` types in the same manner.
+
 ### Random Numbers {#sec:random}
 
 ```{=comment}

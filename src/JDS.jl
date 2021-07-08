@@ -11,6 +11,7 @@ using Reexport
 @reexport using InteractiveUtils
 @reexport using Makie
 @reexport using Plots
+@reexport using Random
 
 export without_caption_label
 

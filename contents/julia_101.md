@@ -1807,7 +1807,7 @@ Pairs will be used a lot in data manipulation and data visualization since both 
 
 If you understood what a `Pair` is, then `Dict` won't be a problem.
 **`Dict` in Julia is just a "hash table" with pairs of `key` and `value`**.
-`key`s must be a string and `value`s can be of any type.
+`key`s and `value`s can be of any type, but generally you'll see `key`s as strings.
 
 There are two ways to construct `Dict`s in Julia.
 The first is using the **default constructor `Dict` and passing a vector of tuples composed of `(key, value)`**:
@@ -1990,7 +1990,7 @@ Note to include Julia's `Filesystem` utilities in your data science workflow.
 
 ## Julia Standard Library {#sec:standardlibrary}
 
-Julia's standard library ships with *every* Julia installation.
+Julia has a rich standard library that ships with *every* Julia installation.
 Contrary to everything that we have seen so far, e.g. types, data structures and filesystem; you **must import standard library modules into your environment** to use a particular module or function.
 
 This is done with the `using` keyword:
@@ -2385,8 +2385,198 @@ All we've done with `Date` types can be extended to `DateTime` types in the same
 
 ### Random Numbers {#sec:random}
 
-```{=comment}
-seed!, rand and randn
+Another important module in Julia's standard library is the `Random` module.
+This module deals with **random number generation**.
+`Random` is a rich library and, if you interested in it, you should consult [Julia's `Random` documentation](https://docs.julialang.org/en/v1/stdlib/Random/).
+We will cover *only* three functions: `seed!`, `rand` and `randn`.
+
+To begin we first import the `Random` module:
+
+```julia
+using Random
+```
+
+We have **two main functions that generate random numbers**:
+
+* `rand`: samples a **random element** of a data structure or type.
+* `randn`: generates a random number that follows a **standard normal distribution** (mean 0 and standard deviation 1) of a specific type.
+
+#### `rand` {#sec:random_rand}
+
+By default if you call `rand` without arguments it will return a `Float64` in the interval $[0, 1)$, which means between 0 inclusive to 1 exclusive:
+
+```jl
+scob(
+"""
+rand()
+"""
+)
+```
+
+You can modify `rand` arguments in several ways.
+For example, suppose you want more than 1 random number:
+
+```jl
+sco(
+"""
+rand(3)
+"""
+)
+```
+
+Or you want a different interval:
+
+```jl
+scob(
+"""
+rand(1.0:10.0)
+"""
+)
+```
+
+You can also specify a different step size inside the interval and a different type.
+Here we are using number without the `.` so Julia will interpret them as `Int64`:
+
+```jl
+scob(
+"""
+rand(2:2:20)
+"""
+)
+```
+
+You can also mixmatch arguments:
+
+```jl
+sco(
+"""
+rand(2:2:20, 3)
+"""
+)
+```
+
+It also supports a collection of elements as a tuple:
+
+```jl
+scob(
+"""
+rand((42, "Julia", 3.14))
+"""
+)
+```
+
+And also arrays:
+
+```jl
+scob(
+"""
+rand([1, 2, 3])
+"""
+)
+```
+
+`Dict`s:
+
+```jl
+sco(
+"""
+rand(Dict("one"=>1, "two"=>2))
+"""
+)
+```
+
+To finish off all the `rand` arguments options, you can specify the desired random number dimensions in a tuple.
+If you do this, the returned type will be an array.
+For example, a 2x2 matrix of `Float64` between 1.0 and 3.0:
+
+```jl
+sco(
+"""
+rand(1.0:3.0, (2, 2))
+"""
+)
+```
+
+#### `randn` {#sec:random_randn}
+
+`randn` follows the same general principle from `rand` but now it only returns numbers generated from standard normal distribution.
+The standard normal distribution is the normal distribution with mean 0 and standard deviation 1.
+The default type is `Float64` and it only allows for subtypes of `AbstractFloat` or `Complex`:
+
+```jl
+scob(
+"""
+randn()
+"""
+)
+```
+
+We can only specify the size:
+
+```jl
+sco(
+"""
+randn((2, 2))
+"""
+)
+```
+
+#### `seed!` {#sec:random_seed}
+
+To finish off the `Random` overview, let's talk about **reproducibility**.
+Often, we want to make something replicable.
+Meaning that, we want the random number generator to generate the same random sequence of numbers,
+despite paradoxical that might sound...
+We can do so with the `seed!` function.
+
+Let me show you an example of a `rand` that generates the same three numbers given a certain seed:
+
+```jl
+sco(
+"""
+Random.seed!(123)
+rand(3)
+"""
+)
+```
+
+```jl
+sco(
+"""
+Random.seed!(123)
+rand(3)
+"""
+)
+```
+
+Note that `seed!` is not automatically exported by the `Random` module.
+We have to call it with the `Module.function` syntax.
+
+In order to avoid tedious and inefficient repetition of `seed!` all over the place we can instead define an instance of a `seed!` and pass it as a first argument of **either `rand` or `randn`**.
+
+```jl
+sco(
+"""
+my_seed = Random.seed!(123)
+"""
+)
+```
+
+
+```jl
+sco(
+"""
+rand(my_seed, 3)
+"""
+)
+```
+
+```jl
+sco(
+"""
+rand(my_seed, 3)
+"""
+)
 ```
 
 ### Downloads {#sec:downloads}

@@ -1930,9 +1930,63 @@ Do you think we should add more stuff about Symbols?
 
 ## Filesystem {#sec:filesystem}
 
-```{=comment}
-joinpath (windows, Mac, Linux)
+In data science, most projects are undertaken in a collaborative effort.
+We share code, data, tables, figures and so on.
+Behind everything, there is the **operational system (OS) filesystem**.
+In an ideal work, code would run the *same* in *different* OS.
+But that is not what actually happens.
+Some OS (mostly Windows) have some quirks that can **break code** or **introduce undefined behavior**.
+This is why is important to discuss **filesystem best practices**.
+
+Julia has native filesystem capabilities that can **handle all different OS demands**.
+They are located in the [`Filesystem`](https://docs.julialang.org/en/v1/base/file/) module from the core `Base` Julia library.
+This means that Julia provides everything you need to make your code perform flawlessly in any OS that you want to.
+
+Whenever you are dealing with files such as CSV, Excel files or other Julia scripts, make sure that your code is compliant with all different OS filesystems.
+This is easily accomplished with the `joinpath` and `pwd` functions.
+
+The `pwd` functions is an acronym for **p**rint **w**orking **d**irectory and it returns a string containing the current working directory.
+One nice thing about `pwd` is that it is robust to OS, i.e. it will return the correct string in Linux, MacOS, Windows or any other OS.
+For example, let's see what are our current directory and record it in a variable `root`:
+
+```jl
+scob(
+"""
+root = pwd()
+"""
+)
 ```
+
+The next step would be to include the relative path from `root` to our desired file.
+Since different OS have different ways to construct relative paths with subfolders, some use forward slash `/` while other might use backslashes `\`, we cannot simply concatenate the our file's relative path with the `root` string.
+For that, we have the `joinpath` function, which will join different relative paths and filenames into your specific OS filesystem implementation.
+
+Suppose you have a script named `my_script.jl` inside your project's directory.
+You can have a robust representation of the filepath to `my_script.jl` as:
+
+```jl
+scob(
+"""
+joinpath(root, "my_script.jl")
+"""
+)
+```
+
+`joinpath` also handles subfolders.
+Let's now imagine a common situation where you have a folder named `data/` in your project's directory.
+Inside this folder there is a CSV file named `my_data.csv`.
+You can have the same robust representation of the filepath to `my_data.jl` as:
+
+```jl
+scob(
+"""
+joinpath(root, "data", "my_data.csv")
+"""
+)
+```
+
+Always make sure that your code can run anywhere.
+Note to include Julia's `Filesystem` utilities in your data science workflow.
 
 ## Julia Standard Library {#sec:standardlibrary}
 ### Dates {#sec:dates}

@@ -2580,3 +2580,45 @@ rand(my_seed, 3)
 ```
 
 ### Downloads {#sec:downloads}
+
+One last thing from Julia's standard library for us to cover is the `Download` module.
+It will be really brief because we will only be covering a single function named `download`.
+
+Suppose you want to **download a file from the internet to your local storage**.
+You can accomplish this with the `download` function.
+The first and only required argument is the file's url.
+You can also specify as a second argument the desired output path for the downloaded file (don't forget the filesystem best practices!).
+If you don't specify a second argument, Julia will, by default, create a temporary file with the `tempfile` function.
+
+Let's import the `Download` module:
+
+```julia
+using Download
+```
+
+For example let's download our [`JuliaDataScience` GitHub repository](https://github.com/JuliaDataScience/JuliaDataScience) `Project.toml` file.
+Note that `download` function is not exported by `Downloads` module, so we have to use the `Module.function` syntax.
+By default it returns a string that holds the file path for the downloaded file:
+
+```jl
+scob(
+"""
+url = "https://raw.githubusercontent.com/JuliaDataScience/JuliaDataScience/main/Project.toml"
+
+my_file = Downloads.download(url) # tempfile() being created
+"""
+)
+```
+
+Let's just show the first 4 lines of our downloaded file with the `readlines` function:
+
+```jl
+sco(
+"""
+readlines(my_file)[1:4]
+"""
+)
+```
+
+> **_NOTE:_**
+> If you want to interact with web requests or web APIs, you would probably need to use the [`HTTP.jl` package](https://github.com/JuliaWeb/HTTP.jl).

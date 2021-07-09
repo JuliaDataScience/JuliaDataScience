@@ -214,7 +214,7 @@ We have three boolean operators in Julia:
 * `&&`: **AND**
 * `||`: **OR**
 
-Here is a few examples with some of them:
+Here are a few examples with some of them:
 
 ```jl
 scob(

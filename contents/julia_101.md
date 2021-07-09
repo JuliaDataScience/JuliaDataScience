@@ -769,7 +769,7 @@ It is still a String to Julia.
 
 #### String Concatenation {#sec:string_concatenation}
 
-One nice thing we can do with strings in Julia is **string concatenation**.
+A common string operation is **string concatenation**.
 Suppose you want to construct a new string that is the concatenation of two or more strings.
 This is accomplish in julia either with the `*` operator (this is where Julia departs from other scientific open-source programming languages) or the `join` function:
 

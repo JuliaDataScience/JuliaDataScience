@@ -2,7 +2,6 @@
 
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 [![Code Style: Blue](https://img.shields.io/badge/code%20style-blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
-![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https://github.com/JuliaDataScience/JuliaDataScience)
 
 See <https://juliadatascience.io>.
 

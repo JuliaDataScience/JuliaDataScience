@@ -718,7 +718,7 @@ For example, we can create a function that adds 1 to its argument:
 sc(
 """
 function add_one!(x)
-    for i in 1:length(x)
+    for i ∈ 1:length(x)
         x[i] += 1
     end
     return nothing
@@ -1264,7 +1264,7 @@ For example, say we want to create a vector of squares from 1 to 100:
 ```jl
 sco(
 """
-[x^2 for x in 1:10]
+[x^2 for x ∈ 1:10]
 """
 )
 ```
@@ -1274,7 +1274,7 @@ They also support multiple inputs:
 ```jl
 sco(
 """
-[x*y for x in 1:10 for y in 1:2]
+[x*y for x ∈ 1:10 for y ∈ 1:2]
 """
 )
 ```
@@ -1284,7 +1284,7 @@ And conditionals:
 ```jl
 sco(
 """
-[x^2 for x in 1:10 if isodd(x)]
+[x^2 for x ∈ 1:10 if isodd(x)]
 """
 )
 ```
@@ -1295,7 +1295,7 @@ As with array literals you can specify your desired type before the `[]` bracket
 ```jl
 sco(
 """
-Float64[x^2 for x in 1:10 if isodd(x)]
+Float64[x^2 for x ∈ 1:10 if isodd(x)]
 """
 )
 ```
@@ -1655,7 +1655,7 @@ simple_vector = [1, 2, 3]
 
 empty_vector = Int64[]
 
-for i in simple_vector
+for i ∈ simple_vector
     push!(empty_vector, i + 1)
 end
 
@@ -1676,7 +1676,7 @@ forty_two_vector = [42, 42, 42]
 
 empty_vector = Int64[]
 
-for i in eachindex(forty_two_vector)
+for i ∈ eachindex(forty_two_vector)
     push!(empty_vector, i)
 end
 
@@ -1714,7 +1714,7 @@ sco(
 """
 empty_vector = Int64[]
 
-for i in column_major
+for i ∈ column_major
     push!(empty_vector, i)
 end
 
@@ -1728,7 +1728,7 @@ sco(
 """
 empty_vector = Int64[]
 
-for i in row_major
+for i ∈ row_major
     push!(empty_vector, i)
 end
 

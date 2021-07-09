@@ -1807,7 +1807,7 @@ Pairs will be used a lot in data manipulation and data visualization since both 
 
 If you understood what a `Pair` is, then `Dict` won't be a problem.
 **`Dict` in Julia is just a "hash table" with pairs of `key` and `value`**.
-`key`s must be a string and `value`s can be of any type.
+`key`s and `value`s can be of any type, but generally you'll see `key`s as strings.
 
 There are two ways to construct `Dict`s in Julia.
 The first is using the **default constructor `Dict` and passing a vector of tuples composed of `(key, value)`**:
@@ -1930,16 +1930,695 @@ Do you think we should add more stuff about Symbols?
 
 ## Filesystem {#sec:filesystem}
 
-```{=comment}
-joinpath (windows, Mac, Linux)
+In data science, most projects are undertaken in a collaborative effort.
+We share code, data, tables, figures and so on.
+Behind everything, there is the **operational system (OS) filesystem**.
+In an ideal work, code would run the *same* in *different* OS.
+But that is not what actually happens.
+Some OS (mostly Windows) have some quirks that can **break code** or **introduce undefined behavior**.
+This is why is important to discuss **filesystem best practices**.
+
+Julia has native filesystem capabilities that can **handle all different OS demands**.
+They are located in the [`Filesystem`](https://docs.julialang.org/en/v1/base/file/) module from the core `Base` Julia library.
+This means that Julia provides everything you need to make your code perform flawlessly in any OS that you want to.
+
+Whenever you are dealing with files such as CSV, Excel files or other Julia scripts, make sure that your code is compliant with all different OS filesystems.
+This is easily accomplished with the `joinpath` and `pwd` functions.
+
+The `pwd` functions is an acronym for **p**rint **w**orking **d**irectory and it returns a string containing the current working directory.
+One nice thing about `pwd` is that it is robust to OS, i.e. it will return the correct string in Linux, MacOS, Windows or any other OS.
+For example, let's see what are our current directory and record it in a variable `root`:
+
+```jl
+scob(
+"""
+root = pwd()
+"""
+)
 ```
 
+The next step would be to include the relative path from `root` to our desired file.
+Since different OS have different ways to construct relative paths with subfolders, some use forward slash `/` while other might use backslashes `\`, we cannot simply concatenate the our file's relative path with the `root` string.
+For that, we have the `joinpath` function, which will join different relative paths and filenames into your specific OS filesystem implementation.
+
+Suppose you have a script named `my_script.jl` inside your project's directory.
+You can have a robust representation of the filepath to `my_script.jl` as:
+
+```jl
+scob(
+"""
+joinpath(root, "my_script.jl")
+"""
+)
+```
+
+`joinpath` also handles subfolders.
+Let's now imagine a common situation where you have a folder named `data/` in your project's directory.
+Inside this folder there is a CSV file named `my_data.csv`.
+You can have the same robust representation of the filepath to `my_data.jl` as:
+
+```jl
+scob(
+"""
+joinpath(root, "data", "my_data.csv")
+"""
+)
+```
+
+Always make sure that your code can run anywhere.
+Note to include Julia's `Filesystem` utilities in your data science workflow.
+
 ## Julia Standard Library {#sec:standardlibrary}
+
+Julia has a rich standard library that ships with *every* Julia installation.
+Contrary to everything that we have seen so far, e.g. types, data structures and filesystem; you **must import standard library modules into your environment** to use a particular module or function.
+
+This is done with the `using` keyword:
+
+```julia
+using ModuleName
+```
+
+Now you can access all functions and types inside `ModuleName`.
+
 ### Dates {#sec:dates}
+
+How to handle dates and timestamps is something quite important in data science.
+Like we said in [*Why Julia?*](why_julia.html) section, Python's `pandas` uses its own `Datetime` type to handle dates.
+The same with R tidyverse's `lubridate` package, which also defines its own `datetime` type to handle dates.
+Julia doesn't need any of this, it has all the **date stuff already baked onto its standard library, in a module named `Dates`**.
+
+To begin, let's import the `Dates` module:
+
+```julia
+using Dates
+```
+
+#### `Date` and `DateTime` Types {#sec:dates_types}
+
+The `Dates` standard library module has **two types for working with dates**:
+
+1. `Date`: representing time in days; and
+2. `DateTime`: representing time in millisecond precision.
+
+We can construct `Date` and `DateTime` with the default constructor either by specifying an integer to represent year, month, day, hours and so on:
+
+```jl
+sco(
+"""
+Date(1987) # year
+"""
+)
+```
+
+```jl
+sco(
+"""
+Date(1987, 9) # month
+"""
+)
+```
+
+```jl
+sco(
+"""
+Date(1987, 9, 13) # day
+"""
+)
+```
+
+```jl
+sco(
+"""
+DateTime(1987, 9, 13, 21) # hour
+"""
+)
+```
+
+```jl
+sco(
+"""
+DateTime(1987, 9, 13, 21, 21) # minute
+"""
+)
+```
+
+For the curious, September 13th 1987, 21:21 is the official time of birth of the first author, Jose.
+
+
+We can also pass `Period` types to the default constructor.
+**`Period` types are the human-equivalent representation of time** for the computer.
+Julia's `Dates` have the following `Period` abstract subtypes:
+
+```jl
+sco(
+"""
+subtypes(Period)
+"""
+)
+```
+
+Which divide into the following concrete types, they are pretty much self-explanatory:
+
+```jl
+sco(
+"""
+subtypes(DatePeriod)
+"""
+)
+```
+
+```jl
+sco(
+"""
+subtypes(TimePeriod)
+"""
+)
+```
+
+So we could alternatively construct Jose's official time of birth as:
+
+```jl
+sco(
+"""
+DateTime(Year(1987), Month(9), Day(13), Hour(21), Minute(21))
+"""
+)
+```
+
+#### Parsing Dates {#sec:dates_parsing}
+
+Most of the time we won't be constructing `Date` or `DateTime` instances from scratch.
+Actually, we probably will be **parsing strings as `Date` or `DateTime` types**.
+
+The `Date` and `DateTime` constructors can be fed a string and a format string.
+For example, the string `"20210101"` representing January 1st can be parsed with:
+
+```jl
+sco(
+"""
+Date("19870913", "yyyymmdd")
+"""
+)
+```
+
+Notice that the second argument is a string representation of the format.
+We have the first four digits representing year `y`, followed by two digits for month `m` and finally two digits for day `d`.
+
+It also works for timestamps with `DateTime`:
+
+```jl
+sco(
+"""
+DateTime("1987-09-13T21:21:00", "yyyy-mm-ddTHH:MM:SS")
+"""
+)
+```
+
+You can find more on how to specify different format as strings in the [Julia `Dates`' documentation](https://docs.julialang.org/en/v1/stdlib/Dates/#Dates.DateFormat).
+Don't worry if you have to revisit it all the time, we ourselves have to do it all the time when working with dates and timestamps.
+
+According to [Julia `Dates`' documentation](https://docs.julialang.org/en/v1/stdlib/Dates/#Constructors), using the `Date(date_string,format_string)` function is fine if only called a few times.
+If there are many similarly formatted date strings to parse however, it is much more efficient to first create a `DateFormat` type, and then pass it instead of a raw format string.
+So our previous example would become:
+
+```jl
+sco(
+"""
+format = DateFormat("yyyymmdd")
+Date("19870913", format)
+"""
+)
+```
+
+Alternatively, without loss of performance, you can use the string literal prefix `dateformat"..."`:
+
+```jl
+sco(
+"""
+Date("19870913", dateformat"yyyymmdd")
+"""
+)
+```
+
+#### Extracting Date Information {#sec:dates_information}
+
+It is easy to **extract desired information from `Date` and `DateTime` objects**.
+First, let's create an instance of a very special date:
+
+```jl
+sco(
+"""
+my_birthday = Date("1987-09-13")
+"""
+)
+```
+
+We can extract anything we want from `my_birthday`:
+
+```jl
+scob(
+"""
+year(my_birthday)
+"""
+)
+```
+
+```jl
+scob(
+"""
+month(my_birthday)
+"""
+)
+```
+
+```jl
+scob(
+"""
+day(my_birthday)
+"""
+)
+```
+
+Julia's `Dates` module also have **compound functions that returns a tuple of values**:
+
+```jl
+sco(
+"""
+yearmonth(my_birthday)
+"""
+)
+```
+
+```jl
+sco(
+"""
+monthday(my_birthday)
+"""
+)
+```
+
+```jl
+sco(
+"""
+yearmonthday(my_birthday)
+"""
+)
+```
+
+We can also see day of the week and other handy stuff:
+
+```jl
+scob(
+"""
+dayofweek(my_birthday)
+"""
+)
+```
+
+```jl
+scob(
+"""
+dayname(my_birthday)
+"""
+)
+```
+
+```jl
+scob(
+"""
+dayofweekofmonth(my_birthday) # second sunday
+"""
+)
+```
+
+Yep, Jose was born on the second sunday of September.
+
+> **_NOTE_**:
+> Here's a handy tip to just recover weekdays from `Dates` instances.
+> Just use a `filter` on `dayofweek(your_date) <= 5`.
+> For business day you can check the package [`BusinessDays.jl`](https://github.com/JuliaFinance/BusinessDays.jl).
+
+#### Date Operations {#sec:dates_operations}
+
+We can perform **operations** in `Dates` instances.
+For example, we can add days to a `Date` or `DateTime` instance.
+Notice that Julia's `Dates` will automatically perform the adjustments necessary for leapyears, of months with 30 or 31 days (this is known as *calendrical* arithmetic).
+
+```jl
+sco(
+"""
+my_birthday + Day(90)
+"""
+)
+```
+
+We can add as many as we like:
+
+```jl
+sco(
+"""
+my_birthday + Day(90) + Month(2) + Year(1)
+"""
+)
+```
+
+To get **date duration**, we just use the **subtraction** `-` operator.
+Let's see how many days Jose is old:
+
+```jl
+sco(
+"""
+today() - my_birthday
+"""
+)
+```
+
+The **default duration** of `Date` types is a `Day` instance.
+For the `DateTime`, the default duration is `Millisecond` instance:
+
+```jl
+sco(
+"""
+DateTime(today()) - DateTime(my_birthday)
+"""
+)
+```
+
+#### Date Intervals {#sec:dates_intervals}
+
+One nice thing about `Dates` module is that we can also easily construct date and time intervals.
+For example suppose you want to create a `Day` interval.
+This is easy done with the colon `:` operator:
+
+```jl
+sco(
+"""
+Date("2021-01-01"):Day(1):Date("2021-01-07")
+"""
+)
+```
+
+There is nothing special in using `Day(1)` as interval, we can **use whatever `Period` type** as interval.
+For example using 3 days as intervals:
+
+```jl
+sco(
+"""
+Date("2021-01-01"):Day(3):Date("2021-01-07")
+"""
+)
+```
+
+Or even months:
+
+```jl
+sco(
+"""
+Date("2021-01-01"):Month(1):Date("2021-03-01")
+"""
+)
+```
+
+Note that the **type of this interval is a `StepRange` with the `Date` and concrete `Period` type** we used as interval inside the colon `:` operator:
+
+```jl
+sco(
+"""
+my_date_interval = Date("2021-01-01"):Month(1):Date("2021-03-01")
+typeof(my_date_interval)
+"""
+)
+```
+
+We can convert this to a **vector** with the `collect` function:
+
+```jl
+sco(
+"""
+my_date_interval_vector = collect(my_date_interval)
+"""
+)
+```
+
+And have all the **array functionalities available**, like, for example, indexing:
+
+```jl
+sco(
+"""
+my_date_interval_vector[end]
+"""
+)
+```
+
+We can also **broadcast date operations** to our vector of `Date`s:
+
+```jl
+sco(
+"""
+my_date_interval_vector .+ Day(10)
+"""
+)
+```
+
+All we've done with `Date` types can be extended to `DateTime` types in the same manner.
+
 ### Random Numbers {#sec:random}
 
-```{=comment}
-seed!, rand and randn
+Another important module in Julia's standard library is the `Random` module.
+This module deals with **random number generation**.
+`Random` is a rich library and, if you interested in it, you should consult [Julia's `Random` documentation](https://docs.julialang.org/en/v1/stdlib/Random/).
+We will cover *only* three functions: `seed!`, `rand` and `randn`.
+
+To begin we first import the `Random` module:
+
+```julia
+using Random
+```
+
+We have **two main functions that generate random numbers**:
+
+* `rand`: samples a **random element** of a data structure or type.
+* `randn`: generates a random number that follows a **standard normal distribution** (mean 0 and standard deviation 1) of a specific type.
+
+#### `rand` {#sec:random_rand}
+
+By default if you call `rand` without arguments it will return a `Float64` in the interval $[0, 1)$, which means between 0 inclusive to 1 exclusive:
+
+```jl
+scob(
+"""
+rand()
+"""
+)
+```
+
+You can modify `rand` arguments in several ways.
+For example, suppose you want more than 1 random number:
+
+```jl
+sco(
+"""
+rand(3)
+"""
+)
+```
+
+Or you want a different interval:
+
+```jl
+scob(
+"""
+rand(1.0:10.0)
+"""
+)
+```
+
+You can also specify a different step size inside the interval and a different type.
+Here we are using number without the `.` so Julia will interpret them as `Int64`:
+
+```jl
+scob(
+"""
+rand(2:2:20)
+"""
+)
+```
+
+You can also mixmatch arguments:
+
+```jl
+sco(
+"""
+rand(2:2:20, 3)
+"""
+)
+```
+
+It also supports a collection of elements as a tuple:
+
+```jl
+scob(
+"""
+rand((42, "Julia", 3.14))
+"""
+)
+```
+
+And also arrays:
+
+```jl
+scob(
+"""
+rand([1, 2, 3])
+"""
+)
+```
+
+`Dict`s:
+
+```jl
+sco(
+"""
+rand(Dict("one"=>1, "two"=>2))
+"""
+)
+```
+
+To finish off all the `rand` arguments options, you can specify the desired random number dimensions in a tuple.
+If you do this, the returned type will be an array.
+For example, a 2x2 matrix of `Float64` between 1.0 and 3.0:
+
+```jl
+sco(
+"""
+rand(1.0:3.0, (2, 2))
+"""
+)
+```
+
+#### `randn` {#sec:random_randn}
+
+`randn` follows the same general principle from `rand` but now it only returns numbers generated from standard normal distribution.
+The standard normal distribution is the normal distribution with mean 0 and standard deviation 1.
+The default type is `Float64` and it only allows for subtypes of `AbstractFloat` or `Complex`:
+
+```jl
+scob(
+"""
+randn()
+"""
+)
+```
+
+We can only specify the size:
+
+```jl
+sco(
+"""
+randn((2, 2))
+"""
+)
+```
+
+#### `seed!` {#sec:random_seed}
+
+To finish off the `Random` overview, let's talk about **reproducibility**.
+Often, we want to make something replicable.
+Meaning that, we want the random number generator to generate the same random sequence of numbers,
+despite paradoxical that might sound...
+We can do so with the `seed!` function.
+
+Let me show you an example of a `rand` that generates the same three numbers given a certain seed:
+
+```jl
+sco(
+"""
+Random.seed!(123)
+rand(3)
+"""
+)
+```
+
+```jl
+sco(
+"""
+Random.seed!(123)
+rand(3)
+"""
+)
+```
+
+Note that `seed!` is not automatically exported by the `Random` module.
+We have to call it with the `Module.function` syntax.
+
+In order to avoid tedious and inefficient repetition of `seed!` all over the place we can instead define an instance of a `seed!` and pass it as a first argument of **either `rand` or `randn`**.
+
+```jl
+sco(
+"""
+my_seed = Random.seed!(123)
+"""
+)
+```
+
+
+```jl
+sco(
+"""
+rand(my_seed, 3)
+"""
+)
+```
+
+```jl
+sco(
+"""
+rand(my_seed, 3)
+"""
+)
 ```
 
 ### Downloads {#sec:downloads}
+
+One last thing from Julia's standard library for us to cover is the `Download` module.
+It will be really brief because we will only be covering a single function named `download`.
+
+Suppose you want to **download a file from the internet to your local storage**.
+You can accomplish this with the `download` function.
+The first and only required argument is the file's url.
+You can also specify as a second argument the desired output path for the downloaded file (don't forget the filesystem best practices!).
+If you don't specify a second argument, Julia will, by default, create a temporary file with the `tempfile` function.
+
+Let's import the `Download` module:
+
+```julia
+using Download
+```
+
+For example let's download our [`JuliaDataScience` GitHub repository](https://github.com/JuliaDataScience/JuliaDataScience) `Project.toml` file.
+Note that `download` function is not exported by `Downloads` module, so we have to use the `Module.function` syntax.
+By default it returns a string that holds the file path for the downloaded file:
+
+```jl
+scob(
+"""
+url = "https://raw.githubusercontent.com/JuliaDataScience/JuliaDataScience/main/Project.toml"
+
+my_file = Downloads.download(url) # tempfile() being created
+"""
+)
+```
+
+Let's just show the first 4 lines of our downloaded file with the `readlines` function:
+
+```jl
+sco(
+"""
+readlines(my_file)[1:4]
+"""
+)
+```
+
+> **_NOTE:_**
+> If you want to interact with web requests or web APIs, you would probably need to use the [`HTTP.jl` package](https://github.com/JuliaWeb/HTTP.jl).

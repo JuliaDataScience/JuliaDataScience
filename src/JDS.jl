@@ -8,9 +8,11 @@ using Reexport
 @reexport using CairoMakie
 @reexport using DataFrames
 @reexport using Dates
+@reexport using Downloads
 @reexport using InteractiveUtils
 @reexport using Makie
 @reexport using Plots
+@reexport using Random
 
 export without_caption_label
 

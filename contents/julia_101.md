@@ -115,7 +115,7 @@ sco("typeof(age)")
 ```
 
 The next question then becomes: "What else can I do with integers?"
-There is a nice handy function `methodswit` that spits out every function available, along with its signature, for a certain type.
+There is a nice handy function `methodswith` that spits out every function available, along with its signature, for a certain type.
 Here I will restrict the output to the first 5 rows:
 
 ```{=comment}

@@ -1260,6 +1260,7 @@ sco(
 ```
 
 Another powerful way to create arrays are **array comprehensions**.
+This way of creating arrays is our *preferred* way, it avoids loops, indexing and other error-prone operations.
 You specify what you want to do inside the `[]` brackets.
 For example, say we want to create a vector of squares from 1 to 100:
 

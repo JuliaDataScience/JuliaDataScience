@@ -2644,7 +2644,7 @@ Let's just show the first 4 lines of our downloaded file with the `readlines` fu
 sco(
 """
 readlines(my_file)[1:4]
-"""
+"""; process=string, post=output_block
 )
 ```
 

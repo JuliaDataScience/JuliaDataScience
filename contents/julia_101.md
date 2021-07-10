@@ -2269,7 +2269,7 @@ dayofweekofmonth(my_birthday) # second sunday
 
 Yep, Jose was born on the second sunday of September.
 
-> **_NOTE_**:
+> **_NOTE:_**
 > Here's a handy tip to just recover weekdays from `Dates` instances.
 > Just use a `filter` on `dayofweek(your_date) <= 5`.
 > For business day you can check the package [`BusinessDays.jl`](https://github.com/JuliaFinance/BusinessDays.jl).
@@ -2416,9 +2416,10 @@ We have **two main functions that generate random numbers**:
 * `rand`: samples a **random element** of a data structure or type.
 * `randn`: generates a random number that follows a **standard normal distribution** (mean 0 and standard deviation 1) of a specific type.
 
-> **_NOTE_**
+> **_NOTE:_**
 > Note that those two functions are already in the Julia `Base` module.
 > So you don't need to import `Random` if you planning to use them
+
 #### `rand` {#sec:random_rand}
 
 By default if you call `rand` without arguments it will return a `Float64` in the interval $[0, 1)$, which means between 0 inclusive to 1 exclusive:
@@ -2596,6 +2597,11 @@ rand(my_seed, 3)
 """
 )
 ```
+
+> **_NOTE:_**
+> If you want your code to be reproducible you can just call `Random.seed!` in the beggining of your script.
+> This will take care of reproducibility in sequential `Random` operations.
+> No need to use it all `rand` and `randn` usage.
 
 ### Downloads {#sec:downloads}
 

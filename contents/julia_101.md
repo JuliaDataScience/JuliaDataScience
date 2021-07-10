@@ -2416,6 +2416,9 @@ We have **two main functions that generate random numbers**:
 * `rand`: samples a **random element** of a data structure or type.
 * `randn`: generates a random number that follows a **standard normal distribution** (mean 0 and standard deviation 1) of a specific type.
 
+> **_NOTE_**
+> Note that those two functions are already in the Julia `Base` module.
+> So you don't need to import `Random` if you planning to use them
 #### `rand` {#sec:random_rand}
 
 By default if you call `rand` without arguments it will return a `Float64` in the interval $[0, 1)$, which means between 0 inclusive to 1 exclusive:

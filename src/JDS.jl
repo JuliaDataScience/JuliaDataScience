@@ -10,9 +10,11 @@ using Reexport
 @reexport using CSV
 @reexport using DataFrames
 @reexport using Dates
+@reexport using Downloads
 @reexport using InteractiveUtils
 @reexport using Makie
 @reexport using Plots
+@reexport using Random
 
 plot = Plots.plot
 

@@ -1904,6 +1904,21 @@ my_dict
 `Dict`s are also used in data manipulations by [`DataFrames.jl`](dataframes.html) and data visualization by [`Plots.jl`](plots.html).
 So it is important to know their basic functionality.
 
+There is one useful `Dict` constructor that we use a lot.
+Suppose you have two vectors and you want to construct a `Dict` with one of them as `key`s and the other as `value`s.
+You can do that with the `zip` function which "glues" together two objects just like a zipper:
+
+```jl
+sco(
+"""
+A = ["one", "two", "three"]
+B = [1, 2, 3]
+
+Dict(zip(A, B))
+"""
+)
+```
+
 ### Symbol {#sec:symbol}
 
 `Symbol` is actually *not* a data structure.

@@ -4,6 +4,7 @@ subtitle: ""
 book: true
 author: Jose Storopoli & Rik Huijzer
 html-license: <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+pdf-footer: "\\url{https://github.com/juliadatascience/juliadatascience}"
 tex-license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 lang: en-US
 tags: [JuliaLang, Data Science, Data Visualization, Data Manipulation, Data Analysis]

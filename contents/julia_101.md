@@ -663,7 +663,7 @@ We will cover the most used ones.
 They hold homogeneous or heterogeneous data.
 Since they are collections, they can be *looped* over with the `for` loops.
 
-We will cover `String`, `Tuple`, `NamedTuple`, `Arrays`, `Pair`, `Dict`, `Symbol`.
+We will cover `String`, `Tuple`, `NamedTuple`, `UnitRange`, `Arrays`, `Pair`, `Dict`, `Symbol`.
 
 When you stumble into a data structure in Julia, you can find functions/methods that accept it as an argument with the `methodswith` function.
 Just like we did before with types.
@@ -1095,6 +1095,64 @@ my_quick_namedtuple = (; i, f, s)
 """
 )
 ```
+
+### Ranges {#sec:ranges}
+
+A range in Julia represents an interval between a start and stop boundaries.
+The syntax is `start:stop`:
+
+```jl
+sco(
+"""
+1:10
+"""
+)
+```
+
+As you can see our instantiated range is of type `UnitRange{T}` where `T` is the type inside the `UnitRange`:
+
+```jl
+sco(
+"""
+typeof(1:10)
+"""
+)
+```
+
+We can construct ranges also for other types:
+
+```jl
+sco(
+"""
+typeof(1.0:10.0)
+"""
+)
+```
+
+Sometimes we want to change the default interval stepsize behavior.
+We can do that by adding a stepsize in the range syntax `start:step:stop`.
+For example, suppose we want a range of `Float64` from 0 to 1 with steps of size 0.2:
+
+```jl
+sco(
+"""
+0.0:0.2:1.0
+"""
+)
+```
+
+If you want to "materialize" a `UnitRange` into a collection you can use the function `collect`:
+
+```jl
+sco(
+"""
+collect(1:10)
+"""
+)
+```
+
+We have an array of the type specified in the `UnitRange` between the boundaries that we've set.
+Speaking in arrays, let's talk about them.
 
 ### Array {#sec:array}
 
@@ -2327,6 +2385,10 @@ DateTime(today()) - DateTime(my_birthday)
 #### Date Intervals {#sec:dates_intervals}
 
 One nice thing about `Dates` module is that we can also easily construct date and time intervals.
+Julia is clever enough to not have to define the whole interval types and operations that we covered in [@sec:ranges].
+It just extends the functions and operations defined for `UnitRange` to `Date`'s types.
+This is known as multiple dispatch and we already covered in [*Why Julia?*](why_julia.html).
+
 For example suppose you want to create a `Day` interval.
 This is easy done with the colon `:` operator:
 
@@ -2644,7 +2706,7 @@ Let's just show the first 4 lines of our downloaded file with the `readlines` fu
 sco(
 """
 readlines(my_file)[1:4]
-"""; process=string, post=output_block
+"""; process=Books.catch_show
 )
 ```
 

@@ -710,6 +710,8 @@ logarithm.([1, 2, 3])
 
 In Julia syntax is is common to append `!` to names of functions that modify their arguments.
 This is a convention that warns the user that the function is **not pure**, i.e. it has *side effects*.
+A function with side effects is useful when you want to update a large data structure or variable container without having all the overhead from creating a new instance.
+
 Most of the `!` functions' arguments are data structures.
 
 For example, we can create a function that adds 1 to its argument:

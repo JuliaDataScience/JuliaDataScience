@@ -1099,6 +1099,7 @@ my_quick_namedtuple = (; i, f, s)
 ### Array {#sec:array}
 
 Arrays are a **systematic arrangement of similar objects, usually in _rows_ and _columns_**.
+Most of the time you would want **arrays of a single type for performance issues**, but note that they can also hold objects of different types.
 They are the "bread and butter" of data scientist, because arrays are what constitutes most of **data manipulation** and **data visualization** workflows.
 
 **Arrays are a powerful data structure**. They are one of the main features that makes Julia blazing fast.

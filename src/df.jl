@@ -63,10 +63,7 @@ function grade_2020(name::String)
     dic[name]
 end
 
-function grades_indexing()
-    df = grades_2020()
-    df[1:2, :name]
-end
+grades_indexing(df) = df[1:2, :name]
 
 function grades_2020(names::Vector{Int})
     df = grades_2020()
@@ -74,7 +71,7 @@ function grades_2020(names::Vector{Int})
 end
 
 export equals_alice
-equals_alice(n::String) = n == "Alice"
+equals_alice(name::String) = name == "Alice"
 
 export write_grades_csv
 function write_grades_csv()

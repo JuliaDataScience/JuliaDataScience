@@ -1,13 +1,9 @@
 ## Index and Summarize
 
-Let's go back to the example `grades_2020()` data defined above
+Let's go back to the example `grades_2020()` data defined above:
 
 ```jl
-sco("""
-without_caption_label( # hide
-grades_2020()
-) # hide
-""")
+sco("grades_2020()"; process=without_caption_label)
 ```
 
 To retreive a **vector** for `name`, we can use:
@@ -22,7 +18,7 @@ I need to fix it.
 @sco JDS.names_grades1()
 ```
 
-or
+or:
 
 ```jl
 @sco JDS.names_grades2()
@@ -32,43 +28,29 @@ For any **row**, say the second row, we can use:
 
 ```jl
 sco("""
+df = grades_2020()
 df[2, :]
 df = DataFrame(df[2, :]) # hide
-without_caption_label(df) # hide
-""")
+"""; process=without_caption_label)
 ```
 
 or create a function to give us any row `i` that we want:
 
 ```jl
-@sc JDS.grade_2020(1)
-```
-
-```jl
-sco("""
-without_caption_label( # hide
-grade_2020(2)
-) # hide
-""")
+@sco process=without_caption_label JDS.grade_2020(2)
 ```
 
 We can also get only `names` for the first 2 rows:
 
 ```jl
-@sco JDS.grades_indexing()
+@sco JDS.grades_indexing(grades_2020())
 ```
 
 If we assume that all names in the table are unique, we can also write a function to obtain the grade for a person via their `name`.
 To do so, we convert the table back to one of Julia's basic data structures which is capable of creating a mappings, namely dictionaries:
 
 ```jl
-@sc grade_2020("")
-```
-
-```jl
-sco("""
-grade_2020("Bob")
-""")
+@sco post=output_block grade_2020("Bob")
 ```
 
 which works because `zip` loops through `df.name` and `df.grade_2020` at the same time like a zipper:
@@ -105,29 +87,19 @@ Working with a function `f` for filtering can be a bit difficult to use in pract
 As a simple example, we can create a function which checks whether it's input equals "Alice":
 
 ```jl
-@sc JDS.equals_alice("")
+@sco post=output_block JDS.equals_alice("Bob")
 ```
 
 ```jl
-sco("""
-equals_alice("Bob")
-""")
-```
-
-```jl
-sco("""
-equals_alice("Alice")
-""")
+sco("equals_alice(\"Alice\")"; post=output_block)
 ```
 
 With such a function, we can now filter out all the rows for which `name` equals "Alice"
 
 ```jl
 sco("""
-without_caption_label( # hide
 filter(:name => equals_alice, grades_2020())
-) # hide
-""")
+"""; process=without_caption_label)
 ```
 
 Note that this doesn't only work for DataFrames, but also for vectors:
@@ -146,14 +118,12 @@ filter(n -> n == "Alice", ["Alice", "Bob", "Dave"])
 """)
 ```
 
-or, for the table,
+which we can also use on `grades_2020`:
 
 ```jl
 sco("""
-without_caption_label( # hide
 filter(:name => n -> n == "Alice", grades_2020())
-) # hide
-""")
+"""; process=without_caption_label)
 ```
 
 This line can be read as "for each element in the column `:name`, let's call the element `n`, check whether `n` equals Alice".
@@ -163,25 +133,21 @@ The details of these words are not important, only that you can use it via
 
 ```jl
 sco("""
-s = "Workaround a bug in books" # hide
-without_caption_label( # hide
+s = "This is here to workaround a bug in books" # hide
 filter(:name => ==("Alice"), grades_2020())
-) # hide
-""")
+"""; process=without_caption_label)
 ```
 
 To get all the rows which are **not** Alice, `==` can be replaced by `!=` in all previous examples:
 
 ```jl
 sco("""
-without_caption_label( # hide
 filter(:name => !=("Alice"), grades_2020())
-) # hide
-""")
+"""; process=without_caption_label)
 ```
 
 Now, to show why anonymous functions are so powerful, we can come up with a more complex filter.
-In this filter, we want to have the people whos name start with A or B **and** who have a grade above a 6.
+In this filter, we want to have the people whos name start with A or B **and** who have a grade above a 6:
 
 ```jl
 sc("""
@@ -195,10 +161,8 @@ end
 
 ```jl
 sco("""
-without_caption_label( # hide
 filter([:name, :grade_2020] => complex_filter, grades_2020())
-) # hide
-""")
+"""; process=without_caption_label)
 ```
 
 ## Select {#sec:select}

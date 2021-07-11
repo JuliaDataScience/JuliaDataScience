@@ -8,3 +8,4 @@ using Plots
 @sco JDS.plot_line()
 ```
 
+## StatsPlots.jl {#sec:statsplots}

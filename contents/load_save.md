@@ -19,7 +19,7 @@ julia> ]
 pkg> add CSV
 ```
 
-and load it via
+and load it via:
 
 ```
 using CSV
@@ -33,7 +33,7 @@ grades_2020()
 "; process=without_caption_label)
 ```
 
-and read it from a file after writing it
+and read it from a file after writing it:
 
 ```jl
 @sc write_grades_csv()
@@ -54,14 +54,14 @@ This is unlike many alternatives which require proprietary software.
 
 This is all very nice, of course, but what if our data **contains commas** as values?
 If we would naively write data with commas, it would make the files very hard to convert back to a table.
-Luckily, CSV solves it for us automatically.
+Luckily, `CSV.jl` solves it for us automatically.
 Consider the following data with commas:
 
 ```jl
 @sco grades_with_commas()
 ```
 
-If we write this, we get
+If we write this, we get:
 
 ```jl
 sco("""
@@ -76,7 +76,7 @@ end # hide
 """)
 ```
 
-So, CSV adds quotation marks `"` around the comma containing values.
+So, `CSV.jl` adds quotation marks `"` around the comma containing values.
 Another common way to solve this problem, is to write the data to a tab-separated value (TSV) file.
 This assumes that the data doesn't contain tabs, which holds in most cases.
 
@@ -106,7 +106,7 @@ end # hide
 """)
 ```
 
-By convention, its still best to give files with special delimiters, such as ";", the `.csv` extension.
+By convention, its still best to give files with special delimiters, such as ";", the ".csv" extension.
 
 Loading data in a similar way.
 Now, use `CSV.read` and specify in what kind of format you want the output.
@@ -121,7 +121,7 @@ end # hide
 """; process=without_caption_label)
 ```
 
-Conveniently, CSV will automatically infer column types:
+Conveniently, `CSV.jl` will automatically infer column types:
 
 ```jl
 sco("""
@@ -157,7 +157,7 @@ There are multiple Julia packages to read Excel files.
 In this book, we will only look at [`XLSX.jl`](https://github.com/felipenoris/XLSX.jl), because it is the most actively maintained package in the Julia's ecosystem that deals with Excel data.
 As a second benefit, `XLSX.jl` is written in pure Julia, which makes it easy for us to inspect the implementation and to use it.
 
-Install the package via
+Install the package via:
 
 ```
 julia> ]
@@ -173,13 +173,13 @@ import XLSX
 """)
 ```
 
-To write files, we define a little helper function
+To write files, we define a little helper function:
 
 ```jl
 @sc write_xlsx("", DataFrame())
 ```
 
-Now, we can easily write the grades to an Excel file
+Now, we can easily write the grades to an Excel file:
 
 ```jl
 @sc write_grades_xlsx()

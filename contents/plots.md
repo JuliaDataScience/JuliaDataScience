@@ -5,7 +5,7 @@ using Plots
 ```
 
 ```jl
-@sco JDS.plot_line
+@sco JDS.plot_line()
 ```
 
 ## StatsPlots.jl {#sec:statsplots}

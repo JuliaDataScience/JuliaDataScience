@@ -75,7 +75,7 @@ Now, the data is stored in, so called, column-major, which is cumbersome when we
 @sco JDS.second_row()
 ```
 
-Or, if you want to have the grade for Alice, you first need to figure out in what row Alice is,
+Or, if you want to have the grade for Alice, you first need to figure out in what row Alice is:
 
 ```jl
 sco("""
@@ -87,7 +87,7 @@ row_alice()
 """; post=output_block)
 ```
 
-and, then, we can get the value
+and, then, we can get the value:
 
 ```{=comment}
 Rik: The output isn't going through output_block.
@@ -150,7 +150,7 @@ Note that `name` and `grade_2020` are destroyed after the function returns, that
 There are two other benefits of doing this.
 Firstly, it is now clear to the reader where `name` and `grade_2020` belong to, they below to the grades of 2020.
 Secondly, it is easy to determine what the output of `grades_2020()` would be at any point in the book.
-For example, we can now put the data in a variable
+For example, we can now put the data in a variable:
 
 ```jl
 sco("""
@@ -166,7 +166,7 @@ df = DataFrame(name = ["Malice"], grade_2020 = ["10"])
 """; process=without_caption_label)
 ```
 
-and still get the original data back without any problem
+and still get the original data back without any problem:
 
 ```jl
 sco("""
@@ -179,7 +179,7 @@ We promise to not do that in this book, because it is a bad idea exactly for thi
 Instead of "changing" a function, we will make a new one and give it a clear name.
 
 So, back to the `DataFrames` constructor.
-As you might have seen, the way to create one is simply to pass vectors as arguments into `DataFrame(...)`.
+As you might have seen, the way to create one is simply to pass vectors as arguments into the `DataFrame` constructor.
 You can come up with any valid Julia vector and it will work as long as the vectors have the same length.
 Duplicates, unicode symbols and not so round numbers are fine:
 
@@ -193,13 +193,7 @@ Typically, in your code, you would create a function which wraps around one or m
 For example, we can make a function to get the grades for various `names`:
 
 ```jl
-@sc JDS.grades_2020([1])
-```
-
-```jl
-sco("""
-grades_2020([3, 4])
-"""; M=JDS, process=without_caption_label)
+@sco process=without_caption_label JDS.grades_2020([3, 4])
 ```
 
 This way of using functions to wrap around basic functionality from programming languages and packages is quite common.

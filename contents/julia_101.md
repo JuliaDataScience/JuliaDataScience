@@ -394,7 +394,7 @@ end
 )
 ```
 
-Now it works as expected with any float type:
+Now, it works as expected with any float type:
 
 ```jl
 scob(
@@ -483,7 +483,7 @@ In that case we can do two things:
 Some functions can accept keywords arguments instead of positional arguments.
 These arguments are just like regular arguments, except that they are defined after the regular function's arguments and separated by a semicolon `;`.
 Another difference is that we must supply a **default value** for every keyword argument.
-For example, let's define a `logarithm` function that by default uses base $e$ (`jl exp(1)`) as a keyword argument.
+For example, let's define a `logarithm` function that by default uses base $e$ (2.718281828459045) as a keyword argument.
 Note that here we are using the abstract type `Real` so that we cover all types derived from `Integer` and `AbstractFloat`, being both themselves subtypes of `Real`:
 
 ```jl
@@ -526,7 +526,7 @@ logarithm(10; base=2)
 
 #### Anonymous Functions {#sec:function_anonymous}
 
-A lot of times we need to quickly use functions without having to define a full-fledged function with the `function ... end` syntax.
+A lot of times, we don't care about the name of the function and want to quickly make one.
 What we need are **anonymous functions**.
 They come a lot in Julia's data science workflow.
 For example, when using `DataFrames.jl` ([@sec:dataframes]) or `Plots.jl` ([@sec:plots]), sometimes we need a quick and dirty function to filter data or format plot labels.
@@ -547,7 +547,7 @@ map(x -> 2.7182818284590^x, logarithm(2))
 )
 ```
 
-Here we are using the `map` function to conveniently map the anonymous function (first argument) to `logarithm(2)` (the second argument).
+Here, we are using the `map` function to conveniently map the anonymous function (first argument) to `logarithm(2)` (the second argument).
 As a result, we get back the same number, because logarithm and exponentiation are inverse (at least in the base that we've chosen -- 2.7182818284590)
 
 ### Conditional If-Else-Elseif {#sec:conditionals}
@@ -582,12 +582,12 @@ end
 )
 ```
 
-We can even wrap this in a function called `test`:
+We can even wrap this in a function called `compare`:
 
 ```jl
 scob(
 """
-function test(a, b)
+function compare(a, b)
     if a < b
         "a is less than b"
     elseif a > b
@@ -597,7 +597,7 @@ function test(a, b)
     end
 end
 
-test(3.14, 3.14)
+compare(3.14, 3.14)
 """
 )
 ```
@@ -743,7 +743,7 @@ my_data
 
 ### String {#sec:string}
 
-**Strings** in Julia are represented delimited by double quotes:
+**Strings** are represented delimited by double quotes:
 
 ```jl
 sco(
@@ -753,21 +753,32 @@ typeof("This is a string")
 )
 ```
 
-For long strings we can use triple double quotes:
+We can also write a multiline string:
 
 ```jl
-sco(
-"""
-typeof(
-\"\"\"
+sco("""
+s = "
 This is a big multiline string.
 As you can see.
 It is still a String to Julia.
-\"\"\"
-)
-"""
-)
+"
+"""; post=output_block)
 ```
+
+But, it is typically more clear to use triple-backtics:
+
+```jl
+sco("""
+s = \"\"\"
+    This is a big multiline string.
+    As you can see.
+    It is still a String to Julia.
+    \"\"\"
+"""; post=output_block)
+```
+
+When using triple-backticks, the indentation and newline at the start is ignored by Julia.
+This helps code readability.
 
 #### String Concatenation {#sec:string_concatenation}
 
@@ -779,7 +790,7 @@ This is accomplish in julia either with the `*` operator (this is where Julia de
 scob(
 """
 hello = "Hello"
-goodbye = "Goobye"
+goodbye = "Goodbye"
 
 hello * goodbye
 """
@@ -953,7 +964,7 @@ typeof(string(my_number))
 )
 ```
 
-Sometimes we want the opposite: convert a string to a number.
+Sometimes, we want the opposite: convert a string to a number.
 Julia has a handy function for that: `parse`
 
 ```jl
@@ -964,7 +975,7 @@ typeof(parse(Int64, "123"))
 )
 ```
 
-Sometimes we want to play safe with these convertions.
+Sometimes, we want to play safe with these convertions.
 That's when `tryparse` function steps in.
 It has the same functionality as `parse` but returns either a value of the requested type, or `nothing`.
 That makes `tryparse` handy when we want to avoid errors.
@@ -1002,7 +1013,7 @@ We can access them via indexing.
 Like this:
 
 ```jl
-sco(
+scob(
 """
 my_tuple[2]
 """
@@ -1089,7 +1100,7 @@ sco(
 """
 i = 1
 f = 3.14
-s="Julia"
+s = "Julia"
 
 my_quick_namedtuple = (; i, f, s)
 """
@@ -1119,6 +1130,12 @@ typeof(1:10)
 )
 ```
 
+And, if we gather all the values, we get:
+
+```jl
+sco("[x for x in 1:10]")
+```
+
 We can construct ranges also for other types:
 
 ```jl
@@ -1129,7 +1146,7 @@ typeof(1.0:10.0)
 )
 ```
 
-Sometimes we want to change the default interval stepsize behavior.
+Sometimes, we want to change the default interval stepsize behavior.
 We can do that by adding a stepsize in the range syntax `start:step:stop`.
 For example, suppose we want a range of `Float64` from 0 to 1 with steps of size 0.2:
 
@@ -1976,7 +1993,17 @@ sco(
 A = ["one", "two", "three"]
 B = [1, 2, 3]
 
-Dict(zip(A, B))
+dic = Dict(zip(A, B))
+"""
+)
+```
+
+For instance, we can now get the number 3 via:
+
+```jl
+scob(
+"""
+dic["three"]
 """
 )
 ```
@@ -1984,26 +2011,31 @@ Dict(zip(A, B))
 ### Symbol {#sec:symbol}
 
 `Symbol` is actually *not* a data structure.
-It is a type.
-But an important one.
-We use `Symbol`s a lot in data manipulations with `DataFrames.jl` [@sec:dataframes] and also data visualization with `StatsPlots.jl` [@sec:statsplots].
-
-`Symbol` is a string with a colon `:` as a prefix:
+It is a type and behaves at lot like a string.
+Instead of surrounding the text by quotation marks, a symbol starts with a colon (:) and can contain underscores:
 
 ```jl
-sco(
-"""
-typeof(:my_symbol)
-"""
-)
+sco("""
+sym = :some_text
+""")
 ```
 
-They are a concise way to represent columns in `DataFrame`s and also makes easier to supply plot arguments to `StatsPlots.jl`.
+Since symbols and strings are so similar, we can easily convert a symbol to string and vice versa:
 
-```{=comment}
-@rikhuijzer I might need some help here.
-Do you think we should add more stuff about Symbols?
+```jl
+scob("""
+s = string(sym)
+""")
 ```
+
+```jl
+sco("""
+sym = Symbol(s)
+""")
+```
+
+One simple benefit of symbols is that you have to type one character less, that is, `:some_text` versus `"some text"`.
+We use `Symbol`s a lot in data manipulations with the `DataFrames.jl` package (@sec:dataframes) and data visualizations (@sec:plots and -@sec:makie).
 
 ## Filesystem {#sec:filesystem}
 
@@ -2063,7 +2095,7 @@ joinpath(root, "data", "my_data.csv")
 ```
 
 Always make sure that your code can run anywhere.
-Note to include Julia's `Filesystem` utilities in your data science workflow.
+It's a good habit to pick up, because it's very likely to save problems later.
 
 ## Julia Standard Library {#sec:standardlibrary}
 
@@ -2215,8 +2247,8 @@ DateTime("1987-09-13T21:21:00", "yyyy-mm-ddTHH:MM:SS")
 You can find more on how to specify different format as strings in the [Julia `Dates`' documentation](https://docs.julialang.org/en/v1/stdlib/Dates/#Dates.DateFormat).
 Don't worry if you have to revisit it all the time, we ourselves have to do it all the time when working with dates and timestamps.
 
-According to [Julia `Dates`' documentation](https://docs.julialang.org/en/v1/stdlib/Dates/#Constructors), using the `Date(date_string,format_string)` function is fine if only called a few times.
-If there are many similarly formatted date strings to parse however, it is much more efficient to first create a `DateFormat` type, and then pass it instead of a raw format string.
+According to [Julia `Dates`' documentation](https://docs.julialang.org/en/v1/stdlib/Dates/#Constructors), using the `Date(date_string, format_string)` method is fine if only called a few times.
+If there are many similarly formatted date strings to parse, however, it is much more efficient to first create a `DateFormat` type, and then pass it instead of a raw format string.
 So our previous example would become:
 
 ```jl

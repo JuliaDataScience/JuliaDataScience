@@ -2035,7 +2035,7 @@ sym = Symbol(s)
 ```
 
 One simple benefit of symbols is that you have to type one character less, that is, `:some_text` versus `"some text"`.
-We use `Symbol`s a lot in data manipulitions with the `DataFrames.jl` package (@sec:dataframes) and data visualizations (@sec:plots and -@sec:makie).
+We use `Symbol`s a lot in data manipulations with the `DataFrames.jl` package (@sec:dataframes) and data visualizations (@sec:plots and -@sec:makie).
 
 ## Filesystem {#sec:filesystem}
 

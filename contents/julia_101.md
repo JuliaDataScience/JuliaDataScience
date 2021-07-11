@@ -24,11 +24,11 @@ This means that you don't need to compile it before you run code, like you would
 The main differences from Julia to other dynamic languages such as R and Python are the following.
 
 First, Julia, contrary to most dynamic-typed languages, **enables the user to specify type declaration**.
-You already saw some types declarations in the [*Why Julia?*](why_julia.html) section: they are those double colon `::` that sometimes comes after variables
+You already saw some types declarations in *Why Julia?* ([@sec:why_julia]): they are those double colon `::` that sometimes comes after variables
 But if you don't want to specify what type are your variables or functions, Julia will gladly infer it for you.
 
 Second, Julia also allows users to define function behavior across many combinations of argument types via multiple dispatch.
-We also covered multiple dispatch in [*Why Julia?*](julia_accomplish.html) section.
+We also covered multiple dispatch in @sec:julia_accomplish.
 We defined a different type behavior by defining new function signatures for different type's argument while using the same function name.
 
 ### Variables {#sec:variable}
@@ -529,7 +529,7 @@ logarithm(10; base=2)
 A lot of times we need to quickly use functions without having to define a full-fledged function with the `function ... end` syntax.
 What we need are **anonymous functions**.
 They come a lot in Julia's data science workflow.
-For example, when using [`DataFrames.jl`](dataframes.html) or [`Plots.jl`](plots.html), sometimes we need a quick and dirty function to filter data or format plot labels.
+For example, when using `DataFrames.jl` ([@sec:dataframes]) or `Plots.jl` ([@sec:plots]), sometimes we need a quick and dirty function to filter data or format plot labels.
 That's when we reach out for anonymous functions.
 They are specially useful when we don't want to create a function and a simple in-place statement would be enough.
 
@@ -1863,7 +1863,7 @@ my_pair.second
 )
 ```
 
-Pairs will be used a lot in data manipulation and data visualization since both [`DataFrames.jl`](dataframes.html) and [`Plots.jl`](plots.html) main functions depends on `Pair` as type arguments.
+Pairs will be used a lot in data manipulation and data visualization since both `DataFrames.jl` ([@sec:dataframes]) or `Plots.jl` ([@sec:plots]) main functions depends on `Pair` as type arguments.
 
 ### Dict {#sec:dict}
 
@@ -1963,7 +1963,7 @@ my_dict
 )
 ```
 
-`Dict`s are also used in data manipulations by [`DataFrames.jl`](dataframes.html) and data visualization by [`Plots.jl`](plots.html).
+`Dict`s are also used in data manipulations by `DataFrames.jl`[@sec:dataframes] and data visualization by `Plots.jl` [@sec:plots].
 So it is important to know their basic functionality.
 
 There is one useful `Dict` constructor that we use a lot.
@@ -1986,7 +1986,7 @@ Dict(zip(A, B))
 `Symbol` is actually *not* a data structure.
 It is a type.
 But an important one.
-We use `Symbol`s a lot in data manipulations with [`DataFrames.jl`](dataframes.html) and also data visualization with [`StatsPlots.jl`](plots.html).
+We use `Symbol`s a lot in data manipulations with `DataFrames.jl` [@sec:dataframes] and also data visualization with `StatsPlots.jl` [@sec:statsplots].
 
 `Symbol` is a string with a colon `:` as a prefix:
 
@@ -2081,7 +2081,7 @@ Now you can access all functions and types inside `ModuleName`.
 ### Dates {#sec:dates}
 
 How to handle dates and timestamps is something quite important in data science.
-Like we said in [*Why Julia?*](why_julia.html) section, Python's `pandas` uses its own `Datetime` type to handle dates.
+Like we said in *Why Julia?* ([@sec:why_julia]) section, Python's `pandas` uses its own `Datetime` type to handle dates.
 The same with R tidyverse's `lubridate` package, which also defines its own `datetime` type to handle dates.
 Julia doesn't need any of this, it has all the **date stuff already baked onto its standard library, in a module named `Dates`**.
 
@@ -2387,7 +2387,7 @@ DateTime(today()) - DateTime(my_birthday)
 One nice thing about `Dates` module is that we can also easily construct date and time intervals.
 Julia is clever enough to not have to define the whole interval types and operations that we covered in [@sec:ranges].
 It just extends the functions and operations defined for `UnitRange` to `Date`'s types.
-This is known as multiple dispatch and we already covered in [*Why Julia?*](why_julia.html).
+This is known as multiple dispatch and we already covered in *Why Julia?*([@sec:why_julia]).
 
 For example suppose you want to create a `Day` interval.
 This is easy done with the colon `:` operator:

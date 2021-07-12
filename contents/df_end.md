@@ -65,16 +65,18 @@ collect(zip(df.name, df.grade_2020))
 However, converting a DataFrame to a Dictionary is only useful when the elements are unique.
 When that is not the case, it is time to `filter` (@sec:filter).
 
-## Filter and Subset {#sec:filter}
+## Filter and Subset {#sec:filter_subset}
 
-Continuing from the earlier mentioned data.
+There are two ways to remove rows from a DataFrame, one is `filter` (@sec:filter) and another one is `subset` (@sec:subset).
+`filter` was added earlier to `DataFrames.jl`, is more powerful, and more consistent with syntax from Julia base, so that is why we start with discussing `filter`.
+`subset` is a newer, and often more convenient version.
+
+### Filter {#sec:filter}
+
+Continuing from the earlier mentioned data:
 
 ```jl
-sco("""
-without_caption_label( # hide
-grades_2020()
-) # hide
-""")
+sco("grades_2020()"; process=without_caption_label)
 ```
 
 ```{=comment}
@@ -160,9 +162,66 @@ end
 ```
 
 ```jl
-sco("""
-filter([:name, :grade_2020] => complex_filter, grades_2020())
-"""; process=without_caption_label)
+s = "filter([:name, :grade_2020] => complex_filter, grades_2020())"
+sco(s; process=without_caption_label)
+```
+
+### Subset {#sec:subset}
+
+The `subset` function was added to make it easier to work with missing values (@sec:missing_data).
+In contrast to `filter`, the `subset` function works on complete columns.
+If we want to use our earlier defined functions, we can use `ByRow`:
+
+```jl
+s = "subset(grades_2020(), :name => ByRow(equals_alice))"
+sco(s; process=without_caption_label)
+```
+
+Also note that the DataFrame is now the first argument, whereas it was the second argument in `filter`, that is, use `filter(f, df)` and use `subset(df, args...)`.
+The reason for this is that Julia defines filter as `filter(f, V::Vector)` and the developers of `DataFrames.jl` chose to be consistent with that.
+
+Just like with `filter`, we can also use anonymous functions:
+
+```jl
+s = "subset(grades_2020(), :name => ByRow(name -> name == \"Alice\"))"
+sco(s; process=without_caption_label)
+```
+
+Or, the partial function application for `==`:
+
+```jl
+s = "subset(grades_2020(), :name => ByRow(==(\"Alice\")))"
+sco(s; process=without_caption_label)
+```
+
+To, now, show the real power of `subset`, let's create a dataset with some missing values:
+
+```jl
+@sco salaries()
+```
+
+This data is about an imaginary situation where you want to figure out how many your colleagues earn, and haven't figured it out for Zed yet.
+Even though we don't want to encourage these practices, we suspect it is an interesting example.
+Say that we want to know who earns more than 2000.
+When using `filter` without taking the `missing` values into account, it will fail:
+
+```jl
+s = "filter(:salary => >(2_000), salaries())"
+sce(s, post=trim_last_n_lines(25))
+```
+
+`subset` will also fail, but guide us to an easy solution:
+
+```jl
+s = "subset(salaries(), :salary => ByRow(>(2_000)))"
+sce(s, post=trim_last_n_lines(25))
+```
+
+So, we just need to pass `skipmissing=true`:
+
+```jl
+s = "subset(salaries(), :salary => ByRow(>(2_000)); skipmissing=true)"
+sco(s; process=without_caption_label)
 ```
 
 ## Select {#sec:select}

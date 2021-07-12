@@ -103,3 +103,10 @@ function write_grades_xlsx()
     write_xlsx(path, grades_2020())
     "$path.xlsx"
 end
+
+export salaries
+function salaries()
+    names = ["John", "Hank", "Karen", "Zed"]
+    salary = [1_900, 2_800, 2_800, missing]
+    DataFrame(; names, salary)
+end

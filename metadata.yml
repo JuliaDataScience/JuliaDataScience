@@ -9,20 +9,9 @@ tex-license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 Internati
 lang: en-US
 tags: [JuliaLang, Data Science, Data Visualization, Data Manipulation, Data Analysis]
 repo: https://github.com/JuliaDataScience/JuliaDataScience
-geometry:
-  - top=20mm
-  - left=24mm
-  - right=24mm
-  - bottom=28mm
-number-sections: true
-title-prefix: Tools
 secPrefix: Section
 figPrefix: Figure
 tblPrefix: Table
 titlepage: true
-linkReferences: true
 bibliography: pandoc/references.bib
-link-citations: true
-colorlinks: true
-linkcolor: blue
 ---

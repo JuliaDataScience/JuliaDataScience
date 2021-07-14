@@ -110,3 +110,14 @@ function salaries()
     salary = [1_900, 2_800, 2_800, missing]
     DataFrame(; names, salary)
 end
+
+export responses
+function responses()
+    id = [1, 2]
+    q1 = [28, 61]
+    q2 = [:us, :fr]
+    q3 = ["F", "B"]
+    q4 = ["B", "C"]
+    q5 = ["A", "E"]
+    DataFrame(; id, q1, q2, q3, q4, q5)
+end

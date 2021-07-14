@@ -13,9 +13,10 @@ We could even ask the reader to answer the queries described below as exercises.
 
 ```jl
 tv_shows = DataFrame(
-    name=["Game of Thrones", "The Crown", "Friends", "..."],
-    country=["United States", "England", "United States", "..."],
-    rating=[8.2, 7.3, 7.8, "..."])
+        name=["Game of Thrones", "The Crown", "Friends", "..."],
+        country=["United States", "England", "United States", "..."],
+        rating=[8.2, 7.3, 7.8, "..."]
+    )
 Options(tv_shows; label="TV_shows")
 ```
 

@@ -73,7 +73,11 @@ There are two ways to remove rows from a DataFrame, one is `filter` (@sec:filter
 
 ### Filter {#sec:filter}
 
+From this point on, we start to really get to grips with `DataFrames.jl`.
+To this end, we need to learn some verbs, such as `select` and `filter`, but it might be a relieve to know that the general design goal of `DataFrames.jl` is to keep the number of verbs that a user has to learn to a minimum[^verbs].
 Continuing from the earlier mentioned data:
+
+[^verbs]: According to Bogumił Kamiński on [Discourse](https://discourse.julialang.org/t/pull-dataframes-columns-to-the-front/60327/5).
 
 ```jl
 sco("grades_2020()"; process=without_caption_label)
@@ -225,6 +229,96 @@ sco(s; process=without_caption_label)
 ```
 
 ## Select {#sec:select}
+
+Whereas `filter` removes rows, `select` removes columns.
+However, this function is much more versatile than just removing columns, as we will descuss in this section.
+Lets create a dataset with multiple columns:
+
+```jl
+@sco responses()
+```
+
+Here, the data represents answers on five questions (`q1`, `q2`, ..., `q5`) in a questionnaire.
+Let's first "select" a few columns from this dataset.
+Again, we use symbols to specify columns:
+
+```jl
+s = "select(responses(), :id, :q1)"
+sco(s, process=without_caption_label)
+```
+
+But, we can also use strings if we want:
+
+```jl
+s = """select(responses(), "id", "q1", "q2")"""
+sco(s, process=without_caption_label)
+```
+
+To select everything _except_ one or more columns, use `Not` with a column name:
+
+```jl
+s = """select(responses(), Not(:q5))"""
+sco(s, process=without_caption_label)
+```
+
+Or, with multiple column names:
+
+```jl
+s = """select(responses(), Not([:q4, :q5]))"""
+sco(s, process=without_caption_label)
+```
+
+It's also fine to combine column names with `Not`:
+
+```jl
+s = """select(responses(), :q5, Not(:id))"""
+sco(s, process=without_caption_label)
+```
+
+Note how `q5` is now the first column.
+But, there is a more clever way to do this, and that is with `:`.
+The colon `:` can be thought of as "all the columns that we didn't include yet".
+For example:
+
+```jl
+s = """select(responses(), :q5, :)"""
+sco(s, process=without_caption_label)
+```
+
+Or, to put `q5` at the second position[^sudete]:
+
+[^sudete]: Thanks to Sudete on [Discourse](https://discourse.julialang.org/t/pull-dataframes-columns-to-the-front/60327/4) for this suggestion.
+
+```jl
+s = "select(responses(), 1, :q5, :)"
+sco(s, process=without_caption_label)
+```
+
+Even renaming is possible via select:
+
+```jl
+s = """select(responses(), 1 => "participant", :q1 => "age", :q2 => "nationality")"""
+sco(s, process=without_caption_label)
+```
+
+which, thanks to the `...` operator, we can also write as:
+
+```jl
+s = """
+    renames = (1 => "participant", :q1 => "age", :q2 => "nationality")
+    select(responses(), renames...)
+    """
+sco(s, process=without_caption_label)
+```
+
+> **Note:** Another example of splatting via the `...` operator is:
+> ```jl
+  s = """
+    V = ["a", "b", "c"]
+    joinpath(V...)
+    """
+  scob(s)
+  ```
 
 ## Types and Missing Data, Categorical {#sec:missing_data}
 

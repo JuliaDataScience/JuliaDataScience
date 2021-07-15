@@ -2084,7 +2084,7 @@ joinpath(root, "my_script.jl")
 `joinpath` also handles subfolders.
 Let's now imagine a common situation where you have a folder named `data/` in your project's directory.
 Inside this folder there is a CSV file named `my_data.csv`.
-You can have the same robust representation of the filepath to `my_data.jl` as:
+You can have the same robust representation of the filepath to `my_data.csv` as:
 
 ```jl
 scob(

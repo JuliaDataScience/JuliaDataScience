@@ -2054,7 +2054,7 @@ This means that Julia provides everything you need to make your code perform fla
 Whenever you are dealing with files such as CSV, Excel files or other Julia scripts, make sure that your code is compliant with all different OS filesystems.
 This is easily accomplished with the `joinpath` and `pwd` functions.
 
-The `pwd` functions is an acronym for **p**rint **w**orking **d**irectory and it returns a string containing the current working directory.
+The `pwd` function is an acronym for **p**rint **w**orking **d**irectory and it returns a string containing the current working directory.
 One nice thing about `pwd` is that it is robust to OS, i.e. it will return the correct string in Linux, MacOS, Windows or any other OS.
 For example, let's see what are our current directory and record it in a variable `root`:
 

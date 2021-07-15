@@ -1091,7 +1091,7 @@ my_namedtuple.s
 ```
 
 To finish named tuples, there is one important *quick* syntax that you'll see a lot in Julia code.
-Often Julia users create a tuple by using the familiar parenthesis `()` and commas `,`, but without naming the values.
+Often Julia users create a named tuple by using the familiar parenthesis `()` and commas `,`, but without naming the values.
 To do so you **begin the named tuple construction by specifying first a semicolon `;` before the values**.
 This is specially useful when the values that would compose the named tuple are already defined in variables:
 
@@ -1852,7 +1852,7 @@ my_pair = Pair("Julia", 42)
 )
 ```
 
-Alternatively, we can create a pir by specifying both values and in between we use the pair `=>` operator:
+Alternatively, we can create a pair by specifying both values and in between we use the pair `=>` operator:
 
 ```jl
 sco(

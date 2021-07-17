@@ -314,7 +314,7 @@ sco(s, process=without_caption_label)
 > **Note:** Another example of splatting via the `...` operator is:
 > ```jl
   s = """
-    fun(a, b, c) = "Got the values $a, $b and $c"
+    fun(a, b, c) = "Got the values \$a, \$b and \$c"
     V = [1, 2, 3]
     fun(V...)
     """

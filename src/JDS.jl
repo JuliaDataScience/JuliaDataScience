@@ -7,6 +7,7 @@ using Reexport
 @reexport using AlgebraOfGraphics
 @reexport using Books
 @reexport using CairoMakie
+@reexport using CategoricalArrays
 @reexport using CSV
 @reexport using DataFrames
 @reexport using Dates
@@ -16,56 +17,20 @@ using Reexport
 @reexport using Plots
 @reexport using Random
 
-export sce, trim_last_n_lines
-
-plot = Plots.plot
-
 include("df.jl")
 include("environment.jl")
+include("showcode_additions.jl")
 include("plots.jl")
+
+export sce, scsob, trim_last_n_lines
+
+plot = Plots.plot
 
 function myplot()
     I = 1:30
     xy = mapping([I] => :x, [I .* 2] => :y)
 
     draw(xy)
-end
-
-function get_error(expr::String)
-    try
-        sco(expr)
-    catch e
-        exc, bt = last(Base.catch_stack())
-        stacktrace = sprint(Base.showerror, exc, bt)::String
-        stacktrace = Books.clean_stacktrace(stacktrace)
-        lines = split(stacktrace, '\n')
-        lines = lines[1:end-8]
-        join(lines, '\n')
-    end
-end
-
-function trim_last_n_lines(s::String, n::Int)
-    lines = split(s, '\n')
-    lines = lines[1:end-n]
-    lines = [lines; "  ..."]
-    join(lines, '\n')
-end
-trim_last_n_lines(n::Int) = s -> trim_last_n_lines(s, n)
-
-"""
-    sce(expr::String)
-
-Show code and error.
-"""
-function sce(expr::String; post::Function=identity)
-    code = code_block(expr)
-    err = JDS.get_error(expr)
-    err = post(err)
-    out = output_block(err)
-    """
-    $code
-    $out
-    """
 end
 
 """

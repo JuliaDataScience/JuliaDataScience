@@ -121,3 +121,37 @@ function responses()
     q5 = ["A", "E"]
     DataFrame(; id, q1, q2, q3, q4, q5)
 end
+
+export wrong_types
+function wrong_types()
+    id = 1:4
+    date = ["28-01-2018", "03-04-2019", "01-08-2018", "22-11-2020"]
+    age = ["adolescent", "adult", "infant", "adult"]
+    DataFrame(; id, date, age)
+end
+
+"""
+Not using `transform(df, :date => str2date; renamecols=false)`, because it's less readable.
+"""
+function fix_date_column(df::DataFrame)
+    strings2dates(dates::Vector) = Date.(dates, dateformat"dd-mm-yyyy")
+    dates = strings2dates(df[!, :date])
+    df[!, :date] = dates
+    df
+end
+export fix_date_column
+
+function fix_age_column(df)
+    levels = ["infant", "adolescent", "adult"]
+    ages = categorical(df[!, :age]; ordered=true, levels)
+    df[!, :age] = ages
+    df
+end
+export fix_age_column
+
+function correct_types()
+    df = wrong_types()
+    df = fix_date_column(df)
+    df = fix_age_column(df)
+end
+export correct_types

@@ -103,33 +103,29 @@ sco("equals_alice(\"Alice\")"; post=output_block)
 With such a function, we can now filter out all the rows for which `name` equals "Alice"
 
 ```jl
-sco("""
-filter(:name => equals_alice, grades_2020())
-"""; process=without_caption_label)
+s = "filter(:name => equals_alice, grades_2020())"
+sco(s; process=without_caption_label)
 ```
 
 Note that this doesn't only work for DataFrames, but also for vectors:
 
 ```jl
-sco("""
-filter(equals_alice, ["Alice", "Bob", "Dave"])
-""")
+s = """filter(equals_alice, ["Alice", "Bob", "Dave"])"""
+sco(s)
 ```
 
 We can make it a bit less verbose by using an anonymous function:
 
 ```jl
-sco("""
-filter(n -> n == "Alice", ["Alice", "Bob", "Dave"])
-""")
+s = """filter(n -> n == "Alice", ["Alice", "Bob", "Dave"])"""
+sco(s)
 ```
 
 which we can also use on `grades_2020`:
 
 ```jl
-sco("""
-filter(:name => n -> n == "Alice", grades_2020())
-"""; process=without_caption_label)
+s = """filter(:name => n -> n == "Alice", grades_2020())"""
+sco(s; process=without_caption_label)
 ```
 
 This line can be read as "for each element in the column `:name`, let's call the element `n`, check whether `n` equals Alice".
@@ -147,22 +143,22 @@ filter(:name => ==("Alice"), grades_2020())
 To get all the rows which are **not** Alice, `==` can be replaced by `!=` in all previous examples:
 
 ```jl
-sco("""
-filter(:name => !=("Alice"), grades_2020())
-"""; process=without_caption_label)
+s = """filter(:name => !=("Alice"), grades_2020())"""
+sco(s; process=without_caption_label)
 ```
 
 Now, to show why anonymous functions are so powerful, we can come up with a more complex filter.
 In this filter, we want to have the people whos name start with A or B **and** who have a grade above a 6:
 
 ```jl
-sc("""
-function complex_filter(name, grade)::Bool
-    interesting_name = startswith(name, 'A') || startswith(name, 'B')
-    interesting_grade = 6 < grade
-    interesting_name && interesting_grade
-end
-""")
+s = """
+    function complex_filter(name, grade)::Bool
+        interesting_name = startswith(name, 'A') || startswith(name, 'B')
+        interesting_grade = 6 < grade
+        interesting_name && interesting_grade
+    end
+    """
+sc(s)
 ```
 
 ```jl
@@ -320,10 +316,103 @@ sco(s, process=without_caption_label)
   scob(s)
   ```
 
-## Types and Missing Data, Categorical {#sec:missing_data}
+## Types and Missing Data {#sec:missing_data}
 
 ```{=comment}
 Try to combine with transformations
+
+categorical
+allowmissing
+disallowmissing
+```
+
+As discussed in @sec:load_save, `CSV.jl` will do its best to guess data types for your data.
+However, this won't always work perfectly.
+In this section, we show why good types are important and we fix wrong data types.
+To be more clear about the types, we show the text output for DataFrames instead of a pretty table.
+In this section, we work with the following dataset:
+
+```jl
+@sco process=string post=output_block wrong_types()
+```
+
+Because the date column has the wrong type, sorting won't work correctly:
+
+```jl
+s = "sort(wrong_types(), :date)"
+scsob(s)
+```
+
+To fix the sorting, we can use `Date` as described in @sec:dates:
+
+```jl
+@sco process=string post=output_block fix_date_column(wrong_types())
+```
+
+Now, sorting will work correctly:
+
+```jl
+s = """
+    df = fix_date_column(wrong_types())
+    sort(df, :date)
+    """
+scsob(s)
+```
+
+For the age column, we have a similar problem:
+
+```jl
+s = "sort(wrong_types(), :age)"
+scsob(s)
+```
+
+This isn't right, because an infant is younger than adults and adolescents.
+The solution for this categorical data problem is to use `CategoricalArrays.jl`:
+
+```
+using CategoricalArrays
+```
+
+with this package, we can add levels to our data:
+
+```jl
+@sco process=string post=output_block fix_age_column(wrong_types())
+```
+
+Now, we can sort the data correctly on the age column:
+
+```jl
+s = """
+    df = fix_age_column(wrong_types())
+    sort(df, :age)
+    """
+scsob(s)
+```
+
+Since we have worked with functions, we can now define our fixed data as:
+
+```jl
+@sco process=string post=output_block correct_types()
+```
+
+Note that setting `ordered` to `true` told `CategoricalArrays.jl` that the data is ordinal.
+In other words, because the data is ordinal, we can compare elements:
+
+```jl
+s = """
+    df = correct_types()
+    a = df[1, :age]
+    b = df[2, :age]
+    a < b
+    """
+scob(s)
+```
+
+which would have been wrong for strings:
+
+```jl
+s = "\"infant\" < \"adult\""
+scob(s)
 ```
 
 ## Variable Transformations

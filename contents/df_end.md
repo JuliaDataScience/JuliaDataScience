@@ -8,12 +8,6 @@ sco("grades_2020()"; process=without_caption_label)
 
 To retreive a **vector** for `name`, we can use:
 
-```{=comment}
-These two functions cannot be replaced by inline code due to
-`df.name` being converted to the same filename as `df[!, :name]` in Books.jl.
-I need to fix it.
-```
-
 ```jl
 @sco JDS.names_grades1()
 ```
@@ -24,14 +18,27 @@ or:
 @sco JDS.names_grades2()
 ```
 
+Note that `df.name` is exactly the same as `df[!, :name]`, which you can verify yourself by doing:
+
+```
+julia> df = DataFrame(id = [1]);
+
+julia> @edit df.name
+```
+
+In both cases, it gives you the column `:name`.
+There also exists `df[:, :name]` which modifies the column `:name` in place.
+In most cases, `df[!, :name]` is the best bet since it is more versatile.
+
 For any **row**, say the second row, we can use:
 
 ```jl
-sco("""
-df = grades_2020()
-df[2, :]
-df = DataFrame(df[2, :]) # hide
-"""; process=without_caption_label)
+s = """
+    df = grades_2020()
+    df[2, :]
+    df = DataFrame(df[2, :]) # hide
+    """
+sco(s; process=without_caption_label)
 ```
 
 or create a function to give us any row `i` that we want:
@@ -415,6 +422,17 @@ s = "\"infant\" < \"adult\""
 scob(s)
 ```
 
+## Join {#sec:join}
+
+At the start of this chapter, we showed multiple tables and gave questions related to multiple tables.
+However, we haven't talked about combining tables yet, which we will do in this section.
+In `DataFrames.jl`, combining multiple tables is done via _joins_.
+Joins are extremely powerful, but might take some time to wrap your head around.
+
+```{=comment}
+Here, add the grades stuff from my blog.
+```
+
 ## Variable Transformations
 
 ```{=comment}
@@ -423,8 +441,5 @@ DataFrames.transform
 Ifelse and case_when
 ```
 
-## Join {#sec:join}
 
 ## Groupby {#sec:groupby}
-
-## CategoricalArrays.jl

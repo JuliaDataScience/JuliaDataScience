@@ -74,14 +74,14 @@ When that is not the case, it is time to `filter` (@sec:filter).
 
 ## Filter and Subset {#sec:filter_subset}
 
-There are two ways to remove rows from a DataFrame, one is `filter` (@sec:filter) and another one is `subset` (@sec:subset).
+There are two ways to remove rows from a DataFrame, one is `filter` (@sec:filter) and the other is `subset` (@sec:subset).
 `filter` was added earlier to `DataFrames.jl`, is more powerful, and more consistent with syntax from Julia base, so that is why we start with discussing `filter`.
-`subset` is a newer, and often more convenient version.
+`subset` is newer and often more convenient.
 
 ### Filter {#sec:filter}
 
-From this point on, we start to really get to grips with `DataFrames.jl`.
-To this end, we need to learn some verbs, such as `select` and `filter`, but it might be a relieve to know that the general design goal of `DataFrames.jl` is to keep the number of verbs that a user has to learn to a minimum[^verbs].
+From this point on, we start to get to the more eowerful features of `DataFrames.jl`.
+To do this, we need to learn some verbs, such as `select` and `filter`, but it might be a relieve to know that the general design goal of `DataFrames.jl` is to keep the number of verbs that a user has to learn to a minimum[^verbs].
 Continuing from the earlier mentioned data:
 
 [^verbs]: According to Bogumił Kamiński on [Discourse](https://discourse.julialang.org/t/pull-dataframes-columns-to-the-front/60327/5).
@@ -147,7 +147,7 @@ filter(:name => ==("Alice"), grades_2020())
 """; process=without_caption_label)
 ```
 
-To get all the rows which are **not** Alice, `==` can be replaced by `!=` in all previous examples:
+To get all the rows which are *not* Alice, `==` can be replaced by `!=` in all previous examples:
 
 ```jl
 s = """filter(:name => !=("Alice"), grades_2020())"""
@@ -176,7 +176,7 @@ sco(s; process=without_caption_label)
 ### Subset {#sec:subset}
 
 The `subset` function was added to make it easier to work with missing values (@sec:missing_data).
-In contrast to `filter`, the `subset` function works on complete columns.
+In contrast to `filter`, `subset` works on complete columns.
 If we want to use our earlier defined functions, we can use `ByRow`:
 
 ```jl
@@ -187,7 +187,7 @@ sco(s; process=without_caption_label)
 Also note that the DataFrame is now the first argument, whereas it was the second argument in `filter`, that is, use `filter(f, df)` and use `subset(df, args...)`.
 The reason for this is that Julia defines filter as `filter(f, V::Vector)` and the developers of `DataFrames.jl` chose to be consistent with that.
 
-Just like with `filter`, we can also use anonymous functions:
+Just like with `filter`, we can also use anonymous functions inside `subset`:
 
 ```jl
 s = "subset(grades_2020(), :name => ByRow(name -> name == \"Alice\"))"
@@ -201,13 +201,14 @@ s = "subset(grades_2020(), :name => ByRow(==(\"Alice\")))"
 sco(s; process=without_caption_label)
 ```
 
-To, now, show the real power of `subset`, let's create a dataset with some missing values:
+Ultimately, let's show the real power of `subset`.
+First, we create a dataset with some missing values:
 
 ```jl
 @sco salaries()
 ```
 
-This data is about an imaginary situation where you want to figure out how many your colleagues earn, and haven't figured it out for Zed yet.
+This data is about a plausible situation where you want to figure out how many your colleagues earn, and haven't figured it out for Zed yet.
 Even though we don't want to encourage these practices, we suspect it is an interesting example.
 Say that we want to know who earns more than 2000.
 When using `filter` without taking the `missing` values into account, it will fail:
@@ -217,14 +218,14 @@ s = "filter(:salary => >(2_000), salaries())"
 sce(s, post=trim_last_n_lines(25))
 ```
 
-`subset` will also fail, but guide us to an easy solution:
+`subset` will also fail, but will point us toward an easy solution:
 
 ```jl
 s = "subset(salaries(), :salary => ByRow(>(2_000)))"
 sce(s, post=trim_last_n_lines(25))
 ```
 
-So, we just need to pass `skipmissing=true`:
+So, we just need to pass the keyword argument `skipmissing=true`:
 
 ```jl
 s = "subset(salaries(), :salary => ByRow(>(2_000)); skipmissing=true)"
@@ -234,15 +235,15 @@ sco(s; process=without_caption_label)
 ## Select {#sec:select}
 
 Whereas `filter` removes rows, `select` removes columns.
-However, this function is much more versatile than just removing columns, as we will descuss in this section.
-Lets create a dataset with multiple columns:
+However, `select` is much more versatile than just removing columns, as we will discuss in this section.
+First, let's create a dataset with multiple columns:
 
 ```jl
 @sco responses()
 ```
 
 Here, the data represents answers on five questions (`q1`, `q2`, ..., `q5`) in a questionnaire.
-Let's first "select" a few columns from this dataset.
+We will start by "selecting" a few columns from this dataset.
 Again, we use symbols to specify columns:
 
 ```jl
@@ -250,14 +251,14 @@ s = "select(responses(), :id, :q1)"
 sco(s, process=without_caption_label)
 ```
 
-But, we can also use strings if we want:
+We can also use strings if we want:
 
 ```jl
 s = """select(responses(), "id", "q1", "q2")"""
 sco(s, process=without_caption_label)
 ```
 
-To select everything _except_ one or more columns, use `Not` with a column name:
+To select everything _except_ one or more columns, use `Not` with either a single column name:
 
 ```jl
 s = """select(responses(), Not(:q5))"""
@@ -297,7 +298,7 @@ s = "select(responses(), 1, :q5, :)"
 sco(s, process=without_caption_label)
 ```
 
-Even renaming is possible via select:
+Even renaming columns is possible via `select`:
 
 ```jl
 s = """select(responses(), 1 => "participant", :q1 => "age", :q2 => "nationality")"""
@@ -335,7 +336,7 @@ disallowmissing
 
 As discussed in @sec:load_save, `CSV.jl` will do its best to guess data types for your data.
 However, this won't always work perfectly.
-In this section, we show why good types are important and we fix wrong data types.
+In this section, we show why suitable types are important and we fix wrong data types.
 To be more clear about the types, we show the text output for DataFrames instead of a pretty table.
 In this section, we work with the following dataset:
 
@@ -380,7 +381,7 @@ The solution for this categorical data problem is to use `CategoricalArrays.jl`:
 using CategoricalArrays
 ```
 
-with this package, we can add levels to our data:
+with the `CategoricalArrays.jl` package, we can add levels to our data:
 
 ```jl
 @sco process=string post=output_block fix_age_column(wrong_types())
@@ -402,7 +403,7 @@ Since we have worked with functions, we can now define our fixed data as:
 @sco process=string post=output_block correct_types()
 ```
 
-Note that setting `ordered` to `true` told `CategoricalArrays.jl` that the data is ordinal.
+Note that the keyword argument `ordered` set to `true` signals `CategoricalArrays.jl` that the data is ordinal.
 In other words, because the data is ordinal, we can compare elements:
 
 ```jl

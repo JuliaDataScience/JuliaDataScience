@@ -40,6 +40,9 @@ jobs:
                 using Books; Books.install_dependencies()'
 
       - run: julia --project -e 'using JDS; JDS.build()'
+        env:
+          # Fix for Plots with GR backend.
+          GKSwstype: nul
 
       - name: Deploy to secondary branch
         if: ${{ github.event_name != 'pull_request' }}

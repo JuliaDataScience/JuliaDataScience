@@ -18,7 +18,7 @@ To cite the content, please use:
 Storopoli & Huijzer (2021). Julia Data Science. https://juliadatascience.io.
 ```
 
-Or in BibTeX format for $\LaTeX$:
+Or in BibTeX format:
 
 ```bibtex
 @book{storopolihuijzer2021juliadatascience,

@@ -7,6 +7,7 @@ using Reexport
 @reexport using AlgebraOfGraphics
 @reexport using Books
 @reexport using CairoMakie
+@reexport using CategoricalArrays
 @reexport using CSV
 @reexport using DataFrames
 @reexport using Dates
@@ -16,11 +17,14 @@ using Reexport
 @reexport using Plots
 @reexport using Random
 
-plot = Plots.plot
-
 include("df.jl")
 include("environment.jl")
+include("showcode_additions.jl")
 include("plots.jl")
+
+export sce, scsob, trim_last_n_lines
+
+plot = Plots.plot
 
 function myplot()
     I = 1:30

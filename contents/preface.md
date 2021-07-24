@@ -22,8 +22,6 @@ For now, let's turn our attention towards data.
 
 ### Data is Everywhere {#sec:data_everywhere}
 
-![Yes, data is the new black.](images/data-everywhere.png){#fig:data_everywhere}
-
 **Data is abundant** and will be even more in the near future.
 A report from the end of 2012 concluded that from 2005 to 2020, the amount of data stored digitally will **grow by a factor of 300, from 130 exabytes^[1 exabyte (EB) = 1,000,000 terabyte (TB).] to a whooping 40,000 exabytes** [@gantz2012digital].
 This is equal to 40 trillion gigabytes and, to put in perspective, more than **5,200 gigabytes for every living human currently in this planet!**

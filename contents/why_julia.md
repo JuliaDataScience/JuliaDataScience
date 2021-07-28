@@ -25,7 +25,7 @@ Why should I dedicate my precious time into learning a language that is almost n
 The answer is that **Julia is a fresh approach** both to programming and data science.
 Everything that you do in Python or in R you can do it in Julia with the advantage of using readable[^readable], fast, and powerful code syntax.
 
-So, **if you don't have any programming background knowledge we highly encourage you to take up Julia** as a first programming language and data science framework.
+So, **if you don't have any programming background knowledge, we highly encourage you to take up Julia** as a first programming language and data science framework.
 
 ## For programmers {#sec:programmers}
 

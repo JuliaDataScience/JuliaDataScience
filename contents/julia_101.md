@@ -1,13 +1,13 @@
 # Julia 101 {#sec:julia_101}
 
 > **_NOTE:_**
-> In this chapter we will cover the basic of Julia as a programming language.
+> In this chapter we will cover the basics of Julia as a programming language.
 > Please note that this is not *strictly necessary* for you to use Julia as a tool of data manipulation and data visualization.
 > Having a basic understanding of Julia will definitely make you more *effective* and *efficient* in using Julia.
 > However, if you prefer to get started straight away, you can jump to [@sec:dataframes] to learn about tabular data with DataFrames.jl.
 
 This is going to be a very brief and *not* in-depth overview of Julia language.
-If you are already familiar and confortable with other programming languages, we highly encourage you to read [Julia's documentation](https://docs.julialang.org/).
+If you are already familiar and comfortable with other programming languages, we highly encourage you to read [Julia's documentation](https://docs.julialang.org/).
 It is a thoroughly deep dive into Julia.
 It covers all the basics and corner cases, but it can be cumbersome.
 Especially, if you are aren't familiar with open-source software documentation.

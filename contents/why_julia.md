@@ -21,9 +21,10 @@ Out of the blue you hear a name: "Julia".
 What is this?
 How is it any different from other stuff that I've been told that you ought use to do data science?
 
-Why should I dedicate my precious time into learning a language that is almost never mentioned in any job listing, lab position, postdoc offer or academic job description?
+Why should I dedicate my precious time into learning a language that is almost never mentioned in any job listing, lab position, postdoc offer or academic job description?.
 The answer is that **Julia is a fresh approach** both to programming and data science.
-Everything that you do in Python or in R, you can do it in Julia, with the advantage of using readable[^readable], fast, and powerful code syntax.
+Everything that you do in Python or in R you can do it in Julia with the advantage of using readable[^readable], fast, and powerful code syntax.
+Therfore, we see that the Julia language is gaining traction, and for good reasons.
 
 So, **if you don't have any programming background knowledge, we highly encourage you to take up Julia** as a first programming language and data science framework.
 
@@ -68,7 +69,7 @@ Julia package manager is designed around “environments”: independent sets of
 Each project maintains its own independent set of package versions.
 We'll talk more about how to manage your projects and packages in the Appendix [-@sec:project_management].
 
-If we got you attention by exposing somewhat familiar or plausible situations, you might be interested to learn more about this new kid in the block called Julia.
+If we got your attention by exposing somewhat familiar or plausible situations, you might be interested to learn more about this newcomer called Julia.
 
 Let's proceed then!
 
@@ -80,10 +81,10 @@ Let's proceed then!
 
 Julia [@bezanson2017julia] is a relatively new language, first released in 2012, aims to be **both easy and fast**.
 It "runs like C^[sometimes even faster than C.] but reads like Python" [@perkelJuliaComeSyntax2019].
-It was made for scientific computing, capable handling **large amounts of data and computation** while still being fairly **easy to manipulate, create and protype code**.
+It was made for scientific computing, capable of handling **large amounts of data and computation** while still being fairly **easy to manipulate, create and protype code**.
 
 The creators of julia explained why they created Julia in a [2012 blogpost](https://julialang.org/blog/2012/02/why-we-created-julia/).
-Their motivations shows how Julia was designed to be:
+Their motivations show how Julia was designed to be:
 
 > We are greedy: we want more.
 > We want a language that’s open source, with a liberal license.
@@ -114,7 +115,7 @@ Let's talk about the other Julia's features.
 
 ### Julia versus other programming languages
 
-In [@fig:language_comparison] is a highly opinionated representation that divides the main open-source^[we have a very strong bias towards open-source and we won't discuss paid programming languages such as Matlab.] scientific computing languages in a 2x2 diagram with two axes: Slow-Fast and Easy-Hard.
+In [@fig:language_comparison] a highly opinionated representation it is shown, that divides the main open-source^[we have a very strong bias towards open-source and we won't discuss paid programming languages such as Matlab.] scientific computing languages in a 2x2 diagram with two axes: Slow-Fast and Easy-Hard.
 
 We've put C++ and FORTRAN in the hard and fast quadrant.
 Being static languages that needs compilation, type checking and other professional care and attention, they are really hard to learn and slow to prototype.
@@ -152,11 +153,11 @@ This is known as the "Two-Language Problem" and we discuss next.
 ### The Two-Language Problem {#sec:two_language}
 
 The "Two-Language Problem" is a very typical situation in scientific computing where a researcher devises an algorithm or a solution to tackle a desired problem or analysis at hand.
-The solution is, then, prototyped in an easy to code language (like Python or R).
-If the prototype works, the researcher  would code in a fast language that would not be easy to prototype (C++ or FORTRAN).
-Thus, we have two languages involved in the process of of developing a new solution.
+Then, the solution is prototyped in an easy to code language (like Python or R).
+If the prototype works the researcher  would code in a fast language that would not be easy to prototype (C++ or FORTRAN).
+Thus, we have two languages involved in the process of developing a new solution.
 One which is easy to prototype but is not suited for implementation (mostly due to being slow).
-And another one which is not so easy to code (and, consequently, not easy to prototype) but suited for implementation (mostly because it is fast).
+And another one which is not so easy to code (and consequently not easy to prototype) but suited for implementation (mostly because it is fast).
 Julia comes to eliminate such situations by being the **same language that you prototype (ease of use) and implement the solution (speed)**.
 
 Also, Julia lets you use **unicode characters as variables or parameters**.
@@ -164,7 +165,7 @@ This means no more using `sigma` or `sigma_i`, and instead just use $σ$ or $σ�
 When you see code for an algorithm or for a mathematical equation you see almost the same notation and idiom.
 We call this feature **"One-To-One Code and Math Relation"**, while usually downplayed can be a powerful feature.
 
-We think that the "Two-Language problem" and the o"One-To-One Code and Math Relation" are best described by one of the creators of Julia, Alan Edelman, in a TEDx Talk [@tedxtalksProgrammingLanguageHeal2020] (if you reading the printed book or a static PDF please click on the link to go the video or check the citation):
+We think that the "Two-Language problem" and the "One-To-One Code and Math Relation" are best described by one of the creators of Julia, Alan Edelman, in a TEDx Talk [@tedxtalksProgrammingLanguageHeal2020] (if you are reading the printed book or a static PDF please click on the link to go the video or check the citation):
 
 <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/qGW0GT1rCvs' frameborder='0' allowfullscreen></iframe></div>
 
@@ -205,7 +206,7 @@ noam = Linguist("Noam Chomsky", 92)
 judea = ComputerScientist("Judea Pearl", 84)
 ```
 
-Now suppose you want to define a function that will behave *different behaviors* depending on the *argument's types*.
+Now suppose you want to define a function that will have *different behaviors* depending on the *argument's types*.
 For example, a linguist researcher might approach a computer scientist researcher and ask him to collaborate on a new paper.
 The approach would be different if the situation were the opposite: a computer scientist researcher approaching the linguist researcher.
 Below, you'll see that we defined two functions that should behave differently in both approaches:
@@ -237,7 +238,7 @@ You would need to change your approach with a substancial loss of simplicity (yo
 **Now let's do this in Julia**.
 
 In Julia, we don't have classes but we have structures (`struct`) that are meant to be "structured data": they define the kind of information that is embedded in the structure, that is a set of fields (i.e. "properties" or "attributes" in other languages), and then individual instances (or "objects") can be produced each with its own specific values for the fields defined by the structure.
-They differ from the primitive types (e.g. integer and floats) that are by default defined already inside the core of Julia language.
+They differ from the primitive types (e.g. integer and floats) that are by default defined already inside the core of the Julia language.
 Thus, they are known as user-defined types.
 The user can only create new `abstract type`s or `struct`s (which are also known as composite types).
 In Julia, all `struct`s are final and may only have `abstract type`s as their supertypes.
@@ -379,7 +380,7 @@ The second is an interview of [Christopher Rackauckas](https://www.chrisrackauck
 Chris mentions that, while using [`DifferentialEquations.jl`](https://diffeq.sciml.ai/dev/), a package that he developed and currently maintains, a user reported that Julia has the best GPU-based quaternion ODE Solver and he said that he had no idea because he didn't even implemented it.
 Most of the merit is due to multiple dispatch and high user code/type sharing.
 
-To conclude, we think that multiple dispatch is best explained by one of the creators of Julia, [Stefan Karpinski, at JuliaCon 2019](https://youtu.be/kc9HwsxE1OY) [@thejuliaprogramminglanguageJuliaCon2019Unreasonable2019] (if you reading the printed book or a static PDF please click on the link to go the video or check the citation):
+To conclude, we think that multiple dispatch is best explained by one of the creators of Julia, [Stefan Karpinski, at JuliaCon 2019](https://youtu.be/kc9HwsxE1OY) [@thejuliaprogramminglanguageJuliaCon2019Unreasonable2019] (if you are reading the printed book or a static PDF please click on the link to go the video or check the citation):
 
 <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/kc9HwsxE1OY' frameborder='0' allowfullscreen></iframe></div>
 

@@ -21,9 +21,10 @@ Out of the blue you hear a name: "Julia".
 What is this?
 How is it any different from other stuff that I've been told that you ought use to do data science?
 
-Why should I dedicate my precious time into learning a language that is almost never mentioned in any job listing, lab position, postdoc offer or academic job description?. Being slowly less common as the language is gaining reputation. 
+Why should I dedicate my precious time into learning a language that is almost never mentioned in any job listing, lab position, postdoc offer or academic job description?.
 The answer is that **Julia is a fresh approach** both to programming and data science.
 Everything that you do in Python or in R you can do it in Julia with the advantage of using readable[^readable], fast, and powerful code syntax.
+Therfore, we see that the Julia language is gaining traction, and for good reasons.
 
 So, **if you don't have any programming background knowledge, we highly encourage you to take up Julia** as a first programming language and data science framework.
 

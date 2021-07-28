@@ -387,7 +387,7 @@ To conclude, we think that multiple dispatch is best explained by one of the cre
 
 In @sec:julia_accomplish, we exposed why we think Julia is such a unique programming language.
 We showed simple examples about the main features of Julia.
-If you would like to have a deep dive on how Julia is being used we have some **interesting use cases**:
+If you would like to have a deep dive on how Julia is being used, we have some **interesting use cases**:
 
 1. NASA uses Julia in a supercomputer to analyze the ["Largest Batch of Earth-Sized Planets Ever Found"](https://exoplanets.nasa.gov/news/1669/seven-rocky-trappist-1-planets-may-be-made-of-similar-stuff/) and achieve a whopping **1,000x speedup** to catalog 188 million astronomical objects in 15 minutes.
 2. [The Climate Modeling Alliance (CliMa)](https://clima.caltech.edu/) is using mostly Julia to **model climate in the GPU and CPU**.

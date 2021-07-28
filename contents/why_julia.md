@@ -152,7 +152,7 @@ This is known as the "Two-Language Problem" and we discuss next.
 ### The Two-Language Problem {#sec:two_language}
 
 The "Two-Language Problem" is a very typical situation in scientific computing where a researcher devises an algorithm or a solution to tackle a desired problem or analysis at hand.
-The solution is then prototyped in an easy to code language (like Python or R).
+Then, the solution is prototyped in an easy to code language (like Python or R).
 If the prototype works the researcher  would code in a fast language that would not be easy to prototype (C++ or FORTRAN).
 Thus, we have two languages involved in the process of developing a new solution.
 One which is easy to prototype but is not suited for implementation (mostly due to being slow).

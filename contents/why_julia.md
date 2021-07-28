@@ -29,7 +29,7 @@ So, **if you don't have any programming background knowledge, we highly encourag
 
 ## For programmers {#sec:programmers}
 
-In the second background the common underlying story changes a little bit.
+In the second background, the common underlying story changes a little bit.
 You are someone who knows how to program and probably does this for a living.
 You are well-versed (or even fluent) in Python or R.
 You've heard about this new flashy thing called "data science" and you wanna jump on the bandwagon.

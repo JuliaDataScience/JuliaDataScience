@@ -1,0 +1,27 @@
+# YAML 1.2
+---
+authors: 
+  -
+    family-names: Storopoli
+    given-names: Jose
+    orcid: "https://orcid.org/0000-0002-0559-5176"
+  -
+    family-names: Huijzer
+    given-names: Rik
+    orcid: "https://orcid.org/0000-0001-9445-8466"
+  -
+    family-names: Alonso
+    given-names: Lazaro
+    orcid: "https://orcid.org/0000-0001-6979-859X"
+cff-version: "1.2.0"
+date-released: 2021-10-01
+identifiers: 
+  - 
+    type: url
+    value: "https://juliadatascience.io/"
+license: "CC-BY-NC-SA-4.0"
+message: "If you use this software, please cite it using these metadata."
+repository-code: "https://github.com/JuliaDataScience/JuliaDataScience"
+title: "Julia Data Science"
+version: 1.0.0
+...

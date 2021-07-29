@@ -21,6 +21,8 @@ include("df.jl")
 include("environment.jl")
 include("showcode_additions.jl")
 include("plots.jl")
+include("makie.jl")
+
 
 export sce, scsob, trim_last_n_lines
 

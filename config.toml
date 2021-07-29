@@ -8,8 +8,7 @@
     "dataframes",
     "load_save",
     "df_end",
-    "plots",
-    "makie",
+    "dataVis",
     "appendix",
     "references"
   ]

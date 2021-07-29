@@ -1,15 +1,4 @@
-function makiejl()
-    x = range(0, 10, length=100)
-    y = sin.(x)
-    p = lines(x, y)
-    caption = "An example plot with Makie.jl."
-    label = missing
-    Options(p; caption, label)
-end
-makiejl()
-
-
-function costumPlot()
+function custom_plot()
     caption = "An example plot with Makie.jl."
     label = missing
     x = 1:10
@@ -19,11 +8,12 @@ function costumPlot()
         backgroundcolor = :white))
     axislegend("legend", position = :lt)
     limits!(ax, 0,10,0,100)
-    fig 
-    Options(fig; caption, label)
+    fig
+    filename = "customPlot"
+    Options(fig; filename, caption, label)
 end
 
-function costumPlot2()
+function custom_plot2()
     x = 1:10
     lines(x, x.^2, color = :black, linewidth = 2,linestyle=".-", 
         label = "x²", figure = (; resolution = (700,450), fontsize = 18, 
@@ -53,4 +43,12 @@ function areaUnder()
     Options(fig; caption, label)
 end
 
+function makiejl()
+    x = range(0, 10, length=100)
+    y = sin.(x)
+    p = lines(x, y)
+    caption = "An example plot with Makie.jl."
+    label = missing
+    Options(p; caption, label)
+end
 

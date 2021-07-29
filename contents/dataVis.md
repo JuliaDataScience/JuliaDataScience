@@ -88,9 +88,10 @@ CairoMakie.activate!()
 
 ```jl
 s = """
-    plt = lines(1:10,1:10, figure = (; resolution = (600,400)), 
+    plt = lines(1:10,1:10, figure = (; resolution = (600,400)),
     axis = (; xlabel = L"x"))
-    Options(plt; caption="First plot", label="firstplot") # hide 
+    filename = "firstplot"
+    Options(plt; filename, caption="First plot", label="firstplot") # hide
     """
 sco(s)
 ```

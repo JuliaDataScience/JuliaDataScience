@@ -2221,7 +2221,7 @@ Most of the time we won't be constructing `Date` or `DateTime` instances from sc
 Actually, we probably will be **parsing strings as `Date` or `DateTime` types**.
 
 The `Date` and `DateTime` constructors can be fed a string and a format string.
-For example, the string `"20210101"` representing January 1st can be parsed with:
+For example, the string `"19870913"` representing September 13th 1987 can be parsed with:
 
 ```jl
 sco(

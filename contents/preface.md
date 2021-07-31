@@ -1,7 +1,7 @@
 # Preface {#sec:preface}
 
 Here, we discuss two important aspects of data analysis.
-Actually, there is a third one, Julia, but it deserves a whole chapter (see [@sec:why_julia]).
+Actually, there is a third one, Julia, but it deserves a whole chapter (see @sec:why_julia).
 
 First, we emphasize the **"data" part of data science** and why data skills are, and will remain, in **high demand** in industry as well as in academia.
 
@@ -17,7 +17,7 @@ Our aim in this book is two-fold:
 * First, we want to focus on the backbone of data science: data.
 * Second, we want you to use Julia.
 
-We will cover why we think you should use Julia in [@sec:why_julia].
+We will cover why we think you should use Julia in @sec:why_julia.
 For now, let's turn our attention towards data.
 
 ### Data is Everywhere {#sec:data_everywhere}
@@ -41,12 +41,12 @@ We also like the informal idea that, as a data literate, you won't feel overwhel
 Data literacy can be seen as a highly competitive skill to possess.
 In this book we'll cover two aspects of data literacy:
 
-1. **Data Manipulation** with DataFrames.jl ([@sec:dataframes]).
+1. **Data Manipulation** with DataFrames.jl (@sec:dataframes).
 In this chapter you will learn how to:
     1. Read CSV and Excel data from disk and from the internet
     2. ...
     3. ...
-1. **Data Visualization** with Plots.jl and Makie.jl ([@sec:plots] and [@sec:makie]).
+1. **Data Visualization** with Plots.jl and Makie.jl (@sec:plots and @sec:makie).
 In these chapter you will learn how to:
     1. ...
     2. ...

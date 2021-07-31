@@ -77,7 +77,7 @@ Let's proceed then!
 
 > **_NOTE:_**
 > In this section we will explain the bells and whistles about what makes Julia shine as a programming language.
-> If it becomes too technical for you, you can skip and go straight to [@sec:dataframes] to learn about tabular data with DataFrames.jl.
+> If it becomes too technical for you, you can skip and go straight to @sec:dataframes to learn about tabular data with DataFrames.jl.
 
 Julia [@bezanson2017julia] is a relatively new language, first released in 2012, aims to be **both easy and fast**.
 It "runs like C^[sometimes even faster than C.] but reads like Python" [@perkelJuliaComeSyntax2019].

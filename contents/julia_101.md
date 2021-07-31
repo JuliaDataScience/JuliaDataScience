@@ -4,7 +4,7 @@
 > In this chapter we will cover the basics of Julia as a programming language.
 > Please note that this is not *strictly necessary* for you to use Julia as a tool of data manipulation and data visualization.
 > Having a basic understanding of Julia will definitely make you more *effective* and *efficient* in using Julia.
-> However, if you prefer to get started straight away, you can jump to [@sec:dataframes] to learn about tabular data with DataFrames.jl.
+> However, if you prefer to get started straight away, you can jump to @sec:dataframes to learn about tabular data with DataFrames.jl.
 
 This is going to be a very brief and *not* in-depth overview of Julia language.
 If you are already familiar and comfortable with other programming languages, we highly encourage you to read [Julia's documentation](https://docs.julialang.org/).
@@ -24,7 +24,7 @@ This means that you don't need to compile it before you run code, like you would
 The main differences from Julia to other dynamic languages such as R and Python are the following.
 
 First, Julia, contrary to most dynamic-typed languages, **enables the user to specify type declaration**.
-You already saw some types declarations in *Why Julia?* ([@sec:why_julia]): they are those double colon `::` that sometimes comes after variables
+You already saw some types declarations in *Why Julia?* (@sec:why_julia): they are those double colon `::` that sometimes comes after variables
 But if you don't want to specify what type are your variables or functions, Julia will gladly infer it for you.
 
 Second, Julia also allows users to define function behavior across many combinations of argument types via multiple dispatch.
@@ -529,7 +529,7 @@ logarithm(10; base=2)
 A lot of times, we don't care about the name of the function and want to quickly make one.
 What we need are **anonymous functions**.
 They come a lot in Julia's data science workflow.
-For example, when using `DataFrames.jl` ([@sec:dataframes]) or `Plots.jl` ([@sec:plots]), sometimes we need a quick and dirty function to filter data or format plot labels.
+For example, when using `DataFrames.jl` (@sec:dataframes) or `Plots.jl` (@sec:plots), sometimes we need a quick and dirty function to filter data or format plot labels.
 That's when we reach out for anonymous functions.
 They are specially useful when we don't want to create a function and a simple in-place statement would be enough.
 
@@ -826,7 +826,7 @@ scob(
 ```
 
 It works even inside functions.
-Let's revisit our `test` function from [@sec:conditionals]:
+Let's revisit our `test` function from @sec:conditionals:
 
 ```jl
 scob(
@@ -1025,7 +1025,7 @@ And even apply functions to tuples.
 But we can **never change any value of a tuple**, since they are **immutable**.
 
 The relationship between tuples and functions is a very important one.
-Remember functions that return multiple values back in [@sec:function_multiple]?
+Remember functions that return multiple values back in @sec:function_multiple?
 Let's inspect what our `add_multiply` function returns:
 
 ```jl
@@ -1880,7 +1880,7 @@ my_pair.second
 )
 ```
 
-Pairs will be used a lot in data manipulation and data visualization since both `DataFrames.jl` ([@sec:dataframes]) or `Plots.jl` ([@sec:plots]) main functions depends on `Pair` as type arguments.
+Pairs will be used a lot in data manipulation and data visualization since both `DataFrames.jl` (@sec:dataframes) or `Plots.jl` (@sec:plots) main functions depends on `Pair` as type arguments.
 
 ### Dict {#sec:dict}
 
@@ -1980,7 +1980,7 @@ my_dict
 )
 ```
 
-`Dict`s are also used in data manipulations by `DataFrames.jl`[@sec:dataframes] and data visualization by `Plots.jl` [@sec:plots].
+`Dict`s are also used in data manipulations by `DataFrames.jl` (@sec:dataframes) and data visualization by `Plots.jl` (@sec:plots).
 So it is important to know their basic functionality.
 
 There is one useful `Dict` constructor that we use a lot.
@@ -2113,7 +2113,7 @@ Now you can access all functions and types inside `ModuleName`.
 ### Dates {#sec:dates}
 
 How to handle dates and timestamps is something quite important in data science.
-Like we said in *Why Julia?* ([@sec:why_julia]) section, Python's `pandas` uses its own `Datetime` type to handle dates.
+Like we said in *Why Julia?* (@sec:why_julia) section, Python's `pandas` uses its own `Datetime` type to handle dates.
 The same with R tidyverse's `lubridate` package, which also defines its own `datetime` type to handle dates.
 Julia doesn't need any of this, it has all the **date stuff already baked onto its standard library, in a module named `Dates`**.
 
@@ -2417,9 +2417,9 @@ DateTime(today()) - DateTime(my_birthday)
 #### Date Intervals {#sec:dates_intervals}
 
 One nice thing about `Dates` module is that we can also easily construct date and time intervals.
-Julia is clever enough to not have to define the whole interval types and operations that we covered in [@sec:ranges].
+Julia is clever enough to not have to define the whole interval types and operations that we covered in @sec:ranges.
 It just extends the functions and operations defined for `UnitRange` to `Date`'s types.
-This is known as multiple dispatch and we already covered in *Why Julia?*([@sec:why_julia]).
+This is known as multiple dispatch and we already covered in *Why Julia?*(@sec:why_julia).
 
 For example suppose you want to create a `Day` interval.
 This is easy done with the colon `:` operator:

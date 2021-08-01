@@ -214,10 +214,13 @@ s = """
     let
         Random.seed!(123)
         n = 100
-        CairoMakie.scatter(randn(n), randn(n), color = randn(n), 
-            colormap = (:plasma, 0.65), markersize = 25*rand(n), 
-            figure = (; resolution = (400,400)))
+        fig, ax, pltobj = CairoMakie.scatter(randn(n), randn(n), color = randn(n), 
+            label = "Bubbles",colormap = :plasma, markersize = 25*rand(n), 
+            figure = (; resolution = (550,400)), axis = (; aspect= DataAspect()))
         limits!(-3, 3, -3, 3)
+        Legend(fig[1,2], ax, valign = :top)
+        Colorbar(fig[1,2], pltobj, height = Relative(3/4))
+        fig
         Options(current_figure(); filename ="bubbleplot", caption="Bubble plot", label="bubbleplot") # hide 
     end
     """
@@ -234,17 +237,47 @@ for more advanced options.
 Several [predifined themes](http://makie.juliaplots.org/stable/predefined_themes.html) 
 are already available
 
+
 ```jl
-@sco JDS.multiple_example_themes()
+@sc demo_themes()
+```
+
+```jl
+s = """
+    filenames = ["theme_dark()", "theme_black()", "theme_ggplot2()", # hide 
+        "theme_minimal()", "theme_light()"] # hide 
+    objects = [# hide
+        with_theme(demo_themes, theme_dark())
+        with_theme(demo_themes, theme_black())
+        with_theme(demo_themes, theme_ggplot2())
+        with_theme(demo_themes, theme_minimal())
+        with_theme(demo_themes, theme_light())
+    ]# hide 
+    Options.(objects, filenames) # hide 
+    """
+sco(s)
 ```
 
 Or, defining a custom `Theme` according to your needs by doing 
 `with_theme(yourplotfunction, your_theme())`. For instance the following theme
 could be a simple version for a publication quality template. 
 
+```jl
+@sc publication_theme()
+```
 
 ```jl
-@sco JDS.my_theme()
+@sc plot_with_legend_and_colorbar()
+```
+
+```jl
+s = """
+    with_theme(plot_with_legend_and_colorbar, publication_theme())
+    filename = "plot_with_legend_and_colorbar" # hide 
+    Options(current_figure(); filename, caption="Themed plot with Legend and Colorbar", # hide
+    label="plot_with_legend_and_colorbar") # hide
+    """
+sco(s)
 ```
 
 now if something needs to be changed after `set_theme!(your_theme)` we can do it with  
@@ -252,7 +285,17 @@ now if something needs to be changed after `set_theme!(your_theme)` we can do it
 pass additional arguments to the `with_theme` function as in 
 
 ```jl
-@sco JDS.with_my_theme() 
+s = """
+    with_theme(publication_theme(),resolution = (410,400), figure_padding = 1, 
+            backgroundcolor= :grey90, Axis = (; aspect = DataAspect()), 
+            Colorbar = (; height = Relative(4/5))) do 
+        plot_with_legend_and_colorbar()
+    end
+    filename = "plot_theme_extra_args" # hide 
+    Options(current_figure(); filename, caption="Theme with extra args.", # hide
+    label="themeExtraArgs") # hide
+    """
+sco(s)
 ```
 
 
@@ -264,7 +307,17 @@ LaTeX support string in Makie is also available. Simple use cases are shown belo
 A basic example includes LaTeX string for x-y labels and legends. 
 
 ```jl
-@sco JDS.LaTeX_Strings_with_theme()
+@sc LaTeX_Strings()
+```
+
+```jl
+s = """
+    with_theme(LaTeX_Strings, publication_theme())
+    filename = "LaTeX_Strings" # hide 
+    Options(current_figure(); filename, caption="Plot with LaTeX Strings", # hide
+    label="LaTeXStrings") # hide
+    """
+sco(s)
 ```
 
 A more involved example will one with some equation as `text` and increasing 
@@ -279,7 +332,13 @@ using LaTeXStrings
 ```
 
 But, some lines have repeated colors, so thats no good. Adding some 
-markers usually helps. 
+markers and line styles usually helps. So, let's do that using [Cycles](http://makie.juliaplots.org/stable/theming.html#Cycles) 
+for these types. 
+
+```jl
+@sco JDS.multiple_scatters_and_lines()
+```
+
 
 ### Colors and Palettes {#sec:colors}
 Sequential, diverging, categorical. 

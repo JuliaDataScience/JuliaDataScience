@@ -15,6 +15,7 @@ using Reexport
 @reexport using InteractiveUtils
 @reexport using Makie
 @reexport using Plots
+@reexport using LaTeXStrings
 @reexport using Random
 
 include("df.jl")

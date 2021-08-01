@@ -47,8 +47,149 @@ function makiejl()
     x = range(0, 10, length=100)
     y = sin.(x)
     p = lines(x, y)
-    caption = "An example plot with Makie.jl."
-    label = missing
-    Options(p; caption, label)
+    caption = "An example plot with Makie.jl." # hide 
+    label = missing # hide 
+    Options(p; caption, label) # hide 
 end
 
+function LaTeX_Strings()
+    x = 0:0.05:4π
+    lines(x, x -> sin(3x)/(cos(x) + 2)/x,label=L"\frac{\sin(3x)}{x(\cos(x)+2)}", 
+        figure=(;resolution=(600,400), ), axis = (; xlabel = L"x"))
+    lines!(x, x-> cos(x)/x, label = L"\cos(x)/x")
+    lines!(x, x-> exp(-x), label = L"e^{-x}")
+    limits!(-0.5,13,-0.6,1.05)  
+    axislegend(L"f(x)") #position = :rt, bgcolor = (:grey90, 0.25), framewidth = 0.25
+    current_figure()
+end
+
+publication_theme()= Theme(
+        fontsize = 16,font="CMU Serif",
+        Axis = (xlabelsize= 20,xgridstyle=:dash,ygridstyle=:dash,
+            xtickalign = 1, ytickalign=1,yticksize=10, xticksize=10, 
+            xlabelpadding = -5, xlabel = "x", ylabel = "y"),
+        Legend = (framecolor = (:black, 0.5), bgcolor = (:white, 0.5)),
+        Colorbar = (ticksize=16, tickalign = 1, spinewidth = 0.5)
+    )
+
+function LaTeX_Strings_with_theme() # hide 
+    function LaTeX_Strings()
+        x = 0:0.05:4π
+        lines(x,x -> sin(3x)/(cos(x)+2)/x,label=L"\frac{\sin(3x)}{x(\cos(x)+2)}", 
+            figure=(; resolution=(600,400)), axis = (; xlabel = L"x"))
+        lines!(x,x-> cos(x)/x, label = L"\cos(x)/x")
+        lines!(x,x-> exp(-x), label = L"e^{-x}")
+        limits!(-0.5,13,-0.6,1.05) 
+        axislegend(L"f(x)")
+        current_figure()
+    end
+
+    with_theme(LaTeX_Strings, publication_theme())
+end # hide  
+
+function myplot()
+    n = 15
+    x = LinRange(6,9,n)
+    y = LinRange(2,5,n)
+    m = randn(n,n)
+    fig, ax, _ = lines(1:10, label = "line")
+    CairoMakie.scatter!(1:10, label = "line")
+    heatObj = CairoMakie.heatmap!(ax, x, y, m, colormap = :Spectral_11)
+    axislegend("legend", position = :lt,  merge = true)
+    Colorbar(fig[1,2], heatObj, label = "values")
+    ax.title = "my custom theme"
+    fig
+end
+
+
+function my_theme() # hide 
+    publication_theme()= Theme(
+        fontsize = 16,font="CMU Serif",
+        Axis = (xlabelsize= 20,xgridstyle=:dash,ygridstyle=:dash,
+            xtickalign = 1, ytickalign=1,yticksize=10, xticksize=10, 
+            xlabelpadding = -5, xlabel = "x", ylabel = "y"),
+        Legend = (framecolor = (:black, 0.5), bgcolor = (:white, 0.5)),
+        Colorbar = (ticksize=16, tickalign = 1, spinewidth = 0.5)
+    )
+
+    function myplot()
+        n = 15
+        x = LinRange(6,9,n)
+        y = LinRange(2,5,n)
+        m = randn(n,n)
+        fig, ax, _ = lines(1:10, label = "line")
+        CairoMakie.scatter!(1:10, label = "line")
+        heatObj = CairoMakie.heatmap!(ax, x, y, m, colormap = :Spectral_11)
+        axislegend("legend", position = :lt,  merge = true)
+        Colorbar(fig[1,2], heatObj, label = "values")
+        ax.title = "my custom theme"
+        fig
+    end
+    with_theme(myplot, publication_theme())
+    current_figure() # hide 
+    #Options(current_figure(); filename ="mytheme", caption="my theme", label="mytheme") # hide 
+end # hide 
+
+function with_my_theme() # hide 
+    with_theme(publication_theme(),resolution = (410,400), figure_padding = 1, 
+        backgroundcolor= :grey90, Axis = (; aspect = DataAspect()), 
+        Colorbar = (; height = Relative(4/5))) do 
+        n = 15
+        x = LinRange(6,9,n)
+        y = LinRange(2,5,n)
+        m = randn(n,n)
+        fig, ax, _ = lines(1:10, label = "line")
+        CairoMakie.scatter!(1:10, label = "line")
+        heatObj = CairoMakie.heatmap!(ax, x, y, m, colormap = :Spectral_11)
+        axislegend("legend", position = :lt,  merge = true)
+        Colorbar(fig[1,2], heatObj, label = "values")
+        ax.title = "my custom theme"
+        fig
+    end
+    current_figure() # hide 
+end # hide 
+
+function multiple_lines()
+    fig = Figure(resolution = (600,400), font="CMU Serif")
+    ax = Axis(fig[1,1], xlabel = L"x", ylabel = L"f(x)")
+    for i in 0:10
+        lines!(ax, 0:10, i .* collect(0:10), label = latexstring("$(i) x"))
+    end
+    axislegend(L"f(x)",position = :lt, nbanks = 2, labelsize = 14)
+    text!(L"f(x,a) = ax", position = (4,80))
+    fig
+end
+
+
+
+function multiple_example_themes()
+    filenames = ["theme_dark()", "theme_black()", "theme_ggplot2()", # hide 
+        "theme_minimal()", "theme_light()"] # hide 
+    function demo_theme()
+        Random.seed!(123)
+        i = 1 
+        y = cumsum(randn(10)) 
+        lines(y, label = "$(i)", figure = (;resolution = (600,300)), 
+            axis = (; xlabel = "time (s)", ylabel = "Amplitude", 
+            title = "Measurements"))
+        CairoMakie.scatter!(y, label = "$(i)")
+        # now just add more plot objects to the current_figure.
+        for i in 2:6
+            y = cumsum(randn(10))
+            lines!(y, label = "$(i)")
+            CairoMakie.scatter!(y, label = "$(i)")
+        end
+        limits!(0,12,-5.1,5.1)
+        axislegend("legend", merge = true)
+        current_figure()
+    end
+
+    objects = [  
+        with_theme(demo_theme, theme_dark())
+        with_theme(demo_theme, theme_black())
+        with_theme(demo_theme, theme_ggplot2())
+        with_theme(demo_theme, theme_minimal())
+        with_theme(demo_theme, theme_light())
+    ] 
+    Options.(objects, filenames) # hide 
+end

@@ -57,7 +57,7 @@ From the style guide, we attempt to adhere specifically to:
   ```
 - Do not omit zeros in floats (even though Julia allows it).
   Hence, write `1.0` instead of `1.` and write `0.1` instead of `.1`.
-- Use `in` in for loops and not `=` or `∈` (even though Julia allows it).
+- Use `in` in for loops and not = or ∈ (even though Julia allows it).
 
 ### Our additions
 
@@ -66,3 +66,5 @@ From the style guide, we attempt to adhere specifically to:
   This makes it easier to recognize that we are talking about a package.
 - For filenames, we stick to "file.txt" and not `file.txt` or file.txt, because it is consistent with the code.
 - For column names in tables, like the column `x`, we stick to column `:x`, because it is consistent with the code.
+- Do not use unicode symbols in inline code.
+  This is simply a bug in the PDF generation that we have to workaround for now.

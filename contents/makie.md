@@ -1,1 +1,0 @@
-# Makie.jl {#sec:makie}

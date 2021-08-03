@@ -61,6 +61,8 @@ Plotly, PGFPlotsX, PyPlot?
 
 ## Makie.jl {#sec:makie}
 
+(WIP) ideas for a better openinig line? 
+
 [Makie](http://makie.juliaplots.org/stable/index.html#Welcome-to-Makie!) is a high-performance, extendable, and multi-platform plotting ecosystem for the Julia programming language.
 
 Makie is Makie's frontend package that defines all plotting functions.
@@ -106,6 +108,9 @@ Also note that every plotting function like `scatterlines` creates and returns a
 and `plot` object in a collection called `FigureAxisPlot`, these are known as the 
 `non-mutating` methods. On the other hand, the `mutating` methods (e.g. `scatterlines!`, note the `!`)
 just returns a plot object which can be appended into a given `axis`  or the `current_figure()`.
+
+The next question that one might have is, how do I change the color or the marker type? 
+Well, this is done via `attributes`, our next section. 
 
 ### Attributes
 
@@ -160,7 +165,8 @@ sco(s)
 This example has already most of the attributes that most users will play with it. 
 Probably a `legend` will also be good to have. Which for more than one function will 
 make more sense. So, let's  `append` another `plot object`, a mutating one `!`, and
-add the corresponding legends. 
+add the corresponding legends by calling `axislegend`. This will collect all the `labels`
+you might have passed to your plotting functions. 
 
 ```jl
 s = """
@@ -203,11 +209,11 @@ s = """
 sco(s)
 ```
 
-For more on `themes` please go to section xxx  and learn how to do `with_theme(...)`.
+For more on `themes` please go to section xxx (Refs)
 
-Before moving on into the next section, it's worthwile to see an example 
+Before moving on into the next section, it's worthwhile to see an example 
 where an `array` of attributes are passed at once to a plotting function. 
-For this example we will use the `scatter` plotting function a do a bubble plot. 
+For this example we will use the `scatter` plotting function to do a bubble plot. 
 
 ```jl
 s = """
@@ -227,15 +233,38 @@ s = """
 sco(s)
 ```
 
-Of course a `Colorbar` will be nice to have. We will learn to do it in Section xxx. 
+Where we have decomposed the tuple `FigureAxisPlot` into `fig, ax, pltobj`, in order to 
+be able to add a `Legend` and `Colorbar` outside of the plot object. We will discuss 
+this, `layouts`,  in more detail in the [Layouts] section.
 
-Do a Legend outside and the correspoing Colorbar. Then reference chapter on layouts 
-for more advanced options. 
+Well, we have done some basic but still interesting examples to show
+how to use `Makie` and by now you might be wondering, what else can 
+we do? What are all the possible plotting functions available in `Makie`?
+To answer this question a `cheat sheet` is shown in [@fig:cheat_sheet_cairomakie]. These work
+specially well with `CairoMakie`. 
+
+![Plotting functions: Cheat Sheet. Output given by Cairomakie.](images/makiePlottingFunctionsHide.png){#fig:cheat_sheet_cairomakie}
+
+For completeness in [@fig:cheat_sheet_glmakie] we 
+show the corresponding ones for `GLMakie`, mostly 3D plots which are highly
+supported in this backend. Those will be explained in detail in section [GLMakie].
+
+![Plotting functions: Cheat Sheet. Output given by GLMakie.](images/GLMakiePlottingFunctionsHide.png){#fig:cheat_sheet_glmakie}
+
+Now, that we have an idea of all the things we can do, let's go back and 
+continue with the basics. It's time to learn how to change the general 
+appereance of our plots. 
 
 ### Themes {#sec:themes}
 
-Several [predifined themes](http://makie.juliaplots.org/stable/predefined_themes.html) 
-are already available
+There are several ways to affect the general appeareance of your plots. Either, you
+could use a [predifined theme](http://makie.juliaplots.org/stable/predefined_themes.html)
+doing for example `with_theme(your_plot_function, theme_dark())`, 
+build your own with `Theme(kwargs)`, or even update the one that is active with `update_theme!(kwargs)`. 
+
+You can also do `set_theme!(theme; kwargs...)` to change the current default theme to `theme` 
+and override or add attributes given by `kwargs`. If you do this and want to reset all
+previous setting just do `set_theme!()`. See it in action in the following examples. 
 
 
 ```jl
@@ -259,7 +288,7 @@ sco(s)
 ```
 
 Or, defining a custom `Theme` according to your needs by doing 
-`with_theme(yourplotfunction, your_theme())`. For instance the following theme
+`with_theme(your_plot_function, your_theme())`. For instance the following theme
 could be a simple version for a publication quality template. 
 
 ```jl
@@ -303,8 +332,8 @@ Now, let's move on and do a plot with LaTeX strings and a custom theme.
 
 ### LaTeXStrings
 
-LaTeX support string in Makie is also available. Simple use cases are shown below. 
-A basic example includes LaTeX string for x-y labels and legends. 
+LaTeX support in Makie is also available. Simple use cases are shown below. 
+A basic example includes LaTeX strings for x-y labels and legends. 
 
 ```jl
 @sc LaTeX_Strings()
@@ -320,7 +349,7 @@ s = """
 sco(s)
 ```
 
-A more involved example will one with some equation as `text` and increasing 
+A more involved example will be one with some equation as `text` and increasing 
 legend numering for curves in a plot. 
 
 ```
@@ -339,6 +368,10 @@ for these types.
 @sco JDS.multiple_scatters_and_lines()
 ```
 
+And voilà. A publication quality plot its here. What more can we ask for? Well, what about 
+different default colors or palettes. In our next section, we will see how to use again
+[Cycles](http://makie.juliaplots.org/stable/theming.html#Cycles) and know a little bit more
+about them, plus some additional keywords in order to achieve this.  
 
 ### Colors and Palettes {#sec:colors}
 Sequential, diverging, categorical. 

@@ -15,24 +15,17 @@ The default backend is GR.
 using Plots
 ```
 
-### Plots attributes {#sec:attributes}
-
-### Colors and Palettes {#sec:colors}
-
-Sequential, diverging, categorical. 
-
 ### Layouts {#sec:layouts}
 
 - Overview on several ways to do layouts
 - the layout argument, also cover the grid
-- the @layout macro
+- the `@layout` macro
 - specific measures with the Plots.PlotMeasures submodule (additionally a footnote to say that we have it in StatsPlots.PlotMeasures also)
 - adding subplots incremententally. Define p1, p2, p3; then do a plot(p1, p2, p3; layout=l)
 
-### Animations {#sec:animations}
-Doing an animation with Plots is quite easy. 
+### Animations {#sec:plots-animations}
 
-### Themes {#sec:themes}
+Doing an animation with Plots is quite easy.
 
 ### Other backends {#sec:backends}
 
@@ -51,7 +44,7 @@ Plotly, PGFPlotsX, PyPlot?
 - Themes
 2. Works on Types of Distributions and DataFrames, but we will only focus on DataFrames
 
-3. the @df macro and the Symbols (:col1, :col2) instead of other input data (vectors, arrays, tuples etc.)
+3. the `@df` macro and the Symbols (:col1, :col2) instead of other input data (vectors, arrays, tuples etc.)
 
 4. Recipes (I would cover almost all of them, except for andrewsplot MDS plot, Dendograms, QQ-Plot etc., since they are specific for modeling or simulation):
 
@@ -241,7 +234,7 @@ sco(s)
 ```
 
 where we have decomposed the tuple `FigureAxisPlot` into `fig, ax, pltobj`, in order to be able to add a `Legend` and `Colorbar` outside of the plot object.
-We will discuss this, `layouts`, in more detail in section [Layouts].
+We will discuss this, `layouts`, in more detail in @sec:makie_layouts.
 
 We have done some basic but still interesting examples to show how to use `Makie` and by now you might be wondering, what else can we do?
 What are all the possible plotting functions available in `Makie.jl`?
@@ -250,24 +243,24 @@ These work especially well with `CairoMakie.jl`.
 
 ![Plotting functions: Cheat Sheet. Output given by Cairomakie.](images/makiePlottingFunctionsHide.png){#fig:cheat_sheet_cairomakie}
 
-For completeness, in [@fig:cheat_sheet_glmakie] we show the corresponding ones for `GLMakie.jl`, mostly 3D plots which are highly supported in this backend.
-Those will be explained in detail in section [GLMakie].
+For completeness, in @fig:cheat_sheet_glmakie we show the corresponding ones for `GLMakie.jl`, mostly 3D plots which are highly supported in this backend.
+Those will be explained in detail in @sec:glmakie.
 
 ![Plotting functions: Cheat Sheet. Output given by GLMakie.](images/GLMakiePlottingFunctionsHide.png){#fig:cheat_sheet_glmakie}
 
 Now, that we have an idea of all the things we can do, let's go back and continue with the basics.
-It's time to learn how to change the general appearance of our plots. 
+It's time to learn how to change the general appearance of our plots.
 
 ### Themes {#sec:themes}
 
-There are several ways to affect the general appeareance of your plots. Either, you
-could use a [predifined theme](http://makie.juliaplots.org/stable/predefined_themes.html)
-doing for example `with_theme(your_plot_function, theme_dark())`, 
-build your own with `Theme(kwargs)`, or even update the one that is active with `update_theme!(kwargs)`. 
+There are several ways to affect the general appearance of your plots.
+Either, you could use a [predefined theme](http://makie.juliaplots.org/stable/predefined_themes.html) or your own.
+For example, to use the predefined dark theme via `with_theme(your_plot_function, theme_dark())`.
+Or, build your own with `Theme(kwargs)` or even update the one that is active with `update_theme!(kwargs)`.
 
-You can also do `set_theme!(theme; kwargs...)` to change the current default theme to `theme` 
-and override or add attributes given by `kwargs`. If you do this and want to reset all
-previous setting just do `set_theme!()`. See it in action in the following examples. 
+You can also do `set_theme!(theme; kwargs...)` to change the current default theme to `theme` and override or add attributes given by `kwargs`.
+If you do this and want to reset all previous setting just do `set_theme!()`.
+See it in action in the following examples:
 
 
 ```jl
@@ -276,23 +269,22 @@ previous setting just do `set_theme!()`. See it in action in the following examp
 
 ```jl
 s = """
-    filenames = ["theme_dark()", "theme_black()", "theme_ggplot2()", # hide 
-        "theme_minimal()", "theme_light()"] # hide 
-    objects = [# hide
+    filenames = ["theme_dark()", "theme_black()", "theme_ggplot2()", # hide
+        "theme_minimal()", "theme_light()"] # hide
+    objects = [ # hide
         with_theme(demo_themes, theme_dark())
         with_theme(demo_themes, theme_black())
         with_theme(demo_themes, theme_ggplot2())
         with_theme(demo_themes, theme_minimal())
         with_theme(demo_themes, theme_light())
-    ]# hide 
-    Options.(objects, filenames) # hide 
+    ] # hide
+    Options.(objects, filenames) # hide
     """
 sco(s)
 ```
 
-Or, defining a custom `Theme` according to your needs by doing 
-`with_theme(your_plot_function, your_theme())`. For instance the following theme
-could be a simple version for a publication quality template. 
+Or, defining a custom `Theme` by doing `with_theme(your_plot_function, your_theme())`.
+For instance, the following theme could be a simple version for a publication quality template:
 
 ```jl
 @sc publication_theme()
@@ -305,31 +297,33 @@ could be a simple version for a publication quality template.
 ```jl
 s = """
     with_theme(plot_with_legend_and_colorbar, publication_theme())
-    filename = "plot_with_legend_and_colorbar" # hide 
-    Options(current_figure(); filename, caption="Themed plot with Legend and Colorbar", # hide
-    label="plot_with_legend_and_colorbar") # hide
+    label = "plot_with_legend_and_colorbar" # hide
+    caption = "Themed plot with Legend and Colorbar." # hide
+    Options(current_figure(); filename=label, label, caption) # hide
     """
 sco(s)
 ```
 
-now if something needs to be changed after `set_theme!(your_theme)` we can do it with  
-`update_theme!(resolution = (500,400), fontsize = 18)`. Another approach will be to
-pass additional arguments to the `with_theme` function as in 
+Now, if something needs to be changed after `set_theme!(your_theme)`, we can do it with `update_theme!(resolution = (500,400), fontsize = 18)`.
+Another approach will be to pass additional arguments to the `with_theme` function:
+
+```{comment}
+The do here makes the code very difficult to read.
+```
 
 ```jl
 s = """
-    with_theme(publication_theme(),resolution = (410,400), figure_padding = 1, 
-            backgroundcolor= :grey90, Axis = (; aspect = DataAspect()), 
-            Colorbar = (; height = Relative(4/5))) do 
+    with_theme(publication_theme(),resolution = (410,400), figure_padding = 1,
+            backgroundcolor= :grey90, Axis = (; aspect = DataAspect()),
+            Colorbar = (; height = Relative(4/5))) do
         plot_with_legend_and_colorbar()
     end
-    filename = "plot_theme_extra_args" # hide 
-    Options(current_figure(); filename, caption="Theme with extra args.", # hide
-    label="themeExtraArgs") # hide
+    label = "plot_theme_extra_args" # hide
+    caption = "Theme with extra args." # hide
+    Options(current_figure(); filename=label, caption, label) # hide
     """
 sco(s)
 ```
-
 
 Now, let's move on and do a plot with LaTeX strings and a custom theme.
 
@@ -346,15 +340,14 @@ A basic example includes LaTeX strings for x-y labels and legends:
 ```jl
 s = """
     with_theme(LaTeX_Strings, publication_theme())
-    filename = "latex_strings" # hide
+    label = "latex_strings" # hide
     caption = "Plot with LaTeX strings." # hide
-    Options(current_figure(); filename, caption) # hide
+    Options(current_figure(); filename=label, caption, label) # hide
     """
 sco(s)
 ```
 
-A more involved example will be one with some equation as `text` and increasing 
-legend numering for curves in a plot. 
+A more involved example will be one with some equation as `text` and increasing legend numering for curves in a plot.
 
 ```
 using LaTeXStrings
@@ -364,31 +357,33 @@ using LaTeXStrings
 @sco JDS.multiple_lines()
 ```
 
-But, some lines have repeated colors, so thats no good. Adding some 
-markers and line styles usually helps. So, let's do that using [Cycles](http://makie.juliaplots.org/stable/theming.html#Cycles) 
-for these types. 
+But, some lines have repeated colors, so thats no good.
+Adding some markers and line styles usually helps.
+So, let's do that using [Cycles](http://makie.juliaplots.org/stable/theming.html#Cycles) for these types:
 
 ```jl
 @sco JDS.multiple_scatters_and_lines()
 ```
 
-And voilà. A publication quality plot its here. What more can we ask for? Well, what about 
-different default colors or palettes. In our next section, we will see how to use again
-[Cycles](http://makie.juliaplots.org/stable/theming.html#Cycles) and know a little bit more
-about them, plus some additional keywords in order to achieve this.  
+And voilà.
+A publication quality plot is here.
+What more can we ask for?
+Well, what about different default colors or palettes.
+In our next section, we will see how to use again [Cycles](http://makie.juliaplots.org/stable/theming.html#Cycles) and know a little bit more about them, plus some additional keywords in order to achieve this.
 
-### Colors and Palettes {#sec:colors}
-Sequential, diverging, categorical. 
+### Colors and Palettes {#sec:makie_colors}
 
-### Layouts {#sec:layouts}
-- Overview on several ways to do layouts and related attributes. 
+Sequential, diverging, categorical.
 
-### Animations {#sec:animations}
-Recording an animation with CairoMakie (GLMakie). 
+### Layouts {#sec:makie_layouts}
+
+- Overview on several ways to do layouts and related attributes.
+
+### Animations {#sec:makie_animations}
+
+Recording an animation with CairoMakie (GLMakie).
 
 ### GLMakie.jl {#sec:glmakie}
 
-
 ## AlgebraOfGraphics.jl {#sec:algebraofgraphics}
-
 

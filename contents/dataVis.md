@@ -1,12 +1,13 @@
 # Data Visualisation {#sec:dataVis}
 
 Data visualisation it is a vital part of almost any data analysis process.
-Here, in this chapter we will consider several libraries that can be used in Julia, namely Plots, Makie and AlbegraOfGraphics specially usefull for tabular data. 
+Here, in this chapter, we will consider several packages that can be used in Julia, namely `Plots.jl`, `Makie.jl` and `AlgebraOfGraphics.jl`.
+The latter is especially useful for tabular data.
 
 - Overview of the JuliaPlots ecosystem
 
 ## Plots.jl {#sec:plots}
-Plots is .... 
+Plots is ....
 
 The default backend is GR. 
 
@@ -17,6 +18,7 @@ using Plots
 ### Plots attributes {#sec:attributes}
 
 ### Colors and Palettes {#sec:colors}
+
 Sequential, diverging, categorical. 
 
 ### Layouts {#sec:layouts}
@@ -33,11 +35,13 @@ Doing an animation with Plots is quite easy.
 ### Themes {#sec:themes}
 
 ### Other backends {#sec:backends}
+
 Plotly, PGFPlotsX, PyPlot?
 
 ## StatsPlots.jl {#sec:statsplots}
 
-1. A brief intro and show that is is really just "syntactic sugar" for Plots.jl. Also note that works on all plots.jl stuff:
+1. A brief intro and show that is is really just "syntactic sugar" for Plots.jl.
+    Also note that works on all Plots.jl stuff:
 
 - Backends
 - Attributes
@@ -59,33 +63,35 @@ Plotly, PGFPlotsX, PyPlot?
 - marginalhist, marginalkde and marginalscatter
 - corrplot and cornerplot
 
-## Makie.jl {#sec:makie}
+## `Makie.jl` {#sec:makie}
 
 (WIP) ideas for a better openinig line? 
 
-[Makie](http://makie.juliaplots.org/stable/index.html#Welcome-to-Makie!) is a high-performance, extendable, and multi-platform plotting ecosystem for the Julia programming language.
+[Makie.jl](http://makie.juliaplots.org/stable/index.html#Welcome-to-Makie!) is a high-performance, extendable, and multi-platform plotting ecosystem for the Julia programming language.
+In our opinion, it is the prettiest and most versatile plotting package.
 
-Makie is Makie's frontend package that defines all plotting functions.
+`Makie.jl` is the frontend package that defines all plotting functions.
 It is reexported by every backend, so you don't have to specifically install or import it.
 There are three main backends which concretely implement all abstract rendering capabilities defined in Makie.
-One for non-interactive 2D publication-quality vector graphics, `CairoMakie.jl`.
-Another for interactive 2D and 3D plotting in standalone GLFW.jl windows (also GPU-powered), `GLMakie.jl`.
+One for non-interactive 2D publication-quality vector graphics: `CairoMakie.jl`.
+Another for interactive 2D and 3D plotting in standalone `GLFW.jl` windows (also GPU-powered), `GLMakie.jl`.
 And the third one, a WebGL-based interactive 2D and 3D plotting that runs within browsers, `WGLMakie.jl`. [See Makie's documentation for more](http://makie.juliaplots.org/stable/backends_and_output.html#Backends-and-Output).
 
-In this book we will only show examples for `CairoMakie` and `GLMakie`.
+In this book we will only show examples for `CairoMakie.jl` and `GLMakie.jl`.
 
-You can activate any backend by using the appropriate package and calling its `activate!` function, e.g. 
+You can activate any backend by using the appropriate package and calling its `activate!` function.
+For example:
 
 ```
 using GLMakie
 GLMakie.activate!()
 ```
-Now, we will start with publication-quality plots. 
+
+Now, we will start with publication-quality plots.
 
 ### CairoMakie.jl {#sec:cairomakie}
 
-Let's start with our first plot, a not so boring example but still simple enough, e.g. a line and 
-some scatter points. 
+Let's start with our first plot, a not so boring example but still simple enough, e.g. a line and some scatter points:
 
 ```
 using CairoMakie
@@ -95,27 +101,26 @@ CairoMakie.activate!()
 ```jl
 s = """
     scatterlines(1:10, 1:10)
-    filename = "firstplot" # hide 
-    Options(current_figure(); filename, caption="First plot", label="firstplot") # hide
+    filename = "firstplot" # hide
+    Options(current_figure(); filename, caption="First plot.", label="firstplot") # hide
     """
 sco(s)
 ```
 
-The previous plot is the default output, which for some probably is not ideal, plus some 
-axis names and labels could be useful. 
+The previous plot is the default output, which we probably need to tweak by using axis names and labels.
 
-Also note that every plotting function like `scatterlines` creates and returns a new `Figure`, `Axis` 
-and `plot` object in a collection called `FigureAxisPlot`, these are known as the 
-`non-mutating` methods. On the other hand, the `mutating` methods (e.g. `scatterlines!`, note the `!`)
-just returns a plot object which can be appended into a given `axis`  or the `current_figure()`.
+Also note that every plotting function like `scatterlines` creates and returns a new `Figure`, `Axis` and `plot` object in a collection called `FigureAxisPlot`.
+These are known as the `non-mutating` methods.
+On the other hand, the `mutating` methods (e.g. `scatterlines!`, note the `!`) just return a plot object which can be appended into a given `axis` or the `current_figure()`.
 
-The next question that one might have is, how do I change the color or the marker type? 
-Well, this is done via `attributes`, our next section. 
+The next question that one might have is: how do I change the color or the marker type?
+This can be done via `attributes`, which we do in the next section.
 
 ### Attributes
 
-A custom plot can be done via `attributes` which can be set through keyword arguments. 
-A list of `attributes` for every plotting object can be view as follows, 
+A custom plot can be created by using `attributes`.
+The attibutes can be set through keyword arguments.
+A list of `attributes` for every plotting object can be viewed via:
 
 ```jl
 s = """
@@ -124,11 +129,9 @@ s = """
     """
 sco(s)
 ```
-or as a `Dict` calling `pltobject.attributes.attributes`. 
+or as a `Dict` calling `pltobject.attributes.attributes`.
 
-Asking for help in the `repl` as `?lines` or `help(lines)` for any given plotting 
-function will also show you their corresponding attributes plus a short description on how to use 
-that specific function, e.g.,
+Asking for help in the `repl` as `?lines` or `help(lines)` for any given plotting function will show you their corresponding attributes plus a short description on how to use that specific function, e.g.:
 
 ```jl
 s = """
@@ -136,50 +139,54 @@ s = """
     """
 sco(s)
 ```
-But not only the plot objects have attributes, also the Axis and Figure objects do. For example
-we have for Figure, `backgroundcolor`, `resolution`, `font` and `fontsize` and the 
-[figure_padding](http://makie.juliaplots.org/stable/figure.html#Figure-padding) 
-which changes the amount of space around the figure content, see grey area in plot.
-It can take one number for all sides, or a tuple of four numbers for left, right, bottom
-and top.  
 
-Axis has a lot more, some of them are  `backgroundcolor`, `xgridcolor`, `title` among others,
-for a full list just type `help(Axis)`. 
+But not only the plot objects have attributes, also the Axis and Figure objects do.
+For example, for Figure, we have `backgroundcolor`, `resolution`, `font` and `fontsize` and the [figure_padding](http://makie.juliaplots.org/stable/figure.html#Figure-padding) which changes the amount of space around the figure content, see the grey area in the plot.
+It can take one number for all sides, or a tuple of four numbers for left, right, bottom and top.
 
+Axis has a lot more, some of them are  `backgroundcolor`, `xgridcolor` and `title`.
+For a full list just type `help(Axis)`.
 
-Hence, for our next plot we will call several attributes at once as follows.
+Hence, for our next plot we will call several attributes at once as follows:
+
+```{comment}
+The rewrite below is a suggestion.
+```
 
 ```jl
 s = """
-    lines(1:10, (1:10).^2, color = :black, linewidth = 2, linestyle = :dash,
-        figure = (; figure_padding = 5, resolution = (600,400), 
-            backgroundcolor = :grey90, fontsize = 16, font = "sans"), 
-        axis = (; xlabel = "x", ylabel = "x²", title = "title", 
-            backgroundcolor = :white, xgridstyle=:dash, ygridstyle=:dash))
-    filename = "customPlot" # hide 
-    Options(current_figure(); filename, caption="custom plot", label="customplot") # hide
+    figure = (; figure_padding=5, resolution=(600,400),
+        backgroundcolor=:grey90, fontsize=16, font="sans")
+
+    axis = (; xlabel="x", ylabel="x²", title="title",
+        backgroundcolor=:white, xgridstyle=:dash, ygridstyle=:dash)
+
+    lines(1:10, (1:10).^2; color=:black, linewidth=2, linestyle=:dash, figure, axis)
+
+    filename = "custom_plot" # hide
+    Options(current_figure(); filename, caption="Custom plot.", label=filename) # hide
     """
 sco(s)
 ```
 
-This example has already most of the attributes that most users will play with it. 
-Probably a `legend` will also be good to have. Which for more than one function will 
-make more sense. So, let's  `append` another `plot object`, a mutating one `!`, and
-add the corresponding legends by calling `axislegend`. This will collect all the `labels`
-you might have passed to your plotting functions. 
+This example has already most of the attributes that most users will normally use.
+Probably, a `legend` will also be good to have.
+Which for more than one function will make more sense.
+So, let's `append` another mutation `plot object` and add the corresponding legends by calling `axislegend`.
+This will collect all the `labels` you might have passed to your plotting functions (@fig:custom_plot_leg):
 
 ```jl
 s = """
     lines(1:10, (1:10).^2, label = "x²", linewidth = 2, linestyle = nothing,
-        figure = (; figure_padding = 5, resolution = (600,400), 
-            backgroundcolor = :grey90, fontsize = 16, font = "sans"), 
-        axis = (; xlabel = "x", title = "title", backgroundcolor = :white, 
+        figure = (; figure_padding = 5, resolution = (600,400),
+            backgroundcolor = :grey90, fontsize = 16, font = "sans"),
+        axis = (; xlabel = "x", title = "title", backgroundcolor = :white,
             xgridstyle=:dash, ygridstyle=:dash))
-    scatterlines!(1:10, (10:-1:1).^2, label = "Reverse(x)²")
+    scatterlines!(1:10, (10:-1:1).^2; label = "Reverse(x)²")
     axislegend("legend", position = :ct)
     current_figure()
-    filename = "customPlotLeg" # hide 
-    Options(current_figure(); filename, caption="custom plot legend", label="customplotlegend") # hide
+    label = "custom_plot_leg" # hide
+    Options(current_figure(); label, filename=label, caption="Custom plot legend.") # hide
     """
 sco(s)
 ```
@@ -191,7 +198,7 @@ example illustrates, not a particular good set of attributes but you get the ide
 
 ```jl
 s = """
-    set_theme!(resolution = (600,400), backgroundcolor = (:orange, 0.5), 
+    set_theme!(resolution = (600,400), backgroundcolor = (:orange, 0.5),
         fontsize = 16, font = "sans",
         Axis = (backgroundcolor = :white, xgridstyle=:dash, ygridstyle=:dash),
         Legend = (bgcolor = (:red,0.2), framecolor = :dodgerblue)
@@ -203,57 +210,53 @@ s = """
     axislegend("legend", position = :ct)
     current_figure()
     set_theme!() # in order to go back to the default settings. 
-    filename = "setTheme" # hide 
-    Options(current_figure(); filename, caption="set theme", label="setTheme") # hide
+    label = "setTheme" # hide
+    Options(current_figure(); filename=label, caption="set theme", label) # hide
     """
 sco(s)
 ```
 
 For more on `themes` please go to section xxx (Refs)
 
-Before moving on into the next section, it's worthwhile to see an example 
-where an `array` of attributes are passed at once to a plotting function. 
-For this example we will use the `scatter` plotting function to do a bubble plot. 
+Before moving on into the next section, it's worthwhile to see an example where an `array` of attributes are passed at once to a plotting function.
+For this example, we will use the `scatter` plotting function to do a bubble plot.
 
 ```jl
 s = """
     let
         Random.seed!(123)
         n = 100
-        fig, ax, pltobj = CairoMakie.scatter(randn(n), randn(n), color = randn(n), 
-            label = "Bubbles",colormap = :plasma, markersize = 25*rand(n), 
+        fig, ax, pltobj = CairoMakie.scatter(randn(n), randn(n), color = randn(n),
+            label = "Bubbles",colormap = :plasma, markersize = 25*rand(n),
             figure = (; resolution = (550,400)), axis = (; aspect= DataAspect()))
         limits!(-3, 3, -3, 3)
         Legend(fig[1,2], ax, valign = :top)
         Colorbar(fig[1,2], pltobj, height = Relative(3/4))
         fig
-        Options(current_figure(); filename ="bubbleplot", caption="Bubble plot", label="bubbleplot") # hide 
+        label = "bubbleplot" # hide
+        Options(current_figure(); filename=label, caption="Bubble plot", label) # hide
     end
     """
 sco(s)
 ```
 
-Where we have decomposed the tuple `FigureAxisPlot` into `fig, ax, pltobj`, in order to 
-be able to add a `Legend` and `Colorbar` outside of the plot object. We will discuss 
-this, `layouts`,  in more detail in the [Layouts] section.
+where we have decomposed the tuple `FigureAxisPlot` into `fig, ax, pltobj`, in order to be able to add a `Legend` and `Colorbar` outside of the plot object.
+We will discuss this, `layouts`, in more detail in section [Layouts].
 
-Well, we have done some basic but still interesting examples to show
-how to use `Makie` and by now you might be wondering, what else can 
-we do? What are all the possible plotting functions available in `Makie`?
-To answer this question a `cheat sheet` is shown in [@fig:cheat_sheet_cairomakie]. These work
-specially well with `CairoMakie`. 
+We have done some basic but still interesting examples to show how to use `Makie` and by now you might be wondering, what else can we do?
+What are all the possible plotting functions available in `Makie.jl`?
+To answer this question, a `cheat sheet` is shown in @fig:cheat_sheet_cairomakie.
+These work especially well with `CairoMakie.jl`.
 
 ![Plotting functions: Cheat Sheet. Output given by Cairomakie.](images/makiePlottingFunctionsHide.png){#fig:cheat_sheet_cairomakie}
 
-For completeness in [@fig:cheat_sheet_glmakie] we 
-show the corresponding ones for `GLMakie`, mostly 3D plots which are highly
-supported in this backend. Those will be explained in detail in section [GLMakie].
+For completeness, in [@fig:cheat_sheet_glmakie] we show the corresponding ones for `GLMakie.jl`, mostly 3D plots which are highly supported in this backend.
+Those will be explained in detail in section [GLMakie].
 
 ![Plotting functions: Cheat Sheet. Output given by GLMakie.](images/GLMakiePlottingFunctionsHide.png){#fig:cheat_sheet_glmakie}
 
-Now, that we have an idea of all the things we can do, let's go back and 
-continue with the basics. It's time to learn how to change the general 
-appereance of our plots. 
+Now, that we have an idea of all the things we can do, let's go back and continue with the basics.
+It's time to learn how to change the general appearance of our plots. 
 
 ### Themes {#sec:themes}
 
@@ -332,8 +335,9 @@ Now, let's move on and do a plot with LaTeX strings and a custom theme.
 
 ### LaTeXStrings
 
-LaTeX support in Makie is also available. Simple use cases are shown below. 
-A basic example includes LaTeX strings for x-y labels and legends. 
+LaTeX support in Makie is also available.
+Simple use cases are shown below (@fig:latex_strings).
+A basic example includes LaTeX strings for x-y labels and legends:
 
 ```jl
 @sc LaTeX_Strings()
@@ -342,9 +346,9 @@ A basic example includes LaTeX strings for x-y labels and legends.
 ```jl
 s = """
     with_theme(LaTeX_Strings, publication_theme())
-    filename = "LaTeX_Strings" # hide 
-    Options(current_figure(); filename, caption="Plot with LaTeX Strings", # hide
-    label="LaTeXStrings") # hide
+    filename = "latex_strings" # hide
+    caption = "Plot with LaTeX strings." # hide
+    Options(current_figure(); filename, caption) # hide
     """
 sco(s)
 ```

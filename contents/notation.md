@@ -68,3 +68,4 @@ From the style guide, we attempt to adhere specifically to:
 - For column names in tables, like the column `x`, we stick to column `:x`, because it is consistent with the code.
 - Do not use unicode symbols in inline code.
   This is simply a bug in the PDF generation that we have to workaround for now.
+- The line before each code block ends with a colon (:) to indicate that the line belongs to the code block.

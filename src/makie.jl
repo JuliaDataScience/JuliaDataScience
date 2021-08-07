@@ -54,10 +54,10 @@ end
 
 function LaTeX_Strings()
     x = 0:0.05:4π
-    lines(x,x -> sin(3x)/(cos(x)+2)/x,label=L"\frac{\sin(3x)}{x(\cos(x)+2)}", 
+    lines(x,x -> sin(3x)/(cos(x)+2)/x; label=L"\frac{\sin(3x)}{x(\cos(x)+2)}", 
         figure=(;resolution=(600,400), ), axis = (; xlabel = L"x"))
-    lines!(x,x-> cos(x)/x, label = L"\cos(x)/x")
-    lines!(x,x-> exp(-x), label = L"e^{-x}")
+    lines!(x,x-> cos(x)/x; label = L"\cos(x)/x")
+    lines!(x,x-> exp(-x); label = L"e^{-x}")
     limits!(-0.5,13,-0.6,1.05)  
     axislegend(L"f(x)")
     current_figure()
@@ -77,10 +77,10 @@ function plot_with_legend_and_colorbar()
     x = LinRange(6,9,n)
     y = LinRange(2,5,n)
     m = randn(n,n)
-    fig, ax, _ = lines(1:10, label = "line")
-    CairoMakie.scatter!(1:10, label = "line")
-    heatObj = CairoMakie.heatmap!(ax, x, y, m, colormap = :Spectral_11)
-    axislegend("legend", position = :lt,  merge = true)
+    fig, ax, _ = lines(1:10; label = "line")
+    CairoMakie.scatter!(1:10; label = "line")
+    heatObj = CairoMakie.heatmap!(ax, x, y, m; colormap = :Spectral_11)
+    axislegend("legend"; position = :lt,  merge = true)
     Colorbar(fig[1,2], heatObj, label = "values")
     ax.title = "my custom theme"
     fig
@@ -90,9 +90,9 @@ function multiple_lines()
     fig = Figure(resolution = (600,400), font="CMU Serif")
     ax = Axis(fig[1,1], xlabel = L"x", ylabel = L"f(x,a)")
     for i in 0:10
-        lines!(ax, 0:10, i .* collect(0:10), label = latexstring("$(i) x"))
+        lines!(ax, 0:10, i .* collect(0:10); label = latexstring("$(i) x"))
     end
-    axislegend(L"f(x)",position = :lt, nbanks = 2, labelsize = 14)
+    axislegend(L"f(x)"; position = :lt, nbanks = 2, labelsize = 14)
     text!(L"f(x,a) = ax", position = (4,80))
     fig
 end
@@ -105,11 +105,11 @@ function multiple_scatters_and_lines()
     ax = Axis(fig[1,1], xlabel = L"x", ylabel = L"f(x,a)")
     x = collect(0:10)
     for i in x
-        lines!(ax, x, i .* x, label = latexstring("$(i) x"))
-        CairoMakie.scatter!(ax, x, i .* x, markersize = 13,
+        lines!(ax, x, i .* x; label = latexstring("$(i) x"))
+        CairoMakie.scatter!(ax, x, i .* x; markersize = 13,
             strokewidth = 0.25, label = latexstring("$(i) x"))
     end
-    axislegend(L"f(x)",merge = true,position = :lt,nbanks=2,labelsize=14)
+    axislegend(L"f(x)"; merge = true,position = :lt,nbanks=2,labelsize=14)
     text!(L"f(x,a) = ax", position = (4,80))
     set_theme!() # reset to default theme
     fig 
@@ -120,14 +120,14 @@ function demo_themes()
     n = 6
     y = cumsum(randn(n, 10), dims = 2)
     labels = ["$i" for i in 1:n]
-    fig, _ = series(y, labels = labels, markersize = 10, color=:Set1, 
+    fig, _ = series(y; labels = labels, markersize = 10, color=:Set1, 
         axis = (; xlabel = "time (s)", ylabel = "Amplitude", 
         title = "Measurements"), figure = (;resolution = (600,300)))
     xh = LinRange(-3,0.5,20)
     yh = LinRange(-3.5,3.5, 20)
-    hmap = CairoMakie.heatmap!(xh, yh, randn(20,20), colormap = :plasma)
+    hmap = CairoMakie.heatmap!(xh, yh, randn(20,20); colormap = :plasma)
     limits!(-3.1,13,-6,5.1)
-    axislegend("legend", merge = true)
+    axislegend("legend"; merge = true)
     Colorbar(fig[1,2], hmap)
     fig
 end
@@ -142,14 +142,14 @@ function multiple_example_themes()
         n = 6
         y = cumsum(randn(n, 10), dims = 2)
         labels = ["$i" for i in 1:n]
-        fig, _ = series(y, labels = labels, markersize = 10, color=:Set1, 
+        fig, _ = series(y; labels = labels, markersize = 10, color=:Set1, 
             axis = (; xlabel = "time (s)", ylabel = "Amplitude", 
             title = "Measurements"), figure = (;resolution = (600,300)))
         xh = LinRange(-3,0.5,20)
         yh = LinRange(-3.5,3.5, 20)
-        hmap = CairoMakie.heatmap!(xh, yh, randn(20,20), colormap = :plasma)
+        hmap = CairoMakie.heatmap!(xh, yh, randn(20,20); colormap = :plasma)
         limits!(-3.1,13,-6,5.1)
-        axislegend("legend", merge = true)
+        axislegend("legend"; merge = true)
         Colorbar(fig[1,2], hmap)
         current_figure()
     end

@@ -56,15 +56,18 @@ Plotly, PGFPlotsX, PyPlot?
 - marginalhist, marginalkde and marginalscatter
 - corrplot and cornerplot
 
-## `Makie.jl` {#sec:makie}
+## Makie.jl {#sec:makie}
 
-(WIP) ideas for a better openinig line? 
+> From the japanese word Maki-e, which is a technique to sprinkle lacquer with gold and silver powder.
+> Data is the gold and silver of our age, so let's spread it out beautifully on the screen!
+>
+> _Simon Danisch_
 
 [Makie.jl](http://makie.juliaplots.org/stable/index.html#Welcome-to-Makie!) is a high-performance, extendable, and multi-platform plotting ecosystem for the Julia programming language.
 In our opinion, it is the prettiest and most versatile plotting package.
 
 `Makie.jl` is the frontend package that defines all plotting functions.
-It is reexported by every backend, so you don't have to specifically install or import it.
+It is reexported by every backend _(the machinery behind-the-scenes making the figure)_, so you don't have to specifically install or import it.
 There are three main backends which concretely implement all abstract rendering capabilities defined in Makie.
 One for non-interactive 2D publication-quality vector graphics: `CairoMakie.jl`.
 Another for interactive 2D and 3D plotting in standalone `GLFW.jl` windows (also GPU-powered), `GLMakie.jl`.
@@ -117,7 +120,7 @@ A list of `attributes` for every plotting object can be viewed via:
 
 ```jl
 s = """
-    fig, ax, pltobj = scatterlines(1:10, 1:10)
+    fig, ax, pltobj = scatterlines(1:10)
     pltobj.attributes
     """
 sco(s)
@@ -141,10 +144,6 @@ Axis has a lot more, some of them are  `backgroundcolor`, `xgridcolor` and `titl
 For a full list just type `help(Axis)`.
 
 Hence, for our next plot we will call several attributes at once as follows:
-
-```{comment}
-The rewrite below is a suggestion.
-```
 
 ```jl
 s = """
@@ -170,13 +169,13 @@ This will collect all the `labels` you might have passed to your plotting functi
 
 ```jl
 s = """
-    lines(1:10, (1:10).^2, label = "x²", linewidth = 2, linestyle = nothing,
+    lines(1:10, (1:10).^2; label = "x²", linewidth = 2, linestyle = nothing,
         figure = (; figure_padding = 5, resolution = (600,400),
             backgroundcolor = :grey90, fontsize = 16, font = "sans"),
         axis = (; xlabel = "x", title = "title", backgroundcolor = :white,
             xgridstyle=:dash, ygridstyle=:dash))
     scatterlines!(1:10, (10:-1:1).^2; label = "Reverse(x)²")
-    axislegend("legend", position = :ct)
+    axislegend("legend"; position = :ct)
     current_figure()
     label = "custom_plot_leg" # hide
     Options(current_figure(); label, filename=label, caption="Custom plot legend.") # hide
@@ -197,10 +196,10 @@ s = """
         Legend = (bgcolor = (:red,0.2), framecolor = :dodgerblue)
         )
 
-    lines(1:10, (1:10).^2, label = "x²", linewidth = 2, linestyle = nothing,
+    lines(1:10, (1:10).^2; label = "x²", linewidth = 2, linestyle = nothing,
         axis = (; xlabel = "x", title = "title"))
-    scatterlines!(1:10, (10:-1:1).^2, label = "Reverse(x)²")
-    axislegend("legend", position = :ct)
+    scatterlines!(1:10, (10:-1:1).^2; label = "Reverse(x)²")
+    axislegend("legend"; position = :ct)
     current_figure()
     set_theme!() # in order to go back to the default settings. 
     label = "setTheme" # hide
@@ -209,7 +208,7 @@ s = """
 sco(s)
 ```
 
-For more on `themes` please go to section xxx (Refs)
+For more on `themes` please go to section [Themes].
 
 Before moving on into the next section, it's worthwhile to see an example where an `array` of attributes are passed at once to a plotting function.
 For this example, we will use the `scatter` plotting function to do a bubble plot.
@@ -219,7 +218,7 @@ s = """
     let
         Random.seed!(123)
         n = 100
-        fig, ax, pltobj = CairoMakie.scatter(randn(n), randn(n), color = randn(n),
+        fig, ax, pltobj = CairoMakie.scatter(randn(n), randn(n); color = randn(n),
             label = "Bubbles",colormap = :plasma, markersize = 25*rand(n),
             figure = (; resolution = (550,400)), axis = (; aspect= DataAspect()))
         limits!(-3, 3, -3, 3)
@@ -307,15 +306,13 @@ sco(s)
 Now, if something needs to be changed after `set_theme!(your_theme)`, we can do it with `update_theme!(resolution = (500,400), fontsize = 18)`.
 Another approach will be to pass additional arguments to the `with_theme` function:
 
-```{comment}
-The do here makes the code very difficult to read.
-```
-
 ```jl
 s = """
-    with_theme(publication_theme(),resolution = (410,400), figure_padding = 1,
-            backgroundcolor= :grey90, Axis = (; aspect = DataAspect()),
-            Colorbar = (; height = Relative(4/5))) do
+    fig = (resolution = (410,400), figure_padding = 1, backgroundcolor= :grey90)
+    ax = (; aspect = DataAspect())
+    cbar = (; height = Relative(4/5))
+
+    with_theme(publication_theme(); fig..., Axis = ax, Colorbar = cbar) do
         plot_with_legend_and_colorbar()
     end
     label = "plot_theme_extra_args" # hide
@@ -327,11 +324,11 @@ sco(s)
 
 Now, let's move on and do a plot with LaTeX strings and a custom theme.
 
-### LaTeXStrings
+### $\LaTeX$ using LaTeXStrings
 
-LaTeX support in Makie is also available.
+$\LaTeX$ support in Makie is also available.
 Simple use cases are shown below (@fig:latex_strings).
-A basic example includes LaTeX strings for x-y labels and legends:
+A basic example includes $\LaTeX$ strings for x-y labels and legends:
 
 ```jl
 @sc LaTeX_Strings()

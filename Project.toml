@@ -27,7 +27,7 @@ StatsPlots = "f3b207a7-027a-5e70-b257-86293d7955fd"
 XLSX = "fdbf4ff8-1666-58a4-91e7-1b58723a45e0"
 
 [compat]
-AlgebraOfGraphics = "0.4"
+AlgebraOfGraphics = "0.4, 0.5"
 Books = "0.7"
 CSV = "0.8"
 CairoMakie = "0.6"

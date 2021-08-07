@@ -4,6 +4,9 @@ At the start of this chapter, we showed multiple tables and gave questions relat
 However, we haven't talked about combining tables yet, which we will do in this section.
 In `DataFrames.jl`, combining multiple tables is done via _joins_.
 Joins are extremely powerful, but might take some time to wrap your head around.
+It is not necessary to know the joins below by heart, the [`DataFrames.jl` documentation](https://DataFrames.juliadata.org/stable/man/joins/) and this book list them too.
+But, it's good to know that they exists.
+If you ever find yourself looping over rows in a DataFrame and and comparing it with other data, then you probably need one of the joins below.
 
 In @sec:dataframes, we've introduced the grades for 2020:
 
@@ -19,13 +22,13 @@ s = "grades_2021()"
 sco(s; process=without_caption_label)
 ```
 
-To do this, we are going to use a `join`.
-The [`DataFrames.jl` documentation](https://dataframes.juliadata.org/stable/man/joins/) lists no less than seven kinds of joins.
-We can just as well show them all here, because they are all useful depending on how your data will look.
+To do this, we are going to use joins.
+The `DataFrames.jl` lists no less than seven kinds of joins.
+We show them all here, because they are all useful.
 This first mentioned one is `innerjoin`.
-Suppose we have two datasets `A` and `B` with respectively columns `A_1, A_2, ..., A_n` and `B_1, B_2, ..., B_m` **and** one of the columns has the same name, say `A_1` and `B_1` are both called `:id`.
+Suppose that we have two datasets `A` and `B` with respectively columns `A_1, A_2, ..., A_n` and `B_1, B_2, ..., B_m` **and** one of the columns has the same name, say `A_1` and `B_1` are both called `:id`.
 Then, the inner join on `:id` will go through all the elements in `A_1` and compare it to the elements in `B_1`.
-If the elements are **the same**, then add all the information from `A_2, ..., A_n` and `B_2, ..., B_m` behind it.
+If the elements are **the same**, then it will add all the information from `A_2, ..., A_n` and `B_2, ..., B_m` behind it.
 
 Okay, so no worries if you didn't get this description.
 The result on the grades datasets looks like this:
@@ -78,6 +81,48 @@ sco(s; process=without_caption_label)
 So, now, we have one row for each grade from everyone in grades 2020 and grades 2021 datasets.
 For direct queries, such as "who has the highest grade?", the cartesian product is usually not so useful, but for (statistal) queries, it can be.
 
+More useful for scientific projects are the `leftjoin` and `rightjoin`.
+The left join gives all the elements in the _left_ DataFrame:
+
+```jl
+s = "leftjoin(grades_2020(), grades_2021(); on=:name)"
+sco(s; process=without_caption_label)
+```
+
+Here, grades for "Bob" and "Alice" were missing in the grades 2021 table, so that's why there are elements missing.
+The rightjoin does sort of the opposite:
+
+```jl
+s = "rightjoin(grades_2020(), grades_2021(); on=:name)"
+sco(s; process=without_caption_label)
+```
+
+Now, grades in 2020 are missing.
+Note that `leftjoin(A, B) != rightjoin(B, A)`, because the order of the columns will differ.
+For example, compare the output below to the previous output:
+
+```jl
+s = "leftjoin(grades_2021(), grades_2020(); on=:name)"
+sco(s; process=without_caption_label)
+```
+
+Lastly, we have the `semijoin` and `antijoin`.
+The semi join is even more restrictive than the inner join.
+It returns only the elements from the left DataFrame which are in both DataFrames:
+
+```jl
+s = "semijoin(grades_2020(), grades_2021(); on=:name)"
+sco(s; process=without_caption_label)
+```
+
+The opposite of the semi join is the anti join.
+It returns only the elements from the left DataFrame which are **not** in the right DataFrame:
+
+```jl
+s = "antijoin(grades_2020(), grades_2021(); on=:name)"
+sco(s; process=without_caption_label)
+```
+
 ## Variable Transformations
 
 ```{=comment}
@@ -85,5 +130,11 @@ manipulate variables
 DataFrames.transform
 Ifelse and case_when
 ```
+
+In @sec:filter, we saw that `filter` works by taking one or more source columns and filtering it by applying a function.
+In other words, we saw that `source => f::Function` like in, for example, `filter(:name => name -> name == "Alice", df)`.
+In @sec:select, we saw that `select` can take one or more source columns and put it into one or more target columns `source => target` like in, for example, `select(df, :name => :people_names)`.
+In this section, we discuss how to **transform** variables.
+This goes via `source => transformation => target`.
 
 ## Groupby {#sec:groupby}

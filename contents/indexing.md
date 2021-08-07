@@ -94,8 +94,8 @@ sco("grades_2020()"; process=without_caption_label)
 Add ref to multiple dispatch in the intro
 ```
 
-We can filter rows by using `filter(f::Function, df)`.
-This function is very similar to the function `filter(f::Function, V::Vector)` from Julia itself.
+We can filter rows by using `filter(source => f::Function, df)`.
+Note how this function is very similar to the function `filter(f::Function, V::Vector)` from Julia itself.
 Working with a function `f` for filtering can be a bit difficult to use in practice, but it is very powerful.
 As a simple example, we can create a function which checks whether it's input equals "Alice":
 
@@ -107,7 +107,7 @@ As a simple example, we can create a function which checks whether it's input eq
 sco("equals_alice(\"Alice\")"; post=output_block)
 ```
 
-With such a function, we can now filter out all the rows for which `name` equals "Alice"
+With such a function, we can now filter out all the rows for which `name` equals "Alice":
 
 ```jl
 s = "filter(:name => equals_alice, grades_2020())"

@@ -64,7 +64,7 @@ s = "select(responses(), 1, :q5, :)"
 sco(s, process=without_caption_label)
 ```
 
-Even renaming columns is possible via `select`:
+Even renaming columns is possible via `select` via `source => target`:
 
 ```jl
 s = """select(responses(), 1 => "participant", :q1 => "age", :q2 => "nationality")"""

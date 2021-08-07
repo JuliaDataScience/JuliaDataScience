@@ -324,11 +324,11 @@ sco(s)
 
 Now, let's move on and do a plot with LaTeX strings and a custom theme.
 
-### $\LaTeX$ using LaTeXStrings
+### using LaTeXStrings
 
-$\LaTeX$ support in Makie is also available.
+LaTeX support in Makie is also available.
 Simple use cases are shown below (@fig:latex_strings).
-A basic example includes $\LaTeX$ strings for x-y labels and legends:
+A basic example includes LaTeX strings for x-y labels and legends:
 
 ```jl
 @sc LaTeX_Strings()

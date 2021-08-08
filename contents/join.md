@@ -6,7 +6,7 @@ In `DataFrames.jl`, combining multiple tables is done via _joins_.
 Joins are extremely powerful, but might take some time to wrap your head around.
 It is not necessary to know the joins below by heart, the [`DataFrames.jl` documentation](https://DataFrames.juliadata.org/stable/man/joins/) and this book list them too.
 But, it's good to know that they exists.
-If you ever find yourself looping over rows in a DataFrame and and comparing it with other data, then you probably need one of the joins below.
+If you ever find yourself looping over rows in a DataFrame and comparing it with other data, then you probably need one of the joins below.
 
 In @sec:dataframes, we've introduced the grades for 2020:
 
@@ -39,10 +39,10 @@ sco(s; process=without_caption_label)
 ```
 
 Note that only "Sally" and "Hank" are in both datasets.
-The name _inner_ join makes sense if you know that, in mathematics, the _set intersection_ is defined by "all elements in $A$, that are also in $B$, or all elements in $B$ that are also in $A$".
+The name _inner_ join makes sense since, in mathematics, the _set intersection_ is defined by "all elements in $A$, that are also in $B$, or all elements in $B$ that are also in $A$".
 
 Maybe, you're now thinking "aha, if we have an _inner_, then we probably also have an _outer_".
-That thinking would then be correct.
+Yes, you've guessed right!
 The `outerjoin` is much less strict than the `innerjoin` and just takes any row it can find which contains a name:
 
 ```jl
@@ -51,9 +51,9 @@ sco(s; process=without_caption_label)
 ```
 
 Personally, this join makes me (Rik) a little bit sad, because our neat data without missing values suddenly has missing values.
-But, that doesn't mean that there aren't good use-cases for this join or that you shouldn't use it.
+But, that doesn't mean that there aren't good use-cases for _outer_ join or that you shouldn't use it.
 We can get even more missing data if we use the `crossjoin`.
-This gives the cartesian product of the rows, which is basically multiplication of rows, that is, for every row create a combination with any other row:
+This gives the Cartesian product of the rows, which is basically multiplication of rows, that is, for every row create a combination with any other row:
 
 ```jl
 s = "crossjoin(grades_2020(), grades_2021(); on=:id)"
@@ -79,7 +79,7 @@ sco(s; process=without_caption_label)
 ```
 
 So, now, we have one row for each grade from everyone in grades 2020 and grades 2021 datasets.
-For direct queries, such as "who has the highest grade?", the cartesian product is usually not so useful, but for (statistal) queries, it can be.
+For direct queries, such as "who has the highest grade?", the Cartesian product is usually not so useful, but for (statistical) queries, it can be.
 
 More useful for scientific projects are the `leftjoin` and `rightjoin`.
 The left join gives all the elements in the _left_ DataFrame:
@@ -89,8 +89,8 @@ s = "leftjoin(grades_2020(), grades_2021(); on=:name)"
 sco(s; process=without_caption_label)
 ```
 
-Here, grades for "Bob" and "Alice" were missing in the grades 2021 table, so that's why there are elements missing.
-The rightjoin does sort of the opposite:
+Here, grades for "Bob" and "Alice" were missing in the grades 2021 table, so that's why there are missing elements.
+The right join does sort of the opposite:
 
 ```jl
 s = "rightjoin(grades_2020(), grades_2021(); on=:name)"

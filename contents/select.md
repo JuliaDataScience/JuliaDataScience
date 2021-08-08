@@ -8,7 +8,7 @@ First, let's create a dataset with multiple columns:
 @sco responses()
 ```
 
-Here, the data represents answers on five questions (`q1`, `q2`, ..., `q5`) in a questionnaire.
+Here, the data represents answers for five questions (`q1`, `q2`, ..., `q5`) in a questionnaire.
 We will start by "selecting" a few columns from this dataset.
 Again, we use symbols to specify columns:
 
@@ -117,7 +117,7 @@ s = "sort(wrong_types(), :date)"
 scsob(s)
 ```
 
-To fix the sorting, we can use `Date` as described in @sec:dates:
+To fix the sorting, we can use `Date` from Julia's standard library as described in @sec:dates:
 
 ```jl
 @sco process=string post=output_block fix_date_column(wrong_types())
@@ -182,10 +182,9 @@ s = """
 scob(s)
 ```
 
-which would have been wrong for strings:
+which would give wrong comparisons when the element type were strings:
 
 ```jl
 s = "\"infant\" < \"adult\""
 scob(s)
 ```
-

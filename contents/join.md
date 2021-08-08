@@ -50,8 +50,7 @@ s = "outerjoin(grades_2020(), grades_2021(); on=:name)"
 sco(s; process=without_caption_label)
 ```
 
-Personally, this join makes me (Rik) a little bit sad, because our neat data without missing values suddenly has missing values.
-But, that doesn't mean that there aren't good use-cases for _outer_ join or that you shouldn't use it.
+So, this method can create missing data even though non of the original datasets had missing values.
 We can get even more missing data if we use the `crossjoin`.
 This gives the Cartesian product of the rows, which is basically multiplication of rows, that is, for every row create a combination with any other row:
 
@@ -108,7 +107,8 @@ sco(s; process=without_caption_label)
 
 Lastly, we have the `semijoin` and `antijoin`.
 The semi join is even more restrictive than the inner join.
-It returns only the elements from the left DataFrame which are in both DataFrames:
+It returns only the elements from the left DataFrame which are in both DataFrames.
+This is like a combination of the left join with the inner join.
 
 ```jl
 s = "semijoin(grades_2020(), grades_2021(); on=:name)"

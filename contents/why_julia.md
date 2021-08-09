@@ -19,7 +19,7 @@ Then, you try to find resources to learn this new craft and you stumble into a w
 
 Out of the blue you hear a name: "Julia".
 What is this?
-How is it any different from other stuff that I've been told that you ought use to do data science?
+How is it any different from other stuff that I've been told that I need to do data science?
 
 Why should I dedicate my precious time into learning a language that is almost never mentioned in any job listing, lab position, postdoc offer or academic job description?.
 The answer is that **Julia is a fresh approach** both to programming and data science.

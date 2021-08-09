@@ -14,6 +14,7 @@ using Reexport
 @reexport using Downloads
 @reexport using InteractiveUtils
 @reexport using Makie
+@reexport using ColorSchemes
 @reexport using Plots
 @reexport using LaTeXStrings
 @reexport using Random
@@ -25,7 +26,7 @@ include("plots.jl")
 include("makie.jl")
 
 export sce, scsob, trim_last_n_lines, publication_theme, plot_with_legend_and_colorbar
-export LaTeX_Strings, demo_themes
+export LaTeX_Strings, demo_themes, new_cycle_theme, scatters_and_lines
 
 plot = Plots.plot
 

@@ -56,7 +56,7 @@ In these chapter you will learn how to:
 
 Unlike most books on data science, this book lays more emphasis on **properly structuring code**.
 The reason for this is that we noticed that many data scientists simply place their code into one large file and run all the statements sequentially.
-You can think of this as writing a book for someone and forcing that person to read it from beginning to start.
+You can think of this as writing a book for someone and forcing that person to read it from beginning to end.
 This works great for small and simple projects, but the bigger or more complex the project becomes, more problems will start to arise.
 For example, with a well written book: the book is split into distinctly named chapters and sections which contains several references to other parts in the book.
 The software equivalent of this is **splitting code into functions**.

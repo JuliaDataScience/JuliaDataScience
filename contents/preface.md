@@ -11,7 +11,7 @@ Most of data analyses are a collaborative endeavor, these practices should come 
 ## Why Data Science? {#sec:why_data_science}
 
 Data science is not only machine learning and statistics, also it is not all about prediction, alas, it is not even a discipline fully contained within STEM (Science, Technology, Engineering, and Mathematics) fields [@Meng2019Data].
-But one thing we can assure with highly confidence is that **data is always involved**.
+But one thing we can assure with high confidence is that **data is always involved**.
 Our aim in this book is two-fold:
 
 * First, we want to focus on the backbone of data science: data.

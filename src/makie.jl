@@ -174,7 +174,7 @@ function set_colors_and_cycle()
         title = "Epicycloid", aspect= DataAspect())
     figure = (;resolution = (500,400), font= "CMU Serif")
 
-    fig, ax, _ = lines(x(1,1,θ), y(1,1,θ); color = "firebrick1", #string 
+    fig, ax, _ = lines(x(1,1,θ), y(1,1,θ); color = "firebrick1", # string 
         label = L"1.0", axis = axis, figure = figure)
     lines!(ax, x(4,2,θ), y(4,2,θ); color = :royalblue1, #symbol
         label = L"2.0")  

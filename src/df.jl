@@ -11,9 +11,10 @@ function grades_2020()
     DataFrame(; name, grade_2020)
 end
 
+export grades_2021
 function grades_2021()
     name = ["Bob 2", "Sally", "Hank"]
-    grade_2020 = [9.5, 9.5, 5]
+    grade_2021 = [9.5, 9.5, 5]
     DataFrame(; name, grade_2021)
 end
 

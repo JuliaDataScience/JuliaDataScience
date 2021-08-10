@@ -96,6 +96,7 @@ CairoMakie.activate!()
 
 ```jl
 s = """
+    CairoMakie.activate!() # hide
     scatterlines(1:10, 1:10)
     filename = "firstplot" # hide
     Options(current_figure(); filename, caption="First plot.", label="firstplot") # hide
@@ -120,6 +121,7 @@ A list of `attributes` for every plotting object can be viewed via:
 
 ```jl
 s = """
+    CairoMakie.activate!() # hide
     fig, ax, pltobj = scatterlines(1:10)
     pltobj.attributes
     """
@@ -147,6 +149,7 @@ Hence, for our next plot we will call several attributes at once as follows:
 
 ```jl
 s = """
+    CairoMakie.activate!() # hide
     figure = (; figure_padding=5, resolution=(600,400),
         backgroundcolor=:grey90, fontsize=16, font="sans")
 
@@ -169,6 +172,7 @@ This will collect all the `labels` you might have passed to your plotting functi
 
 ```jl
 s = """
+    CairoMakie.activate!() # hide 
     lines(1:10, (1:10).^2; label = "x²", linewidth = 2, linestyle = nothing,
         figure = (; figure_padding = 5, resolution = (600,400),
             backgroundcolor = :grey90, fontsize = 16, font = "sans"),
@@ -190,6 +194,7 @@ We can do this with `set_theme!()` as the following example illustrates, not a p
 
 ```jl
 s = """
+    CairoMakie.activate!() # hide
     set_theme!(resolution = (600,400), backgroundcolor = (:orange, 0.5),
         fontsize = 16, font = "sans",
         Axis = (backgroundcolor = :white, xgridstyle=:dash, ygridstyle=:dash),
@@ -216,6 +221,7 @@ For this example, we will use the `scatter` plotting function to do a bubble plo
 ```jl
 s = """
     let
+        CairoMakie.activate!() # hide
         Random.seed!(123)
         n = 100
         fig, ax, pltobj = CairoMakie.scatter(randn(n), randn(n); color = randn(n),
@@ -268,6 +274,7 @@ See it in action in the following examples:
 
 ```jl
 s = """
+    CairoMakie.activate!() # hide
     filenames = ["theme_dark()", "theme_black()", "theme_ggplot2()", # hide
         "theme_minimal()", "theme_light()"] # hide
     objects = [ # hide
@@ -295,6 +302,7 @@ For instance, the following theme could be a simple version for a publication qu
 
 ```jl
 s = """
+    CairoMakie.activate!() # hide
     with_theme(plot_with_legend_and_colorbar, publication_theme())
     label = "plot_with_legend_and_colorbar" # hide
     caption = "Themed plot with Legend and Colorbar." # hide
@@ -308,6 +316,7 @@ Another approach will be to pass additional arguments to the `with_theme` functi
 
 ```jl
 s = """
+    CairoMakie.activate!() # hide
     fig = (resolution = (410,400), figure_padding = 1, backgroundcolor= :grey90)
     ax = (; aspect = DataAspect())
     cbar = (; height = Relative(4/5))
@@ -336,6 +345,7 @@ A basic example includes LaTeX strings for x-y labels and legends:
 
 ```jl
 s = """
+    CairoMakie.activate!() # hide
     with_theme(LaTeX_Strings, publication_theme())
     label = "latex_strings" # hide
     caption = "Plot with LaTeX strings." # hide
@@ -372,7 +382,7 @@ In our next section, we will see how to use again [`Cycles`](http://makie.juliap
 
 Choosing an appropiate set of colors or colorbar for your plot is an essential part when presenting results.
 Using [Colors.jl](https://github.com/JuliaGraphics/Colors.jl) is supported in `Makie.jl`
-so that you can used [named colors](https://juliagraphics.github.io/Colors.jl/latest/namedcolors/) or pass `RGB` or `RGBA` values.
+so that you can use [named colors](https://juliagraphics.github.io/Colors.jl/latest/namedcolors/) or pass `RGB` or `RGBA` values.
 Regarding colormaps, all those that work with [Plots.jl](https://github.com/JuliaPlots/Plots.jl) also do here.
 Additionally, colormaps from [ColorSchemes.jl](https://github.com/JuliaGraphics/ColorSchemes.jl) and [PerceptualColourMaps.jl](https://github.com/peterkovesi/PerceptualColourMaps.jl) can also be used.
 It is worth knowing that you can reverse a colormap by doing `Reverse(:colormap_name)`
@@ -401,6 +411,7 @@ See `?cgrad` for more information.
 
 ```jl
 scolor = """
+    CairoMakie.activate!() # hide 
     figure = (;resolution = (400,300), font= "CMU Serif")
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
 
@@ -424,6 +435,7 @@ using ColorSchemes
 
 ```jl
 s = """
+    CairoMakie.activate!() # hide
     figure = (;resolution = (400,300), font= "CMU Serif")
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
 
@@ -448,6 +460,7 @@ using ColorSchemes
 
 ```jl
 scat = """
+    CairoMakie.activate!() # hide
     figure = (;resolution = (400,300), font= "CMU Serif")
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
     cmap = ColorScheme(range(colorant"red", colorant"green", length=3))
@@ -475,6 +488,7 @@ Also, `hex` coded colors are also accepted. So, on top or our heatmap let's put 
 
 ```jl
 s2color2 = """
+    CairoMakie.activate!() # hide
     figure = (;resolution = (400,300), font= "CMU Serif")
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
 
@@ -510,6 +524,7 @@ And apply it to a plotting function like the following:
 
 ```jl
 s = """
+    CairoMakie.activate!() # hide
     with_theme(scatters_and_lines, new_cycle_theme())
     label = "custom_cycle" # hide
     caption = "Custom theme with new cycle and colormap." # hide
@@ -530,5 +545,13 @@ Next, we will dive into how to manage and control **layouts**.
 Recording an animation with CairoMakie (GLMakie).
 
 ### GLMakie.jl {#sec:glmakie}
+
+```jl
+@sc peaks()
+```
+
+```jl
+@sco JDS.plot_peaks_function()
+```
 
 ## AlgebraOfGraphics.jl {#sec:algebraofgraphics}

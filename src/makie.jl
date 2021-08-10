@@ -1,4 +1,5 @@
 function custom_plot()
+    CairoMakie.activate!() # hide
     caption = "An example plot with Makie.jl."
     label = missing
     x = 1:10
@@ -14,6 +15,7 @@ function custom_plot()
 end
 
 function custom_plot2()
+    CairoMakie.activate!() # hide
     x = 1:10
     lines(x, x.^2, color = :black, linewidth = 2,linestyle=".-", 
         label = "x²", figure = (; resolution = (700,450), fontsize = 18, 
@@ -27,6 +29,7 @@ function custom_plot2()
 end
 
 function areaUnder()
+    CairoMakie.activate!() # hide
     x = 0:0.05:1
     y = x.^2
     fig = Figure(resolution = (700, 450))
@@ -44,6 +47,7 @@ function areaUnder()
 end
 
 function makiejl()
+    CairoMakie.activate!() # hide
     x = range(0, 10, length=100)
     y = sin.(x)
     p = lines(x, y)
@@ -53,6 +57,7 @@ function makiejl()
 end
 
 function LaTeX_Strings()
+    CairoMakie.activate!() # hide
     x = 0:0.05:4π
     lines(x,x -> sin(3x)/(cos(x)+2)/x; label=L"\frac{\sin(3x)}{x(\cos(x)+2)}", 
         figure=(;resolution=(600,400), ), axis = (; xlabel = L"x"))
@@ -73,6 +78,7 @@ publication_theme()= Theme(
     )
 
 function plot_with_legend_and_colorbar()
+    CairoMakie.activate!() # hide
     n = 15
     x = LinRange(6,9,n)
     y = LinRange(2,5,n)
@@ -87,6 +93,7 @@ function plot_with_legend_and_colorbar()
 end
 
 function multiple_lines()
+    CairoMakie.activate!() # hide 
     fig = Figure(resolution = (600,400), font="CMU Serif")
     ax = Axis(fig[1,1], xlabel = L"x", ylabel = L"f(x,a)")
     for i in 0:10
@@ -98,6 +105,7 @@ function multiple_lines()
 end
 
 function multiple_scatters_and_lines()
+    CairoMakie.activate!() # hide
     cycle = Cycle([:color, :linestyle, :marker], covary = true)
     set_theme!(Lines = (cycle = cycle,), Scatter = (cycle = cycle,))
 
@@ -116,6 +124,7 @@ function multiple_scatters_and_lines()
 end
 
 function demo_themes()
+    CairoMakie.activate!() # hide 
     Random.seed!(123)
     n = 6
     y = cumsum(randn(n, 10), dims = 2)
@@ -135,6 +144,7 @@ end
 
 
 function multiple_example_themes()
+    CairoMakie.activate!() # hide
     filenames = ["theme_dark()", "theme_black()", "theme_ggplot2()", # hide 
         "theme_minimal()", "theme_light()"] # hide 
     function demo_theme()
@@ -165,6 +175,7 @@ function multiple_example_themes()
 end
 
 function set_colors_and_cycle()
+    CairoMakie.activate!() # hide 
     # Epicycloid lines 
     x(r,k,θ) = r*(k .+ 1.0).*cos.(θ) .- r*cos.((k .+ 1.0) .* θ)
     y(r,k,θ) = r*(k .+ 1.0).*sin.(θ) .- r*sin.((k .+ 1.0) .* θ)
@@ -209,6 +220,7 @@ function new_cycle_theme()
 end
 
 function scatters_and_lines()
+    CairoMakie.activate!() # hide
     fig = Figure(resolution = (650,400), font="CMU Serif")
     ax = Axis(fig[1,1], xlabel = L"x", ylabel = L"f(x,a)")
     x = collect(0:10)
@@ -223,4 +235,38 @@ function scatters_and_lines()
     limits!(ax,-0.5,10.5,-5,105)
     colgap!(fig.layout, 5)
     fig 
+end
+
+# written by Josef Heinen from GR.jl
+"""
+    peaks([n=49])
+    
+    Returns a nonlinear function on a grid.  Useful for test cases.
+    x, y, z
+"""
+function peaks(; n = 49)
+    x = LinRange(-3, 3, n)
+    y = LinRange(-3, 3, n)
+    a = 3 * (1 .- x').^2 .* exp.(-(x'.^2) .- (y .+ 1).^2) 
+    b = 10 * (x' / 5 .- x'.^3 .- y.^5) .* exp.(-x'.^2 .- y.^2)
+    c = 1 / 3 * exp.(-(x' .+ 1).^2 .- y.^2)
+    x, y, a .- b .- c
+end
+
+function plot_peaks_function()
+    GLMakie.activate!() # hide
+    x, y, z = peaks()
+
+    fig = Figure(resolution = (1200,400))
+    ax1 = Axis3(fig[1,1], aspect= (1,1,1))
+    ax2 = Axis3(fig[1,2], aspect= (1,1,1))
+    ax3 = Axis3(fig[1,3], aspect= (1,1,1))
+    ax4 = Axis3(fig[1,4], aspect= (1,1,1))
+
+    hm = GLMakie.surface!(ax1, x, y, z)
+    GLMakie.wireframe!(ax2, x, y, z)
+    GLMakie.contour!(ax3, x, y, z)
+    GLMakie.contourf!(ax4, x, y, z)
+    Colorbar(fig[1,5], hm)
+    fig
 end

@@ -115,7 +115,7 @@ This can be done via `attributes`, which we do in the next section.
 ### Attributes
 
 A custom plot can be created by using `attributes`.
-The attibutes can be set through keyword arguments.
+The attributes can be set through keyword arguments.
 A list of `attributes` for every plotting object can be viewed via:
 
 ```jl
@@ -127,7 +127,7 @@ sco(s)
 ```
 or as a `Dict` calling `pltobject.attributes.attributes`.
 
-Asking for help in the `repl` as `?lines` or `help(lines)` for any given plotting function will show you their corresponding attributes plus a short description on how to use that specific function, e.g.:
+Asking for help in the `REPL` as `?lines` or `help(lines)` for any given plotting function will show you their corresponding attributes plus a short description on how to use that specific function, e.g.:
 
 ```jl
 s = """
@@ -136,11 +136,11 @@ s = """
 sco(s)
 ```
 
-But not only the plot objects have attributes, also the Axis and Figure objects do.
+But not only the plot objects have attributes, also the `Axis` and `Figure` objects do.
 For example, for Figure, we have `backgroundcolor`, `resolution`, `font` and `fontsize` and the [figure_padding](http://makie.juliaplots.org/stable/figure.html#Figure-padding) which changes the amount of space around the figure content, see the grey area in the plot.
 It can take one number for all sides, or a tuple of four numbers for left, right, bottom and top.
 
-Axis has a lot more, some of them are  `backgroundcolor`, `xgridcolor` and `title`.
+`Axis` has a lot more, some of them are  `backgroundcolor`, `xgridcolor` and `title`.
 For a full list just type `help(Axis)`.
 
 Hence, for our next plot we will call several attributes at once as follows:
@@ -183,10 +183,10 @@ s = """
 sco(s)
 ```
 
-However, having to writte this so much code just for two lines can become cumbersome
-and tired, so if you plan on doing a lot of plots with the same general aesthetics
-then setting a theme will be better. We can do this with `set_theme!()` as the following
-example illustrates, not a particular good set of attributes but you get the idea.
+However, having to write this so much code just for two lines can become cumbersome
+and tired.
+So if you plan on doing a lot of plots with the same general aesthetics then setting a theme will be better.
+We can do this with `set_theme!()` as the following example illustrates, not a particular good set of attributes but you'll get the idea.
 
 ```jl
 s = """
@@ -208,7 +208,7 @@ s = """
 sco(s)
 ```
 
-For more on `themes` please go to section [Themes].
+For more on `themes` please go to @sec:themes.
 
 Before moving on into the next section, it's worthwhile to see an example where an `array` of attributes are passed at once to a plotting function.
 For this example, we will use the `scatter` plotting function to do a bubble plot.
@@ -233,16 +233,16 @@ sco(s)
 ```
 
 where we have decomposed the tuple `FigureAxisPlot` into `fig, ax, pltobj`, in order to be able to add a `Legend` and `Colorbar` outside of the plot object.
-We will discuss this, `layouts`, in more detail in @sec:makie_layouts.
+We will discuss layout options in more detail in @sec:makie_layouts.
 
-We have done some basic but still interesting examples to show how to use `Makie` and by now you might be wondering, what else can we do?
+We have done some basic but still interesting examples to show how to use `Makie.jl` and by now you might be wondering, what else can we do?
 What are all the possible plotting functions available in `Makie.jl`?
-To answer this question, a `cheat sheet` is shown in @fig:cheat_sheet_cairomakie.
-These work especially well with `CairoMakie.jl`.
+To answer this question, a _cheat sheet_ is shown in @fig:cheat_sheet_cairomakie.
+These work especially well with `CairoMakie.jl` backend.
 
 ![Plotting functions: Cheat Sheet. Output given by Cairomakie.](images/makiePlottingFunctionsHide.png){#fig:cheat_sheet_cairomakie}
 
-For completeness, in @fig:cheat_sheet_glmakie we show the corresponding ones for `GLMakie.jl`, mostly 3D plots which are highly supported in this backend.
+For completeness, in @fig:cheat_sheet_glmakie we show the corresponding functions _cheat sheet_ for `GLMakie.jl`, which as a backend supports mostly 3D plots.
 Those will be explained in detail in @sec:glmakie.
 
 ![Plotting functions: Cheat Sheet. Output given by GLMakie.](images/GLMakiePlottingFunctionsHide.png){#fig:cheat_sheet_glmakie}
@@ -253,12 +253,12 @@ It's time to learn how to change the general appearance of our plots.
 ### Themes {#sec:themes}
 
 There are several ways to affect the general appearance of your plots.
-Either, you could use a [predefined theme](http://makie.juliaplots.org/stable/predefined_themes.html) or your own.
+Either, you could use a [predefined theme](http://makie.juliaplots.org/stable/predefined_themes.html) or your own custom theme.
 For example, to use the predefined dark theme via `with_theme(your_plot_function, theme_dark())`.
 Or, build your own with `Theme(kwargs)` or even update the one that is active with `update_theme!(kwargs)`.
 
 You can also do `set_theme!(theme; kwargs...)` to change the current default theme to `theme` and override or add attributes given by `kwargs`.
-If you do this and want to reset all previous setting just do `set_theme!()`.
+If you do this and want to reset all previous setting just do `set_theme!()` with no arguments.
 See it in action in the following examples:
 
 

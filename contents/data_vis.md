@@ -1,7 +1,7 @@
 # Data Visualization {#sec:dataviz}
 
 Data visualization it is a vital part of almost any data analysis process.
-Here, in this chapter, we will consider several packages that can be used in Julia, namely `Plots.jl`, `Makie.jl` and `AlgebraOfGraphics.jl`.
+Here, in this chapter, we will consider several packages that can be used in Julia, namely `Plots.jl`, `StatsPlots.jl`, `Makie.jl` and `AlgebraOfGraphics.jl`.
 The latter is especially useful for tabular data.
 
 - Overview of the JuliaPlots ecosystem
@@ -326,7 +326,7 @@ Now, let's move on and do a plot with LaTeX strings and a custom theme.
 
 ### using LaTeXStrings.jl
 
-LaTeX support in Makie is also available.
+LaTeX support in `Makie.jl` is also available.
 Simple use cases are shown below (@fig:latex_strings).
 A basic example includes LaTeX strings for x-y labels and legends:
 
@@ -366,7 +366,7 @@ And voilà.
 A publication quality plot is here.
 What more can we ask for?
 Well, what about different default colors or palettes.
-In our next section, we will see how to use again [Cycles](http://makie.juliaplots.org/stable/theming.html#Cycles) and know a little bit more about them, plus some additional keywords in order to achieve this.
+In our next section, we will see how to use again [`Cycles`](http://makie.juliaplots.org/stable/theming.html#Cycles) and know a little bit more about them, plus some additional keywords in order to achieve this.
 
 ### Colors and Colormaps {#sec:makie_colors}
 
@@ -380,8 +380,8 @@ And obtain a transparent color or colormap with `color= (:red,0.5)` and `colorma
 
 Different use cases will be shown next. Then we will difine a custom theme with new colors and a colorbar palette.
 
-By default `Makie.jl` has a predifined set of colors in order to cycle trought them automatically.
-As shown in the previuos figures, where no specific color was set.
+By default `Makie.jl` has a predefined set of colors in order to cycle trough them automatically.
+As shown in the previous figures, where no specific color was set.
 Overwritting these defaults is done by calling the keyword `color` in the plotting function and specifying a new color via a `Symbol` or `String`.
 See this in action in the following example:
 
@@ -394,7 +394,7 @@ The rest its using the default cycle set of colors. Later, we will learn how to 
 
 Regarding colormaps, we are already familiar with the keyword `colormap` for heatmaps and scatters.
 Here, we show that a colormap can also be specified via a `Symbol` or a `String`, similar to colors.
-Or, even a vector of RGB colors.
+Or, even a vector of `RGB` colors.
 Let's do our first an example by calling colormaps as a `Symbol`, `String` and `cgrad` for categorical values.
 See `?cgrad` for more information.
 
@@ -415,7 +415,7 @@ sco(scolor)
 ```
 
 When setting a `colorrange` usually the values outside this range are colored with the first and last color from  the colormap.
-However, sometimes is better to specified the color that you want at both ends. We do that with `highclip` and `lowclip`:
+However, sometimes is better to specify the color you want at both ends. We do that with `highclip` and `lowclip`:
 
 ```
 using ColorSchemes
@@ -438,8 +438,8 @@ s = """
 sco(s)
 ```
 
-But we mentioned that also RGB vectors are valid options.
-For our next example you could pass the custom colormap _perse_ or use `cgrad` to force a categorical colorbar.
+But we mentioned that also `RGB` vectors are valid options.
+For our next example you could pass the custom colormap _perse_ or use `cgrad` to force a categorical `Colorbar`.
 
 ```
 using ColorSchemes
@@ -467,7 +467,7 @@ sco(scat)
 
 Lastly, the ticks in the colorbar for the categorial case are not centered by default in each color.
 This is fixed by passing custom ticks, as in `cbar.ticks = (positions, ticks)`.
-The last situation is when passing a `tuple` of two colors to `colormap` as symbols, strings or a mix.
+The last situation is when passing a tuple of two colors to `colormap` as symbols, strings or a mix.
 You will get an interpolated colormap between these two colors.
 
 Also, `hex` coded colors are also accepted. So, on top or our heatmap let's put one semi-transparent point using this.
@@ -492,10 +492,10 @@ sco(s2color2)
 
  **Custom cycle**
 
-Here, we could define a global `Theme` with a new cycle for colors, however that is not the recommend way to do it.
+Here, we could define a global `Theme` with a new cycle for colors, however that is **not the recommend way** to do it.
 It's better to define a new theme and use as shown before.
-Lets define a new one with a `cycle` for `:color`, `:linestyle`, `:marker` and a new colormap default.
-Lets add this new attributes to our previuos `publication_theme`.
+Lets define a new one with a `cycle` for `:color`, `:linestyle`, `:marker` and a new `colormap` default.
+Lets add this new attributes to our previous `publication_theme`.
 
 ```jl
 @sc new_cycle_theme()
@@ -517,8 +517,8 @@ s = """
 sco(s)
 ```
 
-At this point you should be able to have complete control over your colors, line styles, markers and colormaps for your plots.
-Next, we will like to manage and control layouts at will as well.
+At this point you should be able to have **complete control** over your colors, line styles, markers and colormaps for your plots.
+Next, we will dive into how to manage and control **layouts**.
 
 ### Layouts {#sec:makie_layouts}
 
@@ -531,4 +531,3 @@ Recording an animation with CairoMakie (GLMakie).
 ### GLMakie.jl {#sec:glmakie}
 
 ## AlgebraOfGraphics.jl {#sec:algebraofgraphics}
-

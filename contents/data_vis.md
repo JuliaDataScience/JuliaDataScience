@@ -1,6 +1,6 @@
-# Data Visualisation {#sec:dataVis}
+# Data Visualization {#sec:dataviz}
 
-Data visualisation it is a vital part of almost any data analysis process.
+Data visualization it is a vital part of almost any data analysis process.
 Here, in this chapter, we will consider several packages that can be used in Julia, namely `Plots.jl`, `Makie.jl` and `AlgebraOfGraphics.jl`.
 The latter is especially useful for tabular data.
 
@@ -9,7 +9,7 @@ The latter is especially useful for tabular data.
 ## Plots.jl {#sec:plots}
 Plots is ....
 
-The default backend is GR. 
+The default backend is GR.
 
 ```
 using Plots
@@ -186,7 +186,7 @@ sco(s)
 However, having to writte this so much code just for two lines can become cumbersome
 and tired, so if you plan on doing a lot of plots with the same general aesthetics
 then setting a theme will be better. We can do this with `set_theme!()` as the following
-example illustrates, not a particular good set of attributes but you get the idea. 
+example illustrates, not a particular good set of attributes but you get the idea.
 
 ```jl
 s = """
@@ -201,7 +201,7 @@ s = """
     scatterlines!(1:10, (10:-1:1).^2; label = "Reverse(x)²")
     axislegend("legend"; position = :ct)
     current_figure()
-    set_theme!() # in order to go back to the default settings. 
+    set_theme!() # in order to go back to the default settings.
     label = "setTheme" # hide
     Options(current_figure(); filename=label, caption="set theme", label) # hide
     """
@@ -370,19 +370,19 @@ In our next section, we will see how to use again [Cycles](http://makie.juliaplo
 
 ### Colors and Colormaps {#sec:makie_colors}
 
-Choosing an appropiate set of colors or colorbar for your plot is an essential part when presenting results. 
-Using [Colors.jl](https://github.com/JuliaGraphics/Colors.jl) is supported in `Makie.jl` 
+Choosing an appropiate set of colors or colorbar for your plot is an essential part when presenting results.
+Using [Colors.jl](https://github.com/JuliaGraphics/Colors.jl) is supported in `Makie.jl`
 so that you can used [names colors](https://juliagraphics.github.io/Colors.jl/latest/namedcolors/) or pass `RGB` or `RGBA` values.
-Regarding colormaps, all those that work with [Plots.jl](https://github.com/JuliaPlots/Plots.jl) also do here. 
-Additionally, colormaps from [ColorSchemes.jl](https://github.com/JuliaGraphics/ColorSchemes.jl) and [PerceptualColourMaps.jl](https://github.com/peterkovesi/PerceptualColourMaps.jl) can also be used. 
+Regarding colormaps, all those that work with [Plots.jl](https://github.com/JuliaPlots/Plots.jl) also do here.
+Additionally, colormaps from [ColorSchemes.jl](https://github.com/JuliaGraphics/ColorSchemes.jl) and [PerceptualColourMaps.jl](https://github.com/peterkovesi/PerceptualColourMaps.jl) can also be used.
 Worth knowing now, your can reverse a colormap by doing `Reverse(:colormap_name)`.
 And obtain a transparent color or colormap with `color= (:red,0.5)` and `colormap = (:viridis, 0.5)`.
 
-Different use cases will be shown next. Then we will difine a custom theme with new colors and a colorbar palette. 
+Different use cases will be shown next. Then we will difine a custom theme with new colors and a colorbar palette.
 
 By default `Makie.jl` has a predifined set of colors in order to cycle trought them automatically.
-As shown in the previuos figures, where no specific color was set. 
-Overwritting these defaults is done by calling the keyword `color` in the plotting function and specifying a new color via a `Symbol` or `String`. 
+As shown in the previuos figures, where no specific color was set.
+Overwritting these defaults is done by calling the keyword `color` in the plotting function and specifying a new color via a `Symbol` or `String`.
 See this in action in the following example:
 
 ```jl
@@ -392,11 +392,11 @@ See this in action in the following example:
 Where, in the first two lines we have used the keyword `color` to specified our color.
 The rest its using the default cycle set of colors. Later, we will learn how to do a custom cycle.
 
-Regarding colormaps, we are already familiar with the keyword `colormap` for heatmaps and scatters. 
-Here, we show that a colormap can also be specified via a `Symbol` or a `String`, similar to colors. 
-Or, even a vector of RGB colors. 
+Regarding colormaps, we are already familiar with the keyword `colormap` for heatmaps and scatters.
+Here, we show that a colormap can also be specified via a `Symbol` or a `String`, similar to colors.
+Or, even a vector of RGB colors.
 Let's do our first an example by calling colormaps as a `Symbol`, `String` and `cgrad` for categorical values.
-See `?cgrad` for more information. 
+See `?cgrad` for more information.
 
 ```jl
 scolor = """
@@ -427,7 +427,7 @@ s = """
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
 
     fig, ax, pltobj = CairoMakie.heatmap(randn(20,20); colorrange = (-2,2),
-        colormap = "diverging_rainbow_bgymr_45_85_c67_n256", 
+        colormap = "diverging_rainbow_bgymr_45_85_c67_n256",
         highclip = :black, lowclip = :white, axis = axis, figure = figure)
     Colorbar(fig[1,2], pltobj, label = "Diverging colormap")
     fig
@@ -438,8 +438,8 @@ s = """
 sco(s)
 ```
 
-But we mentioned that also RGB vectors are valid options. 
-For our next example you could pass the custom colormap _perse_ or use `cgrad` to force a categorical colorbar. 
+But we mentioned that also RGB vectors are valid options.
+For our next example you could pass the custom colormap _perse_ or use `cgrad` to force a categorical colorbar.
 
 ```
 using ColorSchemes
@@ -452,8 +452,8 @@ scat = """
     cmap = ColorScheme(range(colorant"red", colorant"green", length=3))
     mygrays = ColorScheme([RGB{Float64}(i, i, i) for i in [0.0,0.5,1.0]])
 
-    fig, ax, pltobj = CairoMakie.heatmap(rand(-1:1,20,20); 
-        colormap = cgrad(mygrays, 3, categorical = true, rev = true), # cgrad and Symbol, mygrays, 
+    fig, ax, pltobj = CairoMakie.heatmap(rand(-1:1,20,20);
+        colormap = cgrad(mygrays, 3, categorical = true, rev = true), # cgrad and Symbol, mygrays,
         axis = axis, figure = figure)
     cbar = Colorbar(fig[1,2], pltobj, label = "Categories")
     cbar.ticks = ([-0.66,0,0.66], ["-1","0","1"])
@@ -465,12 +465,12 @@ scat = """
 sco(scat)
 ```
 
-Lastly, the ticks in the colorbar for the categorial case are not centered by default in each color. 
-This is fixed by passing custom ticks, as in `cbar.ticks = (positions, ticks)`. 
-The last situation is when passing a `tuple` of two colors to `colormap` as symbols, strings or a mix. 
-You will get an interpolated colormap between these two colors. 
+Lastly, the ticks in the colorbar for the categorial case are not centered by default in each color.
+This is fixed by passing custom ticks, as in `cbar.ticks = (positions, ticks)`.
+The last situation is when passing a `tuple` of two colors to `colormap` as symbols, strings or a mix.
+You will get an interpolated colormap between these two colors.
 
-Also, `hex` coded colors are also accepted. So, on top or our heatmap let's put one semi-transparent point using this. 
+Also, `hex` coded colors are also accepted. So, on top or our heatmap let's put one semi-transparent point using this.
 
 ```jl
 s2color2 = """
@@ -493,15 +493,15 @@ sco(s2color2)
  **Custom cycle**
 
 Here, we could define a global `Theme` with a new cycle for colors, however that is not the recommend way to do it.
-It's better to define a new theme and use as shown before. 
-Lets define a new one with a `cycle` for `:color`, `:linestyle`, `:marker` and a new colormap default. 
+It's better to define a new theme and use as shown before.
+Lets define a new one with a `cycle` for `:color`, `:linestyle`, `:marker` and a new colormap default.
 Lets add this new attributes to our previuos `publication_theme`.
 
 ```jl
 @sc new_cycle_theme()
 ```
 
-And apply it to a plotting function to see it in action. 
+And apply it to a plotting function to see it in action.
 
 ```jl
 @sc scatters_and_lines()
@@ -517,8 +517,8 @@ s = """
 sco(s)
 ```
 
-At this point you should be able to have complete control over your colors, line styles, markers and colormaps for your plots. 
-Next, we will like to manage and control layouts at will as well. 
+At this point you should be able to have complete control over your colors, line styles, markers and colormaps for your plots.
+Next, we will like to manage and control layouts at will as well.
 
 ### Layouts {#sec:makie_layouts}
 

@@ -372,25 +372,26 @@ In our next section, we will see how to use again [`Cycles`](http://makie.juliap
 
 Choosing an appropiate set of colors or colorbar for your plot is an essential part when presenting results.
 Using [Colors.jl](https://github.com/JuliaGraphics/Colors.jl) is supported in `Makie.jl`
-so that you can used [names colors](https://juliagraphics.github.io/Colors.jl/latest/namedcolors/) or pass `RGB` or `RGBA` values.
+so that you can used [named colors](https://juliagraphics.github.io/Colors.jl/latest/namedcolors/) or pass `RGB` or `RGBA` values.
 Regarding colormaps, all those that work with [Plots.jl](https://github.com/JuliaPlots/Plots.jl) also do here.
 Additionally, colormaps from [ColorSchemes.jl](https://github.com/JuliaGraphics/ColorSchemes.jl) and [PerceptualColourMaps.jl](https://github.com/peterkovesi/PerceptualColourMaps.jl) can also be used.
-Worth knowing now, your can reverse a colormap by doing `Reverse(:colormap_name)`.
-And obtain a transparent color or colormap with `color= (:red,0.5)` and `colormap = (:viridis, 0.5)`.
+It is worth knowing that you can reverse a colormap by doing `Reverse(:colormap_name)`
+and obtain a transparent color or colormap with `color= (:red,0.5)` and `colormap = (:viridis, 0.5)`.
 
 Different use cases will be shown next. Then we will difine a custom theme with new colors and a colorbar palette.
 
 By default `Makie.jl` has a predefined set of colors in order to cycle trough them automatically.
 As shown in the previous figures, where no specific color was set.
-Overwritting these defaults is done by calling the keyword `color` in the plotting function and specifying a new color via a `Symbol` or `String`.
+Overwriting these defaults is done by calling the keyword `color` in the plotting function and specifying a new color via a `Symbol` or `String`.
 See this in action in the following example:
 
 ```jl
 @sco JDS.set_colors_and_cycle()
 ```
 
-Where, in the first two lines we have used the keyword `color` to specified our color.
-The rest its using the default cycle set of colors. Later, we will learn how to do a custom cycle.
+Where, in the first two lines we have used the keyword `color` to specify our color.
+The rest is using the default cycle set of colors. 
+Later, we will learn how to do a custom cycle.
 
 Regarding colormaps, we are already familiar with the keyword `colormap` for heatmaps and scatters.
 Here, we show that a colormap can also be specified via a `Symbol` or a `String`, similar to colors.
@@ -501,7 +502,7 @@ Lets add this new attributes to our previous `publication_theme`.
 @sc new_cycle_theme()
 ```
 
-And apply it to a plotting function to see it in action.
+And apply it to a plotting function like the following:
 
 ```jl
 @sc scatters_and_lines()

@@ -344,7 +344,7 @@ s = """
 sco(s)
 ```
 
-A more involved example will be one with some equation as `text` and increasing legend numering for curves in a plot.
+A more involved example will be one with some equation as `text` and increasing legend numbering for curves in a plot.
 
 ```
 using LaTeXStrings
@@ -356,7 +356,7 @@ using LaTeXStrings
 
 But, some lines have repeated colors, so thats no good.
 Adding some markers and line styles usually helps.
-So, let's do that using [Cycles](http://makie.juliaplots.org/stable/theming.html#Cycles) for these types:
+So, let's do that using [`Cycles`](http://makie.juliaplots.org/stable/theming.html#Cycles) for these types:
 
 ```jl
 @sco JDS.multiple_scatters_and_lines()

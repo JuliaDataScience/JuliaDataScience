@@ -14,7 +14,7 @@ end
 export grades_2021
 function grades_2021()
     name = ["Bob 2", "Sally", "Hank"]
-    grade_2021 = [9.5, 9.5, 5]
+    grade_2021 = [9.5, 9.5, 6]
     DataFrame(; name, grade_2021)
 end
 
@@ -156,3 +156,12 @@ function correct_types()
     df = fix_age_column(df)
 end
 export correct_types
+
+function only_pass()
+    leftjoined = leftjoin(grades_2020(), grades_2021(); on=:name)
+    pass(A, B) = [5.5 < a || 5.5 < b for (a, b) in zip(A, B)]
+    leftjoined = transform(leftjoined, [:grade_2020, :grade_2021] => pass => :pass)
+    passed = subset(leftjoined, :pass; skipmissing=true)
+    return passed.name
+end
+export only_pass

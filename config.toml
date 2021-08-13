@@ -10,6 +10,7 @@
     "indexing",
     "select",
     "join",
+    "transform",
     "data_vis",
     "appendix",
     "notation",

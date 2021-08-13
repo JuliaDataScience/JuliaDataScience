@@ -122,19 +122,3 @@ It returns only the elements from the left DataFrame which are **not** in the ri
 s = "antijoin(grades_2020(), grades_2021(); on=:name)"
 sco(s; process=without_caption_label)
 ```
-
-## Variable Transformations
-
-```{=comment}
-manipulate variables
-DataFrames.transform
-Ifelse and case_when
-```
-
-In @sec:filter, we saw that `filter` works by taking one or more source columns and filtering it by applying a function.
-In other words, we saw that `source => f::Function` like in, for example, `filter(:name => name -> name == "Alice", df)`.
-In @sec:select, we saw that `select` can take one or more source columns and put it into one or more target columns `source => target` like in, for example, `select(df, :name => :people_names)`.
-In this section, we discuss how to **transform** variables.
-This goes via `source => transformation => target`.
-
-## Groupby {#sec:groupby}

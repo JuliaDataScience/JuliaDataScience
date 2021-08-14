@@ -37,7 +37,7 @@ For instance:
 sco("[1, 2, 3] .+ 1")
 ```
 
-Like said above, the `DataFrames.jl` minilanguage talks is `source => transformation => target`.
+Like said above, the `DataFrames.jl` minilanguage is `source => transformation => target`.
 So, if we want to have only one column in the output, we can do:
 
 ```jl

@@ -18,7 +18,7 @@ As a generous example, given the `grades_2020` dataset:
 @sco process=without_caption_label grades_2020()
 ```
 
-we can increase all the grades in `grades_2020`:
+we can increase all the grades in `grades_2020` by 1:
 
 ```jl
 s = """
@@ -30,7 +30,7 @@ sco(s; process=without_caption_label)
 
 Here, the `plus_one` function receives the whole `:grade_2020` row and not just one element as one might expect.
 That is the reason why we've added the dot before the plus symbol.
-The dot, in Julia's syntax, means broadcasting and allows Julia to add one to all the elements in `grades`.
+The `dot`, in Julia's syntax, means broadcasting and allows Julia to add one to all the elements in `grades`.
 For instance:
 
 ```jl

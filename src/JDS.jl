@@ -54,7 +54,7 @@ function build()
       gtag('js', new Date());  gtag('config', 'G-2RKMTDS1S8');
     </script>
     """
-    Books.build_all(; extra_head)
+    Books.build_all(; extra_head, fail_on_error=true)
 end
 
 end # module

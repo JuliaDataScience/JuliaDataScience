@@ -1,8 +1,6 @@
 ## Variable Transformations
 
 ```{=comment}
-manipulate variables
-DataFrames.transform
 Ifelse and case_when
 ```
 
@@ -47,8 +45,30 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-We can also process two columns at the same time.
-Take the left joined data from @sec:join:
+The same thing can also be written with `select` as follows:
+
+```jl
+s = """
+    select(grades_2020(), :, :grade_2020 => plus_one => :grade_2020)
+    """
+sco(s; process=without_caption_label)
+```
+
+where the `:` means "select all the columns" as described in @sec:select.
+Alternatively, it can be written by using Julia's broadcasting and modify column `grade_2020` by using `df.grade_2020`:
+
+```jl
+s = """
+    df = grades_2020()
+    df.grade_2020 = plus_one.(df.grade_2020)
+    df
+    """
+sco(s; process=without_caption_label)
+```
+
+But, although the last example is easier since it builds on more native Julia operations, we would advise to use the functions provided by `DataFrames.jl` in most cases.
+
+To show how to process two columns at the same time we take the left joined data from @sec:join:
 
 ```jl
 s = """
@@ -72,5 +92,3 @@ We can clean up the outcome and put the logic in a function to get a list of the
 ```jl
 @sco only_pass()
 ```
-
-## Groupby {#sec:groupby}

@@ -11,6 +11,7 @@
     "select",
     "join",
     "transform",
+    "groupby",
     "data_vis",
     "appendix",
     "notation",

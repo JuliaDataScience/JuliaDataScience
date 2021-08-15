@@ -2074,7 +2074,6 @@ add_elements(1:2:20...)
 """)
 ```
 
-
 ## Filesystem {#sec:filesystem}
 
 In data science, most projects are undertaken in a collaborative effort.

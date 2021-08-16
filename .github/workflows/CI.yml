@@ -29,7 +29,10 @@ jobs:
             ${{ runner.os }}-test-${{ env.cache-name }}-
             ${{ runner.os }}-test-
             ${{ runner.os }}-
-
+      
+      # for GLMakie
+      - name: Install binary dependencies
+        run: sudo apt-get update && sudo apt-get install -y xorg-dev mesa-utils xvfb libgl1 freeglut3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev
       # Enforce most recent version.
       - name: Install Books.jl#main
         run: julia --project -e 'using Pkg;

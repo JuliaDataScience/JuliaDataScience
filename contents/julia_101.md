@@ -2037,6 +2037,59 @@ sym = Symbol(s)
 One simple benefit of symbols is that you have to type one character less, that is, `:some_text` versus `"some text"`.
 We use `Symbol`s a lot in data manipulations with the `DataFrames.jl` package (@sec:dataframes) and data visualizations (@sec:plots and -@sec:makie).
 
+### Splat Operator {#sec:splat}
+
+In Julia we have the "splat" operator `...` which is mainly used in function calls as a **sequence of arguments**.
+We will occasionally use splatting in some function calls in **data manipulation** and **data visualization** chapters.
+
+The most intuitive way to learn about splatting is with an example.
+The `add_elements` function below takes three arguments to be adeed together:
+
+```jl
+sco("""
+add_elements(a, b, c) = a + b + c
+""")
+```
+
+Now suppose that I have a collection with three elements.
+The naïve way to this would be to supply the function with all three elements as function arguments like this:
+
+```jl
+scob("""
+my_collection = [1, 2, 3]
+
+add_elements(my_collection[1], my_collection[2], my_collection[3])
+""")
+```
+
+Here is where we use the "splat" operator `...` which  takes a collection (often an array, vector, tuple or range) and converts into a sequence of arguments:
+
+```jl
+scob("""
+add_elements(my_collection...) # and splat!
+""")
+```
+
+The `...` is included after the collection that we want to "splat" into a sequence of arguments.
+In the example above, syntactically speaking, the following are the same:
+
+```julia
+collection = [x, y, z]
+
+function(collection...) = function(x, y, z)
+```
+
+Anytime Julia sees a splatting operator inside a function call, it will be converted on a sequence of arguments for all elements of the collection separated by commas.
+
+It also works for ranges:
+
+```jl
+scob("""
+add_elements(1:3...) # and splat!
+""")
+```
+
+
 ## Filesystem {#sec:filesystem}
 
 In data science, most projects are undertaken in a collaborative effort.

@@ -26,9 +26,9 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-Here, the `plus_one` function receives the whole `:grade_2020` row and not just one element as one might expect.
-That is the reason why we've added the dot before the plus symbol.
-The `dot`, in Julia's syntax, means broadcasting and allows Julia to add one to all the elements in `grades`.
+Here, the `plus_one` function receives the whole `:grade_2020` column and not just one element as one might expect.
+That is the reason why we've added the broadcasting "dot" `.` before the plus symbol.
+The `.`, in Julia's syntax, means broadcasting and allows Julia to add one to all the elements in `grades`.
 For instance:
 
 ```jl
@@ -36,7 +36,7 @@ sco("[1, 2, 3] .+ 1")
 ```
 
 Like said above, the `DataFrames.jl` minilanguage is `source => transformation => target`.
-So, if we want to have only one column in the output, we can do:
+So, if we want to keep the naming of the `target` column in the output, we can do:
 
 ```jl
 s = """
@@ -45,7 +45,7 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-The same thing can also be written with `select` as follows:
+The same transformation can also be written with `select` as follows:
 
 ```jl
 s = """
@@ -55,7 +55,7 @@ sco(s; process=without_caption_label)
 ```
 
 where the `:` means "select all the columns" as described in @sec:select.
-Alternatively, it can be written by using Julia's broadcasting and modify column `grade_2020` by using `df.grade_2020`:
+Alternatively, it can be written by using Julia's broadcasting and modify column `grade_2020` by acessing the column with `df.grade_2020`:
 
 ```jl
 s = """
@@ -68,7 +68,7 @@ sco(s; process=without_caption_label)
 
 But, although the last example is easier since it builds on more native Julia operations, we would advise to use the functions provided by `DataFrames.jl` in most cases.
 
-To show how to process two columns at the same time we take the left joined data from @sec:join:
+To show how to transform two columns at the same time, we use the left joined data from @sec:join:
 
 ```jl
 s = """
@@ -77,7 +77,7 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-With this, we can add a column saying whether someone passed:
+With this, we can add a column saying whether someone was approved:
 
 ```jl
 s = """

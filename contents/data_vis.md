@@ -12,7 +12,10 @@ Plots is ....
 The default backend is GR.
 
 ```
-using Plots
+using Plots, LaTeXStrings
+```
+```jl
+@sco JDS.test_plots_layout()
 ```
 
 ### Layouts {#sec:layouts}
@@ -224,7 +227,7 @@ s = """
         CairoMakie.activate!() # hide
         Random.seed!(123)
         n = 100
-        fig, ax, pltobj = CairoMakie.scatter(randn(n), randn(n); color = randn(n),
+        fig, ax, pltobj = scatter(randn(n), randn(n); color = randn(n),
             label = "Bubbles",colormap = :plasma, markersize = 25*rand(n),
             figure = (; resolution = (550,400)), axis = (; aspect= DataAspect()))
         limits!(-3, 3, -3, 3)
@@ -415,7 +418,7 @@ scolor = """
     figure = (;resolution = (400,300), font= "CMU Serif")
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
 
-    fig, ax, pltobj = CairoMakie.heatmap(rand(20,20); colorrange = (0,1),
+    fig, ax, pltobj = heatmap(rand(20,20); colorrange = (0,1),
         colormap = Reverse(:viridis), axis = axis, figure = figure)
     Colorbar(fig[1,2], pltobj, label = "Reverse colormap Sequential")
     fig
@@ -439,7 +442,7 @@ s = """
     figure = (;resolution = (400,300), font= "CMU Serif")
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
 
-    fig, ax, pltobj = CairoMakie.heatmap(randn(20,20); colorrange = (-2,2),
+    fig, ax, pltobj = heatmap(randn(20,20); colorrange = (-2,2),
         colormap = "diverging_rainbow_bgymr_45_85_c67_n256",
         highclip = :black, lowclip = :white, axis = axis, figure = figure)
     Colorbar(fig[1,2], pltobj, label = "Diverging colormap")
@@ -455,7 +458,7 @@ But we mentioned that also `RGB` vectors are valid options.
 For our next example you could pass the custom colormap _perse_ or use `cgrad` to force a categorical `Colorbar`.
 
 ```
-using ColorSchemes
+using Colors, ColorSchemes
 ```
 
 ```jl
@@ -466,7 +469,7 @@ scat = """
     cmap = ColorScheme(range(colorant"red", colorant"green", length=3))
     mygrays = ColorScheme([RGB{Float64}(i, i, i) for i in [0.0,0.5,1.0]])
 
-    fig, ax, pltobj = CairoMakie.heatmap(rand(-1:1,20,20);
+    fig, ax, pltobj = heatmap(rand(-1:1,20,20);
         colormap = cgrad(mygrays, 3, categorical = true, rev = true), # cgrad and Symbol, mygrays,
         axis = axis, figure = figure)
     cbar = Colorbar(fig[1,2], pltobj, label = "Categories")
@@ -492,9 +495,9 @@ s2color2 = """
     figure = (;resolution = (400,300), font= "CMU Serif")
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
 
-    fig, ax, pltobj = CairoMakie.heatmap(rand(20,20); colorrange = (0,1),
+    fig, ax, pltobj = heatmap(rand(20,20); colorrange = (0,1),
         colormap = (:red, "black"), axis = axis, figure = figure)
-    CairoMakie.scatter!(ax,[11],[11],color=("#C0C0C0", 0.5),markersize=150)
+    scatter!(ax,[11],[11],color=("#C0C0C0", 0.5),markersize=150)
     Colorbar(fig[1,2], pltobj, label = "2 colors")
     fig
     label = "colormap_two_colors" # hide
@@ -538,20 +541,193 @@ Next, we will dive into how to manage and control **layouts**.
 
 ### Layouts {#sec:makie_layouts}
 
-- Overview on several ways to do layouts and related attributes.
+A complete _canvas/layout_ is defined by `Figure`, which can be fill up afterwards with content. 
+We will start with a simple arrangment of one `Axis`, one `Legend` and one `Colorbar`. 
+For this task we can think of the canvas as an arrangment of `rows` and `columns`. 
+The `Axis` content will be in _row 1, column 1_, e.g. `fig[1,1]`, the `Colorbar` in _row 1, column 2_, namely `fig[1,2]`.
+And the `Legend` in _row 2_ and across _column 1 and 2_, namely `fig[2,1:2]`. 
 
-### Animations {#sec:makie_animations}
 
-Recording an animation with CairoMakie (GLMakie).
+```jl
+@sco JDS.first_layout()
+```
+
+This does not look good. Next, we fix the spacing problems using the following keywords and methods: 
+
+- `figure_padding = (left, right, bottom, top)`
+- `padding =  (left, right, bottom, top)` 
+
+Taking into account the actual size for a `Legend` or `Colorbar` is done by 
+
+> - `tellheight = true or false`
+> - `tellwidth = true or false` 
+>
+> _Setting this to `true` will take into account the actual size(height or width) for a `Legend` or `Colorbar`_.
+> And then, things will be resized accordingly. 
+
+The space between columns and rows is specified as 
+
+> - `colgap!(fig.layout, col, separation)`
+> - `rowgap!(fig.layout, row, separation)`
+>
+> _Column gap_, if `col` is given then the gap will be applied to that column. 
+>_Row gap_ ,if `row` is given then the gap will be applied to that row. 
+
+Also, we will see how to put content into the **protrusions**, _i.e._ the space reserved for _title, x - (ticks,label), y - (ticks,label)_. 
+We do this by plotting into `fig[i,j, protrusion]` where _`protrusion`_ can be `Left()`, `Right()`, `Bottom()` and `Top()`, 
+or for each corner `TopLeft()`, `TopRight()`, `BottomRight()`, `BottomLeft()`. 
+See below how these options are being used. 
+
+```jl
+@sco JDS.first_layout_fixed()
+```
+
+Here, probably having the label `(a)` in the `TopLeft()` is not necessary, this will make sense for more than two plots. 
+For our next example let's use the previous tools and some more to create a more complex figure. 
+
+You can hide decorations and axis's spines with
+
+> - `hidedecorations!(ax; kwargs...)`
+> - `hidexdecorations!(ax; kwargs...)`
+> - `hideydecorations!(ax; kwargs...)`
+> - `hidespines!(ax; kwargs...)`
+
+Remember, we can always ask for help to see what kind of arguments we can use, e.g.,
+
+```jl
+s = """
+    help(hidespines!)
+    """
+sco(s)
+```
+
+Or, for decorations
+
+```jl
+s = """
+    help(hidedecorations!)
+    """
+sco(s)
+```
+
+For elements that **you don't want to hide**, just pass them with `false`, i.e. `hideydecorations!(ax, ticks = false, grid = false)`.
+
+
+Synchronizing your `Axis` is done via
+
+> - `linkaxes! linkyaxes! linkxaxes!`
+>
+> This could be useful when shared axis are desired. Another way of getting shared axis will be by setting `limits!`.
+
+Setting `limits` at once or independenly for each axis is done by calling 
+
+> - `limits!(ax; l,r,b,t)`
+> You can also do `ylims!(low, high)` or `xlims!(low, high)`, and even open ones by doing `ylims!(low=0)` or `xlims!(high=1)`.
+
+Now, the example:
+
+```jl
+@sco JDS.complex_layout_double_axis()
+```
+
+So, now our `Colorbar` needs to be horizontal and the bar ticks be in the lower part. 
+This is done by setting `vertical = false` and `flipaxis = false`. 
+Also, note that we can call many `Axis` into `fig`, or even `Colorbar`'s and `Legend`'s, and then afterwards build the layout. 
+
+Another common layout is a grid of squares for heatmaps. See next example. 
+
+```jl
+@sco JDS.squares_layout()
+```
+
+Where, all labels are in the **protrusions** and each `Axis` has an `AspectData()` ratio. 
+The `Colorbar` is located in the third column and extpands from row 1 up to row 2. 
+
+The next case uses the so called `Mixed()` **alignmode**, which is specially useful when dealing with large empty spaces between `Axis` due to long ticks. 
+
+```jl
+@sco JDS.mixed_mode_layout()
+```
+
+Here, the argument `alignmode =Mixed(bottom=0)` it's shifting the bounding box to the bottom, so that this will align with the panel on the left filling the space. 
+
+Also, see how `colsize!` and `rowsize!` are being used for different columns and rows. 
+You could also put a number instead of `Auto()` but then everything will be fixed. 
+And, additionally, one could also give a `height` or `width` when defining the `Axis`, as in `Axis(fig, heigth = 50)` which will be fixed as well.
+
+#### Nested `Axis` (_subplots_)
+
+It is also possible to define a set of `Axis` (_subplots_) explicitly, and use it to build a main figure with several rows and columns. 
+For instance, the following its a "complicated" arrangment of `Axis`
+
+```jl
+@sc nested_sub_plot!(fig)
+```
+
+which, when used to build a more complex figure by doing several calls, we obatain
+
+```jl
+@sco JDS.main_figure()
+```
+
+Note that, different subplot functions can be call here. Also, each `Axis` here is an independ part of `Figure`. 
+So that, if you need to do some `rowgap!`'s or `colsize!`'s opperations, you will need to do it in each one of them independenly or to all of them together. 
+
+For grouped `Axis` (_subplots_) we can use `GridLayout()` which then could be used to composed a more complicated `Figure`. 
+
+
+#### Nested GridLayout
+
+By using `GridLayout()` we can group subplots, allowing more freedom to build complex figures. 
+Here, using our previous `nested_sub_plot!` we define three sub-groups and one normal `Axis`. 
+
+```jl
+@sco JDS.nested_Grid_Layouts()
+```
+
+Now, using `rowgap!` or `colsize!` over each group is possible and `rowsize!, colsize!` can also be applied to the set of `GridLayout()`s. 
+
+
+#### Inset plots
+
+Currently, doing `inset` plots is a little bit tricky. Here, we show two possible ways of doing it by defining first auxiliary functions. 
+The first one is by doing a `BBox`, which lives in the whole `Figure` space. Namely,
+
+```jl
+@sc add_box_inset(fig)
+```
+
+Then, the `inset` is easily done, as in 
+
+```jl
+@sco JDS.figure_box_inset()
+```
+
+where the `Box` dimensions are bound by the `Figure`'s `resolution`. Note, that an inset can be also outside the `Axis`. 
+The other approach, is by defininig a new `Axis` into a position `fig[i,j]` specifying his `width`, `height`, `halign` and `valign`.
+We do that in the following function:
+
+```jl
+@sc add_axis_inset()
+```
+
+See that in the following example this `Axis`(grey one) will be rescaled if the total figure size changes. The _insets_ are bound by the `Axis` positioning.
+
+```jl
+@sco JDS.figure_axis_inset()
+```
+
+And this should cover most used cases for layouting with Makie. Now, let's do some nice 3d examples with  `GLMakie.jl`.
 
 ### GLMakie.jl {#sec:glmakie}
 
 ```jl
-@sc peaks()
+@sc JDS.peaks()
 ```
 
-```jl
-@sco JDS.plot_peaks_function()
-```
+
+### Animations {#sec:makie_animations}
+
+Recording an animation with CairoMakie (GLMakie).
 
 ## AlgebraOfGraphics.jl {#sec:algebraofgraphics}

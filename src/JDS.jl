@@ -2,6 +2,7 @@ module JDS
 
 import XLSX
 import Pkg
+import Plots
 
 using Reexport
 @reexport using AlgebraOfGraphics
@@ -16,7 +17,7 @@ using Reexport
 @reexport using InteractiveUtils
 @reexport using Makie
 @reexport using ColorSchemes
-@reexport using Plots
+@reexport using Colors
 @reexport using LaTeXStrings
 @reexport using Random
 
@@ -27,9 +28,10 @@ include("plots.jl")
 include("makie.jl")
 
 export sce, scsob, trim_last_n_lines, publication_theme, plot_with_legend_and_colorbar
-export LaTeX_Strings, demo_themes, new_cycle_theme, scatters_and_lines, peaks
+export LaTeX_Strings, demo_themes, new_cycle_theme, scatters_and_lines
+export nested_sub_plot!, add_box_inset, add_axis_inset, peaks
 
-plot = Plots.plot
+#plot = Plots.plot
 
 function myplot()
     I = 1:30

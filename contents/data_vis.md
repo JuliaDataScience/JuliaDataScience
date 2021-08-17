@@ -630,7 +630,7 @@ Now, the example:
 @sco JDS.complex_layout_double_axis()
 ```
 
-So, now our `Colorbar` needs to be horizontal and the bar ticks be in the lower part. 
+So, now our `Colorbar` needs to be horizontal and the bar ticks need to be in the lower part. 
 This is done by setting `vertical = false` and `flipaxis = false`. 
 Also, note that we can call many `Axis` into `fig`, or even `Colorbar`'s and `Legend`'s, and then afterwards build the layout. 
 

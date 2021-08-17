@@ -272,15 +272,15 @@ function first_layout_fixed()
 
     pltobj = scatter!(ax, x, y; color = z, label = "scatters")
     lines!(ax, x, 1.1y, label = "line")
-    Legend(fig[2,1:2], ax, "Labels", orientation = :horizontal, 
+    Legend(fig[2, 1:2], ax, "Labels", orientation = :horizontal, 
         tellheight = true, titleposition = :left)
     Colorbar(fig[1, 2], pltobj, label = "colorbar")
 
     # additional aesthetics 
-    Box(fig[1,1, Right()], color = (:slateblue1,0.35))
-    Label(fig[1,1, Right()], "protrusion", textsize = 18, 
+    Box(fig[1, 1, Right()], color = (:slateblue1,0.35))
+    Label(fig[1, 1, Right()], "protrusion", textsize = 18, 
         rotation = pi/2, padding =(3,3,3,3))
-    Label(fig[1, 1, TopLeft()], "(a)",textsize = 18, padding =(0,3,8,0))
+    Label(fig[1, 1, TopLeft()], "(a)", textsize = 18, padding = (0,3,8,0))
     colgap!(fig.layout, 5)
     rowgap!(fig.layout, 5)
     fig
@@ -325,11 +325,11 @@ function squares_layout()
     letters = reshape(collect('a':'d'), (2,2))
     fig = Figure(resolution =(500,400),fontsize = 14, font="CMU Serif",
         backgroundcolor = :grey90)
-    axs = [Axis(fig[i,j], aspect = DataAspect()) for i in 1:2, j in 1:2]
+    axs = [Axis(fig[i, j], aspect = DataAspect()) for i in 1:2, j in 1:2]
     hms = [heatmap!(axs[i,j], randn(10,10), colorrange = (-2,2)) 
         for i in 1:2, j in 1:2]
     
-    Colorbar(fig[1:2,3], hms[1], label = "colorbar")
+    Colorbar(fig[1:2, 3], hms[1], label = "colorbar")
     [Label(fig[i, j, TopLeft()], "($(letters[i,j]))", textsize = 16, 
         padding = (-24,0,-16,0)) for i in 1:2, j in 1:2]
     
@@ -355,7 +355,7 @@ function mixed_mode_layout()
     lines!(ax2, 1:10, rand(10))
     lines!(ax3, 1:10, rand(10))
     lines!(ax4, 1:10, rand(10))
-    hidexdecorations!(ax3, ticks = false, grid = false)
+    hidexdecorations!(ax3; ticks = false, grid = false)
 
     Box(fig[2:3,1:2, Right()], color = (:slateblue1, 0.35))
     Label(fig[2:3,1:2, Right()],"protrusion",rotation = pi/2,textsize = 14,
@@ -486,8 +486,8 @@ end
 """
     peaks([n=49])
     
-    Returns a nonlinear function on a grid.  Useful for test cases.
-    x, y, z
+Return a nonlinear function on a grid.  Useful for test cases.
+x, y, z
 """
 function peaks(; n = 49)
     x = LinRange(-3, 3, n)
@@ -495,7 +495,7 @@ function peaks(; n = 49)
     a = 3 * (1 .- x').^2 .* exp.(-(x'.^2) .- (y .+ 1).^2) 
     b = 10 * (x' / 5 .- x'.^3 .- y.^5) .* exp.(-x'.^2 .- y.^2)
     c = 1 / 3 * exp.(-(x' .+ 1).^2 .- y.^2)
-    x, y, a .- b .- c
+    return (x, y, a .- b .- c)
 end
 
 function plot_peaks_function()

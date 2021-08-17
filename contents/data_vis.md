@@ -541,10 +541,10 @@ Next, we will dive into how to manage and control **layouts**.
 
 ### Layouts {#sec:makie_layouts}
 
-A complete _canvas/layout_ is defined by `Figure`, which can be fill up afterwards with content. 
+A complete _canvas/layout_ is defined by `Figure`, which can be filled with content after creation.
 We will start with a simple arrangment of one `Axis`, one `Legend` and one `Colorbar`. 
 For this task we can think of the canvas as an arrangment of `rows` and `columns`. 
-The `Axis` content will be in _row 1, column 1_, e.g. `fig[1,1]`, the `Colorbar` in _row 1, column 2_, namely `fig[1,2]`.
+The `Axis` content will be in _row 1, column 1_, e.g. `fig[1, 1]`, the `Colorbar` in _row 1, column 2_, namely `fig[1,2]`.
 And the `Legend` in _row 2_ and across _column 1 and 2_, namely `fig[2,1:2]`. 
 
 
@@ -574,7 +574,7 @@ The space between columns and rows is specified as
 >_Row gap_ ,if `row` is given then the gap will be applied to that row. 
 
 Also, we will see how to put content into the **protrusions**, _i.e._ the space reserved for _title, x - (ticks,label), y - (ticks,label)_. 
-We do this by plotting into `fig[i,j, protrusion]` where _`protrusion`_ can be `Left()`, `Right()`, `Bottom()` and `Top()`, 
+We do this by plotting into `fig[i, j, protrusion]` where _`protrusion`_ can be `Left()`, `Right()`, `Bottom()` and `Top()`, 
 or for each corner `TopLeft()`, `TopRight()`, `BottomRight()`, `BottomLeft()`. 
 See below how these options are being used. 
 
@@ -582,7 +582,7 @@ See below how these options are being used.
 @sco JDS.first_layout_fixed()
 ```
 
-Here, probably having the label `(a)` in the `TopLeft()` is not necessary, this will make sense for more than two plots. 
+Here, having the label `(a)` in the `TopLeft()` is probably not necessary, this will only make sense for more than two plots.
 For our next example let's use the previous tools and some more to create a more complex figure. 
 
 You can hide decorations and axis's spines with
@@ -610,7 +610,7 @@ s = """
 sco(s)
 ```
 
-For elements that **you don't want to hide**, just pass them with `false`, i.e. `hideydecorations!(ax, ticks = false, grid = false)`.
+For elements that **you don't want to hide**, just pass them with `false`, i.e. `hideydecorations!(ax; ticks=false, grid=false)`.
 
 
 Synchronizing your `Axis` is done via
@@ -634,22 +634,22 @@ So, now our `Colorbar` needs to be horizontal and the bar ticks be in the lower 
 This is done by setting `vertical = false` and `flipaxis = false`. 
 Also, note that we can call many `Axis` into `fig`, or even `Colorbar`'s and `Legend`'s, and then afterwards build the layout. 
 
-Another common layout is a grid of squares for heatmaps. See next example. 
+Another common layout is a grid of squares for heatmaps:
 
 ```jl
 @sco JDS.squares_layout()
 ```
 
-Where, all labels are in the **protrusions** and each `Axis` has an `AspectData()` ratio. 
-The `Colorbar` is located in the third column and extpands from row 1 up to row 2. 
+where all labels are in the **protrusions** and each `Axis` has an `AspectData()` ratio. 
+The `Colorbar` is located in the third column and expands from row 1 up to row 2. 
 
-The next case uses the so called `Mixed()` **alignmode**, which is specially useful when dealing with large empty spaces between `Axis` due to long ticks. 
+The next case uses the so called `Mixed()` **alignmode**, which is especially useful when dealing with large empty spaces between `Axis` due to long ticks. 
 
 ```jl
 @sco JDS.mixed_mode_layout()
 ```
 
-Here, the argument `alignmode =Mixed(bottom=0)` it's shifting the bounding box to the bottom, so that this will align with the panel on the left filling the space. 
+Here, the argument `alignmode = Mixed(bottom=0)` is shifting the bounding box to the bottom, so that this will align with the panel on the left filling the space. 
 
 Also, see how `colsize!` and `rowsize!` are being used for different columns and rows. 
 You could also put a number instead of `Auto()` but then everything will be fixed. 
@@ -664,14 +664,15 @@ For instance, the following its a "complicated" arrangment of `Axis`
 @sc nested_sub_plot!(fig)
 ```
 
-which, when used to build a more complex figure by doing several calls, we obatain
+which, when used to build a more complex figure by doing several calls, we obtain
 
 ```jl
 @sco JDS.main_figure()
 ```
 
-Note that, different subplot functions can be call here. Also, each `Axis` here is an independ part of `Figure`. 
-So that, if you need to do some `rowgap!`'s or `colsize!`'s opperations, you will need to do it in each one of them independenly or to all of them together. 
+Note that, different subplot functions can be called here.
+Also, each `Axis` here is an independent part of `Figure`. 
+So that, if you need to do some `rowgap!`'s or `colsize!`'s operations, you will need to do it in each one of them independently or to all of them together. 
 
 For grouped `Axis` (_subplots_) we can use `GridLayout()` which then could be used to composed a more complicated `Figure`. 
 

@@ -1,4 +1,3 @@
-
 ## StatsPlots.jl {#sec:statsplots}
 
 1. A brief intro and show that is is really just "syntactic sugar" for Plots.jl.

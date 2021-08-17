@@ -1,4 +1,3 @@
-
 ## Themes {#sec:themes}
 
 There are several ways to affect the general appearance of your plots.

@@ -1,4 +1,3 @@
-
 ## using LaTeXStrings.jl
 
 LaTeX support in `Makie.jl` is also available.

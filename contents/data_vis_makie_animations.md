@@ -1,4 +1,3 @@
-
 ## Animations {#sec:makie_animations}
 
 Recording an animation with CairoMakie (GLMakie).
@@ -8,7 +7,7 @@ Test animation:
 ```jl
 @sc JDS.first_animation()
 ```
-
+<!---
 <div>
 
 <video controls width="100%">
@@ -18,5 +17,5 @@ Test animation:
 </video>
 
 </div>
-
+-->
 does it work? 

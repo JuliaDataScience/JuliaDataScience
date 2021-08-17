@@ -1,4 +1,4 @@
-# Data Vis with Makie.jl {#sec:datavizMakie}
+# Data Vis with Makie.jl {#sec:datavisMakie}
 
 > From the japanese word Maki-e, which is a technique to sprinkle lacquer with gold and silver powder.
 > Data is the gold and silver of our age, so let's spread it out beautifully on the screen!

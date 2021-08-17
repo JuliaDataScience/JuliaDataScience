@@ -1,4 +1,3 @@
-
 ## Colors and Colormaps {#sec:makie_colors}
 
 Choosing an appropiate set of colors or colorbar for your plot is an essential part when presenting results.

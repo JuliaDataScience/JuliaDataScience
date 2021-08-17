@@ -1,4 +1,3 @@
-
 ## Layouts {#sec:makie_layouts}
 
 A complete _canvas/layout_ is defined by `Figure`, which can be filled with content after creation.

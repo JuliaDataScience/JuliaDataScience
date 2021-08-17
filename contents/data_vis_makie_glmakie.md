@@ -1,4 +1,3 @@
-
 ## GLMakie.jl {#sec:glmakie}
 
 For the most common plots in 3d we will use the following `peaks` functions

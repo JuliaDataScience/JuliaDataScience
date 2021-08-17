@@ -1,4 +1,3 @@
-
 ## Attributes
 
 A custom plot can be created by using `attributes`.

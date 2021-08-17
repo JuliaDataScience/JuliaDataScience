@@ -1,4 +1,3 @@
-
 ## CairoMakie.jl {#sec:cairomakie}
 
 Let's start with our first plot, a not so boring example but still simple enough, e.g. a line and some scatter points:

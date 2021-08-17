@@ -26,6 +26,7 @@ include("environment.jl")
 include("showcode_additions.jl")
 include("plots.jl")
 include("makie.jl")
+include("AoG.jl")
 
 export sce, scsob, trim_last_n_lines, publication_theme, plot_with_legend_and_colorbar
 export LaTeX_Strings, demo_themes, new_cycle_theme, scatters_and_lines

@@ -501,8 +501,29 @@ function plot_peaks_function()
 
     hm = surface!(ax1, x, y, z)
     wireframe!(ax2, x, y, z)
-    contour!(ax3, x, y, z)
+    contour3d!(ax3, x, y, z)
     contourf!(ax4, x, y, z)
     Colorbar(fig[1,5], hm)
     fig
+end
+
+function first_animation()
+    CairoMakie.activate!() # hide
+    Random.seed!(123)
+    npts = 100
+    initms = 8*rand(npts) # initial marker size
+    msize = Node(initms) # this is the variable that will change
+    # first frame, initial plot
+    fig, ax = scatter(2*rand(npts), rand(npts); markersize = msize,
+        color = initms, colormap = (:viridis, 0.75), strokewidth = 0.5,
+        strokecolor = :white, figure = (; resolution=(600,400)),
+        axis = (xlabel = "x", ylabel = "y",))
+    limits!(ax, 0,2,0,1)
+    # the animation is done by updating the node values
+    record(fig, "animScatters.mp4") do io
+        for i in 1:0.1:8
+            msize[] = i*initms
+            recordframe!(io)  # record a new frame
+        end
+    end
 end

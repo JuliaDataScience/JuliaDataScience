@@ -722,10 +722,17 @@ And this should cover most used cases for layouting with Makie. Now, let's do so
 
 ### GLMakie.jl {#sec:glmakie}
 
+For the most common plots in 3d we will use the following `peaks` functions
+
 ```jl
 @sc JDS.peaks()
 ```
 
+Whose output for several 3d functions calls with GLMakie is the following
+
+```jl
+@sco JDS.plot_peaks_function()
+```
 
 ### Animations {#sec:makie_animations}
 

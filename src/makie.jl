@@ -420,15 +420,11 @@ function add_box_inset(fig;left=100,right=250,bottom = 200,top= 300,
         xticklabelsize = 12, yticklabelsize=12, backgroundcolor = bgcolor)
     
     # bring content upfront
+    # bring content upfront
     translate!(inset_box.scene, 0, 0, 10)
     elements = keys(inset_box.elements)
-    for ele in elements
-        if ele == :xaxis || ele == :yaxis
-            nothing
-        else 
-            translate!(inset_box.elements[ele], 0, 0, 9)
-        end
-    end
+    filtered = filter(ele -> ele != :xaxis && ele !=:yaxis , elements)
+    foreach(ele -> translate!(inset_box.elements[ele], 0, 0, 9), filtered)
     return inset_box
 end
 
@@ -442,13 +438,8 @@ function add_axis_inset(; pos = fig[1,1], halign=0.1, valign=0.5,
     # bring content upfront
     translate!(inset_box.scene, 0, 0, 10)
     elements = keys(inset_box.elements)
-    for ele in elements
-        if ele == :xaxis || ele == :yaxis
-            nothing
-        else 
-            translate!(inset_box.elements[ele], 0, 0, 9)
-        end
-    end
+    filtered = filter(ele -> ele != :xaxis && ele !=:yaxis , elements)
+    foreach(ele -> translate!(inset_box.elements[ele], 0, 0, 9), filtered)
     return inset_box
 end
 
@@ -502,7 +493,7 @@ function plot_peaks_function()
     GLMakie.activate!() # hide
     x, y, z = peaks()
 
-    fig = Figure(resolution = (1200,400))
+    fig = Figure(resolution = (1400,600))
     ax1 = Axis3(fig[1,1], aspect= (1,1,1))
     ax2 = Axis3(fig[1,2], aspect= (1,1,1))
     ax3 = Axis3(fig[1,3], aspect= (1,1,1))

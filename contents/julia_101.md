@@ -459,6 +459,7 @@ end
 In that case we can do two things:
 
 1. We can, analogously as the return values, define two variables to hold the function return values, one for each return value:
+
    ```jl
    scob(
    """
@@ -469,6 +470,7 @@ In that case we can do two things:
    ```
 
 2. Or we can define just one variable to hold the function return values and access them with either `first` or `last`:
+
    ```jl
    scob(
    """

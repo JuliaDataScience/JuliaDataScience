@@ -1,22 +1,27 @@
 ## Variable Transformations
 
 ```{=comment}
-Ifelse and case_when
+We need to cover `ifelse` and `case_when`
 ```
 
-In @sec:filter, we saw that `filter` works by taking one or more source columns and filtering it by applying a function.
-In other words, we saw that `source => f::Function` like in, for example, `filter(:name => name -> name == "Alice", df)`.
-In @sec:select, we saw that `select` can take one or more source columns and put it into one or more target columns `source => target` like in, for example, `select(df, :name => :people_names)`.
-In this section, we discuss how to **transform** variables, that is, how to modify data.
-This goes via `source => transformation => target`.
+In @sec:filter, we saw that `filter` works by taking one or more source columns and filtering it by applying a "filtering" function.
+To recap here's an example of filter using the `source => f::Function` syntax: `filter(:name => name -> name == "Alice", df)`.
 
-As a generous example, given the `grades_2020` dataset:
+In @sec:select, we saw that `select` can take one or more source columns and put it into one or more target columns `source => target`.
+Also to recap here's an example: `select(df, :name => :people_names)`.
+
+In this section, we discuss how to **transform** variables, that is, how to **modify data**.
+In `DataFrames.jl`, the syntax is `source => transformation => target`.
+
+Like before, we use the `grades_2020` dataset:
 
 ```jl
 @sco process=without_caption_label grades_2020()
 ```
 
-we can increase all the grades in `grades_2020` by 1:
+Suppose we would want to increase all the grades in `grades_2020` by 1.
+First, we define a function that take as argument a vector of data and return all of its elements increased by 1.
+Then we use the `transform` function from `DataFrames.jl` that, as all native `DataFrames.jl`'s functions, takes a `DataFrame` as first argument followed by the transformation syntax:
 
 ```jl
 s = """
@@ -26,21 +31,25 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-Here, the `plus_one` function receives the whole `:grade_2020` column and not just one element as one might expect.
-That is the reason why we've added the broadcasting "dot" `.` before the plus symbol.
-The `.`, in Julia's syntax, means broadcasting and allows Julia to add one to all the elements in `grades`.
-For instance:
+Here, the `plus_one` function receives the whole `:grade_2020` column.
+That is the reason why we've added the broadcasting "dot" `.` before the plus `+` operator.
+For a recap on broadcasting please see @sec:broadcasting.
 
-```jl
-sco("[1, 2, 3] .+ 1")
-```
-
-Like said above, the `DataFrames.jl` minilanguage is `source => transformation => target`.
+Like said above, the `DataFrames.jl` minilanguage is always `source => transformation => target`.
 So, if we want to keep the naming of the `target` column in the output, we can do:
 
 ```jl
 s = """
     transform(grades_2020(), :grade_2020 => plus_one => :grade_2020)
+    """
+sco(s; process=without_caption_label)
+```
+
+We can also use the keyword argument `renamecols=false`:
+
+```jl
+s = """
+    transform(grades_2020(), :grade_2020 => plus_one; renamecols=false)
     """
 sco(s; process=without_caption_label)
 ```
@@ -54,8 +63,8 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-where the `:` means "select all the columns" as described in @sec:select.
-Alternatively, it can be written by using Julia's broadcasting and modify column `grade_2020` by acessing the column with `df.grade_2020`:
+Where the `:` means "select all the columns" as described in @sec:select.
+Alternatively, you can also use Julia's broadcasting and modify the column `grade_2020` by acessing it with `df.grade_2020`:
 
 ```jl
 s = """
@@ -66,7 +75,9 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-But, although the last example is easier since it builds on more native Julia operations, we would advise to use the functions provided by `DataFrames.jl` in most cases because they are more capable.
+But, although the last example is easier since it builds on more native Julia operations, **we strongly advise to use the functions provided by `DataFrames.jl` in most cases because they are more capable and performs accordingly with no surprises**.
+
+### Multiple Transformations {#sec:multiple_transform}
 
 To show how to transform two columns at the same time, we use the left joined data from @sec:join:
 
@@ -77,17 +88,22 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-With this, we can add a column saying whether someone was approved:
+With this, we can add a column saying whether someone was approved by the criterion that all of his grades were above 5.5:
 
 ```jl
 s = """
     pass(A, B) = [5.5 < a || 5.5 < b for (a, b) in zip(A, B)]
-    transform(leftjoined, [:grade_2020, :grade_2021] => pass => :pass)
+    transform(leftjoined, [:grade_2020, :grade_2021] => pass; renamecols=false)
     """
 sco(s; process=without_caption_label)
 ```
 
-We can clean up the outcome and put the logic in a function to get a list of the people who passed:
+```{=comment}
+I don't think you have covered vector of symbols as col selector...
+You might have to do this in the `dataframes_select.md`
+```
+
+We can clean up the outcome and put the logic in a function to get a list of all the approved students:
 
 ```jl
 @sco only_pass()

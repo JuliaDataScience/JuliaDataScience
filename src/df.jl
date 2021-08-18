@@ -144,7 +144,7 @@ export fix_date_column
 
 function fix_age_column(df)
     levels = ["infant", "adolescent", "adult"]
-    ages = categorical(df[!, :age]; ordered=true, levels)
+    ages = categorical(df[!, :age]; levels, ordered=true)
     df[!, :age] = ages
     df
 end

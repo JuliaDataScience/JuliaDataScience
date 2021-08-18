@@ -41,12 +41,12 @@ We also like the informal idea that, as a data literate, you won't feel overwhel
 Data literacy can be seen as a highly competitive skill to possess.
 In this book we'll cover two aspects of data literacy:
 
-1. **Data Manipulation** with DataFrames.jl (@sec:dataframes).
+1. **Data Manipulation** with `DataFrames.jl` (@sec:dataframes).
 In this chapter you will learn how to:
     1. Read CSV and Excel data from disk and from the internet
     2. ...
     3. ...
-1. **Data Visualization** with Plots.jl and Makie.jl (@sec:datavisPlots and @sec:datavisMakie).
+1. **Data Visualization** with `Plots.jl` and `Makie.jl` (@sec:datavisPlots and @sec:datavisMakie).
 In these chapter you will learn how to:
     1. ...
     2. ...
@@ -79,4 +79,4 @@ Jose Storopoli would like to thank his colleagues, specially [Fernando Serra](ht
 
 Rik Huijzer would like to thank his PhD supervisors, [Peter de Jonge](https://www.rug.nl/staff/peter.de.jonge/), [Ruud den Hartigh](https://www.rug.nl/staff/j.r.den.hartigh/) and [Frank Blaauw](https://frankblaauw.nl/), for their support.
 
-Lazaro Alonso would like to thank his wife and daughters for their encouragement to get involved in this project. 
+Lazaro Alonso would like to thank his wife and daughters for their encouragement to get involved in this project.

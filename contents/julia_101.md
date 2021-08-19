@@ -1308,7 +1308,7 @@ Bool[0, 1, 0, 1]
 )
 ```
 
-You can even **mixmatch** array literals with the constructors:
+You can even **mix and match** array literals with the constructors:
 
 ```jl
 sco(
@@ -2617,7 +2617,7 @@ rand(2:2:20)
 )
 ```
 
-You can also mixmatch arguments:
+You can also mix and match arguments:
 
 ```jl
 sco(

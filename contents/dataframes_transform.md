@@ -75,7 +75,7 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-But, although the last example is easier since it builds on more native Julia operations, **we strongly advise to use the functions provided by `DataFrames.jl` in most cases because they are more capable and performs accordingly with no surprises**.
+But, although the last example is easier since it builds on more native Julia operations, **we strongly advise to use the functions provided by `DataFrames.jl` in most cases because they are more capable and easier to work with.**
 
 ### Multiple Transformations {#sec:multiple_transform}
 

@@ -133,7 +133,7 @@ end # hide
 """; process=string, post=output_block)
 ```
 
-It works even for far complex data:
+It works even for far more complex data:
 
 ```jl
 sco("""
@@ -149,8 +149,8 @@ end # hide
 """; process=string, post=output_block)
 ```
 
-These CSV basics should cover most usecases.
-For more information, see the [`CSV.jl` documentation](https://csv.juliadata.org/stable){target="_blank} and specially the [`CSV.File` constructor docstring](https://csv.juliadata.org/stable/#CSV.File){target="_blank}.
+These CSV basics should cover most use cases.
+For more information, see the [`CSV.jl` documentation](https://csv.juliadata.org/stable){target="_blank} and especially the [`CSV.File` constructor docstring](https://csv.juliadata.org/stable/#CSV.File){target="_blank}.
 
 ### Excel {#sec:excel}
 

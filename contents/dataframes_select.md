@@ -38,7 +38,7 @@ s = """select(responses(), Not([:q4, :q5]))"""
 sco(s, process=without_caption_label)
 ```
 
-It's also fine to mixmatch columns that we want to preserve with columns that we do `Not` want to select:
+It's also fine to mix and match columns that we want to preserve with columns that we do `Not` want to select:
 
 ```jl
 s = """select(responses(), :q5, Not(:id))"""

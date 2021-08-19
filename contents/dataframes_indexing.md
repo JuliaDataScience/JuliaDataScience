@@ -157,8 +157,8 @@ s = """filter(:name => !=("Alice"), grades_2020())"""
 sco(s; process=without_caption_label)
 ```
 
-Now, to show **why anonymous functions are so powerful**, we can come up with a slight more complex filter.
-In this filter, we want to have the people whose name start with A or B **and** while also having grades over 6:
+Now, to show **why anonymous functions are so powerful**, we can come up with a slightly more complex filter.
+In this filter, we want to have the people whose name start with A or B **and**  have a grade above 6:
 
 ```jl
 s = """

@@ -179,7 +179,7 @@ Instead of "changing" a function, we will make a new one and give it a clear nam
 So, back to the `DataFrames` constructor.
 As you might have seen, the way to create one is simply to pass vectors as arguments into the `DataFrame` constructor.
 You can come up with any valid Julia vector and it will work **as long as the vectors have the same length**.
-Duplicates, unicode symbols and any sorte of numbers are fine:
+Duplicates, Unicode symbols and any sort of numbers are fine:
 
 ```jl
 sco("""
@@ -196,7 +196,7 @@ For example, we can make a function to get the grades for one or more `names`:
 
 This way of using functions to wrap around basic functionality from programming languages and packages is quite common.
 Basically, you can think of Julia and `DataFrames.jl` as providers of building blocks.
-They provide very **generic** building blocks which allow you to build things for your **specific** usecase like this grades example.
+They provide very **generic** building blocks which allow you to build things for your **specific** use case like this grades example.
 By using the blocks, you can make a data analysis script, control a robot or whatever you like to build.
 
 So far, the examples were quite cumbersome, because we had to use indexes.

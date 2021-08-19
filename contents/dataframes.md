@@ -108,7 +108,7 @@ You can start by loading `DataFrames.jl` with `using`:
 using DataFrames
 ```
 
-With `DataFrames.jl`, we can define a `DataFrame` type to hold our tabular data:
+With `DataFrames.jl`, we can define a `DataFrame` to hold our tabular data:
 
 ```jl
 sco("""

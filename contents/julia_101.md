@@ -682,7 +682,7 @@ first(methodswith(String), 5)
 ```
 
 
-### Broadcasting Operators and Functions
+### Broadcasting Operators and Functions {#sec:broadcasting}
 
 Before we dive into data structures, we need to talk about broadcasting (also known as *vectorization*) and the "dot" operator `.`.
 

@@ -83,7 +83,7 @@ s = """select(responses(), 1 => "participant", :q1 => "age", :q2 => "nationality
 sco(s, process=without_caption_label)
 ```
 
-Additionally, thanks to the "splat" operator `...` (see @sec:splat) operator, we can write as:
+Additionally, thanks to the "splat" operator `...` (see @sec:splat) operator, we can also write:
 
 ```jl
 s = """

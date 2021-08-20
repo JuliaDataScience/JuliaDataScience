@@ -21,7 +21,7 @@ Options(tv_shows; label="TV_shows")
 ```
 
 Here, the dots mean that this could be a very long table and we only show a few rows.
-While analyzing data, often we come up interesting questions about the data, also known as _data queries_.
+While analyzing data, often we come up with interesting questions about the data, also known as _data queries_.
 For large tables, computers would be able to answer these kinds of questions much quicker than you could do it by hand.
 Examples of, so called _queries_, for this data could be:
 
@@ -194,7 +194,7 @@ For example, we can make a function to get the grades for one or more `names`:
 @sco process=without_caption_label JDS.grades_2020([3, 4])
 ```
 
-This way of using functions to wrap around basic functionality from programming languages and packages is quite common.
+This way of using functions to wrap around basic functionality in programming languages and packages is quite common.
 Basically, you can think of Julia and `DataFrames.jl` as providers of building blocks.
 They provide very **generic** building blocks which allow you to build things for your **specific** use case like this grades example.
 By using the blocks, you can make a data analysis script, control a robot or whatever you like to build.

@@ -55,7 +55,7 @@ We can also get only `names` for the first 2 rows using **slicing** (again simil
 ```
 
 If we assume that all names in the table are unique, we can also write a function to obtain the grade for a person via their `name`.
-To do so, we convert the table back to one of Julia's basic data structures (see @sec:data_structures) which is capable of creating a mappings, namely `Dict`s:
+To do so, we convert the table back to one of Julia's basic data structures (see @sec:data_structures) which is capable of creating mappings, namely `Dict`s:
 
 ```jl
 @sco post=output_block grade_2020("Bob")
@@ -71,12 +71,12 @@ collect(zip(df.name, df.grade_2020))
 ```
 
 However, converting a `DataFrame` to a `Dict` is only useful when the elements are unique.
-Generally that is not the case, it is time to learn how to `filter` a `DataFrame`.
+Generally that is not the case and that's why  we need to learn how to `filter` a `DataFrame`.
 
 ## Filter and Subset {#sec:filter_subset}
 
 There are two ways to remove rows from a `DataFrame`, one is `filter` (@sec:filter) and the other is `subset` (@sec:subset).
-`filter` was added earlier to `DataFrames.jl`, is more powerful, and more consistent with syntax from Julia base, so that is why we start with discussing `filter`.
+`filter` was added earlier to `DataFrames.jl`, is more powerful and more consistent with syntax from Julia base, so that is why we start discussing `filter` first.
 `subset` is newer and often more convenient.
 
 ### Filter {#sec:filter}
@@ -99,7 +99,7 @@ Note how this function is very similar to the function `filter(f::Function, V::V
 This is because `DataFrames.jl` uses **multiple dispatch** (see @sec:multiple_dispatch) to define a new method of `filter` that accepts a `DataFrame` as argument.
 
 At first sight, defining and working with a function `f` for filtering can be a bit difficult to use in practice.
-Hold tight, that the effort is well-paid, since **it is very powerful way of filtering data**.
+Hold tight, that the effort is well-paid, since **it is a very powerful way of filtering data**.
 As a simple example, we can create a function `equals_alice` that checks whether its input equals "Alice":
 
 ```jl
@@ -187,7 +187,7 @@ s = "subset(grades_2020(), :name => ByRow(equals_alice))"
 sco(s; process=without_caption_label)
 ```
 
-Also note that the `DataFrame` is now the first argument `subset(df, args...)`, whereas in `filter` it was the second argument `filter(f, df)`.
+Also note that the `DataFrame` is now the first argument `subset(df, args...)`, whereas in `filter` it was the second one `filter(f, df)`.
 The reason for this is that Julia defines filter as `filter(f, V::Vector)` and `DataFrames.jl` chose to maintain consistency with existing Julia functions that were extended to `DataFrame`s types by multiple dispatch.
 
 > **_NOTE:_**
@@ -224,7 +224,7 @@ s = "filter(:salary => >(2_000), salaries())"
 sce(s, post=trim_last_n_lines(25))
 ```
 
-`subset` will also fail, but will fortunately point us toward an easy solution:
+`subset` will also fail, but it will fortunately point us towards an easy solution:
 
 ```jl
 s = "subset(salaries(), :salary => ByRow(>(2_000)))"

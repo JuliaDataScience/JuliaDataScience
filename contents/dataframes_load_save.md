@@ -2,7 +2,7 @@
 
 Having only data inside Julia programs and not being able to load or save it would be very limiting.
 Therefore, we start by mentioning how to store files to and load files from disk.
-We focus on CSV, see @sec:csv, and Excel, see @sec:excel, file formats since those are the most common data storage formats.
+We focus on CSV, see @sec:csv, and Excel, see @sec:excel, file formats since those are the most common data storage formats for tabular data.
 
 ### CSV {#sec:csv}
 
@@ -109,7 +109,7 @@ end # hide
 
 By convention, its still best to give files with special delimiters, such as ";", the ".csv" extension.
 
-How to load CSV files using `CSV.jl` is done in a similar way.
+Loading CSV files using `CSV.jl` is done in a similar way.
 You can use `CSV.read` and specify in what kind of format you want the output.
 We specify a `DataFrame`.
 
@@ -156,7 +156,7 @@ For more information, see the [`CSV.jl` documentation](https://csv.juliadata.org
 
 There are multiple Julia packages to read Excel files.
 In this book, we will only look at [`XLSX.jl`](https://github.com/felipenoris/XLSX.jl), because it is the most actively maintained package in the Julia's ecosystem that deals with Excel data.
-As a second benefit, `XLSX.jl` is written in pure Julia, which makes it easy for us to inspect it under the hood and understanding what's going on.
+As a second benefit, `XLSX.jl` is written in pure Julia, which makes it easy for us to inspect and understand what's going on under the hood.
 
 Install the `XSLX.jl` package via:
 

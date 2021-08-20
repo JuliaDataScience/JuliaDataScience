@@ -3,7 +3,7 @@
 At the start of this chapter, we showed multiple tables and raised questions also related to multiple tables.
 However, we haven't talked about combining tables yet, which we will do in this section.
 In `DataFrames.jl`, combining multiple tables is done via _joins_.
-Joins are extremely powerful, but might take some time to wrap your head around.
+Joins are extremely powerful, but it might take a while to wrap your head around.
 It is not necessary to know the joins below by heart, the [`DataFrames.jl` documentation](https://DataFrames.juliadata.org/stable/man/joins/) along with this book will list them for you.
 But, it's essential to know that joins exists.
 If you ever find yourself looping over rows in a `DataFrame` and comparing it with other data, then you probably need one of the joins below.
@@ -79,7 +79,7 @@ sce(s; post=trim_last_n_lines(6))
 Oops again.
 This is a very common error with `DataFrame`s and `join`s.
 The tables for the 2020 and 2021 grades have a duplicate column name, namely `:name`.
-Like before, the error that `DataFrames.jl` outputs informs us a simple suggestion to fix.
+Like before, the error that `DataFrames.jl` outputs shows a simple suggestion that might fix the issue.
 We can just pass `makeunique=true` to solve this:
 
 ```jl

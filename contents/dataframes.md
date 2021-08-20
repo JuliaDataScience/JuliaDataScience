@@ -172,7 +172,7 @@ df = grades_2020()
 """; process=without_caption_label)
 ```
 
-This assumes, of course, that the function is not re-defined.
+Of course, this assumes that the function is not re-defined.
 We promise to not do that in this book, because it is a bad idea exactly for this reason.
 Instead of "changing" a function, we will make a new one and give it a clear name.
 

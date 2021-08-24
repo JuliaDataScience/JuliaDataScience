@@ -3,7 +3,7 @@
 The world of data science is already filled with different open source programming languages.
 
 Industry has mostly adopted Python and academia have adopted R.
-**Why bother learning other language?**
+**Why bother learning another language?**
 To answer this question, we will address two common backgrounds:
 
 1. **Did not program before** -- see @sec:non-programmers.

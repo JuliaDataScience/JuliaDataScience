@@ -62,7 +62,7 @@ It also covers the use case for when "you had an interesting idea and wanted to 
 Most of Julia user-defined types and functions work right out of the bat^[or with little effort necessary.] and some users are even marvelled upon discovering how their packages are being used by other libraries in ways that they could not have imagined.
 We have some examples in @sec:multiple_dispatch.
 
-5. needed to have a better project management, with dependecies and version control tightly controlled, manageable and replicable?
+5. Needed to have a better project management, with dependecies and version control tightly controlled, manageable and replicable?
 **Julia has an amazing project management solution allied to a great package manager**.
 Unlike traditional package managers, which install and manage a single global set of packages.
 Julia package manager is designed around “environments”: independent sets of packages that can be local to an individual project or shared.

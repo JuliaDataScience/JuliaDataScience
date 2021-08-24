@@ -35,11 +35,11 @@ jobs:
 
       # Enforce most recent version.
       - name: Install Books.jl#main
-        run: julia --project -e 'using Pkg;
+        run: julia --color=yes --project -e 'using Pkg;
           Pkg.add(url="https://github.com/rikhuijzer/Books.jl#main");'
 
       - name: Install dependencies
-        run: julia --project -e 'using Pkg; Pkg.instantiate();
+        run: julia --color=yes --project -e 'using Pkg; Pkg.instantiate();
                 using Books; Books.install_dependencies()'
 
       - run: >

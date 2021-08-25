@@ -47,6 +47,7 @@ Now, questions that we could ask ourselves could be:
 
 In the rest of this chapter, we will show you how you can easily answer these questions in Julia.
 To do so, we first show why we need a Julia package called `DataFrames.jl`.
+In the next sections, we show how you can use this package and, in the end, we show how to write fast data transformations (@sec:df_performance).
 
 ```{=comment}
 TODO: Add a comparison with Excel to see where Julia is better.

@@ -4,25 +4,32 @@ function grades_ages()
     DataFrame(; name, age)
 end
 
-export grades_2020
 function grades_2020()
     name = ["Sally", "Bob", "Alice", "Hank"]
     grade_2020 = [1, 5, 8.5, 4]
     DataFrame(; name, grade_2020)
 end
 
-export grades_2021
 function grades_2021()
     name = ["Bob 2", "Sally", "Hank"]
     grade_2021 = [9.5, 9.5, 6]
     DataFrame(; name, grade_2021)
 end
 
+function all_grades()
+    df1 = grades_2020()
+    df1 = select(df1, :name, :grade_2020 => :grade)
+    df2 = grades_2021()
+    df2 = select(df2, :name, :grade_2021 => :grade)
+    rename_bob2(data_col) = replace.(data_col, "Bob 2" => "Bob")
+    df2 = transform(df2, :name => rename_bob2 => :name)
+    return vcat(df1, df2)
+end
+
 function grades_for_2020()
     innerjoin(grades_ages(), grades_2020(); on=:name)
 end
 
-export grades_array
 function grades_array()
     name = ["Bob", "Sally", "Alice", "Hank"]
     age = [17, 18, 20, 19]
@@ -47,12 +54,10 @@ function names_grades2()
 end
 
 # Should fix this in Books.jl
-export convert_output
 function Books.convert_output(path, expr, out::DataFrameRow; kwargs...)
     Books.convert_output(path, expr, DataFrame(out); kwargs...)
 end
 
-export grade_2020
 function grade_2020(i::Int)
     df = grades_2020()
     df[i, :]
@@ -71,16 +76,13 @@ function grades_2020(names::Vector{Int})
     df[names, :]
 end
 
-export equals_alice
 equals_alice(name::String) = name == "Alice"
 
-export write_grades_csv
 function write_grades_csv()
     path = "grades.csv"
     CSV.write(path, grades_2020())
 end
 
-export grades_with_commas
 function grades_with_commas()
     df = grades_2020()
     df[3, :name] = "Alice,"
@@ -90,7 +92,6 @@ end
 inside_tempdir(f) = cd(f, mktempdir())
 output_block_inside_tempdir(f) = output_block(inside_tempdir(f))
 
-export write_xlsx
 function write_xlsx(name, df::DataFrame)
     path = "$name.xlsx"
     data = collect(eachcol(df))
@@ -98,21 +99,18 @@ function write_xlsx(name, df::DataFrame)
     XLSX.writetable(path, data, cols)
 end
 
-export write_grades_xlsx
 function write_grades_xlsx()
     path = "grades"
     write_xlsx(path, grades_2020())
     "$path.xlsx"
 end
 
-export salaries
 function salaries()
     names = ["John", "Hank", "Karen", "Zed"]
     salary = [1_900, 2_800, 2_800, missing]
     DataFrame(; names, salary)
 end
 
-export responses
 function responses()
     id = [1, 2]
     q1 = [28, 61]
@@ -123,7 +121,6 @@ function responses()
     DataFrame(; id, q1, q2, q3, q4, q5)
 end
 
-export wrong_types
 function wrong_types()
     id = 1:4
     date = ["28-01-2018", "03-04-2019", "01-08-2018", "22-11-2020"]
@@ -140,7 +137,6 @@ function fix_date_column(df::DataFrame)
     df[!, :date] = dates
     df
 end
-export fix_date_column
 
 function fix_age_column(df)
     levels = ["infant", "adolescent", "adult"]
@@ -148,14 +144,12 @@ function fix_age_column(df)
     df[!, :age] = ages
     df
 end
-export fix_age_column
 
 function correct_types()
     df = wrong_types()
     df = fix_date_column(df)
     df = fix_age_column(df)
 end
-export correct_types
 
 function only_pass()
     leftjoined = leftjoin(grades_2020(), grades_2021(); on=:name)
@@ -164,4 +158,3 @@ function only_pass()
     passed = subset(leftjoined, :pass; skipmissing=true)
     return passed.name
 end
-export only_pass

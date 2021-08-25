@@ -1,3 +1,0 @@
-## Groupby {#sec:groupby}
-
-

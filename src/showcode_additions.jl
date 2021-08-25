@@ -44,3 +44,11 @@ Abbreviation for `sco(s; process=string, post=output_block)`.
 function scsob(expr::String)
     sco(expr; process=string, post=output_block)
 end
+
+function plainblock(expr)
+    return """
+        ```language-plain
+        $expr
+        ```
+        """
+end

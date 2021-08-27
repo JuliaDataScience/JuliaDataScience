@@ -1,8 +1,7 @@
 # Data Vis with Plots {#sec:datavisPlots}
 
 Data visualization it is a vital part of almost any data analysis process.
-Here, in this chapter, we will consider several packages that can be used in Julia, namely `Plots.jl`, `StatsPlots.jl`, `Makie.jl` and `AlgebraOfGraphics.jl`.
-The latter is especially useful for tabular data.
+Here, in this chapter, we will consider several packages that can be used in Julia, namely `Plots.jl`, `StatsPlots.jl`, and `Makie.jl`.
 
 - Overview of the JuliaPlots ecosystem
 

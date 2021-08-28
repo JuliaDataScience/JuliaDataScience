@@ -5,7 +5,6 @@ import Pkg
 import Plots
 
 using Reexport
-@reexport using AlgebraOfGraphics
 @reexport using Books
 @reexport using CSV
 @reexport using CairoMakie

@@ -76,7 +76,7 @@ using LinearAlgebra
 
 Other interesting examples are a  `mesh(obj)`, a `volume(x, y, z, vals)`, and a  `contour(x, y, z, vals)`. 
 
-### Meshes and volumens 
+### Meshes and volumes 
 
 ```
 using GeometryBasics
@@ -88,6 +88,18 @@ using GeometryBasics
 
 Note that here we are plotting to meshes in the same axis, one transparent sphere and a cube. 
 Up to here, this covers most of the use cases in 3D, just a few are missing. Type for example `?linesegments`.
+
+Taking as reference the previous example one can do the following custom plot with spheres and rectangles.
+
+```
+using Colors
+```
+
+```jl
+@sco JDS.grid_spheres_and_rectangle_as_plate()
+```
+
+Here the rectangle is semi-transparent due to the alpha channel added to the RGB color. 
 
 ### Filled line, band
 

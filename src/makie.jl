@@ -706,3 +706,38 @@ function first_animation()
         end
     end
 end
+
+function grid_spheres_and_rectangle_as_plate()    
+    Random.seed!(123)
+    rectMesh = FRect3D(Vec3f0(-1,-1,2.1), Vec3f0(22,11,0.5))
+    recmesh = GeometryBasics.mesh(rectMesh)
+    colors = [RGBA(rand(4)...) for v in recmesh.position]
+    fig = with_theme(theme_dark()) do 
+        fig = Figure(resolution = (1600,800), fontsize = 26)
+        ax1 = Axis3(fig[1,1]; aspect = (1,1,1),  perspectiveness = 0.5, 
+            azimuth= 0.7223275083269882)
+        ax2 = Axis3(fig[1,2], aspect=:data, perspectiveness = 0.5,)
+
+        for i in 1:2:10, j in 1:2:10, k in 1:2:10
+            sphere = Sphere(Point3f0(i,j,k), 1)
+            spheremesh = GeometryBasics.mesh(Tesselation(sphere, 32)) 
+            mesh!(ax1, spheremesh; color = RGBA(i*0.1,j*0.1,k*0.1, 0.75), 
+                transparency = false, shading = false)
+        end
+        cbarPal = :plasma
+        cmap = get(colorschemes[cbarPal], LinRange(0,1,50))
+        for i in 1:2.5:20, j in 1:2.5:10, k in 1:2.5:4
+            sphere = Sphere(Point3f0(i,j,k), 1)
+            spheremesh = GeometryBasics.mesh(Tesselation(sphere, 32)) 
+            mesh!(ax2, spheremesh; color = cmap[rand(1:50)],
+            lightposition = Vec3f0(10, 5, 2), 
+            ambient = Vec3f0(0.95, 0.95, 0.95), backlight = 1f0,
+            transparency = false, shading = true)
+        end
+        mesh!(recmesh; color= colors, colormap = :rainbow, shading = false, 
+            transparency = false)
+        #hidedecorations!(ax2)
+        fig
+    end
+    fig
+end

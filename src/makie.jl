@@ -471,7 +471,54 @@ function figure_box_inset()
     lines!(inset_ax1, 1:10)
     scatter!(inset_ax2, 1:10, color = :black)
     fig
-end   
+end 
+
+function scatters_in_3D()
+    GLMakie.activate!() # hide 
+    Random.seed!(123)
+    xyz = randn(10, 3)
+    x, y, z = xyz[:,1], xyz[:,2], xyz[:,3]
+    fig = Figure(resolution = (1800,600), fontsize = 26)
+    ax1 = Axis3(fig; aspect= (1,1,1), perspectiveness = 0.5,)
+    ax2 = Axis3(fig; aspect= (1,1,1), perspectiveness = 0.5,)
+    ax3 = Axis3(fig; aspect= :data, perspectiveness = 0.5,)
+
+    scatter!(ax1, x, y, z; markersize = 50)
+    meshscatter!(ax2, x, y, z; markersize = 0.25)
+    hm = meshscatter!(ax3, x, y, z; markersize = 0.25, 
+        marker = FRect3D(Vec3f0(0), Vec3f0(1)), color = 1:size(xyz)[2], 
+        colormap = :plasma, transparency = false)
+    cbar = Colorbar(fig, hm, label = "values", height = Relative(0.5))
+    fig[1,1] = ax1
+    fig[1,2] = ax2
+    fig[1,3] = ax3
+    fig[1,4] = cbar
+    fig
+end
+
+function lines_in_3D()
+    GLMakie.activate!() # hide 
+    Random.seed!(123)
+    xyz = randn(10, 3)
+    x, y, z = xyz[:,1], xyz[:,2], xyz[:,3]
+    fig = Figure(resolution = (1800,600), fontsize = 26)
+    ax1 = Axis3(fig; aspect= (1,1,1), perspectiveness = 0.5,)
+    ax2 = Axis3(fig; aspect= (1,1,1), perspectiveness = 0.5,)
+    ax3 = Axis3(fig; aspect= :data, perspectiveness = 0.5,)
+
+    lines!(ax1, x, y, z; color = 1:size(xyz)[2], linewidth=3)
+    scatterlines!(ax2, x, y, z; markersize = 50)
+    hm = meshscatter!(ax3, x, y, z; markersize = 0.2, 
+        color = 1:size(xyz)[2])
+    lines!(ax3, x, y, z; color = 1:size(xyz)[2])
+    cbar = Colorbar(fig, hm; label = "values", height = 15, vertical = false,
+     flipaxis = false, ticksize=15, tickalign = 1, width = Relative(3.55/4))
+    fig[1,1] = ax1
+    fig[1,2] = ax2
+    fig[1,3] = ax3
+    fig[2,1] = cbar
+    fig
+end
 
 # written by Josef Heinen from GR.jl
 """
@@ -492,20 +539,152 @@ end
 function plot_peaks_function()
     GLMakie.activate!() # hide
     x, y, z = peaks()
+    x2, y2, z2 = peaks(;n = 15)
 
-    fig = Figure(resolution = (1400,600))
-    ax1 = Axis3(fig[1,1], aspect= (1,1,1))
-    ax2 = Axis3(fig[1,2], aspect= (1,1,1))
-    ax3 = Axis3(fig[1,3], aspect= (1,1,1))
-    ax4 = Axis3(fig[1,4], aspect= (1,1,1))
+    fig = Figure(resolution = (1800,600), fontsize = 26)
+    ax1 = Axis3(fig[1,1]; aspect= (1,1,1))
+    ax2 = Axis3(fig[1,2]; aspect= (1,1,1))
+    ax3 = Axis3(fig[1,3]; aspect= (1,1,1))
 
     hm = surface!(ax1, x, y, z)
-    wireframe!(ax2, x, y, z)
-    contour3d!(ax3, x, y, z)
-    contourf!(ax4, x, y, z)
-    Colorbar(fig[1,5], hm)
+    wireframe!(ax2, x2, y2, z2)
+    contour3d!(ax3, x, y, z; levels = 20)
+    Colorbar(fig[1,4], hm, height = Relative(0.5))
     fig
 end
+
+function heatmap_contour_and_contourf()
+    GLMakie.activate!() # hide
+    x, y, z = peaks()
+
+    fig = Figure(resolution = (1800,600), fontsize = 26)
+    ax1 = Axis(fig[1,1]; aspect = DataAspect())
+    ax2 = Axis(fig[1,2]; aspect = DataAspect())
+    ax3 = Axis(fig[1,3]; aspect = DataAspect())
+
+    hm = heatmap!(ax1, x, y, z)
+    contour!(ax2, x, y, z; levels = 20)
+    contourf!(ax3, x, y, z)
+    Colorbar(fig[1,4], hm, height = Relative(0.5))
+    fig
+end
+
+function heatmap_contour_and_contourf_in_a_3d_plane()
+    GLMakie.activate!() # hide
+    x, y, z = peaks()
+
+    fig = Figure(resolution = (1800,600), fontsize = 26)
+    ax1 = Axis3(fig[1,1])
+    ax2 = Axis3(fig[1,2])
+    ax3 = Axis3(fig[1,3])
+
+    hm = heatmap!(ax1, x, y, z)
+    contour!(ax2, x, y, z; levels = 20)
+    contourf!(ax3, x, y, z)
+    Colorbar(fig[1,4], hm, height = Relative(0.5))
+    fig
+end
+
+function mixing_surface_contour3d_contour_and_contourf()
+    GLMakie.activate!() # hide
+    x, y, z = peaks()
+    cmap = :Spectral_11
+    fig = Figure(resolution = (1400,800), fontsize = 26)
+    ax1 = Axis3(fig[1,1]; aspect = (1,1,1), elevation = pi/6, 
+        perspectiveness = 0.5, xzpanelcolor= (:black,0.75), 
+        yzpanelcolor= :black, zgridcolor = :grey70, 
+        ygridcolor = :grey70, xgridcolor = :grey70)
+    ax2 = Axis3(fig[1,3]; aspect = (1,1,1), elevation = pi/6, 
+        perspectiveness = 0.5)
+
+    hm = surface!(ax1, x, y, z; colormap = (cmap, 0.95), shading = true)
+    contour3d!(ax1, x, y, z .+ 0.02; colormap =cmap, 
+        levels = 20, linewidth = 2 )
+    xmin, ymin, zmin = minimum(ax1.finallimits[])
+    xmax, ymax, zmax = maximum(ax1.finallimits[])
+    contour!(ax1, x, y, z; colormap = cmap, levels = 20, 
+        transformation = (:xy, zmax))
+    contourf!(ax1, x, y, z; colormap = cmap, 
+        transformation = (:xy, zmin))
+    Colorbar(fig[1,2], hm, width = 15, ticksize=15, tickalign = 1,
+        height = Relative(0.35))
+    # transformations into planes
+    heatmap!(ax2, x, y, z; colormap = :viridis, 
+        transformation = (:yz, 3.5))
+    contourf!(ax2, x, y, z; colormap = :CMRmap, 
+        transformation = (:xy, -3.5))
+    contourf!(ax2, x, y, z; colormap = :bone_1, 
+        transformation = (:xz, 3.5))
+    heatmap!(ax2, x, y, z; colormap = :plasma,
+        transformation = (:xy, 3.8))
+    xlims!(ax2, -3.8,3.8)
+    ylims!(ax2, -3.8,3.8)
+    zlims!(ax2, -3.8,3.8)
+    fig
+end
+
+function arrows_and_streamplot_in_3d()
+    ps = [Point3f0(x, y, z) for x in -3:1:3 for y in -3:1:3 for z in -3:1:3]
+    ns = map(p -> 0.1*rand() * Vec3f0(p[2], p[3], p[1]), ps)
+    lengths = norm.(ns)
+    flowField(x,y,z) = Point(-y + x*(-1+x^2+y^2)^2, x + y*(-1+x^2+y^2)^2, 
+        z + x*(y-z^2))
+
+    fig = Figure(resolution = (1400,800), fontsize = 26)
+    ax1 = Axis3(fig[1,1]; aspect = (1,1,1),  perspectiveness = 0.5)
+    ax2 = Axis3(fig[1,2]; aspect = (1,1,1),  perspectiveness = 0.5)
+    # http://makie.juliaplots.org/stable/plotting_functions/arrows.html # hide
+    arrows!(ax1, ps, ns, color=lengths, linewidth = 0.1, 
+        arrowsize = Vec3f0(0.2, 0.2, 0.3), align = :center)
+    streamplot!(ax2, flowField, -4..4, -4..4, -4..4, colormap = :plasma,
+        gridsize= (7,7), arrow_size = 0.25,linewidth=1)
+    fig
+
+end
+
+function mesh_volume_contour()
+    # mesh objects
+    rectMesh = FRect3D(Vec3f0(-0.5), Vec3f0(1))
+    recmesh = GeometryBasics.mesh(rectMesh)
+    sphere = Sphere(Point3f0(0), 1)
+    # https://juliageometry.github.io/GeometryBasics.jl/stable/primitives/
+    spheremesh = GeometryBasics.mesh(Tesselation(sphere, 64)) 
+    # uses 64 for tesselation, a smoother sphere
+    colors = [rand() for v in recmesh.position]
+    # cloud points for volume
+    x = 1:10
+    y = 1:10
+    z = 1:10
+    vals = randn(10,10,10)
+    # figure
+    fig = Figure(resolution = (1800,600), fontsize = 26)
+    ax1 = Axis3(fig[1,1]; aspect = (1,1,1),  perspectiveness = 0.5)
+    ax2 = Axis3(fig[1,2]; aspect = (1,1,1),  perspectiveness = 0.5)
+    ax3 = Axis3(fig[1,3]; aspect = (1,1,1),  perspectiveness = 0.5)
+
+    mesh!(ax1, recmesh; color= colors, colormap = :rainbow, shading = false)
+    mesh!(ax1, spheremesh; color = (:white,0.25), transparency = true)
+    volume!(ax2, x, y, z, vals; colormap = Reverse(:plasma))
+    contour!(ax3, x, y, z, vals; colormap = Reverse(:plasma))
+    fig
+end
+
+function filled_line_and_linesegments_in_3D()
+    xs = LinRange(-3, 3, 10)
+    lower = [Point3f0(i,-i,0) for i in LinRange(0,3,100)]
+    upper = [Point3f0(i,-i, sin(i) * exp(-(i+i)) ) for i in range(0,3, length=100)]
+
+    fig = Figure(resolution = (1400,800), fontsize = 26)
+    ax1 = Axis3(fig[1,1]; elevation = pi/6, perspectiveness = 0.5)
+    ax2 = Axis3(fig[1,2]; elevation = pi/6, perspectiveness = 0.5)
+
+    band!(ax1, lower, upper, color = repeat(norm.(upper), outer=2), colormap = :CMRmap)
+    lines!(ax1, upper, color = :black)
+    linesegments!(ax2, cos.(xs), xs, sin.(xs), linewidth = 5, 
+        color = 1:length(xs), colormap = :plasma)
+    fig
+end
+
 
 function first_animation()
     CairoMakie.activate!() # hide

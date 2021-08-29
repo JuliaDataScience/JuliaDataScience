@@ -20,6 +20,9 @@ using Reexport
 @reexport using Random
 @reexport using Statistics
 @reexport using InteractiveUtils
+@reexport using LinearAlgebra
+@reexport using GeometryBasics
+
 
 include("df.jl")
 include("environment.jl")

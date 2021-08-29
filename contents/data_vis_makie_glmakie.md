@@ -92,7 +92,7 @@ Up to here, this covers most of the use cases in 3D, just a few are missing. Typ
 Taking as reference the previous example one can do the following custom plot with spheres and rectangles.
 
 ```
-using Colors
+using GeometryBasics, Colors
 ```
 
 ```jl
@@ -100,6 +100,13 @@ using Colors
 ```
 
 Here the rectangle is semi-transparent due to the alpha channel added to the RGB color. 
+The rectangle function is quite versatil, for instance  3D boxes are easy do implement which in turn could be used for plotting a 3D histogram. See next working example.
+
+```jl
+@sco JDS.histogram_or_bars_in_3d()
+```
+
+Note, that you can also call `lines` or `wireframe` over a mesh object. 
 
 ### Filled line, band
 

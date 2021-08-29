@@ -741,3 +741,33 @@ function grid_spheres_and_rectangle_as_plate()
     end
     fig
 end
+
+function histogram_or_bars_in_3d()
+    x, y, z = peaks(;n = 15)
+    δx = (x[2] - x[1])/2
+    δy = (y[2] - y[1])/2
+    
+    cbarPal = :Spectral_11
+    ztmp = (z .- minimum(z))./(maximum(z .- minimum(z)))
+    cmap = get(colorschemes[cbarPal], ztmp)
+    cmap2 = reshape(cmap, size(z))
+    ztmp2 = abs.(z)./maximum(abs.(z)) .+ 0.15
+
+    fig = Figure(resolution = (1400,800), fontsize = 26)
+    ax1 = Axis3(fig[1,1]; aspect = (1,1,1), elevation = pi/6, perspectiveness = 0.5)
+    ax2 = Axis3(fig[1,2]; aspect = (1,1,1), perspectiveness = 0.5)
+
+    for (idx, i) in enumerate(x), (idy,j) in enumerate(y)
+        rectMesh = FRect3D(Vec3f0(i - δx, j - δy, 0), Vec3f0(2δx, 2δy, z[idx, idy]))
+        recmesh = GeometryBasics.mesh(rectMesh)
+        mesh!(ax1, recmesh; color= cmap2[idx,idy], shading = false)
+    end
+    for (idx, i) in enumerate(x), (idy,j) in enumerate(y)
+        rectMesh = FRect3D(Vec3f0(i - δx, j - δy, 0), Vec3f0(2δx, 2δy, z[idx, idy]))
+        recmesh = GeometryBasics.mesh(rectMesh)
+        lines!(ax2, recmesh; color= (cmap2[idx,idy], ztmp2[idx, idy]))
+        mesh!(ax2, recmesh; color= (cmap2[idx,idy], 0.25), 
+            shading = false, transparency = true)
+    end
+    fig
+end

@@ -478,8 +478,8 @@ function scatters_in_3D()
     Random.seed!(123)
     xyz = randn(10, 3)
     x, y, z = xyz[:,1], xyz[:,2], xyz[:,3]
-    fig = Figure(resolution = (1800,600), fontsize = 26)
-    ax1 = Axis3(fig; aspect= (1,1,1), perspectiveness = 0.5,)
+    fig = Figure(resolution = (1800, 600), fontsize = 26)
+    ax1 = Axis3(fig; aspect = (1, 1, 1), perspectiveness = 0.5)
     ax2 = Axis3(fig; aspect= (1,1,1), perspectiveness = 0.5,)
     ax3 = Axis3(fig; aspect= :data, perspectiveness = 0.5,)
 
@@ -751,10 +751,10 @@ function histogram_or_bars_in_3d()
     ztmp = (z .- minimum(z))./(maximum(z .- minimum(z)))
     cmap = get(colorschemes[cbarPal], ztmp)
     cmap2 = reshape(cmap, size(z))
-    ztmp2 = abs.(z)./maximum(abs.(z)) .+ 0.15
+    ztmp2 = abs.(z) ./ maximum(abs.(z)) .+ 0.15
 
     fig = Figure(resolution = (1400,800), fontsize = 26)
-    ax1 = Axis3(fig[1,1]; aspect = (1,1,1), elevation = pi/6, perspectiveness = 0.5)
+    ax1 = Axis3(fig[1,1]; aspect = (1,1,1), elevation = π/6, perspectiveness = 0.5)
     ax2 = Axis3(fig[1,2]; aspect = (1,1,1), perspectiveness = 0.5)
 
     for (idx, i) in enumerate(x), (idy,j) in enumerate(y)

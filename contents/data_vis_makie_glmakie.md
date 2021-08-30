@@ -82,6 +82,9 @@ Other interesting examples are a `mesh(obj)`, a `volume(x, y, z, vals)`, and a `
 
 ### Meshes and Volumes 
 
+Drawing Meshes comes in handy when you want to plot geometries, like a `Sphere` or a Rectangle, i. e. `FRect3D`.
+Another approach to visualize points in 3 space is by calling the functions `volume` and `contour`, which implements [ray tracing](https://en.wikipedia.org/wiki/Ray_tracing_(graphics)) to simulate wide variety of optical effects. See next examples.
+
 ```
 using GeometryBasics
 ```

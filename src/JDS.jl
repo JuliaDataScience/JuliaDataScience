@@ -22,6 +22,8 @@ using Reexport
 @reexport using InteractiveUtils
 @reexport using LinearAlgebra
 @reexport using GeometryBasics
+@reexport using FileIO
+
 
 include("df.jl")
 include("environment.jl")

@@ -65,7 +65,7 @@ Something else that is easy to do is to mix all this plotting functions into jus
 
 Not bad, right? From there is clear that  any `heatmap`'s, `contour`'s, `contourf`'s or `image` can be plotted into any plane.
 
-### Arrows and streamplots
+### Arrows and Streamplots
 
 `arrows` and `streamplot` are plots that might be useful when we want to know the directions that a given variable will follow.
 See a demonstration below:

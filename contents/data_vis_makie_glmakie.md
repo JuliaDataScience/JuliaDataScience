@@ -1,12 +1,15 @@
 ## GLMakie.jl {#sec:glmakie}
 
-Visualising data in 3D is also a common practice to gain insight from your data. 
-A simple plot include of course, lines and points. So we will start with those and since we already know how layouts work, we will put that into practice. 
+`CairoMakie.jl` supplies all our needs for static 2-D images.
+But sometimes we want interactivity, specially when we are dealing with 3D images.
+Visualizing data in 3D is also a common practice to gain insight from your data.
+This is where `GLMakie.jl` might be helpful, since it uses OpenGL as a backend that adds interactivity and responsiveness to plots.
+Like before, a simple plot include, of course, lines and points. So we will start with those and since we already know how layouts work, we will put that into practice.
 
-### Scatters and lines
+### Scatters and Lines
 
 For scatter plots we have two options, the first one is `scatter(x,y,z)` and the second one is `meshscatter(x,y,z)`. 
-In the first one markers don't scale in the axis directions but in the later they do, becuase they are actual geometries in 3D space. See next example. 
+In the left one markers don't scale in the axis directions but in the later they do, because they are actual geometries in 3D space. See next example:
 
 ```
 using GLMakie
@@ -17,20 +20,20 @@ GLMakie.activate!()
 @sco JDS.scatters_in_3D()
 ```
 
-Note also, that a different geometry can be passed as marker, i.e., a square/rectangle and `colormap` for them as well. 
-In the middle panel one could get perfect spheres by doing `aspect = :data` as in the last panel.
+Note also, that a different geometry can be passed as markers, i.e., a square/rectangle and we can assign a `colormap` for them as well.
+In the middle panel one could get perfect spheres by doing `aspect = :data` as in the right panel.
 
-And doing `lines` or `scatterlines` is also straightforward. 
+And doing `lines` or `scatterlines` is also straightforward:
 
 ```jl
 @sco JDS.lines_in_3D()
 ```
 
-Plotting a `surface` is also easy to do as well as a `wireframe` and `contour` lines in 3D. 
+Plotting a `surface` is also easy to do as well as a `wireframe` and `contour` lines in 3D.
 
 ### Surfaces, wireframe, contour, contourf and contour3d 
 
-To show these cases we use the following `peaks` function.
+To show these cases we'll use the following `peaks` function:
 
 ```jl
 @sc JDS.peaks()
@@ -42,19 +45,19 @@ Whose output for the different plotting functions is
 @sco JDS.plot_peaks_function()
 ```
 
-But this data can also be plotted with a `heatmap(x,y,z)`, `contour(x,y,z)` or `contourf(x,y,z)`. 
+But it can also be plotted with a `heatmap(x,y,z)`, `contour(x,y,z)` or `contourf(x,y,z)`:
 
 ```jl
 @sco JDS.heatmap_contour_and_contourf()
 ```
 
-And by changing the `Axis` to an `Axis3`, these plots will be automatically be in the x-y plane. 
+Additionally, by changing `Axis` to an `Axis3`, these plots will be automatically be in the x-y plane:
 
 ```jl
 @sco JDS.heatmap_contour_and_contourf_in_a_3d_plane()
 ```
 
-Something else that is easy to do is to mix all this plotting functions into just one plot, namely 
+Something else that is easy to do is to mix all this plotting functions into just one plot, namely:
 
 ```jl
 @sco JDS.mixing_surface_contour3d_contour_and_contourf()
@@ -64,7 +67,8 @@ Not bad, right? From there is clear that  any `heatmap`'s, `contour`'s, `contour
 
 ### Arrows and streamplots
 
-Another plots that might be useful are `arrows` and `streamplot` which are important when we want to know the directions that a given variable will follow.
+`arrows` and `streamplot` are plots that might be useful when we want to know the directions that a given variable will follow.
+See a demonstration below:
 
 ```
 using LinearAlgebra
@@ -74,9 +78,9 @@ using LinearAlgebra
 @sco JDS.arrows_and_streamplot_in_3d()
 ```
 
-Other interesting examples are a  `mesh(obj)`, a `volume(x, y, z, vals)`, and a  `contour(x, y, z, vals)`. 
+Other interesting examples are a `mesh(obj)`, a `volume(x, y, z, vals)`, and a `contour(x, y, z, vals)`.
 
-### Meshes and volumes 
+### Meshes and Volumes 
 
 ```
 using GeometryBasics
@@ -86,10 +90,10 @@ using GeometryBasics
 @sco JDS.mesh_volume_contour()
 ```
 
-Note that here we are plotting to meshes in the same axis, one transparent sphere and a cube. 
-Up to here, this covers most of the use cases in 3D, just a few are missing. Type for example `?linesegments`.
+Note that here we are plotting to meshes in the same axis, one transparent sphere and a cube.
+Up to here, this covers most of the use cases in 3D, just a few are missing. You can find more examples in the `?linesegments` docstring.
 
-Taking as reference the previous example one can do the following custom plot with spheres and rectangles.
+Taking as reference the previous example one can do the following custom plot with spheres and rectangles:
 
 ```
 using GeometryBasics, Colors
@@ -99,22 +103,24 @@ using GeometryBasics, Colors
 @sco JDS.grid_spheres_and_rectangle_as_plate()
 ```
 
-Here the rectangle is semi-transparent due to the alpha channel added to the RGB color. 
-The rectangle function is quite versatil, for instance  3D boxes are easy do implement which in turn could be used for plotting a 3D histogram. See next working example.
+Here the rectangle is semi-transparent due to the alpha channel added to the RGB color.
+The rectangle function is quite versatile, for instance  3D boxes are easy do implement which in turn could be used for plotting a 3D histogram.
+See our next example:
 
 ```jl
 @sco JDS.histogram_or_bars_in_3d()
 ```
 
-Note, that you can also call `lines` or `wireframe` over a mesh object. 
+Note, that you can also call `lines` or `wireframe` over a mesh object.
 
-### Filled line, band
+### Filled Line and Band
 
-For our last example we will show how to do a filled curve in 3D with `band` and some `linesegments`. 
+For our last example we will show how to do a filled curve in 3D with `band` and some `linesegments`:
 
 ```jl
 @sco JDS.filled_line_and_linesegments_in_3D()
 ```
 
-And with this our journey doing 3D plots has come to an end. If you combine all this tools amazing things can be created. 
-Now, it's time to dig into the basic rules to create animations. 
+Finally our journey doing 3D plots has come to an end.
+You can combine everything we exposed here to create amazing 3D images! 
+Now, it's time to dig into the basic rules to create animations.

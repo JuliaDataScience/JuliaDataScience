@@ -23,7 +23,6 @@ using Reexport
 @reexport using LinearAlgebra
 @reexport using GeometryBasics
 
-
 include("df.jl")
 include("environment.jl")
 include("showcode_additions.jl")

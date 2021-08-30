@@ -23,6 +23,7 @@ using Reexport
 @reexport using LinearAlgebra
 @reexport using GeometryBasics
 @reexport using FileIO
+@reexport using TestImages
 
 
 include("df.jl")

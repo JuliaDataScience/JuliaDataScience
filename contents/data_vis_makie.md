@@ -13,7 +13,7 @@ It is reexported by every backend _(the machinery behind-the-scenes making the f
 There are three main backends which concretely implement all abstract rendering capabilities defined in Makie.
 One for non-interactive 2D publication-quality vector graphics: `CairoMakie.jl`.
 Another for interactive 2D and 3D plotting in standalone `GLFW.jl` windows (also GPU-powered), `GLMakie.jl`.
-And the third one, a WebGL-based interactive 2D and 3D plotting that runs within browsers, `WGLMakie.jl`. [See Makie's documentation for more](http://makie.juliaplots.org/stable/backends_and_output.html#Backends-and-Output).
+And the third one, a WebGL-based interactive 2D and 3D plotting that runs within browsers, `WGLMakie.jl`. [See Makie's documentation for more](http://makie.juliaplots.org/v0.15.2/documentation/backends_and_output/).
 
 In this book we will only show examples for `CairoMakie.jl` and `GLMakie.jl`.
 

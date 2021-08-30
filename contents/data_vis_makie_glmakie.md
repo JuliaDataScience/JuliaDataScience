@@ -9,7 +9,7 @@ Like before, a simple plot includes, of course, lines and points. So, we will st
 ### Scatters and Lines
 
 For scatter plots we have two options, the first one is `scatter(x, y, z)` and the second one is `meshscatter(x, y, z)`. 
-In the left one markers don't scale in the axis directions, but in the later they do because they are actual geometries in 3D space.
+In the first one markers don't scale in the axis directions, but in the later they do because they are actual geometries in 3D space.
 See the next example:
 
 ```
@@ -40,7 +40,7 @@ To show these cases we'll use the following `peaks` function:
 @sc JDS.peaks()
 ```
 
-Whose output for the different plotting functions is
+The output for the different plotting functions is
 
 ```jl
 @sco JDS.plot_peaks_function()
@@ -58,7 +58,11 @@ Additionally, by changing `Axis` to an `Axis3`, these plots will be automaticall
 @sco JDS.heatmap_contour_and_contourf_in_a_3d_plane()
 ```
 
-Something else that is easy to do is to mix all this plotting functions into just one plot, namely:
+Something else that is easy to do is to mix all these plotting functions into just one plot, namely:
+
+```
+using Downloads, FileIO
+```
 
 ```jl
 @sco JDS.mixing_surface_contour3d_contour_and_contourf()
@@ -84,7 +88,7 @@ Other interesting examples are a `mesh(obj)`, a `volume(x, y, z, vals)`, and a `
 ### Meshes and Volumes 
 
 Drawing Meshes comes in handy when you want to plot geometries, like a `Sphere` or a Rectangle, i. e. `FRect3D`.
-Another approach to visualize points in 3D space is by calling the functions `volume` and `contour`, which implements [ray tracing](https://en.wikipedia.org/wiki/Ray_tracing_(graphics)) to simulate wide variety of optical effects.
+Another approach to visualize points in 3D space is by calling the functions `volume` and `contour`, which implements [ray tracing](https://en.wikipedia.org/wiki/Ray_tracing_(graphics)) to simulate a wide variety of optical effects.
 See the next examples:
 
 ```
@@ -95,9 +99,9 @@ using GeometryBasics
 @sco JDS.mesh_volume_contour()
 ```
 
-Note that here we are plotting to meshes in the same axis, one transparent sphere and a cube.
+Note that here we are plotting two meshes in the same axis, one transparent sphere and a cube.
 So far, we have covered most of the 3D use-cases.
-You can find more examples in the `?linesegments` docstring.
+Another example is `?linesegments`.
 
 Taking as reference the previous example one can do the following custom plot with spheres and rectangles:
 

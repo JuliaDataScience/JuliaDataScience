@@ -587,6 +587,9 @@ end
 
 function mixing_surface_contour3d_contour_and_contourf()
     GLMakie.activate!() # hide
+    url = "https://raw.githubusercontent.com/JuliaImages/TestImages.jl/images/images/coffee.png"
+    img = load(Downloads.download(url))
+
     x, y, z = peaks()
     cmap = :Spectral_11
     fig = Figure(resolution = (1400,800), fontsize = 26)
@@ -615,13 +618,16 @@ function mixing_surface_contour3d_contour_and_contourf()
         transformation = (:xy, -3.5))
     contourf!(ax2, x, y, z; colormap = :bone_1, 
         transformation = (:xz, 3.5))
-    heatmap!(ax2, x, y, z; colormap = :plasma,
+    image!(ax2, -3..3, -3..2, rotr90(img); 
         transformation = (:xy, 3.8))
     xlims!(ax2, -3.8,3.8)
     ylims!(ax2, -3.8,3.8)
     zlims!(ax2, -3.8,3.8)
     fig
 end
+
+url = "https://raw.githubusercontent.com/JuliaImages/TestImages.jl/images/images/monarch_color_256.png"
+img = load(Downloads.download(url))
 
 function arrows_and_streamplot_in_3d()
     ps = [Point3f0(x, y, z) for x in -3:1:3 for y in -3:1:3 for z in -3:1:3]

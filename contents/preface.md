@@ -1,20 +1,20 @@
 # Preface {#sec:preface}
 
-There are many programming languages and each and every one has it's strenghts and weaknesses.
-Some languages are very quick, but a verbose.
-Other languages are very easy to write in, but are slow.
-All three of us come from different fields.
-However, we all found programming in the Julia language a breath of fresh air.
+There are many programming languages and each and every one has its strengths and weaknesses.
+Some languages are very quick, but verbose.
+Other languages are very easy to write in, but slow.
+Even though all three of us come from different fields, we all found the Julia language more effective for our research than languages that we've used before.
 We discuss some of our arguments in @sec:why_julia.
-Compared to other languages, it is one of the newest languages around.
+Compared to other languages, Julia is one of the newest languages around.
 This means that the ecosystem around the language is sometimes difficult to navigate through.
+It's difficult to figure out where to start and how all the different packages fit together.
 That is why we decided to create this book!
 We wanted to make it easier for researchers, and especially our colleagues, to start using this awesome language.
 
 Like discussed above, each language has it's strengths and weaknesses.
-In our opinion, data science is definitely a strengh of Julia.
-At the same time, we are all three researchers, so we need data science in our day to day life.
-And, probably you need data science too.
+In our opinion, data science is definitely a strength of Julia.
+At the same time, all three of us need data science in our day to day life.
+And, probably, you need data science too!
 In this book, we discuss two important aspects of data analysis.
 Next, we emphasize the **"data" part of data science** and why data skills are, and will remain, in **high demand** in industry as well as in academia.
 

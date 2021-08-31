@@ -15,7 +15,7 @@ Like discussed above, each language has it's strengths and weaknesses.
 In our opinion, data science is definitely a strength of Julia.
 At the same time, all three of us need data science in our day to day life.
 And, probably, you need data science too!
-In this book, we discuss two important aspects of data analysis.
+That is why this book has a focus on data science.
 Next, we emphasize the **"data" part of data science** and why data skills are, and will remain, in **high demand** in industry as well as in academia.
 
 Second, we make an argument for **incorporate software engineering practices into data science** which should reduce friction in updating and sharing code with collaborators.

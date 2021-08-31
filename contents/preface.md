@@ -1,9 +1,22 @@
 # Preface {#sec:preface}
 
-In this book, we discuss two important aspects of data analysis.
-Actually, there is a third one, Julia, but it deserves a whole chapter (see @sec:why_julia).
+There are many programming languages and each and every one has it's strenghts and weaknesses.
+Some languages are very quick, but a verbose.
+Other languages are very easy to write in, but are slow.
+All three of us come from different fields.
+However, we all found programming in the Julia language a breath of fresh air.
+We discuss some of our arguments in @sec:why_julia.
+Compared to other languages, it is one of the newest languages around.
+This means that the ecosystem around the language is sometimes difficult to navigate through.
+That is why we decided to create this book!
+We wanted to make it easier for researchers, and especially our colleagues, to start using this awesome language.
 
-First, we emphasize the **"data" part of data science** and why data skills are, and will remain, in **high demand** in industry as well as in academia.
+Like discussed above, each language has it's strengths and weaknesses.
+In our opinion, data science is definitely a strengh of Julia.
+At the same time, we are all three researchers, so we need data science in our day to day life.
+And, probably you need data science too.
+In this book, we discuss two important aspects of data analysis.
+Next, we emphasize the **"data" part of data science** and why data skills are, and will remain, in **high demand** in industry as well as in academia.
 
 Second, we make an argument for **incorporate software engineering practices into data science** which should reduce friction in updating and sharing code with collaborators.
 Most data analyses are a collaborative endeavor; that is why these practices will help you.

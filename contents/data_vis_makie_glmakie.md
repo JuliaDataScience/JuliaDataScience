@@ -61,7 +61,7 @@ Additionally, by changing `Axis` to an `Axis3`, these plots will be automaticall
 Something else that is easy to do is to mix all these plotting functions into just one plot, namely:
 
 ```
-using Downloads, FileIO
+using TestImages
 ```
 
 ```jl

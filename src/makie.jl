@@ -587,11 +587,10 @@ end
 
 function mixing_surface_contour3d_contour_and_contourf()
     GLMakie.activate!() # hide
-    url = "https://raw.githubusercontent.com/JuliaImages/TestImages.jl/images/images/coffee.png"
-    img = load(Downloads.download(url))
-
+    img = testimage("coffee.png")
     x, y, z = peaks()
     cmap = :Spectral_11
+    
     fig = Figure(resolution = (1400,800), fontsize = 26)
     ax1 = Axis3(fig[1,1]; aspect = (1,1,1), elevation = pi/6, 
         perspectiveness = 0.5, xzpanelcolor= (:black,0.75), 

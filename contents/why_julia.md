@@ -139,6 +139,8 @@ Very fast!**
 It was designed for speed from the beginning.
 It accomplishes this by multiple dispatch.
 Basically, the idea is to generate very efficient LLVM code.
+LLVM code, also known as LLVM instructions, are very low-level, that is, very close to the actual operations that your computer is executing.
+So, in essence, Julia converts your hand written and easy to read code to LLVM machine code which is very hard to read for humans, but easy to read for computers.
 For example, if you define a function taking one argument and pass an integer into the function, then Julia will create a _specialized_ `MethodInstance`.
 The next time that you pass an integer to the function, Julia will lookup the `MethodInstance` that was created earlier and refer execution to that.
 Now, the **great** trick is that you can also do this inside a function that calls a function.

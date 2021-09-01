@@ -586,7 +586,7 @@ The `methodswith` function is a nice trick to have in your bag of tricks.
 Let's see what we can do with a `String` for example:
 
 ```jl
-s = first(methodswith(String), 5)
+s = "first(methodswith(String), 5)"
 sco(s; process=Books.catch_show)
 ```
 

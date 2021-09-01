@@ -10,7 +10,7 @@ To answer this question, we will address two common backgrounds:
 
 2. **Did program before** -- see @sec:programmers.
 
-## For non-programmers {#sec:non-programmers}
+## For Non-Programmers {#sec:non-programmers}
 
 In the first background, we expect the common underlying story to be the following.
 
@@ -29,7 +29,7 @@ Therefore, the Julia language is gaining traction, and for good reasons.
 
 So, **if you don't have any programming background knowledge, we highly encourage you to take up Julia** as a first programming language and data science framework.
 
-## For programmers {#sec:programmers}
+## For Programmers {#sec:programmers}
 
 In the second background, the common underlying story changes a little bit.
 You are someone who knows how to program and probably does this for a living.
@@ -73,7 +73,7 @@ If we got your attention by exposing somewhat familiar or plausible situations, 
 
 Let's proceed then!
 
-## What Julia tries to accomplish? {#sec:julia_accomplish}
+## What Julia Aims to Accomplish? {#sec:julia_accomplish}
 
 > **_NOTE:_**
 > In this section we will explain the details of what makes Julia shine as a programming language.
@@ -113,7 +113,7 @@ They just have to extend the dates type to new functionalities by defining new f
 Julia's `Dates` module can do amazing stuff, but we are getting ahead of ourselves now.
 Let's talk about the other Julia's features.
 
-### Julia versus other programming languages
+### Julia Versus Other Programming Languages
 
 In [@fig:language_comparison], a highly opinionated representation is shown that divides the main open source and scientific computing languages in a 2x2 diagram with two axes:
 Slow-Fast and Easy-Hard.

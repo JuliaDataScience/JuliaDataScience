@@ -6,7 +6,7 @@ Let's go back to the example `grades_2020()` data defined before:
 sco("grades_2020()"; process=without_caption_label)
 ```
 
-To retrieve a **vector** for `name`, we can access the `DataFrame` with the `.`, as we did previously with `struct`s in @sec:julia_101:
+To retrieve a **vector** for `name`, we can access the `DataFrame` with the `.`, as we did previously with `struct`s in @sec:julia_basics:
 
 ```jl
 @sco JDS.names_grades1()

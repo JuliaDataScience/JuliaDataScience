@@ -1,60 +1,62 @@
-# Julia 101 {#sec:julia_101}
+# Julia Basics {#sec:julia_basics}
 
 > **_NOTE:_**
-> In this chapter we will cover the basics of Julia as a programming language.
-> Please note that this is not *strictly necessary* for you to use Julia as a tool of data manipulation and data visualization.
+> In this chapter we cover the basics of Julia as a programming language.
+> Please note that this is not *strictly necessary* for you to use Julia as a tool for data manipulation and data visualization.
 > Having a basic understanding of Julia will definitely make you more *effective* and *efficient* in using Julia.
-> However, if you prefer to get started straight away, you can jump to @sec:dataframes to learn about tabular data with DataFrames.jl.
+> However, if you prefer to get started straight away, you can jump to @sec:dataframes to learn about tabular data with `DataFrames.jl`.
 
-This is going to be a very brief and *not* in-depth overview of Julia language.
+This is going to be a very brief and *not* in-depth overview of the Julia language.
 If you are already familiar and comfortable with other programming languages, we highly encourage you to read [Julia's documentation](https://docs.julialang.org/).
-It is a thoroughly deep dive into Julia.
+The docs are an excellent resource for taking a deep dive into Julia.
 It covers all the basics and corner cases, but it can be cumbersome.
-Especially, if you are aren't familiar with open-source software documentation.
+Especially, if you are aren't familiar with software documentation.
 
 We'll cover the basics of Julia.
 Imagine that Julia is a fancy feature-loaded car, such as a brand-new Tesla.
-We'll just explain to you how to "drive the car, park it and how to navigate in traffic".
+We'll just explain you how to "drive the car, park it and how to navigate in traffic".
 If you want to know what all "buttons in the steering wheel and dashboard do", this is not the resource you are looking for.
 
 ## Language Syntax {#sec:syntax}
 
-Julia is a **dynamic-typed language**.
-This means that you don't need to compile it before you run code, like you would do in C++ or FORTRAN.
+Julia is a **dynamic-typed language** with a just-in-time compiler.
+The latter means that you don't need to compile your program before you run it, like you would do in C++ or FORTRAN.
+Instead, Julia will take your code, guess types where necessary, and compile parts of code just before running it.
+Also, you don't need to explicitly specify each type.
+Julia will guess types for you on the go.
+
 The main differences from Julia to other dynamic languages such as R and Python are the following.
+First, Julia, contrary to R, **allows the user to specify type declarations**.
+You already saw some types declarations in *Why Julia?* (@sec:why_julia): they are those double colon `::` that sometimes comes after variables.
+However, if you don't want to specify what type are your variables or functions, Julia will gladly infer (guess) them for you.
 
-First, Julia, contrary to most dynamic-typed languages, **enables the user to specify type declaration**.
-You already saw some types declarations in *Why Julia?* (@sec:why_julia): they are those double colon `::` that sometimes comes after variables
-But if you don't want to specify what type are your variables or functions, Julia will gladly infer it for you.
-
-Second, Julia also allows users to define function behavior across many combinations of argument types via multiple dispatch.
+Second, Julia allows users to define function behavior across many combinations of argument types via multiple dispatch.
 We also covered multiple dispatch in @sec:julia_accomplish.
 We defined a different type behavior by defining new function signatures for different type's argument while using the same function name.
 
 ### Variables {#sec:variable}
 
 Variables are values that you tell the computer to store with an specific name, so that you can later recover or change its value.
-Julia have several type of variables but what we most use in data science are:
+Julia has several types of variables but, in data science, we mostly use:
 
 * Integers: `Int64`
 * Real Numbers: `Float64`
 * Boolean: `Bool`
 * Strings: `String`
 
-Integers and real numbers have by default 64 bits, thats why they have the `64` suffix in their type.
-If you need more or less precision, there are `Int8` or `Int128` for example.
-Most of the time this won't be an issue and can be overwhelming having to deal with different types.
+Integers and real numbers have by default 64 bits, that's why they have the `64` suffix in the name of the type.
+If you need more or less precision, there are `Int8` or `Int128` for example, where higher means more precision.
+Most of the time, this won't be an issue so you can just stick to the defaults.
 
-We create new variables by writing the variable name on the left and its value in the right, and in the middle we use the `=` assign operator.
+We create new variables by writing the variable name on the left and its value in the right, and in the middle we use the `=` assignment operator.
 For example:
 
 ```jl
-scob(
-"""
-name = "Julia"
-age = 9
-"""
-)
+s = """
+    name = "Julia"
+    age = 9
+    """
+scob(s)
 ```
 
 Note that the return output of the last statement (`age`) was printed to the console.
@@ -62,95 +64,74 @@ Here, we are defining two new variables: `name` and `age`.
 We can recover their values by typing its name given in the assignment:
 
 ```jl
-scob(
-"""
-name
-"""
-)
+scob("name")
 ```
 
 If you want to define new values for an existing variable, you can repeat the steps in the assignment.
 Note that Julia will now override the previous variable's value with the new one.
-Supposed `jl name`'s birthday has passed and now it has turned `jl age+1`:
+Supposed, `jl name`'s birthday has passed and now it has turned `jl age+1`:
 
 ```jl
-scob(
-"""
-age = 10
-"""
-)
+scob("age = 10")
 ```
 
 We can do the same with its `name`, suppose that Julia has earned some titles due to its blazing speed.
 We would change the variable `name` to the new value:
 
 ```jl
-scob(
-"""
-name = "Julia Rapidus"
-"""
-)
+s = """
+    name = "Julia Rapidus"
+    """
+scob(s)
 ```
 
 We can also do operations on variables such as addition or division.
 Let's see how much months of age `jl name` has by multiplying `age` by 12:
 
 ```jl
-scob(
-"""
-age * 12
-"""
-)
+s = "12 * age"
+scob(s)
 ```
 
-We can inspect variables types by using `typeof` function:
-
-```{=comment}
-Rik: I have no idea why `scob` doesn't work here.
-It is overloaded somewhere in the wrong way it seems.
-```
+We can inspect the types of variables by using the `typeof` function:
 
 ```jl
 sco("typeof(age)")
 ```
 
-The next question then becomes: "What else can I do with integers?"
+The next question then becomes:
+"What else can I do with integers?"
 There is a nice handy function `methodswith` that spits out every function available, along with its signature, for a certain type.
-Here I will restrict the output to the first 5 rows:
-
-```{=comment}
-Since the type is a Vector, Books converts it to multiple output statements.
-In this case, I've enforced to show the output of `Base.show`.
-```
+Here, I will restrict the output to the first 5 rows:
 
 ```jl
-sco(
-"""
-first(methodswith(Int64), 5)
-"""; process=Books.catch_show
-)
+s = """
+    first(methodswith(Int64), 5)
+    """
+sco(s; process=Books.catch_show)
 ```
 
 ### User-defined Types {#sec:struct}
 
 Having variables around without any sort of hierarchy and relationships are not ideal.
-In Julia we can define that kind of structured data with a `struct` (also known as composite types).
-Inside each `struct` there is an optional set of fields.
+In Julia, we can define that kind of structured data with a `struct` (also known as a composite type).
+Inside each `struct`, you can specify a set of fields.
 They differ from the primitive types (e.g. integer and floats) that are by default defined already inside the core of Julia language.
 Since most `struct`s are user-defined they are known as user-defined types.
 
-For example lets create a `struct` to represent scientific open-source programming languages.
+For example, let's create a `struct` to represent scientific open source programming languages.
 We'll also define a set of fields along with the corresponding types inside the `struct`:
 
 ```jl
-sco("""
-struct Language
-    name::String
-    title::String
-    year_of_birth::Int64
-    fast::Bool
-end
-"""; post=x -> "")
+s = """
+    struct Language
+        name::String
+        title::String
+        year_of_birth::Int64
+        fast::Bool
+    end
+    """
+sco(s; post=x -> "")
 ```
 
 To inspect the field names you can use the `fieldnames` and passing the desired `struct` as an argument:
@@ -160,48 +141,46 @@ sco("fieldnames(Language)")
 ```
 
 To use `struct`s, we must instantiate individual instances (or "objects"), each with its own specific values for the fields defined inside the `struct`.
-Let's instantiate two instances, one for Julia and one for Python with the appropriate types as fields inside the `Language` constructor:
+Let's instantiate two instances, one for Julia and one for Python:
 
 ```jl
-sco(
-"""
-julia = Language("Julia", "Rapidus", 2012, true)
-python = Language("Python", "Letargicus", 1991, false)
-"""
-)
+s = """
+    julia = Language("Julia", "Rapidus", 2012, true)
+    python = Language("Python", "Letargicus", 1991, false)
+    """
+sco(s)
 ```
 
-One thing to note with `struct`s is that we cannot change their values once they are instantiated.
+One thing to note with `struct`s is that we can't change their values once they are instantiated.
 We can solve this with a `mutable struct`.
 Also, note that mutable objects will, generally, be slower and more error prone.
-Whenever possible make everything *immutable*.
+Whenever possible, make everything *immutable*.
 Let's create a `mutable struct`.
 
 ```jl
-sco(
-"""
-mutable struct MutableLanguage
-    name::String
-    title::String
-    year_of_birth::Int64
-    fast::Bool
-end
+s = """
+    mutable struct MutableLanguage
+        name::String
+        title::String
+        year_of_birth::Int64
+        fast::Bool
+    end
 
-julia_mutable = MutableLanguage("Julia", "Rapidus", 2012, true)
-""")
+    julia_mutable = MutableLanguage("Julia", "Rapidus", 2012, true)
+    """
+sco(s)
 ```
 
 Suppose that we want to change `julia_mutable`'s title.
-Now we can do this, since `julia_mutable` is an instantiated `mutable struct`:
+Now, we can do this since `julia_mutable` is an instantiated `mutable struct`:
 
 ```jl
-sco(
-"""
-julia_mutable.title = "Python Obliteratus"
+s = """
+    julia_mutable.title = "Python Obliteratus"
 
-julia_mutable
-"""
-)
+    julia_mutable
+    """
+sco(s)
 ```
 
 ### Boolean Operators an Numeric Comparison
@@ -217,27 +196,15 @@ We have three boolean operators in Julia:
 Here are a few examples with some of them:
 
 ```jl
-scob(
-"""
-!true
-"""
-)
+scob("!true")
 ```
 
 ```jl
-scob(
-"""
-(false && true) || (!false)
-"""
-)
+scob("(false && true) || (!false)")
 ```
 
 ```jl
-scob(
-"""
-(6 isa Int64) && (6 isa Real)
-"""
-)
+scob("(6 isa Int64) && (6 isa Real)")
 ```
 
 Regarding numeric comparison, Julia has three major types of comparisons:
@@ -255,59 +222,44 @@ Regarding numeric comparison, Julia has three major types of comparisons:
 Here are some examples:
 
 ```jl
-scob(
-"""
-1 == 1
-"""
-)
+scob("1 == 1")
 ```
 
 ```jl
-scob(
-"""
-1 >= 10
-"""
-)
+scob("1 >= 10")
 ```
 
 It evens works between different types:
 
 ```jl
-scob(
-"""
-1 == 1.0
-"""
-)
+scob("1 == 1.0")
 ```
 
 We can also mix and match boolean operators with numeric comparisons:
 
 ```jl
-scob(
-"""
-(1 != 10) || (3.14 <= 2.71)
-"""
-)
+scob("(1 != 10) || (3.14 <= 2.71)")
 ```
 
 ### Functions {#sec:function}
 
 Now that we already know how to define variables and custom types as `struct`s, let's turn our attention to **functions**.
-In Julia, a function is an **object that maps argument's values to a return value**.
-The basic syntax goes something like this:
+In Julia, a function **maps argument's values to one or more return values**.
+The basic syntax goes like this:
 
 ```julia
-function f_name(arg1, arg2)
-    stuff_done = stuff with the arg1 and arg2
-    return stuff_done
+function function_name(arg1, arg2)
+    result = stuff with the arg1 and arg2
+    return result
 end
 ```
 
-Every function declaration begins with the keyword `function` followed by the function name.
+The function declaration begins with the keyword `function` followed by the function name.
 Then, inside parentheses `()`, we define the arguments separated by a comma `,`.
 Inside the function, we specify what we want Julia to do with the parameters that we supplied.
-After all the operations that we want the function to do has been performed, we ask Julia to return the result of those operations with the `return` statement.
-Finally, we let Julia know that our function is well-defined and finished with the `end` keyword.
+All variables that we define inside a function are deleted after the function returns, this is nice because it is like an automatic cleanup.
+After all the operations in the function body are finished, we instruct Julia to return the final result with the `return` statement.
+Finally, we let Julia know that the function definition is finished with the `end` keyword.
 
 There is also the compact **assignment form**:
 
@@ -316,6 +268,8 @@ f_name(arg1, arg2) = stuff with the arg1 and arg2
 ```
 
 It is the **same function** as before but with a different, more compact, form.
+As a rule of thumb, when your code can fit easily on one line of length at most 92, then the compact form is suitable.
+Otherwise, just use the longer form with the `function` keyword.
 Let's dive into some examples.
 
 #### Creating new Functions {#sec:function_example}
@@ -323,60 +277,46 @@ Let's dive into some examples.
 Let's create a new function that adds number together:
 
 ```jl
-sco(
-"""
-function add_numbers(x, y)
-    return x + y
-end
-"""
-)
+s = """
+    function add_numbers(x, y)
+        return x + y
+    end
+    """
+sco(s)
 ```
 
 Now, we can use our `add_numbers` function:
 
 ```jl
-scob(
-"""
-add_numbers(17, 29)
-"""
-)
+scob("add_numbers(17, 29)")
 ```
 
 And it works also with floats:
 
 ```jl
-scob(
-"""
-add_numbers(3.14, 2.72)
-"""
-)
+scob("add_numbers(3.14, 2.72)")
 ```
 
-We can also define custom behavior by specifying types declarations.
-Suppose we want to have a `round_number` function that behaves differently if its argument is either a `Float64` or `Int64`:
+Also, we can define custom behavior by specifying types declarations.
+Suppose that we want to have a `round_number` function that behaves differently if its argument is either a `Float64` or `Int64`:
 
 ```jl
-sco(
-"""
-function round_number(x::Float64)
-    return round(x)
-end
+s = """
+    function round_number(x::Float64)
+        return round(x)
+    end
 
-function round_number(x::Int64)
-    return x
-end
-"""
-)
+    function round_number(x::Int64)
+        return x
+    end
+    """
+sco(s)
 ```
 
 We can see that it is a function with multiple methods:
 
 ```jl
-sco(
-"""
-methods(round_number)
-"""
-)
+sco("methods(round_number)")
 ```
 
 There is one issue: what happens if we want to round a 32-bit float `Float32`?
@@ -385,24 +325,22 @@ Or a 8-bit integer `Int8`?
 If you want something to function on all float's and integer's types you can use an abstract type as type signature, such as `AbstractFloat` or `Integer`:
 
 ```jl
-sco(
-"""
-function round_number(x::AbstractFloat)
-    return round(x)
-end
-"""
-)
+s = """
+    function round_number(x::AbstractFloat)
+        return round(x)
+    end
+    """
+sco(s)
 ```
 
 Now, it works as expected with any float type:
 
 ```jl
-scob(
-"""
-x_32 = Float32(1.1)
-round_number(x_32)
-"""
-)
+s = """
+    x_32 = Float32(1.1)
+    round_number(x_32)
+    """
+scob(s)
 ```
 
 > **_NOTE:_**
@@ -412,31 +350,26 @@ Let's go back to our `Language` `struct` that we defined above.
 This is an example of multiple dispatch.
 We will extend the `Base.show` function that prints the output of instantiated types and `struct`s.
 
-By default a `struct` has a basic output, which you saw above in the `python` case.
+By default, a `struct` has a basic output, which you saw above in the `python` case.
 We can define `Base.show` function to our `Language` type, so that we have some nice printing for our programming languages instances.
-We want to clearly communicate programming languages' names, titles and ages in years of old.
+We want to clearly communicate programming languages' names, titles and ages in years of age.
 The function `Base.show` accepts as arguments a `IO` type named `io` followed by the type you want to define custom behavior:
 
 ```jl
-sco(
-"""
-Base.show(io::IO, l::Language) = print(
-    io, l.name, " ",
-    2021 - l.year_of_birth, ", years old, ",
-    "has the following titles: ", l.title
-)
-"""; post=x -> ""
-)
+s = """
+    Base.show(io::IO, l::Language) = print(
+        io, l.name, " ",
+        2021 - l.year_of_birth, ", years old, ",
+        "has the following titles: ", l.title
+    )
+    """
+sco(s; post=x -> "")
 ```
 
-Now let's see how `python` will output:
+Now, let's see how `python` will output:
 
 ```jl
-sco(
-"""
-python
-"""
-)
+sco("python")
 ```
 
 #### Multiple Return Values {#sec:function_multiple}
@@ -445,39 +378,36 @@ A function can, also, return two or more values.
 See the new function `add_multiply` below:
 
 ```jl
-sco(
-"""
-function add_multiply(x, y)
-    addition = x + y
-    multiplication = x * y
-    return addition, multiplication
-end
-"""
-)
+s = """
+    function add_multiply(x, y)
+        addition = x + y
+        multiplication = x * y
+        return addition, multiplication
+    end
+    """
+sco(s)
 ```
 
-In that case we can do two things:
+In that case, we can do two things:
 
 1. We can, analogously as the return values, define two variables to hold the function return values, one for each return value:
 
    ```jl
-   scob(
-   """
-   return_1, return_2 = add_multiply(1, 2)
-   return_2
-   """
-   )
+   s = """
+       return_1, return_2 = add_multiply(1, 2)
+       return_2
+       """
+   scob(s)
    ```
 
 2. Or we can define just one variable to hold the function return values and access them with either `first` or `last`:
 
    ```jl
-   scob(
-   """
-   all_returns = add_multiply(1, 2)
-   last(all_returns)
-   """
-   )
+   s = """
+       all_returns = add_multiply(1, 2)
+       last(all_returns)
+       """
+   scob(s)
    ```
 
 #### Keyword Arguments {#sec:function_keyword_arguments}
@@ -486,67 +416,54 @@ Some functions can accept keywords arguments instead of positional arguments.
 These arguments are just like regular arguments, except that they are defined after the regular function's arguments and separated by a semicolon `;`.
 Another difference is that we must supply a **default value** for every keyword argument.
 For example, let's define a `logarithm` function that by default uses base $e$ (2.718281828459045) as a keyword argument.
-Note that here we are using the abstract type `Real` so that we cover all types derived from `Integer` and `AbstractFloat`, being both themselves subtypes of `Real`:
+Note that, here, we are using the abstract type `Real` so that we cover all types derived from `Integer` and `AbstractFloat`, being both themselves subtypes of `Real`:
 
 ```jl
-scob(
-"""
-AbstractFloat <: Real && Integer <: Real
-"""
-)
+scob("AbstractFloat <: Real && Integer <: Real")
 ```
 
 ```jl
-sco(
-"""
-function logarithm(x::Real; base::Real=2.7182818284590)
-    return log(base, x)
-end
-"""
-)
+s = """
+    function logarithm(x::Real; base::Real=2.7182818284590)
+        return log(base, x)
+    end
+    """
+sco(s)
 ```
 
 It works without specifying the `base` argument:
 
 ```jl
-scob(
-"""
-logarithm(10)
-"""
-)
+scob("logarithm(10)")
 ```
 
 And also with the keyword argument `base` different from its default value:
 
 ```jl
-scob(
-"""
-logarithm(10; base=2)
-"""
-)
+s = """
+    logarithm(10; base=2)
+    """
+scob(s)
 ```
 
 #### Anonymous Functions {#sec:function_anonymous}
 
 A lot of times, we don't care about the name of the function and want to quickly make one.
 What we need are **anonymous functions**.
-They come a lot in Julia's data science workflow.
-For example, when using `DataFrames.jl` (@sec:dataframes) or `Plots.jl` (@sec:datavisPlots), sometimes we need a quick and dirty function to filter data or format plot labels.
-That's when we reach out for anonymous functions.
-They are specially useful when we don't want to create a function and a simple in-place statement would be enough.
+They are used a lot in Julia's data science workflow.
+For example, when using `DataFrames.jl` (@sec:dataframes) or `Plots.jl` (@sec:datavisPlots), sometimes we need a temporary function to filter data or format plot labels.
+That's when we use anonymous functions.
+They are especially useful when we don't want to create a function and a simple in-place statement would be enough.
 
 The syntax is simple.
 We use the `->` operator.
 On the left of `->` we define the parameter name.
-And on the right of `->` we define what operations we want to perform on the parameter we defined on the left of `->`.
-Here's an example, suppose we want to undo the log transformation by using an exponentiation:
+And on the right of `->` we define what operations we want to perform on the parameter that we defined on the left of `->`.
+Here is an example:
+suppose that we want to undo the log transformation by using an exponentiation:
 
 ```jl
-scob(
-"""
-map(x -> 2.7182818284590^x, logarithm(2))
-"""
-)
+scob("map(x -> 2.7182818284590^x, logarithm(2))")
 ```
 
 Here, we are using the `map` function to conveniently map the anonymous function (first argument) to `logarithm(2)` (the second argument).
@@ -557,39 +474,21 @@ As a result, we get back the same number, because logarithm and exponentiation a
 In most programming languages, the user is allowed to control the computer's flow of execution.
 Depending on the situation, we want the computer to do one thing or another.
 In Julia we can control the flow of execution with `if`, `elseif` and `else` keywords.
-There are known as conditional syntax.
+These are known as conditional statements.
 
 `if` keyword prompts Julia to evaluate an expression and depending whether `true` or `false` certain portions of code will be executed.
-We can compound several `if` conditions with the `elseif`  keyword, for complex an nuanced control flow.
-Finally we can define an alterative portion to be executed if anything inside the `if` or `elseif`s are evaluated as `true`.
+We can compound several `if` conditions with the `elseif` keyword for complex control flow.
+Finally, we can define an alterative portion to be executed if anything inside the `if` or `elseif`s is evaluated to `true`.
 This is the purpose of the `else` keyword.
 Finally, like all the previous keyword operators that we saw, we must tell Julia when the conditional statement is finished with the `end` keyword.
 
 Here's an example with all the `if`-`elseif`-`else` keywords:
 
 ```jl
-scob(
-"""
-a = 1
-b = 2
+s = """
+    a = 1
+    b = 2
 
-if a < b
-    "a is less than b"
-elseif a > b
-    "a is greater than b"
-else
-    "a is equal to b"
-end
-"""
-)
-```
-
-We can even wrap this in a function called `compare`:
-
-```jl
-scob(
-"""
-function compare(a, b)
     if a < b
         "a is less than b"
     elseif a > b
@@ -597,37 +496,52 @@ function compare(a, b)
     else
         "a is equal to b"
     end
-end
+    """
+scob(s)
+```
 
-compare(3.14, 3.14)
-"""
-)
+We can even wrap this in a function called `compare`:
+
+```jl
+s = """
+    function compare(a, b)
+        if a < b
+            "a is less than b"
+        elseif a > b
+            "a is greater than b"
+        else
+            "a is equal to b"
+        end
+    end
+
+    compare(3.14, 3.14)
+    """
+sco(s)
 ```
 
 
 ### For Loop {#sec:for}
 
-The classical for loop in Julia follow a similar syntax as the conditional statements.
+The classical for loop in Julia follows a similar syntax as the conditional statements.
 You begin with a keyword, in this case `for`.
-Then you specify what Julia should "loop" for, i.e. a sequence.
+Then, you specify what Julia should "loop" for, i.e., a sequence.
 Also, like everything else, you must finish with the `end` keyword.
 
-So, to make Julia print every number from 1 to 10, you'll need the following for loop:
+So, to make Julia print every number from 1 to 10, you can use the following for loop:
 
 ```jl
-sco(
-"""
-for i in 1:10
-    println(i)
-end
-"""; post=x -> ""
-)
+s = """
+    for i in 1:10
+        println(i)
+    end
+    """
+sco(s; post=x -> "")
 ```
 
 ### While Loop {#sec:while}
 
 The while loop is a mix of the previous conditional statements and for loops.
-Here the loop is executed everytime the condition is `true`.
+Here, the loop is executed every time the condition is `true`.
 The syntax follows the same fashion as the previous one.
 We begin with the keyword `while`, followed by the statement to evaluated as either `true`.
 Like previously, you must end with the `end` keyword.
@@ -635,31 +549,29 @@ Like previously, you must end with the `end` keyword.
 Here's an example:
 
 ```jl
-scob(
-"""
-n = 0
+s = """
+    n = 0
 
-while n < 3
-    global n += 1
-end
+    while n < 3
+        global n += 1
+    end
 
-n
-"""
-)
+    n
+    """
+scob(s)
 ```
 
-As you can see we have to use the `global` keyword.
+As you can see, we have to use the `global` keyword.
 This is because of **variable scope**.
 Variables defined inside conditional statements, loops and functions exist only inside it.
 This is known as the *scope* of the variable.
-Here we had to tell Julia that the `n` inside `while` loop is in the global scope with the `global` keyword.
+Here, we had to tell Julia that the `n` inside `while` loop is in the global scope with the `global` keyword.
 
 Finally, we used also the `+=` operator which is a nice short hand for `n = n + 1`.
 
-
 ## Native Data Structures {#sec:data_structures}
 
-Julia have several native data structures.
+Julia has several native data structures.
 They are abstractions of data that represent somehow structured data.
 We will cover the most used ones.
 They hold homogeneous or heterogeneous data.
@@ -667,26 +579,22 @@ Since they are collections, they can be *looped* over with the `for` loops.
 
 We will cover `String`, `Tuple`, `NamedTuple`, `UnitRange`, `Arrays`, `Pair`, `Dict`, `Symbol`.
 
-When you stumble into a data structure in Julia, you can find functions/methods that accept it as an argument with the `methodswith` function.
-Just like we did before with types.
-This is a nice thing to have in your bag of tricks.
-We personally use it often.
-Let's see what we can do with an `String` for example:
+When you stumble into a data structure in Julia, you can find methods that accept it as an argument with the `methodswith` function.
+In Julia, the distinction between methods and functions is as follows:
+Every function can have multiple methods like we have shown earlier.
+The `methodswith` function is a nice trick to have in your bag of tricks.
+Let's see what we can do with a `String` for example:
 
 ```jl
-sco(
-"""
-first(methodswith(String), 5)
-"""; process=Books.catch_show
-)
+s = "first(methodswith(String), 5)"
+sco(s; process=Books.catch_show)
 ```
-
 
 ### Broadcasting Operators and Functions {#sec:broadcasting}
 
 Before we dive into data structures, we need to talk about broadcasting (also known as *vectorization*) and the "dot" operator `.`.
 
-For mathematical operation, like `*` (multiplication) or `+` (addition), we can broadcast it using the dot operator.
+For mathematical operations, like `*` (multiplication) or `+` (addition), we can broadcast it using the dot operator.
 For example, broadcasted addition would imply in changing the `+` to `.+`:
 
 ```jl
@@ -698,49 +606,42 @@ sco(
 ```
 
 It also works with functions automatically.
+(Technically, the mathematical operations, or infix operators, are also functions, but that is not so important to know.)
 Remember our `logarithm` function?
 
 ```jl
-sco(
-"""
-logarithm.([1, 2, 3])
-"""
-)
+sco("logarithm.([1, 2, 3])")
 ```
 
 #### Functions with a bang `!` {#sec:function_bang}
 
-In Julia syntax is is common to append `!` to names of functions that modify their arguments.
-This is a convention that warns the user that the function is **not pure**, i.e. it has *side effects*.
+It is a Julia convention to append a bang `!` to names of functions that modify one or more of their arguments.
+This convention warns the user that the function is **not pure**, i.e., that it has *side effects*.
 A function with side effects is useful when you want to update a large data structure or variable container without having all the overhead from creating a new instance.
 
-Most of the `!` functions' arguments are data structures.
-
-For example, we can create a function that adds 1 to its argument:
+For example, we can create a function that adds 1 to each element in a vector `V`:
 
 ```jl
-sc(
-"""
-function add_one!(x)
-    for i in 1:length(x)
-        x[i] += 1
+s = """
+    function add_one!(V)
+        for i in 1:length(V)
+            V[i] += 1
+        end
+        return nothing
     end
-    return nothing
-end
-"""
-)
+    """
+sc(s)
 ```
 
 ```jl
-sco(
-"""
-my_data = [1, 2, 3]
+s = """
+    my_data = [1, 2, 3]
 
-add_one!(my_data)
+    add_one!(my_data)
 
-my_data
-"""
-)
+    my_data
+    """
+sco(s)
 ```
 
 ### String {#sec:string}
@@ -748,31 +649,31 @@ my_data
 **Strings** are represented delimited by double quotes:
 
 ```jl
-sco(
-"""
-typeof("This is a string")
-"""
-)
+s = """
+    typeof("This is a string")
+    """
+sco(s)
 ```
 
 We can also write a multiline string:
 
 ```jl
-sco("""
-s = "
-This is a big multiline string.
-As you can see.
-It is still a String to Julia.
-"
-"""; post=output_block)
+s = """
+    text = "
+    This is a big multiline string.
+    As you can see.
+    It is still a String to Julia.
+    "
+    """
+sco(s; post=output_block)
 ```
 
-But, it is typically more clear to use triple-backtics:
+But, it is, typically, more clear to use triple quotation marks:
 
 ```jl
 sco("""
 s = \"\"\"
-    This is a big multiline string.
+    This is a big multiline string with a nested "quotation".
     As you can see.
     It is still a String to Julia.
     \"\"\"
@@ -780,36 +681,35 @@ s = \"\"\"
 ```
 
 When using triple-backticks, the indentation and newline at the start is ignored by Julia.
-This helps code readability.
+This improves code readability because you can indent the block in your source code without those spaces ending up in your string.
 
 #### String Concatenation {#sec:string_concatenation}
 
 A common string operation is **string concatenation**.
-Suppose you want to construct a new string that is the concatenation of two or more strings.
-This is accomplish in julia either with the `*` operator (this is where Julia departs from other scientific open-source programming languages) or the `join` function:
+Suppose that you want to construct a new string that is the concatenation of two or more strings.
+This is accomplish in julia either with the `*` operator or the `join` function.
+This symbol might sound like a weird choice and it actually is.
+For now, many Julia codebases are using this symbol, so it will stay in the language.
+If you're interested, you can read a discussion from 2015 about it at
+<https://github.com/JuliaLang/julia/issues/11030>.
 
 ```jl
-scob(
-"""
-hello = "Hello"
-goodbye = "Goodbye"
+s = """
+    hello = "Hello"
+    goodbye = "Goodbye"
 
-hello * goodbye
-"""
-)
+    hello * goodbye
+    """
+scob(s)
 ```
 
-As you can see we are missing a space between `hello` and `goodbye`.
+As you can see, we are missing a space between `hello` and `goodbye`.
 We could concatenate an additional `" "` string with the `*`, but that would be cumbersome for more than two strings.
 That's when the `join` function comes up.
 We just pass as arguments the strings inside the brackets `[]` and the separator:
 
 ```jl
-scob(
-"""
-join([hello, goodbye], " ")
-"""
-)
+scob("""join([hello, goodbye], " ")""")
 ```
 
 #### String Interpolation {#sec:string_interpolation}
@@ -820,32 +720,30 @@ It works like this: you specify whatever you want to be included in you string w
 Here's the example before but now using interpolation:
 
 ```jl
-scob(
-"""
-"\$hello \$goodbye"
-"""
-)
+s = """
+    "\$hello \$goodbye"
+    """
+scob(s)
 ```
 
 It works even inside functions.
 Let's revisit our `test` function from @sec:conditionals:
 
 ```jl
-scob(
-"""
-function test_interpolated(a, b)
-    if a < b
-        "\$a is less than \$b"
-    elseif a > b
-        "\$a is greater than \$b"
-    else
-        "\$a is equal to \$b"
+s = """
+    function test_interpolated(a, b)
+        if a < b
+            "\$a is less than \$b"
+        elseif a > b
+            "\$a is greater than \$b"
+        else
+            "\$a is equal to \$b"
+        end
     end
-end
 
-test_interpolated(3.14, 3.14)
-"""
-)
+    test_interpolated(3.14, 3.14)
+    """
+scob(s)
 ```
 
 #### String Manipulations {#sec:string_manipulations}
@@ -853,16 +751,15 @@ test_interpolated(3.14, 3.14)
 There are several functions to manipulate strings in Julia.
 We will demonstrate the most common ones.
 Also, note that most of these functions accepts a [Regular Expression (RegEx)](https://docs.julialang.org/en/v1/manual/strings/#Regular-Expressions) as arguments.
-We won't cover RegEx in this book, but you are encouraged to learn about them, specially if most of your work uses textual data.
+We won't cover RegEx in this book, but you are encouraged to learn about them, especially if most of your work uses textual data.
 
 First, let us define a string for us to play around with:
 
 ```jl
-scob(
-"""
-julia_string = "Julia is an amazing opensource programming language"
-"""
-)
+s = """
+    julia_string = "Julia is an amazing opensource programming language"
+    """
+scob(s)
 ```
 
 
@@ -870,86 +767,49 @@ julia_string = "Julia is an amazing opensource programming language"
     * **substring** of the second argument
 
        ```jl
-       scob(
-       """
-       occursin("Julia", julia_string)
-
-       """
-       )
+       scob("""occursin("Julia", julia_string)""")
        ```
 
     * **prefix** of the second argument
 
        ```jl
-       scob(
-       """
-       startswith("Julia", julia_string)
-       """
-       )
+       scob("""startswith("Julia", julia_string)""")
        ```
 
     * **suffix** of the second argument
 
        ```jl
-       scob(
-       """
-       endswith("Julia", julia_string)
-       """
-       )
+       scob("""endswith("Julia", julia_string)""")
        ```
 
 2. `lowercase`, `uppercase`, `titlecase` and `lowercasefirst`:
 
     ```jl
-    scob(
-    """
-    lowercase(julia_string)
-    """
-    )
+    scob("lowercase(julia_string)")
     ```
 
     ```jl
-    scob(
-    """
-    uppercase(julia_string)
-    """
-    )
+    scob("uppercase(julia_string)")
     ```
 
     ```jl
-    scob(
-    """
-    titlecase(julia_string)
-    """
-    )
+    scob("titlecase(julia_string)")
     ```
 
     ```jl
-    scob(
-    """
-    lowercasefirst(julia_string)
-    """
-    )
+    scob("lowercasefirst(julia_string)")
     ```
 
 3. `replace`: introduces a new syntax, called the `Pair`
 
     ```jl
-    scob(
-    """
-    replace(julia_string, "amazing" => "awesome")
-    """
-    )
+    scob("""replace(julia_string, "amazing" => "awesome")""")
     ```
 
 4. `split`: breaks up a string by a delimiter:
 
     ```jl
-    sco(
-    """
-    split(julia_string, " ")
-    """
-    )
+    sco("""split(julia_string, " ")""")
     ```
 
 #### String Conversions {#sec:string_conversions}
@@ -958,23 +818,18 @@ Often, we need to convert between types in Julia.
 We can use the `string` function:
 
 ```jl
-sco(
-"""
-my_number = 123
-typeof(string(my_number))
-"""
-)
+s = """
+    my_number = 123
+    typeof(string(my_number))
+    """
+sco(s)
 ```
 
 Sometimes, we want the opposite: convert a string to a number.
 Julia has a handy function for that: `parse`
 
 ```jl
-sco(
-"""
-typeof(parse(Int64, "123"))
-"""
-)
+sco("""typeof(parse(Int64, "123"))""")
 ```
 
 Sometimes, we want to play safe with these convertions.
@@ -984,129 +839,104 @@ That makes `tryparse` handy when we want to avoid errors.
 Of course, you would need to deal with all those `nothing` values afterwards.
 
 ```jl
-sco(
-"""
-tryparse(Int64, "A very non-numeric string")
-"""
-)
+sco("""tryparse(Int64, "A very non-numeric string")""")
 ```
 
 ### Tuple {#sec:tuple}
 
 Julia has a data structure called **tuple**.
-They are really *special* in Julia because they are *closely related* to functions.
+They are really *special* in Julia because they are often used in relation to functions.
 Since functions are a important feature in Julia, every Julia user should know the basics of tuples.
 
-A tuple is a **fixed-length container that can hold any type of value**.
+A tuple is a **fixed-length container that can hold multiple different types**.
 A tuple is an **imutable object**, meaning that it cannot be modified after instantiation.
-To construct a tuple you use parentheses `()` to delimitate the beginning and end, along with commas `,` as value's delimiters:
+To construct a tuple, use parentheses `()` to delimitate the beginning and end, along with commas `,` as value's delimiters:
 
 ```jl
-sco(
-"""
-my_tuple = (1, 3.14, "Julia")
-"""
-)
+sco("""my_tuple = (1, 3.14, "Julia")""")
 ```
 
-Here we are creating a tuple with three values.
+Here, we are creating a tuple with three values.
 Each one of the values is a different type.
 We can access them via indexing.
 Like this:
 
 ```jl
-scob(
-"""
-my_tuple[2]
-"""
-)
+scob("my_tuple[2]")
 ```
 
 We can also loop over tuples with the `for` keyword.
 And even apply functions to tuples.
-But we can **never change any value of a tuple**, since they are **immutable**.
+But we can **never change any value of a tuple** since they are **immutable**.
 
-The relationship between tuples and functions is a very important one.
 Remember functions that return multiple values back in @sec:function_multiple?
 Let's inspect what our `add_multiply` function returns:
 
 ```jl
-sco(
-"""
-return_multiple = add_multiply(1, 2)
-typeof(return_multiple)
-"""
-)
+s = """
+    return_multiple = add_multiply(1, 2)
+    typeof(return_multiple)
+    """
+sco(s)
 ```
 
-So, now you can see how they are related.
-**Functions that return multiple arguments do so by returning a `Tuple`** with the types inside the `{}` brackets.
+This is because `return a, b` is the same as `return (a, b)`:
+
+```jl
+sco("1, 2")
+```
+
+So, now you can see why they are often related.
 
 One more thing about tuples.
 **When you want to pass more than one variable to an anonymous function, guess what you would need to use?
 Once again: tuples!**
 
 ```jl
-scob(
-"""
-map((x, y) -> x^y, 2, 3)
-"""
-)
+scob("map((x, y) -> x^y, 2, 3)")
 ```
 
-Or even more than two arguments:
+Or, even more than two arguments:
 
 ```jl
-scob(
-"""
-map((x, y, z) -> x^y + z, 2, 3, 1)
-"""
-)
+scob("map((x, y, z) -> x^y + z, 2, 3, 1)")
 ```
 
 ### Named Tuple {#sec:namedtuple}
 
-Sometimes you want to name the values in tuples.
+Sometimes, you want to name the values in tuples.
 That's when **named tuples** comes in.
-Their functionality is pretty much same the same as tuples: they are **immutable** and can hold **any type of value**.
+Their functionality is pretty much same the same as tuples:
+they are **immutable** and can hold **any type of value**.
 
 Named tuple's construction are slightly different from tuples.
 You have the familiar parentheses `()` and comma `,` value separator.
-But now you must **name the values**:
+But now you **name the values**:
 
 ```jl
-sco(
-"""
-my_namedtuple = (i=1, f=3.14, s="Julia")
-"""
-)
+sco("""my_namedtuple = (i=1, f=3.14, s="Julia")""")
 ```
 
 We can access a named tuple's values via indexing like regular tuples or, alternatively, **access by their names** with the `.`:
 
 ```jl
-scob(
-"""
-my_namedtuple.s
-"""
-)
+scob("my_namedtuple.s")
 ```
 
 To finish named tuples, there is one important *quick* syntax that you'll see a lot in Julia code.
 Often Julia users create a named tuple by using the familiar parenthesis `()` and commas `,`, but without naming the values.
 To do so you **begin the named tuple construction by specifying first a semicolon `;` before the values**.
-This is specially useful when the values that would compose the named tuple are already defined in variables:
+This is especially useful when the values that would compose the named tuple are already defined in variables or when you want to avoid long lines:
 
 ```jl
-sco(
-"""
-i = 1
-f = 3.14
-s = "Julia"
+s = """
+    i = 1
+    f = 3.14
+    s = "Julia"
 
-my_quick_namedtuple = (; i, f, s)
-"""
-)
+    my_quick_namedtuple = (; i, f, s)
+    """
+sco(s)
 ```
 
 ### Ranges {#sec:ranges}
@@ -1115,21 +945,13 @@ A range in Julia represents an interval between a start and stop boundaries.
 The syntax is `start:stop`:
 
 ```jl
-sco(
-"""
-1:10
-"""
-)
+sco("1:10")
 ```
 
-As you can see our instantiated range is of type `UnitRange{T}` where `T` is the type inside the `UnitRange`:
+As you can see, our instantiated range is of type `UnitRange{T}` where `T` is the type inside the `UnitRange`:
 
 ```jl
-sco(
-"""
-typeof(1:10)
-"""
-)
+sco("typeof(1:10)")
 ```
 
 And, if we gather all the values, we get:
@@ -1141,11 +963,7 @@ sco("[x for x in 1:10]")
 We can construct ranges also for other types:
 
 ```jl
-sco(
-"""
-typeof(1.0:10.0)
-"""
-)
+sco("typeof(1.0:10.0)")
 ```
 
 Sometimes, we want to change the default interval stepsize behavior.
@@ -1153,21 +971,13 @@ We can do that by adding a stepsize in the range syntax `start:step:stop`.
 For example, suppose we want a range of `Float64` from 0 to 1 with steps of size 0.2:
 
 ```jl
-sco(
-"""
-0.0:0.2:1.0
-"""
-)
+sco("0.0:0.2:1.0")
 ```
 
-If you want to "materialize" a `UnitRange` into a collection you can use the function `collect`:
+If you want to "materialize" a `UnitRange` into a collection, you can use the function `collect`:
 
 ```jl
-sco(
-"""
-collect(1:10)
-"""
-)
+sco("collect(1:10)")
 ```
 
 We have an array of the type specified in the `UnitRange` between the boundaries that we've set.

@@ -13,12 +13,12 @@ We wanted to make it easier for researchers, and especially our colleagues, to s
 
 Like discussed above, each language has it's strengths and weaknesses.
 In our opinion, data science is definitely a strength of Julia.
-At the same time, all three of us need data science in our day to day life.
-And, probably, you need data science too!
+At the same time, all three of us used data science tools in our day to day life.
+And, probably, you want to use data science too!
 That is why this book has a focus on data science.
-Next, we emphasize the **"data" part of data science** and why data skills are, and will remain, in **high demand** in industry as well as in academia.
 
-Second, we make an argument for **incorporate software engineering practices into data science** which should reduce friction in updating and sharing code with collaborators.
+In the next part of this section, we emphasize the **"data" part of data science** and why data skills are, and will remain, in **high demand** in industry as well as in academia.
+We make an argument for **incorporate software engineering practices into data science** which should reduce friction in updating and sharing code with collaborators.
 Most data analyses are a collaborative endeavor; that is why these practices will help you.
 
 ### Data is Everywhere {#sec:data_everywhere}

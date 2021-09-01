@@ -4,7 +4,7 @@
   contents = [
     "preface",
     "why_julia",
-    "julia_101",
+    "julia_basics",
     "dataframes",
     "dataframes_load_save",
     "dataframes_indexing",

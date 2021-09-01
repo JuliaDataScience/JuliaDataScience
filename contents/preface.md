@@ -1,11 +1,24 @@
 # Preface {#sec:preface}
 
-In this book, we discuss two important aspects of data analysis.
-Actually, there is a third one, Julia, but it deserves a whole chapter (see @sec:why_julia).
+There are many programming languages and each and every one of them has its strengths and weaknesses.
+Some languages are very quick, but verbose.
+Other languages are very easy to write in, but slow. This is known as the `two-language` problem and `Julia` aims at circumventing this problem. 
+Even though all three of us come from different fields, we all found the Julia language more effective for our research than languages that we've used before.
+We discuss some of our arguments in @sec:why_julia.
+Compared to other languages, Julia is one of the newest languages around.
+This means that the ecosystem around the language is sometimes difficult to navigate through.
+It's difficult to figure out where to start and how all the different packages fit together.
+That is why we decided to create this book!
+We wanted to make it easier for researchers, and especially our colleagues, to start using this awesome language.
 
-First, we emphasize the **"data" part of data science** and why data skills are, and will remain, in **high demand** in industry as well as in academia.
+Like discussed above, each language has it's strengths and weaknesses.
+In our opinion, data science is definitely a strength of Julia.
+At the same time, all three of us used data science tools in our day to day life.
+And, probably, you want to use data science too!
+That is why this book has a focus on data science.
 
-Second, we make an argument for **incorporate software engineering practices into data science** which should reduce friction in updating and sharing code with collaborators.
+In the next part of this section, we emphasize the **"data" part of data science** and why data skills are, and will remain, in **high demand** in industry as well as in academia.
+We make an argument for **incorporate software engineering practices into data science** which should reduce friction in updating and sharing code with collaborators.
 Most data analyses are a collaborative endeavor; that is why these practices will help you.
 
 ### Data is Everywhere {#sec:data_everywhere}

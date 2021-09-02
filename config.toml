@@ -36,5 +36,7 @@
     "images",
     "files"
   ]
+  
+  online_url = "https://juliadatascience.io"
 
   output_filename = "juliadatascience"

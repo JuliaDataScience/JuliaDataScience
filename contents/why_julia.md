@@ -190,7 +190,7 @@ We think that the "Two-Language problem" and the "One-To-One Code and Math Relat
 ### Multiple Dispatch {#sec:multiple_dispatch}
 
 To explain multiple dispatch, we'll give an illustrative example in **Python**.
-Suppose that you want to have different types of researcher that will inherent from a "base" class `Researcher`.
+Suppose that you want to have different types of researcher that will inherit from a "base" class `Researcher`.
 The base class `Researcher` would define the initial common values for every derived class, namely `name` and `age`. These would go inside the default constructor method `__init__`:
 
 ```python
@@ -200,7 +200,7 @@ class Researcher:
         self.age = age
 ```
 
-Now let us define a `Linguist` class that will inherent from the `Researcher` class.
+Now let us define a `Linguist` class that will inherit from the `Researcher` class.
 We will also define a method `citation` that returns the citation style that is mostly used in the linguistics research field.
 
 ```python
@@ -209,7 +209,7 @@ class Linguist(Researcher):
         return "APA"
 ```
 
-We do the same for the `ComputerScientist` class, but with different citation style:
+We do the same for the `ComputerScientist` class, but with a different citation style:
 
 ```python
 class ComputerScientist(Researcher):
@@ -237,7 +237,7 @@ def approaches(cs:ComputerScientist, li: Linguist):
     print(f"Hey {li.name}, wanna do a paper together? We need to use {cs.citation()} style.")
 ```
 
-Now lets say Noam Chomsky approaches Judea Pearl with a paper idea:
+Now let's say Noam Chomsky approaches Judea Pearl with a paper idea:
 
 ```python
 approaches(noam, judea)
@@ -249,9 +249,9 @@ Hey Judea Pearl, wanna do a paper? We need to use APA style.
 
 That was not what `judea` as a `Linguist` type would say to `noam`, a `ComputerScientist` type.
 This is **single dispatch** and is the default feature available on most object-oriented languages, like Python or C++.
-Single dispatch just act on the first argument of a function.
-Since both of our researchers `noam` and `judea` are instantiate as types inherited from the same base type `Researcher` we cannot implement what we are trying to do in Python.
-You would need to change your approach with a substancial loss of simplicity.
+Single dispatch just acts on the first argument of a function.
+Since both of our researchers `noam` and `judea` are instantiated as types inherited from the same base type `Researcher` we cannot implement what we are trying to do in Python.
+You would need to change your approach with a substantial loss of simplicity.
 Specifically, you would probably need to create different functions with different names.
 
 **Now, let's do this in Julia**.

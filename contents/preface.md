@@ -65,7 +65,7 @@ In these chapter you will learn how to:
     2. ...
     3. ...
 
-## Software engineering and data science {#sec:engineering}
+## Software Engineering {#sec:engineering}
 
 Unlike most books on data science, this book lays more emphasis on properly **structuring code**.
 The reason for this is that we noticed that many data scientists simply place their code into one large file and run all the statements sequentially.

@@ -1,4 +1,4 @@
-## Groupby and combine {#sec:groupby_combine}
+## Groupby and Combine {#sec:groupby_combine}
 
 In the R programming language, @wickham2011split has popularized the, so called, split-apply-combine strategy for data transformations.
 In essence, this strategy **splits** a dataset into distinct groups, **applies** one or more functions to each group, and then **combines** the result.

@@ -1,4 +1,4 @@
-# Performance {#sec:df_performance}
+## Performance {#sec:df_performance}
 
 So far, we didn't think about making our `DataFrames.jl` code **fast**.
 Like everything in Julia, `DataFrames.jl` can be really fast.

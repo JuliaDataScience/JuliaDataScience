@@ -3,6 +3,7 @@
 [![CI Build](https://github.com/JuliaDataScience/JuliaDataScience/workflows/CI/badge.svg)](https://github.com/JuliaDataScience/JuliaDataScience/actions?query=workflow%3ACI+branch%3Amain)
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 [![Code Style: Blue](https://img.shields.io/badge/code%20style-blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
+[![Site Analytics](https://img.shields.io/badge/site-analytics-blueviolet)](https://app.usefathom.com/share/eejxhkte/julia+data+science)
 
 See <https://juliadatascience.io>.
 

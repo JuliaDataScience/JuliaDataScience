@@ -65,13 +65,7 @@ function build()
     println("Building JDS")
     Books.gen(; fail_on_error=true)
     extra_head = """
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RKMTDS1S8"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());  gtag('config', 'G-2RKMTDS1S8');
-    </script>
+    <script src="https://cdn.usefathom.com/script.js" data-site="EEJXHKTE" defer></script>
     """
     Books.build_all(; extra_head, fail_on_error=true)
 end

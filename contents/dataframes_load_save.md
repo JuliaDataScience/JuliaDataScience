@@ -150,7 +150,7 @@ end # hide
 ```
 
 These CSV basics should cover most use cases.
-For more information, see the [`CSV.jl` documentation](https://csv.juliadata.org/stable){target="_blank} and especially the [`CSV.File` constructor docstring](https://csv.juliadata.org/stable/#CSV.File){target="_blank}.
+For more information, see the [`CSV.jl` documentation](https://csv.juliadata.org/stable) and especially the [`CSV.File` constructor docstring](https://csv.juliadata.org/stable/#CSV.File).
 
 ### Excel {#sec:excel}
 
@@ -208,4 +208,4 @@ end # hide
 ```
 
 Notice that we cover just the basics of `XLSX.jl` but more powerful usage and customizations are available.
-For more information and options, see the [`XLSX.jl` documentation](https://felipenoris.github.io/XLSX.jl/stable/){target="_blank"}.
+For more information and options, see the [`XLSX.jl` documentation](https://felipenoris.github.io/XLSX.jl/stable/).

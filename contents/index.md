@@ -35,13 +35,13 @@ For details about the status, see the [JuliaDataScience](https://github.com/Juli
 To cite the content, please use:
 
 ```plaintext
-Jose Storopoli, Rik Huijzer and Lazaro Alonso (2021). Julia Data Science. https://juliadatascience.io.
+Storopoli, Huijzer and Alonso (2021). Julia Data Science. https://juliadatascience.io.
 ```
 
 Or in BibTeX format:
 
 ```plaintext
-@book{storopolihuijzer2021juliadatascience,
+@book{storopolihuijzeralonso2021juliadatascience,
   title = {Julia Data Science},
   author = {Storopoli, Jose and Huijzer, Rik and Alonso, Lazaro},
   url = {https://juliadatascience.io},

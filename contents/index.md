@@ -12,6 +12,24 @@ The book is also available as [**PDF**](/juliadatascience.pdf){target="_blank"}.
 
 The source code is available at [GitHub](https://github.com/JuliaDataScience/JuliaDataScience){target="_blank"}.
 
+### Work in progress {-}
+
+This book is almost finished and we plan to publish within a few months.
+Roughly, the status is as follows:
+
+- [x] 1. Preface
+- [x] 2. Why Julia?
+- [x] 3. Julia Basics
+- [ ] 4. DataFrames.jl
+- [ ] 5. Plots.jl
+- [x] 6. Makie.jl
+- [ ] Review complete book
+- [ ] Publish with Amazon Kindle Direct Publishing
+
+Also, some small issues have to be fixed like _footnotes not working on the website_.
+
+### Citation info {-}
+
 To cite the content, please use:
 
 ```plaintext

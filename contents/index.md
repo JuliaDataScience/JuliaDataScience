@@ -7,7 +7,7 @@ This file is only included on the website.
 Welcome! This is an open source and open access book on how to do **Data Science using [Julia](https://julialang.org)**.
 Our target audience are PhD candidates from all fields of applied sciences.
 Industry analysts, upcoming and established researchers are also welcome.
-You can navigate through the pages of this website by using the arrow keys (left/right) on your keyboard.
+You can navigate through the pages of e-book by using the arrow keys (left/right) on your keyboard.
 
 The book is also available as [**PDF**](/juliadatascience.pdf){target="_blank"}.
 

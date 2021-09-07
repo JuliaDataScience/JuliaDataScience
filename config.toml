@@ -33,8 +33,7 @@
 
   # Extra directories to be copied.
   extra_directories = [
-    "images",
-    "files"
+    "images"
   ]
   
   online_url = "https://juliadatascience.io"

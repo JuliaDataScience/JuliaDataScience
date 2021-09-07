@@ -27,6 +27,7 @@ Roughly, the status is as follows:
 - [ ] Publish with Amazon Kindle Direct Publishing
 
 Also, some small issues have to be fixed like _footnotes not working on the website_.
+For details about the status, see the [JuliaDataScience](https://github.com/JuliaDataScience/JuliaDataScience) GitHub repository.
 
 ### Citation info {-}
 

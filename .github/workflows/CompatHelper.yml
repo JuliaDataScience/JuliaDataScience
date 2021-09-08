@@ -22,7 +22,7 @@ jobs:
         shell: julia --color=yes {0}
         run: |
           import CompatHelper
-          CompatHelper.main()
+          CompatHelper.main(; entry_type=DropEntry())
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMPATHELPER_PRIV: ${{ secrets.COMPATHELPER_PRIV }}

@@ -33,7 +33,7 @@ XLSX = "fdbf4ff8-1666-58a4-91e7-1b58723a45e0"
 
 [compat]
 Books = "0.7"
-CSV = "0.8"
+CSV = "0.9"
 CairoMakie = "0.6"
 CategoricalArrays = "0.10"
 ColorSchemes = "3"

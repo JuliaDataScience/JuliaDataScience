@@ -74,13 +74,13 @@ So, it should be faster and while consuming less memory.
 There are **two ways to access a DataFrame column**.
 They differ in how they are accessed: one creates a "view" to the column without copying and the other creates a whole new column by copying the original column.
 
-The first is the regular dot `.` operator followed by the column name, like in `df.Col`.
-This kind of access **does not copy** the column `Col`.
-Instead `df.Col` creates a "view" which is a link to the original column without performing any allocation.
-Additionally, the syntax `df.Col` is the same as `df[!, :Col]` with the bang `!` as the row selector.
+The first is the regular dot `.` operator followed by the column name, like in `df.col`.
+This kind of access **does not copy** the column `col`.
+Instead `df.col` creates a "view" which is a link to the original column without performing any allocation.
+Additionally, the syntax `df.col` is the same as `df[!, :col]` with the bang `!` as the row selector.
 
-The second way to access a `DataFrame` column is the `df[:, :Col]` with the colon `:` as the row selector.
-This kind of access **does copy** the column `Col`, so beware that it may produce unwanted allocations.
+The second way to access a `DataFrame` column is the `df[:, :col]` with the colon `:` as the row selector.
+This kind of access **does copy** the column `col`, so beware that it may produce unwanted allocations.
 
 As before, let's try out our two ways to access a column in the responses `DataFrame`:
 

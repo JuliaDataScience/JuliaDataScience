@@ -46,7 +46,9 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-Now let's see how they perform with the `@allocated` macro:
+The `@allocated` macro tells us how much memory was allocated.
+In other words, how much new information the computer had to store in its memory while running the code.
+Let's see how they will perform: 
 
 ```jl
 s = """

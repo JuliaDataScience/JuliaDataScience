@@ -6,18 +6,18 @@ In this section, we will give some performance tips and tricks.
 
 ### Allocations
 
-Like we explained in @sec:function_bang functions that end with a bang `!` are a common pattern to denote functions that modify one or more of their arguments.
+Like we explained in @sec:function_bang, functions that end with a bang `!` are a common pattern to denote functions that modify one or more of their arguments.
 In the context of high performance Julia code, this *means* that **functions with `!` do not perform any sort of allocation**.
-They just change in place any object that we supply as arguments.
+They just change in-place one of the objects that we supply as arguments.
 
 Almost all the `DataFrames.jl` functions that we've seen so far have a \"`!` twin\".
 For example, `filter` has a non allocating `filter!`, `select` has `select!`, `subset` has `subset!`, and so on.
-Notice that these functions **do not** return a `DataFrame`, but instead they **alter** the `DataFrame` that they act upon.
+Notice that these functions **do not** return a new `DataFrame`, but instead they **alter** the `DataFrame` that they act upon.
 Additionally, there are some functions that do not have a `!` counterpart.
-For example, all the `join`s, by logical purposes, *cannot* be done without allocations.
+For example, all the `join`s, for technical reasons, *cannot* be done in-place.
 Thus, we don't have any `join!` functions in `DataFrames.jl`.
 
-If you want the highest speed and performance in your code you should definitely use the `!` functions instead of regular `DataFrames.jl` functions.
+If you want the highest speed and performance in your code, you should definitely use the `!` functions instead of regular `DataFrames.jl` functions.
 
 Let's go back to the example of the `select` function in the beginning of @sec:select.
 Here is the responses `DataFrame`:
@@ -66,7 +66,8 @@ s = """
 sco(s; process=string, post=plainblock)
 ```
 
-As we can see `select!` makes less allocations that `select` so it should be faster while consuming less memory.
+As we can see, `select!` allocates less than `select`.
+So, it should be faster and while consuming less memory.
 
 ### Copying vs Not Copying Columns
 
@@ -107,10 +108,10 @@ So, if you don't need a copy always access your `DataFrame`s columns with `df.co
 
 ### CSV.read versus CSV.File
 
-If you take a look at the help output for `CSV.read` you will see that it is a convenience function identical to a function called `CSV.File` with the same keywords arguments.
+If you take a look at the help output for `CSV.read`, you will see that it is a convenience function identical to the function called `CSV.File` with the same keywords arguments.
 Both `CSV.read` and `CSV.File` will read the contents of a CSV file, but they differ in the default behavior.
 **`CSV.read`, by default, will not make copies** of the incoming data.
-Instead, `CSV.read` will pass all the data to the second argument (known as "sink").
+Instead, `CSV.read` will pass all the data to the second argument (known as the "sink").
 
 So, something like this:
 
@@ -120,8 +121,9 @@ df = CSV.read("file.csv", DataFrame)
 
 will pass all the incoming data from `file.csv` to the `DataFrame` sink, thus returning a `DataFrame` type that we store in the `df` variable.
 
-For the case of **`CSV.File` the default behavior is the opposite: it will make copies of every column contained in the CSV file**.
-Also the syntax is slight different, we need to wrap anything that `CSV.File` returns in a `DataFrame` constructor function:
+For the case of **`CSV.File`, the default behavior is the opposite: it will make copies of every column contained in the CSV file**.
+Also, the syntax is slightly different.
+We need to wrap anything that `CSV.File` returns in a `DataFrame` constructor function:
 
 ```julia
 df = DataFrame(CSV.File("file.csv"))
@@ -160,7 +162,6 @@ files = filter(endswith(".csv"), readdir())
 df = CSV.read(files, DataFrame)
 ```
 
-Much more simpler.
 `CSV.jl` will design a file for each thread available in the computer while it lazily concatenates each thread parsed output into a `DataFrame`.
 So we have the **additional benefit of multithreading** that we don't have with the `reduce` option.
 
@@ -183,7 +184,7 @@ That's why `categorical` has a `compress` argument that accepts either `true` or
 If you pass **`compress=true`, `CategoricalArrays.jl` will try to compress the underlying categorical to the smallest possible representation in `UInt`**.
 For example, the previous `categorical` vector would be represented as an unsigned integer of size 8 bits `UInt8` (mostly because this is the smallest unsigned integer available in Julia):
 
-[^bigdata]: also notice that regular data is not big data. So if you are dealing primarily with big data please take caution in capping your categorical values.
+[^bigdata]: also notice that regular data (about <10 000 rows) is not big data (about >100 000 rows). So, if you are dealing primarily with big data please take caution in capping your categorical values.
 
 ```jl
 s = """
@@ -192,9 +193,9 @@ s = """
 sco(s; process=string, post=plainblock)
 ```
 
-What does this all means?
+What does this all mean?
 Suppose you have a big vector.
-For example a vector with one million entries, but only 4 underlying categories: A, B, C or D.
+For example, a vector with one million entries, but only 4 underlying categories: A, B, C or D.
 If you do not compress the resulting categorical vector, you will have one million entries stored as `UInt32`.
 On the other hand, if you do compress it, you will have one million entries stored instead as `UInt8`.
 By using `Base.summarysize` function we can get the underlying size, in bytes, of a given object.

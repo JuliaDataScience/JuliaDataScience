@@ -21,14 +21,26 @@ Roughly, the status is as follows:
 - [x] 1. Preface
 - [x] 2. Why Julia?
 - [x] 3. Julia Basics
-- [ ] 4. DataFrames.jl
+- [x] 4. DataFrames.jl
 - [ ] 5. Plots.jl
 - [x] 6. Makie.jl
+- [ ] Statistics
 - [ ] Review complete book
 - [ ] Publish with Amazon Kindle Direct Publishing
 
 Also, some small issues have to be fixed like _footnotes not working on the website_.
 For details about the status, see the [JuliaDataScience](https://github.com/JuliaDataScience/JuliaDataScience) GitHub repository.
+
+### Roadmap {-}
+
+Of course, data science is about more things than just tables, basic statistics and plotting.
+We want to cover more topics, but we have scheduled them for the second edition of the book.
+For now, the planned topics for the second edition are:
+
+- More statistics (probably, descriptive statistics, `Distributions.jl`)
+- Plotting via `AlgebraOfGraphics.jl`.
+- Machine learning (probably, `MLJ.jl` and `Flux.jl`)
+- Bayesian statistics (`Turing.jl`)
 
 ### Citation info {-}
 
@@ -47,10 +59,4 @@ Or in BibTeX format:
   url = {https://juliadatascience.io},
   year = {2021}
 }
-```
-
-```{=comment}
-Once the book is launched in Amazon we should add something like: "You can also buy this book in printed version at Amazon.com"
-
-We need a nice cover image...
 ```

@@ -36,7 +36,7 @@ Of course, data science is about more things than just tables, basic statistics 
 We want to cover more topics, but we have scheduled them for the second edition of the book.
 For now, the planned topics for the second edition are:
 
-- More statistics (probably, `Distributions.jl`, `GLM.jl` and `HypothesisTests.jl`)
+- More statistics (probably, descriptive statistics, `Distributions.jl`)
 - Plotting via `AlgebraOfGraphics.jl`.
 - Machine learning (probably, `MLJ.jl` and `Flux.jl`)
 - Bayesian statistics (`Turing.jl`)

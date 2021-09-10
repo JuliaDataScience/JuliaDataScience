@@ -4,15 +4,14 @@ So far, we didn't think about making our `DataFrames.jl` code **fast**.
 Like everything in Julia, `DataFrames.jl` can be really fast.
 In this section, we will give some performance tips and tricks.
 
-### Allocations
+### In-place operations 
 
 Like we explained in @sec:function_bang, functions that end with a bang `!` are a common pattern to denote functions that modify one or more of their arguments.
-In the context of high performance Julia code, this *means* that **functions with `!` do not perform any sort of allocation**.
-They just change in-place one of the objects that we supply as arguments.
+In the context of high performance Julia code, this *means* that **functions with `!` will just change in-place the objects that we have supplied as arguments.
 
-Almost all the `DataFrames.jl` functions that we've seen so far have a \"`!` twin\".
-For example, `filter` has a non allocating `filter!`, `select` has `select!`, `subset` has `subset!`, and so on.
-Notice that these functions **do not** return a new `DataFrame`, but instead they **alter** the `DataFrame` that they act upon.
+Almost all the `DataFrames.jl` functions that we've seen have a \"`!` twin\".
+For example, `filter` has an _in-place_ `filter!`, `select` has `select!`, `subset` has `subset!`, and so on.
+Notice that these functions **do not** return a new `DataFrame`, but instead they **update** the `DataFrame` that they act upon.
 Additionally, there are some functions that do not have a `!` counterpart.
 For example, all the `join`s, for technical reasons, *cannot* be done in-place.
 Thus, we don't have any `join!` functions in `DataFrames.jl`.
@@ -36,7 +35,7 @@ s = """
 sco(s, process=without_caption_label)
 ```
 
-And here is the non allocating function:
+And here is the _in-place_ function:
 
 ```jl
 s = """
@@ -47,7 +46,7 @@ sco(s; process=without_caption_label)
 ```
 
 The `@allocated` macro tells us how much memory was allocated.
-In other words, how much new information the computer had to store in its memory while running the code.
+In other words, **how much new information the computer had to store in its memory while running the code**.
 Let's see how they will perform: 
 
 ```jl
@@ -84,7 +83,7 @@ Additionally, the syntax `df.col` is the same as `df[!, :col]` with the bang `!`
 The second way to access a `DataFrame` column is the `df[:, :col]` with the colon `:` as the row selector.
 This kind of access **does copy** the column `col`, so beware that it may produce unwanted allocations.
 
-As before, let's try out our two ways to access a column in the responses `DataFrame`:
+As before, let's try out these two ways to access a column in the responses `DataFrame`:
 
 ```jl
 s = """
@@ -110,7 +109,7 @@ So, if you don't need a copy always access your `DataFrame`s columns with `df.co
 
 ### CSV.read versus CSV.File
 
-If you take a look at the help output for `CSV.read`, you will see that it is a convenience function identical to the function called `CSV.File` with the same keywords arguments.
+If you take a look at the help output for `CSV.read`, you will see that there is a convenience function identical to the function called `CSV.File` with the same keywords arguments.
 Both `CSV.read` and `CSV.File` will read the contents of a CSV file, but they differ in the default behavior.
 **`CSV.read`, by default, will not make copies** of the incoming data.
 Instead, `CSV.read` will pass all the data to the second argument (known as the "sink").
@@ -148,16 +147,16 @@ Now let's turn our attention to the `CSV.jl`.
 Specially when we have multiple CSV files to read into a single `DataFrame`.
 Since version 0.9 of `CSV.jl` we can provide a vector of strings representing filenames.
 Before, we needed to perform some sort of multiple file reading and then concatenate vertically the results into a single `DataFrame`.
-To exemplify, the code below reads from multiple CSV files and them concatenates vertically using `vcat` them into a single `DataFrame` with the `reduce` function:
+To exemplify, the code below reads from multiple CSV files and then concatenates them vertically using `vcat` into a single `DataFrame` with the `reduce` function:
 
 ```julia
 files = filter(endswith(".csv"), readdir())
 df = reduce(vcat, CSV.read(file, DataFrame) for file in files)
 ```
 
-One additional quirk is that `reduce` will not paralelize because it needs to keep the order of `vcat` which follows the same ordering of the `files` vector.
+One additional trait is that `reduce` will not paralelize because it needs to keep the order of `vcat` which follows the same ordering of the `files` vector.
 
-With the new functionality in `CSV.jl` we simply pass the `files` vector into the `CSV.read` function:
+With this functionality in `CSV.jl` we simply pass the `files` vector into the `CSV.read` function:
 
 ```julia
 files = filter(endswith(".csv"), readdir())
@@ -171,7 +170,7 @@ So we have the **additional benefit of multithreading** that we don't have with 
 
 If you are handling data with a lot of categorical values, i.e. a lot of columns with textual data that represent somehow different qualitative data, you would probably benefit by using `CategoricalArrays.jl` compression.
 
-By default, **`CategoricalArrays.jl` will use a unsigned integer of size 32 bits `UInt32` to represent the underlying categories**:
+By default, **`CategoricalArrays.jl` will use an unsigned integer of size 32 bits `UInt32` to represent the underlying categories**:
 
 ```jl
 s = """

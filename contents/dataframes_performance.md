@@ -4,7 +4,7 @@ So far, we didn't think about making our `DataFrames.jl` code **fast**.
 Like everything in Julia, `DataFrames.jl` can be really fast.
 In this section, we will give some performance tips and tricks.
 
-### In-place operations 
+### In-place operations {#sec:df_performance_inplace}
 
 Like we explained in @sec:function_bang, functions that end with a bang `!` are a common pattern to denote functions that modify one or more of their arguments.
 In the context of high performance Julia code, this *means* that **functions with `!` will just change in-place the objects that we have supplied as arguments.
@@ -70,7 +70,7 @@ sco(s; process=string, post=plainblock)
 As we can see, `select!` allocates less than `select`.
 So, it should be faster and while consuming less memory.
 
-### Copying vs Not Copying Columns
+### Copying vs Not Copying Columns {#sec:df_performance_df_copy}
 
 There are **two ways to access a DataFrame column**.
 They differ in how they are accessed: one creates a "view" to the column without copying and the other creates a whole new column by copying the original column.
@@ -107,7 +107,7 @@ sco(s; process=string, post=plainblock)
 When we access a column without copying it we are making zero allocations and our code should be faster.
 So, if you don't need a copy always access your `DataFrame`s columns with `df.col` or `df[!, :col]` instead of `df[:, :col]`.
 
-### CSV.read versus CSV.File
+### CSV.read versus CSV.File {#sec:df_performance_csv_read_file}
 
 If you take a look at the help output for `CSV.read`, you will see that there is a convenience function identical to the function called `CSV.File` with the same keywords arguments.
 Both `CSV.read` and `CSV.File` will read the contents of a CSV file, but they differ in the default behavior.
@@ -141,7 +141,7 @@ Like we said, `CSV.File` will make copies of each column in the underlying CSV f
 Ultimately, if you want the most performance, you would definitely use `CSV.read` instead of `CSV.File`.
 That's why we only covered `CSV.read` in @sec:csv.
 
-### CSV.jl Multiple Files
+### CSV.jl Multiple Files {#sec:df_performance_csv_multiple}
 
 Now let's turn our attention to the `CSV.jl`.
 Specially when we have multiple CSV files to read into a single `DataFrame`.
@@ -166,7 +166,7 @@ df = CSV.read(files, DataFrame)
 `CSV.jl` will design a file for each thread available in the computer while it lazily concatenates each thread parsed output into a `DataFrame`.
 So we have the **additional benefit of multithreading** that we don't have with the `reduce` option.
 
-### CategoricalArrays.jl compression
+### CategoricalArrays.jl compression {#sec:df_performance_categorical_compression}
 
 If you are handling data with a lot of categorical values, i.e. a lot of columns with textual data that represent somehow different qualitative data, you would probably benefit by using `CategoricalArrays.jl` compression.
 

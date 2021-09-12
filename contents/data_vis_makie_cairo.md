@@ -12,7 +12,7 @@ s = """
     CairoMakie.activate!() # hide
     scatterlines(1:10, 1:10)
     label = "firstplot" # hide
-    caption = "First plot."
+    caption = "First plot." # hide
     link_attributes = JDS.SMALL_IM_ATTR # hide
     Options(current_figure(); filename=label, caption, label, link_attributes) # hide
     """

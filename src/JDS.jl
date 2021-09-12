@@ -25,6 +25,7 @@ using Reexport
 @reexport using FileIO
 @reexport using TestImages
 
+const SMALL_IM_ATTR = "width=70%"
 
 include("df.jl")
 include("environment.jl")

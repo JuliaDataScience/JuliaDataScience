@@ -362,7 +362,7 @@ function mixed_mode_layout()
         padding = (3,3,3,3))
     Label(fig[1,1:2, Top()], "Mixed alignmode", textsize = 16,
         padding = (0,0,15,0))
-    
+
     colsize!(fig.layout, 1, Auto(2))
     rowsize!(fig.layout, 2, Auto(0.5))
     rowsize!(fig.layout, 3, Auto(0.5))
@@ -394,7 +394,7 @@ end
 
 function nested_Grid_Layouts()
     CairoMakie.activate!() # hide
-    fig = Figure(backgroundcolor = RGBf0(0.96, 0.96, 0.96),)    
+    fig = Figure(backgroundcolor = RGBf0(0.96, 0.96, 0.96),)
     ga = fig[1, 1] = GridLayout()
     gb = fig[1, 2] = GridLayout()
     gc = fig[1, 3] = GridLayout()

@@ -1,5 +1,18 @@
 # Statistics {#sec:stats}
 
+This content was created in order to awaken the reader to the importance of statistics for science and knowledge generation.
+Our idea is to present the concepts in the way we would like to have been provided when students about to be initiated into science.
+Our approach is to simplify the concepts as much as possible without losing their essence.
+We will cover:
+
+* what is statistics
+* the difference between descriptive statistics and inferential statistics
+* measures of central tendencies
+* measures of dispersion
+* measures of dependence
+* probability distributions
+* statistical visualization
+
 Importance of statistics.
 Overall introduction.
 

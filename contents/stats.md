@@ -3,20 +3,38 @@
 This content was created in order to awaken the reader to the importance of statistics for science and knowledge generation.
 Our idea is to present the concepts in the way we would like to have been provided when students about to be initiated into science.
 Our approach is to simplify the concepts as much as possible without losing their essence.
-We will cover:
+**In this chapter, we will cover**:
 
-* what is statistics
-* the difference between descriptive statistics and inferential statistics
-* measures of central tendencies
-* measures of dispersion
-* measures of dependence
-* probability distributions
-* statistical visualization
+* what is **statistics**
+* the difference between **descriptive statistics** and **inferential statistics**
+* measures of **central tendencies**
+* measures of **dispersion**
+* measures of **dependence**
+* **probability distributions**
+* statistical **visualization**
 
-Importance of statistics.
-Overall introduction.
+Statistics is important because it is a **tool to make sense of data**.
+With the abundant availability of data, we are often overwhelmed by numbers.
+Statistics offers a way to comprehend, summarize and infer information from data.
+We believe that every data scientist should have a basic understanding of statistics and how to perform simple statistical operations.
 
-@fig:stats_vs_prob ...
+We can divide statistics into two broad categories: **descriptive** and **inferential**.
+**Descriptive statistics summarizes and quantifies the characteristics of a given observed data**.
+Common metrics are: mean, median, mode, standard deviation, variance, correlation, percentiles.
+
+**Inferential statistics allows generating inferences** (statements) **from observed data about the data generation process**.
+All phenomena have an underlying data generating process that describes how the data is being generated.
+For example, in a soccer game, a scored goal can be explained by an underlying process: a tactic, error, struck of luck; or a mix of those.
+If we know a phenomenon's data generating process, we can use probability to simulate possible scenarios given certain aspects.
+Most of the time, specially in applied sciences, we do not have full knowledge of the data generating process.
+Given the observed data, we can retrace our way back to the data generating process.
+This process is known as **statistical inference**.
+Given some data, we can *infer* what are the aspects of the underlying data generating process.
+This is the realm of inferential statistics.
+
+In @fig:stats_vs_prob we summarize the relationship between data generating process and observed data.
+With knowledge of the data generating process we can apply probability to generate and simulate plausible data.
+And by using the observed data we can use inference to gain knowledge about the underlying data generating process.
 
 ![Statistics vs Probability](images/statistics.png){#fig:stats_vs_prob}
 
@@ -45,11 +63,59 @@ digraph estatistica_inferencial {
 }
 ```
 
+In this chapter, we will cover only descriptive statistics.
+Inferential statistics is an important and fundamental component of applied sciences, but its scope is too broad. Let's begin on simple ways to summarize our data with central tendencies.
+
 ## Central Tendencies Measures {#sec:stats_central}
 
-Mean.
-Median.
-Mode.
+The most basic way of using descriptive statistics is to summarize data by a measure of **central tendency**.
+
+### Mean {#sec:stats_central_mean}
+
+We have several ways to summarize data but the most common is to use the **mean**.
+The mean is the **sum of all measurements divided by the number of observations** and we generally denote it as "x bar":
+
+$$ \bar{x} = \frac{1}{n} \sum^n_{i=1} x_i = \frac{x_1 + x_2 + \cdots + x_n}{n}, $$ {#eq:mean}
+
+where $\bar{x}$ is the sample mean of the variable $\mathbf{x} = x_1, \cdots, x_n$.
+
+Get a dataset in the DataFrames section and apply the mean.
+
+### Median {#sec:stats_central_median}
+
+We will see that the mean is highly sensitive to outliers and can sometimes misguide us, specially when we are dealing with long-tailed (non-normal distributions) (more in @sec:stats_dist_normal).
+That is why sometimes we are interested in also the **median** which is the **middle value that separates the higher half from the lower half of the data**.
+Intuitively, the median tells us the value of the data's 50\% percentile.
+One example is when we are analyzing income.
+The median is the upper limit that we expect that half of the observations earn.
+So, if the median income is U$ 80,000, we expect that half of our observations earn between the minimum value and U$ 80,000.
+The mathematical formula for the median is:
+
+$$ \operatorname{median}(\mathbf{x}) = \frac{x_{\lfloor (\# x+1) \div 2 \rfloor} + x_{\lceil (\# x+1) \div 2 \rceil}}{2}, $$ {#eq:median}
+
+where:
+
+- $\mathbf{x} = x_1, \cdots, x_n$ is an ordered list of numbers
+- $\# x$ is the list length
+- $\lfloor . \rfloor$ a rounded-down value to the nearest integer
+- $\lceil . \rceil$ a rounded-up value to the nearest integer
+
+Get a dataset in the DataFrames section and apply the mean.
+
+### Mode {#sec:stats_central_mode}
+
+The mean and median can be useful for numerical and ordinal data.
+But they are ineffective for nominal data, in which our data is comprised of qualitative data (also known as categorical data).
+This is where we use the **mode**, defined as **the most frequent value in our data**.
+
+Get a dataset in the DataFrames section and apply the mode.
+
+### Visualization of Central Tendencies {#sec:stats_central_vis}
+
+**Placeholder for a picture that shows mean, median and mode for a normal-like distribution**
+
+
+**Placeholder for a picture that shows mean, median and mode for a long-tailed distribution**
 
 ## Dispersion Measures {#sec:stats_dispersion}
 

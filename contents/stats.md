@@ -177,10 +177,29 @@ sco(s; process=without_caption_label)
 
 ### Visualization of Central Tendencies {#sec:stats_central_vis}
 
-**Placeholder for a picture that shows mean, median and mode for a normal-like distribution**
+In order to have a better intuition behind the difference between mean, median and mode, it is always useful to make some visualizations.
+We will cover statistical visualizations in depth in @sec:stats_vis.
+Below, in @fig:plot_central, we have two data distributions:
 
+- **Upper row**: **normal** distributed data
+- **Lower row**: **non-normal** distributed data
 
-**Placeholder for a picture that shows mean, median and mode for a long-tailed distribution**
+```jl
+s = """
+    fig = plot_central()
+    caption = "Normal and Non-Normal Distributed Data -- Difference Between Central Tendencies."
+    label = "plot_central"
+    Options(fig; filename=label, caption, label)
+    """
+sco(s)
+```
+
+You can see that the mean, median and mode are almost the same in the normal distributed data, but they differ a lot in the non-normal distributed data.
+In the non-normal distributed data the mean is highly skewed towards to the right, *biasing* our central tendency.
+This is an example of an outlier scenario where the mean can be highly sensitive to influential observations.
+Nevertheless, the median is unaffected by the outliers and can be used as a *reliable* central tendency.
+This demonstrates that the **median is robust to outliers**.
+In both cases, the mode is used only for comparison, since it is not advised for use with numerical data.
 
 ### Advice on Central Tendencies {#sec:stats_central_advice}
 
@@ -199,4 +218,4 @@ Percentiles, Quartile, Quintiles and IQR.
 
 ## Dependence Measures {#sec:stats_dependence}
 
-Covariance [and](and) Correlation.
+Covariance and Correlation.

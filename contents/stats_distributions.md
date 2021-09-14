@@ -3,6 +3,10 @@
 What is a distribution.
 3 axioms of Komolgorov.
 
+```julia
+using Distributions
+```
+
 ### Discrete and Continuous {#sec:stats_dist_discrete_continuous}
 
 ### Normal and Non-Normal Distributions {#sec:stats_dist_normal}

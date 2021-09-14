@@ -13,6 +13,7 @@ using Reexport
 @reexport using Colors
 @reexport using DataFrames
 @reexport using Dates
+@reexport using Distributions
 @reexport using Downloads
 @reexport using GLMakie
 @reexport using LaTeXStrings
@@ -51,6 +52,7 @@ export only_pass, correct_types, fix_age_column, fix_date_column
 
 # Stats.
 export more_grades
+export plot_central
 
 """
     build()

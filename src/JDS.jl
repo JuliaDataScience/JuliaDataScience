@@ -47,15 +47,6 @@ export convert_output, equals_alice, write_grades_csv, grades_with_commas
 export write_grades_xlsx, write_xlsx, salaries, responses, wrong_types
 export only_pass, correct_types, fix_age_column, fix_date_column
 
-#plot = Plots.plot
-
-function myplot()
-    I = 1:30
-    xy = mapping([I] => :x, [I .* 2] => :y)
-
-    draw(xy)
-end
-
 """
     build()
 

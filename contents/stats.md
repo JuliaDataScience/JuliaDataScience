@@ -36,31 +36,14 @@ In @fig:stats_vs_prob we summarize the relationship between data generating proc
 With knowledge of the data generating process we can apply probability to generate and simulate plausible data.
 And by using the observed data we can use inference to gain knowledge about the underlying data generating process.
 
-![Statistics vs Probability](images/statistics.png){#fig:stats_vs_prob}
-
-```{=comment}
-The graph above is here:
-
-digraph estatistica_inferencial {
-  forcelabels = true;
-  graph [overlap = false,
-  	 dpi = 300,
-  	 bgcolor="transparent",
-         fontsize = 12,
-         rankdir = TD]
-  node [shape = oval,
-        fontname = Helvetica]
-  A [label = "Data\nGenerating\nProcess"]
-  B [label = "Observed\nData"]
-  A -> B [dir = forward,
-          xlabel = "  Probability  ",
-          tailport = "e",
-          headport = "e"]
-  B -> A [dir = backward,
-          label = "  Inference  ",
-          tailport = "w",
-          headport = "w"]
-}
+```jl
+s = """
+    fig = statistics_graph()
+    caption = "Statistics vs Probability"
+    label = "stats_vs_prob"
+    Options(fig; filename=label, caption, label)
+    """
+sco(s)
 ```
 
 In this chapter, we will cover only descriptive statistics.
@@ -72,12 +55,15 @@ The most basic way of using descriptive statistics is to summarize data by a mea
 
 ### Mean {#sec:stats_central_mean}
 
-We have several ways to summarize data but the most common is to use the **mean**.
-The mean is the **sum of all measurements divided by the number of observations** and we generally denote it as "x bar":
+We have several ways to summarize data but the most common is to use the mean.
+**The mean, also known as average, is the sum of all measurements divided by the number of observations** and we generally denote it as "x bar":
 
 $$ \bar{x} = \frac{1}{n} \sum^n_{i=1} x_i = \frac{x_1 + x_2 + \cdots + x_n}{n}, $$ {#eq:mean}
 
 where $\bar{x}$ is the sample mean of the variable $\mathbf{x} = x_1, \cdots, x_n$.
+Often, we see the mean denoted with the **Greek letter $\mu$**, for example $\bar{x} = \mu_x$.
+Additionally, the mean is also known as the **expectation** which is represented by the operator $\operatorname{E}$, thus the mean of a variable $x$ becomes a $\operatorname{E}(x)$.
+So, bear in mind that you might find different notations for the mean.
 
 The mean can be used from the `mean` function from Julia's standard library `Statistics` module:
 
@@ -212,9 +198,118 @@ Here is our advice:
 
 ## Dispersion Measures {#sec:stats_dispersion}
 
-Variance and Standard Deviation.
-Mean Absolute Deviation.
-Percentiles, Quartile, Quintiles and IQR.
+In statistics, **dispersion is a measure of how much spread certain observations are from a central tendency**.
+It is also called variability or spread.
+One interesting property is that, contrary to central tendencies, dispersion measures can *only* be **positive**.
+In other words, we do not have negative measures of dispersion.
+
+### Variance and Standard Deviation {#sec:stats_dispersion_varstd}
+
+The first dispersion measure that we will cover are variance and standard deviation.
+We will be covering both measures together because they have a profound relationship.
+**The variance is the square of the standard deviation and the standard deviation is the square root of the variance.**
+
+Let's start with the variance. **Variance is mean of the squared difference between measurements and their average value**:
+
+$$ \operatorname{Var}(x) = \frac{1}{n-1} \sum^n_{i=1} (x_i - \bar{x})^2. $$ {#eq:variance}
+
+We use the operator $\operatorname{Var}$ to denote variance, but you also might find variance being denoted as the squared Greek letter $\sigma^2$.
+Note that we are using $n-1$ in @eq:variance.
+This is because we need a bias correction since we are using one *degree of freedom* from our estimate mean $\bar{x}$.
+Degrees of freedom are not in the scope of our book, so we won't cover in details, but feel free to check the [Wikipedia](https://en.wikipedia.org/wiki/Degrees_of_freedom_(statistics)) for a in depth explanation.
+
+Since we are squaring the differences in @eq:variance, the variance has a property that all dispersion measures have: the variance *cannot* be negative.
+
+The **var**iance can be used from the `var` function from Julia's standard library `Statistics` module:
+
+```julia
+using Statistics: var
+```
+
+Like before, we can apply the variance to different groups in our `more_grades` `DataFrame`:
+
+```jl
+# variance
+s = """
+    gdf = groupby(more_grades(), :name)
+    combine(gdf, :grade => var)
+    """
+sco(s; process=without_caption_label)
+```
+
+We can see that Sally has the highest dispersion in her grades measured by its variance.
+
+**The squared deviation is the square root of the mean of the squared difference between measurements and their average value**.
+Or in more simple words: it is the **square root of the variance**:
+
+$$ \sigma(x) = \sqrt{\frac{1}{n-1} \sum^n_{i=1} (x_i - \bar{x})^2}. $$ {#eq:std}
+
+For the standard deviation, since it is the square root of the variance, and variance is denoted as $\sigma^2$, we use the Greek letter $\sigma$ to denote standard deviation.
+
+In a similar fashion, for the **st**andard **d**eviation, we can use the `std` function from Julia's standard library `Statistics` module:
+
+```julia
+using Statistics: std
+```
+
+```jl
+# std
+s = """
+    gdf = groupby(more_grades(), :name)
+    combine(gdf, :grade => std)
+    """
+sco(s; process=without_caption_label)
+```
+
+Since the standard deviation is the square root of the variance, our measures of dispersion have only been rescaled.
+Sally still has the highest dispersion in her grades measured either by variance or standard deviation.
+
+### Mean Absolute Deviation {#sec:stats_dispersion_mad}
+
+Since variance and standard deviation uses the mean in their mathematical formulation, they are also **sensitive to outliers**.
+This is where a **dispersion measure that uses the median instead of the mean** would be useful.
+This is exactly the case of the **median absolute deviation which is defined as the median of the absolute difference between measurements and their median value**.
+Also known as its acronym MAD, it is an extreme robust dispersion measure since it uses twice the median to calculate first the central tendency followed by the difference between observations and their central distance:
+
+$$ \operatorname{MAD}(x) = \operatorname{median}(|x_i - \operatorname{median}(x)|), $$ {#eq:mad}
+
+where $|.|$ is the notation for absolute value.
+
+The **m**ean **a**bsolute **d**eviation is available as the function `mad` in the `StatsBase.jl`:
+
+```julia
+using StatsBase: mad
+```
+
+Let's see how our `more_grades` `DataFrame`'s dispersion measures are using `mad`:
+
+```jl
+# mad
+s = """
+    gdf = groupby(more_grades(), :name)
+    combine(gdf, :grade => mad)
+    """
+sco(s; process=without_caption_label)
+```
+
+We can see that still Sally has the highest grades dispersion, but now Bob's and Alice's dispersion are the same.
+Also note that, by using $\operatorname{MAD}$, Hank's dispersion is zero.
+This happens because two of the three Hank's grade are the same value:
+
+```jl
+s = """
+    df = more_grades()
+    filter!(row -> row.name == "Hank", df)
+    df
+    """
+sco(s; process=without_caption_label)
+```
+
+If we plug Hank's grades into @eq:mad we have to calculate $\operatorname{median}([2, 0, 0])$, so we end up with the middle value in an ordered list which is $0$.
+
+### Quantile and Percentiles {#sec:stats_dispersion_quantiles}
+
+Percentiles, Quantile, and IQR.
 
 ## Dependence Measures {#sec:stats_dependence}
 

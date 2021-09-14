@@ -31,7 +31,7 @@ include("environment.jl")
 include("showcode_additions.jl")
 include("plots.jl")
 include("makie.jl")
-include("AoG.jl")
+#include("AoG.jl")
 
 # Showcode additions.
 export sce, scsob, trim_last_n_lines, plainblock

@@ -79,7 +79,34 @@ $$ \bar{x} = \frac{1}{n} \sum^n_{i=1} x_i = \frac{x_1 + x_2 + \cdots + x_n}{n}, 
 
 where $\bar{x}$ is the sample mean of the variable $\mathbf{x} = x_1, \cdots, x_n$.
 
-Get a dataset in the DataFrames section and apply the mean.
+The mean can be used from the `mean` function from Julia's standard library `Statistics` module:
+
+```julia
+using Statistics: mean
+```
+
+And we can apply the mean to different groups in our data like we did in @sec:groupby_combine.
+For example, we have the `all_grades` `DataFrame`:
+
+```jl
+# inside stats content # hide
+sco("all_grades()"; process=without_caption_label)
+```
+
+Let us add more grades to our students so that we have more numbers to calculate central tendencies:
+
+```jl
+sco("more_grades()"; process=without_caption_label)
+```
+
+```jl
+# inside stats content # hide
+s = """
+    gdf = groupby(more_grades(), :name)
+    combine(gdf, :grade => mean)
+    """
+sco(s; process=without_caption_label)
+```
 
 ### Median {#sec:stats_central_median}
 
@@ -100,7 +127,22 @@ where:
 - $\lfloor . \rfloor$ a rounded-down value to the nearest integer
 - $\lceil . \rceil$ a rounded-up value to the nearest integer
 
-Get a dataset in the DataFrames section and apply the mean.
+Similarly, we can use the `median` from `Statistics` module to apply the median to our data:
+
+```julia
+using Statistics: median
+```
+
+```jl
+# median # hide
+s = """
+    gdf = groupby(more_grades(), :name)
+    combine(gdf, :grade => median)
+    """
+sco(s; process=without_caption_label)
+```
+
+As we can see, the median differs substantially from the mean.
 
 ### Mode {#sec:stats_central_mode}
 
@@ -108,7 +150,30 @@ The mean and median can be useful for numerical and ordinal data.
 But they are ineffective for nominal data, in which our data is comprised of qualitative data (also known as categorical data).
 This is where we use the **mode**, defined as **the most frequent value in our data**.
 
-Get a dataset in the DataFrames section and apply the mode.
+For the mode, we *do not* have a `mode` function inside Julia's standard library `Statistics` module.
+Instead, we need to use the `StatsBase.jl` for less common statistical functions:
+
+```julia
+using StatsBase: mode
+```
+
+In @sec:missing_data, we have the `correct_types` `DataFrame`, which is mainly categorical with `Date`s and `String`s:
+
+```jl
+# inside stats content # hide
+sco("correct_types()"; process=without_caption_label)
+```
+
+We can compute the mode with the `combine` function from `DataFrames.jl`.
+Notice that, unlike previously with mean and median, we will not group our data:
+
+```jl
+# mode # hide
+s = """
+    combine(correct_types(), :age => mode)
+    """
+sco(s; process=without_caption_label)
+```
 
 ### Visualization of Central Tendencies {#sec:stats_central_vis}
 
@@ -116,6 +181,15 @@ Get a dataset in the DataFrames section and apply the mode.
 
 
 **Placeholder for a picture that shows mean, median and mode for a long-tailed distribution**
+
+### Advice on Central Tendencies {#sec:stats_central_advice}
+
+You might be wondering: "which central tendency shall I use? Mean? Median? Mode?".
+Here is our advice:
+
+- For data that do *not* have outliers, use the **mean**
+- For data that *do* have outliers, use the **median**
+- For categorical/nominal data, use the **mode**
 
 ## Dispersion Measures {#sec:stats_dispersion}
 

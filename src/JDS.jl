@@ -19,6 +19,7 @@ using Reexport
 @reexport using Makie
 @reexport using Random
 @reexport using Statistics
+@reexport using StatsBase
 @reexport using InteractiveUtils
 @reexport using LinearAlgebra
 @reexport using GeometryBasics
@@ -32,6 +33,7 @@ include("showcode_additions.jl")
 include("plots.jl")
 include("makie.jl")
 #include("AoG.jl")
+include("stats.jl")
 
 # Showcode additions.
 export sce, scsob, trim_last_n_lines, plainblock
@@ -46,6 +48,9 @@ export grades_2020, grades_2021, all_grades, grades_array, grade_2020
 export convert_output, equals_alice, write_grades_csv, grades_with_commas
 export write_grades_xlsx, write_xlsx, salaries, responses, wrong_types
 export only_pass, correct_types, fix_age_column, fix_date_column
+
+# Stats.
+export more_grades
 
 """
     build()

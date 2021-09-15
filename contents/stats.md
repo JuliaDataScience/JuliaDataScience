@@ -26,7 +26,7 @@ Common metrics are: mean, median, mode, standard deviation, variance, correlatio
 All phenomena have an underlying data generating process that describes how the data is being generated.
 For example, in a soccer game, a scored goal can be explained by an underlying process: a tactic, error, struck of luck; or a mix of those.
 If we know a phenomenon's data generating process, we can use probability to simulate possible scenarios given certain aspects.
-Most of the time, specially in applied sciences, we do not have full knowledge of the data generating process.
+Most of the time, especially in applied sciences, we do not have full knowledge of the data generating process.
 Given the observed data, we can retrace our way back to the data generating process.
 This process is known as **statistical inference**.
 Given some data, we can *infer* what are the aspects of the underlying data generating process.
@@ -55,7 +55,7 @@ The most basic way of using descriptive statistics is to summarize data by a mea
 
 ### Mean {#sec:stats_central_mean}
 
-We have several ways to summarize data but the most common is to use the mean.
+The most common central tendency measure is the mean.
 **The mean, also known as average, is the sum of all measurements divided by the number of observations** and we generally denote it as "x bar":
 
 $$ \bar{x} = \frac{1}{n} \sum^n_{i=1} x_i = \frac{x_1 + x_2 + \cdots + x_n}{n}, $$ {#eq:mean}

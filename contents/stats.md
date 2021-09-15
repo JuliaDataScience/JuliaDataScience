@@ -133,7 +133,7 @@ As we can see, the median differs substantially from the mean.
 ### Mode {#sec:stats_central_mode}
 
 The mean and median can be useful for numerical and ordinal data.
-But they are ineffective for nominal data, in which our data is comprised of qualitative data (also known as categorical data).
+However, they are ineffective for nominal data, in which our data is comprised of qualitative data (also known as categorical data).
 This is where we use the **mode**, defined as **the most frequent value in our data**.
 
 For the mode, we *do not* have a `mode` function inside Julia's standard library `Statistics` module.
@@ -397,4 +397,49 @@ Like before, we provide the following advice:
  
 ## Dependence Measures {#sec:stats_dependence}
 
-Covariance and Correlation.
+Now that we covered univariate measures of central tendency and dispersion, we need to talk about bivariate measures.
+**Univariate measures are measures with respect to a single variable**.
+**Bivariate measures are measures with respect to the _relationship_ between two variables**.
+To quantity such relationships we use **dependence measures, which measure somehow the degree of how one variable value depends (or is related) to another variable value**.
+
+There is a distinction between a dependence *measure* and a dependence *relationship*.
+The first is simply a bivariate measure of how one variable is related to the other.
+On the other hand, a dependence relationship implies a profounder relationship, where not only they are related but information regarding one variable gives us information regarding the other.
+
+There two main measures of dependence and they are practically the same since one is the other constrained to the unit range between -1 and 1.
+**Covariance is a measure of the joint variability of two variables**.
+It is the expectation of one variable minus its expectation times another variables minus its expectation:
+
+$$ \operatorname{Cov}(x, y) = \operatorname{E} \left[ \left( x - \operatorname{E}(x) \right) \cdot \left( y - \operatorname{E}(y) \right) \right]. $$ {#eq:covariance}
+
+High positive or negative covariance indicates either a strong positive or negative joint variability, respectively.
+It measures how much one unit increase/decrease in one variable is related to one unit increase/decrease in another variable.
+
+The interpretation of a given covariance demands knowledge about units of measurement from both the underlying variables.
+So, if we want to analyze covariance between two variables we must have some understanding of how the variables units are measured.
+That is why most of the time we use the **correlation, which is _normalized_ covariance**.
+The correlation is _dimensionless_ since it is constrained to the unit range between -1 and 1.
+Mathematically speaking, the correlation is the covariance divided by the product of the variables' standard deviation and is denoted by the Greek letter $\rho$:
+
+$$ \rho(x, y) = \frac{\operatorname{Cov}(x, y)}{\sigma_x \cdot \sigma_y}, $$ {#eq:correlation}
+
+where $\sigma_x$ and $\sigma_y$ are the standard devations of $x$ and $y$, respectively.
+
+In @fig:plot_corr, we can see some correlations and their underlying scatter plot for 50 random generated observations.
+
+```jl
+s = """
+    fig = plot_corr()
+    caption = "Correlation for 50 Random Bivariate Observations."
+    label = "plot_corr"
+    Options(fig; filename=label, caption, label)
+    """
+sco(s)
+```
+
+As we can see, correlation depicts the **linear association** between variables.
+The slope of the dashed line shows the correlation between variables.
+The more far from zero and closer to $\pm$ 1 the stronger is the association between variables.
+Finally, the sign of the correlation denotes the type of relationship between variables.
+**Positive correlations** implies **positive relationship**, increase in one variable results in an _increase_ in the other.
+**Negative correlations** implies **negative/inverse relationship**, increase in one variable results in an _decrease_ in the other.

@@ -87,10 +87,10 @@ function plot_central()
     d1 = Distributions.Normal(10)
     d2 = LogNormal(log(10), log(1.5))
     density!(
-        ax1, rand(d1, 1_000); strokewidth=1.5, strokecolor= (:black,0.5), color=(:silver, 0.15)
+        ax1, rand(d1, 1_000); strokewidth=1.5, strokecolor= (:black, 0.5), color=(:silver, 0.15)
     )
     density!(
-        ax2, rand(d2, 1_000); strokewidth=1.5, strokecolor= (:black,0.5), color=(:grey, 0.25)
+        ax2, rand(d2, 1_000); strokewidth=1.5, strokecolor= (:black, 0.5), color=(:grey, 0.25)
     )
     # colorbrewer2 palettes
     ylim_ax1 = 0.38
@@ -171,10 +171,10 @@ function plot_dispersion_std()
     d1 = Distributions.Normal(10)
     d2 = LogNormal(log(10), log(1.5))
     density!(
-        ax1, rand(d1, 1_000); strokewidth=1.5, strokecolor= (:black,0.5), color=(:silver, 0.15)
+        ax1, rand(d1, 1_000); strokewidth=1.5, strokecolor= (:black, 0.5), color=(:silver, 0.15)
     )
     density!(
-        ax2, rand(d2, 1_000); strokewidth=1.5, strokecolor= (:black,0.5), color=(:grey, 0.25)
+        ax2, rand(d2, 1_000); strokewidth=1.5, strokecolor= (:black, 0.5), color=(:grey, 0.25)
     )
     # colorbrewer2 palettes
     ylim_ax1 = 0.38
@@ -239,10 +239,10 @@ function plot_dispersion_mad()
     x1 = rand(d1, 1_000)
     x2 = rand(d2, 1_000)
     density!(
-        ax1,x1; strokewidth=1.5, strokecolor= (:black,0.5), color=(:silver, 0.15)
+        ax1,x1; strokewidth=1.5, strokecolor= (:black, 0.5), color=(:silver, 0.15)
     )
     density!(
-        ax2,x2; strokewidth=1.5, strokecolor= (:black,0.5), color=(:grey, 0.25)
+        ax2,x2; strokewidth=1.5, strokecolor= (:black, 0.5), color=(:grey, 0.25)
     )
     # colorbrewer2 palettes
     ylim_ax1 = 0.38
@@ -305,10 +305,10 @@ function plot_dispersion_iqr()
     d1 = Distributions.Normal(10)
     d2 = LogNormal(log(10), log(1.5))
     density!(
-        ax1, rand(d1, 1_000); strokewidth=1.5, strokecolor= (:black,0.5), color=(:silver, 0.15)
+        ax1, rand(d1, 1_000); strokewidth=1.5, strokecolor= (:black, 0.5), color=(:silver, 0.15)
     )
     density!(
-        ax2, rand(d2, 1_000); strokewidth=1.5, strokecolor= (:black,0.5), color=(:grey, 0.25)
+        ax2, rand(d2, 1_000); strokewidth=1.5, strokecolor= (:black, 0.5), color=(:grey, 0.25)
     )
     # colorbrewer2 palettes
     ylim_ax1 = 0.38
@@ -395,5 +395,47 @@ function plot_dispersion_iqr()
     #fig[1:2, 2] = Legend(fig, ax2)
     axislegend(ax1, position = :rt)
     rowgap!(fig.layout, 8)
+    return fig
+end
+
+function plot_corr()
+    Random.seed!(123)
+    CairoMakie.activate!() # hide
+    fig = Figure(; resolution=(600, 600))
+    corrs = [0.5, -0.5, 0.8, -0.8]
+    ds = [MvNormal([1 i; i 1]) for i in corrs]
+    d0 = MvNormal(2, 1)
+    ax1 = Axis(
+               fig[1, 1:2]; title="Correlation = $(corrs[1])", titlesize=20, limits=((-2, 2), (-2, 2))
+               )
+    ax2 = Axis(
+               fig[1, 3:4]; title="Correlation = $(corrs[2])", titlesize=20, limits=((-2, 2), (-2, 2))
+               )
+    ax3 = Axis(
+               fig[2, 2:3]; title="Correlation = 0", titlesize=20, limits=((-2, 2), (-2, 2))
+               )
+    ax4 = Axis(
+               fig[3, 1:2]; title="Correlation = $(corrs[3])", titlesize=20, limits=((-2, 2), (-2, 2))
+               )
+    ax5 = Axis(
+               fig[3, 3:4]; title="Correlation = $(corrs[4])", titlesize=20, limits=((-2, 2), (-2, 2))
+               )
+    scatter!(ax1, rand(ds[1], 50)'; marker=:circle, color=:dodgerblue)
+    scatter!(ax2, rand(ds[2], 50)'; marker=:circle, color=:dodgerblue)
+    scatter!(ax3, rand(d0, 50)'; marker=:circle, color=:dodgerblue)
+    scatter!(ax4, rand(ds[3], 50)'; marker=:circle, color=:dodgerblue)
+    scatter!(ax5, rand(ds[4], 50)'; marker=:circle, color=:dodgerblue)
+    abline!(ax1, 0, corrs[1]; linewidth=2,linestyle=:dash, color=:red)
+    abline!(ax2, 0, corrs[2]; linewidth=2,linestyle=:dash, color=:red)
+    abline!(ax3, 0, 0; linewidth=2,linestyle=:dash, color=:red)
+    abline!(ax4, 0, corrs[3]; linewidth=2,linestyle=:dash, color=:red)
+    abline!(ax5, 0, corrs[4]; linewidth=2,linestyle=:dash, color=:red)
+    rowgap!(fig.layout, 8)
+    hidexdecorations!(ax1; grid=false, ticks=false)
+    hidexdecorations!(ax2; grid=false, ticks=false)
+    hideydecorations!(ax2; grid=false, ticks=false)
+    hideydecorations!(ax5; grid=false, ticks=false)
+    #hidedecorations!(ax3; grid=false, ticks=false)
+    colgap!(fig.layout, 8)
     return fig
 end

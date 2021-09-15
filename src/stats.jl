@@ -122,11 +122,11 @@ function plot_central()
         label="mode",
     )
     #ylims!(ax1, 0, ylim_ax1)
-    #ylim_ax2 = 0.105
+    ylim_ax2 = 0.105
     vlines!(
         ax2,
         mean(d2);
-        #ymax=Distributions.pdf(d2, mean(d2)) / ylim_ax2,
+        ymax=Distributions.pdf(d2, mean(d2)) / ylim_ax2,
         color= :dodgerblue,
         linewidth=3,
         linestyle = :solid,
@@ -135,7 +135,7 @@ function plot_central()
     vlines!(
         ax2,
         median(d2);
-        #ymax=Distributions.pdf(d2, median(d2)) / ylim_ax2,
+        ymax=Distributions.pdf(d2, median(d2)) / ylim_ax2,
         color="red",
         linewidth=3,
         linestyle = :dot,
@@ -144,7 +144,7 @@ function plot_central()
     vlines!(
         ax2,
         mode(d2);
-        #ymax = Distributions.pdf(d2, mode(d2)) / ylim_ax2,
+        ymax = Distributions.pdf(d2, mode(d2)) / ylim_ax2,
         color="black",
         linewidth=3,
         linestyle = :dashdot,
@@ -162,3 +162,238 @@ function plot_central()
     return fig
 end
 
+function plot_dispersion_std()
+    Random.seed!(123)
+    CairoMakie.activate!() # hide
+    fig = Figure(; resolution=(600, 400))
+    ax1 = Axis(fig[1, 1]; limits=((3, 20), nothing))
+    ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
+    d1 = Distributions.Normal(10)
+    d2 = LogNormal(log(10), log(1.5))
+    density!(
+        ax1, rand(d1, 1_000); strokewidth=1.5, strokecolor= (:black,0.5), color=(:silver, 0.15)
+    )
+    density!(
+        ax2, rand(d2, 1_000); strokewidth=1.5, strokecolor= (:black,0.5), color=(:grey, 0.25)
+    )
+    # colorbrewer2 palettes
+    ylim_ax1 = 0.38
+    vlines!(
+        ax1,
+        mean(d1);
+        ymax=Distributions.pdf(d1, mean(d1)) / ylim_ax1,
+        color= :dodgerblue,
+        linewidth=3,
+        linestyle = :solid,
+        label=L"\mu",
+    )
+    vlines!(
+        ax1,
+        [mean(d1) - std(d1), mean(d1) + std(d1)];
+        ymax=Distributions.pdf(d1, [mean(d1) - std(d1), mean(d1) + std(d1)]) ./ ylim_ax1,
+        color= :red,
+        linewidth=3,
+        linestyle = :dot,
+        label=L"1 \cdot \sigma",
+    )
+    #ylims!(ax1, 0, ylim_ax1)
+    ylim_ax2 = 0.105
+    vlines!(
+        ax2,
+        mean(d2);
+        ymax=Distributions.pdf(d2, mean(d2)) / ylim_ax2,
+        color= :dodgerblue,
+        linewidth=3,
+        linestyle = :solid,
+        label=L"\mu",
+    )
+    vlines!(
+        ax2,
+        [mean(d2) - std(d2), mean(d2) + std(d2)];
+        ymax=Distributions.pdf(d2, [mean(d2) - std(d2), mean(d2) + std(d2)]) ./ ylim_ax2,
+        color="red",
+        linewidth=3,
+        linestyle = :dot,
+        label=L"1 \cdot \sigma",
+    )
+    #ylims!(ax2, 0, ylim_ax2)
+    #ylims!(ax1, 0, ylim_ax1)
+
+    hidexdecorations!(ax1; grid = false, ticks = false)
+    #hideydecorations!(ax1; grid = false)
+    #hideydecorations!(ax2; grid = false)
+    #fig[1:2, 2] = Legend(fig, ax2)
+    axislegend(ax1, position = :rt)
+    rowgap!(fig.layout, 8)
+    return fig
+end
+
+function plot_dispersion_mad()
+    Random.seed!(123)
+    CairoMakie.activate!() # hide
+    fig = Figure(; resolution=(600, 400))
+    ax1 = Axis(fig[1, 1]; limits=((3, 20), nothing))
+    ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
+    d1 = Distributions.Normal(10)
+    d2 = LogNormal(log(10), log(1.5))
+    x1 = rand(d1, 1_000)
+    x2 = rand(d2, 1_000)
+    density!(
+        ax1,x1; strokewidth=1.5, strokecolor= (:black,0.5), color=(:silver, 0.15)
+    )
+    density!(
+        ax2,x2; strokewidth=1.5, strokecolor= (:black,0.5), color=(:grey, 0.25)
+    )
+    # colorbrewer2 palettes
+    ylim_ax1 = 0.38
+    vlines!(
+        ax1,
+        median(d1);
+        ymax=Distributions.pdf(d1, median(d1)) / ylim_ax1,
+        color= :dodgerblue,
+        linewidth=3,
+        linestyle = :solid,
+        label="median",
+    )
+    vlines!(
+        ax1,
+        [median(d1) - mad(x1), median(d1) + mad(x1)];
+        ymax=Distributions.pdf(d1, [median(d1) - mad(x1), median(d1) + mad(x1)]) ./ ylim_ax1,
+        color= :red,
+        linewidth=3,
+        linestyle = :dot,
+        label=L"1 \cdot MAD",
+    )
+    #ylims!(ax1, 0, ylim_ax1)
+    ylim_ax2 = 0.105
+    vlines!(
+        ax2,
+        median(d2);
+        ymax=Distributions.pdf(d2, median(d2)) / ylim_ax2,
+        color= :dodgerblue,
+        linewidth=3,
+        linestyle = :solid,
+        label="median",
+    )
+    vlines!(
+        ax2,
+        [median(d2) - mad(x2), median(d2) + mad(x2)];
+        ymax=Distributions.pdf(d2, [median(d2) - mad(x2), median(d2) + mad(x2)]) ./ ylim_ax2,
+        color="red",
+        linewidth=3,
+        linestyle = :dot,
+        label=L"1 \cdot MAD",
+    )
+    #ylims!(ax2, 0, ylim_ax2)
+    #ylims!(ax1, 0, ylim_ax1)
+
+    hidexdecorations!(ax1; grid = false, ticks = false)
+    #hideydecorations!(ax1; grid = false)
+    #hideydecorations!(ax2; grid = false)
+    #fig[1:2, 2] = Legend(fig, ax2)
+    axislegend(ax1, position = :rt)
+    rowgap!(fig.layout, 8)
+    return fig
+end
+
+function plot_dispersion_iqr()
+    Random.seed!(123)
+    CairoMakie.activate!() # hide
+    fig = Figure(; resolution=(600, 400))
+    ax1 = Axis(fig[1, 1]; limits=((3, 20), nothing))
+    ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
+    d1 = Distributions.Normal(10)
+    d2 = LogNormal(log(10), log(1.5))
+    density!(
+        ax1, rand(d1, 1_000); strokewidth=1.5, strokecolor= (:black,0.5), color=(:silver, 0.15)
+    )
+    density!(
+        ax2, rand(d2, 1_000); strokewidth=1.5, strokecolor= (:black,0.5), color=(:grey, 0.25)
+    )
+    # colorbrewer2 palettes
+    ylim_ax1 = 0.38
+    vlines!(
+        ax1,
+        median(d1);
+        ymax=Distributions.pdf(d1, median(d1)) / ylim_ax1,
+        color= :dodgerblue,
+        linewidth=3,
+        linestyle = :solid,
+        label="median",
+    )
+    vlines!(
+        ax1,
+        quantile(d1, 0.25);
+        ymax=Distributions.pdf(d1, quantile(d1, 0.25)) / ylim_ax1,
+        color= :red,
+        linewidth=3,
+        linestyle = :dot,
+        label="Q1",
+    )
+    vlines!(
+        ax1,
+        quantile(d1, 0.75);
+        ymax=Distributions.pdf(d1, quantile(d1, 0.75)) / ylim_ax1,
+        color="black",
+        linewidth=3,
+        linestyle = :dashdot,
+        label="Q3",
+    )
+    vspan!(
+        ax1,
+        quantile(d1, 0.25),
+        quantile(d1, 0.75);
+        color=(:green, 0.3),
+        #linewidth=3,
+        #linestyle = :dashdot,
+        label="IQR",
+    )
+    #ylims!(ax1, 0, ylim_ax1)
+    ylim_ax2 = 0.105
+    vlines!(
+        ax2,
+        median(d2);
+        ymax=Distributions.pdf(d2, median(d2)) / ylim_ax2,
+        color= :dodgerblue,
+        linewidth=3,
+        linestyle = :solid,
+        label="median",
+    )
+    vlines!(
+        ax2,
+        quantile(d2, 0.25);
+        #ymax=Distributions.pdf(d2, quantile(d2, 0.25)) / ylim_ax1,
+        color="red",
+        linewidth=3,
+        linestyle = :dot,
+        label="Q1",
+    )
+    vlines!(
+        ax2,
+        quantile(d2, 0.75);
+        #ymax=Distributions.pdf(d2, quantile(d2, 0.75)) / ylim_ax1,
+        color="black",
+        linewidth=3,
+        linestyle = :dashdot,
+        label="Q3",
+    )
+    vspan!(
+        ax2,
+        quantile(d2, 0.25),
+        quantile(d2, 0.75);
+        color=(:green, 0.3),
+        #linewidth=3,
+        #linestyle = :dashdot,
+        label="IQR",
+    )
+    #ylims!(ax2, 0, ylim_ax2)
+    #ylims!(ax1, 0, ylim_ax1)
+
+    hidexdecorations!(ax1; grid = false, ticks = false)
+    #hideydecorations!(ax1; grid = false)
+    #hideydecorations!(ax2; grid = false)
+    #fig[1:2, 2] = Legend(fig, ax2)
+    axislegend(ax1, position = :rt)
+    rowgap!(fig.layout, 8)
+    return fig
+end

@@ -173,7 +173,7 @@ Below, in @fig:plot_central, we have two data distributions:
 ```jl
 s = """
     fig = plot_central()
-    caption = "Normal and Non-Normal Distributed Data -- Difference Between Central Tendencies."
+    caption = "Normal and Non-Normal Distributed Data -- Differences Between Central Tendencies."
     label = "plot_central"
     Options(fig; filename=label, caption, label)
     """
@@ -264,6 +264,23 @@ sco(s; process=without_caption_label)
 Since the standard deviation is the square root of the variance, our measures of dispersion have only been rescaled.
 Sally still has the highest dispersion in her grades measured either by variance or standard deviation.
 
+As we did before, in @fig:plot_dispersion_std, we have two data distributions:
+
+- **Upper row**: **normal** distributed data
+- **Lower row**: **non-normal** distributed data
+
+```jl
+s = """
+    fig = plot_dispersion_std()
+    caption = "Normal and Non-Normal Distributed Data -- Differences Between Standard Deviations."
+    label = "plot_dispersion_std"
+    Options(fig; filename=label, caption, label)
+    """
+sco(s)
+```
+
+We can see that the mean $\mu$ is slightly shifted towards to the right by the few influential observations and that the dispersion measured by the $\pm 1\sigma$ (one standard deviation) away from the mean inherits the bias from the mean.
+
 ### Mean Absolute Deviation {#sec:stats_dispersion_mad}
 
 Since variance and standard deviation uses the mean in their mathematical formulation, they are also **sensitive to outliers**.
@@ -307,10 +324,77 @@ sco(s; process=without_caption_label)
 
 If we plug Hank's grades into @eq:mad we have to calculate $\operatorname{median}([2, 0, 0])$, so we end up with the middle value in an ordered list which is $0$.
 
-### Quantile and Percentiles {#sec:stats_dispersion_quantiles}
+One more, in @fig:plot_dispersion_mad, we have two data distributions:
 
-Percentiles, Quantile, and IQR.
+- **Upper row**: **normal** distributed data
+- **Lower row**: **non-normal** distributed data
 
+```jl
+s = """
+    fig = plot_dispersion_mad()
+    caption = "Normal and Non-Normal Distributed Data -- Differences Between Mean Absolute Deviations."
+    label = "plot_dispersion_mad"
+    Options(fig; filename=label, caption, label)
+    """
+sco(s)
+```
+
+Note that the MAD is very robust against influential observations and, contrary to the standard deviation, does not inherit any bias from the underlying central tendency measure (median).
+MAD can be an effective dispersion measure to non-normal data which few influential observations shift a non-robust central tendency (such as the mean).
+
+### Percentiles and Quantiles {#sec:stats_dispersion_quantiles}
+
+In statistics, we have the notion of a **percentile that is a score _below which_ a given percentage of scores from observations falls**.
+For example, the median is the 0.5 percentile (50\%).
+Or, if we want the top-5% highest values of our observations, we would select observations from the 0.95 percentile onwards.
+
+Some percentiles have special names:
+
+- 0.33 and 0.666 are called **terciles**
+- 0.25, 0.50, 0.75 are called **quartiles**
+- 0.2, 0.4, 0.6, 0.8 are called **quintiles**
+- 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 are called **deciles**
+
+These, including percentiles, are in a broad manner called quantiles.
+**Quantiles are cut points that divide equally the range of observations values' into equal spaced intervals**.
+
+Most important and commonly used quantile is the 4-quantile, also known as **quartile**, which we denote with the letter Q followed by a number to identify which one of the quantiles we are referring to.
+Since we have only three quantiles, we have Q1, Q2 and Q3 correspoding to the first, second and third quantile, respectively.
+The Q2 (the 0.5 percentile) is also the median and the Q1 and Q3 are the 0.25 and 0.75 percentile.
+The quartiles are important because we often use it to denote a measure of dispersion.
+This measure is known as **interquartile range** (IQR) and is the **difference between the third and first quartile**:
+
+$$ \operatorname{IQR}(x) = \operatorname{Q3}(x) - \operatorname{Q1}(x), $$ {#eq:iqr}
+
+Like the mean absolute deviation, **IQR**, since uses the median and percentiles, is also **robust to outliers**.
+
+As usual, in @fig:plot_dispersion_iqr, we have two data distributions:
+
+- **Upper row**: **normal** distributed data
+- **Lower row**: **non-normal** distributed data
+
+```jl
+s = """
+    fig = plot_dispersion_iqr()
+    caption = "Normal and Non-Normal Distributed Data -- Differences Between IQR Measures."
+    label = "plot_dispersion_iqr"
+    Options(fig; filename=label, caption, label)
+    """
+sco(s)
+```
+
+Here we can see that the median is *not* influenced by the few influential observations and that the IQR measured by the 1st and 3rd quantiles represents the 50% most probable values of our observations.
+
+### Advice on Dispersion Measures {#sec:stats_dispersion_advice}
+
+You might be wondering: "which dispersion measure shall I use? Variance? Standard Deviation? Mean Absolute Deviation? IQR?".
+Like before, we provide the following advice:
+
+- _Don't_ use **variance**, since it is not an intuitive measure
+- For data that do *not* have outliers, use the **standard deviation**
+- For data that *do* have outliers, use either the **mean absolute deviation** or **IQR**
+- For categorical/nominal data, use some sort of **frequency counter**
+ 
 ## Dependence Measures {#sec:stats_dependence}
 
 Covariance and Correlation.

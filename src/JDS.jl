@@ -52,7 +52,7 @@ export only_pass, correct_types, fix_age_column, fix_date_column
 
 # Stats.
 export more_grades
-export statistics_graph, plot_central
+export statistics_graph, plot_central, plot_dispersion_std, plot_dispersion_mad, plot_dispersion_iqr
 
 """
     build()

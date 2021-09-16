@@ -96,19 +96,20 @@ sco(s; process=without_caption_label)
 
 ### Median {#sec:stats_central_median}
 
-We will see that the mean is highly sensitive to outliers and can sometimes misguide us, specially when we are dealing with long-tailed (non-normal distributions) (more in @sec:stats_dist_normal).
-That is why sometimes we are interested in also the **median** which is the **middle value that separates the higher half from the lower half of the data**.
+We will see that the mean is highly sensitive to outliers and can sometimes misguide us, especially when we are dealing with long-tailed (non-normal distributions) (more in @sec:stats_dist_normal).
+That is why sometimes we are interested in the **median** which is the **middle value that separates the higher half from the lower half of the data**.
 Intuitively, the median tells us the value of the data's 50\% percentile.
 One example is when we are analyzing income.
 The median is the upper limit that we expect that half of the observations earn.
-So, if the median income is U$ 80,000, we expect that half of our observations earn between the minimum value and U$ 80,000.
+So, if the median income is $ 80,000, we expect that half of our observations earn between the minimum value and $ 80,000.
 The mathematical formula for the median is:
 
 $$ \operatorname{median}(\mathbf{x}) = \frac{x_{\lfloor (\# x+1) \div 2 \rfloor} + x_{\lceil (\# x+1) \div 2 \rceil}}{2}, $$ {#eq:median}
 
 where:
 
-- $\mathbf{x} = x_1, \cdots, x_n$ is an ordered list of numbers
+- $\mathbf{x} = x_1, \cdots, x_n$ is an ordered vector of numbers
+- $\mathbf{x}_i$ is the element in vector $\mathbf{x}$ at position $i$
 - $\# x$ is the list length
 - $\lfloor . \rfloor$ a rounded-down value to the nearest integer
 - $\lceil . \rceil$ a rounded-up value to the nearest integer
@@ -137,7 +138,7 @@ However, they are ineffective for nominal data, in which our data is comprised o
 This is where we use the **mode**, defined as **the most frequent value in our data**.
 
 For the mode, we *do not* have a `mode` function inside Julia's standard library `Statistics` module.
-Instead, we need to use the `StatsBase.jl` for less common statistical functions:
+Instead, we need to use the `StatsBase.jl` package for less common statistical functions:
 
 ```julia
 using StatsBase: mode
@@ -171,13 +172,10 @@ Below, in @fig:plot_central, we have two data distributions:
 - **Lower row**: **non-normal** distributed data
 
 ```jl
-s = """
-    fig = plot_central()
-    caption = "Normal and Non-Normal Distributed Data -- Differences Between Central Tendencies."
-    label = "plot_central"
-    Options(fig; filename=label, caption, label)
-    """
-sco(s)
+fig = plot_central()
+caption = "Normal and Non-Normal Distributed Data -- Differences Between Central Tendencies."
+label = "plot_central"
+Options(fig; filename=label, caption, label)
 ```
 
 You can see that the mean, median and mode are almost the same in the normal distributed data, but they differ a lot in the non-normal distributed data.

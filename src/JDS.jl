@@ -35,6 +35,7 @@ include("plots.jl")
 include("makie.jl")
 #include("AoG.jl")
 include("stats.jl")
+include("bezier.jl")
 
 # Showcode additions.
 export sce, scsob, trim_last_n_lines, plainblock

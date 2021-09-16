@@ -15,7 +15,7 @@ This means the "probability of the event to occur is the set of all real numbers
 In addition, we have three axioms, originated from @kolmogorovFoundationsTheoryProbability1933:
 
 1. **Non-negativity**: For all $A$, $P(A) \geq 0$. Every probability is positive (greater than or equal to zero), regardless of the event.
-2. **Additivity**: For two mutually exclusive $A$ and $B$ (cannot occur at the same time): $P(A) = 1 - P(B)$ and $P(B) = 1 - P(A)$.
+2. **Additivity**: For two mutually exclusive events $A$ and $B$ (cannot occur at the same time): $P(A) = 1 - P(B)$ and $P(B) = 1 - P(A)$.
 3. **Normalization**: The probability of all possible events $A_1, A_2, \dots$ must add up to 1: $\sum_{n \in \mathbb{N}} P(A_n) = 1$; or, in the case of a continuous variable, integrate to 1: $\int^\infty_{-\infty} f(x) dx = 1$.
 
 What is a distribution.

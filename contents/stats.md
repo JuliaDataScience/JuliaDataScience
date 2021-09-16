@@ -37,13 +37,10 @@ With knowledge of the data generating process we can apply probability to genera
 And by using the observed data we can use inference to gain knowledge about the underlying data generating process.
 
 ```jl
-s = """
-    fig = statistics_graph()
-    caption = "Statistics vs Probability"
-    label = "stats_vs_prob"
-    Options(fig; filename=label, caption, label)
-    """
-sco(s)
+fig = statistics_graph()
+caption = "Statistics vs Probability"
+label = "stats_vs_prob"
+Options(fig; filename=label, caption, label)
 ```
 
 In this chapter, we will cover only descriptive statistics.
@@ -268,13 +265,10 @@ As we did before, in @fig:plot_dispersion_std, we have two data distributions:
 - **Lower row**: **non-normal** distributed data
 
 ```jl
-s = """
-    fig = plot_dispersion_std()
-    caption = "Normal and Non-Normal Distributed Data -- Differences Between Standard Deviations."
-    label = "plot_dispersion_std"
-    Options(fig; filename=label, caption, label)
-    """
-sco(s)
+fig = plot_dispersion_std()
+caption = "Normal and Non-Normal Distributed Data -- Differences Between Standard Deviations."
+label = "plot_dispersion_std"
+Options(fig; filename=label, caption, label)
 ```
 
 We can see that the mean $\mu$ is slightly shifted towards to the right by the few influential observations and that the dispersion measured by the $\pm 1\sigma$ (one standard deviation) away from the mean inherits the bias from the mean.
@@ -328,16 +322,13 @@ One more, in @fig:plot_dispersion_mad, we have two data distributions:
 - **Lower row**: **non-normal** distributed data
 
 ```jl
-s = """
-    fig = plot_dispersion_mad()
-    caption = "Normal and Non-Normal Distributed Data -- Differences Between Mean Absolute Deviations."
-    label = "plot_dispersion_mad"
-    Options(fig; filename=label, caption, label)
-    """
-sco(s)
+fig = plot_dispersion_mad()
+caption = "Normal and Non-Normal Distributed Data -- Differences Between Mean Absolute Deviations."
+label = "plot_dispersion_mad"
+Options(fig; filename=label, caption, label)
 ```
 
-Note that the MAD is very robust against influential observations and, contrary to the standard deviation, does not inherit any bias from the underlying central tendency measure (median).
+Note that the MAD is extremely robust against influential observations and, contrary to the standard deviation, does not inherit any bias from the underlying central tendency measure (median).
 MAD can be an effective dispersion measure to non-normal data which few influential observations shift a non-robust central tendency (such as the mean).
 
 ### Percentiles and Quantiles {#sec:stats_dispersion_quantiles}
@@ -372,13 +363,10 @@ As usual, in @fig:plot_dispersion_iqr, we have two data distributions:
 - **Lower row**: **non-normal** distributed data
 
 ```jl
-s = """
-    fig = plot_dispersion_iqr()
-    caption = "Normal and Non-Normal Distributed Data -- Differences Between IQR Measures."
-    label = "plot_dispersion_iqr"
-    Options(fig; filename=label, caption, label)
-    """
-sco(s)
+fig = plot_dispersion_iqr()
+caption = "Normal and Non-Normal Distributed Data -- Differences Between IQR Measures."
+label = "plot_dispersion_iqr"
+Options(fig; filename=label, caption, label)
 ```
 
 Here we can see that the median is *not* influenced by the few influential observations and that the IQR measured by the 1st and 3rd quantiles represents the 50% most probable values of our observations.
@@ -426,13 +414,10 @@ where $\sigma_x$ and $\sigma_y$ are the standard devations of $x$ and $y$, respe
 In @fig:plot_corr, we can see some correlations and their underlying scatter plot for 50 random generated observations.
 
 ```jl
-s = """
-    fig = plot_corr()
-    caption = "Correlation for 50 Random Bivariate Observations."
-    label = "plot_corr"
-    Options(fig; filename=label, caption, label)
-    """
-sco(s)
+fig = plot_corr()
+caption = "Correlation for 50 Random Bivariate Observations."
+label = "plot_corr"
+Options(fig; filename=label, caption, label)
 ```
 
 As we can see, correlation depicts the **linear association** between variables.

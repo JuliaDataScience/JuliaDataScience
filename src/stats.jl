@@ -45,7 +45,7 @@ function statistics_graph()
     t0 = [2, 1.0] # starting tangent vector
     t1 = [-2, 1.0] # end tangent vector
     curve = BezierCurve(x0, x1, t0, t1)
-    T = range(0, 1 ; length=100)
+    T = range(0, 1; length=100)
     points = [curve(t) for t in T]
     points = hcat(points...)';
     ##
@@ -86,12 +86,11 @@ function plot_central()
     ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
     d1 = Distributions.Normal(10)
     d2 = LogNormal(log(10), log(1.5))
-    density!(
-        ax1, rand(d1, 1_000); strokewidth=1.5, strokecolor= (:black, 0.5), color=(:silver, 0.15)
-    )
-    density!(
-        ax2, rand(d2, 1_000); strokewidth=1.5, strokecolor= (:black, 0.5), color=(:grey, 0.25)
-    )
+strokewidth = 1.5
+strokecolor = (:black, 0.5)
+dens(ax, d, color) = density!(ax, rand(d, 1_000); strokewidth, strokecolor, color)
+dens(ax1, d1, (:silver, 0.15))
+dens(ax2, d2, (:grey, 0.25))
     # colorbrewer2 palettes
     ylim_ax1 = 0.38
     vlines!(
@@ -187,10 +186,11 @@ function plot_dispersion_std()
         linestyle = :solid,
         label=L"\mu",
     )
+msd = [mean(d1) - std(d1), mean(d1) + std(d1)]
     vlines!(
         ax1,
-        [mean(d1) - std(d1), mean(d1) + std(d1)];
-        ymax=Distributions.pdf(d1, [mean(d1) - std(d1), mean(d1) + std(d1)]) ./ ylim_ax1,
+        msd;
+        ymax=Distributions.pdf(d1, msd) ./ ylim_ax1,
         color= :red,
         linewidth=3,
         linestyle = :dot,

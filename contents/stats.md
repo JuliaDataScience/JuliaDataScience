@@ -16,7 +16,7 @@ Our approach is to simplify the concepts as much as possible without losing thei
 Statistics is important because it is a **tool to make sense of data**.
 With the abundant availability of data, we are often overwhelmed by numbers.
 Statistics offers a way to comprehend, summarize and infer information from data.
-We believe that every data scientist should have a basic understanding of statistics and how to perform simple statistical operations.
+We believe that every data scientist needs to have a basic understanding of statistics and how to perform simple statistical operations.
 
 We can divide statistics into two broad categories: **descriptive** and **inferential**.
 **Descriptive statistics summarizes and quantifies the characteristics of a given observed data**.

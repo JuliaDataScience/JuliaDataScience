@@ -56,6 +56,9 @@ export more_grades
 export statistics_graph, plot_central
 export plot_dispersion_std, plot_dispersion_mad, plot_dispersion_iqr
 export plot_corr
+export plot_normal_lognormal, plot_discrete_continuous
+export plot_pmf, plot_pdf, plot_cdf
+export calculate_pdf
 
 """
     build()

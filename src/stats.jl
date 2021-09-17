@@ -40,19 +40,30 @@ function more_grades()
     return vcat(df1, df2)
 end
 
+function normal_dist(mean, std; seed=123)
+    Random.seed!(seed)
+    d = Distributions.Normal(mean, std)
+    return d, rand(d, 1_000)
+end
+
+function lognormal_dist(mean, std; seed=123)
+    Random.seed!(seed)
+    d = LogNormal(log(mean), log(std))
+    return d, rand(d, 1_000)
+end
+
+
+dens(ax, rand_d, color) = density!(ax, rand_d; color=color, strokewidth=1.5, strokecolor=(:black, 0.5))
+
 function plot_central()
-    Random.seed!(123)
     CairoMakie.activate!() # hide
     fig = Figure(; resolution=(600, 400))
     ax1 = Axis(fig[1, 1]; limits=((3, 20), nothing))
     ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
-    d1 = Distributions.Normal(10)
-    d2 = LogNormal(log(10), log(1.5))
-strokewidth = 1.5
-strokecolor = (:black, 0.5)
-dens(ax, d, color) = density!(ax, rand(d, 1_000); strokewidth, strokecolor, color)
-dens(ax1, d1, (:silver, 0.15))
-dens(ax2, d2, (:grey, 0.25))
+    d1, rand_d1 = normal_dist(10, 1) 
+    d2, rand_d2 = lognormal_dist(10, 1.5)
+    dens(ax1, rand_d1, (:silver, 0.15))
+    dens(ax2, rand_d2, (:grey, 0.25))
     # colorbrewer2 palettes
     ylim_ax1 = 0.38
     vlines!(
@@ -124,19 +135,14 @@ dens(ax2, d2, (:grey, 0.25))
 end
 
 function plot_dispersion_std()
-    Random.seed!(123)
     CairoMakie.activate!() # hide
     fig = Figure(; resolution=(600, 400))
     ax1 = Axis(fig[1, 1]; limits=((3, 20), nothing))
     ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
-    d1 = Distributions.Normal(10)
-    d2 = LogNormal(log(10), log(1.5))
-    density!(
-        ax1, rand(d1, 1_000); strokewidth=1.5, strokecolor= (:black, 0.5), color=(:silver, 0.15)
-    )
-    density!(
-        ax2, rand(d2, 1_000); strokewidth=1.5, strokecolor= (:black, 0.5), color=(:grey, 0.25)
-    )
+    d1, rand_d1 = normal_dist(10, 1) 
+    d2, rand_d2 = lognormal_dist(10, 1.5)
+    dens(ax1, rand_d1, (:silver, 0.15))
+    dens(ax2, rand_d2, (:grey, 0.25))
     # colorbrewer2 palettes
     ylim_ax1 = 0.38
     vlines!(
@@ -191,21 +197,14 @@ function plot_dispersion_std()
 end
 
 function plot_dispersion_mad()
-    Random.seed!(123)
     CairoMakie.activate!() # hide
     fig = Figure(; resolution=(600, 400))
     ax1 = Axis(fig[1, 1]; limits=((3, 20), nothing))
     ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
-    d1 = Distributions.Normal(10)
-    d2 = LogNormal(log(10), log(1.5))
-    x1 = rand(d1, 1_000)
-    x2 = rand(d2, 1_000)
-    density!(
-        ax1,x1; strokewidth=1.5, strokecolor= (:black, 0.5), color=(:silver, 0.15)
-    )
-    density!(
-        ax2,x2; strokewidth=1.5, strokecolor= (:black, 0.5), color=(:grey, 0.25)
-    )
+    d1, rand_d1 = normal_dist(10, 1) 
+    d2, rand_d2 = lognormal_dist(10, 1.5)
+    dens(ax1, rand_d1, (:silver, 0.15))
+    dens(ax2, rand_d2, (:grey, 0.25))
     # colorbrewer2 palettes
     ylim_ax1 = 0.38
     vlines!(
@@ -219,8 +218,8 @@ function plot_dispersion_mad()
     )
     vlines!(
         ax1,
-        [median(d1) - mad(x1), median(d1) + mad(x1)];
-        ymax=Distributions.pdf(d1, [median(d1) - mad(x1), median(d1) + mad(x1)]) ./ ylim_ax1,
+        [median(d1) - mad(rand_d1), median(d1) + mad(rand_d1)];
+        ymax=Distributions.pdf(d1, [median(d1) - mad(rand_d1), median(d1) + mad(rand_d1)]) ./ ylim_ax1,
         color= :red,
         linewidth=3,
         linestyle = :dot,
@@ -239,8 +238,8 @@ function plot_dispersion_mad()
     )
     vlines!(
         ax2,
-        [median(d2) - mad(x2), median(d2) + mad(x2)];
-        ymax=Distributions.pdf(d2, [median(d2) - mad(x2), median(d2) + mad(x2)]) ./ ylim_ax2,
+        [median(d2) - mad(rand_d2), median(d2) + mad(rand_d2)];
+        ymax=Distributions.pdf(d2, [median(d2) - mad(rand_d2), median(d2) + mad(rand_d2)]) ./ ylim_ax2,
         color="red",
         linewidth=3,
         linestyle = :dot,
@@ -259,19 +258,14 @@ function plot_dispersion_mad()
 end
 
 function plot_dispersion_iqr()
-    Random.seed!(123)
     CairoMakie.activate!() # hide
     fig = Figure(; resolution=(600, 400))
     ax1 = Axis(fig[1, 1]; limits=((3, 20), nothing))
     ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
-    d1 = Distributions.Normal(10)
-    d2 = LogNormal(log(10), log(1.5))
-    density!(
-        ax1, rand(d1, 1_000); strokewidth=1.5, strokecolor= (:black, 0.5), color=(:silver, 0.15)
-    )
-    density!(
-        ax2, rand(d2, 1_000); strokewidth=1.5, strokecolor= (:black, 0.5), color=(:grey, 0.25)
-    )
+    d1, rand_d1 = normal_dist(10, 1) 
+    d2, rand_d2 = lognormal_dist(10, 1.5)
+    dens(ax1, rand_d1, (:silver, 0.15))
+    dens(ax2, rand_d2, (:grey, 0.25))
     # colorbrewer2 palettes
     ylim_ax1 = 0.38
     vlines!(
@@ -400,4 +394,72 @@ function plot_corr()
     #hidedecorations!(ax3; grid=false, ticks=false)
     colgap!(fig.layout, 8)
     return fig
+end
+
+function plot_normal_lognormal()
+    CairoMakie.activate!() # hide
+    fig = Figure(; resolution=(600, 400))
+    ax = Axis(fig[1, 1]; limits=((3, 20), nothing))
+    _, rand_d1 = normal_dist(10, 1) 
+    _, rand_d2 = lognormal_dist(10, 1.3)
+    density!(ax, rand_d1; color=(:dodgerblue, 0.15), strokewidth=1.5, strokecolor=(:black, 0.5), label="normal")
+    density!(ax, rand_d2; color=(:red, 0.15), strokewidth=1.5, strokecolor=(:black, 0.5), label="non-normal")
+    axislegend(ax, position = :rt)
+    return fig
+end
+
+function plot_discrete_continuous()
+    Random.seed!(123)
+    discrete = Binomial(10, 0.6)
+    continuous = Distributions.Normal(6, 2)
+    CairoMakie.activate!() # hide
+    fig = Figure(; resolution=(600, 400))
+    ax1 = Axis(fig[1, 1]; limits=((0, 10), nothing), title="Discrete", titlesize=20)
+    ax2 = Axis(fig[1, 2]; limits=((0, 10), nothing), title="Continuous", titlesize=20)
+    hist!(ax1, rand(discrete, 1_000); color=(:dodgerblue, 0.5), strokewidth=1.5, strokecolor=(:black, 0.5), bins=10, normalization=:pdf)
+    density!(ax2, rand(continuous, 1_000); color=(:red, 0.5), strokewidth=1.5, strokecolor=(:black, 0.5))
+    hidedecorations!(ax1)
+    hidedecorations!(ax2)
+    return fig
+end
+
+function plot_pmf()
+    dice = DiscreteUniform(1, 6)
+    CairoMakie.activate!() # hide
+    fig = Figure(; resolution=(600, 400))
+    ax = Axis(fig[1, 1]; xticks=1:6, limits=(nothing, (0, 0.2)))
+    barplot!(ax, 1:6, Distributions.pdf(dice, 1:6); color=(:grey, 0.25), strokewidth=1.5, strokecolor=(:black, 0.5))
+    return fig
+end
+
+function plot_pdf()
+    d = Distributions.Normal()
+    CairoMakie.activate!() # hide
+    fig = Figure(; resolution=(600, 400))
+    ax = Axis(fig[1, 1]; xticks=-3:3)
+    range = -3:0.01:3.0
+    subset = 1:0.01:2.0
+    band!(ax, range, fill(0, length(range)), Distributions.pdf(d, range); color=(:grey, 0.25), strokewidth=1.5, strokecolor=(:black, 0.5))
+    band!(ax, subset, fill(0, length(subset)), Distributions.pdf(d, subset); color=(:red, 0.25), strokewidth=1.5, strokecolor=(:black, 0.5))
+    return fig
+end
+
+function plot_cdf(type::AbstractString)
+    CairoMakie.activate!() # hide
+    fig = Figure(; resolution=(600, 400))
+    if type == "discrete"
+        d = Distributions.DiscreteUniform(1,6)
+        range = 1:6
+        ax = Axis(fig[1, 1]; xticks=1:6)
+    elseif type == "continuous"
+        d = Distributions.Normal()
+        range = -3:0.01:3.0
+        ax = Axis(fig[1, 1]; xticks=-3:3)
+    end
+    lines!(ax, range, Distributions.cdf(d, range); linewidth=4, color=(:black, 0.5))
+    return fig
+end
+
+function calculate_pdf(a, b; d=Distributions.Normal())
+    return round(cdf(d, b) - cdf(d, a); digits=2)
 end

@@ -100,7 +100,7 @@ That is why sometimes we are interested in the **median** which is the **middle 
 Intuitively, the median tells us the value of the data's 50\% percentile.
 One example is when we are analyzing income.
 The median is the upper limit that we expect that half of the observations earn.
-So, if the median income is $ 80,000, we expect that half of our observations earn between the minimum value and $ 80,000.
+So, if the median income is \$80,000, we expect that half of our observations earn between the minimum value and \$80,000.
 The mathematical formula for the median is:
 
 $$ \operatorname{median}(\mathbf{x}) = \frac{x_{\lfloor (\# x+1) \div 2 \rfloor} + x_{\lceil (\# x+1) \div 2 \rceil}}{2}, $$ {#eq:median}
@@ -208,9 +208,9 @@ We will be covering both measures together because they have a profound relation
 
 Let's start with the variance. **Variance is mean of the squared difference between measurements and their average value**:
 
-$$ \operatorname{var}(x) = \frac{1}{n-1} \sum^n_{i=1} (x_i - \bar{x})^2. $$ {#eq:variance}
+$$ \sigma^2(x) = \frac{1}{n-1} \sum^n_{i=1} (x_i - \bar{x})^2. $$ {#eq:variance}
 
-We use the operator $\operatorname{Var}$ to denote variance, but you also might find variance being denoted as the squared Greek letter $\sigma^2$.
+We use the squared Greek letter $\sigma^2$ to denote variance, but you also might find variance being denoted as operator $\operatorname{var}$.
 Note that we are using $n-1$ in @eq:variance.
 This is because we need a bias correction since we are using one *degree of freedom* from our estimate mean $\bar{x}$.
 Degrees of freedom are not in the scope of our book, so we won't cover in details, but feel free to check the [Wikipedia](https://en.wikipedia.org/wiki/Degrees_of_freedom_(statistics)) for a in depth explanation.
@@ -236,7 +236,7 @@ sco(s; process=without_caption_label)
 
 We can see that Sally has the highest dispersion in her grades measured by its variance.
 
-**The squared deviation is the square root of the mean of the squared difference between measurements and their average value**.
+**The standard deviation is the square root of the mean of the squared difference between measurements and their average value**.
 Or in more simple words: it is the **square root of the variance**:
 
 $$ \sigma(x) = \sqrt{\frac{1}{n-1} \sum^n_{i=1} (x_i - \bar{x})^2}. $$ {#eq:std}
@@ -282,7 +282,7 @@ This is where a **dispersion measure that uses the median instead of the mean** 
 This is exactly the case of the **median absolute deviation (mad) which is defined as the median of the absolute difference between measurements and their median value**.
 `mad` is an extreme robust dispersion measure since it uses twice the median to calculate first the central tendency followed by the difference between observations and their central distance:
 
-$$ \operatorname{MAD}(x) = \operatorname{median}(|x_i - \operatorname{median}(x)|), $$ {#eq:mad}
+$$ \operatorname{mad}(x) = \operatorname{median}(|x_i - \operatorname{median}(x)|), $$ {#eq:mad}
 
 where $|.|$ is the notation for absolute value.
 
@@ -378,10 +378,12 @@ Here we can see that the median is *not* influenced by the few influential obser
 You might be wondering: "which dispersion measure shall I use? Variance? Standard Deviation? Mean Absolute Deviation? IQR?".
 Like before, we provide the following advice:
 
-- _Don't_ use **variance**, since it is not an intuitive measure
+- _Avoid_ **variance**, since it is not an intuitive measure
 - For data that do *not* have outliers, use the **standard deviation**
 - For data that *do* have outliers, use either the **mean absolute deviation** or **IQR**
-- For categorical/nominal data, use some sort of **frequency counter**
+- For categorical/nominal data, use some sort of **frequency counter**[^frequency_counter]
+
+[^frequency_counter]: we would suggest to use the `StatsBase.countmap` function which returns a dictionary mapping each unique value in a given vector to its number of occurrences.
  
 ## Dependence Measures {#sec:stats_dependence}
 

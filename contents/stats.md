@@ -62,7 +62,7 @@ Often, we see the mean denoted with the **Greek letter $\mu$**, for example $\ba
 Additionally, the mean is also known as the **expectation** which is represented by the operator $\operatorname{E}$, thus the mean of a variable $x$ becomes $\operatorname{E}(x)$[^expectation].
 So, bear in mind that you might find different notations for the mean.
 
-[^expectation]: technically speaking, the expectation is defined as either a sum for discrete variables or an integral for continuous variables. In contrast with the mean which is the sum of the variables' values divided by number of values, the expectation can be defined over an infinite domain while the mean only works for finite domains.
+[^expectation]: technically speaking, the expectation is defined as either a sum for discrete variables or an integral for continuous variables weighted by a probability distribution. In contrast with the mean which is simply the arithmetic sum of the variables' values divided by number of values.
 
 The mean can be used from the `mean` function from Julia's standard library `Statistics` module:
 

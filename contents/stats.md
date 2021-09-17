@@ -23,6 +23,7 @@ We can divide statistics into two broad categories: **descriptive** and **infere
 Common metrics are: mean, median, mode, standard deviation, variance, correlation, percentiles.
 
 **Inferential statistics allows generating inferences** (statements) **from observed data about the data generation process**.
+In @fig:stats_vs_prob we summarize the relationship between data generating process and observed data.
 All phenomena have an underlying data generating process that describes how the data is being generated.
 For example, in a soccer game, a scored goal can be explained by an underlying process: a tactic, error, struck of luck; or a mix of those.
 If we know a phenomenon's data generating process, we can use probability to simulate possible scenarios given certain aspects.
@@ -32,7 +33,6 @@ This process is known as **statistical inference**.
 Given some data, we can *infer* what are the aspects of the underlying data generating process.
 This is the realm of inferential statistics.
 
-In @fig:stats_vs_prob we summarize the relationship between data generating process and observed data.
 With knowledge of the data generating process we can apply probability to generate and simulate plausible data.
 And by using the observed data we can use inference to gain knowledge about the underlying data generating process.
 
@@ -44,7 +44,7 @@ Options(fig; filename=label, caption, label)
 ```
 
 In this chapter, we will cover only descriptive statistics.
-Inferential statistics is an important and fundamental component of applied sciences, but its scope is too broad. Let's begin on simple ways to summarize our data with central tendencies.
+Inferential statistics is an important and fundamental component of applied sciences, but its scope is too broad. So, let's begin on simple ways to summarize our data by using central tendencies.
 
 ## Central Tendencies Measures {#sec:stats_central}
 
@@ -59,7 +59,7 @@ $$ \bar{x} = \frac{1}{n} \sum^n_{i=1} x_i = \frac{x_1 + x_2 + \cdots + x_n}{n}, 
 
 where $\bar{x}$ is the sample mean of the variable $\mathbf{x} = x_1, \cdots, x_n$.
 Often, we see the mean denoted with the **Greek letter $\mu$**, for example $\bar{x} = \mu_x$.
-Additionally, the mean is also known as the **expectation** which is represented by the operator $\operatorname{E}$, thus the mean of a variable $x$ becomes a $\operatorname{E}(x)$[^expectation].
+Additionally, the mean is also known as the **expectation** which is represented by the operator $\operatorname{E}$, thus the mean of a variable $x$ becomes $\operatorname{E}(x)$[^expectation].
 So, bear in mind that you might find different notations for the mean.
 
 [^expectation]: technically speaking, the expectation is defined as either a sum for discrete variables or an integral for continuous variables. In contrast with the mean which is the sum of the variables' values divided by number of values, the expectation can be defined over an infinite domain while the mean only works for finite domains.
@@ -195,7 +195,7 @@ Here is our advice:
 
 ## Dispersion Measures {#sec:stats_dispersion}
 
-In statistics, **dispersion is a measure of how much spread certain observations are from a central tendency**.
+In statistics, **dispersion is a measure of how much spread certain observations have from a central tendency**.
 It is also called variability or spread.
 One interesting property is that, contrary to central tendencies, dispersion measures can *only* be **positive**.
 In other words, we do not have negative measures of dispersion.
@@ -208,7 +208,7 @@ We will be covering both measures together because they have a profound relation
 
 Let's start with the variance. **Variance is mean of the squared difference between measurements and their average value**:
 
-$$ \operatorname{Var}(x) = \frac{1}{n-1} \sum^n_{i=1} (x_i - \bar{x})^2. $$ {#eq:variance}
+$$ \operatorname{var}(x) = \frac{1}{n-1} \sum^n_{i=1} (x_i - \bar{x})^2. $$ {#eq:variance}
 
 We use the operator $\operatorname{Var}$ to denote variance, but you also might find variance being denoted as the squared Greek letter $\sigma^2$.
 Note that we are using $n-1$ in @eq:variance.
@@ -279,8 +279,8 @@ We can see that the mean $\mu$ is slightly shifted towards to the right by the f
 
 Since variance and standard deviation uses the mean in their mathematical formulation, they are also **sensitive to outliers**.
 This is where a **dispersion measure that uses the median instead of the mean** would be useful.
-This is exactly the case of the **median absolute deviation which is defined as the median of the absolute difference between measurements and their median value**.
-Also known as its acronym MAD, it is an extreme robust dispersion measure since it uses twice the median to calculate first the central tendency followed by the difference between observations and their central distance:
+This is exactly the case of the **median absolute deviation (mad) which is defined as the median of the absolute difference between measurements and their median value**.
+`mad` is an extreme robust dispersion measure since it uses twice the median to calculate first the central tendency followed by the difference between observations and their central distance:
 
 $$ \operatorname{MAD}(x) = \operatorname{median}(|x_i - \operatorname{median}(x)|), $$ {#eq:mad}
 
@@ -304,7 +304,7 @@ sco(s; process=without_caption_label)
 ```
 
 We can see that still Sally has the highest grades dispersion, but now Bob's and Alice's dispersion are the same.
-Also note that, by using $\operatorname{MAD}$, Hank's dispersion is zero.
+Also note that, by using $\operatorname{mad}$, Hank's dispersion is zero.
 This happens because two of the three Hank's grade are the same value:
 
 ```jl
@@ -318,7 +318,7 @@ sco(s; process=without_caption_label)
 
 If we plug Hank's grades into @eq:mad we have to calculate $\operatorname{median}([2, 0, 0])$, so we end up with the middle value in an ordered list which is $0$.
 
-One more, in @fig:plot_dispersion_mad, we have two data distributions:
+Once more, in @fig:plot_dispersion_mad, we have two data distributions:
 
 - **Upper row**: **normal** distributed data
 - **Lower row**: **non-normal** distributed data
@@ -330,8 +330,8 @@ label = "plot_dispersion_mad"
 Options(fig; filename=label, caption, label)
 ```
 
-Note that the MAD is extremely robust against influential observations and, contrary to the standard deviation, does not inherit any bias from the underlying central tendency measure (median).
-MAD can be an effective dispersion measure to non-normal data which few influential observations shift a non-robust central tendency (such as the mean).
+Note that the `mad` is extremely robust against influential observations and, contrary to the standard deviation, does not inherit any bias from the underlying central tendency measure (median).
+`mad` can be an effective dispersion measure to non-normal data which few influential observations shift a non-robust central tendency (such as the mean).
 
 ### Percentiles and Quantiles {#sec:stats_dispersion_quantiles}
 
@@ -388,30 +388,30 @@ Like before, we provide the following advice:
 Now that we covered univariate measures of central tendency and dispersion, we need to talk about bivariate measures.
 **Univariate measures are measures with respect to a single variable**.
 **Bivariate measures are measures with respect to the _relationship_ between two variables**.
-To quantity such relationships we use **dependence measures, which measure somehow the degree of how one variable value depends (or is related) to another variable value**.
+To quantify such relationships we use **dependence measures, which measure the degree of how one variable value depends (or is related) to another variable value**.
 
 There is a distinction between a dependence *measure* and a dependence *relationship*.
 The first is simply a bivariate measure of how one variable is related to the other.
-On the other hand, a dependence relationship implies a profounder relationship, where not only they are related but information regarding one variable gives us information regarding the other.
+On the other hand, a dependence relationship implies a deeper connection, where not only they are related but information regarding one variable gives us information about the other one.
 
-There two main measures of dependence and they are practically the same since one is the other constrained to the unit range between -1 and 1.
+There are two main measures of dependence and they are practically the same since one is the other constrained to the unit range between -1 and 1.
 **Covariance is a measure of the joint variability of two variables**.
 It is the expectation of one variable minus its expectation times another variables minus its expectation:
 
-$$ \operatorname{Cov}(x, y) = \operatorname{E} \left[ \left( x - \operatorname{E}(x) \right) \cdot \left( y - \operatorname{E}(y) \right) \right]. $$ {#eq:covariance}
+$$ \operatorname{cov}(x, y) = \operatorname{E} \left[ \left( x - \operatorname{E}(x) \right) \cdot \left( y - \operatorname{E}(y) \right) \right]. $$ {#eq:covariance}
 
 High positive or negative covariance indicates either a strong positive or negative joint variability, respectively.
 It measures how much one unit increase/decrease in one variable is related to one unit increase/decrease in another variable.
 
-The interpretation of a given covariance demands knowledge about units of measurement from both the underlying variables.
+The interpretation of a given covariance demands knowledge about units of measurement from both underlying variables.
 So, if we want to analyze covariance between two variables we must have some understanding of how the variables units are measured.
 That is why most of the time we use the **correlation, which is _normalized_ covariance**.
 The correlation is _dimensionless_ since it is constrained to the unit range between -1 and 1.
 Mathematically speaking, the correlation is the covariance divided by the product of the variables' standard deviation and is denoted by the Greek letter $\rho$:
 
-$$ \rho(x, y) = \frac{\operatorname{Cov}(x, y)}{\sigma_x \cdot \sigma_y}, $$ {#eq:correlation}
+$$ \rho(x, y) = \frac{\operatorname{cov}(x, y)}{\sigma_x \cdot \sigma_y}, $$ {#eq:correlation}
 
-where $\sigma_x$ and $\sigma_y$ are the standard devations of $x$ and $y$, respectively.
+where $\sigma_x$ and $\sigma_y$ are the standard deviations of $x$ and $y$, respectively.
 
 In @fig:plot_corr, we can see some correlations and their underlying scatter plot for 50 random generated observations.
 
@@ -422,9 +422,9 @@ label = "plot_corr"
 Options(fig; filename=label, caption, label)
 ```
 
-As we can see, correlation depicts the **linear association** between variables.
+As we can see, the correlation depicts the **linear association** between variables.
 The slope of the dashed line shows the correlation between variables.
 The more far from zero and closer to $\pm$ 1 the stronger is the association between variables.
 Finally, the sign of the correlation denotes the type of relationship between variables.
-**Positive correlations** implies **positive relationship**, increase in one variable results in an _increase_ in the other.
-**Negative correlations** implies **negative/inverse relationship**, increase in one variable results in an _decrease_ in the other.
+**Positive correlations** implies **positive relationship**, increase in one variable results in an _increase_ on the other one.
+**Negative correlations** implies **negative/inverse relationship**, increase in one variable results in a _decrease_ on the other one.

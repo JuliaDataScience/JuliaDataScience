@@ -5,8 +5,8 @@ This file is only included on the website.
 ```
 
 Welcome! This is an open source and open access book on how to do **Data Science using [Julia](https://julialang.org)**.
-Our target audience are PhD candidates from all fields of applied sciences.
-Industry analysts, upcoming and established researchers are also welcome.
+Our target audience are researchers from all fields of applied sciences.
+Of course, we hope to be useful for industry too.
 You can navigate through the pages of ebook by using the arrow keys (left/right) on your keyboard.
 
 The book is also available as [**PDF**](/juliadatascience.pdf){target="_blank"}.
@@ -28,7 +28,6 @@ Roughly, the status is as follows:
 - [ ] Review complete book
 - [ ] Publish with Amazon Kindle Direct Publishing
 
-Also, some small issues have to be fixed like _footnotes not working on the website_.
 For details about the status, see the [JuliaDataScience](https://github.com/JuliaDataScience/JuliaDataScience) GitHub repository.
 
 ### Roadmap {-}

@@ -123,8 +123,6 @@ label = "plot_pdf"
 Options(fig; filename=label, caption, label)
 ```
 
-Placeholder for a nice PDF figure.
-
 ### Cumulative Distribution Function {#sec:stats_dist_cdf}
 
 Finally, there is one more important distribution function.

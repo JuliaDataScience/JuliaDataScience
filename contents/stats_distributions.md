@@ -19,7 +19,8 @@ In addition, we have three axioms, originated from @kolmogorovFoundationsTheoryP
 3. **Normalization**: The probability of all possible events $A_1, A_2, \dots$ must add up to 1: $\sum_{n \in \mathbb{N}} P(A_n) = 1$; or, in the case of a continuous variable, integrate to 1: $\int^\infty_{-\infty} f(x) dx = 1$.
 
 Now we are ready to talk about distributions.
-A **distribution is a function which maps real numbers to a probability**:
+Simply put: a **distribution is a just a collection of scores (counts) in a variable (observations)**.
+A **probability distribution is defined by a function which maps real numbers to a probability**:
 
 $$ f(X): X \to \mathbb{R} \in [0, 1], $$ {#eq:distribution}
 

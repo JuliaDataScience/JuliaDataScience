@@ -13,12 +13,14 @@ using Reexport
 @reexport using Colors
 @reexport using DataFrames
 @reexport using Dates
+@reexport using Distributions
 @reexport using Downloads
 @reexport using GLMakie
 @reexport using LaTeXStrings
 @reexport using Makie
 @reexport using Random
 @reexport using Statistics
+@reexport using StatsBase
 @reexport using InteractiveUtils
 @reexport using LinearAlgebra
 @reexport using GeometryBasics
@@ -32,7 +34,9 @@ include("environment.jl")
 include("showcode_additions.jl")
 include("plots.jl")
 include("makie.jl")
-include("AoG.jl")
+#include("AoG.jl")
+include("stats.jl")
+include("bezier.jl")
 
 # Showcode additions.
 export sce, scsob, trim_last_n_lines, plainblock
@@ -48,14 +52,14 @@ export convert_output, equals_alice, write_grades_csv, grades_with_commas
 export write_grades_xlsx, write_xlsx, salaries, responses, wrong_types
 export only_pass, correct_types, fix_age_column, fix_date_column
 
-#plot = Plots.plot
-
-function myplot()
-    I = 1:30
-    xy = mapping([I] => :x, [I .* 2] => :y)
-
-    draw(xy)
-end
+# Stats.
+export more_grades
+export statistics_graph, plot_central
+export plot_dispersion_std, plot_dispersion_mad, plot_dispersion_iqr
+export plot_corr
+export plot_normal_lognormal, plot_discrete_continuous
+export plot_pmf, plot_pdf, plot_cdf
+export calculate_pdf
 
 """
     build()

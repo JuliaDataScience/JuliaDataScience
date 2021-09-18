@@ -80,7 +80,7 @@ Let's proceed then!
 > If it becomes too technical for you, you can skip and go straight to @sec:dataframes to learn about tabular data with `DataFrames.jl`.
 
 The Julia programming language [@bezanson2017julia] is a relatively new language, first released in 2012 and aims to be **both easy and fast**.
-It "runs like C^[Sometimes even faster than C.] but reads like Python" [@perkelJuliaComeSyntax2019].
+It "runs like C^[sometimes even faster than C.] but reads like Python" [@perkelJuliaComeSyntax2019].
 It was made for scientific computing, capable of handling **large amounts of data and computation** while still being fairly **easy to manipulate, create and protype code**.
 
 The creators of Julia explained why they created Julia in a [2012 blogpost](https://julialang.org/blog/2012/02/why-we-created-julia/).
@@ -345,7 +345,7 @@ sc(s)
 ```
 
 Next, we want to define addition for both the `fox` and `chicken` types.
-We proceed by defining a new function signature of the `+` operator from the `Base` module of Julia^[This is an example for teaching purposes. Doing something similar as this example will result in many [method invalidations](https://julialang.org/blog/2020/08/invalidations/) and is, therefore, not a good idea.]:
+We proceed by defining a new function signature of the `+` operator from the `Base` module of Julia^[this is an example for teaching purposes. Doing something similar as this example will result in many [method invalidations](https://julialang.org/blog/2020/08/invalidations/) and is, therefore, not a good idea.]:
 
 ```jl
 s = """

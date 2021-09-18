@@ -49,15 +49,16 @@ using Distributions
 
 ### Normal and Non-Normal Distributions {#sec:stats_dist_normal}
 
-In applied sciences, there is a widely used distribution called the **normal distribution**.
+The most commonly arising distribution is the **normal distribution**.
+It occurs a lot in nature; for example, the height and weight of humans and the size of snowflakes.
 It has the ubiquitous shape of a bell curve and is also known as the *Gaussian* distribution in honor of the mathematician Carl Friedrich Gauss.
 
 This distribution is generally used in the social and natural sciences to represent variables in which their distributions are not known.
 Some phenomena follow a normal distribution, such as human height, human shoe size or test scores.
 
-We urge the reader to perceive that *not all phenomena are normally distributed*.
+However, beware that *not all phenomena are normally distributed*.
 For example, income, financial returns, city size, social media followers are examples of important phenomena that, generally, do not follow a normal distribution.
-Instead, they follow what we will call as non-normal distribution, or, as some also denote, a long-tailed distribution.
+Instead, they follow what we will call a non-normal distribution, or, as some also denote, a long-tailed distribution.
 
 In @fig:plot_normal_lognormal, we can see the comparison between a distribution that follows a normal distribution and a distribution that is long-tailed, i.e. does *not* follow a normal distribution.
 
@@ -70,7 +71,7 @@ Options(fig; filename=label, caption, label)
 
 ### Discrete and Continuous {#sec:stats_dist_discrete_continuous}
 
-Regarding distributions we have mainly two types of distributions: **discrete** and **continuous**.
+Regarding distributions, we have mainly two types of distributions: **discrete** and **continuous**.
 In figure @fig:plot_discrete_continuous, we have two distributions.
 To the left, a discrete distribution represented by bins of values and their probability as the height of the bar.
 To the right, a continuous distribution represented by a continuous curve and the probability of values as the area under the curve.
@@ -111,7 +112,7 @@ That's why we have an integral in @eq:pdf.
 
 For example, in @fig:plot_pdf, we have a normal distribution with mean 0 and standard deviation 1.
 Notice that, since this is a valid probability, the gray shaded area that represents all the possible values integrates to 1.
-The red shaded area is the probability, under this distribution, of we observing values from 1 to 2 and we need to calculate the total area.
+The red shaded area is the probability, under this distribution, of observing values from 1 to 2 and we need to calculate the total area.
 So we integrate the distribution from 1 to 2, this is the pdf and evaluates to `jl calculate_pdf(1, 2)`.
 
 ```jl

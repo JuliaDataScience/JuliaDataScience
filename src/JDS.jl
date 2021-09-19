@@ -74,9 +74,9 @@ include("environment.jl")
 include("showcode_additions.jl")
 include("plots.jl")
 include("makie.jl")
-#include("AoG.jl")
 include("stats.jl")
 include("bezier.jl")
+include("front-cover.jl")
 
 # Showcode additions.
 export sce, scsob, trim_last_n_lines, plainblock
@@ -100,6 +100,9 @@ export plot_corr
 export plot_normal_lognormal, plot_discrete_continuous
 export plot_pmf, plot_pdf, plot_cdf
 export calculate_pdf
+
+# Front cover.
+export front_cover
 
 """
     build()

@@ -1,6 +1,6 @@
 # YAML 1.2
 ---
-authors: 
+authors:
   -
     family-names: Storopoli
     given-names: Jose
@@ -15,8 +15,8 @@ authors:
     orcid: "https://orcid.org/0000-0001-6979-859X"
 cff-version: "1.2.0"
 date-released: 2021-10-01
-identifiers: 
-  - 
+identifiers:
+  -
     type: url
     value: "https://juliadatascience.io/"
 license: "CC-BY-NC-SA-4.0"

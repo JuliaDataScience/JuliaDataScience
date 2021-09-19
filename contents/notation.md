@@ -72,9 +72,18 @@ From the style guide, we attempt to adhere specifically to:
 
 #### Loading of symbols
 
-Prefer to load symbols explicitly, that is, prefer `using A: foo` over `using A` when not using the REPL [see also, @jump2021using] because the latter loads all exported symbols.
-Also, prefer `using A: foo` over `import A: foo` because the latter makes it easy to accidentaly extend `foo`.
-Note that implicit loading of symbols via `from <module> import *` is also discouraged in Python [@pep8].
+Prefer to load symbols explicitly, that is, prefer `using A: foo` over `using A` when not using the REPL [see also, @jump2021using].
+In this context, a symbol means an identifier to an object.
+For example, even if it doesn't look like it normally, internally `DataFrame`, `π` and `CSV` are all symbols.
+We notice this when we use a introspective method from Julia such as `isdefined`:
+
+```jl
+scob("isdefined(Main, :π)")
+```
+
+Next to being explicit when using `using`, also prefer `using A: foo` over `import A: foo` because the latter makes it easy to accidentaly extend `foo`.
+Note that this isn't an advise for Julia only:
+implicit loading of symbols via `from <module> import *` is also discouraged in Python [@pep8].
 
 The reason why being explicit is important is related to semantic versioning.
 With semantic versioning (<http://semver.org>), the version number is related to whether a package is, so called, _breaking_ or not.

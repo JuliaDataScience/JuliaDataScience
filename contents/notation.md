@@ -69,9 +69,18 @@ From the style guide, we attempt to adhere specifically to:
 - Do not use unicode symbols in inline code.
   This is simply a bug in the PDF generation that we have to workaround for now.
 - The line before each code block ends with a colon (:) to indicate that the line belongs to the code block.
-- Prefer `using A: foo` over `using A` when not using the REPL because the latter loads all exported symbols [@jump2021using].
-    The reason is that when `using A; using B;`, these statements can cause your software to break in the future when both package `A` and `B` decide to export a symbol with the same name.
-    When using `using A: foo`, all loaded symbols are explicit so they cannot accidentaly collide.
-    Also, prefer `using A: foo` over `import A: foo` because the latter makes it easy to accidentaly extend `foo`.
-    Note that `from <module> import *` is also discouraged in Python [@pep8].
 
+#### Loading of symbols
+
+Prefer to load symbols explicitly, that is, prefer `using A: foo` over `using A` when not using the REPL [see also, @jump2021using] because the latter loads all exported symbols.
+Also, prefer `using A: foo` over `import A: foo` because the latter makes it easy to accidentaly extend `foo`.
+Note that implicit loading of symbols via `from <module> import *` is also discouraged in Python [@pep8].
+
+The reason why being explicit is important is related to semantic versioning.
+With semantic versioning (<http://semver.org>), the version number is related to whether a package is, so called, _breaking_ or not.
+For example, a non-breaking update for package `A` is when the package goes from version `0.2.2` to `0.2.3`.
+With such a non-breaking version update, you don't need to worry that your package will break, that is, throw an error or change behavior.
+If package `A` goes from `0.2` to `1.0`, then that's a breaking update and you can expect that you need some changes in your package to make `A` work again.
+**However**, exporting extra symbols is considered a non-breaking change.
+So, with implicit loading of symbols, **non-breaking changes can break your package**.
+That's why it's good practice to explicitly load symbols.

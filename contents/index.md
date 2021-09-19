@@ -40,6 +40,7 @@ For now, the planned topics for the second edition are:
 - Plotting via `AlgebraOfGraphics.jl`.
 - Machine learning (probably, `MLJ.jl` and `Flux.jl`)
 - Bayesian statistics (`Turing.jl`)
+- Exercises
 
 ### Citation info {-}
 

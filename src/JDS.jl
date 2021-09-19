@@ -1,13 +1,26 @@
 module JDS
 
-import XLSX
 import Pkg
 import Plots
 
 using Reexport: @reexport
 
 @reexport begin
-using Books
+using Books:
+    @sc,
+    @sco,
+    Options,
+    build_all,
+    catch_show,
+    clean_stacktrace,
+    code_block,
+    gen,
+    output_block,
+    sc,
+    sco,
+    scob,
+    serve,
+    without_caption_label
 using CSV
 using CairoMakie
 using CategoricalArrays
@@ -94,11 +107,11 @@ This method is called during CI.
 """
 function build()
     println("Building JDS")
-    Books.gen(; fail_on_error=true)
+    gen(; fail_on_error=true)
     extra_head = """
     <script src="https://cdn.usefathom.com/script.js" data-site="EEJXHKTE" defer></script>
     """
-    Books.build_all(; extra_head, fail_on_error=true)
+    build_all(; extra_head, fail_on_error=true)
 end
 
 end # module

@@ -108,7 +108,7 @@ Here, I will restrict the output to the first 5 rows:
 s = """
     first(methodswith(Int64), 5)
     """
-sco(s; process=Books.catch_show)
+sco(s; process=catch_show)
 ```
 
 ### User-defined Types {#sec:struct}
@@ -587,7 +587,7 @@ Let's see what we can do with a `String` for example:
 
 ```jl
 s = "first(methodswith(String), 5)"
-sco(s; process=Books.catch_show)
+sco(s; process=catch_show)
 ```
 
 ### Broadcasting Operators and Functions {#sec:broadcasting}
@@ -2603,7 +2603,7 @@ Let's just show the first 4 lines of our downloaded file with the `readlines` fu
 sco(
 """
 readlines(my_file)[1:4]
-"""; process=Books.catch_show
+"""; process=catch_show
 )
 ```
 

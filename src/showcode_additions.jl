@@ -4,7 +4,7 @@ function get_error(expr::String)
     catch e
         exc, bt = last(Base.catch_stack())
         stacktrace = sprint(Base.showerror, exc, bt)::String
-        stacktrace = Books.clean_stacktrace(stacktrace)
+        stacktrace = clean_stacktrace(stacktrace)
         lines = split(stacktrace, '\n')
         lines = lines[1:end-8]
         join(lines, '\n')

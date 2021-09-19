@@ -15,6 +15,12 @@ When the build is finished, run the project with:
 And, if you want to use `serve`, use:
 
 ```
+.devcontainer/run.sh SERVE
+```
+
+and
+
+```
 serve(; host="0.0.0.0")
 ```
 

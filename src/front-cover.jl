@@ -194,32 +194,47 @@ function front_cover(; resolution=(1200, 2400))
 end
 
 """
-    front_cover_thumbnail()
+    compress_image(from::String, to::String)
 
-Return small front cover thumbnail with a link to the full size front cover.
+Read image at `from` and write compressed image to `to`.
+Based on suggestions from <https://stackoverflow.com/questions/7261855>.
+"""
+function compress_image(from::String, to::String; extra_args=nothing)
+    args = [
+        "-sampling-factor",
+        "4:2:0",
+        "-strip",
+        "-quality",
+        "85",
+        "-interlace",
+        "JPEG",
+        # Don't use this to avoid change in appearance.
+        # "-colorspace",
+        # "RGB"
+        extra_args...
+    ]
+    run(`convert $from $args $to`)
+end
+
+"""
+    write_front_cover()
+
+Write small front cover thumbnail and the full size front cover.
 This smaller image is useful for reducing frontpage loading time.
 """
-function front_cover_thumbnail()
+function write_front_cover()
     fig = front_cover()
     opts = Options(fig; filename="front_cover")
     # Writes PNG image to file.
     convert_output(nothing, nothing, opts)
-    full = "/im/front_cover.png"
+    full = joinpath("_build", "im", "front_cover.png")
 
-    resolution=(1200/8, 2400/8)
-    fig = front_cover(; resolution)
-    opts = Options(fig; filename="front_cover_thumbnail")
-    # Writes PNG image to file.
-    convert_output(nothing, nothing, opts)
-    thumbnail = "/im/front_cover_thumbnail.png"
+    thumbnail = joinpath("_build", "im", "front_cover_thumbnail.png")
+    extra_args = [
+        "-resize",
+        "200x400"
+    ]
+    compress_image(full, thumbnail; extra_args)
 
-    return """
-        ```{=html}
-        <center>
-            <a href="/im/front_cover.png">
-                <image src="/im/front_cover_thumbnail.png" alt="Book front cover">
-            </a>
-        </center>
-        ```
-        """
+    return nothing
 end

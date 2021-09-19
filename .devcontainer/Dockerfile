@@ -5,6 +5,7 @@ RUN set -eux; \
       apt-get update; \
       apt-get install -y --no-install-recommends \
         freeglut3-dev \
+        imagemagick \
         libgl1 \
         libxcursor-dev \
         libxext-dev \

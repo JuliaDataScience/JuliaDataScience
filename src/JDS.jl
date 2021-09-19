@@ -102,8 +102,8 @@ export plot_normal_lognormal, plot_discrete_continuous
 export plot_pmf, plot_pdf, plot_cdf
 export calculate_pdf
 
-# Front cover.
-export front_cover, front_cover_thumbnail
+# Book cover.
+export compress_image, front_cover, write_front_cover
 
 """
     build()
@@ -113,6 +113,7 @@ This method is called during CI.
 function build()
     println("Building JDS")
     gen(; fail_on_error=true)
+    write_front_cover()
     extra_head = """
     <script src="https://cdn.usefathom.com/script.js" data-site="EEJXHKTE" defer></script>
     """

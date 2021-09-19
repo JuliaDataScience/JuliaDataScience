@@ -10,8 +10,15 @@ else
   echo 'println("Revise is not available.")' > "$DEPOT_PATH/config/startup.jl"
 fi
 
-docker run -it --rm \
-  --env GKSwstype=nul \
-  -p 8006:8006 \
-  -v "$HOME/.julia-docker":"/root/.julia" \
-  -v "$PWD":/app -w /app jds
+if [ "$1" == "SERVE" ]; then
+  docker run -it --rm \
+    --env GKSwstype=nul \
+    -p 8006:8006 \
+    -v "$HOME/.julia-docker":"/root/.julia" \
+    -v "$PWD":/app -w /app jds
+else
+  docker run -it --rm \
+    --env GKSwstype=nul \
+    -v "$HOME/.julia-docker":"/root/.julia" \
+    -v "$PWD":/app -w /app jds
+fi

@@ -63,6 +63,17 @@ Or in BibTeX format:
 
 ### Front Cover {-}
 
-```jl
-front_cover_thumbnail()
+```{=comment}
+To generate these images, run `write_front_cover()`.
 ```
+
+```{=html}
+<center>
+    <a href="/im/front_cover.png">
+        <image src="/im/front_cover_thumbnail.png" alt="Book front cover">
+    </a><br/>
+
+    <i>Click to see the full size version.</i>
+</center>
+```
+

@@ -62,6 +62,7 @@ using StatsBase:
     mode
 using TestImages
 using XLSX:
+    eachtablerow,
     readxlsx,
     writetable
 end # @reexport

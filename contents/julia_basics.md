@@ -183,7 +183,7 @@ s = """
 sco(s)
 ```
 
-### Boolean Operators an Numeric Comparison
+### Boolean Operators and Numeric Comparisons
 
 Now that we've covered types, we can move to boolean operators and numeric comparison.
 

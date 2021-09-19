@@ -4,28 +4,52 @@ import XLSX
 import Pkg
 import Plots
 
-using Reexport
-@reexport using Books
-@reexport using CSV
-@reexport using CairoMakie
-@reexport using CategoricalArrays
-@reexport using ColorSchemes
-@reexport using Colors
-@reexport using DataFrames
-@reexport using Dates
-@reexport using Distributions
-@reexport using Downloads
-@reexport using GLMakie
-@reexport using LaTeXStrings
-@reexport using Makie
-@reexport using Random
-@reexport using Statistics
-@reexport using StatsBase
-@reexport using InteractiveUtils
-@reexport using LinearAlgebra
-@reexport using GeometryBasics
-@reexport using FileIO
-@reexport using TestImages
+using Reexport: @reexport
+
+@reexport begin
+using Books
+using CSV
+using CairoMakie
+using CategoricalArrays
+using ColorSchemes
+using Colors
+using DataFrames:
+    ByRow,
+    DataFrame,
+    DataFrameRow,
+    Not,
+    antijoin,
+    combine,
+    crossjoin,
+    filter,
+    groupby,
+    innerjoin,
+    leftjoin,
+    outerjoin,
+    rightjoin,
+    select!,
+    select,
+    semijoin,
+    subset,
+    transform
+using Dates
+using Distributions
+using Downloads
+using FileIO
+using GLMakie
+using GeometryBasics
+using InteractiveUtils
+using LaTeXStrings
+using LinearAlgebra
+using Makie
+using Random
+using Statistics
+using StatsBase
+using TestImages
+using XLSX:
+    readxlsx,
+    writetable
+end # @reexport
 
 const SMALL_IM_ATTR = "width=70%"
 

@@ -96,7 +96,7 @@ function write_xlsx(name, df::DataFrame)
     path = "$name.xlsx"
     data = collect(eachcol(df))
     cols = names(df)
-    XLSX.writetable(path, data, cols)
+    writetable(path, data, cols)
 end
 
 function write_grades_xlsx()

@@ -69,3 +69,9 @@ From the style guide, we attempt to adhere specifically to:
 - Do not use unicode symbols in inline code.
   This is simply a bug in the PDF generation that we have to workaround for now.
 - The line before each code block ends with a colon (:) to indicate that the line belongs to the code block.
+- Prefer `using A: foo` over `using A` when not using the REPL because the latter loads all exported symbols [@jump2021using].
+    The reason is that when `using A; using B;`, these statements can cause your software to break in the future when both package `A` and `B` decide to export a symbol with the same name.
+    When using `using A: foo`, all loaded symbols are explicit so they cannot accidentaly collide.
+    Also, prefer `using A: foo` over `import A: foo` because the latter makes it easy to accidentaly extend `foo`.
+    Note that `from <module> import *` is also discouraged in Python [@pep8].
+

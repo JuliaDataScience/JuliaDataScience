@@ -168,10 +168,16 @@ pkg> add XLSX
 
 and load it with:
 
-```jl
-sc("""
-import XLSX
-""")
+```
+using XLSX
+```
+
+or
+
+```
+using XLSX:
+    readxlsx,
+    writetable
 ```
 
 To write files, we define a little helper function for data and column names:

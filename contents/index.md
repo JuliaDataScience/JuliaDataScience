@@ -67,7 +67,7 @@ Or in BibTeX format:
 To generate these images, run `write_front_cover()`.
 ```
 
-```{=html}
+```{=comment}
 <center>
     <a href="/im/front_cover.png">
         <image src="/im/front_cover_thumbnail.png" alt="Book front cover">

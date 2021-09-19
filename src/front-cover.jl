@@ -232,7 +232,7 @@ function write_front_cover()
     thumbnail = joinpath("_build", "im", "front_cover_thumbnail.png")
     extra_args = [
         "-resize",
-        "200x400"
+        "250x500"
     ]
     compress_image(full, thumbnail; extra_args)
 

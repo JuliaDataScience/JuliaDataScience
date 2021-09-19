@@ -53,11 +53,6 @@ function names_grades2()
     df[!, :name]
 end
 
-# Should fix this in Books.jl
-function Books.convert_output(path, expr, out::DataFrameRow; kwargs...)
-    Books.convert_output(path, expr, DataFrame(out); kwargs...)
-end
-
 function grade_2020(i::Int)
     df = grades_2020()
     df[i, :]
@@ -96,7 +91,7 @@ function write_xlsx(name, df::DataFrame)
     path = "$name.xlsx"
     data = collect(eachcol(df))
     cols = names(df)
-    XLSX.writetable(path, data, cols)
+    writetable(path, data, cols)
 end
 
 function write_grades_xlsx()

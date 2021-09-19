@@ -1,31 +1,71 @@
 module JDS
 
-import XLSX
 import Pkg
 import Plots
 
-using Reexport
-@reexport using Books
-@reexport using CSV
-@reexport using CairoMakie
-@reexport using CategoricalArrays
-@reexport using ColorSchemes
-@reexport using Colors
-@reexport using DataFrames
-@reexport using Dates
-@reexport using Distributions
-@reexport using Downloads
-@reexport using GLMakie
-@reexport using LaTeXStrings
-@reexport using Makie
-@reexport using Random
-@reexport using Statistics
-@reexport using StatsBase
-@reexport using InteractiveUtils
-@reexport using LinearAlgebra
-@reexport using GeometryBasics
-@reexport using FileIO
-@reexport using TestImages
+using Reexport: @reexport
+
+@reexport begin
+using Books:
+    @sc,
+    @sco,
+    Options,
+    build_all,
+    catch_show,
+    clean_stacktrace,
+    code_block,
+    gen,
+    output_block,
+    sc,
+    sco,
+    scob,
+    serve,
+    without_caption_label
+using CSV
+using CairoMakie
+using CategoricalArrays
+using ColorSchemes
+using Colors
+using DataFrames:
+    ByRow,
+    DataFrame,
+    DataFrameRow,
+    Not,
+    antijoin,
+    combine,
+    crossjoin,
+    filter,
+    groupby,
+    innerjoin,
+    leftjoin,
+    outerjoin,
+    rightjoin,
+    select!,
+    select,
+    semijoin,
+    subset,
+    transform
+using Dates
+using Distributions
+using Downloads
+using FileIO
+using GLMakie
+using GeometryBasics
+using InteractiveUtils
+using LaTeXStrings
+using LinearAlgebra
+using Makie
+using Random
+using Statistics
+using StatsBase:
+    mad,
+    mode
+using TestImages
+using XLSX:
+    eachtablerow,
+    readxlsx,
+    writetable
+end # @reexport
 
 const SMALL_IM_ATTR = "width=70%"
 
@@ -68,11 +108,11 @@ This method is called during CI.
 """
 function build()
     println("Building JDS")
-    Books.gen(; fail_on_error=true)
+    gen(; fail_on_error=true)
     extra_head = """
     <script src="https://cdn.usefathom.com/script.js" data-site="EEJXHKTE" defer></script>
     """
-    Books.build_all(; extra_head, fail_on_error=true)
+    build_all(; extra_head, fail_on_error=true)
 end
 
 end # module

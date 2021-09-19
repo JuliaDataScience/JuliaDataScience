@@ -158,20 +158,13 @@ There are multiple Julia packages to read Excel files.
 In this book, we will only look at [`XLSX.jl`](https://github.com/felipenoris/XLSX.jl), because it is the most actively maintained package in the Julia's ecosystem that deals with Excel data.
 As a second benefit, `XLSX.jl` is written in pure Julia, which makes it easy for us to inspect and understand what's going on under the hood.
 
-Install the `XSLX.jl` package via:
+Load `XLSX.jl` via
 
 ```
-julia> ]
-
-pkg> add XLSX
-```
-
-and load it with:
-
-```jl
-sc("""
-import XLSX
-""")
+using XLSX:
+    eachtablerow,
+    readxlsx,
+    writetable
 ```
 
 To write files, we define a little helper function for data and column names:
@@ -192,19 +185,20 @@ When reading it back, we will see that `XLSX.jl` puts the data in a `XLSXFile` t
 sco("""
 JDS.inside_tempdir() do # hide
 path = write_grades_xlsx()
-xf = XLSX.readxlsx(path)
+xf = readxlsx(path)
 end # hide
 """)
 ```
 
 ```jl
-sco("""
-JDS.inside_tempdir() do # hide
-xf = XLSX.readxlsx(write_grades_xlsx())
-sheet = xf["Sheet1"]
-XLSX.eachtablerow(sheet) |> DataFrame
-end # hide
-"""; process=without_caption_label)
+s = """
+    JDS.inside_tempdir() do # hide
+    xf = readxlsx(write_grades_xlsx())
+    sheet = xf["Sheet1"]
+    eachtablerow(sheet) |> DataFrame
+    end # hide
+    """
+sco(s; process=without_caption_label)
 ```
 
 Notice that we cover just the basics of `XLSX.jl` but more powerful usage and customizations are available.

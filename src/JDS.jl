@@ -14,6 +14,7 @@ using Books:
     catch_show,
     clean_stacktrace,
     code_block,
+    convert_output,
     gen,
     output_block,
     sc,
@@ -74,9 +75,9 @@ include("environment.jl")
 include("showcode_additions.jl")
 include("plots.jl")
 include("makie.jl")
-#include("AoG.jl")
 include("stats.jl")
 include("bezier.jl")
+include("front-cover.jl")
 
 # Showcode additions.
 export sce, scsob, trim_last_n_lines, plainblock
@@ -101,6 +102,9 @@ export plot_normal_lognormal, plot_discrete_continuous
 export plot_pmf, plot_pdf, plot_cdf
 export calculate_pdf
 
+# Book cover.
+export compress_image, front_cover, write_front_cover
+
 """
     build()
 
@@ -109,6 +113,7 @@ This method is called during CI.
 function build()
     println("Building JDS")
     gen(; fail_on_error=true)
+    write_front_cover()
     extra_head = """
     <script src="https://cdn.usefathom.com/script.js" data-site="EEJXHKTE" defer></script>
     """

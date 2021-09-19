@@ -31,7 +31,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install GLMakie dependencies
-        run: sudo apt-get update && sudo apt-get install -y xorg-dev mesa-utils xvfb libgl1 freeglut3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev
+        run: sudo apt-get update && sudo apt-get install -y xorg-dev imagemagick mesa-utils xvfb libgl1 freeglut3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev
 
       # Enforce most recent version.
       - name: Install Books.jl#main

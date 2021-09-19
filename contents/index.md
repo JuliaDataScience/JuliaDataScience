@@ -13,7 +13,7 @@ The book is also available as [**PDF**](/juliadatascience.pdf){target="_blank"}.
 
 The source code is available at [GitHub](https://github.com/JuliaDataScience/JuliaDataScience){target="_blank"}.
 
-### Work in progress {-}
+### Work in Progress {-}
 
 This book is almost finished and we plan to publish within a few months.
 Roughly, the status is as follows:
@@ -42,7 +42,7 @@ For now, the planned topics for the second edition are:
 - Bayesian statistics (`Turing.jl`)
 - Exercises
 
-### Citation info {-}
+### Citation Info {-}
 
 To cite the content, please use:
 
@@ -55,8 +55,26 @@ Or in BibTeX format:
 ```plaintext
 @book{storopolihuijzeralonso2021juliadatascience,
   title = {Julia Data Science},
-  author = {Storopoli, Jose and Huijzer, Rik and Alonso, Lazaro},
+  author = {Jose Storopoli and Rik Huijzer and Lazaro Alonso},
   url = {https://juliadatascience.io},
   year = {2021}
 }
 ```
+
+
+```{=comment}
+To generate these images, run `write_front_cover()`.
+```
+
+```{=comment}
+### Front Cover {-}
+
+<center>
+    <a href="/im/front_cover.png">
+        <image src="/im/front_cover_thumbnail.png" alt="Book front cover">
+    </a><br/>
+
+    <i>Click to see the full size version.</i>
+</center>
+```
+

@@ -14,6 +14,7 @@ using Books:
     catch_show,
     clean_stacktrace,
     code_block,
+    convert_output,
     gen,
     output_block,
     sc,
@@ -102,7 +103,7 @@ export plot_pmf, plot_pdf, plot_cdf
 export calculate_pdf
 
 # Front cover.
-export front_cover
+export front_cover, front_cover_thumbnail
 
 """
     build()

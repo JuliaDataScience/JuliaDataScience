@@ -12,5 +12,6 @@ fi
 
 docker run -it --rm \
   --env GKSwstype=nul \
+  -p 8006:8006 \
   -v "$HOME/.julia-docker":"/root/.julia" \
   -v "$PWD":/app -w /app jds

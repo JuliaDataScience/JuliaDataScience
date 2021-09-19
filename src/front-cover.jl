@@ -32,10 +32,15 @@ colorTop =  vec(valsTop[:,end])
 colorSides =  vec(valsSides[end,:])
 
 
-function front_cover()
+"""
+    front_cover(; resolution=(1200, 2400))
+
+Return the Julia Data Science book front cover.
+"""
+function front_cover(; resolution=(1200, 2400))
     GLMakie.activate!()
     with_theme(theme_black()) do
-        fig = Figure(resolution=(1200,2400))
+        fig = Figure(; resolution)
         ax1 = Axis3(fig[1,1], perspectiveness = 0.5,  azimuth = 7.19, elevation = 0.57,
                 xlabel = "x label", ylabel = "y label", zlabel = "z label",
                 aspect = (1,1,1))
@@ -186,4 +191,35 @@ function front_cover()
         #fig[1,2] = cbar
         fig
     end
+end
+
+"""
+    front_cover_thumbnail()
+
+Return small front cover thumbnail with a link to the full size front cover.
+This smaller image is useful for reducing frontpage loading time.
+"""
+function front_cover_thumbnail()
+    fig = front_cover()
+    opts = Options(fig; filename="front_cover")
+    # Writes PNG image to file.
+    convert_output(nothing, nothing, opts)
+    full = "/im/front_cover.png"
+
+    resolution=(1200/8, 2400/8)
+    fig = front_cover(; resolution)
+    opts = Options(fig; filename="front_cover_thumbnail")
+    # Writes PNG image to file.
+    convert_output(nothing, nothing, opts)
+    thumbnail = "/im/front_cover_thumbnail.png"
+
+    return """
+        ```{=html}
+        <center>
+            <a href="/im/front_cover.png">
+                <image src="/im/front_cover_thumbnail.png" alt="Book front cover">
+            </a>
+        </center>
+        ```
+        """
 end

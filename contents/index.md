@@ -64,5 +64,5 @@ Or in BibTeX format:
 ### Front Cover {-}
 
 ```jl
-front_cover()
+front_cover_thumbnail()
 ```

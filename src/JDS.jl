@@ -44,7 +44,9 @@ using LinearAlgebra
 using Makie
 using Random
 using Statistics
-using StatsBase
+using StatsBase:
+    mad,
+    mode
 using TestImages
 using XLSX:
     readxlsx,

@@ -11,7 +11,7 @@ It's difficult to figure out where to start and how all the different packages f
 That is why we decided to create this book!
 We wanted to make it easier for researchers, and especially our colleagues, to start using this awesome language.
 
-Like discussed above, each language has it's strengths and weaknesses.
+Like discussed above, each language has its strengths and weaknesses.
 In our opinion, data science is definitely a strength of Julia.
 At the same time, all three of us used data science tools in our day to day life.
 And, probably, you want to use data science too!

@@ -29,12 +29,11 @@ Format all files in the book.
 This removes trailing whitespace by default.
 """
 function format()::BitVector
-    args = [
-        :verbose => true,
-        :remove_extra_newlines => false,
-        :whitespace_in_kwargs => false
-    ]
-    return format_file.(source_files(); args...)
+    return format_file.(source_files();
+        margin=500,
+        verbose=true,
+        whitespace_in_kwargs=false
+    )
 end
 
 """

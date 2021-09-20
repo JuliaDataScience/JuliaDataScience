@@ -45,7 +45,8 @@ using DataFrames:
     select,
     semijoin,
     subset,
-    transform
+    transform,
+    transform!
 using Dates
 using Distributions
 using Downloads

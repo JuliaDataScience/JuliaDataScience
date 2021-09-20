@@ -1,11 +1,12 @@
 name: CI
 
 on:
-  push:
+  workflow_run:
+    workflows: ["Formatter"]
     branches:
       - main
-  pull_request:
-  workflow_dispatch:
+    types:
+      - completed
 
 jobs:
   build-and-deploy:

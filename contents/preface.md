@@ -11,7 +11,7 @@ It's difficult to figure out where to start and how all the different packages f
 That is why we decided to create this book!
 We wanted to make it easier for researchers, and especially our colleagues, to start using this awesome language.
 
-Like discussed above, each language has it's strengths and weaknesses.
+Like discussed above, each language has its strengths and weaknesses.
 In our opinion, data science is definitely a strength of Julia.
 At the same time, all three of us used data science tools in our day to day life.
 And, probably, you want to use data science too!
@@ -43,7 +43,7 @@ But, one thing that we can assure with high confidence is that data science is a
 Our aims of this book are twofold:
 
 * We focus on the backbone of data science: data.
-* We use to Julia programming language to process the data.
+* We use the Julia programming language to process the data.
 
 We cover why Julia is an extremely effective language for data science in @sec:why_julia.
 For now, let's turn our attention towards data.
@@ -71,7 +71,7 @@ Unlike most books on data science, this book lays more emphasis on properly **st
 The reason for this is that we noticed that many data scientists simply place their code into one large file and run all the statements sequentially.
 You can think of this like forcing book readers to always read it from beginning to end, and without being allowed to revisit earlier sections or jumping to interesting sections right away.
 This works fine for small and simple projects, but the bigger or more complex the project becomes, more problems will start to arise.
-For example, in a well written book, the book is split into distinctly named chapters and sections which contains several references to other parts in the book.
+For example, in a well written book, the book is split into distinctly named chapters and sections which contain several references to other parts in the book.
 The software equivalent of this is **splitting code into functions**.
 Each function has a name and some contents.
 By using functions, you can tell the computer at any point in your code to jump to some other place and continue from there.
@@ -80,9 +80,9 @@ Hence, with functions, you can **save time**.
 
 So, while reading this book, you will eventually get used to reading and using functions.
 Another benefit of having good software engineering skills is that it will allow you to more easily read the packages's source code that you're using, which could be greatly beneficial when you are debugging your code or wonder how exactly the package that you're using works.
-Finally, you can rest assured that we did not invented this emphasis on functions ourselves.
+Finally, you can rest assured that we did not invent this emphasis on functions ourselves.
 In industry, it is common practice to encourage developers to use **"functions instead of comments"**.
-That means that, instead of writing a comment for humans and some code for the computer, the developers write a function which is read by, both, humans and computers.
+That means that, instead of writing a comment for humans and some code for the computer, the developers write a function which is read by both humans and computers.
 
 Also, we've put much effort into sticking to a consistent style guide.
 Programming style guides provide guidelines for writing code.

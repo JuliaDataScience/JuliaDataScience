@@ -57,7 +57,7 @@ This will collect all the `labels` you might have passed to your plotting functi
 
 ```jl
 s = """
-    CairoMakie.activate!() # hide 
+    CairoMakie.activate!() # hide
     lines(1:10, (1:10).^2; label = "x²", linewidth = 2, linestyle = nothing,
         figure = (; figure_padding = 5, resolution = (600,400),
             backgroundcolor = :grey90, fontsize = 16, font = "sans"),

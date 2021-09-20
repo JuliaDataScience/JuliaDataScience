@@ -1,7 +1,7 @@
 function statistics_graph()
     u = LinRange(0, 2π, 72)
     a, b = 5.0, 2.0
-    # arrow lines 
+    # arrow lines
     x0 = [1, 0] # start point
     x1 = [0.75, -5] # end point
     t0 = [2, 1.0] # starting tangent vector
@@ -11,23 +11,23 @@ function statistics_graph()
     points = [curve(t) for t in T]
     points = hcat(points...)';
     ##
-    fig, ax, = lines(ellipse.(u);  
+    fig, ax, = lines(ellipse.(u);
         figure = (;resolution = (600,400)),
         axis = (; aspect = 1))
     lines!(ellipse.(u; a = 1.5, b = 3, k = -5))
     lines!(points[:,1], points[:,2])
     lines!(-points[:,1], points[:,2])
-    arrows!([points[end-5, 1]], [points[end-5, 2]], 
+    arrows!([points[end-5, 1]], [points[end-5, 2]],
         [-0.1], [0],  arrowsize = 20, lengthscale = 0.2)
-    arrows!([-points[5, 1]], [points[5, 2]], 
+    arrows!([-points[5, 1]], [points[5, 2]],
         [0.1], [0],  arrowsize = 20, lengthscale = 0.2)
-     
-    text!("Data\nGenerating\nProcess", position = (0,0), 
+
+    text!("Data\nGenerating\nProcess", position = (0,0),
         align = (:center, :center), textsize = 24)
-    text!("Observed\nData", position = (0,-5), 
+    text!("Observed\nData", position = (0,-5),
         align = (:center, :center), textsize = 24)
     text!("Inference", position = (-1.2,-2.5), textsize = 24)
-    text!("Probability", position = (0.65,-2.5), textsize = 24, 
+    text!("Probability", position = (0.65,-2.5), textsize = 24,
         align = (:center, :center))
     hidedecorations!(ax)
     hidespines!(ax)
@@ -60,7 +60,7 @@ function plot_central()
     fig = Figure(; resolution=(600, 400))
     ax1 = Axis(fig[1, 1]; limits=((3, 20), nothing))
     ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
-    d1, rand_d1 = normal_dist(10, 1) 
+    d1, rand_d1 = normal_dist(10, 1)
     d2, rand_d2 = lognormal_dist(10, 1.5)
     dens(ax1, rand_d1, (:silver, 0.15))
     dens(ax2, rand_d2, (:grey, 0.25))
@@ -139,7 +139,7 @@ function plot_dispersion_std()
     fig = Figure(; resolution=(600, 400))
     ax1 = Axis(fig[1, 1]; limits=((3, 20), nothing))
     ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
-    d1, rand_d1 = normal_dist(10, 1) 
+    d1, rand_d1 = normal_dist(10, 1)
     d2, rand_d2 = lognormal_dist(10, 1.5)
     dens(ax1, rand_d1, (:silver, 0.15))
     dens(ax2, rand_d2, (:grey, 0.25))
@@ -201,7 +201,7 @@ function plot_dispersion_mad()
     fig = Figure(; resolution=(600, 400))
     ax1 = Axis(fig[1, 1]; limits=((3, 20), nothing))
     ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
-    d1, rand_d1 = normal_dist(10, 1) 
+    d1, rand_d1 = normal_dist(10, 1)
     d2, rand_d2 = lognormal_dist(10, 1.5)
     dens(ax1, rand_d1, (:silver, 0.15))
     dens(ax2, rand_d2, (:grey, 0.25))
@@ -262,7 +262,7 @@ function plot_dispersion_iqr()
     fig = Figure(; resolution=(600, 400))
     ax1 = Axis(fig[1, 1]; limits=((3, 20), nothing))
     ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
-    d1, rand_d1 = normal_dist(10, 1) 
+    d1, rand_d1 = normal_dist(10, 1)
     d2, rand_d2 = lognormal_dist(10, 1.5)
     dens(ax1, rand_d1, (:silver, 0.15))
     dens(ax2, rand_d2, (:grey, 0.25))
@@ -400,7 +400,7 @@ function plot_normal_lognormal()
     CairoMakie.activate!() # hide
     fig = Figure(; resolution=(600, 400))
     ax = Axis(fig[1, 1]; limits=((3, 20), nothing))
-    _, rand_d1 = normal_dist(10, 1) 
+    _, rand_d1 = normal_dist(10, 1)
     _, rand_d2 = lognormal_dist(10, 1.3)
     density!(ax, rand_d1; color=(:dodgerblue, 0.15), strokewidth=1.5, strokecolor=(:black, 0.5), label="normal")
     density!(ax, rand_d2; color=(:red, 0.15), strokewidth=1.5, strokecolor=(:black, 0.5), label="non-normal")

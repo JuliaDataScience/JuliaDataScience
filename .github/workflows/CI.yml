@@ -3,15 +3,12 @@ name: CI
 on:
   workflow_run:
     workflows: ["Formatter"]
-    branches:
-      - main
     types:
       - completed
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -58,9 +55,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           force_orphan: true
           publish_dir: ./_build/
-
-  on-formatter-failure:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
-    steps:
-      - run: echo "Formatter failed. Exiting"

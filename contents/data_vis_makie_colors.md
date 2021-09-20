@@ -20,7 +20,7 @@ See this in action in the following example:
 ```
 
 Where, in the first two lines we have used the keyword `color` to specify our color.
-The rest is using the default cycle set of colors. 
+The rest is using the default cycle set of colors.
 Later, we will learn how to do a custom cycle.
 
 Regarding colormaps, we are already familiar with the keyword `colormap` for heatmaps and scatters.
@@ -31,7 +31,7 @@ See `?cgrad` for more information.
 
 ```jl
 scolor = """
-    CairoMakie.activate!() # hide 
+    CairoMakie.activate!() # hide
     figure = (;resolution = (400,300), font= "CMU Serif")
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
 

@@ -1,3 +1,8 @@
+name = "FormatJDS"
+uuid = "adfa99fd-7844-4562-9f5d-8091726a002b"
+authors = ["Jose Storopoli", "Rik Huijzer", "Lazaro Alonso"]
+version = "0.1.0"
+
 [deps]
 JuliaFormatter = "98e50ef6-434e-11e9-1051-2b60c6c9e899"
 

@@ -76,63 +76,63 @@ function front_cover(; resolution=(1200, 2400))
 
         meshscatter!(ax1, positions, color = vec(vals), 
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), # here, if you use less than 10, you will see smaller squares. 
-            colormap = :linear_grey_10_95_c0_n256, colorrange = (-2, 2), 
+            colormap = :linear_grey_10_95_c0_n256, colorrange = (-2, 2),
             transparency = false,
             shading= false)
 
-        meshscatter!(ax1, posTops, color = vec(valsTop), marker = FRect3D(Vec3f0(0), Vec3f0(7)), 
-            transparency = false, colormap = (:plasma,0.65),  
+        meshscatter!(ax1, posTops, color = vec(valsTop), marker = FRect3D(Vec3f0(0), Vec3f0(7)),
+            transparency = false, colormap = (:plasma,0.65),
             shading= false, colorrange = (0,1) )
-        meshscatter!(ax1, posSides, color = vec(valsSides), marker = FRect3D(Vec3f0(0), Vec3f0(7)), 
-            transparency = false, colormap = (:viridis,0.65), 
+        meshscatter!(ax1, posSides, color = vec(valsSides), marker = FRect3D(Vec3f0(0), Vec3f0(7)),
+            transparency = false, colormap = (:viridis,0.65),
             shading= false, )
 
-        meshscatter!(ax2, vec(arrTop[:,end]), color = colorTop[end:-1:1], shading = false, 
+        meshscatter!(ax2, vec(arrTop[:,end]), color = colorTop[end:-1:1], shading = false,
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :plasma, colorrange = (0,1))
 
-        meshscatter!(ax2, vec([(0,i) for i in 0:9]), color = colorSides, shading = false, 
+        meshscatter!(ax2, vec([(0,i) for i in 0:9]), color = colorSides, shading = false,
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :viridis, colorrange = (0,1))
 
-        meshscatter!(ax2, vec([(j,i) for i in 0:9, j in 1:10]), shading = false, 
+        meshscatter!(ax2, vec([(j,i) for i in 0:9, j in 1:10]), shading = false,
             color = vec(vals[end:-1:1,end,:]'),
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :linear_grey_10_95_c0_n256, colorrange = (-2,2))
 
-        meshscatter!(ax3, vec(arrTop[1:4,end]), color = colorTop[end:-1:1][1:4], shading = false, 
+        meshscatter!(ax3, vec(arrTop[1:4,end]), color = colorTop[end:-1:1][1:4], shading = false,
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :plasma, colorrange = (0,1))
 
-        meshscatter!(ax3, vec([(0,i) for i in 0:9]), color = colorSides, shading = false, 
+        meshscatter!(ax3, vec([(0,i) for i in 0:9]), color = colorSides, shading = false,
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :viridis, colorrange = (0,1))
         
-        meshscatter!(ax3, vec([(j,i) for i in 0:9, j in 1:4]), shading = false, 
+        meshscatter!(ax3, vec([(j,i) for i in 0:9, j in 1:4]), shading = false,
             color = vec(vals[end:-1:1,end,:]')[1:40],
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :linear_grey_10_95_c0_n256, colorrange = (-2,2))
 
 
-        meshscatter!(ax4, vec(arrTop[1:3,end]), color = colorTop[end:-1:1][1:3], shading = false, 
+        meshscatter!(ax4, vec(arrTop[1:3,end]), color = colorTop[end:-1:1][1:3], shading = false,
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :plasma, colorrange = (0,1))
 
-        meshscatter!(ax4, vec([(0,i) for i in 0:9]), color = colorSides, shading = false, 
+        meshscatter!(ax4, vec([(0,i) for i in 0:9]), color = colorSides, shading = false,
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :viridis, colorrange = (0,1))
 
-        meshscatter!(ax4, vec([(j,i) for i in 0:9, j in 1:3]), shading = false, 
+        meshscatter!(ax4, vec([(j,i) for i in 0:9, j in 1:3]), shading = false,
             color = vec(vals[end:-1:1,end,:]')[1:30],
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :linear_grey_10_95_c0_n256, colorrange = (-2,2))
 
-        meshscatter!(ax5, vec(arrTop[1:2,end]), color = colorTop[end:-1:1][1:2], shading = false, 
+        meshscatter!(ax5, vec(arrTop[1:2,end]), color = colorTop[end:-1:1][1:2], shading = false,
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :plasma, colorrange = (0,1))
 
-        meshscatter!(ax5, vec([(0,i) for i in 0:9]), color = colorSides, shading = false, 
+        meshscatter!(ax5, vec([(0,i) for i in 0:9]), color = colorSides, shading = false,
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :viridis, colorrange = (0,1))
         
-        meshscatter!(ax5, vec([(j,i) for i in 0:9, j in 1:2]), shading = false, 
+        meshscatter!(ax5, vec([(j,i) for i in 0:9, j in 1:2]), shading = false,
             color = vec(vals[end:-1:1,end,:]')[1:20],
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :linear_grey_10_95_c0_n256, colorrange = (-2,2))
 
         
-        meshscatter!(ax6, vec(arrTop[1:1,end]), color = colorTop[end:-1:1][1:1], shading = false, 
+        meshscatter!(ax6, vec(arrTop[1:1,end]), color = colorTop[end:-1:1][1:1], shading = false,
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :plasma, colorrange = (0,1))
 
-        meshscatter!(ax6, vec([(0,i) for i in 0:9]), color = colorSides, shading = false, 
+        meshscatter!(ax6, vec([(0,i) for i in 0:9]), color = colorSides, shading = false,
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :viridis, colorrange = (0,1))
         meshscatter!(ax6, vec([(j,i) for i in 0:9, j in 1:1]), shading = false, 
             color = vec(vals[end:-1:1,end,:]')[1:10],
@@ -141,16 +141,16 @@ function front_cover(; resolution=(1200, 2400))
 
 
         Label(fig[1, 1, BottomLeft()], "|>", textsize = 24,
-                rotation = 0pi, padding = (0,3,8,0),font = noto_sans_bold)
+                rotation = 0pi, padding = (0,3,8,0),font = NOTO_SANS_BOLD)
         Label(fig[2, 1, BottomLeft()], "|>", textsize = 24, 
-            rotation = 0pi, font = noto_sans_bold)
+            rotation = 0pi, font = NOTO_SANS_BOLD)
         Label(fig[3, 1, BottomLeft()], "|>", textsize = 24,
-            rotation = 0pi,padding = (0,3,8,0), font = noto_sans_bold)
+            rotation = 0pi,padding = (0,3,8,0), font = NOTO_SANS_BOLD)
 
         Label(fig[4, 1, BottomLeft()], "|>", textsize = 24,
-            rotation = 0pi, padding = (0,3,8,0), font = noto_sans_bold)
+            rotation = 0pi, padding = (0,3,8,0), font = NOTO_SANS_BOLD)
         Label(fig[5, 1, BottomLeft()], "|>", textsize = 24,
-            rotation = 0pi, padding = (0,3,8,0), font = noto_sans_bold)
+            rotation = 0pi, padding = (0,3,8,0), font = NOTO_SANS_BOLD)
 
         xlims!(ax1,-1,12)
         ylims!(ax1,-1,11)
@@ -188,12 +188,12 @@ function front_cover(; resolution=(1200, 2400))
         x = rand(10)
         y = rand(10)
         z = rand(10)
-        meshscatter!(ax15, x,y,z; color = fill(1,10), colormap = (:red, :white), 
+        meshscatter!(ax15, x,y,z; color = fill(1,10), colormap = (:red, :white),
             markersize = 0.1, ambient = Vec3f0(0.85, 0.85, 0.85))
         lines!(ax15, x,y,z; color = :grey80, linewidth = 2)
-        Label(fig[3, 3:6, Bottom()], "Julia Data Science", textsize = 70, 
+        Label(fig[3, 3:6, Bottom()], "Julia Data Science", textsize = 70,
             tellheight = false)
-        Label(fig[4, 4:end], "Jose Storopoli, Rik Huijzer\n and Lazaro Alonso", 
+        Label(fig[4, 4:end], "Jose Storopoli, Rik Huijzer\n and Lazaro Alonso",
             textsize = 30, tellheight = false)
         ax62 = Axis(fig[6,2], aspect = 1)
         ax63 = Axis(fig[6,3], aspect = 1)
@@ -207,13 +207,13 @@ function front_cover(; resolution=(1200, 2400))
         scatter!(ax52, rand(10), rand(10); color = colors[1], markersize = 16)
         lines!(ax53, 0..10, x -> exp(-x); color = colors[2], linewidth = 4)
 
-        hist!(ax62, randn(1000), bins = 32; color = colors[3], strokewidth = 1.5, 
+        hist!(ax62, randn(1000), bins = 32; color = colors[3], strokewidth = 1.5,
             strokecolor = :grey80)
-        density!(ax63, randn(1000); color = colors[4], 
+        density!(ax63, randn(1000); color = colors[4],
             strokewidth = 2, strokecolor = colors[4])
-        violin!(ax64, fill(1,1000), randn(1000); color = (colors[5], 0.1), 
+        violin!(ax64, fill(1,1000), randn(1000); color = (colors[5], 0.1),
             strokewidth = 2, strokecolor = colors[5], show_median = true,)
-        boxplot!(ax65, fill(1,1000), randn(1000); color = colors[6], strokecolor = :grey80,  
+        boxplot!(ax65, fill(1,1000), randn(1000); color = colors[6], strokecolor = :grey80,
             whiskercolor = colors[6], whiskerwidth = 1, strokewidth = 1)
         scatter!(ax66, randn(1000), 1:1000; color = colors[7], markersize = 4)
         limits!(ax52, -0.5, 1.5, -0.5, 1.5)
@@ -227,7 +227,7 @@ function front_cover(; resolution=(1200, 2400))
         ylims!(ax63, 0,0.55)
 
 
-        axs = [ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8, ax9, 
+        axs = [ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8, ax9,
             ax10, 
             ax11,
             ax12, ax13, 

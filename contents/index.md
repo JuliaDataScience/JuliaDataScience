@@ -24,7 +24,7 @@ Roughly, the status is as follows:
 - [x] 4. DataFrames.jl
 - [ ] 5. Plots.jl
 - [x] 6. Makie.jl
-- [ ] 7. Statistics
+- [x] 7. Statistics
 - [ ] Review complete book
 - [ ] Publish with Amazon Kindle Direct Publishing
 

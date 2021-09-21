@@ -480,7 +480,9 @@ function anscombe_quartet(;type="long")
          4.82 7.26 6.42 7.91;
          5.68 4.74 5.73 6.89]
     if type == "long"
-        return DataFrame(; dataset, x=vcat(repeat(x[1, :]; outer=3), x[2, :]), y=(reshape(y, 11 * 4)))
+        x = vcat(repeat(x[1, :]; outer=3), x[2, :])
+        y = (reshape(y, 11 * 4))
+        return DataFrame(; dataset, x, y)
     elseif type == "wide"
         return DataFrame(; x_1=x[1, :], y_1=y[:, 1], x_2=x[1, :], y_2=y[:, 2],
                          x_3=x[1, :], y_3=y[:, 3], x_4=x[2, :], y_4=y[:, 4])

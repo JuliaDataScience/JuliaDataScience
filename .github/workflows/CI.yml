@@ -35,7 +35,7 @@ jobs:
 
       - shell: julia --project=format --color=yes {0}
         run: |
-          import FormatJDS
+          using FormatJDS
           exitcode = project_has_trailing_whitespace() ? 1 : 0
           exit(exitcode)
 

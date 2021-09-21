@@ -2,9 +2,7 @@ name: CI
 
 on:
   workflow_run:
-    workflows: ["Formatter"]
-    branches:
-      - main
+    workflows: ["Formatting"]
     types:
       - completed
 

@@ -140,11 +140,30 @@ And in the second figure (right) we pass the `:x` argument to `color` to tell Ma
 
 ### Anscombe Quartet {#sec:stats_vis_anscombe}
 
-The importance of visualizations.
+We conclude this Statistics chapter with a demonstration of the **importance of data visualization in statistical analyzes**.
+For this, we present the **Anscombe Quartet** [@anscombe1973graphs], which comprises four datasets that have *nearly identical* simple descriptive statistics, yet have very *different* distributions and appear very different when **graphed**.
+Each dataset has 11 observations with `x` and `y` variables.
+They were created in 1973 by the statistician Francis Anscombe to show the importance of graphing data before conducting statistical analyzes.
+Here is the table with the four datasets:
 
 ```jl
 Options(anscombe_quartet(;type="wide"); caption="Anscome Quartet", label="anscombe_quartet")
 ```
+
+Now, if you look at the descriptive statistics for both `x` and `y` variables in all 4 datasets they are pretty much the same along with their correlation (both up to 2 decimal places):
+
+```jl
+s = """
+    df = anscombe_quartet()
+    round_up = x -> round(x; digits=2)
+    combine(groupby(df, :dataset),
+                    [:x, :y] .=> round_up .∘ [mean std],
+                    [:x, :y]  => round_up ∘ cor)
+    """
+sco(s; process=without_caption_label)
+```
+
+Now, if we take a look at a simple scatter plot of all 4 datasets, we clearly see that something else is going on:
 
 ```jl
 fig = plot_anscombe()
@@ -153,5 +172,10 @@ label = "plot_anscombe"
 Options(fig; filename=label, caption, label)
 ```
 
+Here, the first dataset (upper left) is a frequent situation that we encounter in data science: `x` and `y` are correlated with added random noise.
+The second dataset (upper right), we see a perfect correlation except for an outlier in the second to last observation.
+For the third dataset (lower left), the relationship is non-linear.
+Finally, for the fourth dataset (lower right) there isn't any relationship except by an outlier observation.
 
+Anscombe Quartet tells us that sometimes **descriptive statistics can fool us** and we should rely also in **visualizations** to analyze our data.
 

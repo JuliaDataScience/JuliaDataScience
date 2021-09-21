@@ -124,7 +124,7 @@ We can see clearly that most of the grades are between 4 and 9.
 Histograms are discrete approximations.
 If we would like to have continuous approximations we need something else: **density plots**.
 **Density plots are graphical density estimations of numerical data**.
-It shows us the full distribution of a given variable by depicting it as a density, where the higher the curve at a given point more likely is the variable to take certain value.
+It shows us the approximate distribution of a given variable by depicting it as a density, where the higher the curve at a given point more likely is the variable to take certain value.
 
 The density plot can also be drawn using `Makie.jl`, however it is more convoluted than the box plot.
 First, we want to pass for each `density!` function only the values with respect to one observation.

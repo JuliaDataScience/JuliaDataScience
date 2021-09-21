@@ -1,13 +1,17 @@
 ## Statistical Visualizations {#sec:stats_vis}
 
 There are several statistical visualization techniques.
-We will focus on mainly two: box plots and density plots, since they are the most used and our preferred way to analyze univariate data.
+We will focus on mainly two: **box plots** and **density plots**, since they are the most used and our preferred way to analyze univariate data.
 
 We will also use the same `more_grades` dataset from @sec:stats_central.
 
 ### Box Plots {#sec:stats_vis_boxplots}
 
-Box plots are ...
+Box plots are a method for graphically depicting numerical data through their quartiles.
+The "box" is typically represented by the quartiles 1 to 3.
+The median, second quartile -- Q2, or percentile 0.5, is the line inside the box.
+The first and third quartile, Q1 and Q3, or percentiles 0.25 and 0.75, respectively, are the box's lower and upper bounds.
+Finally, we have the "whisker" which, traditionally (and default in most data visualization techniques), is the range composed by extending the interquartile range (IQR) by 1.5.
 
 The basic box plot can be drawn using `Makie.jl` (see Chapter -@sec:datavisMakie).
 It accepts a `x` and `y` vectors which represents the positions of the categories and the variables within the boxes, respectively.
@@ -32,9 +36,52 @@ s = """
 sco(s)
 ```
 
+The default IQR range for the whiskers in `Makie.jl` is 1.5.
+However, sometimes we see the whiskers either with a different IQR range or with a small vertical bar to better visualize the whiskers tips.
+We can control both of those with the `range` (default `1.5`) and `whiskerwidth` (default `0.0`) arguments:
+
+```jl
+s = """
+    CairoMakie.activate!() # hide
+    label = "boxplot_custom" # hide
+    caption = "Box Plot with different IQR and Whiskers Vertical Bars" # hide
+    df = more_grades()
+    transform!(df, :name => categorical; renamecols=false)
+    fig = Figure(; resolution=(600, 400))
+    ax = Axis(fig[1, 1]; xticks = (1:4, levels(df.name)))
+    boxplot!(ax, levelcode.(df.name), df.grade; range=2.0, whiskerwidth=0.5)
+    Options(current_figure(); filename=label, caption, label) # hide
+    """
+sco(s)
+```
+
+Box plots can also flag anything outside the whiskers as outliers.
+By default, these observations are not shown in `Makie.jl` but you can control it with the `show_outliers` argument:
+
+```jl
+s = """
+    CairoMakie.activate!() # hide
+    label = "boxplot_outliers" # hide
+    caption = "Box Plot with Outliers" # hide
+    df = more_grades()
+    transform!(df, :name => categorical; renamecols=false)
+    fig = Figure(; resolution=(600, 400))
+    ax = Axis(fig[1, 1]; xticks = (1:4, levels(df.name)))
+    boxplot!(ax, levelcode.(df.name), df.grade; range=0.5, show_outliers=true)
+    Options(current_figure(); filename=label, caption, label) # hide
+    """
+sco(s)
+```
+
+As you can see, **box plots are a useful way to visualize data with robust central tendencies and dispersion measures to outliers**.
+
 ### Density Plots {#sec:stats_vis_densityplots}
 
-Density plots are ...
+Box plot limit us just to summary statistics like median, quartiles and IQRs.
+Often we want to see the full distribution of our data.
+This can be accomplished with **density plots**.
+**Density plots are graphical density estimations of numerical data**.
+It shows us the full distribution of a given variable by depicting it as a density, where the higher the curve at a given point more likely is the variable to take certain value.
 
 The density plot can also be drawn using `Makie.jl`, however it is more convoluted than the box plot.
 First, we want to pass for each `density!` function only the values with respect to one observation.
@@ -62,6 +109,49 @@ s = """
 sco(s)
 ```
 
+As explained in @sec:makie_colors, we can change Makie's colors by either specifying a `color` or ` colormap`.
+This can also be applied to `density`:
+
+```jl
+s = """
+    CairoMakie.activate!() # hide
+    label = "densityplot_colors" # hide
+    caption = "Density Plots with Different Color Schemes" # hide
+    df = more_grades()
+    transform!(df, :name => categorical; renamecols=false)
+    categories = levels(df.name)
+    values(code) = filter(row -> levelcode.(row.name) == code, df).grade
+    fig = Figure(; resolution=(600, 400))
+    ax1 = Axis(fig[1, 1]; yticks = (1:4, categories), limits=((-1, 11), nothing))
+    ax2 = Axis(fig[1, 2]; yticks = (1:4, categories), limits=((-1, 11), nothing))
+    for i in 1:length(categories)
+        density!(ax1, values(i); offset=i, color=(:dodgerblue, 0.5))
+    end
+    for i in 1:length(categories)
+        density!(ax2, values(i); offset=i, color=:x, colormap=:viridis)
+    end
+    Options(current_figure(); filename=label, caption, label) # hide
+    """
+sco(s)
+```
+
+Here, in the first figure (left) we are using a specific `color` for all `density!`'s `plotobj`s.
+And in the second figure (right) we pass the `:x` argument to `color` to tell Makie to apply the `colormap` gradient along the x-axis (from left to right) while also specifying which `colormap` palette as `:viridis`.
+
 ### Anscombe Quartet {#sec:stats_vis_anscombe}
 
 The importance of visualizations.
+
+```jl
+Options(anscombe_quartet(;type="wide"); caption="Anscome Quartet", label="anscombe_quartet")
+```
+
+```jl
+fig = plot_anscombe()
+caption = "Anscombe Quartet"
+label = "plot_anscombe"
+Options(fig; filename=label, caption, label)
+```
+
+
+

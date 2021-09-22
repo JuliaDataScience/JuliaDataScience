@@ -2,6 +2,8 @@ name: CI
 
 on:
   workflow_run:
+    branches:
+      - main
     workflows:
       - Format
     types:

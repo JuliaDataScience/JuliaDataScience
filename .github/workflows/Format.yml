@@ -1,0 +1,24 @@
+name: Format
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  docs:
+    name: CheckFormatting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - shell: julia --project=format --color=yes {0}
+        run: 'import Pkg: instantiate'
+
+      - shell: julia --project=format --color=yes {0}
+        run: |
+          import FormatJDS
+          exitcode = project_has_trailing_whitespace() ? 1 : 0
+          exit(exitcode)

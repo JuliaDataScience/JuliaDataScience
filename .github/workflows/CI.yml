@@ -1,15 +1,15 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-  workflow_dispatch:
+  on:
+  workflow_run:
+    workflows: ["Format"]
+    types:
+      - completed
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -29,6 +29,15 @@ jobs:
             ${{ runner.os }}-test-${{ env.cache-name }}-
             ${{ runner.os }}-test-
             ${{ runner.os }}-
+
+      - shell: julia --project=format --color=yes {0}
+        run: 'using Pkg; Pkg.instantiate()'
+
+      - shell: julia --project=format --color=yes {0}
+        run: |
+          using FormatJDS
+          exitcode = project_has_trailing_whitespace() ? 1 : 0
+          exit(exitcode)
 
       - name: Install GLMakie dependencies
         run: sudo apt-get update && sudo apt-get install -y xorg-dev imagemagick mesa-utils xvfb libgl1 freeglut3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev

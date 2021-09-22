@@ -47,7 +47,7 @@ sco(s; process=without_caption_label)
 
 The `@allocated` macro tells us how much memory was allocated.
 In other words, **how much new information the computer had to store in its memory while running the code**.
-Let's see how they will perform: 
+Let's see how they will perform:
 
 ```jl
 s = """
@@ -203,7 +203,7 @@ By using `Base.summarysize` function we can get the underlying size, in bytes, o
 So let's quantify how much more memory we would need to have if we did not compressed our one million categorical vector:
 
 ```julia
-using Random 
+using Random
 ```
 
 ```jl

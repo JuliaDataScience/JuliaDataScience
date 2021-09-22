@@ -41,12 +41,12 @@ function front_cover(; resolution=(1200, 2400))
     CairoMakie.activate!()
     with_theme(theme_black()) do
         #589.44, 884.16
-        # Warning, there is not actual structure in this code, 
-        # things are messy and all around. 
+        # Warning, there is not actual structure in this code,
+        # things are messy and all around.
         fig = Figure(resolution=(1768,2652))
-        ax1 = Axis3(fig[1,1], perspectiveness = 0.5,  azimuth = 7.19, elevation = 0.57,  
+        ax1 = Axis3(fig[1,1], perspectiveness = 0.5,  azimuth = 7.19, elevation = 0.57,
                 xlabel = "x label", ylabel = "y label", zlabel = "z label",
-                aspect = (1,1,1)) 
+                aspect = (1,1,1))
         ax2 = Axis(fig[2,1], aspect = AxisAspect(1))
         ax3 = Axis(fig[3,1], aspect = AxisAspect(1))
         ax4 = Axis(fig[4,1],  aspect = AxisAspect(1))
@@ -66,16 +66,16 @@ function front_cover(; resolution=(1200, 2400))
 
         #ax15 = Axis3(fig[3,3], perspectiveness = 0.5, azimuth = 1π, aspect = (1,1,1))
 
-        axs = [ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8, ax9, 
-            ax10, 
+        axs = [ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8, ax9,
+            ax10,
             ax11,
-            ax12, ax13, 
+            ax12, ax13,
             ax14, ax15, ax16]
 
         ms = 20
 
-        meshscatter!(ax1, positions, color = vec(vals), 
-            marker = FRect3D(Vec3f0(0), Vec3f0(7)), # here, if you use less than 10, you will see smaller squares. 
+        meshscatter!(ax1, positions, color = vec(vals),
+            marker = FRect3D(Vec3f0(0), Vec3f0(7)), # here, if you use less than 10, you will see smaller squares.
             colormap = :linear_grey_10_95_c0_n256, colorrange = (-2, 2),
             transparency = false,
             shading= false)
@@ -102,7 +102,7 @@ function front_cover(; resolution=(1200, 2400))
 
         meshscatter!(ax3, vec([(0,i) for i in 0:9]), color = colorSides, shading = false,
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :viridis, colorrange = (0,1))
-        
+
         meshscatter!(ax3, vec([(j,i) for i in 0:9, j in 1:4]), shading = false,
             color = vec(vals[end:-1:1,end,:]')[1:40],
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :linear_grey_10_95_c0_n256, colorrange = (-2,2))
@@ -123,18 +123,18 @@ function front_cover(; resolution=(1200, 2400))
 
         meshscatter!(ax5, vec([(0,i) for i in 0:9]), color = colorSides, shading = false,
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :viridis, colorrange = (0,1))
-        
+
         meshscatter!(ax5, vec([(j,i) for i in 0:9, j in 1:2]), shading = false,
             color = vec(vals[end:-1:1,end,:]')[1:20],
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :linear_grey_10_95_c0_n256, colorrange = (-2,2))
 
-        
+
         meshscatter!(ax6, vec(arrTop[1:1,end]), color = colorTop[end:-1:1][1:1], shading = false,
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :plasma, colorrange = (0,1))
 
         meshscatter!(ax6, vec([(0,i) for i in 0:9]), color = colorSides, shading = false,
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :viridis, colorrange = (0,1))
-        meshscatter!(ax6, vec([(j,i) for i in 0:9, j in 1:1]), shading = false, 
+        meshscatter!(ax6, vec([(j,i) for i in 0:9, j in 1:1]), shading = false,
             color = vec(vals[end:-1:1,end,:]')[1:10],
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :linear_grey_10_95_c0_n256, colorrange = (-2,2))
 
@@ -142,7 +142,7 @@ function front_cover(; resolution=(1200, 2400))
 
         Label(fig[1, 1, BottomLeft()], "|>", textsize = 24,
                 rotation = 0pi, padding = (0,3,8,0),font = NOTO_SANS_BOLD)
-        Label(fig[2, 1, BottomLeft()], "|>", textsize = 24, 
+        Label(fig[2, 1, BottomLeft()], "|>", textsize = 24,
             rotation = 0pi, font = NOTO_SANS_BOLD)
         Label(fig[3, 1, BottomLeft()], "|>", textsize = 24,
             rotation = 0pi,padding = (0,3,8,0), font = NOTO_SANS_BOLD)
@@ -171,11 +171,11 @@ function front_cover(; resolution=(1200, 2400))
         xlims!(ax6,-0.5,11)
         ylims!(ax6,-1,11)
 
-        
+
 
         volume!(ax7, collect(1:10),collect(1:10),collect(1:10), rand(10,10,10)) # this just works with GLMakie
         #contour!(ax8, 1:10,1:10,1:10, rand(10,10,10))
-        
+
         x, y, z = peaks()
         x2, y2, z2 = peaks(; n = 15)
         surface!(ax9, x, y, z; colormap = :plasma)
@@ -228,9 +228,9 @@ function front_cover(; resolution=(1200, 2400))
 
 
         axs = [ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8, ax9,
-            ax10, 
+            ax10,
             ax11,
-            ax12, ax13, 
+            ax12, ax13,
             ax14, ax15, ax16,
             ax62, ax63, ax64, ax65,
             ax52, ax53, ax66]

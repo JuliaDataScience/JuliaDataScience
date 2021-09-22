@@ -2,7 +2,7 @@
 
 There are many programming languages and each and every one of them has its strengths and weaknesses.
 Some languages are very quick, but verbose.
-Other languages are very easy to write in, but slow. This is known as the `two-language` problem and `Julia` aims at circumventing this problem. 
+Other languages are very easy to write in, but slow. This is known as the `two-language` problem and `Julia` aims at circumventing this problem.
 Even though all three of us come from different fields, we all found the Julia language more effective for our research than languages that we've used before.
 We discuss some of our arguments in @sec:why_julia.
 Compared to other languages, Julia is one of the newest languages around.

@@ -384,7 +384,7 @@ Like before, we provide the following advice:
 - For categorical/nominal data, use some sort of **frequency counter**[^frequency_counter]
 
 [^frequency_counter]: we would suggest to use the `StatsBase.countmap` function which returns a dictionary mapping each unique value in a given vector to its number of occurrences.
- 
+
 ## Dependence Measures {#sec:stats_dependence}
 
 Now that we covered univariate measures of central tendency and dispersion, we need to talk about bivariate measures.

@@ -8,7 +8,7 @@ Like before, a simple plot includes, of course, lines and points. So, we will st
 
 ### Scatters and Lines
 
-For scatter plots we have two options, the first one is `scatter(x, y, z)` and the second one is `meshscatter(x, y, z)`. 
+For scatter plots we have two options, the first one is `scatter(x, y, z)` and the second one is `meshscatter(x, y, z)`.
 In the first one markers don't scale in the axis directions, but in the later they do because they are actual geometries in 3D space.
 See the next example:
 
@@ -32,7 +32,7 @@ And doing `lines` or `scatterlines` is also straightforward:
 
 Plotting a `surface` is also easy to do as well as a `wireframe` and `contour` lines in 3D.
 
-### Surfaces, wireframe, contour, contourf and contour3d 
+### Surfaces, wireframe, contour, contourf and contour3d
 
 To show these cases we'll use the following `peaks` function:
 
@@ -85,7 +85,7 @@ using LinearAlgebra
 
 Other interesting examples are a `mesh(obj)`, a `volume(x, y, z, vals)`, and a `contour(x, y, z, vals)`.
 
-### Meshes and Volumes 
+### Meshes and Volumes
 
 Drawing Meshes comes in handy when you want to plot geometries, like a `Sphere` or a Rectangle, i. e. `FRect3D`.
 Another approach to visualize points in 3D space is by calling the functions `volume` and `contour`, which implements [ray tracing](https://en.wikipedia.org/wiki/Ray_tracing_(graphics)) to simulate a wide variety of optical effects.
@@ -132,5 +132,5 @@ For our last example we will show how to do a filled curve in 3D with `band` and
 ```
 
 Finally, our journey doing 3D plots has come to an end.
-You can combine everything we exposed here to create amazing 3D images! 
+You can combine everything we exposed here to create amazing 3D images!
 Now, it's time to dig into the basic rules to create animations.

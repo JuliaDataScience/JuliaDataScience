@@ -1002,7 +1002,7 @@ There are several, but we will focus on two the most used in data science:
 Note here that `T` is the type of the underlying array.
 So, for example, `Vector{Int64}` is a `Vector` which all elements are `Int64`s and `Matrix{AbstractFloat}` is a `Matrix` which all elements are subtypes of `AbstractFloat`.
 
-Most of the time, specially when dealing with tabular data, we are using either one- or two-dimensional arrays.
+Most of the time, especially when dealing with tabular data, we are using either one- or two-dimensional arrays.
 They are both `Array` types for Julia.
 But we can use the handy aliases `Vector` and `Matrix` for clear and concise syntax.
 

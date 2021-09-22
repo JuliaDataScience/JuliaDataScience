@@ -23,5 +23,5 @@ jobs:
         run: |
           using FormatJDS
           exitcode = FormatJDS.project_has_trailing_whitespace() ? 1 : 0
-          println(exitcode ? 1 : "Trailing whitespace found" : "No trailing whitespace found")
+          println(exitcode == 1 ? "Trailing whitespace found" : "No trailing whitespace found")
           exit(exitcode)

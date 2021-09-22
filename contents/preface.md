@@ -97,8 +97,9 @@ If you do want to see the details of our style guide, checkout @sec:notation.
 
 Many people have contributed directly and indirectly to this book.
 
-Jose Storopoli would like to thank his colleagues, specially [Fernando Serra](https://orcid.org/0000-0002-8178-7313), [Wonder Alexandre Luz Alves](https://orcid.org/0000-0003-0430-950X) and [André Librantz](https://orcid.org/0000-0001-8599-9009), for their encouragement and support.
+Jose Storopoli would like to thank his colleagues, especially [Fernando Serra](https://orcid.org/0000-0002-8178-7313), [Wonder Alexandre Luz Alves](https://orcid.org/0000-0003-0430-950X) and [André Librantz](https://orcid.org/0000-0001-8599-9009), for their encouragement and support.
 
-Rik Huijzer would like to thank his PhD supervisors, [Peter de Jonge](https://www.rug.nl/staff/peter.de.jonge/), [Ruud den Hartigh](https://www.rug.nl/staff/j.r.den.hartigh/) and [Frank Blaauw](https://frankblaauw.nl/) for their support.
+First, Rik Huijzer would like to thank his PhD supervisors at the University of Groningen, [Peter de Jonge](https://www.rug.nl/staff/peter.de.jonge/), [Ruud den Hartigh](https://www.rug.nl/staff/j.r.den.hartigh/) and [Frank Blaauw](https://frankblaauw.nl/) for their support.
+Second, Rik would like to thank his parents and girlfriend for being hugely supportive during the holiday and all the weekends and evenings that were involved in this book.
 
 Lazaro Alonso would like to thank his wife and daughters for their encouragement to get involved in this project.

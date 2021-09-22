@@ -36,7 +36,7 @@ Of course, data science is about more things than just tables, basic statistics 
 We want to cover more topics, but we have scheduled them for the second edition of the book.
 For now, the planned topics for the second edition are:
 
-- More statistics (probably, descriptive statistics, `Distributions.jl`)
+- More statistics
 - Plotting via `AlgebraOfGraphics.jl`.
 - Machine learning (probably, `MLJ.jl` and `Flux.jl`)
 - Bayesian statistics (`Turing.jl`)
@@ -61,20 +61,14 @@ Or in BibTeX format:
 }
 ```
 
-
-```{=comment}
-To generate these images, run `write_front_cover()`.
-```
-
-```{=comment}
 ### Front Cover {-}
 
-<center>
-    <a href="/im/front_cover.png">
-        <image src="/im/front_cover_thumbnail.png" alt="Book front cover">
-    </a><br/>
-
-    <i>Click to see the full size version.</i>
-</center>
+```jl
+let
+    fig = front_cover()
+    # Use lazy loading to keep homepage speed high.
+    link_attributes = "loading=\"lazy\" width=80%"
+    Options(fig; caption=nothing, label=nothing, link_attributes)
+end
 ```
 

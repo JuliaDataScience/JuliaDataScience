@@ -113,7 +113,6 @@ This method is called during CI.
 function build()
     println("Building JDS")
     gen(; fail_on_error=true)
-    write_front_cover()
     extra_head = """
     <script src="https://cdn.usefathom.com/script.js" data-site="EEJXHKTE" defer></script>
     """

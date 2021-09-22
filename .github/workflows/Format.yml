@@ -15,10 +15,12 @@ jobs:
       - uses: actions/checkout@v2
 
       - shell: julia --project=format --color=yes {0}
-        run: 'import Pkg: instantiate'
+        run: |
+          using Pkg
+          Pkg.instantiate()
 
       - shell: julia --project=format --color=yes {0}
         run: |
-          import FormatJDS
-          exitcode = project_has_trailing_whitespace() ? 1 : 0
+          using FormatJDS
+          exitcode = FormatJDS.project_has_trailing_whitespace() ? 1 : 0
           exit(exitcode)

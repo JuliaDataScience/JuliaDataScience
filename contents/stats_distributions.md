@@ -131,11 +131,11 @@ In other words, **the cdf is an accumulation of the probability we observe value
 It is defined both for discrete and continuous variables:
 
 $$ \operatorname{cdf} = P(X \leq x) =
- \begin{cases} 
+ \begin{cases}
  \sum_{k \leq x} P(k), & \text{if $X$  is discrete},\\
  \int^x_{- \infty} f(t) dt, & \text{if $X$ is continuous.}
  \end{cases} $$ {#eq:cdf}
- 
+
 In @eq:cdf we sum all values less or equal than $x$ if the distribution $X$ is discrete or we integrate from minus infinity to $x$ if the distribution $X$ is continuous.
 For example, in @fig:plot_cdf_discrete we have the cdf of a 6-sided dice.
 Notice that since the values are equally likely, the cdf scales *linearly* with the possible outcome values.

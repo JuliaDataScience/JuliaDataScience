@@ -1,0 +1,27 @@
+name: Format
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  docs:
+    name: CheckFormatting
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - shell: julia --project=format --color=yes {0}
+        run: |
+          using Pkg
+          Pkg.instantiate()
+
+      - shell: julia --project=format --color=yes {0}
+        run: |
+          using FormatJDS
+          exitcode = FormatJDS.project_has_trailing_whitespace() ? 1 : 0
+          println(exitcode == 1 ? "Trailing whitespace found" : "No trailing whitespace found")
+          exit(exitcode)

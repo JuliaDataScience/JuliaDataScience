@@ -5,7 +5,7 @@ function ellipse(u; a = 2, b = 3, h = 0, k = 0)
 end
 
 # https://github.com/dronir/Bezier.jl
-# it's not longer in the registery
+# it's not longer in the registry
 struct BezierCurve
     Xcoef::Vector{Float64}
     Ycoef::Vector{Float64}

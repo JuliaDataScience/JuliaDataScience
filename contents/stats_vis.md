@@ -1,7 +1,7 @@
 ## Statistical Visualizations {#sec:stats_vis}
 
 There are several statistical visualization techniques.
-We will focus on mainly two: **box plots** and **density plots**, since they are the most used and our preferred way to analyze univariate data.
+For now, we will focus on only two: **box plots** and **density plots**, since they are commonly used to analyze univariate data.
 
 We will also use the `more_grades` dataset from @sec:stats_central.
 
@@ -14,7 +14,7 @@ The first and third quartile, Q1 and Q3, or percentiles 0.25 and 0.75, respectiv
 Finally, we have the "whisker" which, traditionally (and default in most data visualization techniques), is the range composed by extending the interquartile range (IQR) by 1.5.
 
 The basic box plot can be drawn using `Makie.jl` (see Chapter -@sec:datavisMakie).
-It accepts a `x` and `y` vectors which represents the positions of the categories and the variables within the boxes, respectively.
+It accepts an `x` and `y` vectors which represents the positions of the categories and the variables within the boxes, respectively.
 Since the elements in our vector `x` are of type `String`, we need to convert it to `categorical` using `CategoricalArrays.jl` (@sec:missing_data) and then pass the `Axis` keyword argument `xticks` (see @sec:datavisMakie_attributes) as a tuple of values and labels.
 For the `xticks`' labels we used the `levels` function from `CategoricalArrays.jl` that returns the categorical levels from our `name` variable in the same order as the integer codes.
 Finally, for the `x` vector inside Makie's `boxplot` function, we wrap the `name` variable with the `levelcode` function, also from `CategoricalArrays.jl`, which returns the underlying integer codes from our categorical variable `name`.
@@ -77,7 +77,7 @@ As you can see, **box plots are a useful way to visualize data with robust centr
 
 ### Histograms {#sec:stats_vis_histograms}
 
-Box plots limit us just to summary statistics like median, quartiles and IQRs.
+Box plots limit us just to summarize statistics like median, quartiles and IQRs.
 Often we want to see the underlying distribution of the data.
 This is where histograms are useful.
 **Histograms are approximate representations of the distribution of numerical data**.
@@ -124,9 +124,9 @@ We can see clearly that most of the grades are between 4 and 9.
 Histograms are discrete approximations.
 If we would like to have continuous approximations we need something else: **density plots**.
 **Density plots are graphical density estimations of numerical data**.
-It shows us the approximate distribution of a given variable by depicting it as a density, where the higher the curve at a given point more likely is the variable to take certain value.
+It shows us the approximate distribution of a given variable by depicting it as a density, where the higher the curve at a given point is, the more likely is the variable to take a certain value.
 
-The density plot can also be drawn using `Makie.jl`, however it is more convoluted than the box plot.
+A density plot can also be drawn using `Makie.jl`, however it is more convoluted than the box plot.
 First, we want to pass for each `density!` function only the values with respect to one observation.
 Thus, we define a `values` function that will accept a `code` argument to filter the dataset's variable `name` wrapped with the `levelcode` function.
 Then, we plot a density `pltobj` for each one of the variable `name`'s `levels`.
@@ -145,7 +145,7 @@ s = """
     fig = Figure(; resolution=(600, 400))
     ax = Axis(fig[1, 1]; yticks = (1:4, categories), limits=((-1, 11), nothing))
     for i in 1:length(categories)
-        density!(ax, values(i); offset=i)
+        density!(ax, values(i); offset= i*0.7)
     end
     Options(current_figure(); filename=label, caption, label) # hide
     """
@@ -183,10 +183,10 @@ And in the second figure (right) we pass the `:x` argument to `color` to tell Ma
 
 ### Anscombe Quartet {#sec:stats_vis_anscombe}
 
-We conclude this Statistics chapter with a demonstration of the **importance of data visualization in statistical analyzes**.
-For this, we present the **Anscombe Quartet** [@anscombe1973graphs], which comprises four datasets that have *nearly identical* simple descriptive statistics, yet have very *different* distributions and appear very different when **graphed**.
+We conclude this Statistics chapter with a demonstration of the **importance of data visualization in statistical analysis**.
+For this, we present the **Anscombe Quartet** [@anscombe1973graphs], which comprises four datasets that have *nearly identical* simple descriptive statistics, yet have very *different* distributions and appear very different when **plotted**.
 Each dataset has 11 observations with `x` and `y` variables.
-They were created in 1973 by the statistician Francis Anscombe to show the importance of graphing data before conducting statistical analyzes.
+They were created in 1973 by the statistician Francis Anscombe to show the importance of plotting data before conducting statistical analysis.
 Here is the table with the four datasets:
 
 ```jl
@@ -220,5 +220,5 @@ The second dataset (upper right), we see a perfect correlation except for an out
 For the third dataset (lower left), the relationship is non-linear.
 Finally, for the fourth dataset (lower right) there isn't any relationship except by an outlier observation.
 
-Anscombe Quartet tells us that sometimes **descriptive statistics can fool us** and we should rely also in **visualizations** to analyze our data.
+Anscombe Quartet tells us that sometimes **descriptive statistics can fool us** and we should rely also on **visualizations** to analyze our data.
 

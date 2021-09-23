@@ -1,9 +1,50 @@
 ## Statistical Visualizations {#sec:stats_vis}
 
 There are several statistical visualization techniques.
-For now, we will focus on only three: **box plots**, **histograms** and **density plots**, since they are commonly used to analyze univariate data.
+For now, we will focus on only three: **histograms**, **box plots** and **density plots**, since they are commonly used to analyze univariate data.
 
 We will also use the `more_grades` dataset from @sec:stats_central.
+
+### Histograms {#sec:stats_vis_histograms}
+
+**Histograms are approximate representations of the distribution of numerical data**.
+We construct them by "binning", i.e. inserting into discrete bins the range of values into a series of intervals and then counting up how many values fall on each given interval.
+The bins are represented as a bar in which the height describes the frequency of values belonging to that bin.
+
+We can draw histograms using `Makie.jl`:
+
+```jl
+s = """
+    CairoMakie.activate!() # hide
+    label = "histogram" # hide
+    caption = "Histogram" # hide
+    df = more_grades()
+    fig = Figure(; resolution=(600, 400))
+    ax = Axis(fig[1, 1], xticks=1:10)
+    hist!(ax, df.grade; color=(:dodgerblue, 0.5))
+    Options(current_figure(); filename=label, caption, label) # hide
+    """
+sco(s)
+```
+
+Note that by default `hist!` uses 15 bins.
+We can change that with the `bins` keyword:
+
+```jl
+s = """
+    CairoMakie.activate!() # hide
+    label = "histogram_bins" # hide
+    caption = "Histogram with Custom Bins" # hide
+    df = more_grades()
+    fig = Figure(; resolution=(600, 400))
+    ax = Axis(fig[1, 1], xticks=1:10)
+    hist!(ax, df.grade; color=(:dodgerblue, 0.5), bins=10)
+    Options(current_figure(); filename=label, caption, label) # hide
+    """
+sco(s)
+```
+
+We can see clearly that most of the grades are between 4 and 9.
 
 ### Box Plots {#sec:stats_vis_boxplots}
 
@@ -75,52 +116,10 @@ sco(s)
 
 As you can see, **box plots are a useful way to visualize data with robust central tendencies and dispersion measures to outliers**.
 
-### Histograms {#sec:stats_vis_histograms}
+### Density Plots {#sec:stats_vis_densityplots}
 
 Box plots limit us just to summarize statistics like median, quartiles and IQRs.
 Often we want to see the underlying distribution of the data.
-This is where histograms are useful.
-**Histograms are approximate representations of the distribution of numerical data**.
-We construct them by "binning", i.e. inserting into discrete bins the range of values into a series of intervals and then counting up how many values fall on each given interval.
-The bins are represented as a bar in which the height describes the frequency of values belonging to that bin.
-
-We can draw histograms using `Makie.jl`:
-
-```jl
-s = """
-    CairoMakie.activate!() # hide
-    label = "histogram" # hide
-    caption = "Histogram" # hide
-    df = more_grades()
-    fig = Figure(; resolution=(600, 400))
-    ax = Axis(fig[1, 1], xticks=1:10)
-    hist!(ax, df.grade; color=(:dodgerblue, 0.5))
-    Options(current_figure(); filename=label, caption, label) # hide
-    """
-sco(s)
-```
-
-Note that by default `hist!` uses 15 bins.
-We can change that with the `bins` keyword:
-
-```jl
-s = """
-    CairoMakie.activate!() # hide
-    label = "histogram_bins" # hide
-    caption = "Histogram with Custom Bins" # hide
-    df = more_grades()
-    fig = Figure(; resolution=(600, 400))
-    ax = Axis(fig[1, 1], xticks=1:10)
-    hist!(ax, df.grade; color=(:dodgerblue, 0.5), bins=10)
-    Options(current_figure(); filename=label, caption, label) # hide
-    """
-sco(s)
-```
-
-We can see clearly that most of the grades are between 4 and 9.
-
-### Density Plots {#sec:stats_vis_densityplots}
-
 Histograms are discrete approximations.
 If we would like to have continuous approximations we need something else: **density plots**.
 **Density plots are graphical density estimations of numerical data**.

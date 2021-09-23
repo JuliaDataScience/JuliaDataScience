@@ -1,14 +1,14 @@
 ## Statistical Visualizations {#sec:stats_vis}
 
 There are several statistical visualization techniques.
-For now, we will focus on only two: **box plots** and **density plots**, since they are commonly used to analyze univariate data.
+For now, we will focus on only three: **box plots**, **histograms** and **density plots**, since they are commonly used to analyze univariate data.
 
 We will also use the `more_grades` dataset from @sec:stats_central.
 
 ### Box Plots {#sec:stats_vis_boxplots}
 
 Box plots are a method for graphically depicting numerical data through their quartiles (see @fig:boxplot).
-The "box" is typically represented by the quartiles 1 to 3.
+The "box" is typically represented by the quartiles 1 to 3 (see @sec:stats_dispersion_quantiles).
 The median, second quartile -- Q2, or percentile 0.5, is the line inside the box.
 The first and third quartile, Q1 and Q3, or percentiles 0.25 and 0.75, respectively, are the box's lower and upper bounds.
 Finally, we have the "whisker" which, traditionally (and default in most data visualization techniques), is the range composed by extending the interquartile range (IQR) by 1.5.
@@ -145,7 +145,7 @@ s = """
     fig = Figure(; resolution=(600, 400))
     ax = Axis(fig[1, 1]; yticks = (1:4, categories), limits=((-1, 11), nothing))
     for i in 1:length(categories)
-        density!(ax, values(i); offset= i*0.7)
+        density!(ax, values(i); offset=i)
     end
     Options(current_figure(); filename=label, caption, label) # hide
     """
@@ -180,6 +180,8 @@ sco(s)
 
 Here, in the first figure (left) we are using a specific `color` for all `density!`'s `plotobj`s.
 And in the second figure (right) we pass the `:x` argument to `color` to tell Makie to apply the `colormap` gradient along the x-axis (from left to right) while also specifying which `colormap` palette as `:viridis`.
+The color code gradient in the `y` direction is most common and is a visual aid to easily identify trends.
+In the `x` direction is useful when you want to know how things go in some time-dependent variable, but is not widely used.
 
 ### Anscombe Quartet {#sec:stats_vis_anscombe}
 

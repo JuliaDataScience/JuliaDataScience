@@ -463,3 +463,50 @@ end
 function calculate_pdf(a, b; d=Distributions.Normal())
     return round(cdf(d, b) - cdf(d, a); digits=2)
 end
+
+function anscombe_quartet(;type="long")
+    dataset = repeat(1:4; inner=11)
+    x = [10.0  8.0  13.0  9.0  11.0  14.0  6.0  4.0  12.0  7.0  5.0;
+         8.0  8.0  8.0  8.0  8.0  8.0  8.0  19.0  8.0  8.0  8.0]
+    y = [8.04 9.14 7.46 6.58;
+         6.95 8.14 6.77 5.76;
+         7.58 8.74 12.74 7.71;
+         8.81 8.77 7.11 8.84;
+         8.33 9.26 7.81 8.47;
+         9.96 8.1  8.84 7.04;
+         7.24 6.13 6.08 5.25;
+         4.26 3.1  5.39 12.5;
+         10.84 9.13 8.15 5.56;
+         4.82 7.26 6.42 7.91;
+         5.68 4.74 5.73 6.89]
+    if type == "long"
+        x = vcat(repeat(x[1, :]; outer=3), x[2, :])
+        y = (reshape(y, 11 * 4))
+        return DataFrame(; dataset, x, y)
+    elseif type == "wide"
+        return DataFrame(; x_1=x[1, :], y_1=y[:, 1], x_2=x[1, :], y_2=y[:, 2],
+                         x_3=x[1, :], y_3=y[:, 3], x_4=x[2, :], y_4=y[:, 4])
+    else
+        return nothing
+    end
+end
+
+function plot_anscombe()
+    df = anscombe_quartet()
+    filter_anscombe(idx) = filter(row -> row.dataset == idx, df)
+    CairoMakie.activate!() # hide
+    fig = Figure(; resolution=(600, 600))
+    axs = [Axis(fig[i, j]; limits=((3, 20), (2.5, 14)),
+                xticks=4:2:20, yticks=2:14)
+           for i in 1:2, j in 1:2]
+    for i in 1:4
+        df_filter = Matrix(filter_anscombe(i)[!, 2:3])
+        abline!(axs[i], 3, 0.5; linewidth=2, linestyle=:dash, color=:red)
+        scatter!(axs[i], df_filter; marker=:circle, color=:dodgerblue)
+        hidedecorations!(axs[i]; grid=false, ticks=false)
+    end
+    rowgap!(fig.layout, 8)
+    colgap!(fig.layout, 8)
+    return fig
+end
+

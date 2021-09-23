@@ -45,7 +45,8 @@ using DataFrames:
     select,
     semijoin,
     subset,
-    transform
+    transform,
+    transform!
 using Dates
 using Distributions
 using Downloads
@@ -101,6 +102,7 @@ export plot_corr
 export plot_normal_lognormal, plot_discrete_continuous
 export plot_pmf, plot_pdf, plot_cdf
 export calculate_pdf
+export anscombe_quartet, plot_anscombe
 
 # Book cover.
 export compress_image, front_cover, write_front_cover

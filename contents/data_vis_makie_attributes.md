@@ -1,4 +1,4 @@
-## Attributes
+## Attributes {#sec:datavisMakie_attributes}
 
 A custom plot can be created by using `attributes`.
 The attributes can be set through keyword arguments.

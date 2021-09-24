@@ -29,7 +29,7 @@ Roughly, the status is as follows:
 - [ ] Publish with Amazon Kindle Direct Publishing
 
 For details about the status, see the [JuliaDataScience](https://github.com/JuliaDataScience/JuliaDataScience) GitHub repository.
-Or, sign up for updates:
+Or, **sign up for updates**:
 
 ```{=html}
 <form style="margin: 0 auto;" action="https://api.staticforms.xyz/submit" method="post">

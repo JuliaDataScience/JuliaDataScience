@@ -1,5 +1,6 @@
 const NOTO_SANS_BOLD = assetpath("fonts", "NotoSans-Bold.ttf")
 const JuliaColors = Colors.JULIA_LOGO_COLORS
+const Set1 = ColorSchemes.Set1_4
 Random.seed!(123)
 
 myrand(x,y,z) = rand()
@@ -44,7 +45,8 @@ function front_cover()
         # Figure
         fig = Figure(resolution=(1768,2652))
         # Colors
-        colors = Makie.wong_colors()
+        colors = ColorSchemes.Set1_6
+        #colors = Makie.wong_colors()
         # Markers
         ms = 20
         # Axis
@@ -119,19 +121,19 @@ function front_cover()
         y = rand(10)
         z = rand(10)
         # Third Row 3,2 to to 3,3
-        scatter!(ax32, rand(10), rand(10); color = colors[1], markersize = 16)
-        lines!(ax33, 0..10, x -> exp(-x); color = colors[2], linewidth = 4)
+        scatter!(ax32, rand(10), rand(10); color = JuliaColors.blue, markersize = 16)
+        lines!(ax33, 0..10, x -> exp(-x); color = JuliaColors.red, linewidth = 4)
         limits!(ax32, -0.5, 1.5, -0.5, 1.5)
         limits!(ax33, -1, 15, -0.5, 1.5)
         # Fourt Row 4,2 to 4,5
-        hist!(ax42, randn(1000), bins = 32; color = colors[3], strokewidth = 1.5,
+        hist!(ax42, randn(1000), bins = 32; color = JuliaColors.blue, strokewidth = 1.5,
             strokecolor = :grey80)
-        density!(ax43, randn(1000); color = colors[4],
-            strokewidth = 2, strokecolor = colors[4])
-        violin!(ax44, fill(1,1000), randn(1000); color = (colors[5], 0.1),
-            strokewidth = 2, strokecolor = colors[5], show_median = true,)
-        boxplot!(ax45, fill(1,1000), randn(1000); color = colors[6], strokecolor = :grey80,
-            whiskercolor = colors[6], whiskerwidth = 1, strokewidth = 1)
+        density!(ax43, randn(1000); color = JuliaColors.red,
+            strokewidth = 2, strokecolor = JuliaColors.red)
+        violin!(ax44, fill(1,1000), randn(1000); color = (JuliaColors.purple, 0.5),
+            strokewidth = 2, strokecolor = JuliaColors.purple, show_median = true,)
+        boxplot!(ax45, fill(1,1000), randn(1000); color = JuliaColors.green, strokecolor = :grey80,
+            whiskercolor = JuliaColors.green, whiskerwidth = 1, strokewidth = 1)
         xlims!(ax44, 0,2)
         xlims!(ax45, 0,2)
         ylims!(ax42, 0,150)
@@ -163,11 +165,11 @@ function front_cover()
         # Title and Text Stuff
         Label(fig[0, 2:5, Bottom()], "Julia\nData Science", textsize = 120,
             tellheight = false, halign = :left)
-        Label(fig[3, 3:end], "Jose Storopoli", color = JuliaColors.purple,
+        Label(fig[3, 3:end], "Jose Storopoli", #color = JuliaColors.purple,
             textsize = 60, tellheight = false, halign = :left)
-        Label(fig[3, 3:end], "\n\nRik Huijzer", color = JuliaColors.red,
+        Label(fig[3, 3:end], "\n\nRik Huijzer", #color = JuliaColors.red,
             textsize = 60, tellheight = false, halign = :left)
-        Label(fig[3, 3:end], "\n\n\n\nLazaro Alonso", color = JuliaColors.green,
+        Label(fig[3, 3:end], "\n\n\n\nLazaro Alonso", #color = JuliaColors.green,
             textsize = 60, tellheight = false, halign = :left)
         # Label(fig[3, 3:end], "Jose Storopoli, Rik Huijzer\n and Lazaro Alonso",
         #     textsize = 60, tellheight = false)

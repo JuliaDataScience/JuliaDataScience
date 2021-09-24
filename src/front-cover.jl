@@ -37,6 +37,7 @@ colorSides =  vec(valsSides[end,:])
 
 Return the Julia Data Science book front cover.
 """
+
 function front_cover()
     GLMakie.activate!()
     with_theme(theme_black()) do
@@ -138,26 +139,26 @@ function front_cover()
         ylims!(ax44, -6,6)
         ylims!(ax45, -6,6)
         # Pipes for First Column
-        Label(fig[1, 1, Bottom()], "|>", textsize = 36,
+        Label(fig[1, 1, Bottom()], "|>", textsize = 52,
               rotation = -π/2, padding = (0,3,8,0),font = NOTO_SANS_BOLD)
-        Label(fig[2, 1, BottomLeft()], " |>", textsize = 36,
+        Label(fig[2, 1, BottomLeft()], " |>", textsize = 52,
               rotation = -π/2, padding = (0,3,8,0), font = NOTO_SANS_BOLD)
-        Label(fig[3, 1, BottomLeft()], " |>", textsize = 36,
+        Label(fig[3, 1, BottomLeft()], " |>", textsize = 52,
               rotation = -π/2, padding = (0,3,8,0), font = NOTO_SANS_BOLD)
         # Pipes between columns
-        Label(fig[2,1, Right()], "|>", textsize = 28,
+        Label(fig[2,1, Right()], "|>", textsize = 40,
               rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
-        Label(fig[3,1, Right()], "|>", textsize = 28,
+        Label(fig[3,1, Right()], "|>", textsize = 40,
               rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
-        Label(fig[3,2, Right()], "|>", textsize = 28,
+        Label(fig[3,2, Right()], "|>", textsize = 40,
               rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
-        Label(fig[4,1, Right()], "|>", textsize = 28,
+        Label(fig[4,1, Right()], "|>", textsize = 40,
               rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
-        Label(fig[4,2, Right()], "|>", textsize = 28,
+        Label(fig[4,2, Right()], "|>", textsize = 40,
               rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
-        Label(fig[4,3, Right()], "|>", textsize = 28,
+        Label(fig[4,3, Right()], "|>", textsize = 40,
               rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
-        Label(fig[4,4, Right()], "|>", textsize = 28,
+        Label(fig[4,4, Right()], "|>", textsize = 40,
               rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
         # Title and Text Stuff
         Label(fig[0, 2:5, Bottom()], "Julia\nData Science", textsize = 120,
@@ -169,7 +170,7 @@ function front_cover()
         [hidespines!(ax) for ax in axs]
         rowgap!(fig.layout, 0)
         colgap!(fig.layout, 0)
-        #save("front_cover.png", fig) # no need to compress image
+        save("front_cover.png", fig) # no need to compress image
         #display(fig)
         return fig
     end

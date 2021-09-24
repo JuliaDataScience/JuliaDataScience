@@ -1,4 +1,5 @@
 const NOTO_SANS_BOLD = assetpath("fonts", "NotoSans-Bold.ttf")
+const JuliaColors = Colors.JULIA_LOGO_COLORS
 Random.seed!(123)
 
 myrand(x,y,z) = rand()
@@ -37,7 +38,6 @@ colorSides =  vec(valsSides[end,:])
 
 Return the Julia Data Science book front cover.
 """
-
 function front_cover()
     GLMakie.activate!()
     with_theme(theme_black()) do
@@ -163,14 +163,20 @@ function front_cover()
         # Title and Text Stuff
         Label(fig[0, 2:5, Bottom()], "Julia\nData Science", textsize = 120,
             tellheight = false, halign = :left)
-        Label(fig[3, 3:end], "Jose Storopoli, Rik Huijzer\n and Lazaro Alonso",
-            textsize = 60, tellheight = false)
+        Label(fig[3, 3:end], "Jose Storopoli", color = JuliaColors.purple,
+            textsize = 60, tellheight = false, halign = :left)
+        Label(fig[3, 3:end], "\n\nRik Huijzer", color = JuliaColors.red,
+            textsize = 60, tellheight = false, halign = :left)
+        Label(fig[3, 3:end], "\n\n\n\nLazaro Alonso", color = JuliaColors.green,
+            textsize = 60, tellheight = false, halign = :left)
+        # Label(fig[3, 3:end], "Jose Storopoli, Rik Huijzer\n and Lazaro Alonso",
+        #     textsize = 60, tellheight = false)
         # Final Axis and Figure touches
         [hidedecorations!(ax; grid = false) for ax in axs]
         [hidespines!(ax) for ax in axs]
         rowgap!(fig.layout, 0)
         colgap!(fig.layout, 0)
-        save("front_cover.png", fig) # no need to compress image
+        #save("front_cover.png", fig) # no need to compress image
         #display(fig)
         return fig
     end

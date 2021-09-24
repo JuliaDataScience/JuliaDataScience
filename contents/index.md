@@ -29,6 +29,16 @@ Roughly, the status is as follows:
 - [ ] Publish with Amazon Kindle Direct Publishing
 
 For details about the status, see the [JuliaDataScience](https://github.com/JuliaDataScience/JuliaDataScience) GitHub repository.
+Or, sign up for updates:
+
+```{=html}
+<form style="margin: 0 auto;" action="https://api.staticforms.xyz/submit" method="post">
+    <input type="hidden" name="accessKey" value="2b78f325-fb4e-44e1-ad2f-4dc714ac402f">
+    <input type="email" name="email">
+    <input type="hidden" name="redirectTo" value="https://juliadatascience.io/thanks">
+    <input type="submit" value="Submit" />
+</form>
+```
 
 ### Roadmap {-}
 

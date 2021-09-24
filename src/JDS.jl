@@ -7,6 +7,7 @@ using Reexport: @reexport
 
 @reexport begin
 using Books:
+    BUILD_DIR,
     @sc,
     @sco,
     Options,
@@ -70,6 +71,7 @@ end # @reexport
 
 const SMALL_IM_ATTR = "width=70%"
 
+include("ci.jl")
 include("df.jl")
 include("environment.jl")
 include("showcode_additions.jl")
@@ -104,19 +106,5 @@ export calculate_pdf
 
 # Book cover.
 export compress_image, front_cover, write_front_cover
-
-"""
-    build()
-
-This method is called during CI.
-"""
-function build()
-    println("Building JDS")
-    gen(; fail_on_error=true)
-    extra_head = """
-    <script src="https://cdn.usefathom.com/script.js" data-site="EEJXHKTE" defer></script>
-    """
-    build_all(; extra_head, fail_on_error=true)
-end
 
 end # module

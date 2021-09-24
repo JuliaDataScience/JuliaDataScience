@@ -55,7 +55,7 @@ function front_cover()
         ax31 = Axis(fig[3,1], aspect = AxisAspect(1), xgridvisible=false, ygridvisible=false)
         ax41 = Axis(fig[4,1],  aspect = AxisAspect(1), xgridvisible=false, ygridvisible=false)
         ax22 = Axis3(fig[2,2], perspectiveness = 0.5, aspect = (1,1,1), xgridvisible=false, ygridvisible=false, zgridvisible=false)
-        ax23 = Axis(fig[2,3], aspect = AxisAspect(1), xgridvisible=false, ygridvisible=false)
+        # ax23 = Axis(fig[2,3], aspect = AxisAspect(1), xgridvisible=false, ygridvisible=false)
         ax32 = Axis(fig[3,2], aspect = 1, xgridvisible=false, ygridvisible=false)
         ax33 = Axis(fig[3,3], aspect = 1, xgridvisible=false, ygridvisible=false)
         ax42 = Axis(fig[4,2], aspect = 1, xgridvisible=false, ygridvisible=false)
@@ -63,7 +63,7 @@ function front_cover()
         ax44 = Axis(fig[4,4], aspect = 1, xgridvisible=false, ygridvisible=false)
         ax45 = Axis(fig[4,5], aspect = 1, xgridvisible=false, ygridvisible=false)
         axs = [ax11, ax21, ax31, ax41,
-               ax22, ax23,
+               ax22, #ax23,
                ax32, ax33,
                ax42, ax43, ax44, ax45
               ]
@@ -100,13 +100,6 @@ function front_cover()
         meshscatter!(ax41, vec([(j,i) for i in 0:9, j in 1:1]), shading = false,
             color = vec(vals[end:-1:1,end,:]')[1:10],
             marker = FRect3D(Vec3f0(0), Vec3f0(7)), colormap = :linear_grey_10_95_c0_n256, colorrange = (-2,2))
-        # Pipes for First Column
-        Label(fig[1, 1, Bottom()], "|>", textsize = 28,
-                rotation = -1π, padding = (0,3,8,0),font = NOTO_SANS_BOLD)
-        Label(fig[2, 1, Bottom()], "|>", textsize = 28,
-            rotation = -1π, font = NOTO_SANS_BOLD)
-        Label(fig[3, 1, Bottom()], "|>", textsize = 28,
-            rotation = -1π,padding = (0,3,8,0), font = NOTO_SANS_BOLD)
         # Limits
         xlims!(ax11,-1,12)
         ylims!(ax11,-1,11)
@@ -120,7 +113,7 @@ function front_cover()
         # Second Columns 2,2 to 4,2
         x, y, z = peaks()
         surface!(ax22, x, y, z; colormap = :plasma)
-        contourf!(ax23, x, y, z; colormap = :bone_1)
+        # contourf!(ax23, x, y, z; colormap = :bone_1)
         x = rand(10)
         y = rand(10)
         z = rand(10)
@@ -144,9 +137,31 @@ function front_cover()
         ylims!(ax43, 0,0.55)
         ylims!(ax44, -6,6)
         ylims!(ax45, -6,6)
+        # Pipes for First Column
+        Label(fig[1, 1, Bottom()], "|>", textsize = 36,
+              rotation = -π/2, padding = (0,3,8,0),font = NOTO_SANS_BOLD)
+        Label(fig[2, 1, BottomLeft()], " |>", textsize = 36,
+              rotation = -π/2, padding = (0,3,8,0), font = NOTO_SANS_BOLD)
+        Label(fig[3, 1, BottomLeft()], " |>", textsize = 36,
+              rotation = -π/2, padding = (0,3,8,0), font = NOTO_SANS_BOLD)
+        # Pipes between columns
+        Label(fig[2,1, Right()], "|>", textsize = 28,
+              rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
+        Label(fig[3,1, Right()], "|>", textsize = 28,
+              rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
+        Label(fig[3,2, Right()], "|>", textsize = 28,
+              rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
+        Label(fig[4,1, Right()], "|>", textsize = 28,
+              rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
+        Label(fig[4,2, Right()], "|>", textsize = 28,
+              rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
+        Label(fig[4,3, Right()], "|>", textsize = 28,
+              rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
+        Label(fig[4,4, Right()], "|>", textsize = 28,
+              rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
         # Title and Text Stuff
-        Label(fig[2, 2:5, Bottom()], "Julia\nData Science", textsize = 120,
-            tellheight = false)
+        Label(fig[0, 2:5, Bottom()], "Julia\nData Science", textsize = 120,
+            tellheight = false, halign = :left)
         Label(fig[3, 3:end], "Jose Storopoli, Rik Huijzer\n and Lazaro Alonso",
             textsize = 60, tellheight = false)
         # Final Axis and Figure touches

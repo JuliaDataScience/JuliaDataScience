@@ -3,17 +3,17 @@
   [projects.default]
   contents = [
     "preface",
-    # "why_julia",
-    # "julia_basics",
-    # "dataframes",
+    "why_julia",
+    "julia_basics",
+    "dataframes",
     # "dataframes_load_save",
     # "dataframes_indexing",
     # "dataframes_select",
     # "dataframes_join",
     # "dataframes_transform",
     # "dataframes_groupby_combine",
-    # "dataframes_performance",
-    # "data_vis_Plots",
+    "dataframes_performance",
+    "data_vis_Plots",
     # "data_vis_StatsPlots",
     # "data_vis_makie",
     # "data_vis_makie_cairo",
@@ -27,10 +27,11 @@
     # "stats",
     # "stats_distributions",
     # "stats_vis",
-    # "appendix",
-    # "notation",
+    "appendix",
+    "notation",
+    # There isn't much there.
     # "project_management",
-    # "references"
+    "references"
   ]
   port = 8006
 

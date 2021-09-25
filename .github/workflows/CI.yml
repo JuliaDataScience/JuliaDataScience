@@ -33,11 +33,6 @@ jobs:
       - name: Install GLMakie dependencies
         run: sudo apt-get update && sudo apt-get install -y xorg-dev imagemagick mesa-utils xvfb libgl1 freeglut3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev
 
-      # Enforce most recent version.
-      - name: Install Books.jl#main
-        run: julia --color=yes --project -e 'using Pkg;
-          Pkg.add(url="https://github.com/rikhuijzer/Books.jl#main");'
-
       - name: Install dependencies
         run: julia --color=yes --project -e 'using Pkg; Pkg.instantiate();
                 using Books; Books.install_dependencies()'

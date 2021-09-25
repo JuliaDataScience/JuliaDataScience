@@ -53,7 +53,7 @@ We reserved @sec:julia_wild for displaying successful Julia use cases in both ac
 **In Julia you can do your custom different stuff without loss of performance**.
 
 3. Had to debug code and somehow you see yourself reading a Fortran or C/C++ source code and having no idea what you are trying to accomplish?
-**In Julia you only read Julia code[^readable], no need to learn another language to make your original language fast**.
+**In Julia you only read Julia code, no need to learn another language to make your original language fast**.
 This is called the "two-language problem" (see @sec:two_language).
 It also covers the use case for when "you had an interesting idea and wanted to contribute to an open source package and gave up because almost everything is not in Python or R but in C/C++ or Fortran"^[have a look at some deep learning libraries in GitHub and you'll be surprised that Python is only 25%-33% of the codebase.].
 
@@ -345,7 +345,9 @@ sc(s)
 ```
 
 Next, we want to define addition for both the `fox` and `chicken` types.
-We proceed by defining a new function signature of the `+` operator from the `Base` module of Julia^[this is an example for teaching purposes. Doing something similar as this example will result in many [method invalidations](https://julialang.org/blog/2020/08/invalidations/) and is, therefore, not a good idea.]:
+We proceed by defining a new function signature of the `+` operator from the `Base` module of Julia[^invs]:
+
+[^invs]: this is an example for teaching purposes. Doing something similar as this example will result in many method invalidations (see <https://julialang.org/blog/2020/08/invalidations/> for details) and is, therefore, not a good idea.
 
 ```jl
 s = """

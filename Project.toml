@@ -34,7 +34,7 @@ TestImages = "5e47fb64-e119-507b-a336-dd2b206d9990"
 XLSX = "fdbf4ff8-1666-58a4-91e7-1b58723a45e0"
 
 [compat]
-Books = "0.7"
+Books = "1"
 CSV = "0.9"
 CairoMakie = "0.6"
 CategoricalArrays = "0.10"

@@ -29,8 +29,7 @@
     "stats_vis",
     "appendix",
     "notation",
-    # There isn't much here.
-    # "project_management",
+    "project_management",
     "references"
   ]
   port = 8006

@@ -24,7 +24,7 @@ How is it any different from other tools that people tell me to use for data sci
 
 Why should I dedicate my precious time into learning a language that is almost never mentioned in any job listing, lab position, postdoc offer or academic job description?
 The answer is that **Julia is a fresh approach** to both programming and data science.
-Everything that you do in Python or in R, you can do it in Julia with the advantage of being able to write readable, fast, and powerful code.
+Everything that you do in Python or in R, you can do it in Julia with the advantage of being able to write readable[^readable], fast, and powerful code.
 Therefore, the Julia language is gaining traction, and for good reasons.
 
 So, **if you don't have any programming background knowledge, we highly encourage you to take up Julia** as a first programming language and data science framework.
@@ -53,7 +53,7 @@ We reserved @sec:julia_wild for displaying successful Julia use cases in both ac
 **In Julia you can do your custom different stuff without loss of performance**.
 
 3. Had to debug code and somehow you see yourself reading a Fortran or C/C++ source code and having no idea what you are trying to accomplish?
-**In Julia you only read Julia code[^readable], no need to learn another language to make your original language fast**.
+**In Julia you only read Julia code, no need to learn another language to make your original language fast**.
 This is called the "two-language problem" (see @sec:two_language).
 It also covers the use case for when "you had an interesting idea and wanted to contribute to an open source package and gave up because almost everything is not in Python or R but in C/C++ or Fortran"^[have a look at some deep learning libraries in GitHub and you'll be surprised that Python is only 25%-33% of the codebase.].
 
@@ -345,7 +345,9 @@ sc(s)
 ```
 
 Next, we want to define addition for both the `fox` and `chicken` types.
-We proceed by defining a new function signature of the `+` operator from the `Base` module of Julia^[this is an example for teaching purposes. Doing something similar as this example will result in many method invalidations (<https://julialang.org/blog/2020/08/invalidations/>) and is, therefore, not a good idea.]:
+We proceed by defining a new function signature of the `+` operator from the `Base` module of Julia[^invs]:
+
+[^invs]: this is an example for teaching purposes. Doing something similar as this example will result in many method invalidations (see <https://julialang.org/blog/2020/08/invalidations/> for details) and is, therefore, not a good idea.
 
 ```jl
 s = """
@@ -383,6 +385,13 @@ scob(s)
 
 This is the power of multiple dispatch:
 **we don't need everything from scratch for our custom-defined user types**.
+If you are excited as much as we are by multiple dispatch, here are two more in-depth examples.
+The first is a [fast and elegant implementation of a one-hot vector](https://storopoli.io/Bayesian-Julia/pages/1_why_Julia/#example_one-hot_vector) by @storopoli2021bayesianjulia.
+The second is an interview of [Christopher Rackauckas](https://www.chrisrackauckas.com/) at [Tanmay Bakshi YouTube's Channel](https://youtu.be/moyPIhvw4Nk?t=2107) (see from time 35:07 onwards) [@tanmaybakshiBakingKnowledgeMachine2021].
+Chris mentions that, while using [`DifferentialEquations.jl`](https://diffeq.sciml.ai/dev/), a package that he developed and currently maintains, an user filed an issue that his GPU-based quaternion ODE solver didn't work.
+Chris was quite surprised by this request since he would never have expected that someone would combine GPU computations with quaternions and solving ODEs.
+He was even more surprised to discover that the user made a small mistake and that it all worked.
+Most of the merit is due to multiple dispatch and high user code/type sharing.
 
 To conclude, we think that multiple dispatch is best explained by one of the creators of Julia, [Stefan Karpinski, at JuliaCon 2019](https://youtu.be/kc9HwsxE1OY) [@thejuliaprogramminglanguageJuliaCon2019Unreasonable2019] (if you are reading the printed book or a static PDF please click on the link to go the video or check the citation):
 
@@ -394,15 +403,18 @@ In @sec:julia_accomplish, we exposed why we think Julia is such a unique program
 We showed simple examples about the main features of Julia.
 If you would like to have a deep dive on how Julia is being used, we have some **interesting use cases**:
 
-1. NASA uses Julia in a supercomputer to analyze the "Largest Batch of Earth-Sized Planets Ever Found" (<https://exoplanets.nasa.gov/news/1669>) and achieve a whopping **1,000x speedup** to catalog 188 million astronomical objects in 15 minutes.
-2. The Climate Modeling Alliance (CliMa) (<https://clima.caltech.edu/>) is using mostly Julia to **model climate in the GPU and CPU**.
+1. NASA uses Julia in a supercomputer to analyze the ["Largest Batch of Earth-Sized Planets Ever Found"](https://exoplanets.nasa.gov/news/1669/seven-rocky-trappist-1-planets-may-be-made-of-similar-stuff/) and achieve a whopping **1,000x speedup** to catalog 188 million astronomical objects in 15 minutes.
+2. [The Climate Modeling Alliance (CliMa)](https://clima.caltech.edu/) is using mostly Julia to **model climate in the GPU and CPU**.
 Launched in 2018 in collaboration with researchers at Caltech, the NASA Jet Propulsion Laboratory and the Naval Postgraduate School, CliMA is utilizing recent progress in computational science to develop an Earth system model that can predict droughts, heat waves, and rainfall with unprecedented precision and speed.
-3. US Federal Aviation Administration (FAA) is developing an **Airborne Collision Avoidance System (ACAS-X)** using Julia.
+3. [US Federal Aviation Administration (FAA) is developing an **Airborne Collision Avoidance System (ACAS-X)** using Julia](https://youtu.be/19zm1Fn0S9M).
 This is a nice example of the "Two-Language Problem" (see @sec:julia_accomplish).
 Previous solutions used Matlab to develop the algorithms and C++ for a fast implementation.
 Now, FAA is using one language to do all this: Julia.
-4. **175x speedup** for Pfizer's pharmacology models using GPUs in Julia (<https://juliacomputing.com/case-studies/pfizer/>).
-5. The Attitude and Orbit Control Subsystem (AOCS) of the Brazilian satellite Amazonia-1 is **written 100% in Julia** (<https://discourse.julialang.org/t/julia-and-the-satellite-amazonia-1/57541>) by Ronan Arraes Jardim Chagas.
-6. Brazil's national development bank (BNDES) ditched a paid solution and opted for open-source Julia modeling and gained a **10x speedup** (<https://youtu.be/NY0HcGqHj3g>).
+4. [**175x speedup** for Pfizer's pharmacology models using GPUs in Julia](https://juliacomputing.com/case-studies/pfizer/).
+It was presented as a [poster](https://chrisrackauckas.com/assets/Posters/ACoP11_Poster_Abstracts_2020.pdf) in the 11th American Conference of Pharmacometrics (ACoP11) and [won a quality award](https://web.archive.org/web/20210121164011/https://www.go-acop.org/abstract-awards).
+5. [The Attitude and Orbit Control Subsystem (AOCS) of the Brazilian satellite Amazonia-1 is **written 100% in Julia**](https://discourse.julialang.org/t/julia-and-the-satellite-amazonia-1/57541) by [Ronan Arraes Jardim Chagas](https://ronanarraes.com/)
+6. [Brazil's national development bank (BNDES) ditched a paid solution and opted for open-source Julia modeling and gained a **10x speedup**.](https://youtu.be/NY0HcGqHj3g)
 
-If this is not enough, there are more case studies at the Julia Computing website (<https://juliacomputing.com/case-studies/>).
+If this is not enough, there are more case studies in [Julia Computing website](https://juliacomputing.com/case-studies/).
+
+[^readable]: no C++ or FORTRAN API calls.

@@ -57,7 +57,7 @@ sco(s, process=without_caption_label)
 
 Or, to put `q5` at the second position[^sudete]:
 
-[^sudete]: thanks to Sudete on [Discourse](https://discourse.julialang.org/t/pull-dataframes-columns-to-the-front/60327/4) for this suggestion.
+[^sudete]: thanks to Sudete on Discourse (<https://discourse.julialang.org/t/pull-dataframes-columns-to-the-front/60327/4>) for this suggestion.
 
 ```jl
 s = "select(responses(), 1, :q5, :)"

@@ -86,7 +86,7 @@ To do this, we need to learn some functions, such as `select` and `filter`.
 But don't worry!
 It might be a relieve to know that the **general design goal of `DataFrames.jl` is to keep the number of functions that a user has to learn to a minimum[^verbs]**.
 
-[^verbs]: According to Bogumił Kamiński (lead developer and maintainer of `DataFrames.jl`) on [Discourse](https://discourse.julialang.org/t/pull-dataframes-columns-to-the-front/60327/5).
+[^verbs]: According to Bogumił Kamiński (lead developer and maintainer of `DataFrames.jl`) on Discourse (<https://discourse.julialang.org/t/pull-dataframes-columns-to-the-front/60327/5>).
 
 Like before, we resume from the `grades_2020`:
 

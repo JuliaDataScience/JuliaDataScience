@@ -7,7 +7,7 @@
 > However, if you prefer to get started straight away, you can jump to @sec:dataframes to learn about tabular data with `DataFrames.jl`.
 
 This is going to be a very brief and *not* in-depth overview of the Julia language.
-If you are already familiar and comfortable with other programming languages, we highly encourage you to read [Julia's documentation](https://docs.julialang.org/).
+If you are already familiar and comfortable with other programming languages, we highly encourage you to read Julia's documentation (<https://docs.julialang.org/>).
 The docs are an excellent resource for taking a deep dive into Julia.
 It covers all the basics and corner cases, but it can be cumbersome.
 Especially, if you aren't familiar with software documentation.

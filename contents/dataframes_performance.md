@@ -180,12 +180,12 @@ sco(s; process=string, post=plainblock)
 ```
 
 This means that `CategoricalArrays.jl` can represent up to $2^{32}$ different categories in a given vector or column, which is a huge value (close to 4.3 billion).
-You probably would never need to have this sort of capacity in dealing with regular data[^bigdata].
+You probably would never need to have this sort of capacity in dealing with regular data.
 That's why `categorical` has a `compress` argument that accepts either `true` or `false` to whether compress or not the underlying categorical data.
 If you pass **`compress=true`, `CategoricalArrays.jl` will try to compress the underlying categorical to the smallest possible representation in `UInt`**.
 For example, the previous `categorical` vector would be represented as an unsigned integer of size 8 bits `UInt8` (mostly because this is the smallest unsigned integer available in Julia):
 
-[^bigdata]: also notice that regular data (about <10 000 rows) is not big data (about >100 000 rows). So, if you are dealing primarily with big data please take caution in capping your categorical values.
+(also notice that regular data (about <10 000 rows) is not big data (about >100 000 rows). So, if you are dealing primarily with big data please take caution in capping your categorical values.)
 
 ```jl
 s = """

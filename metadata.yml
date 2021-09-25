@@ -17,4 +17,5 @@ figPrefix: Figure
 tblPrefix: Table
 titlepage: true
 bibliography: pandoc/references.bib
+allow-subsubsections: true
 ---

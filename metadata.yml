@@ -1,14 +1,13 @@
 ---
 title: Julia Data Science
 subtitle: ""
-book: true
 author:
   - Jose Storopoli
   - Rik Huijzer
   - Lazaro Alonso
 html-license: <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
 pdf-footer: "\\textbf{DRAFT} - See \\url{https://juliadatascience.io} for the latest version."
-tex-license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+tex-license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 lang: en-US
 tags: [JuliaLang, Data Science, Data Visualization, Data Manipulation, Data Analysis]
 repo: https://github.com/JuliaDataScience/JuliaDataScience
@@ -18,4 +17,25 @@ tblPrefix: Table
 titlepage: true
 bibliography: pandoc/references.bib
 allow-subsubsections: true
+
+# Only used in PDF.
+titlepage-top: >
+  \begin{tabular}{l}
+  Jose Storopoli\\
+  Universidade Nove de Julho - UNINOVE\\
+  Brazil\\
+  \\
+  Rik Huijzer\\
+  University of Groningen\\
+  the Netherlands\\
+  \\
+  Lázaro Alonso\\
+  Max Planck Institute for Biogeochemistry\\
+  Germany\\
+  \end{tabular}
+
+titlepage-bottom: >
+  \url{https://juliadatascience.io}
+
+dedication: "This book is dedicated to our families."
 ---

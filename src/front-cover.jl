@@ -40,7 +40,7 @@ colorSides =  vec(valsSides[end,:])
 Return the Julia Data Science book front cover.
 """
 function front_cover()
-    GLMakie.activate!()
+    CairoMakie.activate!()
     with_theme(theme_black()) do
         # Figure
         fig = Figure(resolution=(1768,2652))

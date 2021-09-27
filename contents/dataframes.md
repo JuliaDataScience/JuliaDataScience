@@ -4,7 +4,7 @@ Data comes mostly in a tabular format.
 By tabular, we mean that the data consists of a table containing rows and columns.
 Columns are usually of the same data type, whereas rows have different types.
 The rows, in practice, denote observations while columns denote variables.
-For example, we can have a table of TV shows containing in which country it was produced and our personal rating, see @tbl:TV_shows.
+For example, we can have a table of TV shows containing the country in which each was produced and our personal rating, see @tbl:TV_shows.
 
 ```{=comment}
 Using a different example from the rest in the chapter to make the text a bit more interesting.
@@ -23,7 +23,7 @@ Options(tv_shows; label="TV_shows")
 Here, the dots mean that this could be a very long table and we only show a few rows.
 While analyzing data, often we come up with interesting questions about the data, also known as _data queries_.
 For large tables, computers would be able to answer these kinds of questions much quicker than you could do it by hand.
-Examples of, so called _queries_, for this data could be:
+Some examples of these so-called _queries_ for this data could be:
 
 - Which TV show has the highest rating?
 - Which TV shows were produced in the United States?
@@ -47,7 +47,7 @@ Now, questions that we could ask ourselves could be:
 
 In the rest of this chapter, we will show you how you can easily answer these questions in Julia.
 To do so, we first show why we need a Julia package called `DataFrames.jl`.
-In the next sections, we show how you can use this package and, in the end, we show how to write fast data transformations (@sec:df_performance).
+In the next sections, we show how you can use this package and, finally, we show how to write fast data transformations (@sec:df_performance).
 
 ```{=comment}
 TODO: Add a comparison with Excel to see where Julia is better.
@@ -71,7 +71,7 @@ To show that we need more, lets try to store the tabular data in arrays:
 @sc JDS.grades_array()
 ```
 
-Now, the data is stored in, so called, column-major, which is cumbersome when we want to get data from a row:
+Now, the data is stored in so-called column-major form, which is cumbersome when we want to get data from a row:
 
 ```jl
 @sco JDS.second_row()
@@ -89,7 +89,7 @@ row_alice()
 """)
 ```
 
-and, then, we can get the value:
+and then we can get the value:
 
 ```jl
 scob("""

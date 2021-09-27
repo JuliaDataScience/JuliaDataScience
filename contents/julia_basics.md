@@ -6,37 +6,36 @@
 > Having a basic understanding of Julia will definitely make you more *effective* and *efficient* in using Julia.
 > However, if you prefer to get started straight away, you can jump to @sec:dataframes to learn about tabular data with `DataFrames.jl`.
 
-This is going to be a very brief and *not* in-depth overview of the Julia language.
+This is going to be a very brief and *not* an in-depth overview of the Julia language.
 If you are already familiar and comfortable with other programming languages, we highly encourage you to read Julia's documentation (<https://docs.julialang.org/>).
 The docs are an excellent resource for taking a deep dive into Julia.
-It covers all the basics and corner cases, but it can be cumbersome.
-Especially, if you aren't familiar with software documentation.
+It covers all the basics and corner cases, but it can be cumbersome, especially if you aren't familiar with software documentation.
 
 We'll cover the basics of Julia.
 Imagine that Julia is a fancy feature-loaded car, such as a brand-new Tesla.
-We'll just explain you how to "drive the car, park it and how to navigate in traffic".
-If you want to know what all "buttons in the steering wheel and dashboard do", this is not the resource you are looking for.
+We'll just explain to you how to "drive the car, park it, and how to navigate in traffic".
+If you want to know what "all the buttons in the steering wheel and dashboard do", this is not the resource you are looking for.
 
 ## Language Syntax {#sec:syntax}
 
 Julia is a **dynamic-typed language** with a just-in-time compiler.
-The latter means that you don't need to compile your program before you run it, like you would do in C++ or FORTRAN.
+This means that you don't need to compile your program before you run it, like you would do in C++ or FORTRAN.
 Instead, Julia will take your code, guess types where necessary, and compile parts of code just before running it.
 Also, you don't need to explicitly specify each type.
 Julia will guess types for you on the go.
 
-The main differences from Julia to other dynamic languages such as R and Python are the following.
+The main differences between Julia and other dynamic languages such as R and Python are the following.
 First, Julia, contrary to R, **allows the user to specify type declarations**.
-You already saw some types declarations in *Why Julia?* (@sec:why_julia): they are those double colon `::` that sometimes comes after variables.
-However, if you don't want to specify what type are your variables or functions, Julia will gladly infer (guess) them for you.
+You already saw some types declarations in *Why Julia?* (@sec:why_julia): they are those double colons `::` that sometimes come after variables.
+However, if you don't want to specify the type of your variables or functions, Julia will gladly infer (guess) them for you.
 
 Second, Julia allows users to define function behavior across many combinations of argument types via multiple dispatch.
 We also covered multiple dispatch in @sec:julia_accomplish.
-We defined a different type behavior by defining new function signatures for different type's argument while using the same function name.
+We defined a different type behavior by defining new function signatures for argument types while using the same function name.
 
 ### Variables {#sec:variable}
 
-Variables are values that you tell the computer to store with an specific name, so that you can later recover or change its value.
+Variables are values that you tell the computer to store with a specific name, so that you can later recover or change its value.
 Julia has several types of variables but, in data science, we mostly use:
 
 * Integers: `Int64`
@@ -44,8 +43,8 @@ Julia has several types of variables but, in data science, we mostly use:
 * Boolean: `Bool`
 * Strings: `String`
 
-Integers and real numbers have by default 64 bits, that's why they have the `64` suffix in the name of the type.
-If you need more or less precision, there are `Int8` or `Int128` for example, where higher means more precision.
+Integers and real numbers have 64 bits by default, that's why they have the `64` suffix in the name of the type.
+If you need more or less precision, there are `Int8` or `Int128` types, for example, where higher means more precision.
 Most of the time, this won't be an issue so you can just stick to the defaults.
 
 We create new variables by writing the variable name on the left and its value in the right, and in the middle we use the `=` assignment operator.
@@ -61,21 +60,21 @@ scob(s)
 
 Note that the return output of the last statement (`age`) was printed to the console.
 Here, we are defining two new variables: `name` and `age`.
-We can recover their values by typing its name given in the assignment:
+We can recover their values by typing the names given in the assignment:
 
 ```jl
 scob("name")
 ```
 
 If you want to define new values for an existing variable, you can repeat the steps in the assignment.
-Note that Julia will now override the previous variable's value with the new one.
+Note that Julia will now override the previous value with the new one.
 Supposed, `jl name`'s birthday has passed and now it has turned `jl age+1`:
 
 ```jl
 scob("age = 10")
 ```
 
-We can do the same with its `name`, suppose that Julia has earned some titles due to its blazing speed.
+We can do the same with its `name`. Suppose that Julia has earned some titles due to its blazing speed.
 We would change the variable `name` to the new value:
 
 ```jl
@@ -86,7 +85,7 @@ scob(s)
 ```
 
 We can also do operations on variables such as addition or division.
-Let's see how much months of age `jl name` has by multiplying `age` by 12:
+Let's see how old `jl name` is, in months, by multiplying `age` by 12:
 
 ```jl
 s = "12 * age"
@@ -113,11 +112,11 @@ sco(s; process=catch_show)
 
 ### User-defined Types {#sec:struct}
 
-Having variables around without any sort of hierarchy and relationships are not ideal.
+Having variables around without any sort of hierarchy or relationships is not ideal.
 In Julia, we can define that kind of structured data with a `struct` (also known as a composite type).
 Inside each `struct`, you can specify a set of fields.
 They differ from the primitive types (e.g. integer and floats) that are by default defined already inside the core of Julia language.
-Since most `struct`s are user-defined they are known as user-defined types.
+Since most `struct`s are user-defined, they are known as user-defined types.
 
 For example, let's create a `struct` to represent scientific open source programming languages.
 We'll also define a set of fields along with the corresponding types inside the `struct`:
@@ -134,7 +133,7 @@ s = """
 sco(s; post=x -> "")
 ```
 
-To inspect the field names you can use the `fieldnames` and passing the desired `struct` as an argument:
+To inspect the field names you can use the `fieldnames` and pass the desired `struct` as an argument:
 
 ```jl
 sco("fieldnames(Language)")
@@ -257,7 +256,7 @@ end
 The function declaration begins with the keyword `function` followed by the function name.
 Then, inside parentheses `()`, we define the arguments separated by a comma `,`.
 Inside the function, we specify what we want Julia to do with the parameters that we supplied.
-All variables that we define inside a function are deleted after the function returns, this is nice because it is like an automatic cleanup.
+All variables that we define inside a function are deleted after the function returns. This is nice because it is like an automatic cleanup.
 After all the operations in the function body are finished, we instruct Julia to return the final result with the `return` statement.
 Finally, we let Julia know that the function definition is finished with the `end` keyword.
 
@@ -268,13 +267,13 @@ f_name(arg1, arg2) = stuff with the arg1 and arg2
 ```
 
 It is the **same function** as before but with a different, more compact, form.
-As a rule of thumb, when your code can fit easily on one line of length at most 92, then the compact form is suitable.
+As a rule of thumb, when your code can fit easily on one line of up to 92 characters, then the compact form is suitable.
 Otherwise, just use the longer form with the `function` keyword.
 Let's dive into some examples.
 
 #### Creating new Functions {#sec:function_example}
 
-Let's create a new function that adds number together:
+Let's create a new function that adds numbers together:
 
 ```jl
 s = """
@@ -297,7 +296,7 @@ And it works also with floats:
 scob("add_numbers(3.14, 2.72)")
 ```
 
-Also, we can define custom behavior by specifying types declarations.
+Also, we can define custom behavior by specifying type declarations.
 Suppose that we want to have a `round_number` function that behaves differently if its argument is either a `Float64` or `Int64`:
 
 ```jl
@@ -322,7 +321,7 @@ sco("methods(round_number)")
 There is one issue: what happens if we want to round a 32-bit float `Float32`?
 Or a 8-bit integer `Int8`?
 
-If you want something to function on all float's and integer's types you can use an abstract type as type signature, such as `AbstractFloat` or `Integer`:
+If you want something to function on all float and integer types, you can use an abstract type as the type signature, such as `AbstractFloat` or `Integer`:
 
 ```jl
 s = """
@@ -352,7 +351,7 @@ We will extend the `Base.show` function that prints the output of instantiated t
 
 By default, a `struct` has a basic output, which you saw above in the `python` case.
 We can define `Base.show` function to our `Language` type, so that we have some nice printing for our programming languages instances.
-We want to clearly communicate programming languages' names, titles and ages in years of age.
+We want to clearly communicate programming languages' names, titles, and ages in years.
 The function `Base.show` accepts as arguments a `IO` type named `io` followed by the type you want to define custom behavior:
 
 ```jl
@@ -400,7 +399,7 @@ In that case, we can do two things:
    scob(s)
    ```
 
-2. Or we can define just one variable to hold the function return values and access them with either `first` or `last`:
+2. Or we can define just one variable to hold the function's return values and access them with either `first` or `last`:
 
    ```jl
    s = """
@@ -412,7 +411,7 @@ In that case, we can do two things:
 
 #### Keyword Arguments {#sec:function_keyword_arguments}
 
-Some functions can accept keywords arguments instead of positional arguments.
+Some functions can accept keyword arguments instead of positional arguments.
 These arguments are just like regular arguments, except that they are defined after the regular function's arguments and separated by a semicolon `;`.
 Another difference is that we must supply a **default value** for every keyword argument.
 For example, let's define a `logarithm` function that by default uses base $e$ (2.718281828459045) as a keyword argument.
@@ -448,19 +447,19 @@ scob(s)
 
 #### Anonymous Functions {#sec:function_anonymous}
 
-A lot of times, we don't care about the name of the function and want to quickly make one.
+Often we don't care about the name of the function and want to quickly make one.
 What we need are **anonymous functions**.
 They are used a lot in Julia's data science workflow.
 For example, when using `DataFrames.jl` (@sec:dataframes) or `Plots.jl` (@sec:DataVisualizationPlots), sometimes we need a temporary function to filter data or format plot labels.
 That's when we use anonymous functions.
-They are especially useful when we don't want to create a function and a simple in-place statement would be enough.
+They are especially useful when we don't want to create a function, and a simple in-place statement would be enough.
 
 The syntax is simple.
 We use the `->` operator.
 On the left of `->` we define the parameter name.
 And on the right of `->` we define what operations we want to perform on the parameter that we defined on the left of `->`.
-Here is an example:
-suppose that we want to undo the log transformation by using an exponentiation:
+Here is an example.
+Suppose that we want to undo the log transformation by using an exponentiation:
 
 ```jl
 scob("map(x -> 2.7182818284590^x, logarithm(2))")
@@ -473,12 +472,12 @@ As a result, we get back the same number, because logarithm and exponentiation a
 
 In most programming languages, the user is allowed to control the computer's flow of execution.
 Depending on the situation, we want the computer to do one thing or another.
-In Julia we can control the flow of execution with `if`, `elseif` and `else` keywords.
+In Julia we can control the flow of execution with `if`, `elseif`, and `else` keywords.
 These are known as conditional statements.
 
-`if` keyword prompts Julia to evaluate an expression and depending whether `true` or `false` certain portions of code will be executed.
+The `if` keyword prompts Julia to evaluate an expression and, depending on whether it's `true` or `false`, execute certain portions of code.
 We can compound several `if` conditions with the `elseif` keyword for complex control flow.
-Finally, we can define an alterative portion to be executed if anything inside the `if` or `elseif`s is evaluated to `true`.
+Finally, we can define an alternative portion to be executed if anything inside the `if` or `elseif`s is evaluated to `true`.
 This is the purpose of the `else` keyword.
 Finally, like all the previous keyword operators that we saw, we must tell Julia when the conditional statement is finished with the `end` keyword.
 
@@ -542,9 +541,9 @@ sco(s; post=x -> "")
 
 The while loop is a mix of the previous conditional statements and for loops.
 Here, the loop is executed every time the condition is `true`.
-The syntax follows the same fashion as the previous one.
-We begin with the keyword `while`, followed by the statement to evaluated as either `true`.
-Like previously, you must end with the `end` keyword.
+The syntax follows the same form as the previous one.
+We begin with the keyword `while`, followed by a statement that evaluates to `true` or `false`.
+As usual, you must end with the `end` keyword.
 
 Here's an example:
 
@@ -563,26 +562,26 @@ scob(s)
 
 As you can see, we have to use the `global` keyword.
 This is because of **variable scope**.
-Variables defined inside conditional statements, loops and functions exist only inside it.
+Variables defined inside conditional statements, loops, and functions exist only inside them.
 This is known as the *scope* of the variable.
 Here, we had to tell Julia that the `n` inside `while` loop is in the global scope with the `global` keyword.
 
-Finally, we used also the `+=` operator which is a nice short hand for `n = n + 1`.
+Finally, we also used the `+=` operator which is a nice shorthand for `n = n + 1`.
 
 ## Native Data Structures {#sec:data_structures}
 
 Julia has several native data structures.
-They are abstractions of data that represent somehow structured data.
+They are abstractions of data that represent some form of structured data.
 We will cover the most used ones.
 They hold homogeneous or heterogeneous data.
 Since they are collections, they can be *looped* over with the `for` loops.
 
 We will cover `String`, `Tuple`, `NamedTuple`, `UnitRange`, `Arrays`, `Pair`, `Dict`, `Symbol`.
 
-When you stumble into a data structure in Julia, you can find methods that accept it as an argument with the `methodswith` function.
-In Julia, the distinction between methods and functions is as follows:
+When you stumble across a data structure in Julia, you can find methods that accept it as an argument with the `methodswith` function.
+In Julia, the distinction between methods and functions is as follows.
 Every function can have multiple methods like we have shown earlier.
-The `methodswith` function is a nice trick to have in your bag of tricks.
+The `methodswith` function is nice to have in your bag of tricks.
 Let's see what we can do with a `String` for example:
 
 ```jl
@@ -594,8 +593,8 @@ sco(s; process=catch_show)
 
 Before we dive into data structures, we need to talk about broadcasting (also known as *vectorization*) and the "dot" operator `.`.
 
-For mathematical operations, like `*` (multiplication) or `+` (addition), we can broadcast it using the dot operator.
-For example, broadcasted addition would imply in changing the `+` to `.+`:
+We can broadcast mathematical operations like `*` (multiplication) or `+` (addition) using the dot operator.
+For example, broadcasted addition would imply a change from `+` to `.+`:
 
 ```jl
 sco(
@@ -605,7 +604,7 @@ sco(
 )
 ```
 
-It also works with functions automatically.
+It also works automatically with functions.
 (Technically, the mathematical operations, or infix operators, are also functions, but that is not so important to know.)
 Remember our `logarithm` function?
 
@@ -668,7 +667,7 @@ s = """
 sco(s; post=output_block)
 ```
 
-But, it is, typically, more clear to use triple quotation marks:
+But it is usually clearer to use triple quotation marks:
 
 ```jl
 sco("""
@@ -687,7 +686,7 @@ This improves code readability because you can indent the block in your source c
 
 A common string operation is **string concatenation**.
 Suppose that you want to construct a new string that is the concatenation of two or more strings.
-This is accomplish in julia either with the `*` operator or the `join` function.
+This is accomplished in Julia either with the `*` operator or the `join` function.
 This symbol might sound like a weird choice and it actually is.
 For now, many Julia codebases are using this symbol, so it will stay in the language.
 If you're interested, you can read a discussion from 2015 about it at
@@ -705,7 +704,7 @@ scob(s)
 
 As you can see, we are missing a space between `hello` and `goodbye`.
 We could concatenate an additional `" "` string with the `*`, but that would be cumbersome for more than two strings.
-That's when the `join` function comes up.
+That's where the `join` function comes in handy.
 We just pass as arguments the strings inside the brackets `[]` and the separator:
 
 ```jl
@@ -716,7 +715,7 @@ scob("""join([hello, goodbye], " ")""")
 
 Concatenating strings can be convoluted.
 We can be much more expressive with **string interpolation**.
-It works like this: you specify whatever you want to be included in you string with the dollar sign `$`.
+It works like this: you specify whatever you want to be included in your string with the dollar sign `$`.
 Here's the example before but now using interpolation:
 
 ```jl
@@ -726,7 +725,7 @@ s = """
 scob(s)
 ```
 
-It works even inside functions.
+It even works inside functions.
 Let's revisit our `test` function from @sec:conditionals:
 
 ```jl
@@ -750,7 +749,7 @@ scob(s)
 
 There are several functions to manipulate strings in Julia.
 We will demonstrate the most common ones.
-Also, note that most of these functions accepts a [Regular Expression (RegEx)](https://docs.julialang.org/en/v1/manual/strings/#Regular-Expressions) as arguments.
+Also, note that most of these functions accept a [Regular Expression (RegEx)](https://docs.julialang.org/en/v1/manual/strings/#Regular-Expressions) as arguments.
 We won't cover RegEx in this book, but you are encouraged to learn about them, especially if most of your work uses textual data.
 
 First, let us define a string for us to play around with:
@@ -826,13 +825,13 @@ sco(s)
 ```
 
 Sometimes, we want the opposite: convert a string to a number.
-Julia has a handy function for that: `parse`
+Julia has a handy function for that: `parse`.
 
 ```jl
 sco("""typeof(parse(Int64, "123"))""")
 ```
 
-Sometimes, we want to play safe with these convertions.
+Sometimes, we want to play safe with these conversions.
 That's when `tryparse` function steps in.
 It has the same functionality as `parse` but returns either a value of the requested type, or `nothing`.
 That makes `tryparse` handy when we want to avoid errors.
@@ -849,8 +848,8 @@ They are really *special* in Julia because they are often used in relation to fu
 Since functions are a important feature in Julia, every Julia user should know the basics of tuples.
 
 A tuple is a **fixed-length container that can hold multiple different types**.
-A tuple is an **imutable object**, meaning that it cannot be modified after instantiation.
-To construct a tuple, use parentheses `()` to delimitate the beginning and end, along with commas `,` as value's delimiters:
+A tuple is an **immutable object**, meaning that it cannot be modified after instantiation.
+To construct a tuple, use parentheses `()` to delimit the beginning and end, along with commas `,` as delimiters between values:
 
 ```jl
 sco("""my_tuple = (1, 3.14, "Julia")""")
@@ -889,8 +888,7 @@ sco("1, 2")
 So, now you can see why they are often related.
 
 One more thing about tuples.
-**When you want to pass more than one variable to an anonymous function, guess what you would need to use?
-Once again: tuples!**
+**When you want to pass more than one variable to an anonymous function, guess what you would need to use? Once again: tuples!**
 
 ```jl
 scob("map((x, y) -> x^y, 2, 3)")
@@ -906,11 +904,11 @@ scob("map((x, y, z) -> x^y + z, 2, 3, 1)")
 
 Sometimes, you want to name the values in tuples.
 That's when **named tuples** comes in.
-Their functionality is pretty much same the same as tuples:
+Their functionality is pretty much same as tuples:
 they are **immutable** and can hold **any type of value**.
 
-Named tuple's construction are slightly different from tuples.
-You have the familiar parentheses `()` and comma `,` value separator.
+The construction of named tuples is slightly different from that of tuples.
+You have the familiar parentheses `()` and the comma `,` value separator.
 But now you **name the values**:
 
 ```jl
@@ -923,7 +921,7 @@ We can access a named tuple's values via indexing like regular tuples or, altern
 scob("my_namedtuple.s")
 ```
 
-To finish named tuples, there is one important *quick* syntax that you'll see a lot in Julia code.
+To finish our discussion of named tuples, there is one important *quick* syntax that you'll see a lot in Julia code.
 Often Julia users create a named tuple by using the familiar parenthesis `()` and commas `,`, but without naming the values.
 To do so you **begin the named tuple construction by specifying first a semicolon `;` before the values**.
 This is especially useful when the values that would compose the named tuple are already defined in variables or when you want to avoid long lines:
@@ -941,7 +939,7 @@ sco(s)
 
 ### Ranges {#sec:ranges}
 
-A range in Julia represents an interval between a start and stop boundaries.
+A range in Julia represents an interval between start and stop boundaries.
 The syntax is `start:stop`:
 
 ```jl
@@ -960,7 +958,7 @@ And, if we gather all the values, we get:
 sco("[x for x in 1:10]")
 ```
 
-We can construct ranges also for other types:
+We can also construct ranges for other types:
 
 ```jl
 sco("typeof(1.0:10.0)")
@@ -981,26 +979,26 @@ sco("collect(1:10)")
 ```
 
 We have an array of the type specified in the `UnitRange` between the boundaries that we've set.
-Speaking in arrays, let's talk about them.
+Speaking of arrays, let's talk about them.
 
 ### Array {#sec:array}
 
 Arrays are a **systematic arrangement of similar objects, usually in _rows_ and _columns_**.
 Most of the time you would want **arrays of a single type for performance issues**, but note that they can also hold objects of different types.
-They are the "bread and butter" of data scientist, because arrays are what constitutes most of **data manipulation** and **data visualization** workflows.
+They are the "bread and butter" of data scientists, because most **data manipulation** and **data visualization** workflows make use of arrays.
 
-**Arrays are a powerful data structure**. They are one of the main features that makes Julia blazing fast.
+**Arrays are a powerful data structure**. They are one of the main features that makes Julia blazingly fast.
 
 #### Array Types {#sec:array_types}
 
-Let's start with arrays types.
-There are several, but we will focus on two the most used in data science:
+Let's start with array types.
+There are several, but we will focus on the two most used in data science:
 
 * `Vector{T}`: **one-dimensional** array. Alias for `Array{T, 1}`.
 * `Matrix{T}`: **two-dimensional** array. Alias for `Array{T, 2}`.
 
 Note here that `T` is the type of the underlying array.
-So, for example, `Vector{Int64}` is a `Vector` which all elements are `Int64`s and `Matrix{AbstractFloat}` is a `Matrix` which all elements are subtypes of `AbstractFloat`.
+So, for example, `Vector{Int64}` is a `Vector` in which all elements are `Int64`s, and `Matrix{AbstractFloat}` is a `Matrix` in which all elements are subtypes of `AbstractFloat`.
 
 Most of the time, especially when dealing with tabular data, we are using either one- or two-dimensional arrays.
 They are both `Array` types for Julia.
@@ -1022,8 +1020,8 @@ my_vector = Vector{Float64}(undef, 10)
 )
 ```
 
-For matrices, since we are dealing with two-dimensional objects, we need to pass two dimensions arguments inside the constructor: one for **rows** and another for **columns**.
-For example, a matrix with 10 rows, 2 columns and `undef` elements can be instantiate as:
+For matrices, since we are dealing with two-dimensional objects, we need to pass two dimension arguments inside the constructor: one for **rows** and another for **columns**.
+For example, a matrix with 10 rows and 2 columns of `undef` elements can be instantiated as:
 
 ```jl
 sco(
@@ -1035,7 +1033,7 @@ my_matrix = Matrix{Float64}(undef, 10, 2)
 
 We also have some **syntax aliases** for the most common elements in array construction:
 
-* `zeros` for all elements being initialized to value zero.
+* `zeros` for all elements being initialized to zero.
   Note that the default type is `Float64` which can be changed if necessary:
 
     ```jl
@@ -1054,7 +1052,7 @@ We also have some **syntax aliases** for the most common elements in array const
     )
     ```
 
-* `ones` for all elements being initialized to value one:
+* `ones` for all elements being initialized to one:
 
     ```jl
     sco(
@@ -1072,7 +1070,7 @@ We also have some **syntax aliases** for the most common elements in array const
     )
     ```
 
-For other elements we can first intantiate an array with `undef` elements and use the `fill!` function to fill all elements of an array with the desired element.
+For other elements we can first instantiate an array with `undef` elements and use the `fill!` function to fill all elements of an array with the desired element.
 Here's an example with `3.14` ($\pi$):
 
 ```jl
@@ -1084,8 +1082,8 @@ fill!(my_matrix_π, 3.14)
 )
 ```
 
-We can also create arrays with **arrays literals**.
-For example a 2x2 matrix of integers:
+We can also create arrays with **array literals**.
+For example, here's a 2x2 matrix of integers:
 
 ```jl
 sco(
@@ -1147,8 +1145,8 @@ sco(
 )
 ```
 
-Another powerful way to create arrays are **array comprehensions**.
-This way of creating arrays is our *preferred* way, it avoids loops, indexing and other error-prone operations.
+Another powerful way to create an array is to write an **array comprehension**.
+This way of creating arrays is our *preferred* way: it avoids loops, indexing, and other error-prone operations.
 You specify what you want to do inside the `[]` brackets.
 For example, say we want to create a vector of squares from 1 to 100:
 
@@ -1180,7 +1178,7 @@ sco(
 )
 ```
 
-As with array literals you can specify your desired type before the `[]` brackets:
+As with array literals, you can specify your desired type before the `[]` brackets:
 
 
 ```jl
@@ -1234,7 +1232,7 @@ Finally, we can also create arrays with **concatenation functions**:
 #### Array Inspection {#sec:array_inspection}
 
 Once we have arrays, the next logical step is to inspect them.
-There are a lot of handy functions that allows the user to have an inner insight into any array.
+There are a lot of handy functions that allow the user to have an insight into any array.
 
 It is most useful to know what **type of elements** are inside an array.
 We can do this with `eltype`:
@@ -1294,9 +1292,9 @@ Julia has several functions to inspect array dimensions:
 
 #### Array Indexing and Slicing {#sec:array_indexing}
 
-Sometimes we want to only inspect certain parts of an array.
+Sometimes we want to inspect only certain parts of an array.
 This is called **indexing** and **slicing**.
-If you want a particular observation of a vector, or a row or column of a matrix; you'll probably need to **index an array**.
+If you want a particular observation of a vector, or a row or column of a matrix, you'll probably need to **index an array**.
 
 First, I will create an example vector and matrix to play around:
 
@@ -1312,7 +1310,7 @@ my_example_matrix = [[1 2 3]
 )
 ```
 
-Let's see first an example with vectors.
+Let's first see an example with vectors.
 Suppose you want the second element of a vector.
 You append `[]` brackets with the desired **index** inside:
 
@@ -1336,7 +1334,7 @@ my_example_matrix[2, 1]
 )
 ```
 
-Julia also have conventional keywords for the first and last elements of an array: `begin` and `end`.
+Julia also has conventional keywords for the first and last elements of an array: `begin` and `end`.
 For example, the second to last element of a vector can be retrieved as:
 
 ```jl
@@ -1347,7 +1345,7 @@ my_example_vector[end-1]
 )
 ```
 
-It also work for matrices.
+It also works for matrices.
 Let's retrieve the element of the last row and second column:
 
 ```jl
@@ -1373,7 +1371,7 @@ my_example_vector[2:4]
 
 We could do the same with matrices.
 Particularly with matrices if we want to select all elements in a following dimension we can do so with just a colon `:`.
-For example, all elements in the second row:
+For example, to find all the elements in the second row:
 
 ```jl
 sco(
@@ -1422,7 +1420,7 @@ my_example_matrix
 )
 ```
 
-Note that we had to assign a vector because we our sliced array is of type `Vector`:
+Note that we had to assign a vector because our sliced array is of type `Vector`:
 
 ```jl
 sco(
@@ -1434,7 +1432,7 @@ typeof(my_example_matrix[3, :])
 
 The second way we could manipulate an array is to **alter its shape**.
 Suppose you have a 6-element vector and you want to make it a 3x2 matrix.
-You can do so with `reshape`, by using the array as first argument and a tuple of dimensions as second argument:
+You can do this with `reshape`, by using the array as the first argument and a tuple of dimensions as the second argument:
 
 ```jl
 sco(
@@ -1446,7 +1444,7 @@ tree_two_matrix
 )
 ```
 
-You can do the reverse, convert it back to a vector, by specifying a tuple with only one dimension as second argument:
+You can do the reverse, converting it back to a vector, by specifying a tuple with only one dimension as the second argument:
 
 ```jl
 sco(
@@ -1556,7 +1554,7 @@ empty_vector
 ```
 
 Sometimes you don't want to loop over each element, but actually over each array index.
-**We can `eachindex` function combined with a `for` loop to iterate over each array index**.
+**We can use the `eachindex` function combined with a `for` loop to iterate over each array index**.
 
 Again, let's show an example with a vector:
 
@@ -1582,9 +1580,9 @@ Iterating over matrices involves more details.
 The standard `for` loop goes first over columns then over rows.
 It will first traverse all elements in column 1, from the first row to the last row, then it will move to column 2 in a similar fashion until it has covered all columns.
 
-Those familiar with other programming languages, Julia, like most scientific programming languages, is "column-major".
+For those familiar with other programming languages: Julia, like most scientific programming languages, is "column-major".
 This means that arrays are stored contiguously using a column orientation.
-If any time you are seeing problems of performance and there is an array `for` loop involved, chances are that you are mismatching Julia's native column-major storage orientation.
+If at any time you are seeing performance problems and there is an array `for` loop involved, chances are that you are mismatching Julia's native column-major storage orientation.
 
 Ok, let's show this in an example:
 
@@ -1654,7 +1652,7 @@ There are some handy functions to iterate over matrices.
 
 Compared to the huge section on arrays, this section on pairs will be brief.
 **`Pair` is a data structure that holds two types**.
-How we construct a pair in Julia is using the following syntax:
+We construct a pair in Julia using the following syntax:
 
 ```jl
 sco(
@@ -1711,8 +1709,8 @@ my_dict = Dict([("one", 1), ("two", 2)])
 )
 ```
 
-We *prefer* the second way of constructing `Dict`s.
-It offers a much elegant and expressive syntax.
+We *prefer* a second way of constructing `Dict`s.
+It offers a much more elegant and expressive syntax.
 You use the same **default constructor `Dict`**, but now you pass **`pair`s of `key` and `value`**:
 
 
@@ -1764,7 +1762,7 @@ delete!(my_dict, "three")
 )
 ```
 
-Or to delete a `key` while retuning its `value` you can use the `pop!` function:
+Or to delete a `key` while returning its `value` you can use the `pop!` function:
 
 ```jl
 scob(
@@ -1792,8 +1790,8 @@ my_dict
 )
 ```
 
-`Dict`s are also used in data manipulations by `DataFrames.jl` (@sec:dataframes) and data visualization by `Plots.jl` (@sec:DataVisualizationPlots).
-So it is important to know their basic functionality.
+`Dict`s are also used for data manipulation by `DataFrames.jl` (@sec:dataframes) and for data visualization by `Plots.jl` (@sec:DataVisualizationPlots).
+So, it is important to know their basic functionality.
 
 There is one useful `Dict` constructor that we use a lot.
 Suppose you have two vectors and you want to construct a `Dict` with one of them as `key`s and the other as `value`s.
@@ -1823,7 +1821,7 @@ dic["three"]
 ### Symbol {#sec:symbol}
 
 `Symbol` is actually *not* a data structure.
-It is a type and behaves at lot like a string.
+It is a type and behaves a lot like a string.
 Instead of surrounding the text by quotation marks, a symbol starts with a colon (:) and can contain underscores:
 
 ```jl
@@ -1852,10 +1850,10 @@ We use `Symbol`s a lot in data manipulations with the `DataFrames.jl` package (@
 ### Splat Operator {#sec:splat}
 
 In Julia we have the "splat" operator `...` which is mainly used in function calls as a **sequence of arguments**.
-We will occasionally use splatting in some function calls in **data manipulation** and **data visualization** chapters.
+We will occasionally use splatting in some function calls in the **data manipulation** and **data visualization** chapters.
 
 The most intuitive way to learn about splatting is with an example.
-The `add_elements` function below takes three arguments to be adeed together:
+The `add_elements` function below takes three arguments to be added together:
 
 ```jl
 sco("""
@@ -1863,7 +1861,7 @@ add_elements(a, b, c) = a + b + c
 """)
 ```
 
-Now suppose that I have a collection with three elements.
+Now suppose that we have a collection with three elements.
 The naïve way to this would be to supply the function with all three elements as function arguments like this:
 
 ```jl
@@ -1874,7 +1872,7 @@ add_elements(my_collection[1], my_collection[2], my_collection[3])
 """)
 ```
 
-Here is where we use the "splat" operator `...` which  takes a collection (often an array, vector, tuple or range) and converts into a sequence of arguments:
+Here is where we use the "splat" operator `...` which takes a collection (often an array, vector, tuple, or range) and converts it into a sequence of arguments:
 
 ```jl
 scob("""
@@ -1907,10 +1905,10 @@ add_elements(1:3...) # and splat!
 In data science, most projects are undertaken in a collaborative effort.
 We share code, data, tables, figures and so on.
 Behind everything, there is the **operational system (OS) filesystem**.
-In an ideal work, code would run the *same* in *different* OS.
+In an ideal world, code would run the *same* in *different* OS.
 But that is not what actually happens.
-One instance of this is the difference of Windows paths, such as `C:\\user\john\`, and Linux paths, such as `/home/john`.
-This is why is important to discuss **filesystem best practices**.
+One instance of this is the difference between Windows paths, such as `C:\\user\john\`, and Linux paths, such as `/home/john`.
+This is why it is important to discuss **filesystem best practices**.
 
 Julia has native filesystem capabilities that can **handle all different OS demands**.
 They are located in the [`Filesystem`](https://docs.julialang.org/en/v1/base/file/) module from the core `Base` Julia library.
@@ -1920,8 +1918,8 @@ Whenever you are dealing with files such as CSV, Excel files or other Julia scri
 This is easily accomplished with the `joinpath` and `pwd` functions.
 
 The `pwd` function is an acronym for **p**rint **w**orking **d**irectory and it returns a string containing the current working directory.
-One nice thing about `pwd` is that it is robust to OS, i.e. it will return the correct string in Linux, MacOS, Windows or any other OS.
-For example, let's see what are our current directory and record it in a variable `root`:
+One nice thing about `pwd` is that it will return the correct string in Linux, MacOS, Windows, or any other OS.
+For example, let's see what our current directory is and record it in a variable `root`:
 
 ```jl
 scob(
@@ -1932,8 +1930,8 @@ root = pwd()
 ```
 
 The next step would be to include the relative path from `root` to our desired file.
-Since different OS have different ways to construct relative paths with subfolders, some use forward slash `/` while other might use backslashes `\`, we cannot simply concatenate the our file's relative path with the `root` string.
-For that, we have the `joinpath` function, which will join different relative paths and filenames into your specific OS filesystem implementation.
+Since different OS have different ways to construct relative paths with subfolders (some use forward slashes `/` while other might use backslashes `\`), we cannot simply concatenate the  file's relative path with the `root` string.
+For that, we have the `joinpath` function, which will join different relative paths and filenames according to your specific OS filesystem implementation.
 
 Suppose you have a script named `my_script.jl` inside your project's directory.
 You can have a robust representation of the filepath to `my_script.jl` as:
@@ -1977,10 +1975,10 @@ Now you can access all functions and types inside `ModuleName`.
 
 ### Dates {#sec:dates}
 
-How to handle dates and timestamps is something quite important in data science.
-Like we said in *Why Julia?* (@sec:why_julia) section, Python's `pandas` uses its own `Datetime` type to handle dates.
-The same with R tidyverse's `lubridate` package, which also defines its own `datetime` type to handle dates.
-Julia doesn't need any of this, it has all the **date stuff already baked onto its standard library, in a module named `Dates`**.
+Knowing how to handle dates and timestamps is important in data science.
+As we said in *Why Julia?* (@sec:why_julia) section, Python's `pandas` uses its own `Datetime` type to handle dates.
+The same is true in the R tidyverse's `lubridate` package, which also defines its own `datetime` type to handle dates.
+Julia doesn't need any of this, because it has all the **date stuff already baked into its standard library, in a module named `Dates`**.
 
 To begin, let's import the `Dates` module:
 
@@ -2052,7 +2050,7 @@ subtypes(Period)
 )
 ```
 
-Which divide into the following concrete types, they are pretty much self-explanatory:
+which divide into the following concrete types, and they are pretty much self-explanatory:
 
 ```jl
 sco(
@@ -2083,7 +2081,7 @@ DateTime(Year(1987), Month(9), Day(13), Hour(21), Minute(21))
 #### Parsing Dates {#sec:dates_parsing}
 
 Most of the time we won't be constructing `Date` or `DateTime` instances from scratch.
-Actually, we probably will be **parsing strings as `Date` or `DateTime` types**.
+Actually, we will probably be **parsing strings as `Date` or `DateTime` types**.
 
 The `Date` and `DateTime` constructors can be fed a string and a format string.
 For example, the string `"19870913"` representing September 13th 1987 can be parsed with:
@@ -2109,10 +2107,10 @@ DateTime("1987-09-13T21:21:00", "yyyy-mm-ddTHH:MM:SS")
 )
 ```
 
-You can find more on how to specify different format as strings in the [Julia `Dates`' documentation](https://docs.julialang.org/en/v1/stdlib/Dates/#Dates.DateFormat).
+You can find more on how to specify different date formats in the [Julia `Dates`' documentation](https://docs.julialang.org/en/v1/stdlib/Dates/#Dates.DateFormat).
 Don't worry if you have to revisit it all the time, we ourselves have to do it all the time when working with dates and timestamps.
 
-According to [Julia `Dates`' documentation](https://docs.julialang.org/en/v1/stdlib/Dates/#Constructors), using the `Date(date_string, format_string)` method is fine if only called a few times.
+According to [Julia `Dates`' documentation](https://docs.julialang.org/en/v1/stdlib/Dates/#Constructors), using the `Date(date_string, format_string)` method is fine if it's only called a few times.
 If there are many similarly formatted date strings to parse, however, it is much more efficient to first create a `DateFormat` type, and then pass it instead of a raw format string.
 So our previous example would become:
 
@@ -2174,7 +2172,7 @@ day(my_birthday)
 )
 ```
 
-Julia's `Dates` module also have **compound functions that returns a tuple of values**:
+Julia's `Dates` module also has **compound functions that return a tuple of values**:
 
 ```jl
 sco(
@@ -2200,7 +2198,7 @@ yearmonthday(my_birthday)
 )
 ```
 
-We can also see day of the week and other handy stuff:
+We can also see the day of the week and other handy stuff:
 
 ```jl
 scob(
@@ -2226,7 +2224,7 @@ dayofweekofmonth(my_birthday) # second sunday
 )
 ```
 
-Yep, Jose was born on the second sunday of September.
+Yep, Jose was born on the second Sunday of September.
 
 > **_NOTE:_**
 > Here's a handy tip to just recover weekdays from `Dates` instances.
@@ -2237,7 +2235,7 @@ Yep, Jose was born on the second sunday of September.
 
 We can perform **operations** in `Dates` instances.
 For example, we can add days to a `Date` or `DateTime` instance.
-Notice that Julia's `Dates` will automatically perform the adjustments necessary for leapyears, of months with 30 or 31 days (this is known as *calendrical* arithmetic).
+Notice that Julia's `Dates` will automatically perform the adjustments necessary for leap years, and for months with 30 or 31 days (this is known as *calendrical* arithmetic).
 
 ```jl
 sco(
@@ -2258,7 +2256,7 @@ my_birthday + Day(90) + Month(2) + Year(1)
 ```
 
 To get **date duration**, we just use the **subtraction** `-` operator.
-Let's see how many days Jose is old:
+Let's see how old Jose is, in days:
 
 ```jl
 sco(
@@ -2284,7 +2282,7 @@ DateTime(today()) - DateTime(my_birthday)
 One nice thing about `Dates` module is that we can also easily construct date and time intervals.
 Julia is clever enough to not have to define the whole interval types and operations that we covered in @sec:ranges.
 It just extends the functions and operations defined for `UnitRange` to `Date`'s types.
-This is known as multiple dispatch and we already covered in *Why Julia?*(@sec:why_julia).
+This is known as multiple dispatch and we already covered this in *Why Julia?*(@sec:why_julia).
 
 For example suppose you want to create a `Day` interval.
 This is easy done with the colon `:` operator:
@@ -2297,8 +2295,8 @@ Date("2021-01-01"):Day(1):Date("2021-01-07")
 )
 ```
 
-There is nothing special in using `Day(1)` as interval, we can **use whatever `Period` type** as interval.
-For example using 3 days as intervals:
+There is nothing special in using `Day(1)` as the interval, we can **use whatever `Period` type** as interval.
+For example, using 3 days as the interval:
 
 ```jl
 sco(
@@ -2365,10 +2363,10 @@ All we've done with `Date` types can be extended to `DateTime` types in the same
 
 Another important module in Julia's standard library is the `Random` module.
 This module deals with **random number generation**.
-`Random` is a rich library and, if you interested in it, you should consult [Julia's `Random` documentation](https://docs.julialang.org/en/v1/stdlib/Random/).
+`Random` is a rich library and, if you're interested, you should consult [Julia's `Random` documentation](https://docs.julialang.org/en/v1/stdlib/Random/).
 We will cover *only* three functions: `seed!`, `rand` and `randn`.
 
-To begin we first import the `Random` module:
+To begin, we first import the `Random` module:
 
 ```julia
 using Random
@@ -2417,7 +2415,7 @@ rand(1.0:10.0)
 ```
 
 You can also specify a different step size inside the interval and a different type.
-Here we are using number without the `.` so Julia will interpret them as `Int64`:
+Here we are using numbers without the `.` so Julia will interpret them as `Int64`:
 
 ```jl
 scob(
@@ -2469,7 +2467,7 @@ rand(Dict("one"=>1, "two"=>2))
 
 To finish off all the `rand` arguments options, you can specify the desired random number dimensions in a tuple.
 If you do this, the returned type will be an array.
-For example, a 2x2 matrix of `Float64` between 1.0 and 3.0:
+For example, here's a 2x2 matrix of `Float64` numbers between 1.0 and 3.0:
 
 ```jl
 sco(
@@ -2481,7 +2479,7 @@ rand(1.0:3.0, (2, 2))
 
 #### `randn` {#sec:random_randn}
 
-`randn` follows the same general principle from `rand` but now it only returns numbers generated from standard normal distribution.
+`randn` follows the same general principle from `rand` but now it only returns numbers generated from the standard normal distribution.
 The standard normal distribution is the normal distribution with mean 0 and standard deviation 1.
 The default type is `Float64` and it only allows for subtypes of `AbstractFloat` or `Complex`:
 
@@ -2508,7 +2506,7 @@ randn((2, 2))
 To finish off the `Random` overview, let's talk about **reproducibility**.
 Often, we want to make something replicable.
 Meaning that, we want the random number generator to generate the same random sequence of numbers,
-despite paradoxical that might sound...
+despite how paradoxical that might sound...
 We can do so with the `seed!` function.
 
 Let me show you an example of a `rand` that generates the same three numbers given a certain seed:
@@ -2534,7 +2532,7 @@ rand(3)
 Note that `seed!` is not automatically exported by the `Random` module.
 We have to call it with the `Module.function` syntax.
 
-In order to avoid tedious and inefficient repetition of `seed!` all over the place we can instead define an instance of a `seed!` and pass it as a first argument of **either `rand` or `randn`**.
+In order to avoid tedious and inefficient repetition of `seed!` all over the place, we can instead define an instance of a `seed!` and pass it as a first argument of **either `rand` or `randn`**.
 
 ```jl
 sco(

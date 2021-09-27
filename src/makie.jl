@@ -118,8 +118,8 @@ function multiple_scatters_and_lines()
     ax = Axis(fig[1,1], xlabel = L"x", ylabel = L"f(x,a)")
     for i in x
         lines!(ax, x, i .* x; label = latexstring("$(i) x"))
-        scatter!(ax, x, i .* x; markersize = 13,
-            strokewidth = 0.25, label = latexstring("$(i) x"))
+        scatter!(ax, x, i .* x; markersize = 13, strokewidth = 0.25,
+            label = latexstring("$(i) x"))
     end
     axislegend(L"f(x)"; merge = true,position = :lt,nbanks=2,labelsize=14)
     text!(L"f(x,a) = ax", position = (4,80))
@@ -141,7 +141,7 @@ function demo_themes()
     fig, _ = series(y; labels = labels, markersize = 10, color=:Set1,
         axis = (; xlabel = "time (s)", ylabel = "Amplitude",
         title = "Measurements"), figure = (;resolution = (600,300)))
-    hmap = heatmap!(LinRange(-3,0.5,m), LinRange(-3.5,3.5, m), randn(m, m); 
+    hmap = heatmap!(LinRange(-3,0.5,m), LinRange(-3.5,3.5, m), randn(m, m);
         colormap = :plasma)
     limits!(-3.1,13,-6,5.1)
     axislegend("legend"; merge = true)
@@ -177,7 +177,7 @@ function multiple_example_themes()
         with_theme(demo_theme, theme_minimal())
         with_theme(demo_theme, theme_light())
     ]
-    Options.(objects, filenames) # hide
+    #Options.(objects, filenames) # hide
 end
 
 function set_colors_and_cycle()
@@ -213,7 +213,6 @@ function new_cycle_theme()
         colormap = :linear_bmy_10_95_c78_n256,
         palette=(color=my_colors,marker=my_markers,linestyle=my_linestyle),
         Lines = (cycle = cycle,), Scatter = (cycle = cycle,),
-
         Axis = (xlabelsize= 20,xgridstyle=:dash,ygridstyle=:dash,
             xtickalign = 1, ytickalign=1,yticksize=10, xticksize=10,
             xlabelpadding = -5, xlabel = "x", ylabel = "y"),
@@ -608,14 +607,14 @@ function arrows_and_streamplot_in_3d()
     ps = [Point3f0(x, y, z) for x in -3:1:3 for y in -3:1:3 for z in -3:1:3]
     ns = map(p -> 0.1*rand() * Vec3f0(p[2], p[3], p[1]), ps)
     lengths = norm.(ns)
-    flowField(x,y,z) = Point(-y + x*(-1+x^2+y^2)^2, x + y*(-1+x^2+y^2)^2, 
+    flowField(x,y,z) = Point(-y + x*(-1+x^2+y^2)^2, x + y*(-1+x^2+y^2)^2,
         z + x*(y-z^2))
     fig = Figure(resolution = (1400,800), fontsize = 26)
     axs = [Axis3(fig[1,i]; aspect = (1,1,1),  perspectiveness = 0.5) for i in 1:2]
     # http://makie.juliaplots.org/stable/plotting_functions/arrows.html # hide
-    arrows!(axs[1], ps, ns, color=lengths, arrowsize = Vec3f0(0.2, 0.2, 0.3), 
+    arrows!(axs[1], ps, ns, color=lengths, arrowsize = Vec3f0(0.2, 0.2, 0.3),
         linewidth = 0.1)
-    streamplot!(axs[2], flowField, -4..4, -4..4, -4..4, colormap = :plasma, 
+    streamplot!(axs[2], flowField, -4..4, -4..4, -4..4, colormap = :plasma,
         gridsize= (7,7), arrow_size = 0.25,linewidth = 1)
     fig
     caption = "Arrows and streamplot in 3d." # hide
@@ -702,7 +701,7 @@ function grid_spheres_and_rectangle_as_plate()
         for i in 1:2.5:20, j in 1:2.5:10, k in 1:2.5:4
             sphere = Sphere(Point3f0(i,j,k), 1)
             spheremesh = GeometryBasics.mesh(Tesselation(sphere, 32))
-            mesh!(ax2,spheremesh;color=cmap[rand(1:50)],lightposition=Vec3f0(10,5,2), 
+            mesh!(ax2,spheremesh;color=cmap[rand(1:50)],lightposition=Vec3f0(10,5,2),
                 ambient = Vec3f0(0.95, 0.95, 0.95), backlight = 1f0)
         end
         mesh!(recmesh; color= colors, colormap = :rainbow, shading = false)

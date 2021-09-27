@@ -26,7 +26,7 @@ s = """
         with_theme(demo_themes, theme_minimal())
         with_theme(demo_themes, theme_light())
     ] # hide
-   #link_attributes = "width=60%" # hide
+    link_attributes = "width=60%" # hide
     Options.(objects, filenames) # hide
     """
 sco(s)

@@ -7,7 +7,7 @@ This file is only included on the website.
 Welcome! This is an open source and open access book on how to do **Data Science using [Julia](https://julialang.org)**.
 Our target audience are researchers from all fields of applied sciences.
 Of course, we hope to be useful for industry too.
-You can navigate through the pages of ebook by using the arrow keys (left/right) on your keyboard.
+You can navigate through the pages of the ebook by using the arrow keys (left/right) on your keyboard.
 
 The book is also available as [**PDF**](/juliadatascience.pdf){target="_blank"}.
 
@@ -81,4 +81,3 @@ let
     Options(fig; caption=nothing, label=nothing, link_attributes)
 end
 ```
-

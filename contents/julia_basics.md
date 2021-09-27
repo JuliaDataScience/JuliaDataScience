@@ -985,11 +985,28 @@ Speaking in arrays, let's talk about them.
 
 ### Array {#sec:array}
 
-Arrays are a **systematic arrangement of similar objects, usually in _rows_ and _columns_**.
-Most of the time you would want **arrays of a single type for performance issues**, but note that they can also hold objects of different types.
-They are the "bread and butter" of data scientist, because arrays are what constitutes most of **data manipulation** and **data visualization** workflows.
+In its most basic form, arrays hold multiple objects.
+For example, they can hold multiple numbers in one-dimension:
 
-**Arrays are a powerful data structure**. They are one of the main features that makes Julia blazing fast.
+```jl
+myarray = [1, 2, 3]
+```
+
+Storing multiple dimensions is also possible:
+
+```jl
+myarray = [1, 2, 3; 4, 5, 6]
+```
+
+Most of the time you would want **arrays of a single type for performance issues**, but note that they can also hold objects of different types:
+
+```jl
+myarray = ["text", 1, :symbol]
+```
+
+They are the "bread and butter" of data scientist, because arrays are what underlies most of **data manipulation** and **data visualization** workflows.
+
+Therefore, **Arrays are an essential data structure**.
 
 #### Array Types {#sec:array_types}
 
@@ -999,14 +1016,19 @@ There are several, but we will focus on two the most used in data science:
 * `Vector{T}`: **one-dimensional** array. Alias for `Array{T, 1}`.
 * `Matrix{T}`: **two-dimensional** array. Alias for `Array{T, 2}`.
 
-Note here that `T` is the type of the underlying array.
+Note here that `T` is the type of the elements in the array.
 So, for example, `Vector{Int64}` is a `Vector` which all elements are `Int64`s and `Matrix{AbstractFloat}` is a `Matrix` which all elements are subtypes of `AbstractFloat`.
 
 Most of the time, especially when dealing with tabular data, we are using either one- or two-dimensional arrays.
 They are both `Array` types for Julia.
-But we can use the handy aliases `Vector` and `Matrix` for clear and concise syntax.
+But, we can use the handy aliases `Vector` and `Matrix` for clear and concise syntax.
 
 #### Array Construction {#sec:array_construction}
+
+```{=comment}
+Rik: I actually almost never use the constructor like this.
+I use `map`, broadcasting or list comprehensions.
+```
 
 How do we construct an array?
 The simplest answer is to use the **default constructor**.

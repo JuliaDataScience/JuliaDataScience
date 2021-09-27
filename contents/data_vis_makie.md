@@ -33,8 +33,9 @@ For vector formats you specify `pt_per_unit`, e.g.
 
 ```
 save("filename.pdf", fig; pt_per_unit = 2)
-``` 
-or 
+```
+
+or
 
 ```
 save("filename.pdf", fig; pt_per_unit = 0.5)

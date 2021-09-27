@@ -451,7 +451,7 @@ scob(s)
 A lot of times, we don't care about the name of the function and want to quickly make one.
 What we need are **anonymous functions**.
 They are used a lot in Julia's data science workflow.
-For example, when using `DataFrames.jl` (@sec:dataframes) or `Plots.jl` (@sec:datavisPlots), sometimes we need a temporary function to filter data or format plot labels.
+For example, when using `DataFrames.jl` (@sec:dataframes) or `Plots.jl` (@sec:DataVisualizationPlots), sometimes we need a temporary function to filter data or format plot labels.
 That's when we use anonymous functions.
 They are especially useful when we don't want to create a function and a simple in-place statement would be enough.
 
@@ -1692,7 +1692,7 @@ my_pair.second
 )
 ```
 
-Pairs will be used a lot in data manipulation and data visualization since both `DataFrames.jl` (@sec:dataframes) or `Plots.jl` (@sec:datavisPlots) main functions depends on `Pair` as type arguments.
+Pairs will be used a lot in data manipulation and data visualization since both `DataFrames.jl` (@sec:dataframes) or `Plots.jl` (@sec:DataVisualizationPlots) main functions depends on `Pair` as type arguments.
 
 ### Dict {#sec:dict}
 
@@ -1792,7 +1792,7 @@ my_dict
 )
 ```
 
-`Dict`s are also used in data manipulations by `DataFrames.jl` (@sec:dataframes) and data visualization by `Plots.jl` (@sec:datavisPlots).
+`Dict`s are also used in data manipulations by `DataFrames.jl` (@sec:dataframes) and data visualization by `Plots.jl` (@sec:DataVisualizationPlots).
 So it is important to know their basic functionality.
 
 There is one useful `Dict` constructor that we use a lot.
@@ -1847,7 +1847,7 @@ sym = Symbol(s)
 ```
 
 One simple benefit of symbols is that you have to type one character less, that is, `:some_text` versus `"some text"`.
-We use `Symbol`s a lot in data manipulations with the `DataFrames.jl` package (@sec:dataframes) and data visualizations (@sec:datavisPlots and -@sec:datavisMakie).
+We use `Symbol`s a lot in data manipulations with the `DataFrames.jl` package (@sec:dataframes) and data visualizations (@sec:DataVisualizationPlots and -@sec:DataVisualizationMakie).
 
 ### Splat Operator {#sec:splat}
 

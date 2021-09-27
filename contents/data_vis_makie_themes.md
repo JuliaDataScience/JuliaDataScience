@@ -26,6 +26,7 @@ s = """
         with_theme(demo_themes, theme_minimal())
         with_theme(demo_themes, theme_light())
     ] # hide
+   #link_attributes = "width=60%" # hide
     Options.(objects, filenames) # hide
     """
 sco(s)
@@ -48,7 +49,8 @@ s = """
     with_theme(plot_with_legend_and_colorbar, publication_theme())
     label = "plot_with_legend_and_colorbar" # hide
     caption = "Themed plot with Legend and Colorbar." # hide
-    Options(current_figure(); filename=label, label, caption) # hide
+    link_attributes = "width=60%" # hide
+    Options(current_figure(); filename=label, label, caption, link_attributes) # hide
     """
 sco(s)
 ```
@@ -62,13 +64,13 @@ s = """
     fig = (resolution = (410,400), figure_padding = 1, backgroundcolor= :grey90)
     ax = (; aspect = DataAspect())
     cbar = (; height = Relative(4/5))
-
     with_theme(publication_theme(); fig..., Axis = ax, Colorbar = cbar) do
         plot_with_legend_and_colorbar()
     end
     label = "plot_theme_extra_args" # hide
     caption = "Theme with extra args." # hide
-    Options(current_figure(); filename=label, caption, label) # hide
+    link_attributes = "width=60%" # hide
+    Options(current_figure(); filename=label, caption, label, link_attributes) # hide
     """
 sco(s)
 ```

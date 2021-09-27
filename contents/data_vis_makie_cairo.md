@@ -11,7 +11,6 @@ CairoMakie.activate!()
 s = """
     CairoMakie.activate!() # hide
     fig, = scatterlines(1:10, 1:10)
-    #save("firstplot.png", fig)
     label = "firstplot" # hide
     caption = "First plot." # hide
     link_attributes = "width=60%" # hide

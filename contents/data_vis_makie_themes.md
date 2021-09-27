@@ -20,14 +20,16 @@ s = """
     filenames = ["theme_dark()", "theme_black()", "theme_ggplot2()", # hide
         "theme_minimal()", "theme_light()"] # hide
     objects = [ # hide
-        with_theme(demo_themes, theme_dark())
-        with_theme(demo_themes, theme_black())
-        with_theme(demo_themes, theme_ggplot2())
-        with_theme(demo_themes, theme_minimal())
-        with_theme(demo_themes, theme_light())
+    # Don't indent here because it indent the output incorrectly. # hide
+    with_theme(demo_themes, theme_dark())
+    with_theme(demo_themes, theme_black())
+    with_theme(demo_themes, theme_ggplot2())
+    with_theme(demo_themes, theme_minimal())
+    with_theme(demo_themes, theme_light())
     ] # hide
     link_attributes = "width=60%" # hide
-    Options.(objects, filenames) # hide
+    Options(obj, filename, link_attributes) = Options(obj; filename, link_attributes) # hide
+    Options.(objects, filenames, link_attributes) # hide
     """
 sco(s)
 ```

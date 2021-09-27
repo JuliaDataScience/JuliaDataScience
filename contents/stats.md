@@ -40,7 +40,7 @@ And by using the observed data we can use inference to gain knowledge about the 
 fig = statistics_graph()
 caption = "Statistics vs Probability"
 label = "stats_vs_prob"
-link_attributes = "width=60%" # hide
+link_attributes = "width=60%"
 Options(fig; filename=label, caption, label, link_attributes)
 ```
 

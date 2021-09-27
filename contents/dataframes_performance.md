@@ -130,8 +130,7 @@ We need to wrap anything that `CSV.File` returns in a `DataFrame` constructor fu
 df = DataFrame(CSV.File("file.csv"))
 ```
 
-Or, in a more preferred idiomatic syntax with the pipe `|>` operator:
-
+Or, with the pipe `|>` operator:
 
 ```julia
 df = CSV.File("file.csv") |> DataFrame

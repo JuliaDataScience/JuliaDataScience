@@ -14,7 +14,8 @@ s = """
     with_theme(LaTeX_Strings, publication_theme())
     label = "latex_strings" # hide
     caption = "Plot with LaTeX strings." # hide
-    Options(current_figure(); filename=label, caption, label) # hide
+    link_attributes = "width=60%" # hide
+    Options(current_figure(); filename=label, caption, label, link_attributes) # hide
     """
 sco(s)
 ```

@@ -34,14 +34,14 @@ scolor = """
     CairoMakie.activate!() # hide
     figure = (;resolution = (400,300), font= "CMU Serif")
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
-
     fig, ax, pltobj = heatmap(rand(20,20); colorrange = (0,1),
         colormap = Reverse(:viridis), axis = axis, figure = figure)
     Colorbar(fig[1,2], pltobj, label = "Reverse colormap Sequential")
     fig
     label = "Reverse_colormap_sequential" # hide
     caption = "Reverse colormap sequential and colorrange." # hide
-    Options(fig; filename=label, label, caption) # hide
+    link_attributes = "width=60%" # hide
+    Options(fig; filename=label, label, caption, link_attributes) # hide
     """
 sco(scolor)
 ```
@@ -58,7 +58,6 @@ s = """
     CairoMakie.activate!() # hide
     figure = (;resolution = (400,300), font= "CMU Serif")
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
-
     fig, ax, pltobj = heatmap(randn(20,20); colorrange = (-2,2),
         colormap = "diverging_rainbow_bgymr_45_85_c67_n256",
         highclip = :black, lowclip = :white, axis = axis, figure = figure)
@@ -66,7 +65,8 @@ s = """
     fig
     label = "diverging_colormap" # hide
     caption = "Diverging Colormap with low and high clip." # hide
-    Options(fig; filename=label, label, caption) # hide
+    link_attributes = "width=60%" # hide
+    Options(fig; filename=label, label, caption, link_attributes) # hide
     """
 sco(s)
 ```
@@ -85,7 +85,6 @@ scat = """
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
     cmap = ColorScheme(range(colorant"red", colorant"green", length=3))
     mygrays = ColorScheme([RGB{Float64}(i, i, i) for i in [0.0,0.5,1.0]])
-
     fig, ax, pltobj = heatmap(rand(-1:1,20,20);
         colormap = cgrad(mygrays, 3, categorical = true, rev = true), # cgrad and Symbol, mygrays,
         axis = axis, figure = figure)
@@ -94,7 +93,8 @@ scat = """
     fig
     label = "categorical_colormap" # hide
     caption = "Categorical Colormap." # hide
-    Options(fig; filename=label, label, caption) # hide
+    link_attributes = "width=60%" # hide
+    Options(fig; filename=label, label, caption, link_attributes) # hide
     """
 sco(scat)
 ```
@@ -111,7 +111,6 @@ s2color2 = """
     CairoMakie.activate!() # hide
     figure = (;resolution = (400,300), font= "CMU Serif")
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
-
     fig, ax, pltobj = heatmap(rand(20,20); colorrange = (0,1),
         colormap = (:red, "black"), axis = axis, figure = figure)
     scatter!(ax,[11],[11],color=("#C0C0C0", 0.5),markersize=150)
@@ -119,11 +118,11 @@ s2color2 = """
     fig
     label = "colormap_two_colors" # hide
     caption = "Colormap from two colors." # hide
-    Options(fig; filename=label, label, caption) # hide
+    link_attributes = "width=60%" # hide
+    Options(fig; filename=label, label, caption, link_attributes) # hide
     """
 sco(s2color2)
 ```
-
 
 ### Custom cycle
 
@@ -148,7 +147,8 @@ s = """
     with_theme(scatters_and_lines, new_cycle_theme())
     label = "custom_cycle" # hide
     caption = "Custom theme with new cycle and colormap." # hide
-    Options(current_figure(); filename=label, caption, label) # hide
+    link_attributes = "width=60%" # hide
+    Options(current_figure(); filename=label, caption, label, link_attributes) # hide
     """
 sco(s)
 ```

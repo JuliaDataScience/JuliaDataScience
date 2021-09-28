@@ -54,8 +54,8 @@ The median, second quartile -- Q2, or percentile 0.5, is the line inside the box
 The first and third quartile, Q1 and Q3, or percentiles 0.25 and 0.75, respectively, are the box's lower and upper bounds.
 Finally, we have the "whisker" which, traditionally (and the default in most data visualization techniques), is the range composed by extending the interquartile range (IQR) by 1.5.
 
-The basic box plot can be drawn using `Makie.jl` (see Chapter -@sec:datavisMakie).
-It accepts `x` and `y` vectors which represent the positions of the categories and the variables within the boxes, respectively.
+The basic box plot can be drawn using `Makie.jl` (see Chapter -@sec:DataVisualizationMakie).
+It accepts `x` and `y` vectors which represents the positions of the categories and the variables within the boxes, respectively.
 Since the elements in our vector `x` are of type `String`, we need to convert it to `categorical` using `CategoricalArrays.jl` (@sec:missing_data) and then pass the `Axis` keyword argument `xticks` (see @sec:datavisMakie_attributes) as a tuple of values and labels.
 For the `xticks`' labels we used the `levels` function from `CategoricalArrays.jl` that returns the categorical levels from our `name` variable in the same order as the integer codes.
 Finally, for the `x` vector inside Makie's `boxplot` function, we wrap the `name` variable with the `levelcode` function, also from `CategoricalArrays.jl`, which returns the underlying integer codes from our categorical variable `name`.

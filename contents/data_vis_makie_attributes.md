@@ -12,6 +12,7 @@ s = """
     """
 sco(s)
 ```
+
 or as a `Dict` calling `pltobject.attributes.attributes`.
 
 Asking for help in the `REPL` as `?lines` or `help(lines)` for any given plotting function will show you their corresponding attributes plus a short description on how to use that specific function, e.g.:
@@ -37,14 +38,13 @@ s = """
     CairoMakie.activate!() # hide
     figure = (; figure_padding=5, resolution=(600,400),
         backgroundcolor=:grey90, fontsize=16, font="sans")
-
     axis = (; xlabel="x", ylabel="x²", title="title",
         backgroundcolor=:white, xgridstyle=:dash, ygridstyle=:dash)
-
     lines(1:10, (1:10).^2; color=:black, linewidth=2, linestyle=:dash, figure, axis)
-
+    current_figure()
     filename = "custom_plot" # hide
-    Options(current_figure(); filename, caption="Custom plot.", label=filename) # hide
+    link_attributes = "width=60%" # hide
+    Options(current_figure(); filename, caption="Custom plot.", label=filename, link_attributes) # hide
     """
 sco(s)
 ```
@@ -67,7 +67,8 @@ s = """
     axislegend("legend"; position = :ct)
     current_figure()
     label = "custom_plot_leg" # hide
-    Options(current_figure(); label, filename=label, caption="Custom plot legend.") # hide
+    link_attributes = "width=60%" # hide
+    Options(current_figure(); label, filename=label, caption="Custom plot legend.", link_attributes) # hide
     """
 sco(s)
 ```
@@ -83,9 +84,7 @@ s = """
     set_theme!(resolution = (600,400), backgroundcolor = (:orange, 0.5),
         fontsize = 16, font = "sans",
         Axis = (backgroundcolor = :white, xgridstyle=:dash, ygridstyle=:dash),
-        Legend = (bgcolor = (:red,0.2), framecolor = :dodgerblue)
-        )
-
+        Legend = (bgcolor = (:red,0.2), framecolor = :dodgerblue))
     lines(1:10, (1:10).^2; label = "x²", linewidth = 2, linestyle = nothing,
         axis = (; xlabel = "x", title = "title"))
     scatterlines!(1:10, (10:-1:1).^2; label = "Reverse(x)²")
@@ -93,7 +92,8 @@ s = """
     current_figure()
     set_theme!() # in order to go back to the default settings.
     label = "setTheme" # hide
-    Options(current_figure(); filename=label, caption="set theme", label) # hide
+    link_attributes = "width=60%" # hide
+    Options(current_figure(); filename=label, caption="set theme", label, link_attributes) # hide
     """
 sco(s)
 ```
@@ -117,7 +117,8 @@ s = """
         Colorbar(fig[1,2], pltobj, height = Relative(3/4))
         fig
         label = "bubbleplot" # hide
-        Options(current_figure(); filename=label, caption="Bubble plot", label) # hide
+        link_attributes = "width=60%" # hide
+        Options(current_figure(); filename=label, caption="Bubble plot", label, link_attributes) # hide
     end
     """
 sco(s)

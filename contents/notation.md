@@ -26,7 +26,7 @@ Some of these rules might sound pedantic, but we found that they make the code m
 From the style guide, we attempt to adhere specifically to:
 
 - At most 92 characters per line in code (in Markdown files, longer lines are allowed).
-- With `using`, import at most one module per line.
+- When loading code via `using`, load at most one module per line.
 - No trailing whitespace.
   Trailing whitespace makes inspecting changes in code more difficult since they do not change the behavior of the code but do show up as changes.
 - Avoid extraneous spaces inside brackets.

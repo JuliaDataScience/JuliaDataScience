@@ -2,7 +2,7 @@
 
 Before defining distributions, we must talk about **probability**.
 
-**The probability of an event is a real number between 0 and 1, where, 0 indicates the impossibility of the event and 1 indicates the certainty of the event**.
+**The probability of an event is a real number between 0 and 1, where 0 indicates the impossibility of the event and 1 indicates the certainty of the event**.
 The greater the likelihood of an event, the more likely it is that the event will occur.
 A simple example is the tossing of a fair (impartial) coin.
 Since the coin is fair, both results ("heads" and "tails") are equally likely; the probability of "heads" is equal to the probability of "tails"; and since no other result is possible, the probability of "heads" or "tails" is $\frac{1}{2}$ (which can also be written as 0.5 or 50%).
@@ -11,15 +11,15 @@ Regarding notation, **we define $A$ as an event and $P(A)$ as the probability of
 
 $$ \{P(A) \in \mathbb{R} : 0 \leq P(A) \leq 1 \}. $$ {#eq:probability}
 
-This means the "probability of the event to occur is the set of all real numbers between 0 and 1; including 0 and 1".
-In addition, we have three axioms, originated from @kolmogorovFoundationsTheoryProbability1933:
+This means the "probability of the event occurring is the set of all real numbers between 0 and 1; including 0 and 1".
+In addition, we have three axioms, originating from @kolmogorovFoundationsTheoryProbability1933:
 
 1. **Non-negativity**: For all $A$, $P(A) \geq 0$. Every probability is positive (greater than or equal to zero), regardless of the event.
 2. **Additivity**: For two mutually exclusive events $A$ and $B$ (cannot occur at the same time): $P(A) = 1 - P(B)$ and $P(B) = 1 - P(A)$.
 3. **Normalization**: The probability of all possible events $A_1, A_2, \dots$ must add up to 1: $\sum_{n \in \mathbb{N}} P(A_n) = 1$; or, in the case of a continuous variable, integrate to 1: $\int^\infty_{-\infty} f(x) dx = 1$.
 
 Now we are ready to talk about distributions.
-Simply put: a **distribution is a just a collection of scores (counts) in a variable (observations)**.
+Simply put: a **distribution is just a collection of scores (counts) in a variable (observations)**.
 A **probability distribution is defined by a function which maps real numbers to a probability**:
 
 $$ f(X): X \to \mathbb{R} \in [0, 1], $$ {#eq:distribution}
@@ -34,7 +34,7 @@ where $\operatorname{dist}$ is the name of the distribution and $\theta_1, \thet
 Every distribution can be "parameterized" by specifying parameters that allow us to tailor some aspects of the distribution for some specific purpose.
 
 Also, notice that we are using upper case $X$ instead of lower case $x$.
-This is a wide used convention in probability and statistics, that **upper case characters denote random variables, and lower case characters denote numerical values of a random variable**.
+This is a widely used convention in probability and statistics, that **upper case characters denote random variables, and lower case characters denote numerical values of a random variable**.
 More broadly, $X$ is a theoretical distribution, whereas $x$ are the observed values from $X$.
 
 There are several distributions defined in textbooks[^stats_book] and scientific articles[^stats_articles].
@@ -51,11 +51,11 @@ using Distributions
 ### Normal and Non-Normal Distributions {#sec:stats_dist_normal}
 
 The most commonly arising distribution is the **normal distribution**.
-It occurs a lot in nature; for example, the height and weight of humans and the size of snowflakes.
+It occurs a lot in nature; for example, the height and weight of humans, and the size of snowflakes.
 It has the ubiquitous shape of a bell curve and is also known as the *Gaussian* distribution in honor of the mathematician Carl Friedrich Gauss.
 
 This distribution is generally used in the social and natural sciences to represent variables in which their distributions are not known.
-Some phenomena follow a normal distribution, such as human height, human shoe size or test scores.
+Some phenomena follow a normal distribution, such as human height, human shoe size, or test scores.
 
 However, beware that *not all phenomena are normally distributed*.
 For example, income, financial returns, city size, social media followers are examples of important phenomena that, generally, do not follow a normal distribution.
@@ -136,7 +136,7 @@ $$ \operatorname{cdf} = P(X \leq x) =
  \int^x_{- \infty} f(t) dt, & \text{if $X$ is continuous.}
  \end{cases} $$ {#eq:cdf}
 
-In @eq:cdf we sum all values less or equal than $x$ if the distribution $X$ is discrete or we integrate from minus infinity to $x$ if the distribution $X$ is continuous.
+In @eq:cdf we sum all values less than or equal to $x$ if the distribution $X$ is discrete or we integrate from minus infinity to $x$ if the distribution $X$ is continuous.
 For example, in @fig:plot_cdf_discrete we have the cdf of a 6-sided dice.
 Notice that since the values are equally likely, the cdf scales *linearly* with the possible outcome values.
 
@@ -156,4 +156,3 @@ caption = "Cumulative Distribution Function of a Continuous Distribution -- Norm
 label = "plot_cdf_continuous"
 Options(fig; filename=label, caption, label)
 ```
-

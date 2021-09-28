@@ -6,12 +6,11 @@ For this task we can think of the canvas as an arrangement of `rows` and `column
 The `Axis` content will be in _row 1, column 1_, e.g. `fig[1, 1]`, the `Colorbar` in _row 1, column 2_, namely `fig[1,2]`.
 And the `Legend` in _row 2_ and across _column 1 and 2_, namely `fig[2,1:2]`.
 
-
 ```jl
 @sco JDS.first_layout()
 ```
 
-This does not look good. Next, we fix the spacing problems using the following keywords and methods:
+This does look good already, it could be better. We could fix spacing problems using the following keywords and methods:
 
 - `figure_padding = (left, right, bottom, top)`
 - `padding =  (left, right, bottom, top)`
@@ -103,6 +102,11 @@ where all labels are in the **protrusions** and each `Axis` has an `AspectData()
 The `Colorbar` is located in the third column and expands from row 1 up to row 2.
 
 The next case uses the so called `Mixed()` **alignmode**, which is especially useful when dealing with large empty spaces between `Axis` due to long ticks.
+Also, the `Dates.jl` packages will be needed it for this example.
+
+```
+using Dates
+```
 
 ```jl
 @sco JDS.mixed_mode_layout()

@@ -57,7 +57,7 @@ sco(s, process=without_caption_label)
 
 Or, to put `q5` at the second position[^sudete]:
 
-[^sudete]: thanks to Sudete on [Discourse](https://discourse.julialang.org/t/pull-dataframes-columns-to-the-front/60327/4) for this suggestion.
+[^sudete]: thanks to Sudete on Discourse (<https://discourse.julialang.org/t/pull-dataframes-columns-to-the-front/60327/4>) for this suggestion.
 
 ```jl
 s = "select(responses(), 1, :q5, :)"
@@ -154,7 +154,7 @@ The solution for this issue and any sort of categorical data is to use `Categori
 using CategoricalArrays
 ```
 
-with the `CategoricalArrays.jl` package, we can add levels that represents the ordering of our categorical variable to our data:
+With the `CategoricalArrays.jl` package, we can add levels that represent the ordering of our categorical variable to our data:
 
 ```jl
 @sco process=string post=output_block fix_age_column(wrong_types())

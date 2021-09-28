@@ -1,4 +1,4 @@
-# Data Vis with Makie.jl {#sec:datavisMakie}
+# Data Visualization with Makie.jl {#sec:DataVisualizationMakie}
 
 > From the japanese word Maki-e, which is a technique to sprinkle lacquer with gold and silver powder.
 > Data is the gold and silver of our age, so let's spread it out beautifully on the screen!
@@ -25,4 +25,21 @@ using GLMakie
 GLMakie.activate!()
 ```
 
-Now, we will start with publication-quality plots.
+Now, we will start with publication-quality plots. But, before going into plotting it is important to know how to save our plots.
+The easiest option to `save` a figure `fig` is to type `save("filename.png", fig)`.
+Other formats are also available for `CairoMakie.jl`, such as `svg` and `pdf`.
+Regarding the resolution output, this one can be easily scale by calling extra arguments.
+For vector formats you specify `pt_per_unit`, e.g.
+
+```
+save("filename.pdf", fig; pt_per_unit = 2)
+```
+
+or
+
+```
+save("filename.pdf", fig; pt_per_unit = 0.5)
+```
+
+to scale up or down respectively. For `png`'s you specify `px_per_unit`, also scaling up or down as previously mentioned.
+For a complete overview please visit [Backends & Output](https://makie.juliaplots.org/v0.15.2/documentation/backends_and_output/#backends_output) in the official documentation.

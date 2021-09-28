@@ -10,7 +10,7 @@ CairoMakie.activate!()
 ```jl
 s = """
     CairoMakie.activate!() # hide
-    fig, = scatterlines(1:10, 1:10)
+    fig = scatterlines(1:10, 1:10)
     label = "firstplot" # hide
     caption = "First plot." # hide
     link_attributes = "width=60%" # hide

@@ -154,7 +154,7 @@ The solution for this issue and any sort of categorical data is to use `Categori
 using CategoricalArrays
 ```
 
-with the `CategoricalArrays.jl` package, we can add levels that represents the ordering of our categorical variable to our data:
+With the `CategoricalArrays.jl` package, we can add levels that represent the ordering of our categorical variable to our data:
 
 ```jl
 @sco process=string post=output_block fix_age_column(wrong_types())

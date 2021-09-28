@@ -1,6 +1,6 @@
 ## Performance {#sec:df_performance}
 
-So far, we didn't think about making our `DataFrames.jl` code **fast**.
+So far, we haven't thought about making our `DataFrames.jl` code **fast**.
 Like everything in Julia, `DataFrames.jl` can be really fast.
 In this section, we will give some performance tips and tricks.
 
@@ -68,14 +68,14 @@ sco(s; process=string, post=plainblock)
 ```
 
 As we can see, `select!` allocates less than `select`.
-So, it should be faster and while consuming less memory.
+So, it should be faster, while consuming less memory.
 
 ### Copying vs Not Copying Columns {#sec:df_performance_df_copy}
 
 There are **two ways to access a DataFrame column**.
 They differ in how they are accessed: one creates a "view" to the column without copying and the other creates a whole new column by copying the original column.
 
-The first is the regular dot `.` operator followed by the column name, like in `df.col`.
+The first way uses the regular dot `.` operator followed by the column name, like in `df.col`.
 This kind of access **does not copy** the column `col`.
 Instead `df.col` creates a "view" which is a link to the original column without performing any allocation.
 Additionally, the syntax `df.col` is the same as `df[!, :col]` with the bang `!` as the row selector.
@@ -105,11 +105,11 @@ sco(s; process=string, post=plainblock)
 ```
 
 When we access a column without copying it we are making zero allocations and our code should be faster.
-So, if you don't need a copy always access your `DataFrame`s columns with `df.col` or `df[!, :col]` instead of `df[:, :col]`.
+So, if you don't need a copy, always access your `DataFrame`s columns with `df.col` or `df[!, :col]` instead of `df[:, :col]`.
 
 ### CSV.read versus CSV.File {#sec:df_performance_csv_read_file}
 
-If you take a look at the help output for `CSV.read`, you will see that there is a convenience function identical to the function called `CSV.File` with the same keywords arguments.
+If you take a look at the help output for `CSV.read`, you will see that there is a convenience function identical to the function called `CSV.File` with the same keyword arguments.
 Both `CSV.read` and `CSV.File` will read the contents of a CSV file, but they differ in the default behavior.
 **`CSV.read`, by default, will not make copies** of the incoming data.
 Instead, `CSV.read` will pass all the data to the second argument (known as the "sink").
@@ -143,7 +143,7 @@ That's why we only covered `CSV.read` in @sec:csv.
 ### CSV.jl Multiple Files {#sec:df_performance_csv_multiple}
 
 Now let's turn our attention to the `CSV.jl`.
-Specially when we have multiple CSV files to read into a single `DataFrame`.
+Specifically, the case when we have multiple CSV files to read into a single `DataFrame`.
 Since version 0.9 of `CSV.jl` we can provide a vector of strings representing filenames.
 Before, we needed to perform some sort of multiple file reading and then concatenate vertically the results into a single `DataFrame`.
 To exemplify, the code below reads from multiple CSV files and then concatenates them vertically using `vcat` into a single `DataFrame` with the `reduce` function:
@@ -153,7 +153,7 @@ files = filter(endswith(".csv"), readdir())
 df = reduce(vcat, CSV.read(file, DataFrame) for file in files)
 ```
 
-One additional trait is that `reduce` will not paralelize because it needs to keep the order of `vcat` which follows the same ordering of the `files` vector.
+One additional trait is that `reduce` will not parallelize because it needs to keep the order of `vcat` which follows the same ordering of the `files` vector.
 
 With this functionality in `CSV.jl` we simply pass the `files` vector into the `CSV.read` function:
 
@@ -162,7 +162,7 @@ files = filter(endswith(".csv"), readdir())
 df = CSV.read(files, DataFrame)
 ```
 
-`CSV.jl` will design a file for each thread available in the computer while it lazily concatenates each thread parsed output into a `DataFrame`.
+`CSV.jl` will designate a file for each thread available in the computer while it lazily concatenates each thread-parsed output into a `DataFrame`.
 So we have the **additional benefit of multithreading** that we don't have with the `reduce` option.
 
 ### CategoricalArrays.jl compression {#sec:df_performance_categorical_compression}
@@ -180,11 +180,11 @@ sco(s; process=string, post=plainblock)
 
 This means that `CategoricalArrays.jl` can represent up to $2^{32}$ different categories in a given vector or column, which is a huge value (close to 4.3 billion).
 You probably would never need to have this sort of capacity in dealing with regular data[^bigdata].
-That's why `categorical` has a `compress` argument that accepts either `true` or `false` to whether compress or not the underlying categorical data.
-If you pass **`compress=true`, `CategoricalArrays.jl` will try to compress the underlying categorical to the smallest possible representation in `UInt`**.
+That's why `categorical` has a `compress` argument that accepts either `true` or `false` to determine whether or not the underlying categorical data is compressed.
+If you pass **`compress=true`, `CategoricalArrays.jl` will try to compress the underlying categorical data to the smallest possible representation in `UInt`**.
 For example, the previous `categorical` vector would be represented as an unsigned integer of size 8 bits `UInt8` (mostly because this is the smallest unsigned integer available in Julia):
 
-[^bigdata]: also notice that regular data (about <10 000 rows) is not big data (about >100 000 rows). So, if you are dealing primarily with big data please take caution in capping your categorical values.
+[^bigdata]: also notice that regular data (up to 10 000 rows) is not big data (more than 100 000 rows). So, if you are dealing primarily with big data please exercise caution in capping your categorical values.
 
 ```jl
 s = """
@@ -195,11 +195,11 @@ sco(s; process=string, post=plainblock)
 
 What does this all mean?
 Suppose you have a big vector.
-For example, a vector with one million entries, but only 4 underlying categories: A, B, C or D.
+For example, a vector with one million entries, but only 4 underlying categories: A, B, C, or D.
 If you do not compress the resulting categorical vector, you will have one million entries stored as `UInt32`.
 On the other hand, if you do compress it, you will have one million entries stored instead as `UInt8`.
 By using `Base.summarysize` function we can get the underlying size, in bytes, of a given object.
-So let's quantify how much more memory we would need to have if we did not compressed our one million categorical vector:
+So let's quantify how much more memory we would need to have if we did not compress our one million categorical vector:
 
 ```julia
 using Random
@@ -213,7 +213,7 @@ s = """
 sco(s; process=string, post=plainblock)
 ```
 
-4 million bytes, which is approximate 3.8 MB.
+4 million bytes, which is approximately 3.8 MB.
 Don't get us wrong, this is a good improvement over the raw string size:
 
 ```jl
@@ -235,7 +235,6 @@ sco(s; process=string, post=plainblock)
 ```
 
 We reduced the size to 25% (one quarter) of the original uncompressed vector size without losing information.
-Our compressed categorical vector has now 1 million bytes which is aproximate 1.0MB.
+Our compressed categorical vector now has 1 million bytes which is approximately 1.0 MB.
 
 So whenever possible, in the interest of performance, consider using `compress=true` in your categorical data.
-

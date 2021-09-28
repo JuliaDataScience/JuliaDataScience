@@ -1,7 +1,7 @@
 # Statistics {#sec:stats}
 
 This content was created in order to awaken the reader to the importance of statistics for science and knowledge generation.
-Our idea is to present the concepts in the way we would like to have been provided when students about to be initiated into science.
+Our idea is to present the concepts in the way we would like to have been met them when we were students about to be initiated into science.
 Our approach is to simplify the concepts as much as possible without losing their essence.
 **In this chapter, we will cover**:
 
@@ -15,17 +15,17 @@ Our approach is to simplify the concepts as much as possible without losing thei
 
 Statistics is important because it is a **tool to make sense of data**.
 With the abundant availability of data, we are often overwhelmed by numbers.
-Statistics offers a way to comprehend, summarize and infer information from data.
+Statistics offers a way to comprehend, summarize, and infer information from data.
 We believe that every data scientist needs to have a basic understanding of statistics and how to perform simple statistical operations.
 
 We can divide statistics into two broad categories: **descriptive** and **inferential**.
-**Descriptive statistics summarizes and quantifies the characteristics of a given observed data**.
+**Descriptive statistics summarizes and quantifies the characteristics of given observed data**.
 Common metrics are: mean, median, mode, standard deviation, variance, correlation, percentiles.
 
 **Inferential statistics allows generating inferences** (statements) **from observed data about the data generation process**.
-In @fig:stats_vs_prob we summarize the relationship between data generating process and observed data.
+In @fig:stats_vs_prob we summarize the relationship between the data generating process and observed data.
 All phenomena have an underlying data generating process that describes how the data is being generated.
-For example, in a soccer game, a scored goal can be explained by an underlying process: a tactic, error, struck of luck; or a mix of those.
+For example, in a soccer game, a scored goal can be explained by an underlying process: a tactic, error, stroke of luck; or a mix of those.
 If we know a phenomenon's data generating process, we can use probability to simulate possible scenarios given certain aspects.
 Most of the time, especially in applied sciences, we do not have full knowledge of the data generating process.
 Given the observed data, we can retrace our way back to the data generating process.
@@ -45,7 +45,7 @@ Options(fig; filename=label, caption, label, link_attributes)
 ```
 
 In this chapter, we will cover only descriptive statistics.
-Inferential statistics is an important and fundamental component of applied sciences, but its scope is too broad. So, let's begin on simple ways to summarize our data by using central tendencies.
+Inferential statistics is an important and fundamental component of applied sciences, but its scope is too broad. So, let's begin with some simple ways to summarize our data by using central tendencies.
 
 ## Central Tendencies Measures {#sec:stats_central}
 
@@ -63,9 +63,9 @@ Often, we see the mean denoted with the **Greek letter $\mu$**, for example $\ba
 Additionally, the mean is also known as the **expectation** which is represented by the operator $\operatorname{E}$, thus the mean of a variable $x$ becomes $\operatorname{E}(x)$[^expectation].
 So, bear in mind that you might find different notations for the mean.
 
-[^expectation]: technically speaking, the expectation is defined as either a sum for discrete variables or an integral for continuous variables weighted by a probability distribution. In contrast with the mean which is simply the arithmetic sum of the variables' values divided by number of values.
+[^expectation]: technically speaking, the expectation is defined as either a sum for discrete variables or an integral for continuous variables weighted by a probability distribution. In contrast, the mean is simply the arithmetic sum of the variables' values divided by the number of values.
 
-The mean can be used from the `mean` function from Julia's standard library `Statistics` module:
+The mean can be found using the `mean` function from the `Statistics` module, part of Julia's standard library:
 
 ```julia
 using Statistics: mean
@@ -97,7 +97,7 @@ sco(s; process=without_caption_label)
 ### Median {#sec:stats_central_median}
 
 We will see that the mean is highly sensitive to outliers and can sometimes misguide us, especially when we are dealing with long-tailed (non-normal distributions) (more in @sec:stats_dist_normal).
-That is why sometimes we are interested in the **median** which is the **middle value that separates the higher half from the lower half of the data**.
+That is why we are sometimes interested in the **median** which is the **middle value that separates the higher half from the lower half of the data**.
 Intuitively, the median tells us the value of the data's 50\% percentile.
 One example is when we are analyzing income.
 The median is the upper limit that we expect that half of the observations earn.
@@ -114,7 +114,7 @@ where:
 - $\lfloor . \rfloor$ a rounded-down value to the nearest integer
 - $\lceil . \rceil$ a rounded-up value to the nearest integer
 
-Similarly, we can use the `median` from `Statistics` module to apply the median to our data:
+Similarly, we can use the `median` from the `Statistics` module to apply the median to our data:
 
 ```julia
 using Statistics: median
@@ -134,7 +134,7 @@ As we can see, the median differs substantially from the mean.
 ### Mode {#sec:stats_central_mode}
 
 The mean and median can be useful for numerical and ordinal data.
-However, they are ineffective for nominal data, in which our data is comprised of qualitative data (also known as categorical data).
+However, they are ineffective for nominal data, in which our data consists of qualitative data (also known as categorical data).
 This is where we use the **mode**, defined as **the most frequent value in our data**.
 
 For the mode, we *do not* have a `mode` function inside Julia's standard library `Statistics` module.
@@ -164,7 +164,7 @@ sco(s; process=without_caption_label)
 
 ### Visualization of Central Tendencies {#sec:stats_central_vis}
 
-In order to have a better intuition behind the difference between mean, median and mode, it is always useful to make some visualizations.
+In order to have a better intuition behind the difference between mean, median, and mode, it is always useful to make some visualizations.
 We will cover statistical visualizations in depth in @sec:stats_vis.
 Below, in @fig:plot_central, we have two data distributions:
 
@@ -178,7 +178,7 @@ label = "plot_central"
 Options(fig; filename=label, caption, label)
 ```
 
-You can see that the mean, median and mode are almost the same in the normal distributed data, but they differ a lot in the non-normal distributed data.
+You can see that the mean, median, and mode are almost the same in the normal distributed data, but they differ a lot in the non-normal distributed data.
 In the non-normal distributed data the mean is highly skewed towards to the right, *biasing* our central tendency.
 This is an example of an outlier scenario where the mean can be highly sensitive to influential observations.
 Nevertheless, the median is unaffected by the outliers and can be used as a *reliable* central tendency.
@@ -207,18 +207,18 @@ The first dispersion measure that we will cover are variance and standard deviat
 We will be covering both measures together because they have a profound relationship.
 **The variance is the square of the standard deviation and the standard deviation is the square root of the variance.**
 
-Let's start with the variance. **Variance is mean of the squared difference between measurements and their average value**:
+Let's start with the variance. **Variance is the mean of the squared difference between measurements and their average value**:
 
 $$ \sigma^2(x) = \frac{1}{n-1} \sum^n_{i=1} (x_i - \bar{x})^2. $$ {#eq:variance}
 
 We use the squared Greek letter $\sigma^2$ to denote variance, but you also might find variance being denoted as operator $\operatorname{var}$.
 Note that we are using $n-1$ in @eq:variance.
 This is because we need a bias correction since we are using one *degree of freedom* from our estimate mean $\bar{x}$.
-Degrees of freedom are not in the scope of our book, so we won't cover in details, but feel free to check the [Wikipedia](https://en.wikipedia.org/wiki/Degrees_of_freedom_(statistics)) for a in depth explanation.
+Degrees of freedom are not in the scope of our book, so we won't cover in details, but feel free to check the [Wikipedia](https://en.wikipedia.org/wiki/Degrees_of_freedom_(statistics)) for a in-depth explanation.
 
 Since we are squaring the differences in @eq:variance, the variance has a property that all dispersion measures have: the variance *cannot* be negative.
 
-The **var**iance can be used from the `var` function from Julia's standard library `Statistics` module:
+The **var**iance can be found with the `var` function from Julia's standard library `Statistics` module:
 
 ```julia
 using Statistics: var
@@ -278,10 +278,10 @@ We can see that the mean $\mu$ is slightly shifted towards to the right by the f
 
 ### Mean Absolute Deviation {#sec:stats_dispersion_mad}
 
-Since variance and standard deviation uses the mean in their mathematical formulation, they are also **sensitive to outliers**.
+Since variance and standard deviation use the mean in their mathematical formulation, they are also **sensitive to outliers**.
 This is where a **dispersion measure that uses the median instead of the mean** would be useful.
 This is exactly the case of the **median absolute deviation (mad) which is defined as the median of the absolute difference between measurements and their median value**.
-`mad` is an extreme robust dispersion measure since it uses twice the median to calculate first the central tendency followed by the difference between observations and their central distance:
+`mad` is an extremely robust dispersion measure since it uses twice the median to calculate first the central tendency followed by the difference between observations and their central distance:
 
 $$ \operatorname{mad}(x) = \operatorname{median}(|x_i - \operatorname{median}(x)|), $$ {#eq:mad}
 
@@ -306,7 +306,7 @@ sco(s; process=without_caption_label)
 
 We can see that still Sally has the highest grades dispersion, but now Bob's and Alice's dispersion are the same.
 Also note that, by using $\operatorname{mad}$, Hank's dispersion is zero.
-This happens because two of the three Hank's grade are the same value:
+This happens because two of Hank's three grades are the same value:
 
 ```jl
 s = """
@@ -350,15 +350,15 @@ Some percentiles have special names:
 These, including percentiles, are in a broad manner called quantiles.
 **Quantiles are cut points that divide equally the range of observations values' into equal spaced intervals**.
 
-Most important and commonly used quantile is the 4-quantile, also known as **quartile**, which we denote with the letter Q followed by a number to identify which one of the quantiles we are referring to.
-Since we have only three quantiles, we have Q1, Q2 and Q3 correspoding to the first, second and third quantile, respectively.
+The most important and commonly used quantile is the 4-quantile, also known as **quartile**, which we denote with the letter Q followed by a number to identify which one of the quantiles we are referring to.
+Since we have only three quantiles, we have Q1, Q2, and Q3 corresponding to the first, second, and third quantile, respectively.
 The Q2 (the 0.5 percentile) is also the median and the Q1 and Q3 are the 0.25 and 0.75 percentile.
-The quartiles are important because we often use it to denote a measure of dispersion.
+The quartiles are important because we often use them to denote a measure of dispersion.
 This measure is known as **interquartile range** (IQR) and is the **difference between the third and first quartile**:
 
 $$ \operatorname{IQR}(x) = \operatorname{Q3}(x) - \operatorname{Q1}(x), $$ {#eq:iqr}
 
-Like the mean absolute deviation, **IQR**, since uses the median and percentiles, is also **robust to outliers**.
+Like the mean absolute deviation, **IQR**, since it uses the median and percentiles, it is also **robust to outliers**.
 
 As usual, in @fig:plot_dispersion_iqr, we have two data distributions:
 
@@ -379,27 +379,27 @@ Here we can see that the median is *not* influenced by the few influential obser
 You might be wondering: "which dispersion measure shall I use? Variance? Standard Deviation? Mean Absolute Deviation? IQR?".
 Like before, we provide the following advice:
 
-- _Avoid_ **variance**, since it is not an intuitive measure
-- For data that do *not* have outliers, use the **standard deviation**
-- For data that *do* have outliers, use either the **mean absolute deviation** or **IQR**
-- For categorical/nominal data, use some sort of **frequency counter**[^frequency_counter]
+- _Avoid_ **variance**, since it is not an intuitive measure.
+- For data that do *not* have outliers, use the **standard deviation**.
+- For data that *do* have outliers, use either the **mean absolute deviation** or **IQR**.
+- For categorical/nominal data, use some sort of **frequency counter**[^frequency_counter].
 
-[^frequency_counter]: we would suggest to use the `StatsBase.countmap` function which returns a dictionary mapping each unique value in a given vector to its number of occurrences.
+[^frequency_counter]: we would suggest using the `StatsBase.countmap` function which returns a dictionary that maps each unique value in a given vector to its number of occurrences.
 
 ## Dependence Measures {#sec:stats_dependence}
 
-Now that we covered univariate measures of central tendency and dispersion, we need to talk about bivariate measures.
+Now that we've covered univariate measures of central tendency and dispersion, we need to talk about bivariate measures.
 **Univariate measures are measures with respect to a single variable**.
 **Bivariate measures are measures with respect to the _relationship_ between two variables**.
-To quantify such relationships we use **dependence measures, which measure the degree of how one variable value depends (or is related) to another variable value**.
+To quantify such relationships, we use **dependence measures, which measure the degree of how one variable value depends (or is related) to another variable value**.
 
 There is a distinction between a dependence *measure* and a dependence *relationship*.
 The first is simply a bivariate measure of how one variable is related to the other.
-On the other hand, a dependence relationship implies a deeper connection, where not only they are related but information regarding one variable gives us information about the other one.
+On the other hand, a dependence relationship implies a deeper connection, where not only are they related but information regarding one variable gives us information about the other one.
 
-There are two main measures of dependence and they are practically the same since one is the other constrained to the unit range between -1 and 1.
+There are two main measures of dependence, and they are practically the same since one is the other constrained to the unit range between -1 and 1.
 **Covariance is a measure of the joint variability of two variables**.
-It is the expectation of one variable minus its expectation times another variables minus its expectation:
+It is the expectation of one variable minus its expectation times another variable minus its expectation:
 
 $$ \operatorname{cov}(x, y) = \operatorname{E} \left[ \left( x - \operatorname{E}(x) \right) \cdot \left( y - \operatorname{E}(y) \right) \right]. $$ {#eq:covariance}
 
@@ -407,10 +407,10 @@ High positive or negative covariance indicates either a strong positive or negat
 It measures how much one unit increase/decrease in one variable is related to one unit increase/decrease in another variable.
 
 The interpretation of a given covariance demands knowledge about units of measurement from both underlying variables.
-So, if we want to analyze covariance between two variables we must have some understanding of how the variables units are measured.
+So, if we want to analyze covariance between two variables, we must have some understanding of how the variables' units are measured.
 That is why most of the time we use the **correlation, which is _normalized_ covariance**.
 The correlation is _dimensionless_ since it is constrained to the unit range between -1 and 1.
-Mathematically speaking, the correlation is the covariance divided by the product of the variables' standard deviation and is denoted by the Greek letter $\rho$:
+Mathematically speaking, the correlation is the covariance divided by the product of the variables' standard deviations, and is denoted by the Greek letter $\rho$:
 
 $$ \rho(x, y) = \frac{\operatorname{cov}(x, y)}{\sigma_x \cdot \sigma_y}, $$ {#eq:correlation}
 
@@ -427,7 +427,7 @@ Options(fig; filename=label, caption, label)
 
 As we can see, the correlation depicts the **linear association** between variables.
 The slope of the dashed line shows the correlation between variables.
-The more far from zero and closer to $\pm$ 1 the stronger is the association between variables.
+The further from zero and closer to $\pm$ 1, the stronger is the association between variables.
 Finally, the sign of the correlation denotes the type of relationship between variables.
-**Positive correlations** implies **positive relationship**, increase in one variable results in an _increase_ on the other one.
-**Negative correlations** implies **negative/inverse relationship**, increase in one variable results in a _decrease_ on the other one.
+**Positive correlations** implies **positive relationship**, increase in one variable results in an _increase_ in the other one.
+**Negative correlations** implies **negative/inverse relationship**, increase in one variable results in a _decrease_ in the other one.

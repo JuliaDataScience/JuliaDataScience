@@ -3,9 +3,9 @@
 At the start of this chapter, we showed multiple tables and raised questions also related to multiple tables.
 However, we haven't talked about combining tables yet, which we will do in this section.
 In `DataFrames.jl`, combining multiple tables is done via _joins_.
-Joins are extremely powerful, but it might take a while to wrap your head around.
-It is not necessary to know the joins below by heart, the [`DataFrames.jl` documentation](https://DataFrames.juliadata.org/stable/man/joins/) along with this book will list them for you.
-But, it's essential to know that joins exists.
+Joins are extremely powerful, but it might take a while to wrap your head around them.
+It is not necessary to know the joins below by heart, because the [`DataFrames.jl` documentation](https://DataFrames.juliadata.org/stable/man/joins/), along with this book, will list them for you.
+But, it's essential to know that joins exist.
 If you ever find yourself looping over rows in a `DataFrame` and comparing it with other data, then you probably need one of the joins below.
 
 In @sec:dataframes, we've introduced the grades for 2020 with `grades_2020`:
@@ -23,7 +23,7 @@ sco(s; process=without_caption_label)
 ```
 
 To do this, we are going to use joins.
-`DataFrames.jl` lists no less than seven kinds of joins.
+`DataFrames.jl` lists no less than seven kinds of join.
 This might seem daunting at first, but hang on because they are all useful and we will showcase them all.
 
 ### innerjoin {#sec:innerjoin}
@@ -46,10 +46,10 @@ The name _inner_ join makes sense since, in mathematics, the _set intersection_ 
 
 ### outerjoin {#sec:outerjoin}
 
-Maybe, you're now thinking "aha, if we have an _inner_, then we probably also have an _outer_".
+Maybe you're now thinking "aha, if we have an _inner_, then we probably also have an _outer_".
 Yes, you've guessed right!
 
-The **`outerjoin`** is much less strict than the `innerjoin` and just takes any row it can find which contains a name in **at least one of the dataset**:
+The **`outerjoin`** is much less strict than the `innerjoin` and just takes any row it can find which contains a name in **at least one of the datasets**:
 
 ```jl
 s = "outerjoin(grades_2020(), grades_2021(); on=:name)"

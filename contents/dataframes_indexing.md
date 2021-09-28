@@ -71,7 +71,7 @@ collect(zip(df.name, df.grade_2020))
 ```
 
 However, converting a `DataFrame` to a `Dict` is only useful when the elements are unique.
-Generally that is not the case and that's why  we need to learn how to `filter` a `DataFrame`.
+Generally that is not the case and that's why we need to learn how to `filter` a `DataFrame`.
 
 ## Filter and Subset {#sec:filter_subset}
 
@@ -84,7 +84,7 @@ There are two ways to remove rows from a `DataFrame`, one is `filter` (@sec:filt
 From this point on, we start to get into the more powerful features of `DataFrames.jl`.
 To do this, we need to learn some functions, such as `select` and `filter`.
 But don't worry!
-It might be a relieve to know that the **general design goal of `DataFrames.jl` is to keep the number of functions that a user has to learn to a minimum[^verbs]**.
+It might be a relief to know that the **general design goal of `DataFrames.jl` is to keep the number of functions that a user has to learn to a minimum[^verbs]**.
 
 [^verbs]: According to Bogumił Kamiński (lead developer and maintainer of `DataFrames.jl`) on Discourse (<https://discourse.julialang.org/t/pull-dataframes-columns-to-the-front/60327/5>).
 
@@ -99,7 +99,7 @@ Note how this function is very similar to the function `filter(f::Function, V::V
 This is because `DataFrames.jl` uses **multiple dispatch** (see @sec:multiple_dispatch) to define a new method of `filter` that accepts a `DataFrame` as argument.
 
 At first sight, defining and working with a function `f` for filtering can be a bit difficult to use in practice.
-Hold tight, that the effort is well-paid, since **it is a very powerful way of filtering data**.
+Hold tight, that effort is well-paid, since **it is a very powerful way of filtering data**.
 As a simple example, we can create a function `equals_alice` that checks whether its input equals "Alice":
 
 ```jl
@@ -139,9 +139,9 @@ sco(s; process=without_caption_label)
 ```
 
 To recap, this function call can be read as "for each element in the column `:name`, let's call the element `n`, check whether `n` equals Alice".
-For some people, this is still to verbose.
+For some people, this is still too verbose.
 Luckily, Julia has added a _partial function application_ of `==`.
-The details of these words are not important, only that you can use it just like any other function:
+The details are not important -- just know that you can use it just like any other function:
 
 ```jl
 sco("""
@@ -158,7 +158,7 @@ sco(s; process=without_caption_label)
 ```
 
 Now, to show **why anonymous functions are so powerful**, we can come up with a slightly more complex filter.
-In this filter, we want to have the people whose name start with A or B **and**  have a grade above 6:
+In this filter, we want to have the people whose names start with A or B **and** have a grade above 6:
 
 ```jl
 s = """

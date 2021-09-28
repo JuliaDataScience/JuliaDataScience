@@ -1,9 +1,9 @@
 ## Groupby and Combine {#sec:groupby_combine}
 
-In the R programming language, @wickham2011split has popularized the, so called, split-apply-combine strategy for data transformations.
+In the R programming language, @wickham2011split has popularized the so-called split-apply-combine strategy for data transformations.
 In essence, this strategy **splits** a dataset into distinct groups, **applies** one or more functions to each group, and then **combines** the result.
 `DataFrames.jl` fully supports split-apply-combine.
-We will use student grades example like before.
+We will use the student grades example like before.
 Suppose that we want to know each student's mean grade:
 
 ```jl
@@ -25,7 +25,7 @@ We apply the `mean` function from Julia's standard library `Statistics` module:
 using Statistics
 ```
 
-Applying this function is done by using the `combine` function:
+To apply this function, use the `combine` function:
 
 ```jl
 s = """
@@ -41,7 +41,7 @@ Therefore, the split-apply-combine technique is a great one to know.
 
 ### Multiple Source Columns {#sec:groupby_combine_multiple_source}
 
-But what if we want to apply a function on multiple columns of our dataset?
+But what if we want to apply a function to multiple columns of our dataset?
 
 ```jl
 s = """

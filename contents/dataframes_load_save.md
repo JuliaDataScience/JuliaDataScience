@@ -52,7 +52,7 @@ Here, we also see the second benefit of CSV data format: the data can be read by
 This differs from many alternative data formats which require proprietary software, e.g. Excel.
 
 This works wonders, but what if our data **contains commas `,`** as values?
-If we would naively write data with commas, it would make the files very hard to convert back to a table.
+If we were to naively write data with commas, it would make the files very hard to convert back to a table.
 Luckily, `CSV.jl` handles this for us automatically.
 Consider the following data with commas `,`:
 
@@ -76,10 +76,10 @@ end # hide
 ```
 
 So, `CSV.jl` adds quotation marks `"` around the comma-containing values.
-Another common way to solve this problem, is to write the data to a **t**ab-**s**eparated **v**alues (TSV) file format.
+Another common way to solve this problem is to write the data to a **t**ab-**s**eparated **v**alues (TSV) file format.
 This assumes that the data doesn't contain tabs, which holds in most cases.
 
-Also, note that TSV files can be also read using a simple text editor and uses the ".tsv" extension.
+Also, note that TSV files can also be read using a simple text editor, and these files use the ".tsv" extension.
 
 ```jl
 sco("""
@@ -93,7 +93,7 @@ end # hide
 """)
 ```
 
-Text file formats. like CSV and TSV files, can also come up with other delimiters, such as semicolons ";", spaces "\ ", or even something as unusual as "π".
+Text file formats like CSV and TSV files can also be found that use other delimiters, such as semicolons ";", spaces "\ ", or even something as unusual as "π".
 
 ```jl
 sco("""
@@ -107,7 +107,7 @@ end # hide
 """)
 ```
 
-By convention, its still best to give files with special delimiters, such as ";", the ".csv" extension.
+By convention, it's still best to give files with special delimiters, such as ";", the ".csv" extension.
 
 Loading CSV files using `CSV.jl` is done in a similar way.
 You can use `CSV.read` and specify in what kind of format you want the output.
@@ -155,7 +155,7 @@ For more information, see the [`CSV.jl` documentation](https://csv.juliadata.org
 ### Excel {#sec:excel}
 
 There are multiple Julia packages to read Excel files.
-In this book, we will only look at [`XLSX.jl`](https://github.com/felipenoris/XLSX.jl), because it is the most actively maintained package in the Julia's ecosystem that deals with Excel data.
+In this book, we will only look at [`XLSX.jl`](https://github.com/felipenoris/XLSX.jl), because it is the most actively maintained package in the Julia ecosystem that deals with Excel data.
 As a second benefit, `XLSX.jl` is written in pure Julia, which makes it easy for us to inspect and understand what's going on under the hood.
 
 Load `XLSX.jl` via
@@ -179,7 +179,7 @@ Now, we can easily write the grades to an Excel file:
 @sc write_grades_xlsx()
 ```
 
-When reading it back, we will see that `XLSX.jl` puts the data in a `XLSXFile` type which we can access the desired `sheet` much like a `Dict`:
+When reading it back, we will see that `XLSX.jl` puts the data in a `XLSXFile` type and we can access the desired `sheet` much like a `Dict`:
 
 ```jl
 sco("""

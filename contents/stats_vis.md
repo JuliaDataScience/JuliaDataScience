@@ -1,14 +1,14 @@
 ## Statistical Visualizations {#sec:stats_vis}
 
 There are several statistical visualization techniques.
-For now, we will focus on only three: **histograms**, **box plots** and **density plots**, since they are commonly used to analyze univariate data.
+For now, we will focus on only three: **histograms**, **box plots**, and **density plots**, since they are commonly used to analyze univariate data.
 
 We will also use the `more_grades` dataset from @sec:stats_central.
 
 ### Histograms {#sec:stats_vis_histograms}
 
 **Histograms are approximate representations of the distribution of numerical data**.
-We construct them by "binning", i.e. inserting into discrete bins the range of values into a series of intervals and then counting up how many values fall on each given interval.
+We construct them by "binning", i.e. inserting into discrete bins the range of values into a series of intervals and then counting up how many values fall in each given interval.
 The bins are represented as a bar in which the height describes the frequency of values belonging to that bin.
 
 We can draw histograms using `Makie.jl`:
@@ -52,10 +52,10 @@ Box plots are a method for graphically depicting numerical data through their qu
 The "box" is typically represented by the quartiles 1 to 3 (see @sec:stats_dispersion_quantiles).
 The median, second quartile -- Q2, or percentile 0.5, is the line inside the box.
 The first and third quartile, Q1 and Q3, or percentiles 0.25 and 0.75, respectively, are the box's lower and upper bounds.
-Finally, we have the "whisker" which, traditionally (and default in most data visualization techniques), is the range composed by extending the interquartile range (IQR) by 1.5.
+Finally, we have the "whisker" which, traditionally (and the default in most data visualization techniques), is the range composed by extending the interquartile range (IQR) by 1.5.
 
 The basic box plot can be drawn using `Makie.jl` (see Chapter -@sec:datavisMakie).
-It accepts an `x` and `y` vectors which represents the positions of the categories and the variables within the boxes, respectively.
+It accepts `x` and `y` vectors which represent the positions of the categories and the variables within the boxes, respectively.
 Since the elements in our vector `x` are of type `String`, we need to convert it to `categorical` using `CategoricalArrays.jl` (@sec:missing_data) and then pass the `Axis` keyword argument `xticks` (see @sec:datavisMakie_attributes) as a tuple of values and labels.
 For the `xticks`' labels we used the `levels` function from `CategoricalArrays.jl` that returns the categorical levels from our `name` variable in the same order as the integer codes.
 Finally, for the `x` vector inside Makie's `boxplot` function, we wrap the `name` variable with the `levelcode` function, also from `CategoricalArrays.jl`, which returns the underlying integer codes from our categorical variable `name`.
@@ -78,7 +78,7 @@ sco(s)
 ```
 
 The default IQR range for the whiskers in `Makie.jl` is 1.5.
-However, sometimes we see the whiskers either with a different IQR range or with a small vertical bar to better visualize the whiskers tips.
+However, sometimes we see the whiskers either with a different IQR range or with a small vertical bar to better visualize the whiskers' tips.
 We can control both of those with the `range` (default `1.5`) and `whiskerwidth` (default `0.0`) arguments:
 
 ```jl
@@ -97,7 +97,7 @@ sco(s)
 ```
 
 Box plots can also flag anything outside the whiskers as outliers.
-By default, these observations are not shown in `Makie.jl` but you can control it with the `show_outliers` argument:
+By default, these observations are not shown in `Makie.jl` but you can control this with the `show_outliers` argument:
 
 ```jl
 s = """
@@ -118,14 +118,14 @@ As you can see, **box plots are a useful way to visualize data with robust centr
 
 ### Density Plots {#sec:stats_vis_densityplots}
 
-Box plots limit us just to summarize statistics like median, quartiles and IQRs.
+Box plots limit us just to summarize statistics like median, quartiles, and IQRs.
 Often we want to see the underlying distribution of the data.
 Histograms are discrete approximations.
 If we would like to have continuous approximations we need something else: **density plots**.
 **Density plots are graphical density estimations of numerical data**.
 It shows us the approximate distribution of a given variable by depicting it as a density, where the higher the curve at a given point is, the more likely is the variable to take a certain value.
 
-A density plot can also be drawn using `Makie.jl`, however it is more convoluted than the box plot.
+A density plot can also be drawn using `Makie.jl`. However, it is more convoluted than the box plot.
 First, we want to pass for each `density!` function only the values with respect to one observation.
 Thus, we define a `values` function that will accept a `code` argument to filter the dataset's variable `name` wrapped with the `levelcode` function.
 Then, we plot a density `pltobj` for each one of the variable `name`'s `levels`.
@@ -151,7 +151,7 @@ s = """
 sco(s)
 ```
 
-As explained in @sec:makie_colors, we can change Makie's colors by either specifying a `color` or ` colormap`.
+As explained in @sec:makie_colors, we can change Makie's colors by either specifying a `color` or `colormap`.
 This can also be applied to `density`:
 
 ```jl
@@ -179,8 +179,8 @@ sco(s)
 
 Here, in the first figure (left) we are using a specific `color` for all `density!`'s `plotobj`s.
 And in the second figure (right) we pass the `:x` argument to `color` to tell Makie to apply the `colormap` gradient along the x-axis (from left to right) while also specifying which `colormap` palette as `:viridis`.
-The color code gradient in the `y` direction is most common and is a visual aid to easily identify trends.
-In the `x` direction is useful when you want to know how things go in some time-dependent variable, but is not widely used.
+The color code gradient in the `y` direction is most common and is a visual aid to easily identify trends;
+in the `x` direction is useful when you want to know how things go in some time-dependent variable, but is not widely used.
 
 ### Anscombe Quartet {#sec:stats_vis_anscombe}
 
@@ -217,9 +217,8 @@ Options(fig; filename=label, caption, label)
 ```
 
 Here, the first dataset (upper left) is a frequent situation that we encounter in data science: `x` and `y` are correlated with added random noise.
-The second dataset (upper right), we see a perfect correlation except for an outlier in the second to last observation.
+In the second dataset (upper right), we see a perfect correlation except for an outlier in the second to last observation.
 For the third dataset (lower left), the relationship is non-linear.
 Finally, for the fourth dataset (lower right) there isn't any relationship except by an outlier observation.
 
-Anscombe Quartet tells us that sometimes **descriptive statistics can fool us** and we should rely also on **visualizations** to analyze our data.
-
+The Anscombe Quartet tells us that sometimes **descriptive statistics can fool us** and we should rely also on **visualizations** to analyze our data.

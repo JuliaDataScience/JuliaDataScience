@@ -5,7 +5,7 @@ We need to cover `ifelse` and `case_when`
 ```
 
 In @sec:filter, we saw that `filter` works by taking one or more source columns and filtering it by applying a "filtering" function.
-To recap here's an example of filter using the `source => f::Function` syntax: `filter(:name => name -> name == "Alice", df)`.
+To recap, here's an example of filter using the `source => f::Function` syntax: `filter(:name => name -> name == "Alice", df)`.
 
 In @sec:select, we saw that `select` can take one or more source columns and put it into one or more target columns `source => target`.
 Also to recap here's an example: `select(df, :name => :people_names)`.
@@ -19,9 +19,9 @@ Like before, we use the `grades_2020` dataset:
 @sco process=without_caption_label grades_2020()
 ```
 
-Suppose we would want to increase all the grades in `grades_2020` by 1.
-First, we define a function that take as argument a vector of data and return all of its elements increased by 1.
-Then we use the `transform` function from `DataFrames.jl` that, as all native `DataFrames.jl`'s functions, takes a `DataFrame` as first argument followed by the transformation syntax:
+Suppose we want to increase all the grades in `grades_2020` by 1.
+First, we define a function that takes as argument a vector of data and returns all of its elements increased by 1.
+Then we use the `transform` function from `DataFrames.jl` that, like all native `DataFrames.jl`'s functions, takes a `DataFrame` as first argument followed by the transformation syntax:
 
 ```jl
 s = """
@@ -35,7 +35,7 @@ Here, the `plus_one` function receives the whole `:grade_2020` column.
 That is the reason why we've added the broadcasting "dot" `.` before the plus `+` operator.
 For a recap on broadcasting please see @sec:broadcasting.
 
-Like said above, the `DataFrames.jl` minilanguage is always `source => transformation => target`.
+Like we said above, the `DataFrames.jl` minilanguage is always `source => transformation => target`.
 So, if we want to keep the naming of the `target` column in the output, we can do:
 
 ```jl
@@ -63,8 +63,8 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-Where the `:` means "select all the columns" as described in @sec:select.
-Alternatively, you can also use Julia's broadcasting and modify the column `grade_2020` by acessing it with `df.grade_2020`:
+where the `:` means "select all the columns" as described in @sec:select.
+Alternatively, you can also use Julia's broadcasting and modify the column `grade_2020` by accessing it with `df.grade_2020`:
 
 ```jl
 s = """
@@ -88,7 +88,7 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-With this, we can add a column saying whether someone was approved by the criterion that all of his grades were above 5.5:
+With this, we can add a column saying whether someone was approved by the criterion that all of their grades were above 5.5:
 
 ```jl
 s = """

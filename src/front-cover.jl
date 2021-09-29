@@ -41,11 +41,11 @@ Return the Julia Data Science book front cover.
 """
 function front_cover()
     CairoMakie.activate!() # probably it will be good to have to version, one black and one white
-    with_theme(theme_black(); Axis = (; ygridcolor = :grey90, xgridcolor = :grey90,
+    with_theme(theme_black(); Axis = (; ygridcolor = :grey70, xgridcolor = :grey70,
         xgridstyle=:dashdot, ygridstyle=:dashdot),
-        Axis3 = (; xgridcolor = :grey90, ygridcolor = :grey90, zgridcolor = :grey90)) do
+        Axis3 = (; xgridcolor = :grey70, ygridcolor = :grey70, zgridcolor = :grey70)) do
         # Figure
-        fig = Figure(resolution=(1768,2652))
+        fig = Figure(resolution=(2016,2760)) # new ratio 7x10 in
         # Colors
         colors = ColorSchemes.Set1_6
         #colors = Makie.wong_colors()
@@ -145,12 +145,12 @@ function front_cover()
         ylims!(ax45, -5.6,5.5)
         # Pipes for First Column
         pipisize = 52
-        Label(fig[1, 1, BottomLeft()], "|>", textsize = pipisize,
-              rotation = -π/2, padding = (30,-100, 0, 0),font = NOTO_SANS_BOLD)
-        Label(fig[2, 1, BottomLeft()], " |>", textsize = pipisize,
-              rotation = -π/2, padding = (30,-100, 0, 0), font = NOTO_SANS_BOLD)
-        Label(fig[3, 1, BottomLeft()], " |>", textsize = pipisize,
-              rotation = -π/2, padding = (30,-100, 0, 0), font = NOTO_SANS_BOLD)
+        Label(fig[1, 1, Bottom()], "|>", textsize = pipisize,
+              rotation = -π/2, padding = (0,0, 0, 0),font = NOTO_SANS_BOLD)
+        Label(fig[2, 1, Bottom()], " |>", textsize = pipisize,
+              rotation = -π/2, padding = (0,0, 0, 0), font = NOTO_SANS_BOLD)
+        Label(fig[3, 1, Bottom()], " |>", textsize = pipisize,
+              rotation = -π/2, padding = (0,0, 0, 0), font = NOTO_SANS_BOLD)
         # Pipes between columns
         Label(fig[2,1, Right()], "|>", textsize = pipisize,
               rotation = 0π, padding = (5,5,0,0), font = NOTO_SANS_BOLD)

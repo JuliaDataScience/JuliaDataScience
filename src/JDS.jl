@@ -24,6 +24,9 @@ using Books:
     serve,
     without_caption_label
 using CSV
+using Plots:
+    plot,
+    backend
 using CairoMakie
 using CategoricalArrays
 using ColorSchemes
@@ -57,7 +60,7 @@ using GeometryBasics
 using InteractiveUtils
 using LaTeXStrings
 using LinearAlgebra
-using Makie
+#using Makie
 using Random
 using Statistics
 using StatsBase:

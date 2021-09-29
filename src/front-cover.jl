@@ -41,11 +41,11 @@ Return the Julia Data Science book front cover.
 """
 function front_cover()
     CairoMakie.activate!() # probably it will be good to have to version, one black and one white
-    with_theme(theme_black(); Axis = (; ygridcolor = :grey90, xgridcolor = :grey90,
+    with_theme(theme_black(); Axis = (; ygridcolor = :grey70, xgridcolor = :grey70,
         xgridstyle=:dashdot, ygridstyle=:dashdot),
-        Axis3 = (; xgridcolor = :grey90, ygridcolor = :grey90, zgridcolor = :grey90)) do
+        Axis3 = (; xgridcolor = :grey70, ygridcolor = :grey70, zgridcolor = :grey70)) do
         # Figure
-        fig = Figure(resolution=(1768,2652))
+        fig = Figure(resolution=(2016,2760)) # new ratio 7x10 in
         # Colors
         colors = ColorSchemes.Set1_6
         #colors = Makie.wong_colors()
@@ -56,20 +56,20 @@ function front_cover()
                  xlabel = "x label", ylabel = "y label", zlabel = "z label",
                  xgridvisible=false, ygridvisible=false, zgridvisible=false,
                  aspect = (1,1,1))
-        ax12 = Axis3(fig[1,2]; perspectiveness = 0.5, aspect = (1,1,1)) # empty is ok, that's the idea... Q, how could u plot this kind of data
+        #ax12 = Axis3(fig[1,2]; perspectiveness = 0.5, aspect = (1,1,1)) # empty is ok, that's the idea... Q, how could u plot this kind of data
         ax21 = Axis(fig[2,1], aspect = AxisAspect(1)) # xgridvisible=false, ygridvisible=false) # we can include this on the theme
         ax31 = Axis(fig[3,1], aspect = AxisAspect(1)) # xgridvisible=false, ygridvisible=false)
         ax41 = Axis(fig[4,1], aspect = AxisAspect(1)) # xgridvisible=false, ygridvisible=false)
         ax22 = Axis3(fig[2,2], perspectiveness = 0.5, aspect = (1,1,1)) # xgridvisible=false, ygridvisible=false, zgridvisible=false)
-        ax23 = Axis3(fig[2,3]; perspectiveness = 0.5, aspect = (1,1,1)) # empty is ok, that's the idea... Q, how could u plot this kind of data, alternatives
+        #ax23 = Axis3(fig[2,3]; perspectiveness = 0.5, aspect = (1,1,1)) # empty is ok, that's the idea... Q, how could u plot this kind of data, alternatives
         ax32 = Axis(fig[3,2], aspect = 1) # xgridvisible=false, ygridvisible=false)
         ax33 = Axis(fig[3,3], aspect = 1) # xgridvisible=false, ygridvisible=false)
         ax42 = Axis(fig[4,2], aspect = 1) # xgridvisible=false, ygridvisible=false)
         ax43 = Axis(fig[4,3], aspect = 1) # xgridvisible=false, ygridvisible=false)
         ax44 = Axis(fig[4,4], aspect = 1) # xgridvisible=false, ygridvisible=false)
         ax45 = Axis(fig[4,5], aspect = 1) # xgridvisible=false, ygridvisible=false)
-        axs = [ax11, ax12, ax21, ax31, ax41,
-               ax22, ax23,
+        axs = [ax11, ax21, ax31, ax41,
+               ax22, #ax23,
                ax32, ax33,
                ax42, ax43, ax44, ax45
               ]
@@ -145,12 +145,12 @@ function front_cover()
         ylims!(ax45, -5.6,5.5)
         # Pipes for First Column
         pipisize = 52
-        Label(fig[1, 1, BottomLeft()], "|>", textsize = pipisize,
-              rotation = -π/2, padding = (30,-100, 0, 0),font = NOTO_SANS_BOLD)
-        Label(fig[2, 1, BottomLeft()], " |>", textsize = pipisize,
-              rotation = -π/2, padding = (30,-100, 0, 0), font = NOTO_SANS_BOLD)
-        Label(fig[3, 1, BottomLeft()], " |>", textsize = pipisize,
-              rotation = -π/2, padding = (30,-100, 0, 0), font = NOTO_SANS_BOLD)
+        Label(fig[1, 1, Bottom()], "|>", textsize = pipisize,
+              rotation = -π/2, padding = (0,0, 0, 0),font = NOTO_SANS_BOLD)
+        Label(fig[2, 1, Bottom()], " |>", textsize = pipisize,
+              rotation = -π/2, padding = (0,0, 0, 0), font = NOTO_SANS_BOLD)
+        Label(fig[3, 1, Bottom()], " |>", textsize = pipisize,
+              rotation = -π/2, padding = (0,0, 0, 0), font = NOTO_SANS_BOLD)
         # Pipes between columns
         Label(fig[2,1, Right()], "|>", textsize = pipisize,
               rotation = 0π, padding = (5,5,0,0), font = NOTO_SANS_BOLD)

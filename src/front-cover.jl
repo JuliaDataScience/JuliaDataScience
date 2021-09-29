@@ -56,20 +56,20 @@ function front_cover()
                  xlabel = "x label", ylabel = "y label", zlabel = "z label",
                  xgridvisible=false, ygridvisible=false, zgridvisible=false,
                  aspect = (1,1,1))
-        ax12 = Axis3(fig[1,2]; perspectiveness = 0.5, aspect = (1,1,1)) # empty is ok, that's the idea... Q, how could u plot this kind of data
+        #ax12 = Axis3(fig[1,2]; perspectiveness = 0.5, aspect = (1,1,1)) # empty is ok, that's the idea... Q, how could u plot this kind of data
         ax21 = Axis(fig[2,1], aspect = AxisAspect(1)) # xgridvisible=false, ygridvisible=false) # we can include this on the theme
         ax31 = Axis(fig[3,1], aspect = AxisAspect(1)) # xgridvisible=false, ygridvisible=false)
         ax41 = Axis(fig[4,1], aspect = AxisAspect(1)) # xgridvisible=false, ygridvisible=false)
         ax22 = Axis3(fig[2,2], perspectiveness = 0.5, aspect = (1,1,1)) # xgridvisible=false, ygridvisible=false, zgridvisible=false)
-        ax23 = Axis3(fig[2,3]; perspectiveness = 0.5, aspect = (1,1,1)) # empty is ok, that's the idea... Q, how could u plot this kind of data, alternatives
+        #ax23 = Axis3(fig[2,3]; perspectiveness = 0.5, aspect = (1,1,1)) # empty is ok, that's the idea... Q, how could u plot this kind of data, alternatives
         ax32 = Axis(fig[3,2], aspect = 1) # xgridvisible=false, ygridvisible=false)
         ax33 = Axis(fig[3,3], aspect = 1) # xgridvisible=false, ygridvisible=false)
         ax42 = Axis(fig[4,2], aspect = 1) # xgridvisible=false, ygridvisible=false)
         ax43 = Axis(fig[4,3], aspect = 1) # xgridvisible=false, ygridvisible=false)
         ax44 = Axis(fig[4,4], aspect = 1) # xgridvisible=false, ygridvisible=false)
         ax45 = Axis(fig[4,5], aspect = 1) # xgridvisible=false, ygridvisible=false)
-        axs = [ax11, ax12, ax21, ax31, ax41,
-               ax22, ax23,
+        axs = [ax11, ax21, ax31, ax41,
+               ax22, #ax23,
                ax32, ax33,
                ax42, ax43, ax44, ax45
               ]

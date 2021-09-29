@@ -40,8 +40,10 @@ colorSides =  vec(valsSides[end,:])
 Return the Julia Data Science book front cover.
 """
 function front_cover()
-    CairoMakie.activate!()
-    with_theme(theme_black()) do
+    CairoMakie.activate!() # probably it will be good to have to version, one black and one white
+    with_theme(theme_black(); Axis = (; ygridcolor = :grey90, xgridcolor = :grey90,
+        xgridstyle=:dashdot, ygridstyle=:dashdot),
+        Axis3 = (; xgridcolor = :grey90, ygridcolor = :grey90, zgridcolor = :grey90)) do
         # Figure
         fig = Figure(resolution=(1768,2652))
         # Colors
@@ -54,19 +56,20 @@ function front_cover()
                  xlabel = "x label", ylabel = "y label", zlabel = "z label",
                  xgridvisible=false, ygridvisible=false, zgridvisible=false,
                  aspect = (1,1,1))
-        ax21 = Axis(fig[2,1], aspect = AxisAspect(1), xgridvisible=false, ygridvisible=false)
-        ax31 = Axis(fig[3,1], aspect = AxisAspect(1), xgridvisible=false, ygridvisible=false)
-        ax41 = Axis(fig[4,1],  aspect = AxisAspect(1), xgridvisible=false, ygridvisible=false)
-        ax22 = Axis3(fig[2,2], perspectiveness = 0.5, aspect = (1,1,1), xgridvisible=false, ygridvisible=false, zgridvisible=false)
-        # ax23 = Axis(fig[2,3], aspect = AxisAspect(1), xgridvisible=false, ygridvisible=false)
-        ax32 = Axis(fig[3,2], aspect = 1, xgridvisible=false, ygridvisible=false)
-        ax33 = Axis(fig[3,3], aspect = 1, xgridvisible=false, ygridvisible=false)
-        ax42 = Axis(fig[4,2], aspect = 1, xgridvisible=false, ygridvisible=false)
-        ax43 = Axis(fig[4,3], aspect = 1, xgridvisible=false, ygridvisible=false)
-        ax44 = Axis(fig[4,4], aspect = 1, xgridvisible=false, ygridvisible=false)
-        ax45 = Axis(fig[4,5], aspect = 1, xgridvisible=false, ygridvisible=false)
-        axs = [ax11, ax21, ax31, ax41,
-               ax22, #ax23,
+        ax12 = Axis3(fig[1,2]; perspectiveness = 0.5, aspect = (1,1,1)) # empty is ok, that's the idea... Q, how could u plot this kind of data
+        ax21 = Axis(fig[2,1], aspect = AxisAspect(1)) # xgridvisible=false, ygridvisible=false) # we can include this on the theme
+        ax31 = Axis(fig[3,1], aspect = AxisAspect(1)) # xgridvisible=false, ygridvisible=false)
+        ax41 = Axis(fig[4,1], aspect = AxisAspect(1)) # xgridvisible=false, ygridvisible=false)
+        ax22 = Axis3(fig[2,2], perspectiveness = 0.5, aspect = (1,1,1)) # xgridvisible=false, ygridvisible=false, zgridvisible=false)
+        ax23 = Axis3(fig[2,3]; perspectiveness = 0.5, aspect = (1,1,1)) # empty is ok, that's the idea... Q, how could u plot this kind of data, alternatives
+        ax32 = Axis(fig[3,2], aspect = 1) # xgridvisible=false, ygridvisible=false)
+        ax33 = Axis(fig[3,3], aspect = 1) # xgridvisible=false, ygridvisible=false)
+        ax42 = Axis(fig[4,2], aspect = 1) # xgridvisible=false, ygridvisible=false)
+        ax43 = Axis(fig[4,3], aspect = 1) # xgridvisible=false, ygridvisible=false)
+        ax44 = Axis(fig[4,4], aspect = 1) # xgridvisible=false, ygridvisible=false)
+        ax45 = Axis(fig[4,5], aspect = 1) # xgridvisible=false, ygridvisible=false)
+        axs = [ax11, ax12, ax21, ax31, ax41,
+               ax22, ax23,
                ax32, ax33,
                ax42, ax43, ax44, ax45
               ]
@@ -114,7 +117,7 @@ function front_cover()
         xlims!(ax41,-0.5,11)
         ylims!(ax41,-1,11)
         # Second Columns 2,2 to 4,2
-        x, y, z = peaks()
+        x, y, z = mypeaks()
         surface!(ax22, x, y, z; colormap = :plasma)
         # contourf!(ax23, x, y, z; colormap = :bone_1)
         x = rand(10)
@@ -123,8 +126,8 @@ function front_cover()
         # Third Row 3,2 to to 3,3
         scatter!(ax32, rand(10), rand(10); color = JuliaColors.blue, markersize = 16)
         lines!(ax33, 0..10, x -> exp(-x); color = JuliaColors.red, linewidth = 4)
-        limits!(ax32, -0.5, 1.5, -0.5, 1.5)
-        limits!(ax33, -1, 15, -0.5, 1.5)
+        limits!(ax32, -0.1, 1.1, -0.1, 1.1)
+        limits!(ax33, -1, 11, -0.1, 1.1)
         # Fourt Row 4,2 to 4,5
         hist!(ax42, randn(1000), bins = 32; color = JuliaColors.blue, strokewidth = 1.5,
             strokecolor = :grey80)
@@ -134,42 +137,43 @@ function front_cover()
             strokewidth = 2, strokecolor = JuliaColors.purple, show_median = true,)
         boxplot!(ax45, fill(1,1000), randn(1000); color = JuliaColors.green, strokecolor = :grey80,
             whiskercolor = JuliaColors.green, whiskerwidth = 1, strokewidth = 1)
-        xlims!(ax44, 0,2)
-        xlims!(ax45, 0,2)
+        xlims!(ax44, 0.1,1.9)
+        xlims!(ax45, 0.1,1.9)
         ylims!(ax42, 0,150)
         ylims!(ax43, 0,0.55)
-        ylims!(ax44, -6,6)
-        ylims!(ax45, -6,6)
+        ylims!(ax44, -5.6,5.5)
+        ylims!(ax45, -5.6,5.5)
         # Pipes for First Column
-        Label(fig[1, 1, Bottom()], "|>", textsize = 52,
-              rotation = -π/2, padding = (0,3,8,0),font = NOTO_SANS_BOLD)
-        Label(fig[2, 1, BottomLeft()], " |>", textsize = 52,
-              rotation = -π/2, padding = (0,3,8,0), font = NOTO_SANS_BOLD)
-        Label(fig[3, 1, BottomLeft()], " |>", textsize = 52,
-              rotation = -π/2, padding = (0,3,8,0), font = NOTO_SANS_BOLD)
+        pipisize = 52
+        Label(fig[1, 1, BottomLeft()], "|>", textsize = pipisize,
+              rotation = -π/2, padding = (30,-100, 0, 0),font = NOTO_SANS_BOLD)
+        Label(fig[2, 1, BottomLeft()], " |>", textsize = pipisize,
+              rotation = -π/2, padding = (30,-100, 0, 0), font = NOTO_SANS_BOLD)
+        Label(fig[3, 1, BottomLeft()], " |>", textsize = pipisize,
+              rotation = -π/2, padding = (30,-100, 0, 0), font = NOTO_SANS_BOLD)
         # Pipes between columns
-        Label(fig[2,1, Right()], "|>", textsize = 40,
-              rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
-        Label(fig[3,1, Right()], "|>", textsize = 40,
-              rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
-        Label(fig[3,2, Right()], "|>", textsize = 40,
-              rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
-        Label(fig[4,1, Right()], "|>", textsize = 40,
-              rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
-        Label(fig[4,2, Right()], "|>", textsize = 40,
-              rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
-        Label(fig[4,3, Right()], "|>", textsize = 40,
-              rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
-        Label(fig[4,4, Right()], "|>", textsize = 40,
-              rotation = 0π, padding = (0,0,0,0), font = NOTO_SANS_BOLD)
+        Label(fig[2,1, Right()], "|>", textsize = pipisize,
+              rotation = 0π, padding = (5,5,0,0), font = NOTO_SANS_BOLD)
+        Label(fig[3,1, Right()], "|>", textsize = pipisize,
+              rotation = 0π, padding = (5,5,0,0), font = NOTO_SANS_BOLD)
+        Label(fig[3,2, Right()], "|>", textsize = pipisize,
+              rotation = 0π, padding = (5,5,0,0), font = NOTO_SANS_BOLD)
+        Label(fig[4,1, Right()], "|>", textsize = pipisize,
+              rotation = 0π, padding = (5,5,0,0), font = NOTO_SANS_BOLD)
+        Label(fig[4,2, Right()], "|>", textsize = pipisize,
+              rotation = 0π, padding = (5,5,0,0), font = NOTO_SANS_BOLD)
+        Label(fig[4,3, Right()], "|>", textsize = pipisize,
+              rotation = 0π, padding = (5,5,0,0), font = NOTO_SANS_BOLD)
+        Label(fig[4,4, Right()], "|>", textsize = pipisize,
+              rotation = 0π, padding = (5,5,0,0), font = NOTO_SANS_BOLD)
         # Title and Text Stuff
         Label(fig[0, 2:5, Bottom()], "Julia\nData Science", textsize = 120,
             tellheight = false, halign = :left)
-        Label(fig[3, 3:end], "Jose Storopoli", #color = JuliaColors.purple,
+        Label(fig[3, 4:end], "Jose Storopoli", #color = JuliaColors.purple,
             textsize = 60, tellheight = false, halign = :left)
-        Label(fig[3, 3:end], "\n\nRik Huijzer", #color = JuliaColors.red,
+        Label(fig[3, 4:end], "\n\nRik Huijzer", #color = JuliaColors.red,
             textsize = 60, tellheight = false, halign = :left)
-        Label(fig[3, 3:end], "\n\n\n\nLazaro Alonso", #color = JuliaColors.green,
+        Label(fig[3, 4:end], "\n\n\n\nLazaro Alonso", #color = JuliaColors.green,
             textsize = 60, tellheight = false, halign = :left)
         # Label(fig[3, 3:end], "Jose Storopoli, Rik Huijzer\n and Lazaro Alonso",
         #     textsize = 60, tellheight = false)

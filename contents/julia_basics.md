@@ -983,11 +983,22 @@ Speaking of arrays, let's talk about them.
 
 ### Array {#sec:array}
 
-Arrays are a **systematic arrangement of similar objects, usually in _rows_ and _columns_**.
-Most of the time you would want **arrays of a single type for performance issues**, but note that they can also hold objects of different types.
-They are the "bread and butter" of data scientists, because most **data manipulation** and **data visualization** workflows make use of arrays.
+In its most basic form, arrays hold multiple objects.
+For example, they can hold multiple numbers in one-dimension:
 
-**Arrays are a powerful data structure**. They are one of the main features that makes Julia blazingly fast.
+```jl
+myarray = [1, 2, 3]
+```
+
+Most of the time you would want **arrays of a single type for performance issues**, but note that they can also hold objects of different types:
+
+```jl
+myarray = ["text", 1, :symbol]
+```
+
+They are the "bread and butter" of data scientist, because arrays are what underlies most of **data manipulation** and **data visualization** workflows.
+
+Therefore, **Arrays are an essential data structure**.
 
 #### Array Types {#sec:array_types}
 
@@ -1002,33 +1013,36 @@ So, for example, `Vector{Int64}` is a `Vector` in which all elements are `Int64`
 
 Most of the time, especially when dealing with tabular data, we are using either one- or two-dimensional arrays.
 They are both `Array` types for Julia.
-But we can use the handy aliases `Vector` and `Matrix` for clear and concise syntax.
+But, we can use the handy aliases `Vector` and `Matrix` for clear and concise syntax.
 
 #### Array Construction {#sec:array_construction}
 
 How do we construct an array?
-The simplest answer is to use the **default constructor**.
+In this section, we start by constructing arrays in a low-level way.
+This can be necessary to write high performing code in some situations.
+However, in most situations, this is not necessary, and we can safely use more convenient methods to create arrays.
+These more convenient methods will be described later in this section.
+
+The low-level constructor for Julia arrays is the **default constructor**.
 It accepts the element type as the type parameter inside the `{}` brackets and inside the constructor you'll pass the element type followed by the desired dimensions.
 It is common to initialize vector and matrices with undefined elements by using the `undef` argument for type.
 A vector of 10 `undef` `Float64` elements can be constructed as:
 
 ```jl
-sco(
-"""
-my_vector = Vector{Float64}(undef, 10)
-"""
-)
+s = """
+    my_vector = Vector{Float64}(undef, 10)
+    """
+sco(s)
 ```
 
 For matrices, since we are dealing with two-dimensional objects, we need to pass two dimension arguments inside the constructor: one for **rows** and another for **columns**.
 For example, a matrix with 10 rows and 2 columns of `undef` elements can be instantiated as:
 
 ```jl
-sco(
-"""
-my_matrix = Matrix{Float64}(undef, 10, 2)
-"""
-)
+s = """
+    my_matrix = Matrix{Float64}(undef, 10, 2)
+    """
+sco(s)
 ```
 
 We also have some **syntax aliases** for the most common elements in array construction:
@@ -1037,196 +1051,175 @@ We also have some **syntax aliases** for the most common elements in array const
   Note that the default type is `Float64` which can be changed if necessary:
 
     ```jl
-    sco(
-    """
-    my_vector_zeros = zeros(10)
-    """
-    )
+    s = """
+        my_vector_zeros = zeros(10)
+        """
+    sco(s)
     ```
 
     ```jl
-    sco(
-    """
-    my_matrix_zeros = zeros(Int64, 10, 2)
-    """
-    )
+    s = """
+        my_matrix_zeros = zeros(Int64, 10, 2)
+        """
+    sco(s)
     ```
 
 * `ones` for all elements being initialized to one:
 
     ```jl
-    sco(
-    """
-    my_vector_ones = ones(Int64, 10)
-    """
-    )
+    s = """
+        my_vector_ones = ones(Int64, 10)
+        """
+    sco(s)
     ```
 
     ```jl
-    sco(
-    """
-    my_matrix_ones = ones(10, 2)
-    """
-    )
+    s = """
+        my_matrix_ones = ones(10, 2)
+        """
+    sco(s)
     ```
 
-For other elements we can first instantiate an array with `undef` elements and use the `fill!` function to fill all elements of an array with the desired element.
+For other elements, we can first instantiate an array with `undef` elements and use the `fill!` function to fill all elements of an array with the desired element.
 Here's an example with `3.14` ($\pi$):
 
 ```jl
-sco(
-"""
-my_matrix_π = Matrix{Float64}(undef, 2, 2)
-fill!(my_matrix_π, 3.14)
-"""
-)
+s = """
+    my_matrix_π = Matrix{Float64}(undef, 2, 2)
+    fill!(my_matrix_π, 3.14)
+    """
+sco(s)
 ```
 
 We can also create arrays with **array literals**.
 For example, here's a 2x2 matrix of integers:
 
 ```jl
-sco(
-"""
-[[1 2]
- [3 4]]
-"""
-)
+s = """
+    [[1 2]
+     [3 4]]
+    """
+sco(s)
 ```
 
 Array literals also accept a type specification before the `[]` brackets.
 So, if we want the same 2x2 array as before but now as floats, we can do so:
 
 ```jl
-sco(
-"""
-Float64[[1 2]
-        [3 4]]
-"""
-)
+s = """
+    Float64[[1 2]
+            [3 4]]
+    """
+sco(s)
 ```
 
 It also works for vectors:
 
 ```jl
-sco(
-"""
-Bool[0, 1, 0, 1]
-"""
-)
+s = """
+    Bool[0, 1, 0, 1]
+    """
+sco(s)
 ```
 
 You can even **mix and match** array literals with the constructors:
 
 ```jl
-sco(
-"""
-[ones(Int, 2, 2) zeros(Int, 2, 2)]
-"""
-)
+s = """
+    [ones(Int, 2, 2) zeros(Int, 2, 2)]
+    """
+sco(s)
 ```
 
 ```jl
-sco(
-"""
-[zeros(Int, 2, 2)
- ones(Int, 2, 2)]
-"""
-)
+s = """
+    [zeros(Int, 2, 2)
+     ones(Int, 2, 2)]
+    """
+sco(s)
 ```
 
 
 ```jl
-sco(
-"""
-[ones(Int, 2, 2) [1; 2]
- [3 4]            5]
-"""
-)
+s = """
+    [ones(Int, 2, 2) [1; 2]
+     [3 4]            5]
+    """
+sco(s)
 ```
 
 Another powerful way to create an array is to write an **array comprehension**.
-This way of creating arrays is our *preferred* way: it avoids loops, indexing, and other error-prone operations.
+This way of creating arrays is better in most cases: it avoids loops, indexing, and other error-prone operations.
 You specify what you want to do inside the `[]` brackets.
 For example, say we want to create a vector of squares from 1 to 100:
 
 ```jl
-sco(
-"""
-[x^2 for x in 1:10]
-"""
-)
+s = """
+    [x^2 for x in 1:10]
+    """
+sco(s)
 ```
 
 They also support multiple inputs:
 
 ```jl
-sco(
-"""
-[x*y for x in 1:10 for y in 1:2]
-"""
-)
+s = """
+    [x*y for x in 1:10 for y in 1:2]
+    """
+sco(s)
 ```
 
 And conditionals:
 
 ```jl
-sco(
-"""
-[x^2 for x in 1:10 if isodd(x)]
-"""
-)
+s = """
+    [x^2 for x in 1:10 if isodd(x)]
+    """
+sco(s)
 ```
 
 As with array literals, you can specify your desired type before the `[]` brackets:
 
-
 ```jl
-sco(
-"""
-Float64[x^2 for x in 1:10 if isodd(x)]
-"""
-)
+s = """
+    Float64[x^2 for x in 1:10 if isodd(x)]
+    """
+sco(s)
 ```
 
-Finally, we can also create arrays with **concatenation functions**:
+Finally, we can also create arrays with **concatenation functions**.
+Concatenation is a standard term in computer programming and means "to chain together".
+For example, we can concatenate strings with "aa" and "bb" to get "aabb":
+
+```jl
+s = """
+    "aa" * "bb"
+    """
+sco(s)
+```
+
+And, we can concatenate arrays to create new arrays:
 
 * `cat`: concatenate input arrays along a specific dimension `dims`
 
     ```jl
-    sco(
-    """
-    cat(ones(2), zeros(2), dims=1)
-    """
-    )
+    sco("cat(ones(2), zeros(2), dims=1)")
     ```
 
     ```jl
-    sco(
-    """
-    cat(ones(2), zeros(2), dims=2)
-    """
-    )
+    sco("cat(ones(2), zeros(2), dims=2)")
     ```
 
 * `vcat`: vertical concatenation, a shorthand for `cat(...; dims=1)`
 
     ```jl
-    sco(
-    """
-    vcat(ones(2), zeros(2))
-    """
-    )
+    sco("vcat(ones(2), zeros(2))")
     ```
 
 * `hcat`: horizontal concatenation, a shorthand for `cat(...; dims=2)`
 
     ```jl
-    sco(
-    """
-    hcat(ones(2), zeros(2))
-    """
-    )
+    sco("hcat(ones(2), zeros(2))")
     ```
 
 #### Array Inspection {#sec:array_inspection}
@@ -1238,11 +1231,7 @@ It is most useful to know what **type of elements** are inside an array.
 We can do this with `eltype`:
 
 ```jl
-sco(
-"""
-eltype(my_matrix_π)
-"""
-)
+sco("eltype(my_matrix_π)")
 ```
 
 After knowing its types, one might be interested in array dimensions.
@@ -1251,75 +1240,54 @@ Julia has several functions to inspect array dimensions:
 * `length`: total number of elements
 
     ```jl
-    scob(
-    """
-    length(my_matrix_π)
-    """
-    )
+    scob("length(my_matrix_π)")
     ```
 
 * `ndims`: number of dimensions
 
     ```jl
-    scob(
-    """
-    ndims(my_matrix_π)
-    """
-    )
+    scob("ndims(my_matrix_π)")
     ```
 
 * `size`: this one is a little tricky.
     By default it will return a tuple containing the array's dimensions.
 
     ```jl
-    sco(
-    """
-    size(my_matrix_π)
-    """
-    )
+    sco("size(my_matrix_π)")
     ```
 
-    You can get a specific dimension with a second argument to `size`
+    You can get a specific dimension with a second argument to `size`.
+    Here, the the second axis is columns
 
     ```jl
-    scob(
-    """
-    size(my_matrix_π, 2) # columns
-    """
-    )
+    scob("size(my_matrix_π, 2)")
     ```
-
 
 #### Array Indexing and Slicing {#sec:array_indexing}
 
-Sometimes we want to inspect only certain parts of an array.
+Sometimes, we want to inspect only certain parts of an array.
 This is called **indexing** and **slicing**.
 If you want a particular observation of a vector, or a row or column of a matrix, you'll probably need to **index an array**.
 
 First, I will create an example vector and matrix to play around:
 
 ```jl
-sc(
-"""
-my_example_vector = [1, 2, 3, 4, 5]
+s = """
+    my_example_vector = [1, 2, 3, 4, 5]
 
-my_example_matrix = [[1 2 3]
-                     [4 5 6]
-                     [7 8 9]]
-"""
-)
+    my_example_matrix = [[1 2 3]
+                         [4 5 6]
+                         [7 8 9]]
+    """
+sc(s)
 ```
 
 Let's first see an example with vectors.
-Suppose you want the second element of a vector.
+Suppose that you want the second element of a vector.
 You append `[]` brackets with the desired **index** inside:
 
 ```jl
-scob(
-"""
-my_example_vector[2]
-"""
-)
+scob("my_example_vector[2]")
 ```
 
 The same syntax follows with matrices.
@@ -1327,33 +1295,21 @@ But, since matrices are 2-dimensional arrays, we have to specify *both* rows and
 Let's retrieve the element from the second row (first dimension) and first column (second dimension):
 
 ```jl
-scob(
-"""
-my_example_matrix[2, 1]
-"""
-)
+scob("my_example_matrix[2, 1]")
 ```
 
 Julia also has conventional keywords for the first and last elements of an array: `begin` and `end`.
 For example, the second to last element of a vector can be retrieved as:
 
 ```jl
-scob(
-"""
-my_example_vector[end-1]
-"""
-)
+scob("my_example_vector[end-1]")
 ```
 
-It also works for matrices.
+This also works for matrices.
 Let's retrieve the element of the last row and second column:
 
 ```jl
-scob(
-"""
-my_example_matrix[end, begin+1]
-"""
-)
+scob("my_example_matrix[end, begin+1]")
 ```
 
 Often, we are not only interested in just one array element, but in a whole **subset of array elements**.
@@ -1362,35 +1318,23 @@ It uses the same index syntax, but with the added colon `:` to denote the bounda
 For example, suppose we want to get the 2nd to 4th element of a vector:
 
 ```jl
-sco(
-"""
-my_example_vector[2:4]
-"""
-)
+sco("my_example_vector[2:4]")
 ```
 
 We could do the same with matrices.
 Particularly with matrices if we want to select all elements in a following dimension we can do so with just a colon `:`.
-For example, to find all the elements in the second row:
+For example, to get all the elements in the second row:
 
 ```jl
-sco(
-"""
-my_example_matrix[2, :]
-"""
-)
+sco("my_example_matrix[2, :]")
 ```
 
-You can interpret this with something like "take 2nd row and all columns".
+You can interpret this with something like "take the 2nd row and all the columns".
 
 It also supports `begin` and `end`:
 
 ```jl
-sco(
-"""
-my_example_matrix[begin+1:end, end]
-"""
-)
+sco("my_example_matrix[begin+1:end, end]")
 ```
 
 #### Array Manipulations {#sec:array_manipulation}
@@ -1400,109 +1344,90 @@ The first would be to manipulate a **singular element of the array**.
 We just index the array by the desired element and proceed with an assignment `=`:
 
 ```jl
-sco(
-"""
-my_example_matrix[2, 2] = 42
-my_example_matrix
-"""
-)
+s = """
+    my_example_matrix[2, 2] = 42
+    my_example_matrix
+    """
+sco(s)
 ```
 
-Or you can manipulate a certain **subset of elements of the array**.
+Or, you can manipulate a certain **subset of elements of the array**.
 In this case, we need to slice the array and then assign with `=`:
 
 ```jl
-sco(
-"""
-my_example_matrix[3, :] = [17, 16, 15]
-my_example_matrix
-"""
-)
+s = """
+    my_example_matrix[3, :] = [17, 16, 15]
+    my_example_matrix
+    """
+sco(s)
 ```
 
 Note that we had to assign a vector because our sliced array is of type `Vector`:
 
 ```jl
-sco(
-"""
-typeof(my_example_matrix[3, :])
-"""
-)
+s = """
+    typeof(my_example_matrix[3, :])
+    """
+sco(s)
 ```
 
 The second way we could manipulate an array is to **alter its shape**.
-Suppose you have a 6-element vector and you want to make it a 3x2 matrix.
+Suppose that you have a 6-element vector and you want to make it a 3x2 matrix.
 You can do this with `reshape`, by using the array as the first argument and a tuple of dimensions as the second argument:
 
 ```jl
-sco(
-"""
-six_vector = [1, 2, 3, 4, 5, 6]
-tree_two_matrix = reshape(six_vector, (3, 2))
-tree_two_matrix
-"""
-)
+s = """
+    six_vector = [1, 2, 3, 4, 5, 6]
+    tree_two_matrix = reshape(six_vector, (3, 2))
+    tree_two_matrix
+    """
+sco(s)
 ```
 
-You can do the reverse, converting it back to a vector, by specifying a tuple with only one dimension as the second argument:
+You can convert it back to a vector by specifying a tuple with only one dimension as the second argument:
 
 ```jl
-sco(
-"""
-reshape(tree_two_matrix, (6, ))
-"""
-)
+sco("reshape(tree_two_matrix, (6, ))")
 ```
 
 The third way we could manipulate an array is to **apply a function over every array element**.
-This is where the familiar broadcasting "dot" operator `.` comes in.
+This is where the "dot" operator `.`, also known as _broadcasting_, comes in.
 
 ```jl
-sco(
-"""
-logarithm.(my_example_matrix)
-"""
-)
+sco("logarithm.(my_example_matrix)")
 ```
 
-We also broadcast operators:
+The dot operator in Julia is extremely versatile.
+You can even use it to broadcast infix operators:
 
 ```jl
-sco(
-"""
-my_example_matrix .+ 100
-"""
-)
+sco("my_example_matrix .+ 100")
 ```
 
-We can use also `map` to apply a function to every element of an array:
+An alternative to broadcasting a function over a vector is to use `map`:
 
 ```jl
-sco(
-"""
-map(logarithm, my_example_matrix)
-"""
-)
+sco("map(logarithm, my_example_matrix)")
 ```
 
-It also accepts an anonymous function:
+For anonymous functions, `map` is usually more readable.
+For example,
 
 ```jl
-sco(
-"""
-map(x -> x*3, my_example_matrix)
-"""
-)
+sco("map(x -> 3x, my_example_matrix)")
 ```
 
-It also works with slicing:
+is quite clear.
+However, the same broadcast looks as follows:
 
 ```jl
-sco(
-"""
-map(x -> x + 100, my_example_matrix[:, 3])
-"""
-)
+sco("(x -> 3x).(my_example_matrix)")
+```
+
+Next, `map` works with slicing:
+
+```jl
+sco("map(x -> x + 100, my_example_matrix[:, 3])")
 ```
 
 Finally, sometimes, and specially when dealing with tabular data, we want to apply a **function over all elements in a specific array dimension**.
@@ -1510,7 +1435,7 @@ This can be done with the `mapslices` function.
 Similar to `map`, the first argument is the function and the second argument is the array.
 The only change is that we need to specify the `dims` argument to flag what dimension we want to transform the elements.
 
-For example let's use `mapslice` with the `sum` function on both rows (`dims=1`) and columns (`dims=2`):
+For example, let's use `mapslice` with the `sum` function on both rows (`dims=1`) and columns (`dims=2`):
 
 ```jl
 sco(

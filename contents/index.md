@@ -57,7 +57,7 @@ For now, the planned topics for the second edition are:
 To cite the content, please use:
 
 ```plaintext
-Storopoli, Huijzer and Alonso (2021). Julia Data Science. https://juliadatascience.io.
+Storopoli, Huijzer and Alonso (2021). Julia Data Science. https://juliadatascience.io. ISBN: 9798489859165.
 ```
 
 Or in BibTeX format:
@@ -67,7 +67,8 @@ Or in BibTeX format:
   title = {Julia Data Science},
   author = {Jose Storopoli and Rik Huijzer and Lazaro Alonso},
   url = {https://juliadatascience.io},
-  year = {2021}
+  year = {2021},
+  isbn = {9798489859165}
 }
 ```
 

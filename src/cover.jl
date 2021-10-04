@@ -76,6 +76,9 @@ function cover()
     favicon_to = joinpath(pkgdir(JDS), BUILD_DIR, "favicon.png")
     cp(favicon_from, favicon_to; force=true)
 
+    # To generate the front cover image.
+    gen("index")
+
     tectonic() do bin
         cd(dir) do
             run(`$bin --print $tex_path`)

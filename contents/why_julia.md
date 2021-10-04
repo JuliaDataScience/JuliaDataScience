@@ -247,7 +247,7 @@ approaches(noam, judea)
 Hey Judea Pearl, wanna do a paper? We need to use APA style.
 ```
 
-That was not what `judea` as a `Linguist` type would say to `noam`, a `ComputerScientist` type.
+That was not what `noam` as a `Linguist` type would say to `judea`, a `ComputerScientist` type.
 This is **single dispatch** and is the default feature available on most object-oriented languages, like Python or C++.
 Single dispatch just acts on the first argument of a function.
 Since both of our researchers `noam` and `judea` are instantiated as types inherited from the same base type `Researcher` we cannot implement what we are trying to do in Python.

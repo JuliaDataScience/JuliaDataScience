@@ -71,13 +71,15 @@ Or in BibTeX format:
 }
 ```
 
-### Front Cover {-}
+### Cover {-}
+
+The front cover is depicted below and the full cover is available as `jl cover()`.
 
 ```jl
 let
     fig = front_cover()
     # Use lazy loading to keep homepage speed high.
-    link_attributes = "loading=\"lazy\" width=80%"
+    link_attributes = """loading="lazy" width=80%"""
     Options(fig; caption=nothing, label=nothing, link_attributes)
 end
 ```

@@ -40,12 +40,15 @@ colorSides =  vec(valsSides[end,:])
 Return the Julia Data Science book front cover.
 """
 function front_cover()
-    CairoMakie.activate!() # probably it will be good to have to version, one black and one white
+    # Probably it will be good to have two versions, one black and one white.
+    CairoMakie.activate!()
     with_theme(theme_black(); Axis = (; ygridcolor = :grey70, xgridcolor = :grey70,
         xgridstyle=:dashdot, ygridstyle=:dashdot),
         Axis3 = (; xgridcolor = :grey70, ygridcolor = :grey70, zgridcolor = :grey70)) do
-        # Figure
-        fig = Figure(resolution=(2016,2760)) # new ratio 7x10 in
+
+        width = 2016
+        height = (10/7) * width # Ratio 7 * 10 inch.
+        fig = Figure(resolution=(width, height))
         # Colors
         colors = ColorSchemes.Set1_6
         #colors = Makie.wong_colors()
@@ -182,8 +185,6 @@ function front_cover()
         [hidespines!(ax) for ax in axs]
         rowgap!(fig.layout, 0)
         colgap!(fig.layout, 0)
-        #save("front_cover.png", fig) # no need to compress image
-        #display(fig)
         return fig
     end
 end

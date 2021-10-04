@@ -63,6 +63,7 @@ using Statistics
 using StatsBase:
     mad,
     mode
+using Tectonic: tectonic
 using TestImages
 using XLSX:
     eachtablerow,
@@ -81,6 +82,7 @@ include("makie.jl")
 include("stats.jl")
 include("bezier.jl")
 include("front-cover.jl")
+include("cover.jl")
 
 # Showcode additions.
 export sce, scsob, trim_last_n_lines, plainblock
@@ -108,5 +110,6 @@ export anscombe_quartet, plot_anscombe
 
 # Book cover.
 export compress_image, front_cover, write_front_cover
+export cover
 
 end # module

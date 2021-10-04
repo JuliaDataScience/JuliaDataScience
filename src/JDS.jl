@@ -82,7 +82,6 @@ include("makie.jl")
 include("stats.jl")
 include("bezier.jl")
 include("front-cover.jl")
-include("cover.jl")
 
 # Showcode additions.
 export sce, scsob, trim_last_n_lines, plainblock

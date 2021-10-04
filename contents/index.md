@@ -72,9 +72,7 @@ Or in BibTeX format:
 }
 ```
 
-### Cover {-}
-
-The front cover is depicted below and the full cover is available as `jl cover()`.
+### Front Cover {-}
 
 ```jl
 let

@@ -13,6 +13,15 @@ function cover()
     filename = "cover.pdf"
     dir = joinpath(pkgdir(JDS), BUILD_DIR)
     pdf_path = joinpath(dir, filename)
+
+    favicon_from = joinpath(pkgdir(JDS), "pandoc", "favicon.png")
+    favicon_to = joinpath(pkgdir(JDS), BUILD_DIR, "favicon.png")
+    cp(favicon_from, favicon_to; force=true)
+
+    fig = front_cover()
+    png_path = joinpath(dir, "front_cover.png")
+    FileIO.save(png_path, fig; px_per_unit=1)
+
     # See https://kdp.amazon.com/cover-calculator for details.
     tex = raw"""
         \documentclass[
@@ -39,7 +48,8 @@ function cover()
                 \Huge\bfseries\textcolor{white}{Julia Data Science}
             }
             \vspace*{1in}
-            \includegraphics[height=0.8\textwidth]{favicon.png}
+            % Should be 0.75 or less. Checked with the Amazon Print Previewer.
+            \includegraphics[height=0.75\textwidth]{favicon.png}
         }
 
         \bookcovercomponent{normal}{back}{
@@ -62,22 +72,14 @@ function cover()
         \bookcovercomponent{normal}{front}{
             \vspace*{-0.5in}
             \hspace*{0.5in} % At minimum hinge size.
-            \includegraphics[width=0.97\textwidth]{./im/front_cover_.png}
+            \includegraphics[width=0.97\textwidth]{front_cover.png}
         }
-
 
         \end{bookcover}
         \end{document}
         """
     tex_path = joinpath(dir, "cover.tex")
     write(tex_path, tex)
-
-    favicon_from = joinpath(pkgdir(JDS), "pandoc", "favicon.png")
-    favicon_to = joinpath(pkgdir(JDS), BUILD_DIR, "favicon.png")
-    cp(favicon_from, favicon_to; force=true)
-
-    # To generate the front cover image.
-    gen("index")
 
     tectonic() do bin
         cd(dir) do

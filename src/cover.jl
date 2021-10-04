@@ -72,6 +72,10 @@ function cover()
     tex_path = joinpath(dir, "cover.tex")
     write(tex_path, tex)
 
+    favicon_from = joinpath(pkgdir(JDS), "pandoc", "favicon.png")
+    favicon_to = joinpath(pkgdir(JDS), BUILD_DIR, "favicon.png")
+    cp(favicon_from, favicon_to; force=true)
+
     tectonic() do bin
         cd(dir) do
             run(`$bin --print $tex_path`)

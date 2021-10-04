@@ -63,7 +63,6 @@ using Statistics
 using StatsBase:
     mad,
     mode
-using Tectonic: tectonic
 using TestImages
 using XLSX:
     eachtablerow,

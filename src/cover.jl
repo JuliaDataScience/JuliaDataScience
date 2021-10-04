@@ -27,7 +27,6 @@ function cover()
         ]{geometry}
 
         \usepackage{graphicx}
-        \graphicspath{{im/}}
 
         \begin{document}
         \begin{bookcover}
@@ -35,19 +34,35 @@ function cover()
 
         \bookcovercomponent{center}{spine}{
             \rotatebox[origin=c]{-90}{
+                \large\textcolor{white}{Storopoli, Huijzer \& Alonso}
+                \hspace*{7in}
                 \Huge\bfseries\textcolor{white}{Julia Data Science}
             }
+            \vspace*{1in}
+            \includegraphics[height=0.8\textwidth]{favicon.png}
         }
 
         \bookcovercomponent{normal}{back}{
-            \vfill
-            \textcolor{white}{foo}
+            \vspace*{1in}
+            \hspace*{0.6in}
+            \parbox[c]{0.85\textwidth}{\Large\textcolor{white}{
+        There are many programming languages and each and every one of them has its strengths and weaknesses.
+        Some languages are very quick, but verbose.
+        Other languages are very easy to write in, but slow.
+        This is known as the `two-language` problem and the Julia programming language aims at circumventing this problem.
+        Even though all three of us come from different fields, we all found the Julia language more effective for our research than languages that we've used before.
+        However, compared to other languages, Julia is one of the newest languages around.
+        This means that the ecosystem around the language is sometimes difficult to navigate through.
+        It's difficult to figure out where to start and how all the different packages fit together.
+        That is why we decided to create this book!
+        We wanted to make it easier for researchers, and especially our colleagues, to start using this awesome language.
+            }}
         }
 
         \bookcovercomponent{normal}{front}{
             \vspace*{-0.5in}
             \hspace*{0.5in} % At minimum hinge size.
-            \includegraphics[width=0.97\textwidth]{front_cover_.png}
+            \includegraphics[width=0.97\textwidth]{./im/front_cover_.png}
         }
 
 

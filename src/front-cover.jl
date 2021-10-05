@@ -174,11 +174,13 @@ function front_cover()
             tellheight = false, halign = :left)
         Label(fig[1, 3:5], "\n\n\n\nData Science", textsize=126,
             tellheight = false, halign = :left)
-        Label(fig[2, 4:5], "Jose Storopoli", textsize=60,
+        vspace = "\n\n"
+        hspace = "         "
+        Label(fig[2, 3:5], "$(vspace)$(hspace)Jose Storopoli", textsize=80,
             tellheight = false, halign = :left)
-        Label(fig[2, 4:5], "\n\nRik Huijzer", textsize=60,
+        Label(fig[2, 3:5], "$(vspace)\n\n$(hspace)Rik Huijzer", textsize=80,
             tellheight = false, halign = :left)
-        Label(fig[2, 4:5], "\n\n\n\nLazaro Alonso", textsize=60,
+        Label(fig[2, 3:5], "$(vspace)\n\n\n\n$(hspace)Lazaro Alonso", textsize=80,
             tellheight = false, halign = :left)
 
         #     textsize = 60, tellheight = false)

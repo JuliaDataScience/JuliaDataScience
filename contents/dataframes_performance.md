@@ -12,9 +12,9 @@ In the context of high performance Julia code, this *means* that **functions wit
 Almost all the `DataFrames.jl` functions that we've seen have a \"`!` twin\".
 For example, `filter` has an _in-place_ `filter!`, `select` has `select!`, `subset` has `subset!`, and so on.
 Notice that these functions **do not** return a new `DataFrame`, but instead they **update** the `DataFrame` that they act upon.
-Additionally, there are some functions that do not have a `!` counterpart.
-For example, all the `join`s, for technical reasons, *cannot* be done in-place.
-Thus, we don't have any `join!` functions in `DataFrames.jl`.
+Additionally, `DataFrames.jl` (version 1.3 onwards) supports in-place `leftjoin` with the function `leftjoin!`.
+This function updates the left `DataFrame` with the joined columns from the right `DataFrame`.
+There is a caveat that for each row of left table there must match *at most* one row in right table.
 
 If you want the highest speed and performance in your code, you should definitely use the `!` functions instead of regular `DataFrames.jl` functions.
 

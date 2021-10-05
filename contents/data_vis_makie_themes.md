@@ -14,7 +14,7 @@ sco(
 """
 using Random
 Random.seed!(123)
-y = cumsum(randn(6, 6), dims = 2)
+y = cumsum(randn(6, 6), dims=2)
 """
 )
 ```
@@ -28,8 +28,8 @@ sco(
 using Random
 Random.seed!(13)
 xv = yv = LinRange(-3, 0.5, 20)
-matrix = randn(20,20)
-matrix[1:6,1:6] # first 6 rows and columns
+matrix = randn(20, 20)
+matrix[1:6, 1:6] # first 6 rows and columns
 """
 )
 ```
@@ -117,16 +117,16 @@ s = """
 sco(s)
 ```
 
-Now, if something needs to be changed after `set_theme!(your_theme)`, we can do it with `update_theme!(resolution = (500,400), fontsize = 18)`, for example.
+Now, if something needs to be changed after `set_theme!(your_theme)`, we can do it with `update_theme!(resolution=(500,400), fontsize=18)`, for example.
 Another approach will be to pass additional arguments to the `with_theme` function:
 
 ```jl
 s = """
     CairoMakie.activate!() # hide
-    fig = (resolution = (600,400), figure_padding = 1, backgroundcolor= :grey90)
-    ax = (; aspect = DataAspect(), xlabel = L"x", ylabel = L"y")
-    cbar = (; height = Relative(4/5))
-    with_theme(publication_theme(); fig..., Axis = ax, Colorbar = cbar) do
+    fig = (resolution=(600, 400), figure_padding=1, backgroundcolor=:grey90)
+    ax = (; aspect=DataAspect(), xlabel=L"x", ylabel=L"y")
+    cbar = (; height=Relative(4 / 5))
+    with_theme(publication_theme(); fig..., Axis=ax, Colorbar=cbar) do
         plot_with_legend_and_colorbar()
     end
     label = "plot_theme_extra_args" # hide

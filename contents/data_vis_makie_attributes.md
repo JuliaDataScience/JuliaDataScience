@@ -37,10 +37,10 @@ Hence, for our next plot we will call several attributes at once as follows:
 s = """
     CairoMakie.activate!() # hide
     lines(1:10, (1:10).^2; color = :black, linewidth = 2, linestyle = :dash,
-        figure = (;figure_padding= 5, resolution = (600,400), font = "sans",
-            backgroundcolor = :grey90, fontsize = 16),
-        axis = (; xlabel = "x", ylabel = "x²", title ="title",
-            xgridstyle = :dash, ygridstyle=:dash))
+        figure = (; figure_padding=5, resolution=(600, 400), font="sans",
+            backgroundcolor=:grey90, fontsize=16),
+        axis = (; xlabel="x", ylabel="x²", title="title",
+            xgridstyle=:dash, ygridstyle=:dash))
     current_figure()
     filename = "custom_plot" # hide
     link_attributes = "width=60%" # hide
@@ -54,18 +54,18 @@ Probably, a `legend` will also be good to have.
 Which for more than one function will make more sense.
 So, let's `append` another mutation `plot object` and add the corresponding legends by calling `axislegend`.
 This will collect all the `labels` you might have passed to your plotting functions and by default will be located in the right top position.
-For a different one, the `position = :ct` argument is called, where `:ct` means let's put our label in the `center` and at the `top`,  see Figure @fig:custom_plot_leg:
+For a different one, the `position=:ct` argument is called, where `:ct` means let's put our label in the `center` and at the `top`,  see Figure @fig:custom_plot_leg:
 
 ```jl
 s = """
     CairoMakie.activate!() # hide
-    lines(1:10, (1:10).^2; label = "x²", linewidth = 2, linestyle = nothing,
-        figure = (;figure_padding= 5, resolution = (600,400), font = "sans",
-            backgroundcolor = :grey90, fontsize = 16),
+    lines(1:10, (1:10).^2; label="x²", linewidth=2, linestyle=nothing,
+        figure = (;figure_padding=5, resolution=(600,400), font="sans",
+            backgroundcolor=:grey90, fontsize=16),
         axis = (; xlabel = "x", title = "title", xgridstyle=:dash,
             ygridstyle=:dash))
-    scatterlines!(1:10, (10:-1:1).^2; label = "Reverse(x)²")
-    axislegend("legend"; position = :ct)
+    scatterlines!(1:10, (10:-1:1).^2; label="Reverse(x)²")
+    axislegend("legend"; position=:ct)
     current_figure()
     label = "custom_plot_leg" # hide
     link_attributes = "width=60%" # hide
@@ -86,13 +86,13 @@ Plotting the previous figure should take the new default settings defined by `se
 s = """
     CairoMakie.activate!() # hide
     set_theme!(resolution = (600,400),
-        backgroundcolor = (:orange, 0.5), fontsize = 16, font = "sans",
-        Axis = (backgroundcolor = :grey90, xgridstyle=:dash, ygridstyle=:dash),
-        Legend = (bgcolor = (:red,0.2), framecolor = :dodgerblue))
-    lines(1:10, (1:10).^2; label = "x²", linewidth = 2, linestyle = nothing,
-        axis = (; xlabel = "x", title = "title"))
-    scatterlines!(1:10, (10:-1:1).^2; label = "Reverse(x)²")
-    axislegend("legend"; position = :ct)
+        backgroundcolor=(:orange, 0.5), fontsize=16, font="sans",
+        Axis = (backgroundcolor=:grey90, xgridstyle=:dash, ygridstyle=:dash),
+        Legend = (bgcolor=(:red,0.2), framecolor=:dodgerblue))
+    lines(1:10, (1:10).^2; label="x²", linewidth=2, linestyle=nothing,
+        axis=(; xlabel="x", title="title"))
+    scatterlines!(1:10, (10:-1:1).^2; label="Reverse(x)²")
+    axislegend("legend"; position=:ct)
     current_figure()
     set_theme!()
     label = "setTheme" # hide
@@ -102,7 +102,8 @@ s = """
 sco(s)
 ```
 
-Note that the last line is `set_theme!()`, which will reset the default settings of Makie. For more on `themes` please go to @sec:themes.
+Note that the last line is `set_theme!()`, which will reset the default settings of Makie.
+For more on `themes` please go to @sec:themes.
 
 Before moving on into the next section, it's worthwhile to see an example where an `array` of attributes are passed at once to a plotting function.
 For this example, we will use the `scatter` plotting function to do a bubble plot.
@@ -117,7 +118,7 @@ sco(
 using Random
 Random.seed!(28)
 xyvals = randn(100, 3)
-xyvals[1:5,:]
+xyvals[1:5, :]
 """
 )
 ```
@@ -127,12 +128,12 @@ And then the corresponding plot can be seen in @fig:bubble:
 ```jl
 s = """
     CairoMakie.activate!() # hide
-    fig, ax, pltobj = scatter(xyvals[:,1], xyvals[:,2]; color = xyvals[:,3],
-        label = "Bubbles", colormap = :plasma, markersize = 15*abs.(xyvals[:,3]),
-        figure = (;resolution = (600,400)), axis = (;aspect = DataAspect()))
+    fig, ax, pltobj = scatter(xyvals[:, 1], xyvals[:, 2]; color=xyvals[:, 3],
+        label="Bubbles", colormap=:plasma, markersize=15*abs.(xyvals[:, 3]),
+        figure=(; resolution=(600,400)), axis=(; aspect=DataAspect()))
     limits!(-3, 3, -3, 3)
-    Legend(fig[1,2], ax, valign = :top)
-    Colorbar(fig[1,2], pltobj, height = Relative(3/4))
+    Legend(fig[1, 2], ax, valign=:top)
+    Colorbar(fig[1, 2], pltobj, height=Relative(3 / 4))
     fig
     label = "bubble" # hide
     link_attributes = "width=60%" # hide

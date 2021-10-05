@@ -107,6 +107,6 @@ export calculate_pdf
 export anscombe_quartet, plot_anscombe
 
 # Book cover.
-export compress_image, front_cover, write_front_cover
+export front_cover
 
 end # module

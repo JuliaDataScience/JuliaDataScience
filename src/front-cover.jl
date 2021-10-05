@@ -40,12 +40,15 @@ colorSides =  vec(valsSides[end,:])
 Return the Julia Data Science book front cover.
 """
 function front_cover()
-    CairoMakie.activate!() # probably it will be good to have to version, one black and one white
+    # Probably it will be good to have two versions, one black and one white.
+    CairoMakie.activate!()
     with_theme(theme_black(); Axis = (; ygridcolor = :grey70, xgridcolor = :grey70,
         xgridstyle=:dashdot, ygridstyle=:dashdot),
         Axis3 = (; xgridcolor = :grey70, ygridcolor = :grey70, zgridcolor = :grey70)) do
-        # Figure
-        fig = Figure(resolution=(2016,2760)) # new ratio 7x10 in
+
+        width = 2016
+        height = (10/7) * width # Ratio 7 * 10 inch.
+        fig = Figure(resolution=(width, height))
         # Colors
         colors = ColorSchemes.Set1_6
         #colors = Makie.wong_colors()
@@ -166,24 +169,26 @@ function front_cover()
               rotation = 0π, padding = (5,5,0,0), font = NOTO_SANS_BOLD)
         Label(fig[4,4, Right()], "|>", textsize = pipisize,
               rotation = 0π, padding = (5,5,0,0), font = NOTO_SANS_BOLD)
-        # Title and Text Stuff
-        Label(fig[0, 2:5, Bottom()], "Julia\nData Science", textsize = 120,
+
+        Label(fig[1, 3:5], "Julia", textsize=394,
             tellheight = false, halign = :left)
-        Label(fig[3, 4:end], "Jose Storopoli", #color = JuliaColors.purple,
-            textsize = 60, tellheight = false, halign = :left)
-        Label(fig[3, 4:end], "\n\nRik Huijzer", #color = JuliaColors.red,
-            textsize = 60, tellheight = false, halign = :left)
-        Label(fig[3, 4:end], "\n\n\n\nLazaro Alonso", #color = JuliaColors.green,
-            textsize = 60, tellheight = false, halign = :left)
-        # Label(fig[3, 3:end], "Jose Storopoli, Rik Huijzer\n and Lazaro Alonso",
+        Label(fig[1, 3:5], "\n\n\n\nData Science", textsize=126,
+            tellheight = false, halign = :left)
+        vspace = "\n\n"
+        hspace = "         "
+        Label(fig[2, 3:5], "$(vspace)$(hspace)Jose Storopoli", textsize=80,
+            tellheight = false, halign = :left)
+        Label(fig[2, 3:5], "$(vspace)\n\n$(hspace)Rik Huijzer", textsize=80,
+            tellheight = false, halign = :left)
+        Label(fig[2, 3:5], "$(vspace)\n\n\n\n$(hspace)Lazaro Alonso", textsize=80,
+            tellheight = false, halign = :left)
+
         #     textsize = 60, tellheight = false)
         # Final Axis and Figure touches
         [hidedecorations!(ax; grid = false) for ax in axs]
         [hidespines!(ax) for ax in axs]
         rowgap!(fig.layout, 0)
         colgap!(fig.layout, 0)
-        #save("front_cover.png", fig) # no need to compress image
-        #display(fig)
         return fig
     end
 end

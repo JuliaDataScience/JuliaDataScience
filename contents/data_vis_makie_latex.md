@@ -32,7 +32,7 @@ using LaTeXStrings
 
 But, some lines have repeated colors, so thats no good.
 Adding some markers and line styles usually helps.
-So, let's do that using [`Cycles`](http://makie.juliaplots.org/stable/theming.html#Cycles) for these types:
+So, let's do that using [`Cycles`](http://makie.juliaplots.org/stable/theming.html#Cycles) for these types. Setting `covary = true` allows to cycle all elements together:
 
 ```jl
 @sco JDS.multiple_scatters_and_lines()

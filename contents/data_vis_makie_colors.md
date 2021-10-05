@@ -32,7 +32,7 @@ See `?cgrad` for more information.
 ```jl
 scolor = """
     CairoMakie.activate!() # hide
-    figure = (;resolution = (400,300), font= "CMU Serif")
+    figure = (;resolution = (600,400), font= "CMU Serif")
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
     fig, ax, pltobj = heatmap(rand(20,20); colorrange = (0,1),
         colormap = Reverse(:viridis), axis = axis, figure = figure)
@@ -56,7 +56,7 @@ using ColorSchemes
 ```jl
 s = """
     CairoMakie.activate!() # hide
-    figure = (;resolution = (400,300), font= "CMU Serif")
+    figure = (;resolution = (600,400), font= "CMU Serif")
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
     fig, ax, pltobj = heatmap(randn(20,20); colorrange = (-2,2),
         colormap = "diverging_rainbow_bgymr_45_85_c67_n256",
@@ -81,7 +81,7 @@ using Colors, ColorSchemes
 ```jl
 scat = """
     CairoMakie.activate!() # hide
-    figure = (;resolution = (400,300), font= "CMU Serif")
+    figure = (;resolution = (600,400), font= "CMU Serif")
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
     cmap = ColorScheme(range(colorant"red", colorant"green", length=3))
     mygrays = ColorScheme([RGB{Float64}(i, i, i) for i in [0.0,0.5,1.0]])
@@ -109,7 +109,7 @@ Also, `hex` coded colors are also accepted. So, on top or our heatmap let's put 
 ```jl
 s2color2 = """
     CairoMakie.activate!() # hide
-    figure = (;resolution = (400,300), font= "CMU Serif")
+    figure = (;resolution = (600,400), font= "CMU Serif")
     axis = (; xlabel = L"x", ylabel = L"y", aspect= DataAspect())
     fig, ax, pltobj = heatmap(rand(20,20); colorrange = (0,1),
         colormap = (:red, "black"), axis = axis, figure = figure)

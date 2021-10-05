@@ -14,7 +14,7 @@ For example, `filter` has an _in-place_ `filter!`, `select` has `select!`, `subs
 Notice that these functions **do not** return a new `DataFrame`, but instead they **update** the `DataFrame` that they act upon.
 Additionally, `DataFrames.jl` (version 1.3 onwards) supports in-place `leftjoin` with the function `leftjoin!`.
 This function updates the left `DataFrame` with the joined columns from the right `DataFrame`.
-There is a caveat that for each row of left table there must be *at most* one row in right table.
+There is a caveat that for each row of left table there must match *at most* one row in right table.
 
 If you want the highest speed and performance in your code, you should definitely use the `!` functions instead of regular `DataFrames.jl` functions.
 

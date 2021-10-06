@@ -7,8 +7,8 @@ We will also use the `more_grades` dataset from @sec:stats_central.
 
 ### Histograms {#sec:stats_vis_histograms}
 
-**Histograms are approximate representations of the distribution of numerical data**.
-We construct them by "binning", i.e. inserting into discrete bins the range of values into a series of intervals and then counting up how many values fall in each given interval.
+As already briefly shown in @sec:stats_dist, **histograms approximate the distribution for given data**.
+We construct them by "binning", i.e., inserting into discrete bins the range of values into a series of intervals and then counting up how many values fall in each given interval.
 The bins are represented as a bar in which the height describes the frequency of values belonging to that bin.
 
 We can draw histograms using `Makie.jl`:

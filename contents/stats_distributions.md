@@ -56,7 +56,7 @@ s = """
 sco(s)
 ```
 
-To answer our question about how many times the ball will fall to the right, we can apply a trick.
+To answer our question about how many times the ball will fall to the right, we can apply a look at it from another angle.
 We can't answer the question exactly, but we can make a guess based on how many balls have fallen in each region.
 For example, when looking at @fig:first_distribution, we can conclude that it is very unlikely that a ball will fall 0 times to the right or 100 times to the right.
 It is more likely that a ball will fall roughly half of the time to the left and half of the time to the right.
@@ -79,10 +79,15 @@ s = """
 sco(s)
 ```
 
-And there we have something that looks like a Normal or Gaussian distribution.
+And there we have something that is bell-shaped.
 Now, the question about how many times a ball will fall to the right can be answered by estimating the distribution for these data points.
 Then, the answer will look something like "the falling of the ball is distributed by a ... distribution with ...."
-For example, "the falling of the ball is distributed by a normal distribution with a mean of 50 and a variance of 5" (see @sec:stats_dist_normal for more information about the Normal distribution).
+For example, "the falling of the ball is distributed by a normal distribution with a mean of 50 and a variance of 5" (see @sec:stats_dist_normal for more information about the normal distribution).
+
+What we have shown here is inspired by Galton's board (see @fig:galton).
+This board was used around 1880 by Sir Francis Galton to demonstrate regression to the mean.
+
+![Galton's board (source: Wikimedia Commons).](images/galtons-board.png){#fig:galton width=60%}
 
 There are several distributions defined in textbooks[^stats_book] and scientific articles[^stats_articles].
 We'll cover a few of them in this section.

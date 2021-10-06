@@ -130,7 +130,7 @@ end
 function demo_themes(y, xv, yv, matrix)
     CairoMakie.activate!() # hide
     fig, _ = series(y; labels=["$i" for i in 1:6], markersize=10,
-        color=:Set1, figure=(; resolution=(600, 300)), 
+        color=:Set1, figure=(; resolution=(600, 300)),
         axis=(; xlabel="time (s)", ylabel="Amplitude",
         title="Measurements"))
     hmap = heatmap!(xv, yv, matrix; colormap=:plasma)

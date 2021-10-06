@@ -1,8 +1,8 @@
 # Statistics {#sec:stats}
 
-This content was created in order to awaken the reader to the importance of statistics for science and knowledge generation.
-Our idea is to present the concepts in the way we would like to have been met them when we were students about to be initiated into science.
-Our approach is to simplify the concepts as much as possible without losing their essence.
+Statistics is an essential part of data science.
+In this chapter, we aim to present the concepts in a way that we would have liked to learn it.
+Our approach is to simplify the concepts as much as possible where possible.
 **In this chapter, we will cover**:
 
 * what is **statistics**

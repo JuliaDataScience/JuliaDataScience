@@ -2,16 +2,12 @@
 
 Before defining distributions, we must talk about **probability**.
 
-**The probability of an event is a real number between 0 and 1, where 0 indicates the impossibility of the event and 1 indicates the certainty of the event**.
+In the classical definition of probability, **the probability of an event is a real number between 0 and 1, where 0 indicates the impossibility of the event and 1 indicates the certainty of the event**.
 The greater the likelihood of an event, the more likely it is that the event will occur.
 A simple example is the tossing of a fair (impartial) coin.
 Since the coin is fair, both results ("heads" and "tails") are equally likely; the probability of "heads" is equal to the probability of "tails"; and since no other result is possible, the probability of "heads" or "tails" is $\frac{1}{2}$ (which can also be written as 0.5 or 50%).
 
-Regarding notation, **we define $A$ as an event and $P(A)$ as the probability of event $A$**, thus:
-
-$$ \{P(A) \in \mathbb{R} : 0 \leq P(A) \leq 1 \}. $$ {#eq:probability}
-
-This means the "probability of the event occurring is the set of all real numbers between 0 and 1; including 0 and 1".
+Regarding notation, **we define $A$ as an event and $P(A)$ as the probability of event $A$**.
 In addition, we have three axioms, originating from @kolmogorovFoundationsTheoryProbability1933:
 
 1. **Non-negativity**: For all $A$, $P(A) \geq 0$. Every probability is positive (greater than or equal to zero), regardless of the event.

@@ -2,7 +2,8 @@
 
 Before defining distributions, we must talk about **probability**.
 
-In the classical definition of probability, **the probability of an event is a real number between 0 and 1, where 0 indicates the impossibility of the event and 1 indicates the certainty of the event**.
+**The probability of an event is a real number $p$ where $0 \leq p \leq 1$.
+Here, 0 indicates the that an event is impossible and 1 indicates that an event will certainly happen.**
 The greater the likelihood of an event, the more likely it is that the event will occur.
 A simple example is the tossing of a fair (impartial) coin.
 Since the coin is fair, both results ("heads" and "tails") are equally likely; the probability of "heads" is equal to the probability of "tails"; and since no other result is possible, the probability of "heads" or "tails" is $\frac{1}{2}$ (which can also be written as 0.5 or 50%).

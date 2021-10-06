@@ -11,9 +11,9 @@ Since the coin is fair, both results ("heads" and "tails") are equally likely; t
 Regarding notation, **we define $A$ as an event and $P(A)$ as the probability of event $A$**.
 In addition, we have three axioms, originating from @kolmogorovFoundationsTheoryProbability1933:
 
-1. **Non-negativity**: For all $A$, $P(A) \geq 0$. Every probability is positive (greater than or equal to zero), regardless of the event.
-2. **Additivity**: For two mutually exclusive events $A$ and $B$ (cannot occur at the same time): $P(A) = 1 - P(B)$ and $P(B) = 1 - P(A)$.
-3. **Normalization**: The probability of all possible events $A_1, A_2, \dots$ must add up to 1: $\sum_{n \in \mathbb{N}} P(A_n) = 1$; or, in the case of a continuous variable, integrate to 1: $\int^\infty_{-\infty} f(x) dx = 1$.
+1. **Non-negativity**: For any event $A$, $P(A) \geq 0$. Every probability is positive (greater than or equal to zero), regardless of the event.
+2. **Normalization**: The probability of all possible events $A_n = A_1, A_2, \dots$ must be equal to 1.
+3. **Additivity**: For all mutually exclusive events $A_1, A_2, \dots$ (cannot occur at the same time), the probability of their union is the sum of their individual probabilities: $P \left( \cup_{n=1}^\infty A_n \right) = \sum_{n=1}^\infty P \left( A_n \right)$.
 
 Now we are ready to talk about distributions.
 Simply put: a **distribution is just a collection of scores (counts) in a variable (observations)**.

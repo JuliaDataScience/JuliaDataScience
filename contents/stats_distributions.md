@@ -1,45 +1,93 @@
 ## Distributions {#sec:stats_dist}
 
-Before defining distributions, we must talk about **probability**.
+Distributions are the thing that makes most of the statistical machinery tick.
+We can show how a distribution can arise via a simple example.
+Suppose that a ball falls on top of a few rows of pins.
+At every pin, the ball can either fall to the left or to the right.
+We count a fall to the right as 1 and a fall to the left as 0.
+Now, the question is: how many times will the ball fall to the right?
 
-**The probability of an event is a real number between 0 and 1, where 0 indicates the impossibility of the event and 1 indicates the certainty of the event**.
-The greater the likelihood of an event, the more likely it is that the event will occur.
-A simple example is the tossing of a fair (impartial) coin.
-Since the coin is fair, both results ("heads" and "tails") are equally likely; the probability of "heads" is equal to the probability of "tails"; and since no other result is possible, the probability of "heads" or "tails" is $\frac{1}{2}$ (which can also be written as 0.5 or 50%).
+To simulate this, we can use the `Random` module from Julia.
+We also set a seed to ensure that the outcome of this code is the same for every run:
 
-Regarding notation, **we define $A$ as an event and $P(A)$ as the probability of event $A$**, thus:
+```
+using Random
+```
 
-$$ \{P(A) \in \mathbb{R} : 0 \leq P(A) \leq 1 \}. $$ {#eq:probability}
+```jl
+sc("Random.seed!(0)")
+```
 
-This means the "probability of the event occurring is the set of all real numbers between 0 and 1; including 0 and 1".
-In addition, we have three axioms, originating from @kolmogorovFoundationsTheoryProbability1933:
+```jl
+s = """
+    n_rows = 100
+    x = count(rand(Bool, n_rows))
+    """
+scob(s)
+```
 
-1. **Non-negativity**: For all $A$, $P(A) \geq 0$. Every probability is positive (greater than or equal to zero), regardless of the event.
-2. **Additivity**: For two mutually exclusive events $A$ and $B$ (cannot occur at the same time): $P(A) = 1 - P(B)$ and $P(B) = 1 - P(A)$.
-3. **Normalization**: The probability of all possible events $A_1, A_2, \dots$ must add up to 1: $\sum_{n \in \mathbb{N}} P(A_n) = 1$; or, in the case of a continuous variable, integrate to 1: $\int^\infty_{-\infty} f(x) dx = 1$.
+Okay, so over 11 rows, the ball fell `jl x` times to the right.
+What if we do the same thing a few more times?
 
-Now we are ready to talk about distributions.
-Simply put: a **distribution is just a collection of scores (counts) in a variable (observations)**.
-A **probability distribution is defined by a function which maps real numbers to a probability**:
+```jl
+s = """
+    n_repeats = 800
+    X = [count(rand(Bool, n_rows)) for i in 1:n_repeats]
+    X[1:10]
+    """
+sco(s)
+```
 
-$$ f(X): X \to \mathbb{R} \in [0, 1], $$ {#eq:distribution}
+Apparently, the ball doesn't always fall `jl x` times to the right.
+We can create a scatter plot for these numbers:
 
-where $\mathbb{R}$ is the set of real numbers and $[0, 1] \in \mathbb{R}$ is the closed interval of real numbers between 0 and 1.
-In other words, distributions are a mapping between values and their respective probabilities.
-We generally denote that a random variable $X$ follows a specific distribution by the following notation:
+```jl
+s = """
+    CairoMakie.activate!() # hide
+    figure = (; resolution=(600, 400))
+    xlabel = "number of times fallen to the right"
+    axis = (; xlabel, ylabel="ball")
+    scatter(X, 1:n_repeats; figure, axis)
+    label = "first_distribution" # hide
+    link_attributes = "width=80%" # hide
+    caption = "Scatter plot for balls falling on pins." # hide
+    Options(current_figure(); filename=label, caption, label, link_attributes) # hide
+    """
+sco(s)
+```
 
-$$ X \sim \operatorname{dist}(\theta_1, \theta_2, \dots), $$ {#eq:distribution_notation}
+To answer our question about how many times the ball will fall to the right, we can apply a trick.
+We can't answer the question exactly, but we can make a guess based on how many balls have fallen in each region.
+For example, when looking at @fig:first_distribution, we can conclude that it is very unlikely that a ball will fall 0 times to the right or 100 times to the right.
+It is more likely that a ball will fall roughly half of the time to the left and half of the time to the right.
+In other words, that the ball will fall 50 times to the right.
+But, it also clearly isn't the case that the ball always falls 50 times to the right.
+A question that we can answer is: how many times could we expect the ball to fall 40 times to the right? What about 60 times?
+To answer that, we can divide the range $[0, 100]$ into bins and count how many balls have fallen in that range.
+This is called a **hist**ogram:
 
-where $\operatorname{dist}$ is the name of the distribution and $\theta_1, \theta_2, \dots$ are the parameters that control how the distribution behaves.
-Every distribution can be "parameterized" by specifying parameters that allow us to tailor some aspects of the distribution for some specific purpose.
+```jl
+s = """
+    figure = (; resolution=(600, 400))
+    axis = (; xlabel, ylabel="balls per bin")
+    hist(X; figure, axis)
+    label = "first_histogram" # hide
+    link_attributes = "width=80%" # hide
+    caption = "Histogram for balls falling on pins." # hide
+    Options(current_figure(); filename=label, caption, label, link_attributes) # hide
+    """
+sco(s)
+```
 
-Also, notice that we are using upper case $X$ instead of lower case $x$.
-This is a widely used convention in probability and statistics, that **upper case characters denote random variables, and lower case characters denote numerical values of a random variable**.
-More broadly, $X$ is a theoretical distribution, whereas $x$ are the observed values from $X$.
+And there we have something that looks like a Normal or Gaussian distribution.
+Now, the question about how many times a ball will fall to the right can be answered by estimating the distribution for these data points.
+Then, the answer will look something like "the falling of the ball is distributed by a ... distribution with ...."
+For example, "the falling of the ball is distributed by a normal distribution with a mean of 50 and a variance of 5" (see @sec:stats_dist_normal for more information about the Normal distribution).
 
 There are several distributions defined in textbooks[^stats_book] and scientific articles[^stats_articles].
-We'll cover just a few of them in this section.
-In Julia, we have a package that provides a large collection of distributions and related function called [`Distributions.jl`](https://juliastats.org/Distributions.jl/dev/), which we will use to showcase some distributions:
+We'll cover a few of them in this section.
+In Julia, there is a package that provides a large collection of distributions and related functions.
+The package is called [`Distributions.jl`](https://juliastats.org/Distributions.jl/dev/), which we will use to showcase some distributions:
 
 [^stats_book]: we recommend @bertsekas2000introduction.
 [^stats_articles]: one example is the $\operatorname{LKJ}$ distribution [@lewandowskiGeneratingRandomCorrelation2009].

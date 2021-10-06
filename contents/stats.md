@@ -23,18 +23,18 @@ We can divide statistics into two broad categories: **descriptive** and **infere
 Common metrics are: mean, median, mode, standard deviation, variance, correlation, percentiles.
 
 **Inferential statistics allows generating inferences** (statements) **from observed data about the data generation process**.
-In @fig:stats_vs_prob we summarize the relationship between the data generating process and observed data.
+In @fig:stats_vs_prob, we summarize the relationship between the data generating process and observed data.
 All phenomena have an underlying data generating process that describes how the data is being generated.
 For example, in a soccer game, a scored goal can be explained by an underlying process: a tactic, error, stroke of luck; or a mix of those.
 If we know a phenomenon's data generating process, we can use probability to simulate possible scenarios given certain aspects.
 Most of the time, especially in applied sciences, we do not have full knowledge of the data generating process.
-Given the observed data, we can retrace our way back to the data generating process.
+Given the observed data, we attempt to recover the data generating process.
 This process is known as **statistical inference**.
-Given some data, we can *infer* what are the aspects of the underlying data generating process.
+Given some data, we can *infer* the aspects of the underlying data generating process.
 This is the realm of inferential statistics.
 
-With knowledge of the data generating process we can apply probability to generate and simulate plausible data.
-And by using the observed data we can use inference to gain knowledge about the underlying data generating process.
+With knowledge of the data generating process, we can apply probability to generate and simulate plausible data.
+And by using the observed data, we can use inference to gain knowledge about the underlying data generating process.
 
 ```jl
 fig = statistics_graph()
@@ -54,16 +54,15 @@ The most basic way of using descriptive statistics is to summarize data by a mea
 ### Mean {#sec:stats_central_mean}
 
 The most common central tendency measure is the mean.
-**The mean, also known as average, is the sum of all measurements divided by the number of observations** and we generally denote it as "x bar":
+Let $\mathbf{x}$ denote the vector $x_1, x_2, \dots, x_n$.
+The mean for $\mathbf{x}$, also known as the average, is the sum of all measurements divided by the number of observations:
 
 $$ \bar{x} = \frac{1}{n} \sum^n_{i=1} x_i = \frac{x_1 + x_2 + \cdots + x_n}{n}, $$ {#eq:mean}
 
-where $\bar{x}$ is the sample mean of the variable $\mathbf{x} = x_1, \cdots, x_n$.
-Often, we see the mean denoted with the **Greek letter $\mu$**, for example $\bar{x} = \mu_x$.
-Additionally, the mean is also known as the **expectation** which is represented by the operator $\operatorname{E}$, thus the mean of a variable $x$ becomes $\operatorname{E}(x)$[^expectation].
-So, bear in mind that you might find different notations for the mean.
-
-[^expectation]: technically speaking, the expectation is defined as either a sum for discrete variables or an integral for continuous variables weighted by a probability distribution. In contrast, the mean is simply the arithmetic sum of the variables' values divided by the number of values.
+where $\bar{x}$ is pronounced "x bar".
+It is common in statistics to denote sample statistics with a Roman letter, such as $x$ or $\bar{x}$, and population statistics with a Greek letter, such as $\mu$.
+Additionally, the mean can be used to calculate the **expectation** in distrete settings.
+The expectation is typically represented by the operator $\operatorname{E}$, thus the mean of $\mathbf{x}$ is $\text{mean}(\mathbf{x}) = \operatorname{E}(\mathbf{x})$.
 
 The mean can be found using the `mean` function from the `Statistics` module, part of Julia's standard library:
 
@@ -79,7 +78,7 @@ For example, we have the `all_grades` `DataFrame`:
 sco("all_grades()"; process=without_caption_label)
 ```
 
-Let us add more grades to our students so that we have more numbers to calculate central tendencies:
+Let's add more grades to our students so that we have more numbers to calculate central tendencies:
 
 ```jl
 sco("more_grades()"; process=without_caption_label)
@@ -96,7 +95,10 @@ sco(s; process=without_caption_label)
 
 ### Median {#sec:stats_central_median}
 
-We will see that the mean is highly sensitive to outliers and can sometimes misguide us, especially when we are dealing with long-tailed (non-normal distributions) (more in @sec:stats_dist_normal).
+[^more]: more in @sec:stats_dist_normal.
+
+We will see that the mean is highly sensitive to outliers and can sometimes be misleading.
+This is especially true when we are dealing with long-tailed (non-normal distributions)[^more].
 That is why we are sometimes interested in the **median** which is the **middle value that separates the higher half from the lower half of the data**.
 Intuitively, the median tells us the value of the data's 50\% percentile.
 One example is when we are analyzing income.
@@ -104,15 +106,15 @@ The median is the upper limit that we expect that half of the observations earn.
 So, if the median income is \$80,000, we expect that half of our observations earn between the minimum value and \$80,000.
 The mathematical formula for the median is:
 
-$$ \operatorname{median}(\mathbf{x}) = \frac{x_{\lfloor (\# x+1) \div 2 \rfloor} + x_{\lceil (\# x+1) \div 2 \rceil}}{2}, $$ {#eq:median}
+$$ \operatorname{median}(\mathbf{x}) = \frac{x_{\lfloor (\# \mathbf{x}+1) \div 2 \rfloor} + x_{\lceil (\# \mathbf{x}+1) \div 2 \rceil}}{2}, $$ {#eq:median}
 
 where:
 
 - $\mathbf{x} = x_1, \cdots, x_n$ is an ordered vector of numbers
 - $\mathbf{x}_i$ is the element in vector $\mathbf{x}$ at position $i$
-- $\# x$ is the list length
-- $\lfloor . \rfloor$ a rounded-down value to the nearest integer
-- $\lceil . \rceil$ a rounded-up value to the nearest integer
+- $\# \textbf{x}$ is the length of $\mathbf{x}$
+- $\lfloor u \rfloor$ is the rounded-down value for $u$ to the nearest integer
+- $\lceil u \rceil$ is the rounded-up value for $u$ to the nearest integer
 
 Similarly, we can use the `median` from the `Statistics` module to apply the median to our data:
 
@@ -129,7 +131,7 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-As we can see, the median differs substantially from the mean.
+As we can see, the outcome of median differs substantially from the mean.
 
 ### Mode {#sec:stats_central_mode}
 
@@ -151,8 +153,7 @@ In @sec:missing_data, we have the `correct_types` `DataFrame`, which is mainly c
 sco("correct_types()"; process=without_caption_label)
 ```
 
-We can compute the mode with the `combine` function from `DataFrames.jl`.
-Notice that, unlike previously with mean and median, we will not group our data:
+We can compute the mode with the `combine` function from `DataFrames.jl`:
 
 ```jl
 # mode # hide
@@ -164,7 +165,7 @@ sco(s; process=without_caption_label)
 
 ### Visualization of Central Tendencies {#sec:stats_central_vis}
 
-In order to have a better intuition behind the difference between mean, median, and mode, it is always useful to make some visualizations.
+In order to have a better intuition behind the difference between mean, median, and mode, visualizations are useful.
 We will cover statistical visualizations in depth in @sec:stats_vis.
 Below, in @fig:plot_central, we have two data distributions:
 
@@ -179,7 +180,7 @@ Options(fig; filename=label, caption, label)
 ```
 
 You can see that the mean, median, and mode are almost the same in the normal distributed data, but they differ a lot in the non-normal distributed data.
-In the non-normal distributed data the mean is highly skewed towards to the right, *biasing* our central tendency.
+In the non-normal distributed data, the mean is highly skewed towards to the right, *biasing* our central tendency.
 This is an example of an outlier scenario where the mean can be highly sensitive to influential observations.
 Nevertheless, the median is unaffected by the outliers and can be used as a *reliable* central tendency.
 This demonstrates that the **median is robust to outliers**.
@@ -204,10 +205,10 @@ In other words, we do not have negative measures of dispersion.
 ### Variance and Standard Deviation {#sec:stats_dispersion_varstd}
 
 The first dispersion measure that we will cover are variance and standard deviation.
-We will be covering both measures together because they have a profound relationship.
-**The variance is the square of the standard deviation and the standard deviation is the square root of the variance.**
+We will be covering both measures together because they are related.
 
-Let's start with the variance. **Variance is the mean of the squared difference between measurements and their average value**:
+Let's start with the variance.
+**Variance is the mean of the squared difference between measurements and their average value**:
 
 $$ \sigma^2(x) = \frac{1}{n-1} \sum^n_{i=1} (x_i - \bar{x})^2. $$ {#eq:variance}
 
@@ -240,9 +241,7 @@ We can see that Sally has the highest dispersion in her grades measured by its v
 **The standard deviation is the square root of the mean of the squared difference between measurements and their average value**.
 Or in more simple words: it is the **square root of the variance**:
 
-$$ \sigma(x) = \sqrt{\frac{1}{n-1} \sum^n_{i=1} (x_i - \bar{x})^2}. $$ {#eq:std}
-
-For the standard deviation, since it is the square root of the variance, and variance is denoted as $\sigma^2$, we use the Greek letter $\sigma$ to denote standard deviation.
+$$ \sigma(x) = \sqrt{\sigma(x)^2} = \sqrt{\frac{1}{n-1} \sum^n_{i=1} (x_i - \bar{x})^2}. $$ {#eq:std}
 
 In a similar fashion, for the **st**andard **d**eviation, we can use the `std` function from Julia's standard library `Statistics` module:
 
@@ -262,7 +261,7 @@ sco(s; process=without_caption_label)
 Since the standard deviation is the square root of the variance, our measures of dispersion have only been rescaled.
 Sally still has the highest dispersion in her grades measured either by variance or standard deviation.
 
-As we did before, in @fig:plot_dispersion_std, we have two data distributions:
+As we did before in @fig:plot_dispersion_std, we have two data distributions:
 
 - **Upper row**: **normal** distributed data
 - **Lower row**: **non-normal** distributed data
@@ -285,7 +284,7 @@ This is exactly the case of the **median absolute deviation (mad) which is defin
 
 $$ \operatorname{mad}(x) = \operatorname{median}(|x_i - \operatorname{median}(x)|), $$ {#eq:mad}
 
-where $|.|$ is the notation for absolute value.
+where $|x|$ denotes the absolute value of $x$.
 
 The **m**ean **a**bsolute **d**eviation is available as the function `mad` in the `StatsBase.jl`:
 
@@ -304,7 +303,7 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-We can see that still Sally has the highest grades dispersion, but now Bob's and Alice's dispersion are the same.
+We can see that  Sally has still the highest grades dispersion, but now Bob's and Alice's dispersion are the same.
 Also note that, by using $\operatorname{mad}$, Hank's dispersion is zero.
 This happens because two of Hank's three grades are the same value:
 
@@ -317,7 +316,7 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-If we plug Hank's grades into @eq:mad we have to calculate $\operatorname{median}([2, 0, 0])$, so we end up with the middle value in an ordered list which is $0$.
+If we plug Hank's grades into @eq:mad, we have to calculate $\operatorname{median}([2, 0, 0])$, so we end up with the middle value in an ordered list which is $0$.
 
 Once more, in @fig:plot_dispersion_mad, we have two data distributions:
 
@@ -350,7 +349,7 @@ Some percentiles have special names:
 These, including percentiles, are in a broad manner called quantiles.
 **Quantiles are cut points that divide equally the range of observations values' into equal spaced intervals**.
 
-The most important and commonly used quantile is the 4-quantile, also known as **quartile**, which we denote with the letter Q followed by a number to identify which one of the quantiles we are referring to.
+The most important and commonly used quantile is the quartile or 4-quantile, which we denote with the letter Q followed by a number to identify which one of the quantiles we are referring to.
 Since we have only three quantiles, we have Q1, Q2, and Q3 corresponding to the first, second, and third quantile, respectively.
 The Q2 (the 0.5 percentile) is also the median and the Q1 and Q3 are the 0.25 and 0.75 percentile.
 The quartiles are important because we often use them to denote a measure of dispersion.
@@ -360,7 +359,7 @@ $$ \operatorname{IQR}(x) = \operatorname{Q3}(x) - \operatorname{Q1}(x), $$ {#eq:
 
 Like the mean absolute deviation, **IQR**, since it uses the median and percentiles, it is also **robust to outliers**.
 
-As usual, in @fig:plot_dispersion_iqr, we have two data distributions:
+As before, in @fig:plot_dispersion_iqr, we have two data distributions:
 
 - **Upper row**: **normal** distributed data
 - **Lower row**: **non-normal** distributed data

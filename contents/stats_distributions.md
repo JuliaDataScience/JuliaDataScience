@@ -7,7 +7,7 @@ At every pin, the ball can either fall to the left or to the right.
 We count a fall to the right as 1 and a fall to the left as 0.
 Now, the question is: how many times will the ball fall to the right?
 
-To simulate this, we can use the `Random` module from Julia.
+To simulate this, we can use the `Random` module from Julia's standard library.
 We also set a seed to ensure that the outcome of this code is the same for every run:
 
 ```

@@ -26,7 +26,7 @@ s = """
 scob(s)
 ```
 
-Okay, so over 11 rows, the ball fell `jl x` times to the right.
+Okay, so over `jl n_rows` rows, the ball fell `jl x` times to the right.
 What if we do the same thing a few more times?
 
 ```jl

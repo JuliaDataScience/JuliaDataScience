@@ -45,6 +45,15 @@ function build()
     extra_head = """
     <script src="https://cdn.usefathom.com/script.js" data-site="EEJXHKTE" defer></script>
     """
-    build_all(; extra_head, fail_on_error)
+    mkpath(BUILD_DIR)
+    filename = "favicon.png"
+    from_path = joinpath("pandoc", filename)
+    if isfile(from_path)
+        cp(from_path, joinpath(BUILD_DIR, filename); force=true)
+    end
+    build_sitemap = true
+    project = "default"
+    html(; project, extra_head, fail_on_error, build_sitemap)
+    write_extra_html_files(project)
 end
 

@@ -450,13 +450,16 @@ function plot_cdf(type::AbstractString)
     if type == "discrete"
         d = Distributions.DiscreteUniform(1,6)
         range = 1:6
-        ax = Axis(fig[1, 1]; xticks=1:6)
+        ax = Axis(fig[1, 1]; xticks=1:6, limits=((0.8, 6.9), (-0.2, 1.2)))
+        for i in range
+            lines!(ax, i:i+1, repeat([Distributions.cdf(d, i)], 2); linewidth=4, color=(:black, 0.5))
+        end
     elseif type == "continuous"
         d = Distributions.Normal()
         range = -3:0.01:3.0
         ax = Axis(fig[1, 1]; xticks=-3:3)
+        lines!(ax, range, Distributions.cdf(d, range); linewidth=4, color=(:black, 0.5))
     end
-    lines!(ax, range, Distributions.cdf(d, range); linewidth=4, color=(:black, 0.5))
     return fig
 end
 

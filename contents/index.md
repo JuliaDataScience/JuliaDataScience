@@ -9,6 +9,8 @@ Our target audience are researchers from all fields of applied sciences.
 Of course, we hope to be useful for industry too.
 You can navigate through the pages of the ebook by using the arrow keys (left/right) on your keyboard.
 
+The book is also available as [**PDF**](/juliadatascience.pdf){target="_blank"}.
+
 The source code is available at [GitHub](https://github.com/JuliaDataScience/JuliaDataScience){target="_blank"}.
 
 ### Work in Progress {-}

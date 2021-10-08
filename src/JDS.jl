@@ -17,14 +17,11 @@ using Books:
     code_block,
     convert_output,
     gen,
-    html,
     output_block,
     sc,
     sco,
     scob,
-    serve,
-    without_caption_label,
-    write_extra_html_files
+    serve
 using CSV
 using CairoMakie
 using CategoricalArrays

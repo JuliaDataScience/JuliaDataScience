@@ -21,7 +21,8 @@ using Books:
     sc,
     sco,
     scob,
-    serve
+    serve,
+    without_caption_label
 using CSV
 using CairoMakie
 using CategoricalArrays

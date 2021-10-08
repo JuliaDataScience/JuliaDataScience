@@ -57,7 +57,11 @@ using GeometryBasics
 using InteractiveUtils
 using LaTeXStrings
 using LinearAlgebra
-using Makie
+#using Makie
+using Plots:
+    plot,
+    backend,
+    stroke
 using Random
 using Statistics
 using StatsBase:

@@ -193,7 +193,7 @@ $$ \operatorname{cdf} = P(X \leq x) =
 
 In @eq:cdf we sum all values less than or equal to $x$ if the distribution $X$ is discrete or we integrate from minus infinity to $x$ if the distribution $X$ is continuous.
 For example, in @fig:plot_cdf_discrete we have the cdf of a 6-sided dice.
-Notice that since the values are equally likely, the cdf scales *linearly* with the possible outcome values.
+Notice that since the values are equally likely, the cdf becomes a step function that scales linearly with the possible outcome values.
 
 ```jl
 fig = plot_cdf("discrete")

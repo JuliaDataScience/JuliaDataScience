@@ -48,7 +48,7 @@ function front_cover()
 
         width = 2016
         height = (10/7) * width # Ratio 7 * 10 inch.
-        fig = Figure(resolution=(width, height))
+        fig = Figure(figure_padding = (50,15,5,5), resolution=(width, height))
         # Colors
         colors = ColorSchemes.Set1_6
         #colors = Makie.wong_colors()
@@ -71,10 +71,12 @@ function front_cover()
         ax43 = Axis(fig[4,3], aspect = 1) # xgridvisible=false, ygridvisible=false)
         ax44 = Axis(fig[4,4], aspect = 1) # xgridvisible=false, ygridvisible=false)
         ax45 = Axis(fig[4,5], aspect = 1) # xgridvisible=false, ygridvisible=false)
+        axBubbles = Axis(fig[1:end,1:end]; xgridvisible=false, ygridvisible=false)
         axs = [ax11, ax21, ax31, ax41,
                ax22, #ax23,
                ax32, ax33,
-               ax42, ax43, ax44, ax45
+               ax42, ax43, ax44, ax45,
+               axBubbles
               ]
         # First Column 1,1 to 4,1
         meshscatter!(ax11, positions, color = vec(vals),
@@ -127,12 +129,12 @@ function front_cover()
         y = rand(10)
         z = rand(10)
         # Third Row 3,2 to to 3,3
-        scatter!(ax32, rand(10), rand(10); color = JuliaColors.blue, markersize = 16)
+        scatter!(ax32, rand(10), rand(10); color = "Yellow", markersize = 16)
         lines!(ax33, 0..10, x -> exp(-x); color = JuliaColors.red, linewidth = 4)
         limits!(ax32, -0.1, 1.1, -0.1, 1.1)
         limits!(ax33, -1, 11, -0.1, 1.1)
         # Fourt Row 4,2 to 4,5
-        hist!(ax42, randn(1000), bins = 32; color = JuliaColors.blue, strokewidth = 1.5,
+        hist!(ax42, randn(1000), bins = 32; color = "Yellow", strokewidth = 1.5,
             strokecolor = :grey80)
         density!(ax43, randn(1000); color = JuliaColors.red,
             strokewidth = 2, strokecolor = JuliaColors.red)
@@ -140,6 +142,11 @@ function front_cover()
             strokewidth = 2, strokecolor = JuliaColors.purple, show_median = true,)
         boxplot!(ax45, fill(1,1000), randn(1000); color = JuliaColors.green, strokecolor = :grey80,
             whiskercolor = JuliaColors.green, whiskerwidth = 1, strokewidth = 1)
+        scatter!(axBubbles, rand(Normal(1,1), 1500), rand(Normal(1,1), 1500);
+            color = 1:1500, markersize = 20*rand(1500),
+            colormap = :starrynight, # :thermal
+            marker = :rect)
+        limits!(axBubbles, -2.2,2,-3.3,2)
         xlims!(ax44, 0.1,1.9)
         xlims!(ax45, 0.1,1.9)
         ylims!(ax42, 0,150)
@@ -170,19 +177,23 @@ function front_cover()
         Label(fig[4,4, Right()], "|>", textsize = pipisize,
               rotation = 0π, padding = (5,5,0,0), font = NOTO_SANS_BOLD)
 
-        Label(fig[1, 3:5], "Julia", textsize=394,
-            tellheight = false, halign = :left)
-        Label(fig[1, 3:5], "\n\n\n\nData Science", textsize=126,
-            tellheight = false, halign = :left)
+        legJ = Label(fig[1, 3:5], "Julia", textsize=394,
+            tellheight = false, halign = :left, font = NOTO_SANS_BOLD)
+        translate!(legJ.elements[:text], 0, 0, 9)
+        legD = Label(fig[1, 3:5], "\n\n\n\nData Science", textsize=126,
+            tellheight = false, halign = :left, font = NOTO_SANS_BOLD)
+        translate!(legD.elements[:text], 0, 0, 9)
         vspace = "\n\n"
         hspace = "         "
-        Label(fig[2, 3:5], "$(vspace)$(hspace)Jose Storopoli", textsize=80,
-            tellheight = false, halign = :left)
-        Label(fig[2, 3:5], "$(vspace)\n\n$(hspace)Rik Huijzer", textsize=80,
-            tellheight = false, halign = :left)
-        Label(fig[2, 3:5], "$(vspace)\n\n\n\n$(hspace)Lazaro Alonso", textsize=80,
-            tellheight = false, halign = :left)
-
+        legJose = Label(fig[2, 3:5], "$(vspace)$(hspace)Jose Storopoli", textsize=80,
+            tellheight = false, halign = :left, font = NOTO_SANS_BOLD)
+        legRik = Label(fig[2, 3:5], "$(vspace)\n\n$(hspace)Rik Huijzer", textsize=80,
+            tellheight = false, halign = :left,font = NOTO_SANS_BOLD)
+        legLaz = Label(fig[2, 3:5], "$(vspace)\n\n\n\n$(hspace)Lazaro Alonso", textsize=80,
+            tellheight = false, halign = :left,font = NOTO_SANS_BOLD)
+        translate!(legJose.elements[:text], 0, 0, 9)
+        translate!(legRik.elements[:text], 0, 0, 9)
+        translate!(legLaz.elements[:text], 0, 0, 9)
         #     textsize = 60, tellheight = false)
         # Final Axis and Figure touches
         [hidedecorations!(ax; grid = false) for ax in axs]

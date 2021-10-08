@@ -142,7 +142,7 @@ function front_cover()
             strokewidth = 2, strokecolor = JuliaColors.purple, show_median = true,)
         boxplot!(ax45, fill(1,1000), randn(1000); color = JuliaColors.green, strokecolor = :grey80,
             whiskercolor = JuliaColors.green, whiskerwidth = 1, strokewidth = 1)
-        scatter!(axBubbles, rand(Normal(1,1), 1500), rand(Normal(1,1), 1500);
+        scatter!(axBubbles, rand(Distributions.Normal(1,1), 1500), rand(Distributions.Normal(1,1), 1500);
             color = 1:1500, markersize = 20*rand(1500),
             colormap = :starrynight, # :thermal
             marker = :rect)

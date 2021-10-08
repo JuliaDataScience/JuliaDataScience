@@ -405,6 +405,7 @@ function plot_normal_lognormal()
     density!(ax, rand_d1; color=(:dodgerblue, 0.15), strokewidth=1.5, strokecolor=(:black, 0.5), label="normal")
     density!(ax, rand_d2; color=(:red, 0.15), strokewidth=1.5, strokecolor=(:black, 0.5), label="non-normal")
     axislegend(ax, position = :rt)
+    hideydecorations!(ax; grid=false, ticks=true)
     return fig
 end
 
@@ -427,7 +428,7 @@ function plot_pmf()
     dice = DiscreteUniform(1, 6)
     CairoMakie.activate!() # hide
     fig = Figure(; resolution=(600, 400))
-    ax = Axis(fig[1, 1]; xticks=1:6, limits=(nothing, (0, 0.2)))
+    ax = Axis(fig[1, 1]; xticks=1:6, limits=(nothing, (0, 0.2)), ylabel="pmf")
     barplot!(ax, 1:6, Distributions.pdf(dice, 1:6); color=(:grey, 0.25), strokewidth=1.5, strokecolor=(:black, 0.5))
     return fig
 end
@@ -436,7 +437,7 @@ function plot_pdf()
     d = Distributions.Normal()
     CairoMakie.activate!() # hide
     fig = Figure(; resolution=(600, 400))
-    ax = Axis(fig[1, 1]; xticks=-3:3)
+    ax = Axis(fig[1, 1]; xticks=-3:3, ylabel="pdf")
     range = -3:0.01:3.0
     subset = 1:0.01:2.0
     band!(ax, range, fill(0, length(range)), Distributions.pdf(d, range); color=(:grey, 0.25), strokewidth=1.5, strokecolor=(:black, 0.5))
@@ -450,14 +451,14 @@ function plot_cdf(type::AbstractString)
     if type == "discrete"
         d = Distributions.DiscreteUniform(1,6)
         range = 1:6
-        ax = Axis(fig[1, 1]; xticks=1:6, limits=((0.8, 6.9), (-0.2, 1.2)))
+        ax = Axis(fig[1, 1]; xticks=1:6, limits=((0.8, 6.8), (0, 1.1)), ylabel="cdf")
         for i in range
             lines!(ax, i:i+1, repeat([Distributions.cdf(d, i)], 2); linewidth=4, color=(:black, 0.5))
         end
     elseif type == "continuous"
         d = Distributions.Normal()
         range = -3:0.01:3.0
-        ax = Axis(fig[1, 1]; xticks=-3:3)
+        ax = Axis(fig[1, 1]; xticks=-3:3, ylabel="cdf")
         lines!(ax, range, Distributions.cdf(d, range); linewidth=4, color=(:black, 0.5))
     end
     return fig

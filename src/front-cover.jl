@@ -144,7 +144,7 @@ function front_cover()
             whiskercolor = JuliaColors.green, whiskerwidth = 1, strokewidth = 1)
         scatter!(axBubbles, rand(Distributions.Normal(1,1), 1500), rand(Distributions.Normal(1,1), 1500);
             color = 1:1500, markersize = 20*rand(1500),
-            colormap = :starrynight, # :thermal
+            colormap = :thermal, # :thermal
             marker = :rect)
         limits!(axBubbles, -2.2,2,-3.3,2)
         xlims!(ax44, 0.1,1.9)

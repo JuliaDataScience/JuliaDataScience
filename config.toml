@@ -14,6 +14,7 @@
     "dataframes_groupby_combine",
     "dataframes_performance",
     "data_vis_Plots",
+    "data_vis_Plots_attributes",
     "data_vis_StatsPlots",
     "data_vis_makie",
     "data_vis_makie_cairo",

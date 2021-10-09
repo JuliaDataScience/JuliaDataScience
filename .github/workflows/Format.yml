@@ -21,7 +21,15 @@ jobs:
 
       - shell: julia --project=format --color=yes {0}
         run: |
-          using FormatJDS
-          exitcode = FormatJDS.project_has_trailing_whitespace() ? 1 : 0
+          using FormatJDS:
+              project_has_trailing_whitespace,
+              remove_trailing_whitespace
+
+          exitcode = project_has_trailing_whitespace() ? 1 : 0
           println(exitcode == 1 ? "Trailing whitespace found" : "No trailing whitespace found")
+          if exitcode == 1
+              # Show where the trailing whitespace occurs.
+              remove_trailing_whitespace()
+              run(`git diff`)
+          end
           exit(exitcode)

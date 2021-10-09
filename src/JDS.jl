@@ -1,7 +1,7 @@
 module JDS
 
 import Pkg
-import Plots
+import Plots  
 
 using Reexport: @reexport
 

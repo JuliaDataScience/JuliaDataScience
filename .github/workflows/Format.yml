@@ -30,6 +30,7 @@ jobs:
           if exitcode == 1
               # Show where the trailing whitespace occurs.
               remove_trailing_whitespace()
+              run(`git config --global color.ui true`)
               run(`git diff`)
           end
           exit(exitcode)

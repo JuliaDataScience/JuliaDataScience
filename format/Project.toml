@@ -7,4 +7,4 @@ version = "0.1.0"
 JuliaFormatter = "98e50ef6-434e-11e9-1051-2b60c6c9e899"
 
 [compat]
-JuliaFormatter = "0.16"
+JuliaFormatter = "0.17"

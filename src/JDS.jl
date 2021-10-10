@@ -6,72 +6,72 @@ import Plots
 using Reexport: @reexport
 
 @reexport begin
-using Books:
-    BUILD_DIR,
-    @sc,
-    @sco,
-    Options,
-    build_all,
-    catch_show,
-    clean_stacktrace,
-    code_block,
-    convert_output,
-    gen,
-    output_block,
-    sc,
-    sco,
-    scob,
-    serve,
-    without_caption_label
-using CSV
-using CairoMakie
-using CategoricalArrays
-using ColorSchemes
-using Colors
-using DataFrames:
-    ByRow,
-    DataFrame,
-    DataFrameRow,
-    Not,
-    antijoin,
-    combine,
-    crossjoin,
-    filter,
-    groupby,
-    innerjoin,
-    leftjoin,
-    outerjoin,
-    rightjoin,
-    select!,
-    select,
-    semijoin,
-    subset,
-    transform,
-    transform!
-using Dates
-using Distributions
-using Downloads
-using FileIO
-using GLMakie
-using GeometryBasics
-using InteractiveUtils
-using LaTeXStrings
-using LinearAlgebra
-#using Makie
-using Plots:
-    plot,
-    backend,
-    stroke
-using Random
-using Statistics
-using StatsBase:
-    mad,
-    mode
-using TestImages
-using XLSX:
-    eachtablerow,
-    readxlsx,
-    writetable
+    using Books:
+        BUILD_DIR,
+        @sc,
+        @sco,
+        Options,
+        build_all,
+        catch_show,
+        clean_stacktrace,
+        code_block,
+        convert_output,
+        gen,
+        output_block,
+        sc,
+        sco,
+        scob,
+        serve,
+        without_caption_label
+    using CSV
+    using CairoMakie
+    using CategoricalArrays
+    using ColorSchemes
+    using Colors
+    using DataFrames:
+        ByRow,
+        DataFrame,
+        DataFrameRow,
+        Not,
+        antijoin,
+        combine,
+        crossjoin,
+        filter,
+        groupby,
+        innerjoin,
+        leftjoin,
+        outerjoin,
+        rightjoin,
+        select!,
+        select,
+        semijoin,
+        subset,
+        transform,
+        transform!
+    using Dates
+    using Distributions
+    using Downloads
+    using FileIO
+    using GLMakie
+    using GeometryBasics
+    using InteractiveUtils
+    using LaTeXStrings
+    using LinearAlgebra
+    #using Makie
+    using Plots:
+        plot,
+        backend,
+        stroke
+    using Random
+    using Statistics
+    using StatsBase:
+        mad,
+        mode
+    using TestImages
+    using XLSX:
+        eachtablerow,
+        readxlsx,
+        writetable
 end # @reexport
 
 const SMALL_IM_ATTR = "width=70%"

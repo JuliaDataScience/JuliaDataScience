@@ -33,8 +33,10 @@ titlepage-top: >
   Germany\\
   \end{tabular}
 
-titlepage-bottom: >
+titlepage-bottom: |
+  First edition published 2021
+
   \url{https://juliadatascience.io}
 
-dedication: "This book is dedicated to our families."
+  ISBN: 9798489859165
 ---

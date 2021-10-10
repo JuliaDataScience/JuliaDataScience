@@ -1,0 +1,6 @@
+margin=500
+verbose=true
+join_lines_based_on_source=true
+whitespace_in_kwargs=false
+# This is too aggressive.
+format_markdown=false

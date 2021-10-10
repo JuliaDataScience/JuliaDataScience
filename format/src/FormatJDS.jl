@@ -10,6 +10,7 @@ const SOURCE_FILE_EXTENSIONS = [".jl", ".md", ".bib"]
 
 export source_files
 export project_has_trailing_whitespace, remove_trailing_whitespace
+export format, is_formatted!
 
 function is_source_file_extension(file::String)
     _, ext = splitext(file)

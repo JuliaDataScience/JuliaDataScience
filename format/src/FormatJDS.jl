@@ -1,6 +1,8 @@
 module FormatJDS
 
-using JuliaFormatter: format_file
+using JuliaFormatter:
+    format_file,
+    parse_config
 
 const JDS_DIR = dirname(dirname(@__DIR__))
 

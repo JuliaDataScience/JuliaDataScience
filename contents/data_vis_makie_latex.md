@@ -25,11 +25,7 @@ s = """
 sco(s)
 ```
 
-A more involved example will be one with some equation as `text` and increasing legend numbering for curves in a plot.
-
-```
-using LaTeXStrings
-```
+A more involved example will be one with some equation as `text` and increasing legend numbering for curves in a plot:
 
 ```jl
 @sco JDS.multiple_lines()

@@ -1,6 +1,11 @@
 ## Using LaTeXStrings.jl
 
-LaTeX support in `Makie.jl` is also available.
+LaTeX support in `Makie.jl` is also available via `LaTeXStrings.jl`:
+
+```
+using LaTeXStrings
+```
+
 Simple use cases are shown below (@fig:latex_strings).
 A basic example includes LaTeX strings for x-y labels and legends:
 

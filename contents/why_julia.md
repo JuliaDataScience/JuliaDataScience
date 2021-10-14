@@ -184,10 +184,7 @@ We call this feature **"One-To-One Code and Math Relation"** which is a powerful
 
 We think that the "Two-Language problem" and the "One-To-One Code and Math Relation" are best described by one of the creators of Julia, Alan Edelman, in a TEDx Talk [@tedxtalksProgrammingLanguageHeal2020]
 
-```{=html}
-<!-- This part is only visible in the HTML page. -->
 <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/qGW0GT1rCvs' frameborder='0' allowfullscreen></iframe></div>
-```
 
 ### Multiple Dispatch {#sec:multiple_dispatch}
 
@@ -256,10 +253,8 @@ Most of the merit is due to multiple dispatch and high user code/type sharing.
 To conclude, we think that multiple dispatch is best explained by one of the creators of Julia:
 [Stefan Karpinski at JuliaCon 2019](https://youtu.be/kc9HwsxE1OY).
 
-```{=html}
-<!-- This part is only visible in the HTML page. -->
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/kc9HwsxE10Y' frameborder='0' allowfullscreen></iframe></div>
-```
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/kc9HwsxE1OY' frameborder='0' allowfullscreen></iframe></div>
+
 
 ## Julia in the Wild {#sec:julia_wild}
 

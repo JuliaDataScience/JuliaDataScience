@@ -286,7 +286,7 @@ $$ \operatorname{mad}(x) = \operatorname{median}(|x_i - \operatorname{median}(x)
 
 where $|x|$ denotes the absolute value of $x$.
 
-The **m**ean **a**bsolute **d**eviation is available as the function `mad` in the `StatsBase.jl`:
+The **m**edian **a**bsolute **d**eviation is available as the function `mad` in the `StatsBase.jl`:
 
 ```julia
 using StatsBase: mad
@@ -357,7 +357,7 @@ This measure is known as **interquartile range** (IQR) and is the **difference b
 
 $$ \operatorname{IQR}(x) = \operatorname{Q3}(x) - \operatorname{Q1}(x), $$ {#eq:iqr}
 
-Like the mean absolute deviation, **IQR**, since it uses the median and percentiles, it is also **robust to outliers**.
+Like the median absolute deviation, **IQR**, since it uses the median and percentiles, it is also **robust to outliers**.
 
 As before, in @fig:plot_dispersion_iqr, we have two data distributions:
 
@@ -380,7 +380,7 @@ Like before, we provide the following advice:
 
 - _Avoid_ **variance**, since it is not an intuitive measure.
 - For data that do *not* have outliers, use the **standard deviation**.
-- For data that *do* have outliers, use either the **mean absolute deviation** or **IQR**.
+- For data that *do* have outliers, use either the **median absolute deviation** or **IQR**.
 - For categorical/nominal data, use some sort of **frequency counter**[^frequency_counter].
 
 [^frequency_counter]: we would suggest using the `StatsBase.countmap` function which returns a dictionary that maps each unique value in a given vector to its number of occurrences.

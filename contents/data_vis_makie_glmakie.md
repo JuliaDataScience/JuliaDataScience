@@ -133,4 +133,3 @@ For our last example we will show how to do a filled curve in 3D with `band` and
 
 Finally, our journey doing 3D plots has come to an end.
 You can combine everything we exposed here to create amazing 3D images!
-Now, it's time to dig into the basic rules to create animations.

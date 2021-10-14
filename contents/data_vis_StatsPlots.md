@@ -7,7 +7,6 @@
 - Attributes
 - Colours
 - Layouts
-- Animations
 - Themes
 2. Works on Types of Distributions and DataFrames, but we will only focus on DataFrames
 

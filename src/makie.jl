@@ -651,28 +651,6 @@ function filled_line_and_linesegments_in_3D()
     Options(fig; caption, label, link_attributes) # hide
 end
 
-
-function first_animation()
-    CairoMakie.activate!() # hide
-    Random.seed!(123)
-    npts = 100
-    initms = 8 * rand(npts) # initial marker size
-    msize = Node(initms) # this is the variable that will change
-    # first frame, initial plot
-    fig, ax = scatter(2 * rand(npts), rand(npts); markersize=msize,
-        color=initms, colormap=(:viridis, 0.75), strokewidth=0.5,
-        strokecolor=:white, figure=(; resolution=(600, 400)),
-        axis=(xlabel="x", ylabel="y"))
-    limits!(ax, 0, 2, 0, 1)
-    # the animation is done by updating the node values
-    record(fig, "animScatters.mp4") do io
-        for i = 1:0.1:8
-            msize[] = i * initms
-            recordframe!(io)  # record a new frame
-        end
-    end
-end
-
 function grid_spheres_and_rectangle_as_plate()
     Random.seed!(123)
     rectMesh = FRect3D(Vec3f0(-1, -1, 2.1), Vec3f0(22, 11, 0.5))

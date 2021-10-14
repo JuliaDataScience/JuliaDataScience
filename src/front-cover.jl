@@ -42,7 +42,7 @@ Return the Julia Data Science book front cover.
 function front_cover()
     # Probably it will be good to have two versions, one black and one white.
     CairoMakie.activate!()
-    fig = with_theme(theme_black(); Axis=(; ygridcolor=:grey70, xgridcolor=:grey70,
+    with_theme(theme_black(); Axis=(; ygridcolor=:grey70, xgridcolor=:grey70,
             xgridstyle=:dashdot, ygridstyle=:dashdot),
         Axis3=(; xgridcolor=:grey70, ygridcolor=:grey70, zgridcolor=:grey70)) do
 
@@ -202,7 +202,4 @@ function front_cover()
         colgap!(fig.layout, 0)
         return fig
     end
-    # When changing this name, also change the link in `README.md`.
-    filename = "frontcover"
-    Options(fig; filename)
 end

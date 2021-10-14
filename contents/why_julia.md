@@ -183,9 +183,11 @@ When you see code for an algorithm or for a mathematical equation, you see almos
 We call this feature **"One-To-One Code and Math Relation"** which is a powerful feature.
 
 We think that the "Two-Language problem" and the "One-To-One Code and Math Relation" are best described by one of the creators of Julia, Alan Edelman, in a TEDx Talk [@tedxtalksProgrammingLanguageHeal2020]
-(if you are reading the printed book, please check the citation; if you're reading the static PDF, please click on the link to go the video):
 
+```{=html}
+<!-- This part is only visible in the HTML page. -->
 <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/qGW0GT1rCvs' frameborder='0' allowfullscreen></iframe></div>
+```
 
 ### Multiple Dispatch {#sec:multiple_dispatch}
 
@@ -251,9 +253,13 @@ Chris was quite surprised by this request since he would never have expected tha
 He was even more surprised to discover that the user made a small mistake and that it all worked.
 Most of the merit is due to multiple dispatch and high user code/type sharing.
 
-To conclude, we think that multiple dispatch is best explained by one of the creators of Julia, [Stefan Karpinski, at JuliaCon 2019](https://youtu.be/kc9HwsxE1OY) [@thejuliaprogramminglanguageJuliaCon2019Unreasonable2019] (if you are reading the printed book, please check the citation; if you're reading the static PDF, please click on the link to go the video):
+To conclude, we think that multiple dispatch is best explained by one of the creators of Julia:
+[Stefan Karpinski at JuliaCon 2019](https://youtu.be/kc9HwsxE1OY).
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/kc9HwsxE1OY' frameborder='0' allowfullscreen></iframe></div>
+```{=html}
+<!-- This part is only visible in the HTML page. -->
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/kc9HwsxE10Y' frameborder='0' allowfullscreen></iframe></div>
+```
 
 ## Julia in the Wild {#sec:julia_wild}
 

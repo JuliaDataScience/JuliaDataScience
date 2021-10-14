@@ -79,8 +79,10 @@ let
     fig = front_cover()
     # Use lazy loading to keep homepage speed high.
     link_attributes = """loading="lazy" width=80%"""
-    # When changing this name, also change the link in `README.md`.
+    # When changing this name, also change the link in README.md.
+    # This doesn't work for some reason; I need to fix it.
     filename = "frontcover"
-    Options(fig; filename, caption=nothing, label=nothing, link_attributes)
+    Options(fig; filename, label=filename)
 end
 ```
+

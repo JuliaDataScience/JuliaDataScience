@@ -1,7 +1,6 @@
 module JDS
 
 import Pkg
-import Plots
 
 using Reexport: @reexport
 
@@ -58,10 +57,6 @@ using Reexport: @reexport
     using LaTeXStrings
     using LinearAlgebra
     #using Makie
-    using Plots:
-        plot,
-        backend,
-        stroke
     using Random
     using Statistics
     using StatsBase:
@@ -80,7 +75,6 @@ include("ci.jl")
 include("df.jl")
 include("environment.jl")
 include("showcode_additions.jl")
-include("plots.jl")
 include("makie.jl")
 include("stats.jl")
 include("bezier.jl")
@@ -89,7 +83,7 @@ include("front-cover.jl")
 # Showcode additions.
 export sce, scsob, trim_last_n_lines, plainblock
 
-# Plots.
+# Makie.
 export publication_theme, plot_with_legend_and_colorbar
 export LaTeX_Strings, demo_themes, new_cycle_theme, scatters_and_lines
 export nested_sub_plot!, add_box_inset, add_axis_inset, peaks

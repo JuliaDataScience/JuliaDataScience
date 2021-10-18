@@ -59,7 +59,12 @@ In this book we'll cover two aspects of data literacy:
 In this chapter you will learn how to:
     1. Read CSV and Excel data into Julia.
     2. Process data in Julia, that is, learn how to answer data questions.
-1. **Data Visualization** with `Plots.jl` and `Makie.jl` (@sec:DataVisualizationPlots and @sec:DataVisualizationMakie).
+    3. Filter and subset data.
+    4. Handle missing data.
+    5. Join multiple data sources together.
+    6. Group and summarize data.
+    7. Export data out of Julia to CSV and Excel files.
+2. **Data Visualization** with `Makie.jl` (@sec:DataVisualizationMakie).
 In these chapter you will learn how to:
     1. ...
     2. ...

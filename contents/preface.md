@@ -64,7 +64,7 @@ In this chapter you will learn how to:
     5. Join multiple data sources together.
     6. Group and summarize data.
     7. Export data out of Julia to CSV and Excel files.
-2. **Data Visualization** with `Plots.jl` and `Makie.jl` (@sec:DataVisualizationPlots and @sec:DataVisualizationMakie).
+2. **Data Visualization** with `Makie.jl` (@sec:DataVisualizationMakie).
 In these chapter you will learn how to:
     1. ...
     2. ...

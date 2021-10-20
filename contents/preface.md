@@ -2,7 +2,7 @@
 
 There are many programming languages and each and every one of them has its strengths and weaknesses.
 Some languages are very quick, but verbose.
-Other languages are very easy to write in, but slow. This is known as the `two-language` problem and Julia aims at circumventing this problem.
+Other languages are very easy to write in, but slow. This is known as the *two-language* problem and Julia aims at circumventing this problem.
 Even though all three of us come from different fields, we all found the Julia language more effective for our research than languages that we've used before.
 We discuss some of our arguments in @sec:why_julia.
 However, compared to other languages, Julia is one of the newest languages around.
@@ -19,7 +19,7 @@ That is why this book has a focus on data science.
 
 In the next part of this section, we emphasize the **"data" part of data science** and why data skills are, and will remain, in **high demand** in industry as well as in academia.
 We make an argument for **incorporating software engineering practices into data science** which should reduce friction when updating and sharing code with collaborators.
-Most data analyses are a collaborative endeavor; that is why these practices will help you.
+Most data analyses are collaborative endeavors; that is why these software practices will help you.
 
 ### Data is Everywhere {#sec:data_everywhere}
 
@@ -42,8 +42,8 @@ Alas, it is not even a discipline fully contained within STEM (Science, Technolo
 But one thing that we can assert with high confidence is that data science is always about **data**.
 Our aims of this book are twofold:
 
-* We focus on the backbone of data science: data.
-* We use the Julia programming language to process the data.
+* We focus on the backbone of data science: **data**.
+* We use the **Julia** programming language to process the data.
 
 We cover why Julia is an extremely effective language for data science in @sec:why_julia.
 For now, let's turn our attention towards data.
@@ -59,6 +59,11 @@ In this book we'll cover two aspects of data literacy:
 In this chapter you will learn how to:
     1. Read CSV and Excel data into Julia.
     2. Process data in Julia, that is, learn how to answer data questions.
+    3. Filter and subset data.
+    4. Handle missing data.
+    5. Join multiple data sources together.
+    6. Group and summarize data.
+    7. Export data out of Julia to CSV and Excel files.
 2. **Data Visualization** with `Makie.jl` (@sec:DataVisualizationMakie).
 In these chapter you will learn how to:
     1. Plot data with different `Makie.jl` backends.
@@ -101,7 +106,8 @@ If you do want to see the details of our style guide, check out @sec:notation.
 
 Many people have contributed directly and indirectly to this book.
 
-Jose Storopoli would like to thank his colleagues, especially [Fernando Serra](https://orcid.org/0000-0002-8178-7313), [Wonder Alexandre Luz Alves](https://orcid.org/0000-0003-0430-950X) and [André Librantz](https://orcid.org/0000-0001-8599-9009), for their encouragement and support.
+Jose Storopoli would like to thank his family, especially his wife for the support and love during the writing and reviewing process.
+He would also like to thank his colleagues, especially [Fernando Serra](https://orcid.org/0000-0002-8178-7313), [Wonder Alexandre Luz Alves](https://orcid.org/0000-0003-0430-950X) and [André Librantz](https://orcid.org/0000-0001-8599-9009), for their encouragement.
 
 Rik Huijzer would first like to thank his PhD supervisors at the University of Groningen, [Peter de Jonge](https://www.rug.nl/staff/peter.de.jonge/), [Ruud den Hartigh](https://www.rug.nl/staff/j.r.den.hartigh/) and [Frank Blaauw](https://frankblaauw.nl/) for their support.
 Second, he would like to thank his parents and girlfriend for being hugely supportive during the holiday and all the weekends and evenings that were involved in this book.

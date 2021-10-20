@@ -108,7 +108,7 @@ For more on `themes` please go to @sec:themes.
 Before moving on into the next section, it's worthwhile to see an example where an `array` of attributes are passed at once to a plotting function.
 For this example, we will use the `scatter` plotting function to do a bubble plot.
 
-The data for this could be an `array` with 100 rows and 3 columns, here we generated these at random from a normal distribution, @sec:stats_dist_normal.
+The data for this could be an `array` with 100 rows and 3 columns, here we generated these at random from a normal distribution.
 Where the first column could be the positions in the `x` axis, the second one the positions in `y` and the third one an intrinsic associated value for each point.
 The later could be represented in a plot by a different `color` or with a different marker size. In a bubble plot we can do both.
 

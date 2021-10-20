@@ -21,12 +21,12 @@
     "data_vis_makie_colors",
     "data_vis_makie_layouts",
     "data_vis_makie_glmakie",
-    "stats",
-    "stats_distributions",
-    "stats_vis",
+    #"stats",
+    #"stats_distributions",
+    #"stats_vis",
     "appendix",
     "notation",
-    "project_management",
+    #"project_management",
     "references"
   ]
   port = 8006

@@ -22,9 +22,8 @@ Roughly, the status is as follows:
 - [x] 2. Why Julia?
 - [x] 3. Julia Basics
 - [x] 4. DataFrames.jl
-- [ ] 5. Plots.jl
-- [x] 6. Makie.jl
-- [x] 7. Statistics
+- [x] 5. Makie.jl
+- [x] 6. Statistics
 - [ ] Review complete book
 - [ ] Publish with Amazon Kindle Direct Publishing
 

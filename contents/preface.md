@@ -66,9 +66,14 @@ In this chapter you will learn how to:
     7. Export data out of Julia to CSV and Excel files.
 2. **Data Visualization** with `Makie.jl` (@sec:DataVisualizationMakie).
 In these chapter you will learn how to:
-    1. ...
-    2. ...
-    3. ...
+    1. Plot data with different `Makie.jl` backends.
+    2. Save visualizations in several formats such as PNG or PDF.
+    3. Use different plotting functions to make diverse data visualizations.
+    4. Customize visualizations with attributes.
+    5. Use and create new plotting themes.
+    6. Add $\LaTeX$ elements to plots.
+    7. Manipulate color and palettes.
+    8. Create complex figure layouts.
 
 ## Software Engineering {#sec:engineering}
 

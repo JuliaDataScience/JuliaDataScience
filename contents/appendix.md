@@ -1,5 +1,7 @@
 # Appendix {#sec:appendix}
 
+## Packages Versions {#sec:appendix_pkg}
+
 This book is built with Julia `jl string(VERSION)` and the following packages:
 
 ```jl

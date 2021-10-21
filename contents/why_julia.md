@@ -277,4 +277,4 @@ It was presented as a [poster](https://chrisrackauckas.com/assets/Posters/ACoP11
 If this is not enough, there are more case studies in [Julia Computing website](https://juliacomputing.com/case-studies/).
 
 [^readable]: no C++ or FORTRAN API calls.
-[^LLVM]: LLVM stands for **L**ow **L**evel **V**irtual **M**achine, you can find more in [llvm.org](http://llvm.org).
+[^LLVM]: LLVM stands for **L**ow **L**evel **V**irtual **M**achine, you can find more in `llvm.org`.

@@ -1769,7 +1769,7 @@ sym = Symbol(s)
 ```
 
 One simple benefit of symbols is that you have to type one character less, that is, `:some_text` versus `"some text"`.
-We use `Symbol`s a lot in data manipulations with the `DataFrames.jl` package (@sec:dataframes) and data visualizations with `Makie.jl` package (@sec:DataVisualizationMakie).
+We use `Symbol`s a lot in data manipulations with the `DataFrames.jl` package (@sec:dataframes) and data visualizations with the `Makie.jl` package (@sec:DataVisualizationMakie).
 
 ### Splat Operator {#sec:splat}
 
@@ -1838,7 +1838,7 @@ Julia has native filesystem capabilities that can **handle all different OS dema
 They are located in the [`Filesystem`](https://docs.julialang.org/en/v1/base/file/) module from the core `Base` Julia library.
 This means that Julia provides everything you need to make your code perform flawlessly in any OS that you want to.
 
-Whenever you are dealing with files such as CSV, Excel files or other Julia scripts, make sure that your code is **compliant with all different OS filesystems**.
+Whenever you are dealing with files such as CSV, Excel files or other Julia scripts, make sure that your code **works on different OS filesystems**.
 This is easily accomplished with the `joinpath` and `pwd` functions.
 
 The `pwd` function is an acronym for **p**rint **w**orking **d**irectory and it returns a string containing the current working directory.

@@ -16,5 +16,5 @@ _build/* text
 # Data files
 *.csv   text
 
-# Devcontainer shell files
-.devcontainer/*.sh linguist-generated
+# Devcontainer files
+.devcontainer/* linguist-generated

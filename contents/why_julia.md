@@ -137,7 +137,7 @@ We don't know any other serious language that would want to be hard and slow, so
 Very fast!**
 It was designed for speed from the beginning.
 It accomplishes this by multiple dispatch.
-Basically, the idea is to generate very efficient LLVM^[LLVM stands for **L**ow **L**evel **V**irtual **M**achine, you can find more in <https://llvm.org>] code.
+Basically, the idea is to generate very efficient LLVM[^LLVM] code.
 LLVM code, also known as LLVM instructions, are very low-level, that is, very close to the actual operations that your computer is executing.
 So, in essence, Julia converts your hand written and easy to read code to LLVM machine code which is very hard for humans to read, but easy for computers to read.
 For example, if you define a function taking one argument and pass an integer into the function, then Julia will create a _specialized_ `MethodInstance`.
@@ -150,6 +150,8 @@ Then, the `MethodInstance` has to be recreated which takes time.
 Also, the trade-off is that it takes time to infer what can be hardcoded and what not.
 This explains why it can often take very long before Julia does the first thing:
 in the background, it is optimizing your code.
+
+[^LLVM]: LLVM stands for **L**ow **L**evel **V**irtual **M**achine, you can find more in <http://llvm.org>.
 
 The compiler in turns does what it does best: it optimizes machine code^[if you like to learn more about how Julia is designed you should definitely check @bezanson2017julia.].
 You can find [benchmarks](https://julialang.org/benchmarks/) for Julia and several other languages here.

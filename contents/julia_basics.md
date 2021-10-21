@@ -986,13 +986,13 @@ In its most basic form, arrays hold multiple objects.
 For example, they can hold multiple numbers in one-dimension:
 
 ```jl
-myarray = [1, 2, 3]
+sco("myarray = [1, 2, 3]")
 ```
 
 Most of the time you would want **arrays of a single type for performance issues**, but note that they can also hold objects of different types:
 
 ```jl
-myarray = ["text", 1, :symbol]
+sco("myarray = [\"text\", 1, :symbol]"; process=output_block)
 ```
 
 They are the "bread and butter" of data scientist, because arrays are what underlies most of **data manipulation** and **data visualization** workflows.

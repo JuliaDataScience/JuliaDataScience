@@ -1,5 +1,6 @@
 # LaTeX Stuff
 pandoc/references.bib linguist-generated
+*.tex linguist-generated
 
 # Site
 _build/* text

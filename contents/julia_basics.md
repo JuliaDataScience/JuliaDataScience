@@ -1886,7 +1886,7 @@ It's a good habit to pick up, because it's very likely to save problems later.
 
 ## Julia Standard Library {#sec:standardlibrary}
 
-Julia has a rich standard library that ships with *every* Julia installation.
+Julia has a **rich standard library** that ships with *every* Julia installation.
 Contrary to everything that we have seen so far, e.g. types, data structures and filesystem; you **must import standard library modules into your environment** to use a particular module or function.
 
 This is done with the `using` keyword:
@@ -2203,9 +2203,9 @@ DateTime(today()) - DateTime(my_birthday)
 
 #### Date Intervals {#sec:dates_intervals}
 
-One nice thing about `Dates` module is that we can also easily construct date and time intervals.
+One nice thing about `Dates` module is that we can also easily construct **date and time intervals**.
 Julia is clever enough to not have to define the whole interval types and operations that we covered in @sec:ranges.
-It just extends the functions and operations defined for `UnitRange` to `Date`'s types.
+It just extends the functions and operations defined for range to `Date`'s types.
 This is known as multiple dispatch and we already covered this in *Why Julia?*(@sec:why_julia).
 
 For example suppose you want to create a `Day` interval.
@@ -2339,7 +2339,7 @@ rand(1.0:10.0)
 ```
 
 You can also specify a different step size inside the interval and a different type.
-Here we are using numbers without the `.` so Julia will interpret them as `Int64`:
+Here we are using numbers without the dot `.` so Julia will interpret them as `Int64`:
 
 ```jl
 scob(
@@ -2403,7 +2403,7 @@ rand(1.0:3.0, (2, 2))
 
 #### `randn` {#sec:random_randn}
 
-`randn` follows the same general principle from `rand` but now it only returns numbers generated from the standard normal distribution.
+`randn` follows the same general principle from `rand` but now it only returns numbers generated from the **standard normal distribution**.
 The standard normal distribution is the normal distribution with mean 0 and standard deviation 1.
 The default type is `Float64` and it only allows for subtypes of `AbstractFloat` or `Complex`:
 
@@ -2428,8 +2428,8 @@ randn((2, 2))
 #### `seed!` {#sec:random_seed}
 
 To finish off the `Random` overview, let's talk about **reproducibility**.
-Often, we want to make something replicable.
-Meaning that, we want the random number generator to generate the same random sequence of numbers,
+Often, we want to make something **replicable**.
+Meaning that, we want the random number generator to generate the **same random sequence of numbers**,
 despite how paradoxical that might sound...
 We can do so with the `seed!` function.
 
@@ -2490,7 +2490,7 @@ rand(my_seed, 3)
 
 ### Downloads {#sec:downloads}
 
-One last thing from Julia's standard library for us to cover is the `Download` module.
+One last thing from Julia's standard library for us to cover is the **`Download` module**.
 It will be really brief because we will only be covering a single function named `download`.
 
 Suppose you want to **download a file from the internet to your local storage**.

@@ -108,14 +108,14 @@ For example, Python's `pandas` uses its own `Datetime` type to handle dates.
 The same with R tidyverse's `lubridate` package, which also defines its own `datetime` type to handle dates.
 Julia doesn't need any of this, it has all the date stuff already baked into its standard library.
 This means that other packages don't have to worry about dates.
-They just have to extend the Dates type to new functionalities by defining new functions and do not need to define new types.
+They just have to extend Julia's `DateTime` type to new functionalities by defining new functions and do not need to define new types.
 Julia's `Dates` module can do amazing stuff, but we are getting ahead of ourselves now.
 Let's talk about some other features of Julia.
 
 ### Julia Versus Other Programming Languages
 
 In [@fig:language_comparison], a highly opinionated representation is shown that divides the main open source and scientific computing languages in a 2x2 diagram with two axes:
-Slow-Fast and Easy-Hard.
+**Slow-Fast** and **Easy-Hard**.
 We've omitted closed source languages because there are many benefits to allowing other people to run your code for free as well as being able to inspect the source code in case of issues.
 
 We've put C++ and FORTRAN in the hard and fast quadrant.
@@ -137,7 +137,7 @@ We don't know any other serious language that would want to be hard and slow, so
 Very fast!**
 It was designed for speed from the beginning.
 It accomplishes this by multiple dispatch.
-Basically, the idea is to generate very efficient LLVM code.
+Basically, the idea is to generate very efficient LLVM[^LLVM] code.
 LLVM code, also known as LLVM instructions, are very low-level, that is, very close to the actual operations that your computer is executing.
 So, in essence, Julia converts your hand written and easy to read code to LLVM machine code which is very hard for humans to read, but easy for computers to read.
 For example, if you define a function taking one argument and pass an integer into the function, then Julia will create a _specialized_ `MethodInstance`.
@@ -181,7 +181,7 @@ This means no more using `sigma` or `sigma_i`, and instead just use $σ$ or $σ�
 When you see code for an algorithm or for a mathematical equation, you see almost the same notation and idioms.
 We call this feature **"One-To-One Code and Math Relation"** which is a powerful feature.
 
-We think that the "Two-Language problem" and the "One-To-One Code and Math Relation" are best described by one of the creators of Julia, Alan Edelman, in a TEDx Talk [@tedxtalksProgrammingLanguageHeal2020]
+We think that the "Two-Language problem" and the "One-To-One Code and Math Relation" are best described by one of the creators of Julia, Alan Edelman, in a [TEDx Talk](https://youtu.be/qGW0GT1rCvs) [@tedxtalksProgrammingLanguageHeal2020].
 
 <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/qGW0GT1rCvs' frameborder='0' allowfullscreen></iframe></div>
 
@@ -209,6 +209,7 @@ We proceed by defining a new function signature of the `+` operator from the `Ba
 s = """
     import Base: +
     +(F::fox, C::chicken) = "trouble"
+    +(C::chicken, F::fox) = "trouble"
     +(C1::chicken, C2::chicken) = "safe"
     """
 sco(s)
@@ -276,3 +277,4 @@ It was presented as a [poster](https://chrisrackauckas.com/assets/Posters/ACoP11
 If this is not enough, there are more case studies in [Julia Computing website](https://juliacomputing.com/case-studies/).
 
 [^readable]: no C++ or FORTRAN API calls.
+[^LLVM]: LLVM stands for **L**ow **L**evel **V**irtual **M**achine, you can find more in [llvm.org](http://llvm.org).

@@ -25,7 +25,7 @@ Also, you don't need to explicitly specify each type.
 Julia will guess types for you on the go.
 
 The main differences between Julia and other dynamic languages such as R and Python are the following.
-First, Julia, contrary to R, **allows the user to specify type declarations**.
+First, Julia **allows the user to specify type declarations**.
 You already saw some types declarations in *Why Julia?* (@sec:why_julia): they are those double colons `::` that sometimes come after variables.
 However, if you don't want to specify the type of your variables or functions, Julia will gladly infer (guess) them for you.
 
@@ -68,7 +68,7 @@ scob("name")
 
 If you want to define new values for an existing variable, you can repeat the steps in the assignment.
 Note that Julia will now override the previous value with the new one.
-Supposed, `jl name`'s birthday has passed and now it has turned `jl age+1`:
+Supposed, Julia's birthday has passed and now it has turned 10:
 
 ```jl
 scob("age = 10")
@@ -85,7 +85,7 @@ scob(s)
 ```
 
 We can also do operations on variables such as addition or division.
-Let's see how old `jl name` is, in months, by multiplying `age` by 12:
+Let's see how old Julia is, in months, by multiplying `age` by 12:
 
 ```jl
 s = "12 * age"
@@ -321,7 +321,7 @@ sco("methods(round_number)")
 There is one issue: what happens if we want to round a 32-bit float `Float32`?
 Or a 8-bit integer `Int8`?
 
-If you want something to function on all float and integer types, you can use an abstract type as the type signature, such as `AbstractFloat` or `Integer`:
+If you want something to function on all float and integer types, you can use an **abstract type** as the type signature, such as `AbstractFloat` or `Integer`:
 
 ```jl
 s = """
@@ -350,7 +350,7 @@ This is an example of multiple dispatch.
 We will extend the `Base.show` function that prints the output of instantiated types and `struct`s.
 
 By default, a `struct` has a basic output, which you saw above in the `python` case.
-We can define `Base.show` function to our `Language` type, so that we have some nice printing for our programming languages instances.
+We can define a new `Base.show` method to our `Language` type, so that we have some nice printing for our programming languages instances.
 We want to clearly communicate programming languages' names, titles, and ages in years.
 The function `Base.show` accepts as arguments a `IO` type named `io` followed by the type you want to define custom behavior:
 
@@ -429,7 +429,7 @@ s = """
 sco(s)
 ```
 
-It works without specifying the `base` argument:
+It works without specifying the `base` argument as we supplied a **default argument value** in the function declaration:
 
 ```jl
 scob("logarithm(10)")
@@ -812,8 +812,8 @@ scob(s)
 
 #### String Conversions {#sec:string_conversions}
 
-Often, we need to convert between types in Julia.
-We can use the `string` function:
+Often, we need to **convert** between types in Julia.
+To convert a number to a string we can use the `string` function:
 
 ```jl
 s = """
@@ -938,7 +938,7 @@ sco(s)
 
 ### Ranges {#sec:ranges}
 
-A range in Julia represents an interval between start and stop boundaries.
+A **range** in Julia represents an interval between start and stop boundaries.
 The syntax is `start:stop`:
 
 ```jl
@@ -971,18 +971,18 @@ For example, suppose we want a range of `Float64` from 0 to 1 with steps of size
 sco("0.0:0.2:1.0")
 ```
 
-If you want to "materialize" a `UnitRange` into a collection, you can use the function `collect`:
+If you want to "materialize" a range into a collection, you can use the function `collect`:
 
 ```jl
 sco("collect(1:10)")
 ```
 
-We have an array of the type specified in the `UnitRange` between the boundaries that we've set.
+We have an array of the type specified in the range between the boundaries that we've set.
 Speaking of arrays, let's talk about them.
 
 ### Array {#sec:array}
 
-In its most basic form, arrays hold multiple objects.
+In its most basic form, **array**s hold multiple objects.
 For example, they can hold multiple numbers in one-dimension:
 
 ```jl
@@ -1001,7 +1001,7 @@ Therefore, **Arrays are an essential data structure**.
 
 #### Array Types {#sec:array_types}
 
-Let's start with array types.
+Let's start with **array types**.
 There are several, but we will focus on the two most used in data science:
 
 * `Vector{T}`: **one-dimensional** array. Alias for `Array{T, 1}`.
@@ -1016,7 +1016,7 @@ But, we can use the handy aliases `Vector` and `Matrix` for clear and concise sy
 
 #### Array Construction {#sec:array_construction}
 
-How do we construct an array?
+How do we **construct** an array?
 In this section, we start by constructing arrays in a low-level way.
 This can be necessary to write high performing code in some situations.
 However, in most situations, this is not necessary, and we can safely use more convenient methods to create arrays.
@@ -1150,7 +1150,7 @@ sco(s)
 Another powerful way to create an array is to write an **array comprehension**.
 This way of creating arrays is better in most cases: it avoids loops, indexing, and other error-prone operations.
 You specify what you want to do inside the `[]` brackets.
-For example, say we want to create a vector of squares from 1 to 100:
+For example, say we want to create a vector of squares from 1 to 10:
 
 ```jl
 s = """
@@ -1223,7 +1223,7 @@ And, we can concatenate arrays to create new arrays:
 
 #### Array Inspection {#sec:array_inspection}
 
-Once we have arrays, the next logical step is to inspect them.
+Once we have arrays, the next logical step is to **inspect** them.
 There are a lot of handy functions that allow the user to have an insight into any array.
 
 It is most useful to know what **type of elements** are inside an array.
@@ -1233,7 +1233,7 @@ We can do this with `eltype`:
 sco("eltype(my_matrix_π)")
 ```
 
-After knowing its types, one might be interested in array dimensions.
+After knowing its types, one might be interested in **array dimensions**.
 Julia has several functions to inspect array dimensions:
 
 * `length`: total number of elements
@@ -1281,7 +1281,7 @@ s = """
 sc(s)
 ```
 
-Let's first see an example with vectors.
+Let's start with vectors.
 Suppose that you want the second element of a vector.
 You append `[]` brackets with the desired **index** inside:
 
@@ -1297,7 +1297,7 @@ Let's retrieve the element from the second row (first dimension) and first colum
 scob("my_example_matrix[2, 1]")
 ```
 
-Julia also has conventional keywords for the first and last elements of an array: `begin` and `end`.
+Julia also has conventional keywords for the **first** and **last** elements of an array: `begin` and `end`.
 For example, the second to last element of a vector can be retrieved as:
 
 ```jl
@@ -1321,7 +1321,7 @@ sco("my_example_vector[2:4]")
 ```
 
 We could do the same with matrices.
-Particularly with matrices if we want to select all elements in a following dimension we can do so with just a colon `:`.
+Particularly with matrices if we want to select **all elements** in a following dimension we can do so with just a colon `:`.
 For example, to get all the elements in the second row:
 
 ```jl
@@ -1338,7 +1338,7 @@ sco("my_example_matrix[begin+1:end, end]")
 
 #### Array Manipulations {#sec:array_manipulation}
 
-There are several ways we could manipulate an array.
+There are several ways we could **manipulate** an array.
 The first would be to manipulate a **singular element of the array**.
 We just index the array by the desired element and proceed with an assignment `=`:
 
@@ -1628,7 +1628,7 @@ The first is using the **default constructor `Dict` and passing a vector of tupl
 ```jl
 sco(
 """
-my_dict = Dict([("one", 1), ("two", 2)])
+my_dict_from_tuples = Dict([("one", 1), ("two", 2)])
 """
 )
 ```
@@ -1769,7 +1769,7 @@ sym = Symbol(s)
 ```
 
 One simple benefit of symbols is that you have to type one character less, that is, `:some_text` versus `"some text"`.
-We use `Symbol`s a lot in data manipulations with the `DataFrames.jl` package (@sec:dataframes) and data visualizations (@sec:DataVisualizationMakie).
+We use `Symbol`s a lot in data manipulations with the `DataFrames.jl` package (@sec:dataframes) and data visualizations with `Makie.jl` package (@sec:DataVisualizationMakie).
 
 ### Splat Operator {#sec:splat}
 

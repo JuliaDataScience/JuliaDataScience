@@ -25,7 +25,7 @@ Also, you don't need to explicitly specify each type.
 Julia will guess types for you on the go.
 
 The main differences between Julia and other dynamic languages such as R and Python are the following.
-First, Julia, contrary to R, **allows the user to specify type declarations**.
+First, Julia **allows the user to specify type declarations**.
 You already saw some types declarations in *Why Julia?* (@sec:why_julia): they are those double colons `::` that sometimes come after variables.
 However, if you don't want to specify the type of your variables or functions, Julia will gladly infer (guess) them for you.
 
@@ -68,7 +68,7 @@ scob("name")
 
 If you want to define new values for an existing variable, you can repeat the steps in the assignment.
 Note that Julia will now override the previous value with the new one.
-Supposed, `jl name`'s birthday has passed and now it has turned `jl age+1`:
+Supposed, Julia's birthday has passed and now it has turned 10:
 
 ```jl
 scob("age = 10")
@@ -85,7 +85,7 @@ scob(s)
 ```
 
 We can also do operations on variables such as addition or division.
-Let's see how old `jl name` is, in months, by multiplying `age` by 12:
+Let's see how old Julia is, in months, by multiplying `age` by 12:
 
 ```jl
 s = "12 * age"
@@ -321,7 +321,7 @@ sco("methods(round_number)")
 There is one issue: what happens if we want to round a 32-bit float `Float32`?
 Or a 8-bit integer `Int8`?
 
-If you want something to function on all float and integer types, you can use an abstract type as the type signature, such as `AbstractFloat` or `Integer`:
+If you want something to function on all float and integer types, you can use an **abstract type** as the type signature, such as `AbstractFloat` or `Integer`:
 
 ```jl
 s = """
@@ -350,7 +350,7 @@ This is an example of multiple dispatch.
 We will extend the `Base.show` function that prints the output of instantiated types and `struct`s.
 
 By default, a `struct` has a basic output, which you saw above in the `python` case.
-We can define `Base.show` function to our `Language` type, so that we have some nice printing for our programming languages instances.
+We can define a new `Base.show` method to our `Language` type, so that we have some nice printing for our programming languages instances.
 We want to clearly communicate programming languages' names, titles, and ages in years.
 The function `Base.show` accepts as arguments a `IO` type named `io` followed by the type you want to define custom behavior:
 
@@ -429,7 +429,7 @@ s = """
 sco(s)
 ```
 
-It works without specifying the `base` argument:
+It works without specifying the `base` argument as we supplied a **default argument value** in the function declaration:
 
 ```jl
 scob("logarithm(10)")
@@ -782,38 +782,38 @@ scob(s)
 
 2. `lowercase`, `uppercase`, `titlecase` and `lowercasefirst`:
 
-    ```jl
-    scob("lowercase(julia_string)")
-    ```
+     ```jl
+     scob("lowercase(julia_string)")
+     ```
 
-    ```jl
-    scob("uppercase(julia_string)")
-    ```
+     ```jl
+     scob("uppercase(julia_string)")
+     ```
 
-    ```jl
-    scob("titlecase(julia_string)")
-    ```
+     ```jl
+     scob("titlecase(julia_string)")
+     ```
 
-    ```jl
-    scob("lowercasefirst(julia_string)")
-    ```
+     ```jl
+     scob("lowercasefirst(julia_string)")
+     ```
 
 3. `replace`: introduces a new syntax, called the `Pair`
 
-    ```jl
-    scob("""replace(julia_string, "amazing" => "awesome")""")
-    ```
+     ```jl
+     scob("""replace(julia_string, "amazing" => "awesome")""")
+     ```
 
 4. `split`: breaks up a string by a delimiter:
 
-    ```jl
-    sco("""split(julia_string, " ")""")
-    ```
+     ```jl
+     sco("""split(julia_string, " ")""")
+     ```
 
 #### String Conversions {#sec:string_conversions}
 
-Often, we need to convert between types in Julia.
-We can use the `string` function:
+Often, we need to **convert** between types in Julia.
+To convert a number to a string we can use the `string` function:
 
 ```jl
 s = """
@@ -938,7 +938,7 @@ sco(s)
 
 ### Ranges {#sec:ranges}
 
-A range in Julia represents an interval between start and stop boundaries.
+A **range** in Julia represents an interval between start and stop boundaries.
 The syntax is `start:stop`:
 
 ```jl
@@ -971,28 +971,28 @@ For example, suppose we want a range of `Float64` from 0 to 1 with steps of size
 sco("0.0:0.2:1.0")
 ```
 
-If you want to "materialize" a `UnitRange` into a collection, you can use the function `collect`:
+If you want to "materialize" a range into a collection, you can use the function `collect`:
 
 ```jl
 sco("collect(1:10)")
 ```
 
-We have an array of the type specified in the `UnitRange` between the boundaries that we've set.
+We have an array of the type specified in the range between the boundaries that we've set.
 Speaking of arrays, let's talk about them.
 
 ### Array {#sec:array}
 
-In its most basic form, arrays hold multiple objects.
+In its most basic form, **array**s hold multiple objects.
 For example, they can hold multiple numbers in one-dimension:
 
 ```jl
-myarray = [1, 2, 3]
+sco("myarray = [1, 2, 3]")
 ```
 
 Most of the time you would want **arrays of a single type for performance issues**, but note that they can also hold objects of different types:
 
 ```jl
-myarray = ["text", 1, :symbol]
+sco("myarray = [\"text\", 1, :symbol]"; process=output_block)
 ```
 
 They are the "bread and butter" of data scientist, because arrays are what underlies most of **data manipulation** and **data visualization** workflows.
@@ -1001,7 +1001,7 @@ Therefore, **Arrays are an essential data structure**.
 
 #### Array Types {#sec:array_types}
 
-Let's start with array types.
+Let's start with **array types**.
 There are several, but we will focus on the two most used in data science:
 
 * `Vector{T}`: **one-dimensional** array. Alias for `Array{T, 1}`.
@@ -1016,7 +1016,7 @@ But, we can use the handy aliases `Vector` and `Matrix` for clear and concise sy
 
 #### Array Construction {#sec:array_construction}
 
-How do we construct an array?
+How do we **construct** an array?
 In this section, we start by constructing arrays in a low-level way.
 This can be necessary to write high performing code in some situations.
 However, in most situations, this is not necessary, and we can safely use more convenient methods to create arrays.
@@ -1049,35 +1049,35 @@ We also have some **syntax aliases** for the most common elements in array const
 * `zeros` for all elements being initialized to zero.
   Note that the default type is `Float64` which can be changed if necessary:
 
-    ```jl
-    s = """
-        my_vector_zeros = zeros(10)
-        """
-    sco(s)
-    ```
+     ```jl
+     s = """
+         my_vector_zeros = zeros(10)
+         """
+     sco(s)
+     ```
 
-    ```jl
-    s = """
-        my_matrix_zeros = zeros(Int64, 10, 2)
-        """
-    sco(s)
-    ```
+     ```jl
+     s = """
+         my_matrix_zeros = zeros(Int64, 10, 2)
+         """
+     sco(s)
+     ```
 
 * `ones` for all elements being initialized to one:
 
-    ```jl
-    s = """
-        my_vector_ones = ones(Int64, 10)
-        """
-    sco(s)
-    ```
+     ```jl
+     s = """
+         my_vector_ones = ones(Int64, 10)
+         """
+     sco(s)
+     ```
 
-    ```jl
-    s = """
-        my_matrix_ones = ones(10, 2)
-        """
-    sco(s)
-    ```
+     ```jl
+     s = """
+         my_matrix_ones = ones(10, 2)
+         """
+     sco(s)
+     ```
 
 For other elements, we can first instantiate an array with `undef` elements and use the `fill!` function to fill all elements of an array with the desired element.
 Here's an example with `3.14` ($\pi$):
@@ -1150,7 +1150,7 @@ sco(s)
 Another powerful way to create an array is to write an **array comprehension**.
 This way of creating arrays is better in most cases: it avoids loops, indexing, and other error-prone operations.
 You specify what you want to do inside the `[]` brackets.
-For example, say we want to create a vector of squares from 1 to 100:
+For example, say we want to create a vector of squares from 1 to 10:
 
 ```jl
 s = """
@@ -1201,29 +1201,29 @@ And, we can concatenate arrays to create new arrays:
 
 * `cat`: concatenate input arrays along a specific dimension `dims`
 
-    ```jl
-    sco("cat(ones(2), zeros(2), dims=1)")
-    ```
+     ```jl
+     sco("cat(ones(2), zeros(2), dims=1)")
+     ```
 
-    ```jl
-    sco("cat(ones(2), zeros(2), dims=2)")
-    ```
+     ```jl
+     sco("cat(ones(2), zeros(2), dims=2)")
+     ```
 
 * `vcat`: vertical concatenation, a shorthand for `cat(...; dims=1)`
 
-    ```jl
-    sco("vcat(ones(2), zeros(2))")
-    ```
+     ```jl
+     sco("vcat(ones(2), zeros(2))")
+     ```
 
 * `hcat`: horizontal concatenation, a shorthand for `cat(...; dims=2)`
 
-    ```jl
-    sco("hcat(ones(2), zeros(2))")
-    ```
+     ```jl
+     sco("hcat(ones(2), zeros(2))")
+     ```
 
 #### Array Inspection {#sec:array_inspection}
 
-Once we have arrays, the next logical step is to inspect them.
+Once we have arrays, the next logical step is to **inspect** them.
 There are a lot of handy functions that allow the user to have an insight into any array.
 
 It is most useful to know what **type of elements** are inside an array.
@@ -1233,34 +1233,34 @@ We can do this with `eltype`:
 sco("eltype(my_matrix_π)")
 ```
 
-After knowing its types, one might be interested in array dimensions.
+After knowing its types, one might be interested in **array dimensions**.
 Julia has several functions to inspect array dimensions:
 
 * `length`: total number of elements
 
-    ```jl
-    scob("length(my_matrix_π)")
-    ```
+     ```jl
+     scob("length(my_matrix_π)")
+     ```
 
 * `ndims`: number of dimensions
 
-    ```jl
-    scob("ndims(my_matrix_π)")
-    ```
+     ```jl
+     scob("ndims(my_matrix_π)")
+     ```
 
 * `size`: this one is a little tricky.
     By default it will return a tuple containing the array's dimensions.
 
-    ```jl
-    sco("size(my_matrix_π)")
-    ```
+     ```jl
+     sco("size(my_matrix_π)")
+     ```
 
     You can get a specific dimension with a second argument to `size`.
     Here, the the second axis is columns
 
-    ```jl
-    scob("size(my_matrix_π, 2)")
-    ```
+     ```jl
+     scob("size(my_matrix_π, 2)")
+     ```
 
 #### Array Indexing and Slicing {#sec:array_indexing}
 
@@ -1281,7 +1281,7 @@ s = """
 sc(s)
 ```
 
-Let's first see an example with vectors.
+Let's start with vectors.
 Suppose that you want the second element of a vector.
 You append `[]` brackets with the desired **index** inside:
 
@@ -1297,7 +1297,7 @@ Let's retrieve the element from the second row (first dimension) and first colum
 scob("my_example_matrix[2, 1]")
 ```
 
-Julia also has conventional keywords for the first and last elements of an array: `begin` and `end`.
+Julia also has conventional keywords for the **first** and **last** elements of an array: `begin` and `end`.
 For example, the second to last element of a vector can be retrieved as:
 
 ```jl
@@ -1321,7 +1321,7 @@ sco("my_example_vector[2:4]")
 ```
 
 We could do the same with matrices.
-Particularly with matrices if we want to select all elements in a following dimension we can do so with just a colon `:`.
+Particularly with matrices if we want to select **all elements** in a following dimension we can do so with just a colon `:`.
 For example, to get all the elements in the second row:
 
 ```jl
@@ -1338,7 +1338,7 @@ sco("my_example_matrix[begin+1:end, end]")
 
 #### Array Manipulations {#sec:array_manipulation}
 
-There are several ways we could manipulate an array.
+There are several ways we could **manipulate** an array.
 The first would be to manipulate a **singular element of the array**.
 We just index the array by the desired element and proceed with an assignment `=`:
 
@@ -1554,23 +1554,23 @@ There are some handy functions to iterate over matrices.
 
 * `eachcol`: iterates over an array column first
 
-    ```jl
-    sco(
-    """
-    first(eachcol(column_major))
-    """
-    )
-    ```
+     ```jl
+     sco(
+     """
+     first(eachcol(column_major))
+     """
+     )
+     ```
 
 * `eachrow`: iterates over an array row first
 
-    ```jl
-    sco(
-    """
-    first(eachrow(column_major))
-    """
-    )
-    ```
+     ```jl
+     sco(
+     """
+     first(eachrow(column_major))
+     """
+     )
+     ```
 
 ### Pair {#sec:pair}
 
@@ -1628,7 +1628,7 @@ The first is using the **default constructor `Dict` and passing a vector of tupl
 ```jl
 sco(
 """
-my_dict = Dict([("one", 1), ("two", 2)])
+my_dict_from_tuples = Dict([("one", 1), ("two", 2)])
 """
 )
 ```
@@ -1769,7 +1769,7 @@ sym = Symbol(s)
 ```
 
 One simple benefit of symbols is that you have to type one character less, that is, `:some_text` versus `"some text"`.
-We use `Symbol`s a lot in data manipulations with the `DataFrames.jl` package (@sec:dataframes) and data visualizations (@sec:DataVisualizationMakie).
+We use `Symbol`s a lot in data manipulations with the `DataFrames.jl` package (@sec:dataframes) and data visualizations with the `Makie.jl` package (@sec:DataVisualizationMakie).
 
 ### Splat Operator {#sec:splat}
 
@@ -1838,7 +1838,7 @@ Julia has native filesystem capabilities that can **handle all different OS dema
 They are located in the [`Filesystem`](https://docs.julialang.org/en/v1/base/file/) module from the core `Base` Julia library.
 This means that Julia provides everything you need to make your code perform flawlessly in any OS that you want to.
 
-Whenever you are dealing with files such as CSV, Excel files or other Julia scripts, make sure that your code is compliant with all different OS filesystems.
+Whenever you are dealing with files such as CSV, Excel files or other Julia scripts, make sure that your code **works on different OS filesystems**.
 This is easily accomplished with the `joinpath` and `pwd` functions.
 
 The `pwd` function is an acronym for **p**rint **w**orking **d**irectory and it returns a string containing the current working directory.
@@ -1868,7 +1868,7 @@ joinpath(root, "my_script.jl")
 )
 ```
 
-`joinpath` also handles subfolders.
+`joinpath` also handles **subfolders**.
 Let's now imagine a common situation where you have a folder named `data/` in your project's directory.
 Inside this folder there is a CSV file named `my_data.csv`.
 You can have the same robust representation of the filepath to `my_data.csv` as:
@@ -1886,7 +1886,7 @@ It's a good habit to pick up, because it's very likely to save problems later.
 
 ## Julia Standard Library {#sec:standardlibrary}
 
-Julia has a rich standard library that ships with *every* Julia installation.
+Julia has a **rich standard library** that ships with *every* Julia installation.
 Contrary to everything that we have seen so far, e.g. types, data structures and filesystem; you **must import standard library modules into your environment** to use a particular module or function.
 
 This is done with the `using` keyword:
@@ -2203,9 +2203,9 @@ DateTime(today()) - DateTime(my_birthday)
 
 #### Date Intervals {#sec:dates_intervals}
 
-One nice thing about `Dates` module is that we can also easily construct date and time intervals.
+One nice thing about `Dates` module is that we can also easily construct **date and time intervals**.
 Julia is clever enough to not have to define the whole interval types and operations that we covered in @sec:ranges.
-It just extends the functions and operations defined for `UnitRange` to `Date`'s types.
+It just extends the functions and operations defined for range to `Date`'s types.
 This is known as multiple dispatch and we already covered this in *Why Julia?*(@sec:why_julia).
 
 For example suppose you want to create a `Day` interval.
@@ -2339,7 +2339,7 @@ rand(1.0:10.0)
 ```
 
 You can also specify a different step size inside the interval and a different type.
-Here we are using numbers without the `.` so Julia will interpret them as `Int64`:
+Here we are using numbers without the dot `.` so Julia will interpret them as `Int64`:
 
 ```jl
 scob(
@@ -2403,7 +2403,7 @@ rand(1.0:3.0, (2, 2))
 
 #### `randn` {#sec:random_randn}
 
-`randn` follows the same general principle from `rand` but now it only returns numbers generated from the standard normal distribution.
+`randn` follows the same general principle from `rand` but now it only returns numbers generated from the **standard normal distribution**.
 The standard normal distribution is the normal distribution with mean 0 and standard deviation 1.
 The default type is `Float64` and it only allows for subtypes of `AbstractFloat` or `Complex`:
 
@@ -2428,8 +2428,8 @@ randn((2, 2))
 #### `seed!` {#sec:random_seed}
 
 To finish off the `Random` overview, let's talk about **reproducibility**.
-Often, we want to make something replicable.
-Meaning that, we want the random number generator to generate the same random sequence of numbers,
+Often, we want to make something **replicable**.
+Meaning that, we want the random number generator to generate the **same random sequence of numbers**,
 despite how paradoxical that might sound...
 We can do so with the `seed!` function.
 
@@ -2490,7 +2490,7 @@ rand(my_seed, 3)
 
 ### Downloads {#sec:downloads}
 
-One last thing from Julia's standard library for us to cover is the `Download` module.
+One last thing from Julia's standard library for us to cover is the **`Download` module**.
 It will be really brief because we will only be covering a single function named `download`.
 
 Suppose you want to **download a file from the internet to your local storage**.

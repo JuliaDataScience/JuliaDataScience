@@ -1838,7 +1838,7 @@ Julia has native filesystem capabilities that can **handle all different OS dema
 They are located in the [`Filesystem`](https://docs.julialang.org/en/v1/base/file/) module from the core `Base` Julia library.
 This means that Julia provides everything you need to make your code perform flawlessly in any OS that you want to.
 
-Whenever you are dealing with files such as CSV, Excel files or other Julia scripts, make sure that your code is compliant with all different OS filesystems.
+Whenever you are dealing with files such as CSV, Excel files or other Julia scripts, make sure that your code is **compliant with all different OS filesystems**.
 This is easily accomplished with the `joinpath` and `pwd` functions.
 
 The `pwd` function is an acronym for **p**rint **w**orking **d**irectory and it returns a string containing the current working directory.
@@ -1868,7 +1868,7 @@ joinpath(root, "my_script.jl")
 )
 ```
 
-`joinpath` also handles subfolders.
+`joinpath` also handles **subfolders**.
 Let's now imagine a common situation where you have a folder named `data/` in your project's directory.
 Inside this folder there is a CSV file named `my_data.csv`.
 You can have the same robust representation of the filepath to `my_data.csv` as:

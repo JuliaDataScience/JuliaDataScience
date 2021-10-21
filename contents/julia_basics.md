@@ -413,7 +413,6 @@ In that case, we can do two things:
 
 Some functions can accept keyword arguments instead of positional arguments.
 These arguments are just like regular arguments, except that they are defined after the regular function's arguments and separated by a semicolon `;`.
-Another difference is that we must supply a **default value** for every keyword argument.
 For example, let's define a `logarithm` function that by default uses base $e$ (2.718281828459045) as a keyword argument.
 Note that, here, we are using the abstract type `Real` so that we cover all types derived from `Integer` and `AbstractFloat`, being both themselves subtypes of `Real`:
 

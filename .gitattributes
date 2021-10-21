@@ -1,5 +1,6 @@
 # LaTeX Stuff
 pandoc/references.bib linguist-generated
+*.tex linguist-generated
 
 # Site
 _build/* text
@@ -14,3 +15,6 @@ _build/* text
 
 # Data files
 *.csv   text
+
+# Devcontainer shell files
+.devcontainer/*.sh linguist-generated

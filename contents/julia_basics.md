@@ -782,33 +782,33 @@ scob(s)
 
 2. `lowercase`, `uppercase`, `titlecase` and `lowercasefirst`:
 
-    ```jl
-    scob("lowercase(julia_string)")
-    ```
+     ```jl
+     scob("lowercase(julia_string)")
+     ```
 
-    ```jl
-    scob("uppercase(julia_string)")
-    ```
+     ```jl
+     scob("uppercase(julia_string)")
+     ```
 
-    ```jl
-    scob("titlecase(julia_string)")
-    ```
+     ```jl
+     scob("titlecase(julia_string)")
+     ```
 
-    ```jl
-    scob("lowercasefirst(julia_string)")
-    ```
+     ```jl
+     scob("lowercasefirst(julia_string)")
+     ```
 
 3. `replace`: introduces a new syntax, called the `Pair`
 
-    ```jl
-    scob("""replace(julia_string, "amazing" => "awesome")""")
-    ```
+     ```jl
+     scob("""replace(julia_string, "amazing" => "awesome")""")
+     ```
 
 4. `split`: breaks up a string by a delimiter:
 
-    ```jl
-    sco("""split(julia_string, " ")""")
-    ```
+     ```jl
+     sco("""split(julia_string, " ")""")
+     ```
 
 #### String Conversions {#sec:string_conversions}
 
@@ -1049,35 +1049,35 @@ We also have some **syntax aliases** for the most common elements in array const
 * `zeros` for all elements being initialized to zero.
   Note that the default type is `Float64` which can be changed if necessary:
 
-    ```jl
-    s = """
-        my_vector_zeros = zeros(10)
-        """
-    sco(s)
-    ```
+     ```jl
+     s = """
+         my_vector_zeros = zeros(10)
+         """
+     sco(s)
+     ```
 
-    ```jl
-    s = """
-        my_matrix_zeros = zeros(Int64, 10, 2)
-        """
-    sco(s)
-    ```
+     ```jl
+     s = """
+         my_matrix_zeros = zeros(Int64, 10, 2)
+         """
+     sco(s)
+     ```
 
 * `ones` for all elements being initialized to one:
 
-    ```jl
-    s = """
-        my_vector_ones = ones(Int64, 10)
-        """
-    sco(s)
-    ```
+     ```jl
+     s = """
+         my_vector_ones = ones(Int64, 10)
+         """
+     sco(s)
+     ```
 
-    ```jl
-    s = """
-        my_matrix_ones = ones(10, 2)
-        """
-    sco(s)
-    ```
+     ```jl
+     s = """
+         my_matrix_ones = ones(10, 2)
+         """
+     sco(s)
+     ```
 
 For other elements, we can first instantiate an array with `undef` elements and use the `fill!` function to fill all elements of an array with the desired element.
 Here's an example with `3.14` ($\pi$):
@@ -1201,25 +1201,25 @@ And, we can concatenate arrays to create new arrays:
 
 * `cat`: concatenate input arrays along a specific dimension `dims`
 
-    ```jl
-    sco("cat(ones(2), zeros(2), dims=1)")
-    ```
+     ```jl
+     sco("cat(ones(2), zeros(2), dims=1)")
+     ```
 
-    ```jl
-    sco("cat(ones(2), zeros(2), dims=2)")
-    ```
+     ```jl
+     sco("cat(ones(2), zeros(2), dims=2)")
+     ```
 
 * `vcat`: vertical concatenation, a shorthand for `cat(...; dims=1)`
 
-    ```jl
-    sco("vcat(ones(2), zeros(2))")
-    ```
+     ```jl
+     sco("vcat(ones(2), zeros(2))")
+     ```
 
 * `hcat`: horizontal concatenation, a shorthand for `cat(...; dims=2)`
 
-    ```jl
-    sco("hcat(ones(2), zeros(2))")
-    ```
+     ```jl
+     sco("hcat(ones(2), zeros(2))")
+     ```
 
 #### Array Inspection {#sec:array_inspection}
 
@@ -1238,29 +1238,29 @@ Julia has several functions to inspect array dimensions:
 
 * `length`: total number of elements
 
-    ```jl
-    scob("length(my_matrix_π)")
-    ```
+     ```jl
+     scob("length(my_matrix_π)")
+     ```
 
 * `ndims`: number of dimensions
 
-    ```jl
-    scob("ndims(my_matrix_π)")
-    ```
+     ```jl
+     scob("ndims(my_matrix_π)")
+     ```
 
 * `size`: this one is a little tricky.
     By default it will return a tuple containing the array's dimensions.
 
-    ```jl
-    sco("size(my_matrix_π)")
-    ```
+     ```jl
+     sco("size(my_matrix_π)")
+     ```
 
     You can get a specific dimension with a second argument to `size`.
     Here, the the second axis is columns
 
-    ```jl
-    scob("size(my_matrix_π, 2)")
-    ```
+     ```jl
+     scob("size(my_matrix_π, 2)")
+     ```
 
 #### Array Indexing and Slicing {#sec:array_indexing}
 
@@ -1554,23 +1554,23 @@ There are some handy functions to iterate over matrices.
 
 * `eachcol`: iterates over an array column first
 
-    ```jl
-    sco(
-    """
-    first(eachcol(column_major))
-    """
-    )
-    ```
+     ```jl
+     sco(
+     """
+     first(eachcol(column_major))
+     """
+     )
+     ```
 
 * `eachrow`: iterates over an array row first
 
-    ```jl
-    sco(
-    """
-    first(eachrow(column_major))
-    """
-    )
-    ```
+     ```jl
+     sco(
+     """
+     first(eachrow(column_major))
+     """
+     )
+     ```
 
 ### Pair {#sec:pair}
 

@@ -151,8 +151,6 @@ Also, the trade-off is that it takes time to infer what can be hardcoded and wha
 This explains why it can often take very long before Julia does the first thing:
 in the background, it is optimizing your code.
 
-[^LLVM]: LLVM stands for **L**ow **L**evel **V**irtual **M**achine, you can find more in <http://llvm.org>.
-
 The compiler in turns does what it does best: it optimizes machine code^[if you like to learn more about how Julia is designed you should definitely check @bezanson2017julia.].
 You can find [benchmarks](https://julialang.org/benchmarks/) for Julia and several other languages here.
 @fig:benchmarks was taken from [Julia's website benchmarks section^[please note that the Julia results depicted above do not include compile time.]](https://julialang.org/benchmarks/).
@@ -279,3 +277,4 @@ It was presented as a [poster](https://chrisrackauckas.com/assets/Posters/ACoP11
 If this is not enough, there are more case studies in [Julia Computing website](https://juliacomputing.com/case-studies/).
 
 [^readable]: no C++ or FORTRAN API calls.
+[^LLVM]: LLVM stands for **L**ow **L**evel **V**irtual **M**achine, you can find more in [llvm.org](http://llvm.org).

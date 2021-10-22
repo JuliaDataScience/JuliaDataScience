@@ -1509,7 +1509,7 @@ Julia, like most scientific programming languages, is "column-major".
 Column-major means that the elements in the column are stored next to each other in memory[^pointers].
 This also means that iterating over elements in a column is much quicker than over elements in a row.
 
-[^pointers]: or, that the pointers to the elements in the column are stored next to each other
+[^pointers]: or, that the memory address pointers to the elements in the column are stored next to each other
 
 Ok, let's show this in an example:
 
@@ -1601,7 +1601,7 @@ scob("first(my_pair)")
 scob("last(my_pair)")
 ```
 
-[^easier]: it is easier because `first` and `last` also work on many other types, so you need to remember less.
+[^easier]: it is easier because `first` and `last` also work on many other collections, so you need to remember less.
 
 Pairs will be used a lot in data manipulation and data visualization since both `DataFrames.jl` (@sec:dataframes) or `Makie.jl` (@sec:DataVisualizationMakie) take objects of type `Pair` in their main functions.
 For example, with `DataFrames.jl` we're going to see that `:a => :b` can be used to rename the column `:a` to `:b`.
@@ -1609,7 +1609,7 @@ For example, with `DataFrames.jl` we're going to see that `:a => :b` can be used
 ### Dict {#sec:dict}
 
 If you understood what a `Pair` is, then `Dict` won't be a problem.
-For all practical purposes, **`Dict`s are a mapping from key to value**.
+For all practical purposes, **`Dict`s are mappings from keys to values**.
 By mapping, we mean that if you give a `Dict` some key, then the `Dict` can tell you which value belongs to that key.
 `key`s and `value`s can be of any type, but usually `key`s are strings.
 
@@ -1626,8 +1626,7 @@ name2number_map = Dict([("one", 1), ("two", 2)])
 ```
 
 There is a more readable syntax based on the `Pair` type described above.
-You use the same **default constructor `Dict`**, but now you pass **`pair`s of `key` and `value`**:
-You now pass `Pair`s of `key => value`s to the `Dict` constructor:
+You can also pass `Pair`s of `key => value`s to the `Dict` constructor:
 
 ```jl
 sco(
@@ -1685,7 +1684,7 @@ sco("name2number_map")
 `Dict`s are also used for data manipulation by `DataFrames.jl` (@sec:dataframes) and for data visualization by `Makie.jl` (@sec:DataVisualizationMakie).
 So, it is important to know their basic functionality.
 
-There is one other useful way of constructing `Dict`s.
+There is another useful way of constructing `Dict`s.
 Suppose that you have two vectors and you want to construct a `Dict` with one of them as `key`s and the other as `value`s.
 You can do that with the `zip` function which "glues" together two objects (just like a zipper):
 

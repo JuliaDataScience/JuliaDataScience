@@ -43,7 +43,7 @@ Julia has several types of variables but, in data science, we mostly use:
 * Boolean: `Bool`
 * Strings: `String`
 
-Integers and real numbers have 64 bits by default, that's why they have the `64` suffix in the name of the type.
+Integers and real numbers are stored by using 64 bits by default, that's why they have the `64` suffix in the name of the type.
 If you need more or less precision, there are `Int8` or `Int128` types, for example, where higher means more precision.
 Most of the time, this won't be an issue so you can just stick to the defaults.
 
@@ -1557,7 +1557,7 @@ indexes
 )
 ```
 
-For readability, it is often better to use specialized functions for these loops:
+It is often better to use specialized functions for these loops:
 
 * `eachcol`: iterates over an array column first
 
@@ -1578,28 +1578,32 @@ Compared to the huge section on arrays, this section on pairs will be brief.
 We construct a pair in Julia using the following syntax:
 
 ```jl
-sco(
-"""
-my_pair = "Julia" => 42
-"""
-)
+sco("""my_pair = "Julia" => 42""")
 ```
 
 The elements are stored in the fields `first` and `second`.
 
 ```jl
-scob("my_pair.first, my_pair.second")
+scob("my_pair.first")
+```
+
+```jl
+scob("my_pair.second")
 ```
 
 But, in most cases, it's easier use `first` and `last`[^easier]:
 
 ```jl
-scob("first(my_pair), last(my_pair)")
+scob("first(my_pair)")
+```
+
+```jl
+scob("last(my_pair)")
 ```
 
 [^easier]: it is easier because `first` and `last` also work on many other types, so you need to remember less.
 
-Pairs will be used a lot in data manipulation and data visualization since both `DataFrames.jl` (@sec:dataframes) or `Makie.jl` (@sec:DataVisualizationMakie) main functions take objects of type `Pair`.
+Pairs will be used a lot in data manipulation and data visualization since both `DataFrames.jl` (@sec:dataframes) or `Makie.jl` (@sec:DataVisualizationMakie) take objects of type `Pair` in their main functions.
 For example, with `DataFrames.jl` we're going to see that `:a => :b` can be used to rename the column `:a` to `:b`.
 
 ### Dict {#sec:dict}
@@ -1615,6 +1619,7 @@ The first is by passing a vector of tuples as `(key, value)` to the `Dict` const
 ```jl
 sco(
 """
+# tuples # hide
 name2number_map = Dict([("one", 1), ("two", 2)])
 """
 )
@@ -1627,6 +1632,7 @@ You now pass `Pair`s of `key => value`s to the `Dict` constructor:
 ```jl
 sco(
 """
+# pairs # hide
 name2number_map = Dict("one" => 1, "two" => 2)
 """
 )
@@ -1651,7 +1657,7 @@ name2number_map["three"] = 3
 If you want to check if a `Dict` has a certain `key` you can use `keys` and `in`:
 
 ```jl
-scob("\"two\" in name2number_map")
+scob("\"two\" in keys(name2number_map)")
 ```
 
 To delete a `key` you can use either the `delete!` function:
@@ -1664,16 +1670,16 @@ delete!(name2number_map, "three")
 )
 ```
 
-Or, to delete a `key` while returning its `value` you can use `pop!`:
+Or, to delete a key while returning its value, you can use `pop!`:
 
 ```jl
-scob("""popped_value = pop!(my_dict, "two")""")
+scob("""popped_value = pop!(name2number_map, "two")""")
 ```
 
-Now, our `my_dict` has only one `key`:
+Now, our `name2number_map` has only one `key`:
 
 ```jl
-sco("my_dict")
+sco("name2number_map")
 ```
 
 `Dict`s are also used for data manipulation by `DataFrames.jl` (@sec:dataframes) and for data visualization by `Makie.jl` (@sec:DataVisualizationMakie).
@@ -1819,7 +1825,7 @@ Inside this folder there is a CSV file named `my_data.csv`.
 You can have the same robust representation of the filepath to `my_data.csv` as:
 
 ```jl
-scob("""joinpath(root, "data", "my_data.csv""")
+scob("""joinpath(root, "data", "my_data.csv")""")
 ```
 
 It's a good habit to pick up, because it's very likely to save problems for you or other people later.

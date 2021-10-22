@@ -1477,7 +1477,7 @@ empty_vector
 )
 ```
 
-Sometimes you don't want to loop over each element, but actually over each array index.
+Sometimes, you don't want to loop over each element, but actually over each array index.
 **We can use the `eachindex` function combined with a `for` loop to iterate over each array index**.
 
 Again, let's show an example with a vector:
@@ -1485,11 +1485,11 @@ Again, let's show an example with a vector:
 ```jl
 sco(
 """
-forty_two_vector = [42, 42, 42]
+forty_twos = [42, 42, 42]
 
 empty_vector = Int64[]
 
-for i in eachindex(forty_two_vector)
+for i in eachindex(forty_twos)
     push!(empty_vector, i)
 end
 
@@ -1498,95 +1498,84 @@ empty_vector
 )
 ```
 
-In this example the `eachindex(forty_two_vector)` iterator inside the `for` loop returns not `forty_two_vector`'s values but its indices: `[1, 2, 3]`.
+In this example, the `eachindex(forty_twos)` returns the indices of `forty_twos`, namely `[1, 2, 3]`.
 
-Iterating over matrices involves more details.
+Similarly, we can iterate over matrices.
 The standard `for` loop goes first over columns then over rows.
 It will first traverse all elements in column 1, from the first row to the last row, then it will move to column 2 in a similar fashion until it has covered all columns.
 
-For those familiar with other programming languages: Julia, like most scientific programming languages, is "column-major".
-This means that arrays are stored contiguously using a column orientation.
-If at any time you are seeing performance problems and there is an array `for` loop involved, chances are that you are mismatching Julia's native column-major storage orientation.
+For those familiar with other programming languages:
+Julia, like most scientific programming languages, is "column-major".
+Column-major means that the elements in the column are stored next to each other in memory[^pointers].
+This also means that iterating over elements in a column is much quicker than over elements in a row.
+
+[^pointers]: or, that the pointers to the elements in the column are stored next to each other
 
 Ok, let's show this in an example:
 
 ```jl
 sc(
 """
-column_major = [[1 2]
-                [3 4]]
+column_major = [[1 3]
+                [2 4]]
 
-row_major = [[1 3]
-             [2 4]]
+row_major = [[1 2]
+             [3 4]]
 """
 )
 ```
 
+If we loop over the vector stored in column-major order, then the output is sorted:
+
 ```jl
 sco(
 """
-empty_vector = Int64[]
+indexes = Int64[]
 
 for i in column_major
-    push!(empty_vector, i)
+    push!(indexes, i)
 end
 
-empty_vector
+indexes
 """
 )
 ```
+
+However, the output isn't sorted when looping over the other matrix:
 
 ```jl
 sco(
 """
-empty_vector = Int64[]
+indexes = Int64[]
 
 for i in row_major
-    push!(empty_vector, i)
+    push!(indexes, i)
 end
 
-empty_vector
+indexes
 """
 )
 ```
 
-There are some handy functions to iterate over matrices.
+For readability, it is often better to use specialized functions for these loops:
 
 * `eachcol`: iterates over an array column first
 
      ```jl
-     sco(
-     """
-     first(eachcol(column_major))
-     """
-     )
+     sco("first(eachcol(column_major))")
      ```
 
 * `eachrow`: iterates over an array row first
 
      ```jl
-     sco(
-     """
-     first(eachrow(column_major))
-     """
-     )
+     sco("first(eachrow(column_major))")
      ```
 
 ### Pair {#sec:pair}
 
 Compared to the huge section on arrays, this section on pairs will be brief.
-**`Pair` is a data structure that holds two types**.
+**`Pair` is a data structure that holds two objects** (which typically belong to each other).
 We construct a pair in Julia using the following syntax:
-
-```jl
-sco(
-"""
-my_pair = Pair("Julia", 42)
-"""
-)
-```
-
-Alternatively, we can create a pair by specifying both values and in between we use the pair `=>` operator:
 
 ```jl
 sco(
@@ -1599,49 +1588,46 @@ my_pair = "Julia" => 42
 The elements are stored in the fields `first` and `second`.
 
 ```jl
-scob(
-"""
-my_pair.first
-"""
-)
+scob("my_pair.first, my_pair.second")
 ```
+
+But, in most cases, it's easier use `first` and `last`[^easier]:
 
 ```jl
-scob(
-"""
-my_pair.second
-"""
-)
+scob("first(my_pair), last(my_pair)")
 ```
 
-Pairs will be used a lot in data manipulation and data visualization since both `DataFrames.jl` (@sec:dataframes) or `Makie.jl` (@sec:DataVisualizationMakie) main functions depends on `Pair` as type arguments.
+[^easier]: it is easier because `first` and `last` also work on many other types, so you need to remember less.
+
+Pairs will be used a lot in data manipulation and data visualization since both `DataFrames.jl` (@sec:dataframes) or `Makie.jl` (@sec:DataVisualizationMakie) main functions take objects of type `Pair`.
+For example, with `DataFrames.jl` we're going to see that `:a => :b` can be used to rename the column `:a` to `:b`.
 
 ### Dict {#sec:dict}
 
 If you understood what a `Pair` is, then `Dict` won't be a problem.
-**`Dict` in Julia is just a "hash table" with pairs of `key` and `value`**.
-`key`s and `value`s can be of any type, but generally you'll see `key`s as strings.
+For all practical purposes, **`Dict`s are a mapping from key to value**.
+By mapping, we mean that if you give a `Dict` some key, then the `Dict` can tell you which value belongs to that key.
+`key`s and `value`s can be of any type, but usually `key`s are strings.
 
 There are two ways to construct `Dict`s in Julia.
-The first is using the **default constructor `Dict` and passing a vector of tuples composed of `(key, value)`**:
+The first is by passing a vector of tuples as `(key, value)` to the `Dict` constructor:
 
 ```jl
 sco(
 """
-my_dict_from_tuples = Dict([("one", 1), ("two", 2)])
+name2number_map = Dict([("one", 1), ("two", 2)])
 """
 )
 ```
 
-We *prefer* a second way of constructing `Dict`s.
-It offers a much more elegant and expressive syntax.
+There is a more readable syntax based on the `Pair` type described above.
 You use the same **default constructor `Dict`**, but now you pass **`pair`s of `key` and `value`**:
-
+You now pass `Pair`s of `key => value`s to the `Dict` constructor:
 
 ```jl
 sco(
 """
-my_dict = Dict("one" => 1, "two" => 2)
+name2number_map = Dict("one" => 1, "two" => 2)
 """
 )
 ```
@@ -1649,31 +1635,23 @@ my_dict = Dict("one" => 1, "two" => 2)
 You can retrieve a `Dict`s `value` by indexing it by the corresponding `key`:
 
 ```jl
-scob(
-"""
-my_dict["one"]
-"""
-)
+scob("""name2number_map["one"]""")
 ```
 
-Similarly, to add a new entry you index the `Dict` by the desired `key` and assign a `value` with the assignment `=` operator:
+To add a new entry, you index the `Dict` by the desired `key` and assign a `value` with the assignment `=` operator:
 
 ```jl
 scob(
 """
-my_dict["three"] = 3
+name2number_map["three"] = 3
 """
 )
 ```
 
-If you want to check if a `Dict` has a certain `key` you can use the `haskey` function:
+If you want to check if a `Dict` has a certain `key` you can use `keys` and `in`:
 
 ```jl
-scob(
-"""
-haskey(my_dict, "two")
-"""
-)
+scob("\"two\" in name2number_map")
 ```
 
 To delete a `key` you can use either the `delete!` function:
@@ -1681,45 +1659,29 @@ To delete a `key` you can use either the `delete!` function:
 ```jl
 sco(
 """
-delete!(my_dict, "three")
+delete!(name2number_map, "three")
 """
 )
 ```
 
-Or to delete a `key` while returning its `value` you can use the `pop!` function:
+Or, to delete a `key` while returning its `value` you can use `pop!`:
 
 ```jl
-scob(
-"""
-popped_value = pop!(my_dict, "two")
-"""
-)
+scob("""popped_value = pop!(my_dict, "two")""")
 ```
 
-Now our `my_dict` has only one `key`:
+Now, our `my_dict` has only one `key`:
 
 ```jl
-scob(
-"""
-length(my_dict)
-"""
-)
-```
-
-```jl
-sco(
-"""
-my_dict
-"""
-)
+sco("my_dict")
 ```
 
 `Dict`s are also used for data manipulation by `DataFrames.jl` (@sec:dataframes) and for data visualization by `Makie.jl` (@sec:DataVisualizationMakie).
 So, it is important to know their basic functionality.
 
-There is one useful `Dict` constructor that we use a lot.
-Suppose you have two vectors and you want to construct a `Dict` with one of them as `key`s and the other as `value`s.
-You can do that with the `zip` function which "glues" together two objects just like a zipper:
+There is one other useful way of constructing `Dict`s.
+Suppose that you have two vectors and you want to construct a `Dict` with one of them as `key`s and the other as `value`s.
+You can do that with the `zip` function which "glues" together two objects (just like a zipper):
 
 ```jl
 sco(
@@ -1727,7 +1689,7 @@ sco(
 A = ["one", "two", "three"]
 B = [1, 2, 3]
 
-dic = Dict(zip(A, B))
+name2number_map = Dict(zip(A, B))
 """
 )
 ```
@@ -1735,11 +1697,7 @@ dic = Dict(zip(A, B))
 For instance, we can now get the number 3 via:
 
 ```jl
-scob(
-"""
-dic["three"]
-"""
-)
+scob("""name2number_map["three"]""")
 ```
 
 ### Symbol {#sec:symbol}
@@ -1749,23 +1707,17 @@ It is a type and behaves a lot like a string.
 Instead of surrounding the text by quotation marks, a symbol starts with a colon (:) and can contain underscores:
 
 ```jl
-sco("""
-sym = :some_text
-""")
+sco("sym = :some_text")
 ```
 
-Since symbols and strings are so similar, we can easily convert a symbol to string and vice versa:
+We can easily convert a symbol to string and vice versa:
 
 ```jl
-scob("""
-s = string(sym)
-""")
+scob("s = string(sym)")
 ```
 
 ```jl
-sco("""
-sym = Symbol(s)
-""")
+sco("sym = Symbol(s)")
 ```
 
 One simple benefit of symbols is that you have to type one character less, that is, `:some_text` versus `"some text"`.
@@ -1773,19 +1725,17 @@ We use `Symbol`s a lot in data manipulations with the `DataFrames.jl` package (@
 
 ### Splat Operator {#sec:splat}
 
-In Julia we have the "splat" operator `...` which is mainly used in function calls as a **sequence of arguments**.
+In Julia we have the "splat" operator `...` which is used in function calls as a **sequence of arguments**.
 We will occasionally use splatting in some function calls in the **data manipulation** and **data visualization** chapters.
 
 The most intuitive way to learn about splatting is with an example.
 The `add_elements` function below takes three arguments to be added together:
 
 ```jl
-sco("""
-add_elements(a, b, c) = a + b + c
-""")
+sco("add_elements(a, b, c) = a + b + c")
 ```
 
-Now suppose that we have a collection with three elements.
+Now, suppose that we have a collection with three elements.
 The naïve way to this would be to supply the function with all three elements as function arguments like this:
 
 ```jl
@@ -1799,18 +1749,16 @@ add_elements(my_collection[1], my_collection[2], my_collection[3])
 Here is where we use the "splat" operator `...` which takes a collection (often an array, vector, tuple, or range) and converts it into a sequence of arguments:
 
 ```jl
-scob("""
-add_elements(my_collection...) # and splat!
-""")
+scob("add_elements(my_collection...)")
 ```
 
 The `...` is included after the collection that we want to "splat" into a sequence of arguments.
-In the example above, syntactically speaking, the following are the same:
+In the example above, the following are the same:
 
-```julia
-collection = [x, y, z]
-
-function(collection...) = function(x, y, z)
+```jl
+scob("""
+add_elements(my_collection...) == add_elements(my_collection[1], my_collection[2], my_collection[3])
+""")
 ```
 
 Anytime Julia sees a splatting operator inside a function call, it will be converted on a sequence of arguments for all elements of the collection separated by commas.
@@ -1818,54 +1766,51 @@ Anytime Julia sees a splatting operator inside a function call, it will be conve
 It also works for ranges:
 
 ```jl
-scob("""
-add_elements(1:3...) # and splat!
-""")
+scob("add_elements(1:3...)")
 ```
-
 
 ## Filesystem {#sec:filesystem}
 
 In data science, most projects are undertaken in a collaborative effort.
 We share code, data, tables, figures and so on.
-Behind everything, there is the **operational system (OS) filesystem**.
-In an ideal world, code would run the *same* in *different* OS.
-But that is not what actually happens.
+Behind everything, there is the **operating system (OS) filesystem**.
+In a perfect world, the same program would give the **same** output when running on **different** operating systems.
+Unfortunately, that is not always the case.
 One instance of this is the difference between Windows paths, such as `C:\\user\john\`, and Linux paths, such as `/home/john`.
 This is why it is important to discuss **filesystem best practices**.
 
-Julia has native filesystem capabilities that can **handle all different OS demands**.
+Julia has native filesystem capabilities that **handle the differences between operating systems**.
 They are located in the [`Filesystem`](https://docs.julialang.org/en/v1/base/file/) module from the core `Base` Julia library.
-This means that Julia provides everything you need to make your code perform flawlessly in any OS that you want to.
 
 Whenever you are dealing with files such as CSV, Excel files or other Julia scripts, make sure that your code **works on different OS filesystems**.
-This is easily accomplished with the `joinpath` and `pwd` functions.
+This is easily accomplished with the `joinpath`, `@__FILE__` and `pkgdir` functions.
 
-The `pwd` function is an acronym for **p**rint **w**orking **d**irectory and it returns a string containing the current working directory.
-One nice thing about `pwd` is that it will return the correct string in Linux, MacOS, Windows, or any other OS.
-For example, let's see what our current directory is and record it in a variable `root`:
+If you write your code in a package, you can use `pkgdir` to get the root directory of the package.
+For example, for the Julia Data Science (JDS) package that we use to produce this book:
 
 ```jl
-scob(
-"""
-root = pwd()
-"""
-)
+root = pkgdir(JDS)
 ```
+
+as you can see, the code to produce this book was running on a Linux computer.
+If you're using a script, you can get the location of the script file via
+
+```julia
+root = dirname(@__FILE__)
+```
+
+The nice thing about these two commands is that they are independent of how the user started Julia.
+In other words, it doesn't matter whether the user started the program with `julia scripts/script.jl` or `julia script.jl`, in both cases the paths are the same.
 
 The next step would be to include the relative path from `root` to our desired file.
 Since different OS have different ways to construct relative paths with subfolders (some use forward slashes `/` while other might use backslashes `\`), we cannot simply concatenate the  file's relative path with the `root` string.
 For that, we have the `joinpath` function, which will join different relative paths and filenames according to your specific OS filesystem implementation.
 
-Suppose you have a script named `my_script.jl` inside your project's directory.
+Suppose that you have a script named `my_script.jl` inside your project's directory.
 You can have a robust representation of the filepath to `my_script.jl` as:
 
 ```jl
-scob(
-"""
-joinpath(root, "my_script.jl")
-"""
-)
+scob("""joinpath(root, "my_script.jl")""")
 ```
 
 `joinpath` also handles **subfolders**.
@@ -1874,15 +1819,10 @@ Inside this folder there is a CSV file named `my_data.csv`.
 You can have the same robust representation of the filepath to `my_data.csv` as:
 
 ```jl
-scob(
-"""
-joinpath(root, "data", "my_data.csv")
-"""
-)
+scob("""joinpath(root, "data", "my_data.csv""")
 ```
 
-Always make sure that your code can run anywhere.
-It's a good habit to pick up, because it's very likely to save problems later.
+It's a good habit to pick up, because it's very likely to save problems for you or other people later.
 
 ## Julia Standard Library {#sec:standardlibrary}
 

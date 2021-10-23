@@ -11,7 +11,7 @@ CSV files have two advantages over other data storage files.
 First, it does exactly what the name indicates it does, namely storing values by separating them using commas `,`.
 This acronym is also used as the file extension.
 So, be sure that you save your files using the ".csv" extension such as "myfile.csv".
-To demonstrate how a CSV file looks, we can install the `CSV.jl` package:
+To demonstrate how a CSV file looks, we can install the [`CSV.jl`](http://csv.juliadata.org/latest/) package:
 
 ```
 julia> ]

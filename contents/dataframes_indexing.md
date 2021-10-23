@@ -22,7 +22,7 @@ The **second index is the column indexing**:
 Note that `df.name` is exactly the same as `df[!, :name]`, which you can verify yourself by doing:
 
 ```
-julia> df = DataFrame(id = [1]);
+julia> df = DataFrame(id=[1]);
 
 julia> @edit df.name
 ```

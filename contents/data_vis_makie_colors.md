@@ -3,7 +3,6 @@
 Choosing an appropiate set of colors or colorbar for your plot is an essential part when presenting results.
 Using [Colors.jl](https://github.com/JuliaGraphics/Colors.jl) is supported in `Makie.jl`
 so that you can use [named colors](https://juliagraphics.github.io/Colors.jl/latest/namedcolors/) or pass `RGB` or `RGBA` values.
-Regarding colormaps, all those that work with [Plots.jl](https://github.com/JuliaPlots/Plots.jl) also do here.
 Additionally, colormaps from [ColorSchemes.jl](https://github.com/JuliaGraphics/ColorSchemes.jl) and [PerceptualColourMaps.jl](https://github.com/peterkovesi/PerceptualColourMaps.jl) can also be used.
 It is worth knowing that you can reverse a colormap by doing `Reverse(:colormap_name)`
 and obtain a transparent color or colormap with `color= (:red,0.5)` and `colormap = (:viridis, 0.5)`.
@@ -104,7 +103,7 @@ This is fixed by passing custom ticks, as in `cbar.ticks = (positions, ticks)`.
 The last situation is when passing a tuple of two colors to `colormap` as symbols, strings or a mix.
 You will get an interpolated colormap between these two colors.
 
-Also, `hex` coded colors are also accepted. So, on top or our heatmap let's put one semi-transparent point using this.
+Also, hexadecimal coded colors are also accepted. So, on top or our heatmap let's put one semi-transparent point using this.
 
 ```jl
 s2color2 = """

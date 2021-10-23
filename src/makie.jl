@@ -318,7 +318,7 @@ function squares_layout()
     hms = [heatmap!(axs[i, j], randn(10, 10), colorrange=(-2, 2))
            for i = 1:2, j = 1:2]
     Colorbar(fig[1:2, 3], hms[1], label="colorbar")
-    [Label(fig[i, j, TopLeft()], "($(letters[i,j]))", textsize=16,
+    [Label(fig[i, j, TopLeft()], "($(letters[i, j]))", textsize=16,
         padding=(-2, 0, -20, 0)) for i = 1:2, j = 1:2]
     colgap!(fig.layout, 5)
     rowgap!(fig.layout, 5)

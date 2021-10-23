@@ -3,7 +3,7 @@
 `CairoMakie.jl` supplies all our needs for static 2D images.
 But sometimes we want interactivity, especially when we are dealing with 3D images.
 Visualizing data in 3D is also a common practice to gain insight from your data.
-This is where `GLMakie.jl` might be helpful, since it uses OpenGL as a backend that adds interactivity and responsiveness to plots.
+This is where `GLMakie.jl` might be helpful, since it uses [OpenGL](http://www.opengl.org/) as a backend that adds interactivity and responsiveness to plots.
 Like before, a simple plot includes, of course, lines and points. So, we will start with those and since we already know how layouts work, we will put that into practice.
 
 ### Scatters and Lines
@@ -73,7 +73,7 @@ Not bad, right? From there is clear that  any `heatmap`'s, `contour`'s, `contour
 ### Arrows and Streamplots
 
 `arrows` and `streamplot` are plots that might be useful when we want to know the directions that a given variable will follow.
-See a demonstration below:
+See a demonstration below^[we are using the `LinearAlgebra` module from Julia's standard library.]:
 
 ```
 using LinearAlgebra

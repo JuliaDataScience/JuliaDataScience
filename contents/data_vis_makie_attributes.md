@@ -25,7 +25,7 @@ sco(s)
 ```
 
 But not only the plot objects have attributes, also the `Axis` and `Figure` objects do.
-For example, for Figure, we have `backgroundcolor`, `resolution`, `font` and `fontsize` and the [`figure_padding`](http://makie.juliaplots.org/stable/figure.html#Figure-padding) which changes the amount of space around the figure content, see the grey area in the plot, Figure (@fig:custom_plot).
+For example, for Figure, we have `backgroundcolor`, `resolution`, `font` and `fontsize` and the [`figure_padding`](http://makie.juliaplots.org/stable/documentation/figure/index.html#figure_padding) which changes the amount of space around the figure content, see the grey area in the plot, Figure (@fig:custom_plot).
 It can take one number for all sides, or a tuple of four numbers for left, right, bottom and top.
 
 `Axis` has a lot more, some of them are  `backgroundcolor`, `xgridcolor` and `title`.
@@ -36,10 +36,10 @@ Hence, for our next plot we will call several attributes at once as follows:
 ```jl
 s = """
     CairoMakie.activate!() # hide
-    lines(1:10, (1:10).^2; color = :black, linewidth = 2, linestyle = :dash,
-        figure = (; figure_padding=5, resolution=(600, 400), font="sans",
+    lines(1:10, (1:10).^2; color=:black, linewidth=2, linestyle=:dash,
+        figure=(; figure_padding=5, resolution=(600, 400), font="sans",
             backgroundcolor=:grey90, fontsize=16),
-        axis = (; xlabel="x", ylabel="x²", title="title",
+        axis=(; xlabel="x", ylabel="x²", title="title",
             xgridstyle=:dash, ygridstyle=:dash))
     current_figure()
     filename = "custom_plot" # hide
@@ -60,9 +60,9 @@ For a different one, the `position=:ct` argument is called, where `:ct` means le
 s = """
     CairoMakie.activate!() # hide
     lines(1:10, (1:10).^2; label="x²", linewidth=2, linestyle=nothing,
-        figure = (;figure_padding=5, resolution=(600,400), font="sans",
+        figure=(;figure_padding=5, resolution=(600, 400), font="sans",
             backgroundcolor=:grey90, fontsize=16),
-        axis = (; xlabel = "x", title = "title", xgridstyle=:dash,
+        axis=(; xlabel="x", title="title", xgridstyle=:dash,
             ygridstyle=:dash))
     scatterlines!(1:10, (10:-1:1).^2; label="Reverse(x)²")
     axislegend("legend"; position=:ct)
@@ -85,10 +85,10 @@ Plotting the previous figure should take the new default settings defined by `se
 ```jl
 s = """
     CairoMakie.activate!() # hide
-    set_theme!(resolution = (600,400),
+    set_theme!(resolution = (600, 400),
         backgroundcolor=(:orange, 0.5), fontsize=16, font="sans",
-        Axis = (backgroundcolor=:grey90, xgridstyle=:dash, ygridstyle=:dash),
-        Legend = (bgcolor=(:red,0.2), framecolor=:dodgerblue))
+        Axis=(backgroundcolor=:grey90, xgridstyle=:dash, ygridstyle=:dash),
+        Legend=(bgcolor=(:red, 0.2), framecolor=:dodgerblue))
     lines(1:10, (1:10).^2; label="x²", linewidth=2, linestyle=nothing,
         axis=(; xlabel="x", title="title"))
     scatterlines!(1:10, (10:-1:1).^2; label="Reverse(x)²")
@@ -129,8 +129,8 @@ And then the corresponding plot can be seen in @fig:bubble:
 s = """
     CairoMakie.activate!() # hide
     fig, ax, pltobj = scatter(xyvals[:, 1], xyvals[:, 2]; color=xyvals[:, 3],
-        label="Bubbles", colormap=:plasma, markersize=15*abs.(xyvals[:, 3]),
-        figure=(; resolution=(600,400)), axis=(; aspect=DataAspect()))
+        label="Bubbles", colormap=:plasma, markersize=15 * abs.(xyvals[:, 3]),
+        figure=(; resolution=(600, 400)), axis=(; aspect=DataAspect()))
     limits!(-3, 3, -3, 3)
     Legend(fig[1, 2], ax, valign=:top)
     Colorbar(fig[1, 2], pltobj, height=Relative(3 / 4))

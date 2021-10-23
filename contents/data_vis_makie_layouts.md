@@ -3,8 +3,8 @@
 A complete _canvas/layout_ is defined by `Figure`, which can be filled with content after creation.
 We will start with a simple arrangement of one `Axis`, one `Legend` and one `Colorbar`.
 For this task we can think of the canvas as an arrangement of `rows` and `columns` in indexing a `Figure` much like a regular `Array`/`Matrix`.
-The `Axis` content will be in _row 1, column 1_, e.g. `fig[1, 1]`, the `Colorbar` in _row 1, column 2_, namely `fig[1,2]`.
-And the `Legend` in _row 2_ and across _column 1 and 2_, namely `fig[2,1:2]`.
+The `Axis` content will be in _row 1, column 1_, e.g. `fig[1, 1]`, the `Colorbar` in _row 1, column 2_, namely `fig[1, 2]`.
+And the `Legend` in _row 2_ and across _column 1 and 2_, namely `fig[2, 1:2]`.
 
 ```jl
 @sco JDS.first_layout()
@@ -12,13 +12,13 @@ And the `Legend` in _row 2_ and across _column 1 and 2_, namely `fig[2,1:2]`.
 
 This does look good already, it could be better. We could fix spacing problems using the following keywords and methods:
 
-- `figure_padding = (left, right, bottom, top)`
-- `padding =  (left, right, bottom, top)`
+- `figure_padding=(left, right, bottom, top)`
+- `padding=(left, right, bottom, top)`
 
 Taking into account the actual size for a `Legend` or `Colorbar` is done by
 
-> - `tellheight = true or false`
-> - `tellwidth = true or false`
+> - `tellheight=true` or `false`
+> - `tellwidth=true` or `false`
 >
 > _Setting these to `true` will take into account the actual size (height or width) for a `Legend` or `Colorbar`_.
 > Consequently, things will be resized accordingly.
@@ -72,14 +72,15 @@ For elements that **you don't want to hide**, just pass them with `false`, i.e. 
 
 Synchronizing your `Axis` is done via:
 
-> - `linkaxes! linkyaxes! linkxaxes!`
+> - `linkaxes!`, `linkyaxes!` and `linkxaxes!`
 >
 > This could be useful when shared axis are desired.
 > Another way of getting shared axis will be by setting `limits!`.
 
 Setting `limits` at once or independently for each axis is done by calling
 
-> - `limits!(ax; l,r,b,t)`
+> - `limits!(ax; l, r, b, t)`, where `l` is left, `r` right, `b` bottom, and `t` top.
+>
 > You can also do `ylims!(low, high)` or `xlims!(low, high)`, and even open ones by doing `ylims!(low=0)` or `xlims!(high=1)`.
 
 Now, the example:
@@ -89,7 +90,7 @@ Now, the example:
 ```
 
 So, now our `Colorbar` needs to be horizontal and the bar ticks need to be in the lower part.
-This is done by setting `vertical = false` and `flipaxis = false`.
+This is done by setting `vertical=false` and `flipaxis=false`.
 Additionally, note that we can call many `Axis` into `fig`, or even `Colorbar`'s and `Legend`'s, and then afterwards build the layout.
 
 Another common layout is a grid of squares for heatmaps:
@@ -102,7 +103,7 @@ where all labels are in the **protrusions** and each `Axis` has an `AspectData()
 The `Colorbar` is located in the third column and expands from row 1 up to row 2.
 
 The next case uses the so called `Mixed()` **alignmode**, which is especially useful when dealing with large empty spaces between `Axis` due to long ticks.
-Also, the `Dates.jl` packages will be needed it for this example.
+Also, the `Dates` module from Julia's standard library will be needed it for this example.
 
 ```
 using Dates
@@ -112,11 +113,11 @@ using Dates
 @sco JDS.mixed_mode_layout()
 ```
 
-Here, the argument `alignmode = Mixed(bottom=0)` is shifting the bounding box to the bottom, so that this will align with the panel on the left filling the space.
+Here, the argument `alignmode=Mixed(bottom=0)` is shifting the bounding box to the bottom, so that this will align with the panel on the left filling the space.
 
 Also, see how `colsize!` and `rowsize!` are being used for different columns and rows.
 You could also put a number instead of `Auto()` but then everything will be fixed.
-And, additionally, one could also give a `height` or `width` when defining the `Axis`, as in `Axis(fig, heigth = 50)` which will be fixed as well.
+And, additionally, one could also give a `height` or `width` when defining the `Axis`, as in `Axis(fig, heigth=50)` which will be fixed as well.
 
 ### Nested `Axis` (_subplots_)
 
@@ -168,7 +169,7 @@ Then, the `inset` is easily done, as in:
 
 where the `Box` dimensions are bound by the `Figure`'s `resolution`.
 Note, that an inset can be also outside the `Axis`.
-The other approach, is by defining a new `Axis` into a position `fig[i,j]` specifying his `width`, `height`, `halign` and `valign`.
+The other approach, is by defining a new `Axis` into a position `fig[i, j]` specifying his `width`, `height`, `halign` and `valign`.
 We do that in the following function:
 
 ```jl

@@ -1,7 +1,7 @@
 ## Themes {#sec:themes}
 
 There are several ways to affect the general appearance of your plots.
-Either, you could use a [predefined theme](http://makie.juliaplots.org/stable/predefined_themes.html) or your own custom theme.
+Either, you could use a [predefined theme](http://makie.juliaplots.org/stable/documentation/theming/predefined_themes/index.html) or your own custom theme.
 For example, use the predefined dark theme via `with_theme(your_plot_function, theme_dark())`.
 Or, build your own with `Theme(kwargs)` or even update the one that is active with `update_theme!(kwargs)`.
 
@@ -19,7 +19,7 @@ y = cumsum(randn(6, 6), dims=2)
 )
 ```
 
-A matrix of size (20,20) with random entries, so that we can plot a heatmap.
+A matrix of size `(20, 20)` with random entries, so that we can plot a heatmap.
 The range in $x$ and $y$ is also specified.
 
 ```jl
@@ -117,7 +117,7 @@ s = """
 sco(s)
 ```
 
-Now, if something needs to be changed after `set_theme!(your_theme)`, we can do it with `update_theme!(resolution=(500,400), fontsize=18)`, for example.
+Now, if something needs to be changed after `set_theme!(your_theme)`, we can do it with `update_theme!(resolution=(500, 400), fontsize=18)`, for example.
 Another approach will be to pass additional arguments to the `with_theme` function:
 
 ```jl

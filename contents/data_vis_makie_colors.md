@@ -3,10 +3,9 @@
 Choosing an appropiate set of colors or colorbar for your plot is an essential part when presenting results.
 Using [Colors.jl](https://github.com/JuliaGraphics/Colors.jl) is supported in `Makie.jl`
 so that you can use [named colors](https://juliagraphics.github.io/Colors.jl/latest/namedcolors/) or pass `RGB` or `RGBA` values.
-Regarding colormaps, all those that work with [Plots.jl](https://github.com/JuliaPlots/Plots.jl) also do here.
 Additionally, colormaps from [ColorSchemes.jl](https://github.com/JuliaGraphics/ColorSchemes.jl) and [PerceptualColourMaps.jl](https://github.com/peterkovesi/PerceptualColourMaps.jl) can also be used.
 It is worth knowing that you can reverse a colormap by doing `Reverse(:colormap_name)`
-and obtain a transparent color or colormap with `color= (:red,0.5)` and `colormap = (:viridis, 0.5)`.
+and obtain a transparent color or colormap with `color=(:red,0.5)` and `colormap=(:viridis, 0.5)`.
 
 Different use cases will be shown next. Then we will difine a custom theme with new colors and a colorbar palette.
 
@@ -35,8 +34,8 @@ scolor = """
     figure = (; resolution=(600, 400), font="CMU Serif")
     axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
     fig, ax, pltobj = heatmap(rand(20, 20); colorrange=(0, 1),
-        colormap = Reverse(:viridis), axis=axis, figure=figure)
-    Colorbar(fig[1,2], pltobj, label = "Reverse colormap Sequential")
+        colormap=Reverse(:viridis), axis=axis, figure=figure)
+    Colorbar(fig[1, 2], pltobj, label = "Reverse colormap Sequential")
     fig
     label = "Reverse_colormap_sequential" # hide
     caption = "Reverse colormap sequential and colorrange." # hide
@@ -56,12 +55,12 @@ using ColorSchemes
 ```jl
 s = """
     CairoMakie.activate!() # hide
-    figure = (; resolution = (600, 400), font="CMU Serif")
+    figure = (; resolution=(600, 400), font="CMU Serif")
     axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
-    fig, ax, pltobj = heatmap(randn(20,20); colorrange = (-2,2),
-        colormap = "diverging_rainbow_bgymr_45_85_c67_n256",
-        highclip = :black, lowclip = :white, axis = axis, figure = figure)
-    Colorbar(fig[1,2], pltobj, label = "Diverging colormap")
+    fig, ax, pltobj=heatmap(randn(20, 20); colorrange=(-2, 2),
+        colormap="diverging_rainbow_bgymr_45_85_c67_n256",
+        highclip=:black, lowclip=:white, axis=axis, figure=figure)
+    Colorbar(fig[1, 2], pltobj, label = "Diverging colormap")
     fig
     label = "diverging_colormap" # hide
     caption = "Diverging Colormap with low and high clip." # hide
@@ -81,15 +80,15 @@ using Colors, ColorSchemes
 ```jl
 scat = """
     CairoMakie.activate!() # hide
-    figure = (; resolution=(600,400), font="CMU Serif")
+    figure = (; resolution=(600, 400), font="CMU Serif")
     axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
     cmap = ColorScheme(range(colorant"red", colorant"green", length=3))
     mygrays = ColorScheme([RGB{Float64}(i, i, i) for i in [0.0, 0.5, 1.0]])
-    fig, ax, pltobj = heatmap(rand(-1:1,20,20);
-        colormap = cgrad(mygrays, 3, categorical = true, rev = true), # cgrad and Symbol, mygrays,
-        axis = axis, figure = figure)
-    cbar = Colorbar(fig[1,2], pltobj, label = "Categories")
-    cbar.ticks = ([-0.66,0,0.66], ["-1","0","1"])
+    fig, ax, pltobj = heatmap(rand(-1:1, 20, 20);
+        colormap=cgrad(mygrays, 3, categorical=true, rev=true), # cgrad and Symbol, mygrays,
+        axis=axis, figure=figure)
+    cbar = Colorbar(fig[1, 2], pltobj, label="Categories")
+    cbar.ticks = ([-0.66, 0, 0.66], ["-1", "0", "1"])
     fig
     label = "categorical_colormap" # hide
     caption = "Categorical Colormap." # hide
@@ -104,7 +103,7 @@ This is fixed by passing custom ticks, as in `cbar.ticks = (positions, ticks)`.
 The last situation is when passing a tuple of two colors to `colormap` as symbols, strings or a mix.
 You will get an interpolated colormap between these two colors.
 
-Also, `hex` coded colors are also accepted. So, on top or our heatmap let's put one semi-transparent point using this.
+Also, hexadecimal coded colors are also accepted. So, on top or our heatmap let's put one semi-transparent point using this.
 
 ```jl
 s2color2 = """
@@ -113,8 +112,8 @@ s2color2 = """
     axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
     fig, ax, pltobj = heatmap(rand(20, 20); colorrange=(0, 1),
         colormap=(:red, "black"), axis=axis, figure=figure)
-    scatter!(ax,[11],[11],color=("#C0C0C0", 0.5),markersize=150)
-    Colorbar(fig[1,2], pltobj, label = "2 colors")
+    scatter!(ax, [11], [11], color=("#C0C0C0", 0.5), markersize=150)
+    Colorbar(fig[1, 2], pltobj, label="2 colors")
     fig
     label = "colormap_two_colors" # hide
     caption = "Colormap from two colors." # hide

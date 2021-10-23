@@ -80,7 +80,7 @@ Synchronizing your `Axis` is done via:
 Setting `limits` at once or independently for each axis is done by calling
 
 > - `limits!(ax; l, r, b, t)`, where `l` is left, `r` right, `b` bottom, and `t` top.
-> 
+>
 > You can also do `ylims!(low, high)` or `xlims!(low, high)`, and even open ones by doing `ylims!(low=0)` or `xlims!(high=1)`.
 
 Now, the example:

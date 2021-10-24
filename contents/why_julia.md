@@ -187,61 +187,164 @@ We think that the "Two-Language problem" and the "One-To-One Code and Math Relat
 
 ### Multiple Dispatch {#sec:multiple_dispatch}
 
-Multiple dispatch is a powerful feature that also allows us to extend existing functions or to define custom and complex behavior for new types.
-To show how this works, we'll use an illustrative example.
-Suppose that you want to define two new `struct`s for two different animals.
-For simplicity, we won't be adding fields for the `struct`s:
+Multiple dispatch is a powerful feature that allows us to extend existing functions or to define custom and complex behavior for new types.
+Suppose that you want to define two new `struct`s to denote two different animals:
 
 ```jl
 s = """
-    struct fox end
-    struct chicken end
+    abstract type Animal end
+    struct Fox <: Animal
+        weight::Float64
+    end
+    struct Chicken <: Animal
+        weight::Float64
+    end
     """
 sc(s)
 ```
 
-Next, we want to define addition for both the `fox` and `chicken` types.
-We proceed by defining a new function signature of the `+` operator from the `Base` module of Julia[^invs]:
-
-[^invs]: this is an example for teaching purposes. Doing something similar to this example will result in many method invalidations (see <https://julialang.org/blog/2020/08/invalidations/> for details) and is, therefore, not a good idea.
+Basically, this says "define a fox which is an animal" and "define a chicken which is an animal".
+Next, we might have one fox called Fiona and a chicken called Big Bird.
 
 ```jl
 s = """
-    import Base: +
-    +(F::fox, C::chicken) = "trouble"
-    +(C::chicken, F::fox) = "trouble"
-    +(C1::chicken, C2::chicken) = "safe"
+    fiona = Fox(4.2)
+    big_bird = Chicken(2.9)
+    """
+sc(s)
+```
+
+Next, we want to know how much they weight together, for which we can write a function:
+
+```jl
+sco("combined_weight(A1::Animal, A2::Animal) = A1.weight + A2.weight")
+```
+
+And we want to know whether they go well together.
+One way to implement that is to use conditionals:
+
+```jl
+s = """
+    function naive_trouble(A::Animal, B::Animal)
+        if A isa Fox && B isa Chicken
+            return true
+        elseif A isa Chicken && B isa Chicken
+            return true
+        elseif A isa Chicken && B isa Chicken
+            return false
+        end
+    end
     """
 sco(s)
 ```
 
-Now, let's call addition with the `+` sign on instantiated `fox` and `chicken` objects:
+Now, let's see whether leaving Fiona and Big Bird together would give trouble:
 
 ```jl
-scob(
-"""
-my_fox = fox()
-my_chicken = chicken()
-my_fox + my_chicken
-"""
-)
+scob("naive_trouble(fiona, big_bird)")
 ```
 
-And, as expected, adding two `chicken` objects together signals that they are safe:
+Okay, so this sounds right.
+However, writing the `naive_trouble` function can be easier.
+To show this, let's create a new function `trouble` and use multiple dispatch:
 
 ```jl
 s = """
-    chicken_1 = chicken()
-    chicken_2 = chicken()
-    chicken_1 + chicken_2
+    trouble(F::Fox, C::Chicken) = true
+    trouble(C::Chicken, F::Fox) = true
+    trouble(C1::Chicken, C2::Chicken) = false
+    """
+sco(s)
+```
+
+After defining these methods, `trouble` gives the same result as `naive_trouble`.
+For example:
+
+```jl
+scob("trouble(fiona, big_bird)")
+```
+
+And leaving Big Bird alone with another chicken called Dora is also fine
+
+```jl
+s = """
+    dora = Chicken(2.2)
+    trouble(dora, big_bird)
     """
 scob(s)
 ```
 
----
+So, in this case, the benefit of multiple dispatch is that you can just declare types and Julia will find the correct method for your types.
+Even more so, for many cases when multiple dispatch is used inside code, the Julia compiler will actually optimize the function calls away.
+For example, we could write:
 
-This is the power of multiple dispatch:
-**we don't need everything from scratch for our custom-defined user types**.
+```
+function trouble(A::Fox, B::Chicken, C::Chicken)
+    return trouble(A, B) || trouble(B, C) || trouble(C, A)
+end
+```
+
+Depending on the context, Julia can optimize this to:
+
+```
+function trouble(A::Box, B::Chicken, C::Chicken)
+    return true || false || true
+end
+```
+
+because the compiler **knows** that `A` is a Fox, `B` is a chicken and so this can be replaced by the contents of the method `trouble(F::Fox, C::Chicken)`.
+The same holds for `trouble(C1::Chicken, C2::Chicken)`.
+Next, the compiler can optimize this to:
+
+```
+function trouble(A::Box, B::Chicken, C::Chicken)
+    return true
+end
+```
+
+Another benefit of multiple dispatch is that when someone else now comes by and wants to compare the existing animals to their animal, a Zebra, then that's possible.
+In their package, they can define a Zebra:
+
+```jl
+s = """
+    struct Zebra <: Animal
+        weight::Float64
+    end
+    """
+sc(s)
+```
+
+and also how the interactions with the existing animals would go:
+
+```jl
+s = """
+    trouble(F::Fox, Z::Zebra) = false
+    trouble(Z::Zebra, F::Fox) = false
+    trouble(C::Chicken, Z::Zebra) = false
+    trouble(Z::Zebra, F::Fox) = false
+    """
+sco(s)
+```
+
+Now, we can see whether Marty (our zebra) is safe with Big Bird:
+
+```jl
+s = """
+    marty = Zebra(412)
+    trouble(big_bird, marty)
+    """
+scob(s)
+```
+
+Even better, we can also calculate **the combined weight of zebra's and other animals without defining any extra function at our side**:
+
+```jl
+scob("combined_weight(big_bird, marty)")
+```
+
+So, in summary, the code that was written with only Fox and Chicken in mind works even for types that it **has never seen before**!
+In practise, this means that Julia makes it often easy to re-use code from other projects.
+
 If you are excited as much as we are by multiple dispatch, here are two more in-depth examples.
 The first is a [fast and elegant implementation of a one-hot vector](https://storopoli.io/Bayesian-Julia/pages/1_why_Julia/#example_one-hot_vector) by @storopoli2021bayesianjulia.
 The second is an interview with [Christopher Rackauckas](https://www.chrisrackauckas.com/) at [Tanmay Bakshi YouTube's Channel](https://youtu.be/moyPIhvw4Nk?t=2107) (see from time 35:07 onwards) [@tanmaybakshiBakingKnowledgeMachine2021].

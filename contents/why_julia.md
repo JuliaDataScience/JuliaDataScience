@@ -245,8 +245,7 @@ scob("naive_trouble(fiona, big_bird)")
 ```
 
 Okay, so this sounds right.
-However, writing the `naive_trouble` function can be easier.
-To show this, let's create a new function `trouble` and use multiple dispatch:
+Writing the `naive_trouble` function seems to be easy enough. However, using multiple dispatch to create a new function `trouble` can have their benefits. Let's create our new function as follows:
 
 ```jl
 s = """

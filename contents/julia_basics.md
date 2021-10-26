@@ -2051,7 +2051,8 @@ In case you're ever wondering: "What can I do with dates again? What is availabl
 We show only the first 20 results here:
 
 ```jl
-sco("first(methodswith(Date), 20)")
+s = "first(methodswith(Date), 5)"
+sco(s; process=catch_show)
 ```
 
 From this, we can conclude that we can also use the plus `+` and minus `-` operator.

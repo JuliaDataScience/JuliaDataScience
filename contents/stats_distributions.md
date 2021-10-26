@@ -15,7 +15,7 @@ using Random
 ```
 
 ```jl
-sc("Random.seed!(0)")
+sc("seed!(0)")
 ```
 
 ```jl

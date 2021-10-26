@@ -145,7 +145,7 @@ function multiple_example_themes()
     filenames = ["theme_dark()", "theme_black()", "theme_ggplot2()", # hide
         "theme_minimal()", "theme_light()"] # hide
     function demo_theme()
-        Random.seed!(123)
+        seed!(123)
         n = 6
         y = cumsum(randn(n, 10), dims=2)
         labels = ["$i" for i = 1:n]
@@ -235,7 +235,7 @@ end
 
 function first_layout()
     CairoMakie.activate!() # hide
-    Random.seed!(123)
+    seed!(123)
     x, y, z = randn(6), randn(6), randn(6)
     fig = Figure(resolution=(600, 400), backgroundcolor=:grey90)
     ax = Axis(fig[1, 1], backgroundcolor=:white)
@@ -252,7 +252,7 @@ end
 
 function first_layout_fixed()
     CairoMakie.activate!() # hide
-    Random.seed!(123)
+    seed!(123)
     x, y, z = randn(6), randn(6), randn(6)
     fig = Figure(figure_padding=(0, 3, 5, 2), resolution=(600, 400),
         backgroundcolor=:grey90, font="CMU Serif")
@@ -280,7 +280,7 @@ end
 
 function complex_layout_double_axis()
     CairoMakie.activate!() # hide
-    Random.seed!(123)
+    seed!(123)
     x = LinRange(0, 1, 10)
     y = LinRange(0, 1, 10)
     z = rand(10, 10)
@@ -310,7 +310,7 @@ end
 
 function squares_layout()
     CairoMakie.activate!() # hide
-    Random.seed!(123)
+    seed!(123)
     letters = reshape(collect('a':'d'), (2, 2))
     fig = Figure(resolution=(600, 400), fontsize=14, font="CMU Serif",
         backgroundcolor=:grey90)
@@ -331,7 +331,7 @@ end
 
 function mixed_mode_layout()
     CairoMakie.activate!() # hide
-    Random.seed!(123)
+    seed!(123)
     longlabels = ["$(today() - Day(1))", "$(today())", "$(today() + Day(1))"]
     fig = Figure(resolution=(600, 400), fontsize=12,
         backgroundcolor=:grey90, font="CMU Serif")
@@ -371,7 +371,7 @@ function nested_sub_plot!(fig)
 end
 
 function main_figure()
-    Random.seed!(123) # hide
+    seed!(123) # hide
     CairoMakie.activate!() # hide
     fig = Figure()
     Axis(fig[1, 1])
@@ -472,7 +472,7 @@ end
 
 function scatters_in_3D()
     GLMakie.activate!() # hide
-    Random.seed!(123)
+    seed!(123)
     xyz = randn(10, 3)
     x, y, z = xyz[:, 1], xyz[:, 2], xyz[:, 3]
     fig = Figure(resolution=(1600, 400))
@@ -490,7 +490,7 @@ end
 
 function lines_in_3D()
     GLMakie.activate!() # hide
-    Random.seed!(123)
+    seed!(123)
     xyz = randn(10, 3)
     x, y, z = xyz[:, 1], xyz[:, 2], xyz[:, 3]
     fig = Figure(resolution=(1600, 400))
@@ -652,7 +652,7 @@ function filled_line_and_linesegments_in_3D()
 end
 
 function grid_spheres_and_rectangle_as_plate()
-    Random.seed!(123)
+    seed!(123)
     rectMesh = FRect3D(Vec3f0(-1, -1, 2.1), Vec3f0(22, 11, 0.5))
     recmesh = GeometryBasics.mesh(rectMesh)
     colors = [RGBA(rand(4)...) for v in recmesh.position]

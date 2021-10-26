@@ -1,7 +1,7 @@
 const NOTO_SANS_BOLD = assetpath("fonts", "NotoSans-Bold.ttf")
 const JuliaColors = Colors.JULIA_LOGO_COLORS
 const Set1 = ColorSchemes.Set1_4
-Random.seed!(123)
+seed!(123)
 
 myrand(x, y, z) = rand()
 

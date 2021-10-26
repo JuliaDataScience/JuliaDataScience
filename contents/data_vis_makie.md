@@ -8,7 +8,7 @@
 [Makie.jl](http://makie.juliaplots.org/stable/index.html) is a high-performance, extendable, and multi-platform plotting ecosystem for the Julia programming language.
 In our opinion, it is the prettiest and most versatile plotting package.
 
-Like many plotting plotting packages, the code is split into multiple packages.
+Like many plotting packages, the code is split into multiple packages.
 `Makie.jl` is the front end package that defines all plotting functions required to create plot objects.
 These objects store all information about the plots, but still need to be converted to an image.
 To convert these plot objects to an image, you need one of the Makie back ends.

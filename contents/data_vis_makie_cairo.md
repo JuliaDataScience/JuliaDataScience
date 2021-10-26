@@ -1,6 +1,6 @@
 ## CairoMakie.jl {#sec:cairomakie}
 
-Let's start with our first plot, a not so boring example but still simple enough, e.g. a line and some scatter points:
+Let's start with our first plot, some scatter points with lines between them:
 
 ```
 using CairoMakie
@@ -19,7 +19,7 @@ s = """
 sco(s)
 ```
 
-The previous plot is the default output, which we probably need to tweak by using axis names and labels.
+Note that the previous plot is the default output, which we probably need to tweak by using axis names and labels.
 
 Also note that every plotting function like `scatterlines` creates and returns a new `Figure`, `Axis` and `plot` object in a collection called `FigureAxisPlot`.
 These are known as the `non-mutating` methods.

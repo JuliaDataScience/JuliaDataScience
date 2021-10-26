@@ -13,9 +13,10 @@ s = """
 sco(s)
 ```
 
-or as a `Dict` calling `pltobject.attributes.attributes`.
+Or as a `Dict` calling `pltobject.attributes.attributes`.
 
-Asking for help in the `REPL` as `?lines` or `help(lines)` for any given plotting function will show you their corresponding attributes plus a short description on how to use that specific function, e.g.:
+Asking for help in the `REPL` as `?lines` or `help(lines)` for any given plotting function will show you their corresponding attributes plus a short description on how to use that specific function.
+For example, for `lines`:
 
 ```jl
 s = """
@@ -24,8 +25,8 @@ s = """
 sco(s)
 ```
 
-But not only the plot objects have attributes, also the `Axis` and `Figure` objects do.
-For example, for Figure, we have `backgroundcolor`, `resolution`, `font` and `fontsize` and the [`figure_padding`](http://makie.juliaplots.org/stable/documentation/figure/index.html#figure_padding) which changes the amount of space around the figure content, see the grey area in the plot, Figure (@fig:custom_plot).
+Not only the plot objects have attributes, also the `Axis` and `Figure` objects do.
+For example, for Figure, we have `backgroundcolor`, `resolution`, `font` and `fontsize` and the `figure_padding` which changes the amount of space around the figure content, see the grey area in the plot, Figure (@fig:custom_plot).
 It can take one number for all sides, or a tuple of four numbers for left, right, bottom and top.
 
 `Axis` has a lot more, some of them are  `backgroundcolor`, `xgridcolor` and `title`.
@@ -44,7 +45,8 @@ s = """
     current_figure()
     filename = "custom_plot" # hide
     link_attributes = "width=60%" # hide
-    Options(current_figure(); filename, caption="Custom plot.", label=filename, link_attributes) # hide
+    caption = "Custom plot." # hide
+    Options(current_figure(); filename, caption, label=filename, link_attributes) # hide
     """
 sco(s)
 ```
@@ -60,7 +62,7 @@ For a different one, the `position=:ct` argument is called, where `:ct` means le
 s = """
     CairoMakie.activate!() # hide
     lines(1:10, (1:10).^2; label="x²", linewidth=2, linestyle=nothing,
-        figure=(;figure_padding=5, resolution=(600, 400), font="sans",
+        figure=(; figure_padding=5, resolution=(600, 400), font="sans",
             backgroundcolor=:grey90, fontsize=16),
         axis=(; xlabel="x", title="title", xgridstyle=:dash,
             ygridstyle=:dash))
@@ -69,23 +71,25 @@ s = """
     current_figure()
     label = "custom_plot_leg" # hide
     link_attributes = "width=60%" # hide
-    Options(current_figure(); label, filename=label, caption="Custom plot legend.", link_attributes) # hide
+    caption = "Custom plot legend." # hide
+    Options(current_figure(); label, filename=label, caption, link_attributes) # hide
     """
 sco(s)
 ```
 
-Other positions are also available by combining `left(l), center(c), right(r)` and `bottom(b), center(c), top(t)`, i.e. `:lt`.
+Other positions are also available by combining `left(l), center(c), right(r)` and `bottom(b), center(c), top(t)`.
+For instance, for left top, use `:lt`.
 
-However, having to write this so much code just for two lines can become cumbersome and tired.
-So if you plan on doing a lot of plots with the same general aesthetics then setting a theme will be better.
-We can do this with `set_theme!()` as the following example illustrates, not a particular good set of attributes but you'll get the idea.
+However, having to write this much code just for two lines is cumbersome.
+So, if you plan on doing a lot of plots with the same general aesthetics, then setting a theme will be better.
+We can do this with `set_theme!()` as the following example illustrates.
 
 Plotting the previous figure should take the new default settings defined by `set_theme!(kwargs)`:
 
 ```jl
 s = """
     CairoMakie.activate!() # hide
-    set_theme!(resolution = (600, 400),
+    set_theme!(; resolution=(600, 400),
         backgroundcolor=(:orange, 0.5), fontsize=16, font="sans",
         Axis=(backgroundcolor=:grey90, xgridstyle=:dash, ygridstyle=:dash),
         Legend=(bgcolor=(:red, 0.2), framecolor=:dodgerblue))
@@ -97,7 +101,8 @@ s = """
     set_theme!()
     label = "setTheme" # hide
     link_attributes = "width=60%" # hide
-    Options(current_figure(); filename=label, caption="set theme", label, link_attributes) # hide
+    caption = "Set theme example."
+    Options(current_figure(); filename=label, caption, label, link_attributes) # hide
     """
 sco(s)
 ```
@@ -109,21 +114,20 @@ Before moving on into the next section, it's worthwhile to see an example where 
 For this example, we will use the `scatter` plotting function to do a bubble plot.
 
 The data for this could be an `array` with 100 rows and 3 columns, here we generated these at random from a normal distribution.
-Where the first column could be the positions in the `x` axis, the second one the positions in `y` and the third one an intrinsic associated value for each point.
+Here, the first column could be the positions in the `x` axis, the second one the positions in `y` and the third one an intrinsic associated value for each point.
 The later could be represented in a plot by a different `color` or with a different marker size. In a bubble plot we can do both.
 
 ```jl
-sco(
-"""
-using Random: seed!
-seed!(28)
-xyvals = randn(100, 3)
-xyvals[1:5, :]
-"""
-)
+s = """
+    using Random: seed!
+    seed!(28)
+    xyvals = randn(100, 3)
+    xyvals[1:5, :]
+    """
+sco(s)
 ```
 
-And then the corresponding plot can be seen in @fig:bubble:
+Next, the corresponding plot can be seen in @fig:bubble:
 
 ```jl
 s = """
@@ -137,7 +141,8 @@ s = """
     fig
     label = "bubble" # hide
     link_attributes = "width=60%" # hide
-    Options(current_figure(); filename=label, caption="Bubble plot", label, link_attributes) # hide
+    caption = "Bubble plot."
+    Options(current_figure(); filename=label, caption, label, link_attributes) # hide
     """
 sco(s)
 ```
@@ -145,14 +150,14 @@ sco(s)
 where we have decomposed the tuple `FigureAxisPlot` into `fig, ax, pltobj`, in order to be able to add a `Legend` and `Colorbar` outside of the plotted object.
 We will discuss layout options in more detail in @sec:makie_layouts.
 
-We have done some basic but still interesting examples to show how to use `Makie.jl` and by now you might be wondering, what else can we do?
+We have done some basic but still interesting examples to show how to use `Makie.jl` and by now you might be wondering: what else can we do?
 What are all the possible plotting functions available in `Makie.jl`?
 To answer this question, a _cheat sheet_ is shown in @fig:cheat_sheet_cairomakie.
 These work especially well with `CairoMakie.jl` backend.
 
 ![Plotting functions: Cheat Sheet. Output given by Cairomakie.](images/makiePlottingFunctionsHide.png){#fig:cheat_sheet_cairomakie}
 
-For completeness, in @fig:cheat_sheet_glmakie we show the corresponding functions _cheat sheet_ for `GLMakie.jl`, which as a backend supports mostly 3D plots.
+For completeness, in @fig:cheat_sheet_glmakie, we show the corresponding functions _cheat sheet_ for `GLMakie.jl`, which supports mostly 3D plots.
 Those will be explained in detail in @sec:glmakie.
 
 ![Plotting functions: Cheat Sheet. Output given by GLMakie.](images/GLMakiePlottingFunctionsHide.png){#fig:cheat_sheet_glmakie}

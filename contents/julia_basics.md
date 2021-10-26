@@ -2051,7 +2051,7 @@ In case you're ever wondering: "What can I do with dates again? What is availabl
 We show only the first 20 results here:
 
 ```jl
-s = "first(methodswith(Date), 5)"
+s = "first(methodswith(Date), 20)"
 sco(s; process=catch_show)
 ```
 

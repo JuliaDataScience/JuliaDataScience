@@ -1831,25 +1831,26 @@ It's a good habit to pick up, because it's very likely to save problems for you 
 
 ## Julia Standard Library {#sec:standardlibrary}
 
-Julia has a **rich standard library** that ships with *every* Julia installation.
-Contrary to everything that we have seen so far, e.g. types, data structures and filesystem; you **must import standard library modules into your environment** to use a particular module or function.
+Julia has a **rich standard library** that is available with *every* Julia installation.
+Contrary to everything that we have seen so far, e.g. types, data structures and filesystem; you **must load standard library modules into your environment** to use a particular module or function.
 
-This is done with the `using` keyword:
+This is done via `using` or `import`.
+In this book, we will load code via `using`:
 
 ```julia
 using ModuleName
 ```
 
-Now you can access all functions and types inside `ModuleName`.
+After doing this, you can access all functions and types inside `ModuleName`.
 
 ### Dates {#sec:dates}
 
 Knowing how to handle dates and timestamps is important in data science.
-As we said in *Why Julia?* (@sec:why_julia) section, Python's `pandas` uses its own `Datetime` type to handle dates.
+As we said in *Why Julia?* (@sec:why_julia) section, Python's `pandas` uses its own `datetime` type to handle dates.
 The same is true in the R tidyverse's `lubridate` package, which also defines its own `datetime` type to handle dates.
-Julia doesn't need any of this, because it has all the **date stuff already baked into its standard library, in a module named `Dates`**.
+In Julia packages don't need to write their own dates logic, because Julia has a dates module in its standard library called `Dates`.
 
-To begin, let's import the `Dates` module:
+To begin, let's load the `Dates` module:
 
 ```julia
 using Dates
@@ -1859,7 +1860,7 @@ using Dates
 
 The `Dates` standard library module has **two types for working with dates**:
 
-1. `Date`: representing time in days; and
+1. `Date`: representing time in days and
 2. `DateTime`: representing time in millisecond precision.
 
 We can construct `Date` and `DateTime` with the default constructor either by specifying an integer to represent year, month, day, hours and so on:
@@ -1875,7 +1876,7 @@ Date(1987) # year
 ```jl
 sco(
 """
-Date(1987, 9) # month
+Date(1987, 9) # year, month
 """
 )
 ```
@@ -1883,7 +1884,7 @@ Date(1987, 9) # month
 ```jl
 sco(
 """
-Date(1987, 9, 13) # day
+Date(1987, 9, 13) # year, month, day
 """
 )
 ```
@@ -1891,7 +1892,7 @@ Date(1987, 9, 13) # day
 ```jl
 sco(
 """
-DateTime(1987, 9, 13, 21) # hour
+DateTime(1987, 9, 13, 21) # year, month, day, hour
 """
 )
 ```
@@ -1899,68 +1900,47 @@ DateTime(1987, 9, 13, 21) # hour
 ```jl
 sco(
 """
-DateTime(1987, 9, 13, 21, 21) # minute
+DateTime(1987, 9, 13, 21, 21) # year, month, day, hour, minute
 """
 )
 ```
 
 For the curious, September 13th 1987, 21:21 is the official time of birth of the first author, Jose.
 
-
 We can also pass `Period` types to the default constructor.
 **`Period` types are the human-equivalent representation of time** for the computer.
 Julia's `Dates` have the following `Period` abstract subtypes:
 
 ```jl
-sco(
-"""
-subtypes(Period)
-"""
-)
+sco("subtypes(Period)")
 ```
 
 which divide into the following concrete types, and they are pretty much self-explanatory:
 
 ```jl
-sco(
-"""
-subtypes(DatePeriod)
-"""
-)
+sco("subtypes(DatePeriod)")
 ```
 
 ```jl
-sco(
-"""
-subtypes(TimePeriod)
-"""
-)
+sco("subtypes(TimePeriod)")
 ```
 
-So we could alternatively construct Jose's official time of birth as:
+So, we could alternatively construct Jose's official time of birth as:
 
 ```jl
-sco(
-"""
-DateTime(Year(1987), Month(9), Day(13), Hour(21), Minute(21))
-"""
-)
+sco("DateTime(Year(1987), Month(9), Day(13), Hour(21), Minute(21))")
 ```
 
 #### Parsing Dates {#sec:dates_parsing}
 
-Most of the time we won't be constructing `Date` or `DateTime` instances from scratch.
+Most of the time, we won't be constructing `Date` or `DateTime` instances from scratch.
 Actually, we will probably be **parsing strings as `Date` or `DateTime` types**.
 
 The `Date` and `DateTime` constructors can be fed a string and a format string.
 For example, the string `"19870913"` representing September 13th 1987 can be parsed with:
 
 ```jl
-sco(
-"""
-Date("19870913", "yyyymmdd")
-"""
-)
+sco("""Date("19870913", "yyyymmdd")""")
 ```
 
 Notice that the second argument is a string representation of the format.
@@ -1969,37 +1949,28 @@ We have the first four digits representing year `y`, followed by two digits for 
 It also works for timestamps with `DateTime`:
 
 ```jl
-sco(
-"""
-DateTime("1987-09-13T21:21:00", "yyyy-mm-ddTHH:MM:SS")
-"""
-)
+sco("""DateTime("1987-09-13T21:21:00", "yyyy-mm-ddTHH:MM:SS")""")
 ```
 
 You can find more on how to specify different date formats in the [Julia `Dates`' documentation](https://docs.julialang.org/en/v1/stdlib/Dates/#Dates.DateFormat).
-Don't worry if you have to revisit it all the time, we ourselves have to do it all the time when working with dates and timestamps.
+Don't worry if you have to revisit it all the time, we ourselves do that too when working with dates and timestamps.
 
 According to [Julia `Dates`' documentation](https://docs.julialang.org/en/v1/stdlib/Dates/#Constructors), using the `Date(date_string, format_string)` method is fine if it's only called a few times.
 If there are many similarly formatted date strings to parse, however, it is much more efficient to first create a `DateFormat` type, and then pass it instead of a raw format string.
-So our previous example would become:
+Then, our previous example becomes:
 
 ```jl
-sco(
-"""
-format = DateFormat("yyyymmdd")
-Date("19870913", format)
-"""
-)
+s = """
+    format = DateFormat("yyyymmdd")
+    Date("19870913", format)
+    """
+sco(s)
 ```
 
 Alternatively, without loss of performance, you can use the string literal prefix `dateformat"..."`:
 
 ```jl
-sco(
-"""
-Date("19870913", dateformat"yyyymmdd")
-"""
-)
+sco("""Date("19870913", dateformat"yyyymmdd")""")
 ```
 
 #### Extracting Date Information {#sec:dates_information}
@@ -2008,89 +1979,49 @@ It is easy to **extract desired information from `Date` and `DateTime` objects**
 First, let's create an instance of a very special date:
 
 ```jl
-sco(
-"""
-my_birthday = Date("1987-09-13")
-"""
-)
+sco("""my_birthday = Date("1987-09-13")""")
 ```
 
 We can extract anything we want from `my_birthday`:
 
 ```jl
-scob(
-"""
-year(my_birthday)
-"""
-)
+scob("year(my_birthday)")
 ```
 
 ```jl
-scob(
-"""
-month(my_birthday)
-"""
-)
+scob("month(my_birthday)")
 ```
 
 ```jl
-scob(
-"""
-day(my_birthday)
-"""
-)
+scob("day(my_birthday)")
 ```
 
 Julia's `Dates` module also has **compound functions that return a tuple of values**:
 
 ```jl
-sco(
-"""
-yearmonth(my_birthday)
-"""
-)
+sco("yearmonth(my_birthday)")
 ```
 
 ```jl
-sco(
-"""
-monthday(my_birthday)
-"""
-)
+sco("monthday(my_birthday)")
 ```
 
 ```jl
-sco(
-"""
-yearmonthday(my_birthday)
-"""
-)
+sco("yearmonthday(my_birthday)")
 ```
 
 We can also see the day of the week and other handy stuff:
 
 ```jl
-scob(
-"""
-dayofweek(my_birthday)
-"""
-)
+scob("dayofweek(my_birthday)")
 ```
 
 ```jl
-scob(
-"""
-dayname(my_birthday)
-"""
-)
+scob("dayname(my_birthday)")
 ```
 
 ```jl
-scob(
-"""
-dayofweekofmonth(my_birthday) # second sunday
-"""
-)
+scob("dayofweekofmonth(my_birthday)")
 ```
 
 Yep, Jose was born on the second Sunday of September.
@@ -2098,7 +2029,7 @@ Yep, Jose was born on the second Sunday of September.
 > **_NOTE:_**
 > Here's a handy tip to just recover weekdays from `Dates` instances.
 > Just use a `filter` on `dayofweek(your_date) <= 5`.
-> For business day you can check the package [`BusinessDays.jl`](https://github.com/JuliaFinance/BusinessDays.jl).
+> For business day you can checkout the [`BusinessDays.jl`](https://github.com/JuliaFinance/BusinessDays.jl) package.
 
 #### Date Operations {#sec:dates_operations}
 
@@ -2107,43 +2038,34 @@ For example, we can add days to a `Date` or `DateTime` instance.
 Notice that Julia's `Dates` will automatically perform the adjustments necessary for leap years, and for months with 30 or 31 days (this is known as *calendrical* arithmetic).
 
 ```jl
-sco(
-"""
-my_birthday + Day(90)
-"""
-)
+sco("my_birthday + Day(90)")
 ```
 
 We can add as many as we like:
 
 ```jl
-sco(
-"""
-my_birthday + Day(90) + Month(2) + Year(1)
-"""
-)
+sco("my_birthday + Day(90) + Month(2) + Year(1)")
 ```
 
-To get **date duration**, we just use the **subtraction** `-` operator.
+In case you're ever wondering: "What can I do with dates again? What is available?", then you can use `methodswith` to check it out.
+We show only the first 20 results here:
+
+```jl
+sco("first(methodswith(Date), 20)")
+```
+
+From this, we can conclude that we can also use the plus `+` and minus `-` operator.
 Let's see how old Jose is, in days:
 
 ```jl
-sco(
-"""
-today() - my_birthday
-"""
-)
+sco("today() - my_birthday")
 ```
 
 The **default duration** of `Date` types is a `Day` instance.
 For the `DateTime`, the default duration is `Millisecond` instance:
 
 ```jl
-sco(
-"""
-DateTime(today()) - DateTime(my_birthday)
-"""
-)
+sco("DateTime(today()) - DateTime(my_birthday)")
 ```
 
 #### Date Intervals {#sec:dates_intervals}
@@ -2151,94 +2073,70 @@ DateTime(today()) - DateTime(my_birthday)
 One nice thing about `Dates` module is that we can also easily construct **date and time intervals**.
 Julia is clever enough to not have to define the whole interval types and operations that we covered in @sec:ranges.
 It just extends the functions and operations defined for range to `Date`'s types.
-This is known as multiple dispatch and we already covered this in *Why Julia?*(@sec:why_julia).
+This is known as multiple dispatch and we already covered this in *Why Julia?* (@sec:why_julia).
 
-For example suppose you want to create a `Day` interval.
+For example, suppose that you want to create a `Day` interval.
 This is easy done with the colon `:` operator:
 
 ```jl
-sco(
-"""
-Date("2021-01-01"):Day(1):Date("2021-01-07")
-"""
-)
+sco("""Date("2021-01-01"):Day(1):Date("2021-01-07")""")
 ```
 
 There is nothing special in using `Day(1)` as the interval, we can **use whatever `Period` type** as interval.
 For example, using 3 days as the interval:
 
 ```jl
-sco(
-"""
-Date("2021-01-01"):Day(3):Date("2021-01-07")
-"""
-)
+sco("""Date("2021-01-01"):Day(3):Date("2021-01-07")""")
 ```
 
 Or even months:
 
 ```jl
-sco(
-"""
-Date("2021-01-01"):Month(1):Date("2021-03-01")
-"""
-)
+sco("""Date("2021-01-01"):Month(1):Date("2021-03-01")""")
 ```
 
 Note that the **type of this interval is a `StepRange` with the `Date` and concrete `Period` type** we used as interval inside the colon `:` operator:
 
 ```jl
-sco(
-"""
-my_date_interval = Date("2021-01-01"):Month(1):Date("2021-03-01")
-typeof(my_date_interval)
-"""
-)
+s = """
+    date_interval = Date("2021-01-01"):Month(1):Date("2021-03-01")
+    typeof(date_interval)
+    """
+sco(s)
 ```
 
 We can convert this to a **vector** with the `collect` function:
 
 ```jl
-sco(
-"""
-my_date_interval_vector = collect(my_date_interval)
-"""
-)
+sco("collected_date_interval = collect(date_interval)")
 ```
 
 And have all the **array functionalities available**, like, for example, indexing:
 
 ```jl
-sco(
-"""
-my_date_interval_vector[end]
-"""
-)
+sco("collected_date_interval[end]")
 ```
 
 We can also **broadcast date operations** to our vector of `Date`s:
 
 ```jl
-sco(
-"""
-my_date_interval_vector .+ Day(10)
-"""
-)
+sco("collected_date_interval .+ Day(10)")
 ```
 
-All we've done with `Date` types can be extended to `DateTime` types in the same manner.
+Similarly, these examples work for `DateTime` types too.
 
 ### Random Numbers {#sec:random}
 
 Another important module in Julia's standard library is the `Random` module.
 This module deals with **random number generation**.
 `Random` is a rich library and, if you're interested, you should consult [Julia's `Random` documentation](https://docs.julialang.org/en/v1/stdlib/Random/).
-We will cover *only* three functions: `seed!`, `rand` and `randn`.
+We will cover *only* three functions: `rand`, `randn` and `seed!`.
 
-To begin, we first import the `Random` module:
+To begin, we first load the `Random` module.
+Since we know exactly what we want to load, we can just as well explicitly load the methods that we want to use:
 
 ```julia
-using Random
+using Random: rand, randn, seed!
 ```
 
 We have **two main functions that generate random numbers**:
@@ -2248,90 +2146,58 @@ We have **two main functions that generate random numbers**:
 
 > **_NOTE:_**
 > Note that those two functions are already in the Julia `Base` module.
-> So you don't need to import `Random` if you planning to use them
+> So, you don't need to import `Random` if you're planning to use them.
 
 #### `rand` {#sec:random_rand}
 
-By default if you call `rand` without arguments it will return a `Float64` in the interval $[0, 1)$, which means between 0 inclusive to 1 exclusive:
+By default, if you call `rand` without arguments it will return a `Float64` in the interval $[0, 1)$, which means between 0 inclusive to 1 exclusive:
 
 ```jl
-scob(
-"""
-rand()
-"""
-)
+scob("rand()")
 ```
 
 You can modify `rand` arguments in several ways.
 For example, suppose you want more than 1 random number:
 
 ```jl
-sco(
-"""
-rand(3)
-"""
-)
+sco("rand(3)")
 ```
 
-Or you want a different interval:
+Or, you want a different interval:
 
 ```jl
-scob(
-"""
-rand(1.0:10.0)
-"""
-)
+scob("rand(1.0:10.0)")
 ```
 
 You can also specify a different step size inside the interval and a different type.
 Here we are using numbers without the dot `.` so Julia will interpret them as `Int64`:
 
 ```jl
-scob(
-"""
-rand(2:2:20)
-"""
-)
+scob("rand(2:2:20)")
 ```
 
 You can also mix and match arguments:
 
 ```jl
-sco(
-"""
-rand(2:2:20, 3)
-"""
-)
+sco("rand(2:2:20, 3)")
 ```
 
 It also supports a collection of elements as a tuple:
 
 ```jl
-scob(
-"""
-rand((42, "Julia", 3.14))
-"""
-)
+scob("""rand((42, "Julia", 3.14))""")
 ```
 
 And also arrays:
 
 ```jl
-scob(
-"""
-rand([1, 2, 3])
-"""
-)
+scob("rand([1, 2, 3])")
 ```
 
 `Dict`s:
 
 ```jl
-sco(
-"""
-rand(Dict("one"=>1, "two"=>2))
-"""
-)
+sco("rand(Dict(:one => 1, :two => 2))")
 ```
 
 To finish off all the `rand` arguments options, you can specify the desired random number dimensions in a tuple.
@@ -2339,11 +2205,7 @@ If you do this, the returned type will be an array.
 For example, here's a 2x2 matrix of `Float64` numbers between 1.0 and 3.0:
 
 ```jl
-sco(
-"""
-rand(1.0:3.0, (2, 2))
-"""
-)
+sco("rand(1.0:3.0, (2, 2))")
 ```
 
 #### `randn` {#sec:random_randn}
@@ -2353,83 +2215,55 @@ The standard normal distribution is the normal distribution with mean 0 and stan
 The default type is `Float64` and it only allows for subtypes of `AbstractFloat` or `Complex`:
 
 ```jl
-scob(
-"""
-randn()
-"""
-)
+scob("randn()")
 ```
 
 We can only specify the size:
 
 ```jl
-sco(
-"""
-randn((2, 2))
-"""
-)
+sco("randn((2, 2))")
 ```
 
 #### `seed!` {#sec:random_seed}
 
 To finish off the `Random` overview, let's talk about **reproducibility**.
 Often, we want to make something **replicable**.
-Meaning that, we want the random number generator to generate the **same random sequence of numbers**,
-despite how paradoxical that might sound...
-We can do so with the `seed!` function.
-
-Let me show you an example of a `rand` that generates the same three numbers given a certain seed:
+Meaning that, we want the random number generator to generate the **same random sequence of numbers**.
+We can do so with the `seed!` function:
 
 ```jl
-sco(
-"""
-Random.seed!(123)
-rand(3)
-"""
-)
+s = """
+    seed!(123)
+    rand(3)
+    """
+sco(s)
 ```
 
 ```jl
-sco(
-"""
-Random.seed!(123)
-rand(3)
-"""
-)
+s = """
+    seed!(123)
+    rand(3)
+    """
+sco(s)
 ```
-
-Note that `seed!` is not automatically exported by the `Random` module.
-We have to call it with the `Module.function` syntax.
 
 In order to avoid tedious and inefficient repetition of `seed!` all over the place, we can instead define an instance of a `seed!` and pass it as a first argument of **either `rand` or `randn`**.
 
 ```jl
-sco(
-"""
-my_seed = Random.seed!(123)
-"""
-)
+sco("my_seed = seed!(123)")
 ```
 
 
 ```jl
-sco(
-"""
-rand(my_seed, 3)
-"""
-)
+sco("rand(my_seed, 3)")
 ```
 
 ```jl
-sco(
-"""
-rand(my_seed, 3)
-"""
-)
+sco("rand(my_seed, 3)")
 ```
 
 > **_NOTE:_**
-> If you want your code to be reproducible you can just call `Random.seed!` in the beggining of your script.
+> If you want your code to be reproducible you can just call `seed!` in the beginning of your script.
 > This will take care of reproducibility in sequential `Random` operations.
 > No need to use it all `rand` and `randn` usage.
 
@@ -2444,35 +2278,33 @@ The first and only required argument is the file's url.
 You can also specify as a second argument the desired output path for the downloaded file (don't forget the filesystem best practices!).
 If you don't specify a second argument, Julia will, by default, create a temporary file with the `tempfile` function.
 
-Let's import the `Download` module:
+Let's load the `download` method:
 
 ```julia
-using Download
+using Download: download
 ```
 
-For example let's download our [`JuliaDataScience` GitHub repository](https://github.com/JuliaDataScience/JuliaDataScience) `Project.toml` file.
+For example, let's download our [`JuliaDataScience` GitHub repository](https://github.com/JuliaDataScience/JuliaDataScience) `Project.toml` file.
 Note that `download` function is not exported by `Downloads` module, so we have to use the `Module.function` syntax.
-By default it returns a string that holds the file path for the downloaded file:
+By default, it returns a string that holds the file path for the downloaded file:
 
 ```jl
-scob(
-"""
-url = "https://raw.githubusercontent.com/JuliaDataScience/JuliaDataScience/main/Project.toml"
+s = """
+    url = "https://raw.githubusercontent.com/JuliaDataScience/JuliaDataScience/main/Project.toml"
 
-my_file = Downloads.download(url) # tempfile() being created
-"""
-)
+    my_file = Downloads.download(url) # tempfile() being created
+    """
+scob(s)
 ```
 
-Let's just show the first 4 lines of our downloaded file with the `readlines` function:
+With `readlines`, we can look at the first 4 lines of our downloaded file:
 
 ```jl
-sco(
-"""
-readlines(my_file)[1:4]
-"""; process=catch_show
-)
+s = """
+    readlines(my_file)[1:4]
+    """
+sco(s; process=catch_show)
 ```
 
 > **_NOTE:_**
-> If you want to interact with web requests or web APIs, you would probably need to use the [`HTTP.jl` package](https://github.com/JuliaWeb/HTTP.jl).
+> For more complex HTTP interactions such as interacting with web APIs, see the [`HTTP.jl` package](https://github.com/JuliaWeb/HTTP.jl) package.

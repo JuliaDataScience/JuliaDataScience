@@ -115,8 +115,8 @@ The later could be represented in a plot by a different `color` or with a differ
 ```jl
 sco(
 """
-using Random
-Random.seed!(28)
+using Random: seed!
+seed!(28)
 xyvals = randn(100, 3)
 xyvals[1:5, :]
 """

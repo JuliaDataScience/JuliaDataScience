@@ -12,8 +12,8 @@ See the following examples, where we had prepared a test plotting function with 
 ```jl
 sco(
 """
-using Random
-Random.seed!(123)
+using Random: seed!
+seed!(123)
 y = cumsum(randn(6, 6), dims=2)
 """
 )
@@ -25,8 +25,8 @@ The range in $x$ and $y$ is also specified.
 ```jl
 sco(
 """
-using Random
-Random.seed!(13)
+using Random: seed!
+seed!(13)
 xv = yv = LinRange(-3, 0.5, 20)
 matrix = randn(20, 20)
 matrix[1:6, 1:6] # first 6 rows and columns

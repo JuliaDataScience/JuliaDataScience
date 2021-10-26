@@ -41,13 +41,13 @@ function more_grades()
 end
 
 function normal_dist(mean, std; seed=123)
-    Random.seed!(seed)
+    seed!(seed)
     d = Distributions.Normal(mean, std)
     return d, rand(d, 1_000)
 end
 
 function lognormal_dist(mean, std; seed=123)
-    Random.seed!(seed)
+    seed!(seed)
     d = LogNormal(log(mean), log(std))
     return d, rand(d, 1_000)
 end
@@ -355,7 +355,7 @@ function plot_dispersion_iqr()
 end
 
 function plot_corr()
-    Random.seed!(123)
+    seed!(123)
     CairoMakie.activate!() # hide
     fig = Figure(; resolution=(600, 600))
     corrs = [0.5, -0.5, 0.8, -0.8]
@@ -410,7 +410,7 @@ function plot_normal_lognormal()
 end
 
 function plot_discrete_continuous()
-    Random.seed!(123)
+    seed!(123)
     discrete = Binomial(10, 0.6)
     continuous = Distributions.Normal(6, 2)
     CairoMakie.activate!() # hide

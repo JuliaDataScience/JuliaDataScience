@@ -56,8 +56,7 @@ using Reexport: @reexport
     using InteractiveUtils
     using LaTeXStrings
     using LinearAlgebra
-    #using Makie
-    using Random
+    using Random: rand, randn, seed!
     using Statistics
     using StatsBase:
         mad,

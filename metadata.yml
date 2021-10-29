@@ -5,8 +5,8 @@ author:
   - Jose Storopoli
   - Rik Huijzer
   - Lazaro Alonso
-html-license: '<b>DRAFT</b> - <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>'
-pdf-footer: "\\textbf{DRAFT} - See \\url{https://juliadatascience.io} for the latest version."
+html-license: '<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>'
+pdf-footer: "See \\url{https://juliadatascience.io} for the latest version."
 tex-license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 lang: en-US
 tags: [JuliaLang, Data Science, Data Visualization, Data Manipulation, Data Analysis]

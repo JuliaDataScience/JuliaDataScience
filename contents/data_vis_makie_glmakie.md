@@ -109,13 +109,47 @@ Taking as reference the previous example one can do the following custom plot wi
 using GeometryBasics, Colors
 ```
 
+For the spheres let's do a rectangular grid. Also, we will use a different color for each one of them.
+Additionally, we can mix spheres and a rectangular plane. Next, we define all the necessary data.
+
+```jl
+sc("""
+seed!(123)
+spheresGrid = [Point3f(i,j,k) for i in 1:2:10 for j in 1:2:10 for k in 1:2:10]
+colorSphere = [RGBA(i * 0.1, j * 0.1, k * 0.1, 0.75) for i in 1:2:10 for j in 1:2:10 for k in 1:2:10]
+spheresPlane = [Point3f(i,j,k) for i in 1:2.5:20 for j in 1:2.5:10 for k in 1:2.5:4]
+cmap = get(colorschemes[:plasma], LinRange(0, 1, 50))
+colorsPlane = cmap[rand(1:50,50)]
+rectMesh = FRect3D(Vec3f(-1, -1, 2.1), Vec3f(22, 11, 0.5))
+recmesh = GeometryBasics.mesh(rectMesh)
+colors = [RGBA(rand(4)...) for v in recmesh.position]
+""")
+```
+
+Then, the plot is simply done with:
+
 ```jl
 @sco JDS.grid_spheres_and_rectangle_as_plate()
 ```
 
 Here, the rectangle is semi-transparent due to the alpha channel added to the RGB color.
 The rectangle function is quite versatile, for instance  3D boxes are easy do implement which in turn could be used for plotting a 3D histogram.
-See our next example:
+See our next example, where we are using again our `peaks` function and some additional definitions:
+
+```jl
+sc("""
+x, y, z = peaks(; n=15)
+δx = (x[2] - x[1]) / 2
+δy = (y[2] - y[1]) / 2
+cbarPal = :Spectral_11
+ztmp = (z .- minimum(z)) ./ (maximum(z .- minimum(z)))
+cmap = get(colorschemes[cbarPal], ztmp)
+cmap2 = reshape(cmap, size(z))
+ztmp2 = abs.(z) ./ maximum(abs.(z)) .+ 0.15
+""")
+```
+
+here $\delta x, \delta y$ are used to specified our boxes size. `cmap2` will be the color for each box and `ztmp2` will be used as a transparency parameter. See the output in the next figure.
 
 ```jl
 @sco JDS.histogram_or_bars_in_3d()

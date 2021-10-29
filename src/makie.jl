@@ -482,7 +482,7 @@ function scatters_in_3D()
     scatter!(ax1, x, y, z; markersize=50)
     meshscatter!(ax2, x, y, z; markersize=0.25)
     hm = meshscatter!(ax3, x, y, z; markersize=0.25,
-        marker=FRect3D(Vec3f0(0), Vec3f0(1)), color=1:size(xyz)[2],
+        marker=FRect3D(Vec3f(0), Vec3f(1)), color=1:size(xyz)[2],
         colormap=:plasma, transparency=false)
     Colorbar(fig[1, 4], hm, label="values", height=Relative(0.5))
     fig
@@ -595,8 +595,8 @@ url = "https://raw.githubusercontent.com/JuliaImages/TestImages.jl/images/images
 img = load(Downloads.download(url))
 
 function arrows_and_streamplot_in_3d()
-    ps = [Point3f0(x, y, z) for x = -3:1:3 for y = -3:1:3 for z = -3:1:3]
-    ns = map(p -> 0.1 * rand() * Vec3f0(p[2], p[3], p[1]), ps)
+    ps = [Point3f(x, y, z) for x = -3:1:3 for y = -3:1:3 for z = -3:1:3]
+    ns = map(p -> 0.1 * rand() * Vec3f(p[2], p[3], p[1]), ps)
     lengths = norm.(ns)
     flowField(x, y, z) = Point(-y + x * (-1 + x^2 + y^2)^2, x + y * (-1 + x^2 + y^2)^2,
         z + x * (y - z^2))
@@ -616,9 +616,9 @@ end
 
 function mesh_volume_contour()
     # mesh objects
-    rectMesh = FRect3D(Vec3f0(-0.5), Vec3f0(1))
+    rectMesh = FRect3D(Vec3f(-0.5), Vec3f(1))
     recmesh = GeometryBasics.mesh(rectMesh)
-    sphere = Sphere(Point3f0(0), 1)
+    sphere = Sphere(Point3f(0), 1)
     # https://juliageometry.github.io/GeometryBasics.jl/stable/primitives/
     spheremesh = GeometryBasics.mesh(Tesselation(sphere, 64))
     # uses 64 for tesselation, a smoother sphere
@@ -637,10 +637,10 @@ end
 
 function filled_line_and_linesegments_in_3D()
     xs = LinRange(-3, 3, 10)
-    lower = [Point3f0(i, -i, 0) for i in LinRange(0, 3, 100)]
-    upper = [Point3f0(i, -i, sin(i) * exp(-(i + i))) for i in range(0, 3, length=100)]
+    lower = [Point3f(i, -i, 0) for i in LinRange(0, 3, 100)]
+    upper = [Point3f(i, -i, sin(i) * exp(-(i + i))) for i in range(0, 3, length=100)]
     fig = Figure(resolution=(1200, 800))
-    axs = [Axis3(fig[1, i]; elevation=pi / 6, perspectiveness=0.5) for i = 1:2]
+    axs = [Axis3(fig[1, i]; elevation=pi/6, perspectiveness=0.5) for i = 1:2]
     band!(axs[1], lower, upper, color=repeat(norm.(upper), outer=2), colormap=:CMRmap)
     lines!(axs[1], upper, color=:black)
     linesegments!(axs[2], cos.(xs), xs, sin.(xs), linewidth=5, color=1:length(xs))
@@ -652,28 +652,26 @@ function filled_line_and_linesegments_in_3D()
 end
 
 function grid_spheres_and_rectangle_as_plate()
-    seed!(123)
-    rectMesh = FRect3D(Vec3f0(-1, -1, 2.1), Vec3f0(22, 11, 0.5))
-    recmesh = GeometryBasics.mesh(rectMesh)
-    colors = [RGBA(rand(4)...) for v in recmesh.position]
+    seed!(123) # hide
+    spheresGrid = [Point3f(i,j,k) for i in 1:2:10 for j in 1:2:10 for k in 1:2:10] # hide
+    colorSphere = [RGBA(i * 0.1, j * 0.1, k * 0.1, 0.75) for i in 1:2:10 for j in 1:2:10 for k in 1:2:10] # hide
+    spheresPlane = [Point3f(i,j,k) for i in 1:2.5:20 for j in 1:2.5:10 for k in 1:2.5:4] # hide
+    cmap = get(colorschemes[:plasma], LinRange(0, 1, 50)) # hide
+    colorsPlane = cmap[rand(1:50,50)] # hide
+    rectMesh = FRect3D(Vec3f(-1, -1, 2.1), Vec3f(22, 11, 0.5)) # hide
+    recmesh = GeometryBasics.mesh(rectMesh) # hide
+    colors = [RGBA(rand(4)...) for v in recmesh.position] # hide
     fig = with_theme(theme_dark()) do
         fig = Figure(resolution=(1200, 800))
         ax1 = Axis3(fig[1, 1]; aspect=:data, perspectiveness=0.5, azimuth=0.72)
-        ax2 = Axis3(fig[1, 2], aspect=:data, perspectiveness=0.5)
-        for i = 1:2:10, j = 1:2:10, k = 1:2:10
-            sphere = Sphere(Point3f0(i, j, k), 1)
-            spheremesh = GeometryBasics.mesh(Tesselation(sphere, 32))
-            mesh!(ax1, spheremesh; color=RGBA(i * 0.1, j * 0.1, k * 0.1, 0.75), shading=false)
-        end
-        cbarPal = :plasma
-        cmap = get(colorschemes[cbarPal], LinRange(0, 1, 50))
-        for i = 1:2.5:20, j = 1:2.5:10, k = 1:2.5:4
-            sphere = Sphere(Point3f0(i, j, k), 1)
-            spheremesh = GeometryBasics.mesh(Tesselation(sphere, 32))
-            mesh!(ax2, spheremesh; color=cmap[rand(1:50)], lightposition=Vec3f0(10, 5, 2),
-                ambient=Vec3f0(0.95, 0.95, 0.95), backlight=1.0f0)
-        end
+        ax2 = Axis3(fig[1, 2]; aspect=:data, perspectiveness=0.5)
+        meshscatter!(ax1, spheresGrid; color = colorSphere, markersize = 1,
+            shading=false)
+        meshscatter!(ax2, spheresPlane; color=colorsPlane, markersize = 0.75,
+            lightposition=Vec3f(10, 5, 2), ambient=Vec3f(0.95, 0.95, 0.95),
+            backlight=1.0f0)
         mesh!(recmesh; color=colors, colormap=:rainbow, shading=false)
+        limits!(ax1, 0, 10, 0, 10, 0, 10)
         fig
     end
     fig
@@ -684,27 +682,30 @@ function grid_spheres_and_rectangle_as_plate()
 end
 
 function histogram_or_bars_in_3d()
-    x, y, z = peaks(; n=15)
-    δx = (x[2] - x[1]) / 2
-    δy = (y[2] - y[1]) / 2
-    cbarPal = :Spectral_11
-    ztmp = (z .- minimum(z)) ./ (maximum(z .- minimum(z)))
-    cmap = get(colorschemes[cbarPal], ztmp)
-    cmap2 = reshape(cmap, size(z))
-    ztmp2 = abs.(z) ./ maximum(abs.(z)) .+ 0.15
+    x, y, z = peaks(; n=15) # hide
+    δx = (x[2] - x[1]) / 2 # hide
+    δy = (y[2] - y[1]) / 2 # hide
+    cbarPal = :Spectral_11 # hide
+    ztmp = (z .- minimum(z)) ./ (maximum(z .- minimum(z))) # hide
+    cmap = get(colorschemes[cbarPal], ztmp) # hide
+    cmap2 = reshape(cmap, size(z)) # hide
+    ztmp2 = abs.(z) ./ maximum(abs.(z)) .+ 0.15 # hide
     fig = Figure(resolution=(1200, 800), fontsize=26)
-    ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), elevation=π / 6, perspectiveness=0.5)
+    ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), elevation=π/6,
+        perspectiveness=0.5)
     ax2 = Axis3(fig[1, 2]; aspect=(1, 1, 1), perspectiveness=0.5)
+    rectMesh = FRect3D(Vec3f0(-0.5, -0.5, 0), Vec3f0(1, 1, 1))
+    meshscatter!(ax1, x, y, 0*z, marker = rectMesh, color = z[:],
+        markersize = Vec3f.(2δx, 2δy, z[:]), colormap = :Spectral_11,
+        shading=false)
+    limits!(ax1, -3.5, 3.5, -3.5, 3.5, -7.45, 7.45)
+    meshscatter!(ax2, x, y, 0*z, marker = rectMesh, color = z[:],
+        markersize = Vec3f.(2δx, 2δy, z[:]), colormap = (:Spectral_11, 0.25),
+        shading=false, transparency=true)
     for (idx, i) in enumerate(x), (idy, j) in enumerate(y)
-        rectMesh = FRect3D(Vec3f0(i - δx, j - δy, 0), Vec3f0(2δx, 2δy, z[idx, idy]))
-        recmesh = GeometryBasics.mesh(rectMesh)
-        mesh!(ax1, recmesh; color=cmap2[idx, idy], shading=false)
-    end
-    for (idx, i) in enumerate(x), (idy, j) in enumerate(y)
-        rectMesh = FRect3D(Vec3f0(i - δx, j - δy, 0), Vec3f0(2δx, 2δy, z[idx, idy]))
+        rectMesh = FRect3D(Vec3f(i - δx, j - δy, 0), Vec3f(2δx, 2δy, z[idx, idy]))
         recmesh = GeometryBasics.mesh(rectMesh)
         lines!(ax2, recmesh; color=(cmap2[idx, idy], ztmp2[idx, idy]))
-        mesh!(ax2, recmesh; color=(cmap2[idx, idy], 0.25), shading=false, transparency=true)
     end
     fig
     caption = "Histogram or bars in 3d." # hide

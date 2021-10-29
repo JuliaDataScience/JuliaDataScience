@@ -14,7 +14,8 @@
 [![Site Analytics](https://img.shields.io/badge/site-analytics-blueviolet)](https://app.usefathom.com/share/eejxhkte/julia+data+science)
 
 You can read the full book on <https://juliadatascience.io>.
-Soon available as printed book on Amazon.
+
+This book is also published at [Amazon.com](https://www.amazon.com/dp/B09KMRKQ96/)
 
 ## LICENSE
 

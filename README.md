@@ -15,7 +15,7 @@
 
 You can read the full book on <https://juliadatascience.io>.
 
-This book is also published at [Amazon.com](https://www.amazon.com/dp/B09KMRKQ96/)
+This book is also published at [Amazon.com](https://www.amazon.com/dp/B09KMRKQ96/).
 
 ## LICENSE
 

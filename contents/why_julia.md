@@ -228,7 +228,7 @@ s = """
     function naive_trouble(A::Animal, B::Animal)
         if A isa Fox && B isa Chicken
             return true
-        elseif A isa Chicken && B isa Chicken
+        elseif A isa Chicken && B isa Fox
             return true
         elseif A isa Chicken && B isa Chicken
             return false

@@ -286,7 +286,7 @@ end
 Depending on the context, Julia can optimize this to:
 
 ```
-function trouble(A::Box, B::Chicken, C::Chicken)
+function trouble(A::Fox, B::Chicken, C::Chicken)
     return true || false || true
 end
 ```
@@ -296,7 +296,7 @@ The same holds for `trouble(C1::Chicken, C2::Chicken)`.
 Next, the compiler can optimize this to:
 
 ```
-function trouble(A::Box, B::Chicken, C::Chicken)
+function trouble(A::Fox, B::Chicken, C::Chicken)
     return true
 end
 ```

@@ -44,6 +44,7 @@ function build()
     gen(; fail_on_error)
     extra_head = """
     <script src="https://cdn.usefathom.com/script.js" data-site="EEJXHKTE" defer></script>
+    <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="eB2Isj56H4g6ndupKwaKyHau7lCkTsVV"></script>
     """
     build_all(; extra_head, fail_on_error)
 end

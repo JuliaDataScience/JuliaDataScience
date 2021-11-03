@@ -48,3 +48,7 @@ save("filename.pdf", fig; pt_per_unit=0.5)
 
 For `png`'s you specify `px_per_unit`.
 See [Backends & Output](https://makie.juliaplots.org/stable/documentation/backends_and_output/) for details.
+
+Another important issue is to actually visualize your output plot.
+Note that for `CairoMakie.jl` the Julia REPL is not able to show plots, so you will need an IDE (Integrated Development Environment) such as VSCode, Jupyter or Pluto that supports `png` or `svg` as output.
+On the other hand, `GLMakie.jl` can open interactive windows, or alternatively display bitmaps inline if `Makie.inline!(true)` is called.

@@ -60,7 +60,7 @@ For more information, see the `Revise.jl` documentation or simply Google a bit i
 We are aware that `Revise.jl` and the REPL requires some manual actions which aren't super clearly documented.
 Luckily, there is [Pluto.jl](https://github.com/fonsp/Pluto.jl).
 `Pluto.jl` automatically manages dependencies, runs code, and **reacts** to changes.
-For beginning programmers, `Pluto.jl` is by far the easiest way to get started.
+For people who are new to programming, `Pluto.jl` is by far the easiest way to get started.
 The main drawback of the package is that it is less suitable for larger projects.
 
 Other options are to use Visual Studio Code with various Julia extensions or manage your own IDE.

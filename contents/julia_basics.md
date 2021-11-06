@@ -34,8 +34,8 @@ julia> x + 1
 3
 ```
 
-This works all very well, but what if we want to store the code that we wrote?
-To store the code, one can write ".jl" files such as "script.jl" and load these files into Julia.
+This works all very well, but what if we want to save the code that we wrote?
+To save our code, one can write ".jl" files such as "script.jl" and load these into Julia.
 Say, that "script.jl" contains:
 
 ```

@@ -16,6 +16,63 @@ Imagine that Julia is a fancy feature-loaded car, such as a brand-new Tesla.
 We'll just explain to you how to "drive the car, park it, and how to navigate in traffic".
 If you want to know what "all the buttons in the steering wheel and dashboard do", this is not the resource you are looking for.
 
+## Development environments {#sec:ide}
+
+Before we can dive into the language syntax, we need to answer how to run code.
+Going into details about the various options is out of scope for this book.
+Instead, we will provide you with some pointers to various solutions.
+
+The simplest way is to use the Julia REPL.
+This means starting the Julia executable (`julia` or `julia.exe`) and running code there.
+For example, we can start the REPL and execute some code:
+
+```julia
+julia> x = 2
+2
+
+julia> x + 1
+3
+```
+
+This works all very well, but what if we want to store the code that we wrote?
+To store the code, one can write ".jl" files such as "script.jl" and load these files into Julia.
+Say, that "script.jl" contains:
+
+```
+x = 3
+y = 4
+```
+
+We can load this into Julia:
+
+```julia
+julia> include("script.jl")
+
+julia> y
+4
+```
+
+Now the problem becomes that we would like Julia to re-read our script every time before executing code.
+This can be done via [Revise.jl](https://github.com/timholy/Revise.jl).
+Because compilation time in Julia is often long, `Revise.jl` is a must-have for Julia development.
+For more information, see the `Revise.jl` documentation or simply Google a bit if you have specific questions.
+
+We are aware that `Revise.jl` and the REPL requires some manual actions which aren't super clearly documented.
+Luckily, there is [Pluto.jl](https://github.com/fonsp/Pluto.jl).
+`Pluto.jl` automatically manages dependencies, runs code, and **reacts** to changes.
+For beginning programmers, `Pluto.jl` is by far the easiest way to get started.
+The main drawback of the package is that it is less suitable for larger projects.
+
+Other options are to use Visual Studio Code with various Julia extensions or manage your own IDE.
+If you **don't** know what an IDE is, but do want to manage large projects choose Visual Studio Code.
+If you **do** know what an IDE is, then you might like building your own IDE with Vim or Emacs and the REPL.
+
+So, to summarize:
+
+- Easiest way to get started -> `Pluto.jl`
+- Larger projects -> Visual Studio Code
+- Advanced users -> Vim, Emacs and the REPL
+
 ## Language Syntax {#sec:syntax}
 
 Julia is a **dynamic-typed language** with a just-in-time compiler.

@@ -16,7 +16,7 @@ Imagine that Julia is a fancy feature-loaded car, such as a brand-new Tesla.
 We'll just explain to you how to "drive the car, park it, and how to navigate in traffic".
 If you want to know what "all the buttons in the steering wheel and dashboard do", this is not the resource you are looking for.
 
-## Development environments {#sec:ide}
+## Development Environments {#sec:ide}
 
 Before we can dive into the language syntax, we need to answer how to run code.
 Going into details about the various options is out of scope for this book.

@@ -36,6 +36,7 @@
     "images"
   ]
 
-  online_url = "https://juliadatascience.io"
+  online_url = "https://cn.julialang.org"
+  online_url_prefix = "JuliaDataScience"
 
   output_filename = "juliadatascience"

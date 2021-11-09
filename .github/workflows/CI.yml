@@ -47,7 +47,6 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         uses: peaceiris/actions-gh-pages@v3
         with:
-          cname: juliadatascience.io
           github_token: ${{ secrets.GITHUB_TOKEN }}
           force_orphan: true
           publish_dir: ./_build/

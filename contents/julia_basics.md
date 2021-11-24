@@ -1566,7 +1566,7 @@ Julia, like most scientific programming languages, is "column-major".
 Column-major means that the elements in the column are stored next to each other in memory[^pointers].
 This also means that iterating over elements in a column is much quicker than over elements in a row.
 
-[^pointers]: or, that the memory address pointers to the elements in the column are stored next to each other
+[^pointers]: or, that the memory address pointers to the elements in the column are stored next to each other.
 
 Ok, let's show this in an example:
 
@@ -1694,7 +1694,7 @@ name2number_map = Dict("one" => 1, "two" => 2)
 )
 ```
 
-You can retrieve a `Dict`s `value` by indexing it by the corresponding `key`:
+You can retrieve a `Dict`'s `value` by indexing it by the corresponding `key`:
 
 ```jl
 scob("""name2number_map["one"]""")

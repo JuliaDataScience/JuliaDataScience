@@ -1694,7 +1694,7 @@ name2number_map = Dict("one" => 1, "two" => 2)
 )
 ```
 
-You can retrieve a `Dict`s `value` by indexing it by the corresponding `key`:
+You can retrieve a `Dict`'s `value` by indexing it by the corresponding `key`:
 
 ```jl
 scob("""name2number_map["one"]""")

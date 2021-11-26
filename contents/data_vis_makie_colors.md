@@ -9,7 +9,7 @@ and obtain a transparent color or colormap with `color=(:red,0.5)` and `colormap
 
 Different use cases will be shown next. Then we will difine a custom theme with new colors and a colorbar palette.
 
-By default `Makie.jl` has a predefined set of colors in order to cycle trough them automatically.
+By default `Makie.jl` has a predefined set of colors in order to cycle through them automatically.
 As shown in the previous figures, where no specific color was set.
 Overwriting these defaults is done by calling the keyword `color` in the plotting function and specifying a new color via a `Symbol` or `String`.
 See this in action in the following example:

@@ -133,7 +133,7 @@ With this section, people who already understand it, understand it a bit better 
 > In this example, we defined the variables `name`, `grade_2020` and `df` in global scope.
 > This means that these variables can be accessed and edited from anywhere.
 > If we would continue writing the book like this, we would have a few hundred variables at the end of the book even though the data that we put into the variable `name` should only be accessed via `DataFrame`!
-> The variables `name` and `grade_2020` where never meant to be kept for long!
+> The variables `name` and `grade_2020` were never meant to be kept for long!
 > Now, imagine that we would change the contents of `grade_2020` a few times in this book.
 > Given only the book as PDF, it would be near impossible to figure out the contents of the variable by the end.
 >

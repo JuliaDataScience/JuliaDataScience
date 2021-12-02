@@ -7,7 +7,7 @@ In this section, we will give some performance tips and tricks.
 ### In-place operations {#sec:df_performance_inplace}
 
 Like we explained in @sec:function_bang, functions that end with a bang `!` are a common pattern to denote functions that modify one or more of their arguments.
-In the context of high performance Julia code, this *means* that **functions with `!` will just change in-place the objects that we have supplied as arguments.
+In the context of high performance Julia code, this *means* that **functions** with `!` will just change in-place the objects that we have supplied as arguments.
 
 Almost all the `DataFrames.jl` functions that we've seen have a \"`!` twin\".
 For example, `filter` has an _in-place_ `filter!`, `select` has `select!`, `subset` has `subset!`, and so on.

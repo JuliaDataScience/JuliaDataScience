@@ -828,13 +828,13 @@ scob(s)
     * **prefix** of the second argument
 
        ```jl
-       scob("""startswith("Julia", julia_string)""")
+       scob("""startswith(julia_string, "Julia")""")
        ```
 
     * **suffix** of the second argument
 
        ```jl
-       scob("""endswith("Julia", julia_string)""")
+       scob("""endswith(julia_string, "Julia")""")
        ```
 
 2. `lowercase`, `uppercase`, `titlecase` and `lowercasefirst`:

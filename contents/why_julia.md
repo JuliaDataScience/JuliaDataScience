@@ -151,7 +151,7 @@ Also, the trade-off is that it takes time to infer what can be hardcoded and wha
 This explains why it can often take very long before Julia does the first thing:
 in the background, it is optimizing your code.
 
-The compiler in turns does what it does best: it optimizes machine code^[if you like to learn more about how Julia is designed you should definitely check @bezanson2017julia.].
+The compiler in turn does what it does best: it optimizes machine code^[if you like to learn more about how Julia is designed you should definitely check @bezanson2017julia.].
 You can find [benchmarks](https://julialang.org/benchmarks/) for Julia and several other languages here.
 @fig:benchmarks was taken from [Julia's website benchmarks section^[please note that the Julia results depicted above do not include compile time.]](https://julialang.org/benchmarks/).
 As you can see Julia is **indeed** fast.
@@ -342,7 +342,7 @@ scob("combined_weight(big_bird, marty)")
 ```
 
 So, in summary, the code that was written with only Fox and Chicken in mind works even for types that it **has never seen before**!
-In practise, this means that Julia makes it often easy to re-use code from other projects.
+In practice, this means that Julia makes it often easy to re-use code from other projects.
 
 If you are excited as much as we are by multiple dispatch, here are two more in-depth examples.
 The first is a [fast and elegant implementation of a one-hot vector](https://storopoli.io/Bayesian-Julia/pages/1_why_Julia/#example_one-hot_vector) by @storopoli2021bayesianjulia.
@@ -380,4 +380,3 @@ If this is not enough, there are more case studies in [Julia Computing website](
 
 [^readable]: no C++ or FORTRAN API calls.
 [^LLVM]: LLVM stands for **L**ow **L**evel **V**irtual **M**achine, you can find more at the LLVM website (<http://llvm.org>).
-

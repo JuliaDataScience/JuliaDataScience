@@ -1849,13 +1849,13 @@ Whenever you are dealing with files such as CSV, Excel files or other Julia scri
 This is easily accomplished with the `joinpath`, `@__FILE__` and `pkgdir` functions.
 
 If you write your code in a package, you can use `pkgdir` to get the root directory of the package.
-For example, for the Julia Data Science (JDS) package that we use to produce this book:
+For example, for the Julia Data Science (JDS) package that we use to produce this book the root directory is
 
 ```jl
 root = pkgdir(JDS)
 ```
 
-as you can see, the code to produce this book was running on a Linux computer.
+As you can see, the code to produce this book was running on a Linux computer.
 If you're using a script, you can get the location of the script file via
 
 ```julia

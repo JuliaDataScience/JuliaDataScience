@@ -414,8 +414,8 @@ The function `Base.show` accepts as arguments a `IO` type named `io` followed by
 ```jl
 s = """
     Base.show(io::IO, l::Language) = print(
-        io, l.name, " ",
-        2021 - l.year_of_birth, ", years old, ",
+        io, l.name, ", ",
+        2021 - l.year_of_birth, " years old, ",
         "has the following titles: ", l.title
     )
     """
@@ -901,7 +901,7 @@ sco("""tryparse(Int64, "A very non-numeric string")""")
 
 Julia has a data structure called **tuple**.
 They are really *special* in Julia because they are often used in relation to functions.
-Since functions are a important feature in Julia, every Julia user should know the basics of tuples.
+Since functions are an important feature in Julia, every Julia user should know the basics of tuples.
 
 A tuple is a **fixed-length container that can hold multiple different types**.
 A tuple is an **immutable object**, meaning that it cannot be modified after instantiation.
@@ -971,7 +971,7 @@ But now you **name the values**:
 sco("""my_namedtuple = (i=1, f=3.14, s="Julia")""")
 ```
 
-We can access a named tuple's values via indexing like regular tuples or, alternatively, **access by their names** with the `.`:
+We can access named tuple's values via indexing like regular tuples or, alternatively, **access by their names** with the `.`:
 
 ```jl
 scob("my_namedtuple.s")
@@ -1434,8 +1434,8 @@ You can do this with `reshape`, by using the array as the first argument and a t
 ```jl
 s = """
     six_vector = [1, 2, 3, 4, 5, 6]
-    tree_two_matrix = reshape(six_vector, (3, 2))
-    tree_two_matrix
+    three_two_matrix = reshape(six_vector, (3, 2))
+    three_two_matrix
     """
 sco(s)
 ```
@@ -1443,7 +1443,7 @@ sco(s)
 You can convert it back to a vector by specifying a tuple with only one dimension as the second argument:
 
 ```jl
-sco("reshape(tree_two_matrix, (6, ))")
+sco("reshape(three_two_matrix, (6, ))")
 ```
 
 The third way we could manipulate an array is to **apply a function over every array element**.
@@ -2365,4 +2365,4 @@ sco(s; process=catch_show)
 ```
 
 > **_NOTE:_**
-> For more complex HTTP interactions such as interacting with web APIs, see the [`HTTP.jl` package](https://github.com/JuliaWeb/HTTP.jl) package.
+> For more complex HTTP interactions such as interacting with web APIs, see the [`HTTP.jl` package](https://github.com/JuliaWeb/HTTP.jl).

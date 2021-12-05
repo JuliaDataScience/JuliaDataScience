@@ -22,6 +22,7 @@ We make an argument for **incorporating software engineering practices into data
 Most data analyses are collaborative endeavors; that is why these software practices will help you.
 
 ### Data is Everywhere {#sec:data_everywhere}
+<!-- NOTE: make it an unnumbered section (there is no section 1.0.2) -->
 
 **Data is abundant** and will be even more so in the near future.
 A report from late 2012 concluded that, from 2005 to 2020, the amount of data stored digitally will **grow by a factor of 300, from 130 exabytes^[1 exabyte (EB) = 1,000,000 terabyte (TB).] to a whopping 40,000 exabytes** [@gantz2012digital].
@@ -49,6 +50,7 @@ We cover why Julia is an extremely effective language for data science in @sec:w
 For now, let's turn our attention towards data.
 
 ### Data Literacy {#sec:data_literacy}
+<!-- NOTE: make it an unnumbered section (there is no section 1.1.2) -->
 
 According to [Wikipedia](https://en.wikipedia.org/wiki/Data_literacy), the formal definition of **data literacy is "the ability to read, understand, create, and communicate data as information."**.
 We also like the informal idea that, being data literate, you won't feel overwhelmed by data, but instead can use it to make the right decisions.
@@ -57,6 +59,11 @@ In this book we'll cover two aspects of data literacy:
 
 1. **Data Manipulation** with `DataFrames.jl` (@sec:dataframes).
 In this chapter you will learn how to:
+<!-- NOTE: unfortunately the chapters are automatically named "Section"s
+     as can be seen in the output of the previous line.
+     -> Would it be better to name them (not fully correct but for consistency)
+        "section" in text? (ff = there are other occurrences as well which
+        I will not comment on as well.) -->
     1. Read CSV and Excel data into Julia.
     2. Process data in Julia, that is, learn how to answer data questions.
     3. Filter and subset data.

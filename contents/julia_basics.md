@@ -2351,7 +2351,7 @@ By default, it returns a string that holds the file path for the downloaded file
 s = """
     url = "https://raw.githubusercontent.com/JuliaDataScience/JuliaDataScience/main/Project.toml"
 
-    my_file = Downloads.download(url) # tempfile() being created
+    my_file = download(url) # tempfile() being created
     """
 scob(s)
 ```

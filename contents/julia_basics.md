@@ -1789,7 +1789,7 @@ We use `Symbol`s a lot in data manipulations with the `DataFrames.jl` package (@
 ### Splat Operator {#sec:splat}
 
 In Julia we have the "splat" operator `...` which is used in function calls as a **sequence of arguments**.
-We will occasionally use splatting in some function calls in the **data manipulation** and **data visualization** chapters.
+We will occasionally use splatting in some function calls in the **data manipulation** and **data visualization** sections.
 
 The most intuitive way to learn about splatting is with an example.
 The `add_elements` function below takes three arguments to be added together:

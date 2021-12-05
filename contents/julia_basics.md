@@ -669,6 +669,7 @@ sco("logarithm.([1, 2, 3])")
 ```
 
 #### Functions with a bang `!` {#sec:function_bang}
+<!-- NOTE: make it an unnumbered section (there is no section 3.3.1.2) -->
 
 It is a Julia convention to append a bang `!` to names of functions that modify one or more of their arguments.
 This convention warns the user that the function is **not pure**, i.e., that it has *side effects*.

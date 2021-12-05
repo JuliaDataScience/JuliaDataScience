@@ -669,7 +669,6 @@ sco("logarithm.([1, 2, 3])")
 ```
 
 #### Functions with a bang `!` {#sec:function_bang}
-<!-- NOTE: make it an unnumbered section (there is no section 3.3.1.2) -->
 
 It is a Julia convention to append a bang `!` to names of functions that modify one or more of their arguments.
 This convention warns the user that the function is **not pure**, i.e., that it has *side effects*.
@@ -1789,7 +1788,7 @@ We use `Symbol`s a lot in data manipulations with the `DataFrames.jl` package (@
 ### Splat Operator {#sec:splat}
 
 In Julia we have the "splat" operator `...` which is used in function calls as a **sequence of arguments**.
-We will occasionally use splatting in some function calls in the **data manipulation** and **data visualization** sections.
+We will occasionally use splatting in some function calls in the **data manipulation** and **data visualization** chapters.
 
 The most intuitive way to learn about splatting is with an example.
 The `add_elements` function below takes three arguments to be added together:
@@ -1839,7 +1838,7 @@ We share code, data, tables, figures and so on.
 Behind everything, there is the **operating system (OS) filesystem**.
 In a perfect world, the same program would give the **same** output when running on **different** operating systems.
 Unfortunately, that is not always the case.
-One instance of this is the difference between Windows paths, such as `C:\user\john`, and Linux paths, such as `/home/john`.
+One instance of this is the difference between Windows paths, such as `C:\\user\john`, and Linux paths, such as `/home/john`.
 This is why it is important to discuss **filesystem best practices**.
 
 Julia has native filesystem capabilities that **handle the differences between operating systems**.
@@ -1849,7 +1848,7 @@ Whenever you are dealing with files such as CSV, Excel files or other Julia scri
 This is easily accomplished with the `joinpath`, `@__FILE__` and `pkgdir` functions.
 
 If you write your code in a package, you can use `pkgdir` to get the root directory of the package.
-For example, for the Julia Data Science (JDS) package that we use to produce this book the root directory is
+For example, for the Julia Data Science (JDS) package that we use to produce this book, the root directory is:
 
 ```jl
 root = pkgdir(JDS)
@@ -2351,7 +2350,7 @@ By default, it returns a string that holds the file path for the downloaded file
 s = """
     url = "https://raw.githubusercontent.com/JuliaDataScience/JuliaDataScience/main/Project.toml"
 
-    my_file = download(url) # tempfile() being created
+    my_file = Downloads.download(url) # tempfile() being created
     """
 scob(s)
 ```

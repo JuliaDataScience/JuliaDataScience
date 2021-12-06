@@ -812,7 +812,7 @@ First, let us define a string for us to play around with:
 
 ```jl
 s = """
-    julia_string = "Julia is an amazing opensource programming language"
+    julia_string = "Julia is an amazing open source programming language"
     """
 scob(s)
 ```
@@ -1020,8 +1020,8 @@ We can also construct ranges for other types:
 sco("typeof(1.0:10.0)")
 ```
 
-Sometimes, we want to change the default interval stepsize behavior.
-We can do that by adding a stepsize in the range syntax `start:step:stop`.
+Sometimes, we want to change the default interval step size behavior.
+We can do that by adding a step size in the range syntax `start:step:stop`.
 For example, suppose we want a range of `Float64` from 0 to 1 with steps of size 0.2:
 
 ```jl
@@ -1491,7 +1491,7 @@ This can be done with the `mapslices` function.
 Similar to `map`, the first argument is the function and the second argument is the array.
 The only change is that we need to specify the `dims` argument to flag what dimension we want to transform the elements.
 
-For example, let's use `mapslice` with the `sum` function on both rows (`dims=1`) and columns (`dims=2`):
+For example, let's use `mapslices` with the `sum` function on both rows (`dims=1`) and columns (`dims=2`):
 
 ```jl
 sco(

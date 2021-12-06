@@ -818,20 +818,20 @@ scob(s)
 ```
 
 
-1. `occursin`, `startswith` and `endswith`: A conditional (returns either `true` or `false`) if the first argument is a:
-    * **substring** of the second argument
+1. `contains`, `startswith` and `endswith`: A conditional (returns either `true` or `false`) if the second argument is a:
+    * **substring** of the first argument
 
        ```jl
-       scob("""occursin("Julia", julia_string)""")
+       scob("""contains(julia_string, "Julia")""")
        ```
 
-    * **prefix** of the second argument
+    * **prefix** of the first argument
 
        ```jl
        scob("""startswith(julia_string, "Julia")""")
        ```
 
-    * **suffix** of the second argument
+    * **suffix** of the first argument
 
        ```jl
        scob("""endswith(julia_string, "Julia")""")

@@ -77,7 +77,7 @@ sco(s; process=without_caption_label)
 
 But, although the last example is easier since it builds on more native Julia operations, **we strongly advise to use the functions provided by `DataFrames.jl` in most cases because they are more capable and easier to work with.**
 
-### Multiple Transformations {#sec:multiple_transform}
+### Multiple Transformations {-}
 
 To show how to transform two columns at the same time, we use the left joined data from @sec:join:
 

@@ -123,7 +123,7 @@ s2color2 = """
 sco(s2color2)
 ```
 
-### Custom cycle
+### Custom cycle {-}
 
 Here, we could define a global `Theme` with a new cycle for colors, however that is **not the recommend way** to do it.
 It's better to define a new theme and use as shown before.

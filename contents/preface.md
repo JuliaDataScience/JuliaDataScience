@@ -21,7 +21,7 @@ In the next part of this section, we emphasize the **"data" part of data science
 We make an argument for **incorporating software engineering practices into data science** which should reduce friction when updating and sharing code with collaborators.
 Most data analyses are collaborative endeavors; that is why these software practices will help you.
 
-### Data is Everywhere {#sec:data_everywhere}
+### Data is Everywhere {-}
 
 **Data is abundant** and will be even more so in the near future.
 A report from late 2012 concluded that, from 2005 to 2020, the amount of data stored digitally will **grow by a factor of 300, from 130 exabytes^[1 exabyte (EB) = 1,000,000 terabyte (TB).] to a whopping 40,000 exabytes** [@gantz2012digital].
@@ -48,7 +48,7 @@ Our aims of this book are twofold:
 We cover why Julia is an extremely effective language for data science in @sec:why_julia.
 For now, let's turn our attention towards data.
 
-### Data Literacy {#sec:data_literacy}
+### Data Literacy {-}
 
 According to [Wikipedia](https://en.wikipedia.org/wiki/Data_literacy), the formal definition of **data literacy is "the ability to read, understand, create, and communicate data as information."**.
 We also like the informal idea that, being data literate, you won't feel overwhelmed by data, but instead can use it to make the right decisions.

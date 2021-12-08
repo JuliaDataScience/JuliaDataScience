@@ -49,7 +49,7 @@ using Reexport: @reexport
         transform!
     using Dates
     using Distributions
-    using Downloads
+    using Downloads: download
     using FileIO
     using GLMakie
     using GeometryBasics

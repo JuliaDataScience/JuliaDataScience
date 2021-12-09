@@ -2339,7 +2339,7 @@ If you don't specify a second argument, Julia will, by default, create a tempora
 Let's load the `Downloads` module:
 
 ```julia
-using Downloads: download
+using Downloads
 ```
 
 For example, let's download our [`JuliaDataScience` GitHub repository](https://github.com/JuliaDataScience/JuliaDataScience) `Project.toml` file.

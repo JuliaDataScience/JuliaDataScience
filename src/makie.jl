@@ -592,7 +592,7 @@ function mixing_surface_contour3d_contour_and_contourf()
 end
 
 url = "https://raw.githubusercontent.com/JuliaImages/TestImages.jl/images/images/monarch_color_256.png"
-img = load(download(url))
+img = load(Downloads.download(url))
 
 function arrows_and_streamplot_in_3d()
     ps = [Point3f(x, y, z) for x = -3:1:3 for y = -3:1:3 for z = -3:1:3]

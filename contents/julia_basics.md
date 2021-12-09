@@ -2336,20 +2336,21 @@ The first and only required argument is the file's url.
 You can also specify as a second argument the desired output path for the downloaded file (don't forget the filesystem best practices!).
 If you don't specify a second argument, Julia will, by default, create a temporary file with the `tempfile` function.
 
-Let's load the `download` method from the `Downloads` module:
+Let's load the `Downloads` module:
 
 ```julia
 using Downloads: download
 ```
 
 For example, let's download our [`JuliaDataScience` GitHub repository](https://github.com/JuliaDataScience/JuliaDataScience) `Project.toml` file.
+Note that `download` function is not exported by `Downloads` module, so we have to use the `Module.function` syntax.
 By default, it returns a string that holds the file path for the downloaded file:
 
 ```jl
 s = """
     url = "https://raw.githubusercontent.com/JuliaDataScience/JuliaDataScience/main/Project.toml"
 
-    my_file = download(url) # tempfile() being created
+    my_file = Downloads.download(url) # tempfile() being created
     """
 scob(s)
 ```

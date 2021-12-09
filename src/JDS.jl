@@ -49,7 +49,7 @@ using Reexport: @reexport
         transform!
     using Dates
     using Distributions
-    using Downloads: download
+    using Downloads
     using FileIO
     using GLMakie
     using GeometryBasics
@@ -69,6 +69,7 @@ using Reexport: @reexport
 end # @reexport
 
 const SMALL_IM_ATTR = "width=70%"
+const download = Downloads.download
 
 include("ci.jl")
 include("df.jl")

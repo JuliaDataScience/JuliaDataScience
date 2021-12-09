@@ -21,7 +21,7 @@ In the next part of this section, we emphasize the **"data" part of data science
 We make an argument for **incorporating software engineering practices into data science** which should reduce friction when updating and sharing code with collaborators.
 Most data analyses are collaborative endeavors; that is why these software practices will help you.
 
-### Data is Everywhere {#sec:data_everywhere}
+### Data is Everywhere {-}
 
 **Data is abundant** and will be even more so in the near future.
 A report from late 2012 concluded that, from 2005 to 2020, the amount of data stored digitally will **grow by a factor of 300, from 130 exabytes^[1 exabyte (EB) = 1,000,000 terabyte (TB).] to a whopping 40,000 exabytes** [@gantz2012digital].

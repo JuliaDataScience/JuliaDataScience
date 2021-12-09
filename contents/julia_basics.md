@@ -2327,7 +2327,7 @@ sco("rand(my_seed, 3)")
 
 ### Downloads {#sec:downloads}
 
-One last thing from Julia's standard library for us to cover is the **`Download` module**.
+One last thing from Julia's standard library for us to cover is the **`Downloads` module**.
 It will be really brief because we will only be covering a single function named `download`.
 
 Suppose you want to **download a file from the internet to your local storage**.
@@ -2336,10 +2336,10 @@ The first and only required argument is the file's url.
 You can also specify as a second argument the desired output path for the downloaded file (don't forget the filesystem best practices!).
 If you don't specify a second argument, Julia will, by default, create a temporary file with the `tempfile` function.
 
-Let's load the `download` method:
+Let's load the `Downloads` module:
 
 ```julia
-using Downloads: download
+using Downloads
 ```
 
 For example, let's download our [`JuliaDataScience` GitHub repository](https://github.com/JuliaDataScience/JuliaDataScience) `Project.toml` file.

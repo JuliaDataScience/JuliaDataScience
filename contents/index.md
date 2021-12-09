@@ -9,11 +9,20 @@ Our target audience are researchers from all fields of applied sciences.
 Of course, we hope to be useful for industry too.
 You can navigate through the pages of the ebook by using the arrow keys (left/right) on your keyboard.
 
-The book is also available as [**PDF**](/juliadatascience.pdf){target="_blank"}.
+```{=html}
+<script defer type="text/javascript"
+    src="https://api.pirsch.io/pirsch-events.js" id="pirscheventsjs"
+    data-code="eB2Isj56H4g6ndupKwaKyHau7lCkTsVV">
+</script>
+```
+The book is also available as [**PDF**](/juliadatascience.pdf){target="_blank" onclick="pirsch('Link Clicked')"}.
 
-The source code is available at [GitHub](https://github.com/JuliaDataScience/JuliaDataScience){target="_blank"}.
+The source code is available at [GitHub](https://github.com/JuliaDataScience/JuliaDataScience){onclick="pirsch('Link Clicked')"}.
 
-This book is also published at [Amazon.com](https://www.amazon.com/dp/B09KMRKQ96/).
+The book is published at [Amazon.com](https://www.amazon.com/dp/B09KMRKQ96/){onclick="pirsch('Link Clicked')"},
+[Amazon.de](https://www.amazon.de/dp/B09KMRKQ96){onclick="pirsch('Link Clicked')"},
+[Amazon.co.uk](https://www.amazon.co.uk/dp/B09KMRKQ96){onclick="pirsch('Link Clicked')"}
+and many more Amazon stores.
 
 If you want to be notified about updates, please consider **signing up for updates**:
 

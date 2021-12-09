@@ -1838,7 +1838,7 @@ We share code, data, tables, figures and so on.
 Behind everything, there is the **operating system (OS) filesystem**.
 In a perfect world, the same program would give the **same** output when running on **different** operating systems.
 Unfortunately, that is not always the case.
-One instance of this is the difference between Windows paths, such as `C:\\user\john`, and Linux paths, such as `/home/john`.
+One instance of this is the difference between Windows paths, such as `C:\Users\john`, and Linux paths, such as `/home/john`.
 This is why it is important to discuss **filesystem best practices**.
 
 Julia has native filesystem capabilities that **handle the differences between operating systems**.

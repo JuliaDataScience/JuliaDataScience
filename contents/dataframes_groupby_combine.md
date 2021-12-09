@@ -39,7 +39,7 @@ Imagine having to do this without the `groupby` and `combine` functions.
 We would need to loop over our data to split it up into groups, then loop over each split to apply a function, **and** finally loop over each group to gather the final result.
 Therefore, the split-apply-combine technique is a great one to know.
 
-### Multiple Source Columns {-}
+### Multiple Source Columns {#sec:groupby_combine_multiple_source}
 
 But what if we want to apply a function to multiple columns of our dataset?
 

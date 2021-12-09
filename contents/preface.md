@@ -48,7 +48,7 @@ Our aims of this book are twofold:
 We cover why Julia is an extremely effective language for data science in @sec:why_julia.
 For now, let's turn our attention towards data.
 
-### Data Literacy {-}
+### Data Literacy {#sec:data_literacy}
 
 According to [Wikipedia](https://en.wikipedia.org/wiki/Data_literacy), the formal definition of **data literacy is "the ability to read, understand, create, and communicate data as information."**.
 We also like the informal idea that, being data literate, you won't feel overwhelmed by data, but instead can use it to make the right decisions.

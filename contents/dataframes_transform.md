@@ -4,6 +4,11 @@
 We need to cover `ifelse` and `case_when`
 ```
 
+### Single Transformations
+<!-- That fits to the later "Multiple Transformation" and also solves the
+     "problem" stated in issue #221.
+     (Seems like I have missed this one ...) -->
+
 In @sec:filter, we saw that `filter` works by taking one or more source columns and filtering it by applying a "filtering" function.
 To recap, here's an example of filter using the `source => f::Function` syntax: `filter(:name => name -> name == "Alice", df)`.
 

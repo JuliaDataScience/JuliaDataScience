@@ -41,7 +41,7 @@ sco(s, process=without_caption_label)
 It's also fine to mix and match columns that we want to preserve with columns that we do `Not` want to select:
 
 ```jl
-s = """select(responses(), :q5, Not(:id))"""
+s = """select(responses(), :q5, Not(:q5))"""
 sco(s, process=without_caption_label)
 ```
 

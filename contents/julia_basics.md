@@ -2191,20 +2191,16 @@ This module deals with **random number generation**.
 We will cover *only* three functions: `rand`, `randn` and `seed!`.
 
 To begin, we first load the `Random` module.
-Since we know exactly what we want to load, we can just as well explicitly load the methods that we want to use:
+Since we know exactly what we want to load, we can just as well do that explicitly:
 
 ```julia
-using Random: rand, randn, seed!
+using Random: seed!
 ```
 
 We have **two main functions that generate random numbers**:
 
 * `rand`: samples a **random element** of a data structure or type.
-* `randn`: generates a random number that follows a **standard normal distribution** (mean 0 and standard deviation 1) of a specific type.
-
-> **_NOTE:_**
-> Note that those two functions are already in the Julia `Base` module.
-> So, you don't need to import `Random` if you're planning to use them.
+* `randn`: samples a random number from a **standard normal distribution** (mean 0 and standard deviation 1).
 
 #### `rand` {#sec:random_rand}
 
@@ -2228,7 +2224,7 @@ scob("rand(1.0:10.0)")
 ```
 
 You can also specify a different step size inside the interval and a different type.
-Here we are using numbers without the dot `.` so Julia will interpret them as `Int64`:
+Here we are using numbers without the dot `.` so Julia will interpret them as `Int64` and not `Float64`:
 
 ```jl
 scob("rand(2:2:20)")
@@ -2258,7 +2254,7 @@ scob("rand([1, 2, 3])")
 sco("rand(Dict(:one => 1, :two => 2))")
 ```
 
-To finish off all the `rand` arguments options, you can specify the desired random number dimensions in a tuple.
+For all the `rand` arguments options, you can specify the desired random number dimensions in a tuple.
 If you do this, the returned type will be an array.
 For example, here's a 2x2 matrix of `Float64` numbers between 1.0 and 3.0:
 
@@ -2291,6 +2287,7 @@ We can do so with the `seed!` function:
 
 ```jl
 s = """
+    # comment to distinguish this block from the next # hide
     seed!(123)
     rand(3)
     """
@@ -2305,14 +2302,15 @@ s = """
 sco(s)
 ```
 
-In order to avoid tedious and inefficient repetition of `seed!` all over the place, we can instead define an instance of a `seed!` and pass it as a first argument of **either `rand` or `randn`**.
+In some cases, calling `seed!` at the beginning of your script is not good enough.
+To avoid `rand` or `randn` to depend on a global variable, we can instead define an instance of a `seed!` and pass it as a first argument of **either `rand` or `randn`**.
 
 ```jl
 sco("my_seed = seed!(123)")
 ```
 
-
 ```jl
+# some comment to distinguish this block from the next # hide
 sco("rand(my_seed, 3)")
 ```
 
@@ -2321,9 +2319,8 @@ sco("rand(my_seed, 3)")
 ```
 
 > **_NOTE:_**
-> If you want your code to be reproducible you can just call `seed!` in the beginning of your script.
-> This will take care of reproducibility in sequential `Random` operations.
-> No need to use it all `rand` and `randn` usage.
+> Note that these numbers might differ for different Julia versions.
+> To have stable streams across Julia versions use the `StableRNGs.jl` package.
 
 ### Downloads {#sec:downloads}
 

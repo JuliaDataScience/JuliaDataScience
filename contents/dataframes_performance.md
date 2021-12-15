@@ -39,7 +39,7 @@ And here is the _in-place_ function:
 
 ```jl
 s = """
-    # non allocarting function # hide
+    # non allocating function # hide
     select!(responses(), :id, :q1)
     """
 sco(s; process=without_caption_label)

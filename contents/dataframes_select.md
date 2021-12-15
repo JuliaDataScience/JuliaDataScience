@@ -162,7 +162,7 @@ With the `CategoricalArrays.jl` package, we can add levels that represent the or
 
 > **_NOTE:_**
 > Also note that we are passing the argument `ordered=true` which tells `CategoricalArrays.jl`'s `categorical` function that our categorical data is "ordered".
-> Without this any type of sorting or bigger/smaller comparissons would not be possible.
+> Without this any type of sorting or bigger/smaller comparisons would not be possible.
 
 Now, we can sort the data correctly on the age column:
 

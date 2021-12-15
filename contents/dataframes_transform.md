@@ -88,7 +88,7 @@ s = """
 sco(s; process=without_caption_label)
 ```
 
-With this, we can add a column saying whether someone was approved by the criterion that all of their grades were above 5.5:
+With this, we can add a column saying whether someone was approved by the criterion that one of their grades was above 5.5:
 
 ```jl
 s = """

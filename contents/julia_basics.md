@@ -2224,7 +2224,7 @@ scob("rand(1.0:10.0)")
 ```
 
 You can also specify a different step size inside the interval and a different type.
-Here we are using numbers without the dot `.` so Julia will interpret them as `Int64` and not `Float64`:
+Here we are using numbers without the dot `.` so Julia will interpret them as `Int64` and not as `Float64`:
 
 ```jl
 scob("rand(2:2:20)")

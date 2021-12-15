@@ -4,11 +4,6 @@
 We need to cover `ifelse` and `case_when`
 ```
 
-### Single Transformations
-<!-- That fits to the later "Multiple Transformation" and also solves the
-     "problem" stated in issue #221.
-     (Seems like I have missed this one ...) -->
-
 In @sec:filter, we saw that `filter` works by taking one or more source columns and filtering it by applying a "filtering" function.
 To recap, here's an example of filter using the `source => f::Function` syntax: `filter(:name => name -> name == "Alice", df)`.
 
@@ -21,15 +16,8 @@ In `DataFrames.jl`, the syntax is `source => transformation => target`.
 Like before, we use the `grades_2020` dataset:
 
 ```jl
-s = "grades_2020()"
-sco(s; process=without_caption_label)
+@sco process=without_caption_label grades_2020()
 ```
-<!-- It is not necessary to show the definition of the function here again.
-     This is especially true because the definition of `grades_2021` was
-     not/never shown in the previous section.
-     I used that as an exercise to create it on my own.
-     In case I wouldn't have been able to do that, I would have peeked at
-     the definition of `grades_2020` :-) -->
 
 Suppose we want to increase all the grades in `grades_2020` by 1.
 First, we define a function that takes as argument a vector of data and returns all of its elements increased by 1.

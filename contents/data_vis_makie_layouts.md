@@ -117,7 +117,7 @@ Here, the argument `alignmode=Mixed(bottom=0)` is shifting the bounding box to t
 
 Also, see how `colsize!` and `rowsize!` are being used for different columns and rows.
 You could also put a number instead of `Auto()` but then everything will be fixed.
-And, additionally, one could also give a `height` or `width` when defining the `Axis`, as in `Axis(fig, heigth=50)` which will be fixed as well.
+And, additionally, one could also give a `height` or `width` when defining the `Axis`, as in `Axis(fig, height=50)` which will be fixed as well.
 
 ### Nested `Axis` (_subplots_)
 

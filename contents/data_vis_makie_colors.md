@@ -1,13 +1,13 @@
 ## Colors and Colormaps {#sec:makie_colors}
 
-Choosing an appropiate set of colors or colorbar for your plot is an essential part when presenting results.
+Choosing an appropriate set of colors or colorbar for your plot is an essential part when presenting results.
 Using [Colors.jl](https://github.com/JuliaGraphics/Colors.jl) is supported in `Makie.jl`
 so that you can use [named colors](https://juliagraphics.github.io/Colors.jl/latest/namedcolors/) or pass `RGB` or `RGBA` values.
 Additionally, colormaps from [ColorSchemes.jl](https://github.com/JuliaGraphics/ColorSchemes.jl) and [PerceptualColourMaps.jl](https://github.com/peterkovesi/PerceptualColourMaps.jl) can also be used.
 It is worth knowing that you can reverse a colormap by doing `Reverse(:colormap_name)`
 and obtain a transparent color or colormap with `color=(:red,0.5)` and `colormap=(:viridis, 0.5)`.
 
-Different use cases will be shown next. Then we will difine a custom theme with new colors and a colorbar palette.
+Different use cases will be shown next. Then we will define a custom theme with new colors and a colorbar palette.
 
 By default `Makie.jl` has a predefined set of colors in order to cycle through them automatically.
 As shown in the previous figures, where no specific color was set.

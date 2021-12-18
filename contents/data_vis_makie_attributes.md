@@ -13,7 +13,7 @@ s = """
 sco(s)
 ```
 
-Or as a `Dict` calling `pltobject.attributes.attributes`.
+Or as a `Dict` calling `pltobj.attributes.attributes`.
 
 Asking for help in the `REPL` as `?lines` or `help(lines)` for any given plotting function will show you their corresponding attributes plus a short description on how to use that specific function.
 For example, for `lines`:

@@ -26,7 +26,7 @@ sco(s)
 ```
 
 Not only the plot objects have attributes, also the `Axis` and `Figure` objects do.
-For example, for Figure, we have `backgroundcolor`, `resolution`, `font` and `fontsize` and the `figure_padding` which changes the amount of space around the figure content, see the grey area in the plot, Figure (@fig:custom_plot).
+For example, for Figure, we have `backgroundcolor`, `resolution`, `font` and `fontsize` as well as the `figure_padding` which changes the amount of space around the figure content, see the grey area in @fig:custom_plot.
 It can take one number for all sides, or a tuple of four numbers for left, right, bottom and top.
 
 `Axis` has a lot more, some of them are  `backgroundcolor`, `xgridcolor` and `title`.

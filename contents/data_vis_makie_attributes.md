@@ -115,7 +115,7 @@ s = """
 sco(s)
 ```
 
-Note that the last line is `set_theme!()`, which will reset the default settings of Makie.
+Note that the last line is `set_theme!()`, which will reset to the default settings of Makie.
 For more on `themes` please go to @sec:themes.
 
 Before moving on into the next section, it's worthwhile to see an example where an `array` of attributes are passed at once to a plotting function.

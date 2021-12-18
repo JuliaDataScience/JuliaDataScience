@@ -54,7 +54,7 @@ sco(s)
 This example has already most of the attributes that most users will normally use.
 Probably, a `legend` will also be good to have.
 Which for more than one function will make more sense.
-So, let's `append` another mutation `plot object` and add the corresponding legends by calling `axislegend`.
+So, let's `append` another mutation `plot` object and add the corresponding legends by calling `axislegend`.
 This will collect all the `labels` you might have passed to your plotting functions and by default will be located in the right top position.
 For a different one, the `position=:ct` argument is called, where `:ct` means let's put our label in the `center` and at the `top`,  see Figure @fig:custom_plot_leg:
 

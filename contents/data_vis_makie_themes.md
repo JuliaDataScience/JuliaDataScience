@@ -144,5 +144,18 @@ s = """
     """
 sco(s)
 ```
+<!--
+You already use (a subset of) LaTeXStrings here, right? (I guess the `L` stands
+for LaTeX.) You should change this to avoid confusion.
+(Especially because it seems that this already works without extra stating
+`using LaTeXStrings` as will be the first code in the next file. I think this
+is because the package is loaded indirectly by `Makie`, right?)
+-> Update: No, not totally at least because the second example in the next file
+fails without loading the package because `latexstring` is not defined.
+
+You should really change that to avoid confusion. It will be totally fine if we
+(the n00bs) later find out that some of the LaTeXStrings stuff is already
+included somewhere.
+-->
 
 Now, let's move on and do a plot with LaTeX strings and a custom theme.

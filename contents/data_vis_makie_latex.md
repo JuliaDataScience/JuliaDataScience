@@ -30,6 +30,11 @@ A more involved example will be one with some equation as `text` and increasing 
 ```jl
 @sco JDS.multiple_lines()
 ```
+<!--
+The `lines` labels can be "simplified" to `L"%$i x"`. Then there also would be
+no need any more to load `LaTeXStrings` explicitly.
+(The same of course holds for the next example.)
+-->
 
 But, some lines have repeated colors, so thats no good.
 Adding some markers and line styles usually helps.

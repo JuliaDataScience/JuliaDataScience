@@ -109,7 +109,7 @@ s = """
     set_theme!()
     label = "setTheme" # hide
     link_attributes = "width=60%" # hide
-    caption = "Set theme example."
+    caption = "Set theme example." # hide
     Options(current_figure(); filename=label, caption, label, link_attributes) # hide
     """
 sco(s)
@@ -149,7 +149,7 @@ s = """
     fig
     label = "bubble" # hide
     link_attributes = "width=60%" # hide
-    caption = "Bubble plot."
+    caption = "Bubble plot." # hide
     Options(current_figure(); filename=label, caption, label, link_attributes) # hide
     """
 sco(s)

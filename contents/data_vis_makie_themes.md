@@ -116,6 +116,14 @@ s = """
     """
 sco(s)
 ```
+<!--
+Up to now the syntax
+    with_theme(<theme>) do
+        <plot>
+    end
+was used. Are these two syntaxes equivalents or do they differ?
+-> Either harmonize or add an additional sentence (please).
+-->
 
 Now, if something needs to be changed after `set_theme!(your_theme)`, we can do it with `update_theme!(resolution=(500, 400), fontsize=18)`, for example.
 Another approach will be to pass additional arguments to the `with_theme` function:

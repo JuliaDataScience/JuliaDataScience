@@ -43,6 +43,12 @@ scolor = """
     """
 sco(scolor)
 ```
+<!--
+Here, `ax` is not used. Thus, it should be replaced with `_`, depending on the
+decision you have chosen (see my comment in <data_vis_make_themes.md>).
+(In case there should be more of these instances in the following examples,
+I'll not mark them.)
+-->
 
 When setting a `colorrange` usually the values outside this range are colored with the first and last color from  the colormap.
 However, sometimes is better to specify the color you want at both ends. We do that with `highclip` and `lowclip`:

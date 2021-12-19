@@ -24,7 +24,7 @@ Later, we will learn how to do a custom cycle.
 Regarding colormaps, we are already familiar with the keyword `colormap` for heatmaps and scatters.
 Here, we show that a colormap can also be specified via a `Symbol` or a `String`, similar to colors.
 Or, even a vector of `RGB` colors.
-Let's do our first an example by calling colormaps as a `Symbol`, `String` and `cgrad` for categorical values.
+Let's do our first example by calling colormaps as a `Symbol`, `String` and `cgrad` for categorical values.
 See `?cgrad` for more information.
 
 ```jl

@@ -39,6 +39,10 @@ Hence, our plotting function looks like follows:
 ```jl
 @sc demo_themes(y, xv, yv, matrix)
 ```
+<!--
+Up to now we didn't have the *underscore syntax* (`_`). Please add a sentence
+what that does/is good for.
+-->
 
 Note that the `series` function has been used to plot several lines and scatters at once with their corresponding labels.
 Also, a heatmap with their colorbar has been included.

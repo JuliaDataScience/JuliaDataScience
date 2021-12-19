@@ -34,10 +34,10 @@ scolor = """
     axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
     fig, ax, pltobj = heatmap(rand(20, 20); colorrange=(0, 1),
         colormap=Reverse(:viridis), axis=axis, figure=figure)
-    Colorbar(fig[1, 2], pltobj, label = "Reverse colormap Sequential")
+    Colorbar(fig[1, 2], pltobj, label = "Reverse sequential colormap")
     fig
     label = "Reverse_colormap_sequential" # hide
-    caption = "Reverse colormap sequential and colorrange." # hide
+    caption = "Reverse sequential colormap and colorrange." # hide
     link_attributes = "width=60%" # hide
     Options(fig; filename=label, label, caption, link_attributes) # hide
     """

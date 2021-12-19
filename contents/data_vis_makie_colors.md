@@ -102,6 +102,16 @@ scat = """
     """
 sco(scat)
 ```
+<!--
+Sorry, but I don't like this example, because the same could be achieved much more easily.
+- `cmap` is not used -> either add a comment or text what this *could* be good/used for or delete it.
+- Either state 3 colors in in the `ColorScheme` and omit the `values` parameter of `cgrad` OR
+  state 2 colors in the `ColorScheme` and use the `values` parameter of `cgrad`.
+  Using both is redundant.
+- If you stay with gray colors than use `Gray(i)` instead of `RGB{Float64}(i, i, i)`.
+- To emphasize that we are working (or faking to work) with categorical data, use categorical colorbar labels, e.g. use `cbar.ticks = ([-0.66, 0, 0.66], ["bad", "neutral", "good"])`.
+  (Of course it would be even better to have "real" categorical data. Is that possible using `CategoricalArrays.jl` again?)
+-->
 
 Lastly, the ticks in the colorbar for the categorial case are not centered by default in each color.
 This is fixed by passing custom ticks, as in `cbar.ticks = (positions, ticks)`.

@@ -115,10 +115,10 @@ Sorry, but I don't like this example, because the same could be achieved much mo
 
 Lastly, the ticks in the colorbar for the categorial case are not centered by default in each color.
 This is fixed by passing custom ticks, as in `cbar.ticks = (positions, ticks)`.
+
 The last situation is when passing a tuple of two colors to `colormap` as symbols, strings or a mix.
 You will get an interpolated colormap between these two colors.
-
-Also, hexadecimal coded colors are also accepted. So, on top or our heatmap let's put one semi-transparent point using this.
+Also, hexadecimal coded colors are accepted. So, on top or our heatmap let's put one semi-transparent point using this.
 
 ```jl
 s2color2 = """

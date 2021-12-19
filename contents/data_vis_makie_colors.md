@@ -142,8 +142,9 @@ sco(s2color2)
 
 Here, we could define a global `Theme` with a new cycle for colors, however that is **not the recommend way** to do it.
 It's better to define a new theme and use as shown before.
-Lets define a new one with a `cycle` for `:color`, `:linestyle`, `:marker` and a new `colormap` default.
-Lets add this new attributes to our previous `publication_theme`.
+Let's define a new one with a `cycle` for `:color`, `:linestyle`, `:marker` and a new `colormap` default.
+Let's add this new attributes to our previous `publication_theme`.
+<!-- Two times "Let's" -> Change one of them -->
 
 ```jl
 @sc new_cycle_theme()

@@ -102,6 +102,10 @@ using GeometryBasics
 Note that here we are plotting two meshes in the same axis, one transparent sphere and a cube.
 So far, we have covered most of the 3D use-cases.
 Another example is `?linesegments`.
+<!--
+Delete the previous sentence, because `linesegments` (now) have their own section.
+Most likely this is a leftover from earlier revisions/builds, right?
+-->
 
 Taking as reference the previous example one can do the following custom plot with spheres and rectangles:
 

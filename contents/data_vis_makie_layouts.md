@@ -113,6 +113,11 @@ using Dates
 ```jl
 @sco JDS.mixed_mode_layout()
 ```
+<!--
+I would add `alignmode=Mixed(bottom=0)` to `ax1` as well, so the "outer bottom"
+parts of the upper subplots are aligned. The use of that would be even more
+emphasized if you would add an `xlabel` to `ax1`.
+-->
 
 Here, the argument `alignmode=Mixed(bottom=0)` is shifting the bounding box to the bottom, so that this will align with the panel on the left filling the space.
 

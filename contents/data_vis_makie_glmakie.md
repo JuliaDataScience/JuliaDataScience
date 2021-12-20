@@ -137,7 +137,7 @@ Then, the plot is simply done with:
 ```
 
 Here, the rectangle is semi-transparent due to the alpha channel added to the RGB color.
-The rectangle function is quite versatile, for instance  3D boxes are easy do implement which in turn could be used for plotting a 3D histogram.
+The rectangle function is quite versatile, for instance 3D boxes are easy to implement which in turn could be used for plotting a 3D histogram.
 See our next example, where we are using again our `peaks` function and some additional definitions:
 
 ```jl
@@ -153,7 +153,7 @@ ztmp2 = abs.(z) ./ maximum(abs.(z)) .+ 0.15
 """)
 ```
 
-here $\delta x, \delta y$ are used to specified our boxes size. `cmap2` will be the color for each box and `ztmp2` will be used as a transparency parameter. See the output in the next figure.
+here $\delta x, \delta y$ are used to specify our boxes size. `cmap2` will be the color for each box and `ztmp2` will be used as a transparency parameter. See the output in the next figure.
 
 ```jl
 @sco JDS.histogram_or_bars_in_3d()

@@ -128,7 +128,7 @@ And, additionally, one could also give a `height` or `width` when defining the `
 ### Nested `Axis` (_subplots_)
 
 It is also possible to define a set of `Axis` (_subplots_) explicitly, and use it to build a main figure with several rows and columns.
-For instance, the following its a "complicated" arrangement of `Axis`:
+For instance, the following is a "complicated" arrangement of `Axis`:
 
 ```jl
 @sc nested_sub_plot!(fig)
@@ -144,7 +144,7 @@ Note that different subplot functions can be called here.
 Also, each `Axis` here is an independent part of `Figure`.
 So that, if you need to do some `rowgap!`'s or `colsize!`'s operations, you will need to do it in each one of them independently or to all of them together.
 
-For grouped `Axis` (_subplots_) we can use `GridLayout()` which, then, could be used to composed a more complicated `Figure`.
+For grouped `Axis` (_subplots_) we can use `GridLayout()` which, then, could be used to compose a more complicated `Figure`.
 
 ### Nested GridLayout
 
@@ -172,6 +172,11 @@ Then, the `inset` is easily done, as in:
 ```jl
 @sco JDS.figure_box_inset()
 ```
+<!--
+At least change `right` of `inset_ax2` or add a protrusion so the xaxis label
+isn't cropped. Alternatively enlarge thr `right` value on purpose to make the
+reader aware that he/she/it needs to watch out for this.
+-->
 
 where the `Box` dimensions are bound by the `Figure`'s `resolution`.
 Note, that an inset can be also outside the `Axis`.

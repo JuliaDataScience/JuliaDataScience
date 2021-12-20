@@ -9,7 +9,7 @@ Like before, a simple plot includes, of course, lines and points. So, we will st
 ### Scatters and Lines
 
 For scatter plots we have two options, the first one is `scatter(x, y, z)` and the second one is `meshscatter(x, y, z)`.
-In the first one markers don't scale in the axis directions, but in the later they do because they are actual geometries in 3D space.
+In the first one markers don't scale in the axis directions, but in the latter they do because they are actual geometries in 3D space.
 See the next example:
 
 ```
@@ -21,7 +21,7 @@ GLMakie.activate!()
 @sco JDS.scatters_in_3D()
 ```
 
-Note also, that a different geometry can be passed as markers, i.e., a square/rectangle and we can assign a `colormap` for them as well.
+Note also, that a different geometry can be passed as markers, i.e., a square/rectangle, and we can assign a `colormap` for them as well.
 In the middle panel one could get perfect spheres by doing `aspect = :data` as in the right panel.
 
 And doing `lines` or `scatterlines` is also straightforward:
@@ -87,7 +87,7 @@ Other interesting examples are a `mesh(obj)`, a `volume(x, y, z, vals)`, and a `
 
 ### Meshes and Volumes
 
-Drawing Meshes comes in handy when you want to plot geometries, like a `Sphere` or a Rectangle, i. e. `FRect3D`.
+Drawing meshes comes in handy when you want to plot geometries, like a `Sphere` or a Rectangle, i.e. `FRect3D`.
 Another approach to visualize points in 3D space is by calling the functions `volume` and `contour`, which implements [ray tracing](https://en.wikipedia.org/wiki/Ray_tracing_(graphics)) to simulate a wide variety of optical effects.
 See the next examples:
 

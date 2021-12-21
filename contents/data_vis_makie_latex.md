@@ -30,6 +30,11 @@ A more involved example will be one with some equation as `text` and increasing 
 ```jl
 @sco JDS.multiple_lines()
 ```
+<!--
+The `lines` labels can be "simplified" to `L"%$i x"`. Then there also would be
+no need any more to load `LaTeXStrings` explicitly.
+(The same of course holds for the next example.)
+-->
 
 But, some lines have repeated colors, so thats no good.
 Adding some markers and line styles usually helps.
@@ -45,3 +50,11 @@ A publication quality plot is here.
 What more can we ask for?
 Well, what about different default colors or palettes.
 In our next section, we will see how to use again [`Cycles`](http://makie.juliaplots.org/stable/documentation/theming/index.html#cycles) and know a little bit more about them, plus some additional keywords in order to achieve this.
+<!--
+# `Cycles` link
+I just realized that `Cycles` is also a link (as it was the previous occurrence).
+Unfortunately that can't be seen in the (web) output. So either change the
+output style so that the "link" and "code" style overlap/merge or rephrase the
+text. Otherwise people will only find that by chance ...
+(I didn't check for other occurrences.)
+-->

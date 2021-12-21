@@ -10,7 +10,8 @@ And the `Legend` in _row 2_ and across _column 1 and 2_, namely `fig[2, 1:2]`.
 @sco JDS.first_layout()
 ```
 
-This does look good already, it could be better. We could fix spacing problems using the following keywords and methods:
+This does look good already, but it could be better.
+We could fix spacing problems using the following keywords and methods:
 
 - `figure_padding=(left, right, bottom, top)`
 - `padding=(left, right, bottom, top)`
@@ -29,7 +30,7 @@ The space between columns and rows is specified as
 > - `rowgap!(fig.layout, row, separation)`
 >
 > _Column gap_ (`colgap!`), if `col` is given then the gap will be applied to that specific column.
->_Row gap_ (`rowgap!`) ,if `row` is given then the gap will be applied to that specific row.
+>_Row gap_ (`rowgap!`), if `row` is given then the gap will be applied to that specific row.
 
 Also, we will see how to put content into the **protrusions**, _i.e._ the space reserved for _title: `x` and `y`; either `ticks` or `label`_.
 We do this by plotting into `fig[i, j, protrusion]` where _`protrusion`_ can be `Left()`, `Right()`, `Bottom()` and `Top()`, or for each corner `TopLeft()`, `TopRight()`, `BottomRight()`, `BottomLeft()`.
@@ -39,7 +40,7 @@ See below how these options are being used:
 @sco JDS.first_layout_fixed()
 ```
 
-Here, having the label `(a)` in the `TopLeft()` is probably not necessary, this will only make sense for more than two plots.
+Here, having the label `(a)` in the `TopLeft()` is probably not necessary, this will only make sense for more than one plot.
 For our next example let's keep using the previous tools and some more to create a richer and complex figure.
 
 You can hide decorations and axis' spines with:
@@ -103,7 +104,7 @@ where all labels are in the **protrusions** and each `Axis` has an `AspectData()
 The `Colorbar` is located in the third column and expands from row 1 up to row 2.
 
 The next case uses the so called `Mixed()` **alignmode**, which is especially useful when dealing with large empty spaces between `Axis` due to long ticks.
-Also, the `Dates` module from Julia's standard library will be needed it for this example.
+Also, the `Dates` module from Julia's standard library will be needed for this example.
 
 ```
 using Dates
@@ -112,17 +113,22 @@ using Dates
 ```jl
 @sco JDS.mixed_mode_layout()
 ```
+<!--
+I would add `alignmode=Mixed(bottom=0)` to `ax1` as well, so the "outer bottom"
+parts of the upper subplots are aligned. The use of that would be even more
+emphasized if you would add an `xlabel` to `ax1`.
+-->
 
 Here, the argument `alignmode=Mixed(bottom=0)` is shifting the bounding box to the bottom, so that this will align with the panel on the left filling the space.
 
 Also, see how `colsize!` and `rowsize!` are being used for different columns and rows.
 You could also put a number instead of `Auto()` but then everything will be fixed.
-And, additionally, one could also give a `height` or `width` when defining the `Axis`, as in `Axis(fig, heigth=50)` which will be fixed as well.
+And, additionally, one could also give a `height` or `width` when defining the `Axis`, as in `Axis(fig, height=50)` which will be fixed as well.
 
 ### Nested `Axis` (_subplots_)
 
 It is also possible to define a set of `Axis` (_subplots_) explicitly, and use it to build a main figure with several rows and columns.
-For instance, the following its a "complicated" arrangement of `Axis`:
+For instance, the following is a "complicated" arrangement of `Axis`:
 
 ```jl
 @sc nested_sub_plot!(fig)
@@ -138,7 +144,7 @@ Note that different subplot functions can be called here.
 Also, each `Axis` here is an independent part of `Figure`.
 So that, if you need to do some `rowgap!`'s or `colsize!`'s operations, you will need to do it in each one of them independently or to all of them together.
 
-For grouped `Axis` (_subplots_) we can use `GridLayout()` which, then, could be used to composed a more complicated `Figure`.
+For grouped `Axis` (_subplots_) we can use `GridLayout()` which, then, could be used to compose a more complicated `Figure`.
 
 ### Nested GridLayout
 
@@ -166,6 +172,11 @@ Then, the `inset` is easily done, as in:
 ```jl
 @sco JDS.figure_box_inset()
 ```
+<!--
+At least change `right` of `inset_ax2` or add a protrusion so the xaxis label
+isn't cropped. Alternatively enlarge thr `right` value on purpose to make the
+reader aware that he/she/it needs to watch out for this.
+-->
 
 where the `Box` dimensions are bound by the `Figure`'s `resolution`.
 Note, that an inset can be also outside the `Axis`.

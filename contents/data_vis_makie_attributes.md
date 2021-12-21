@@ -13,7 +13,7 @@ s = """
 sco(s)
 ```
 
-Or as a `Dict` calling `pltobject.attributes.attributes`.
+Or as a `Dict` calling `pltobj.attributes.attributes`.
 
 Asking for help in the `REPL` as `?lines` or `help(lines)` for any given plotting function will show you their corresponding attributes plus a short description on how to use that specific function.
 For example, for `lines`:
@@ -26,7 +26,7 @@ sco(s)
 ```
 
 Not only the plot objects have attributes, also the `Axis` and `Figure` objects do.
-For example, for Figure, we have `backgroundcolor`, `resolution`, `font` and `fontsize` and the `figure_padding` which changes the amount of space around the figure content, see the grey area in the plot, Figure (@fig:custom_plot).
+For example, for Figure, we have `backgroundcolor`, `resolution`, `font` and `fontsize` as well as the `figure_padding` which changes the amount of space around the figure content, see the grey area in @fig:custom_plot.
 It can take one number for all sides, or a tuple of four numbers for left, right, bottom and top.
 
 `Axis` has a lot more, some of them are  `backgroundcolor`, `xgridcolor` and `title`.
@@ -54,7 +54,7 @@ sco(s)
 This example has already most of the attributes that most users will normally use.
 Probably, a `legend` will also be good to have.
 Which for more than one function will make more sense.
-So, let's `append` another mutation `plot object` and add the corresponding legends by calling `axislegend`.
+So, let's `append` another mutation `plot` object and add the corresponding legends by calling `axislegend`.
 This will collect all the `labels` you might have passed to your plotting functions and by default will be located in the right top position.
 For a different one, the `position=:ct` argument is called, where `:ct` means let's put our label in the `center` and at the `top`,  see Figure @fig:custom_plot_leg:
 
@@ -80,6 +80,14 @@ sco(s)
 Other positions are also available by combining `left(l), center(c), right(r)` and `bottom(b), center(c), top(t)`.
 For instance, for left top, use `:lt`.
 
+<!--
+When I remember correct (I didn't check it now), up to now you really just have
+put stuff in backticks that was code. Now it seem that it is also used to
+emphasize stuff like `legend` or `left(l), center(c), right(r)` and `bottom(b),
+center(c), top(t)`. If it is really just emphasizing and not *also* code, then
+I suggest to use another style to do so like putting it in italics.
+-->
+
 However, having to write this much code just for two lines is cumbersome.
 So, if you plan on doing a lot of plots with the same general aesthetics, then setting a theme will be better.
 We can do this with `set_theme!()` as the following example illustrates.
@@ -101,21 +109,21 @@ s = """
     set_theme!()
     label = "setTheme" # hide
     link_attributes = "width=60%" # hide
-    caption = "Set theme example."
+    caption = "Set theme example." # hide
     Options(current_figure(); filename=label, caption, label, link_attributes) # hide
     """
 sco(s)
 ```
 
-Note that the last line is `set_theme!()`, which will reset the default settings of Makie.
+Note that the last line is `set_theme!()`, which will reset to the default settings of Makie.
 For more on `themes` please go to @sec:themes.
 
-Before moving on into the next section, it's worthwhile to see an example where an `array` of attributes are passed at once to a plotting function.
+Before moving on into the next section, it's worthwhile to see an example where an `array` of attributes is passed at once to a plotting function.
 For this example, we will use the `scatter` plotting function to do a bubble plot.
 
-The data for this could be an `array` with 100 rows and 3 columns, here we generated these at random from a normal distribution.
+The data for this could be an `array` with 100 rows and 3 columns, which we generated at random from a normal distribution.
 Here, the first column could be the positions in the `x` axis, the second one the positions in `y` and the third one an intrinsic associated value for each point.
-The later could be represented in a plot by a different `color` or with a different marker size. In a bubble plot we can do both.
+The latter could be represented in a plot by a different `color` or with a different marker size. In a bubble plot we can do both.
 
 ```jl
 s = """
@@ -141,7 +149,7 @@ s = """
     fig
     label = "bubble" # hide
     link_attributes = "width=60%" # hide
-    caption = "Bubble plot."
+    caption = "Bubble plot." # hide
     Options(current_figure(); filename=label, caption, label, link_attributes) # hide
     """
 sco(s)

@@ -9,7 +9,7 @@ Like before, a simple plot includes, of course, lines and points. So, we will st
 ### Scatters and Lines
 
 For scatter plots we have two options, the first one is `scatter(x, y, z)` and the second one is `meshscatter(x, y, z)`.
-In the first one markers don't scale in the axis directions, but in the later they do because they are actual geometries in 3D space.
+In the first one markers don't scale in the axis directions, but in the latter they do because they are actual geometries in 3D space.
 See the next example:
 
 ```
@@ -21,7 +21,7 @@ GLMakie.activate!()
 @sco JDS.scatters_in_3D()
 ```
 
-Note also, that a different geometry can be passed as markers, i.e., a square/rectangle and we can assign a `colormap` for them as well.
+Note also, that a different geometry can be passed as markers, i.e., a square/rectangle, and we can assign a `colormap` for them as well.
 In the middle panel one could get perfect spheres by doing `aspect = :data` as in the right panel.
 
 And doing `lines` or `scatterlines` is also straightforward:
@@ -87,7 +87,7 @@ Other interesting examples are a `mesh(obj)`, a `volume(x, y, z, vals)`, and a `
 
 ### Meshes and Volumes
 
-Drawing Meshes comes in handy when you want to plot geometries, like a `Sphere` or a Rectangle, i. e. `FRect3D`.
+Drawing meshes comes in handy when you want to plot geometries, like a `Sphere` or a Rectangle, i.e. `FRect3D`.
 Another approach to visualize points in 3D space is by calling the functions `volume` and `contour`, which implements [ray tracing](https://en.wikipedia.org/wiki/Ray_tracing_(graphics)) to simulate a wide variety of optical effects.
 See the next examples:
 
@@ -102,6 +102,10 @@ using GeometryBasics
 Note that here we are plotting two meshes in the same axis, one transparent sphere and a cube.
 So far, we have covered most of the 3D use-cases.
 Another example is `?linesegments`.
+<!--
+Delete the previous sentence, because `linesegments` (now) have their own section.
+Most likely this is a leftover from earlier revisions/builds, right?
+-->
 
 Taking as reference the previous example one can do the following custom plot with spheres and rectangles:
 
@@ -133,7 +137,7 @@ Then, the plot is simply done with:
 ```
 
 Here, the rectangle is semi-transparent due to the alpha channel added to the RGB color.
-The rectangle function is quite versatile, for instance  3D boxes are easy do implement which in turn could be used for plotting a 3D histogram.
+The rectangle function is quite versatile, for instance 3D boxes are easy to implement which in turn could be used for plotting a 3D histogram.
 See our next example, where we are using again our `peaks` function and some additional definitions:
 
 ```jl
@@ -149,7 +153,7 @@ ztmp2 = abs.(z) ./ maximum(abs.(z)) .+ 0.15
 """)
 ```
 
-here $\delta x, \delta y$ are used to specified our boxes size. `cmap2` will be the color for each box and `ztmp2` will be used as a transparency parameter. See the output in the next figure.
+here $\delta x, \delta y$ are used to specify our boxes size. `cmap2` will be the color for each box and `ztmp2` will be used as a transparency parameter. See the output in the next figure.
 
 ```jl
 @sco JDS.histogram_or_bars_in_3d()

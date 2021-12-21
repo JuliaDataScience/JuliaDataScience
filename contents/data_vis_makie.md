@@ -11,13 +11,17 @@ In our opinion, it is the prettiest and most versatile plotting package.
 Like many plotting packages, the code is split into multiple packages.
 `Makie.jl` is the front end package that defines all plotting functions required to create plot objects.
 These objects store all information about the plots, but still need to be converted to an image.
-To convert these plot objects to an image, you need one of the Makie back ends.
-By default, `Makie.jl` is reexported by every backend, so you only need to install and load the back end that you want to use.
+To convert these plot objects to an image, you need one of the Makie backends.
+By default, `Makie.jl` is reexported by every backend, so you only need to install and load the backend that you want to use.
 
-There are three main back ends which concretely implement all abstract rendering capabilities defined in Makie.
-One for non-interactive 2D publication-quality vector graphics: `CairoMakie.jl`.
-Another for interactive 2D and 3D plotting in standalone `GLFW.jl` windows (also GPU-powered), `GLMakie.jl`.
-And the third one, a WebGL-based interactive 2D and 3D plotting that runs within browsers, `WGLMakie.jl`. [See Makie's documentation for more](http://makie.juliaplots.org/stable/documentation/backends_and_output/).
+There are three main backends which concretely implement all abstract rendering capabilities defined in Makie.
+These are
+
+- `CairoMakie.jl` for non-interactive 2D publication-quality vector graphics,
+- `GLMakie.jl` for interactive 2D and 3D plotting in standalone `GLFW.jl` windows (also GPU-powered), and
+- `WGLMakie.jl`, a WebGL-based interactive 2D and 3D plotting that runs within browsers.
+
+[See Makie's documentation for more](http://makie.juliaplots.org/stable/documentation/backends_and_output/).
 
 In this book we will only show examples for `CairoMakie.jl` and `GLMakie.jl`.
 

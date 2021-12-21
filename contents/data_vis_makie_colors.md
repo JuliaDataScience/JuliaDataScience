@@ -1,16 +1,15 @@
 ## Colors and Colormaps {#sec:makie_colors}
 
-Choosing an appropiate set of colors or colorbar for your plot is an essential part when presenting results.
+Choosing an appropriate set of colors or colorbar for your plot is an essential part when presenting results.
 Using [Colors.jl](https://github.com/JuliaGraphics/Colors.jl) is supported in `Makie.jl`
 so that you can use [named colors](https://juliagraphics.github.io/Colors.jl/latest/namedcolors/) or pass `RGB` or `RGBA` values.
 Additionally, colormaps from [ColorSchemes.jl](https://github.com/JuliaGraphics/ColorSchemes.jl) and [PerceptualColourMaps.jl](https://github.com/peterkovesi/PerceptualColourMaps.jl) can also be used.
 It is worth knowing that you can reverse a colormap by doing `Reverse(:colormap_name)`
 and obtain a transparent color or colormap with `color=(:red,0.5)` and `colormap=(:viridis, 0.5)`.
 
-Different use cases will be shown next. Then we will difine a custom theme with new colors and a colorbar palette.
+Different use cases will be shown next. Then we will define a custom theme with new colors and a colorbar palette.
 
-By default `Makie.jl` has a predefined set of colors in order to cycle through them automatically.
-As shown in the previous figures, where no specific color was set.
+By default `Makie.jl` has a predefined set of colors in order to cycle through them automatically, as shown in the previous figures, where no specific color was set.
 Overwriting these defaults is done by calling the keyword `color` in the plotting function and specifying a new color via a `Symbol` or `String`.
 See this in action in the following example:
 
@@ -25,7 +24,7 @@ Later, we will learn how to do a custom cycle.
 Regarding colormaps, we are already familiar with the keyword `colormap` for heatmaps and scatters.
 Here, we show that a colormap can also be specified via a `Symbol` or a `String`, similar to colors.
 Or, even a vector of `RGB` colors.
-Let's do our first an example by calling colormaps as a `Symbol`, `String` and `cgrad` for categorical values.
+Let's do our first example by calling colormaps as a `Symbol`, `String` and `cgrad` for categorical values.
 See `?cgrad` for more information.
 
 ```jl
@@ -35,15 +34,21 @@ scolor = """
     axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
     fig, ax, pltobj = heatmap(rand(20, 20); colorrange=(0, 1),
         colormap=Reverse(:viridis), axis=axis, figure=figure)
-    Colorbar(fig[1, 2], pltobj, label = "Reverse colormap Sequential")
+    Colorbar(fig[1, 2], pltobj, label = "Reverse sequential colormap")
     fig
     label = "Reverse_colormap_sequential" # hide
-    caption = "Reverse colormap sequential and colorrange." # hide
+    caption = "Reverse sequential colormap and colorrange." # hide
     link_attributes = "width=60%" # hide
     Options(fig; filename=label, label, caption, link_attributes) # hide
     """
 sco(scolor)
 ```
+<!--
+Here, `ax` is not used. Thus, it should be replaced with `_`, depending on the
+decision you have chosen (see my comment in <data_vis_make_themes.md>).
+(In case there should be more of these instances in the following examples,
+I'll not mark them.)
+-->
 
 When setting a `colorrange` usually the values outside this range are colored with the first and last color from  the colormap.
 However, sometimes is better to specify the color you want at both ends. We do that with `highclip` and `lowclip`:
@@ -97,13 +102,23 @@ scat = """
     """
 sco(scat)
 ```
+<!--
+Sorry, but I don't like this example, because the same could be achieved much more easily.
+- `cmap` is not used -> either add a comment or text what this *could* be good/used for or delete it.
+- Either state 3 colors in in the `ColorScheme` and omit the `values` parameter of `cgrad` OR
+  state 2 colors in the `ColorScheme` and use the `values` parameter of `cgrad`.
+  Using both is redundant.
+- If you stay with gray colors than use `Gray(i)` instead of `RGB{Float64}(i, i, i)`.
+- To emphasize that we are working (or faking to work) with categorical data, use categorical colorbar labels, e.g. use `cbar.ticks = ([-0.66, 0, 0.66], ["bad", "neutral", "good"])`.
+  (Of course it would be even better to have "real" categorical data. Is that possible using `CategoricalArrays.jl` again?)
+-->
 
 Lastly, the ticks in the colorbar for the categorial case are not centered by default in each color.
 This is fixed by passing custom ticks, as in `cbar.ticks = (positions, ticks)`.
+
 The last situation is when passing a tuple of two colors to `colormap` as symbols, strings or a mix.
 You will get an interpolated colormap between these two colors.
-
-Also, hexadecimal coded colors are also accepted. So, on top or our heatmap let's put one semi-transparent point using this.
+Also, hexadecimal coded colors are accepted. So, on top or our heatmap let's put one semi-transparent point using this.
 
 ```jl
 s2color2 = """
@@ -127,8 +142,9 @@ sco(s2color2)
 
 Here, we could define a global `Theme` with a new cycle for colors, however that is **not the recommend way** to do it.
 It's better to define a new theme and use as shown before.
-Lets define a new one with a `cycle` for `:color`, `:linestyle`, `:marker` and a new `colormap` default.
-Lets add this new attributes to our previous `publication_theme`.
+Let's define a new one with a `cycle` for `:color`, `:linestyle`, `:marker` and a new `colormap` default.
+Let's add this new attributes to our previous `publication_theme`.
+<!-- Two times "Let's" -> Change one of them -->
 
 ```jl
 @sc new_cycle_theme()

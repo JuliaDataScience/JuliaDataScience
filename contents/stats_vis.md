@@ -129,7 +129,7 @@ A density plot can also be drawn using `Makie.jl`. However, it is more convolute
 First, we want to pass for each `density!` function only the values with respect to one observation.
 Thus, we define a `values` function that will accept a `code` argument to filter the dataset's variable `name` wrapped with the `levelcode` function.
 Then, we plot a density `pltobj` for each one of the variable `name`'s `levels`.
-Finally, we make sure that the density `plotobj`s have their own `ytick` with the `offset` keyword paired with a custom `yticks` in the `Axis` constructor by specifying, same as before, a tuple of values and labels.
+Finally, we make sure that the density `plotobj`s have their own `yticks` with the `offset` keyword paired with a custom `yticks` in the `Axis` constructor by specifying, same as before, a tuple of values and labels.
 The effect of the `offset` in the `for` loop is the increment from 1 to 4, by 1, of both the `offset` argument for `density!` and the `code` argument for `values`:
 
 ```jl

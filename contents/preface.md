@@ -110,6 +110,8 @@ Jose Storopoli would like to thank his family, especially his wife for the suppo
 He would also like to thank his colleagues, especially [Fernando Serra](https://orcid.org/0000-0002-8178-7313), [Wonder Alexandre Luz Alves](https://orcid.org/0000-0003-0430-950X) and [André Librantz](https://orcid.org/0000-0001-8599-9009), for their encouragement.
 
 Rik Huijzer would first like to thank his PhD supervisors at the University of Groningen, [Peter de Jonge](https://www.rug.nl/staff/peter.de.jonge/), [Ruud den Hartigh](https://www.rug.nl/staff/j.r.den.hartigh/) and [Frank Blaauw](https://frankblaauw.nl/) for their support.
-Second, he would like to thank his parents and girlfriend for being hugely supportive during the holiday and all the weekends and evenings that were involved in this book.
+Also, Rik would like to acknowledge [Pirsch](https://pirsch.io/) for building a great tool to gather feedback from readers.
+This feedback helps in improving the book and finding motivation to improve the book further.
+Most importantly, he would like to thank his parents and girlfriend for being hugely supportive during the holiday and all the weekends and evenings that were involved in making this book.
 
 Lazaro Alonso would like to thank his wife and daughters for their encouragement to get involved in this project.

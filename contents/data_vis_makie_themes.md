@@ -39,13 +39,9 @@ Hence, our plotting function looks like follows:
 ```jl
 @sc demo_themes(y, xv, yv, matrix)
 ```
-<!--
-Up to now we didn't have the *underscore syntax* (`_`). Please add a sentence
-what that does/is good for.
--->
 
-Note that the `series` function has been used to plot several lines and scatters at once with their corresponding labels.
-Also, a heatmap with their colorbar has been included.
+Note that the `series` function has been used to plot several lines and scatters at once with their corresponding labels. And since we don't need the axis neither the plotted object we throw them away with the syntax *_*.
+Also, a heatmap with their `Colorbar` has been included.
 Currently, there are two dark themes, one called `theme_dark()` and the other one `theme_black()`, see Figures.
 
 ```jl
@@ -120,14 +116,8 @@ s = """
     """
 sco(s)
 ```
-<!--
-Up to now the syntax
-    with_theme(<theme>) do
-        <plot>
-    end
-was used. Are these two syntaxes equivalents or do they differ?
--> Either harmonize or add an additional sentence (please).
--->
+
+Here we have use `with_theme` which is more convenient for the direct application of a theme than the `do` syntax. You should use the latter if you want to include extra arguments to the theme that is going to be applied.
 
 Now, if something needs to be changed after `set_theme!(your_theme)`, we can do it with `update_theme!(resolution=(500, 400), fontsize=18)`, for example.
 Another approach will be to pass additional arguments to the `with_theme` function:
@@ -148,18 +138,6 @@ s = """
     """
 sco(s)
 ```
-<!--
-You already use (a subset of) LaTeXStrings here, right? (I guess the `L` stands
-for LaTeX.) You should change this to avoid confusion.
-(Especially because it seems that this already works without extra stating
-`using LaTeXStrings` as will be the first code in the next file. I think this
-is because the package is loaded indirectly by `Makie`, right?)
--> Update: No, not totally at least because the second example in the next file
-fails without loading the package because `latexstring` is not defined.
 
-You should really change that to avoid confusion. It will be totally fine if we
-(the n00bs) later find out that some of the LaTeXStrings stuff is already
-included somewhere.
--->
-
-Now, let's move on and do a plot with LaTeX strings and a custom theme.
+Where the x and y labels have a Latex format due to `L"..."`.
+Most basic Latex strings are already supported by Makie, however to fully exploit this integration is recommend to also load the package LaTeXStrings as stated in the next section.

@@ -43,12 +43,6 @@ scolor = """
     """
 sco(scolor)
 ```
-<!--
-Here, `ax` is not used. Thus, it should be replaced with `_`, depending on the
-decision you have chosen (see my comment in <data_vis_make_themes.md>).
-(In case there should be more of these instances in the following examples,
-I'll not mark them.)
--->
 
 When setting a `colorrange` usually the values outside this range are colored with the first and last color from  the colormap.
 However, sometimes is better to specify the color you want at both ends. We do that with `highclip` and `lowclip`:
@@ -87,13 +81,14 @@ scat = """
     CairoMakie.activate!() # hide
     figure = (; resolution=(600, 400), font="CMU Serif")
     axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
-    cmap = ColorScheme(range(colorant"red", colorant"green", length=3))
-    mygrays = ColorScheme([RGB{Float64}(i, i, i) for i in [0.0, 0.5, 1.0]])
+    #cmap = ColorScheme(range(colorant"red", colorant"green", length=3))
+    # this is another way to obtain a colormap, not used here, but try it.
+    mycmap = ColorScheme([RGB{Float64}(i, 1.5i, 2i) for i in [0.0, 0.25, 0.35, 0.5]])
     fig, ax, pltobj = heatmap(rand(-1:1, 20, 20);
-        colormap=cgrad(mygrays, 3, categorical=true, rev=true), # cgrad and Symbol, mygrays,
+        colormap=cgrad(mycmap, 3, categorical=true, rev=true), # cgrad and Symbol, mycmap
         axis=axis, figure=figure)
     cbar = Colorbar(fig[1, 2], pltobj, label="Categories")
-    cbar.ticks = ([-0.66, 0, 0.66], ["-1", "0", "1"])
+    cbar.ticks = ([-0.66, 0, 0.66], ["negative", "neutral", "positive"])
     fig
     label = "categorical_colormap" # hide
     caption = "Categorical Colormap." # hide
@@ -102,16 +97,6 @@ scat = """
     """
 sco(scat)
 ```
-<!--
-Sorry, but I don't like this example, because the same could be achieved much more easily.
-- `cmap` is not used -> either add a comment or text what this *could* be good/used for or delete it.
-- Either state 3 colors in in the `ColorScheme` and omit the `values` parameter of `cgrad` OR
-  state 2 colors in the `ColorScheme` and use the `values` parameter of `cgrad`.
-  Using both is redundant.
-- If you stay with gray colors than use `Gray(i)` instead of `RGB{Float64}(i, i, i)`.
-- To emphasize that we are working (or faking to work) with categorical data, use categorical colorbar labels, e.g. use `cbar.ticks = ([-0.66, 0, 0.66], ["bad", "neutral", "good"])`.
-  (Of course it would be even better to have "real" categorical data. Is that possible using `CategoricalArrays.jl` again?)
--->
 
 Lastly, the ticks in the colorbar for the categorial case are not centered by default in each color.
 This is fixed by passing custom ticks, as in `cbar.ticks = (positions, ticks)`.
@@ -143,8 +128,7 @@ sco(s2color2)
 Here, we could define a global `Theme` with a new cycle for colors, however that is **not the recommend way** to do it.
 It's better to define a new theme and use as shown before.
 Let's define a new one with a `cycle` for `:color`, `:linestyle`, `:marker` and a new `colormap` default.
-Let's add this new attributes to our previous `publication_theme`.
-<!-- Two times "Let's" -> Change one of them -->
+And add these new attributes to our previous `publication_theme`.
 
 ```jl
 @sc new_cycle_theme()

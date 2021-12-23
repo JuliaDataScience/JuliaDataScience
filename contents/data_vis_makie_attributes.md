@@ -77,16 +77,8 @@ s = """
 sco(s)
 ```
 
-Other positions are also available by combining `left(l), center(c), right(r)` and `bottom(b), center(c), top(t)`.
+Other positions are also available by combining *left(l), center(c), right(r)* and *bottom(b), center(c), top(t)*.
 For instance, for left top, use `:lt`.
-
-<!--
-When I remember correct (I didn't check it now), up to now you really just have
-put stuff in backticks that was code. Now it seem that it is also used to
-emphasize stuff like `legend` or `left(l), center(c), right(r)` and `bottom(b),
-center(c), top(t)`. If it is really just emphasizing and not *also* code, then
-I suggest to use another style to do so like putting it in italics.
--->
 
 However, having to write this much code just for two lines is cumbersome.
 So, if you plan on doing a lot of plots with the same general aesthetics, then setting a theme will be better.

@@ -113,11 +113,6 @@ using Dates
 ```jl
 @sco JDS.mixed_mode_layout()
 ```
-<!--
-I would add `alignmode=Mixed(bottom=0)` to `ax1` as well, so the "outer bottom"
-parts of the upper subplots are aligned. The use of that would be even more
-emphasized if you would add an `xlabel` to `ax1`.
--->
 
 Here, the argument `alignmode=Mixed(bottom=0)` is shifting the bounding box to the bottom, so that this will align with the panel on the left filling the space.
 
@@ -172,11 +167,6 @@ Then, the `inset` is easily done, as in:
 ```jl
 @sco JDS.figure_box_inset()
 ```
-<!--
-At least change `right` of `inset_ax2` or add a protrusion so the xaxis label
-isn't cropped. Alternatively enlarge thr `right` value on purpose to make the
-reader aware that he/she/it needs to watch out for this.
--->
 
 where the `Box` dimensions are bound by the `Figure`'s `resolution`.
 Note, that an inset can be also outside the `Axis`.

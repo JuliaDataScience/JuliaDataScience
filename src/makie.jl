@@ -113,9 +113,9 @@ function multiple_scatters_and_lines()
     fig = Figure(resolution=(600, 400), font="CMU Serif")
     ax = Axis(fig[1, 1], xlabel=L"x", ylabel=L"f(x,a)")
     for i in x
-        lines!(ax, x, i .* x; label=latexstring("$(i) x"))
+        lines!(ax, x, i .* x; label=L"%$i x")
         scatter!(ax, x, i .* x; markersize=13, strokewidth=0.25,
-            label=latexstring("$(i) x"))
+            label=L"%$i x")
     end
     axislegend(L"f(x)"; merge=true, position=:lt, nbanks=2, labelsize=14)
     text!(L"f(x,a) = ax", position=(4, 80))
@@ -333,21 +333,21 @@ function mixed_mode_layout()
     CairoMakie.activate!() # hide
     seed!(123)
     longlabels = ["$(today() - Day(1))", "$(today())", "$(today() + Day(1))"]
-    fig = Figure(resolution=(600, 400), fontsize=12,
-        backgroundcolor=:grey90, font="CMU Serif")
-    ax1 = Axis(fig[1, 1])
-    ax2 = Axis(fig[1, 2], xticklabelrotation=pi / 2, alignmode=Mixed(bottom=0),
-        xticks=([1, 5, 10], longlabels))
+    fig = Figure(resolution = (600, 400), fontsize = 12,
+        backgroundcolor = :grey90, font = "CMU Serif")
+    ax1 = Axis(fig[1, 1], xlabel = "x", alignmode = Mixed(bottom = 0))
+    ax2 = Axis(fig[1, 2], xticklabelrotation = pi / 2, alignmode = Mixed(bottom = 0),
+        xticks = ([1, 5, 10], longlabels))
     ax3 = Axis(fig[2, 1:2])
     ax4 = Axis(fig[3, 1:2])
     axs = [ax1, ax2, ax3, ax4]
     [lines!(ax, 1:10, rand(10)) for ax in axs]
-    hidexdecorations!(ax3; ticks=false, grid=false)
-    Box(fig[2:3, 1:2, Right()], color=(:slateblue1, 0.35))
-    Label(fig[2:3, 1:2, Right()], "protrusion", rotation=pi / 2, textsize=14,
-        padding=(3, 3, 3, 3))
-    Label(fig[1, 1:2, Top()], "Mixed alignmode", textsize=16,
-        padding=(0, 0, 15, 0))
+    hidexdecorations!(ax3; ticks = false, grid = false)
+    Box(fig[2:3, 1:2, Right()], color = (:slateblue1, 0.35))
+    Label(fig[2:3, 1:2, Right()], "protrusion", rotation = pi / 2, textsize = 14,
+        padding = (3, 3, 3, 3))
+    Label(fig[1, 1:2, Top()], "Mixed alignmode", textsize = 16,
+        padding = (0, 0, 15, 0))
     colsize!(fig.layout, 1, Auto(2))
     rowsize!(fig.layout, 2, Auto(0.5))
     rowsize!(fig.layout, 3, Auto(0.5))
@@ -458,7 +458,7 @@ function figure_box_inset()
     ax = Axis(fig[1, 1], backgroundcolor=:white)
     inset_ax1 = add_box_inset(fig; left=100, right=250, bottom=200, top=300,
         bgcolor=:grey90)
-    inset_ax2 = add_box_inset(fig; left=500, right=600, bottom=100, top=200,
+    inset_ax2 = add_box_inset(fig; left=500, right=580, bottom=100, top=200,
         bgcolor=(:white, 0.65))
     lines!(ax, 1:10)
     lines!(inset_ax1, 1:10)

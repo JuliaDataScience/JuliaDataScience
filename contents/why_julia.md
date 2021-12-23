@@ -136,22 +136,76 @@ We don't know any other serious language that would want to be hard and slow, so
 **Julia is fast!
 Very fast!**
 It was designed for speed from the beginning.
-It accomplishes this by multiple dispatch.
+In the rest of this section, we go into details about why this is.
+If you don't have (much) programming experience yet, feel free to skip to the next section and maybe come later to this at a later moment.
+
+Julia accomplishes it's speed partially due to multiple dispatch.
 Basically, the idea is to generate very efficient LLVM[^LLVM] code.
 LLVM code, also known as LLVM instructions, are very low-level, that is, very close to the actual operations that your computer is executing.
 So, in essence, Julia converts your hand written and easy to read code to LLVM machine code which is very hard for humans to read, but easy for computers to read.
 For example, if you define a function taking one argument and pass an integer into the function, then Julia will create a _specialized_ `MethodInstance`.
 The next time that you pass an integer to the function, Julia will look up the `MethodInstance` that was created earlier and refer execution to that.
 Now, the **great** trick is that you can also do this inside a function that calls a function.
-For example, if some data type is passed into function `f` and `f` calls function `g` and the data types passed to `g` are known and always the same, then the generated function `g` can be hardcoded into function `f`!
+For example, if some data type is passed into function `outer` and `outer` calls function `inner` and the data types passed to `inner` are known instead the specialized `outer` instance, then the generated function `inner` can be hardcoded into function `outer`!
 This means that Julia doesn't even have to lookup `MethodInstances` any more, and the code can run very efficiently.
+
+Let's show this in practice.
+We can define the two functions, `inner`:
+
+```jl
+sc("inner(x) = x + 3")
+```
+
+and `outer`:
+
+```jl
+sc("outer(x) = inner(2 * x)")
+```
+
+For example, we can now calculate `outer` for, let's say, 3:
+
+```jl
+scob("outer(3)")
+```
+
+If you step through this calculation, you'll see that the program needs do do quite a lot of things:
+
+1. calculate `2 * 1`
+1. pass the outcome of `2 * 1` to inner
+1. calculate `3 + the outcome of the previous step`
+
+But, if we ask Julia for the optimized code via `@code_typed`, we get what Julia actually does:
+
+```julia
+@code_llvm inner(3)
+```
+
+```output
+define i64 @julia_my_function_3810(i64 signext %0) {
+top:
+    %1 = shl i64 %0, 1
+    %2 = add i64 %1, 3
+    ret i64 %2
+}
+```
+
+This is low-level LLVM code showing that the program only does the following:
+
+1. shift the input (3) one bit to the left, which has the same effect as multiplying by 2; and
+1. add 3.
+
+and that's it!
+Julia has realized that calling `inner` can be removed, so that's not part of the calculation anymore!
+Now, imagine that this function is called a thousand or even a million times.
+These optimizations will reduce the running time significantly.
+
 The trade-off, here, is that there are cases where earlier assumptions about the hardcoded `MethodInstances` are invalidated.
 Then, the `MethodInstance` has to be recreated which takes time.
 Also, the trade-off is that it takes time to infer what can be hardcoded and what not.
 This explains why it can often take very long before Julia does the first thing:
 in the background, it is optimizing your code.
 
-The compiler in turn does what it does best: it optimizes machine code^[if you like to learn more about how Julia is designed you should definitely check @bezanson2017julia.].
+So, Julia creates optimized LLVM machine code^[if you like to learn more about how Julia is designed you should definitely check @bezanson2017julia.].
 You can find [benchmarks](https://julialang.org/benchmarks/) for Julia and several other languages here.
 @fig:benchmarks was taken from [Julia's website benchmarks section^[please note that the Julia results depicted above do not include compile time.]](https://julialang.org/benchmarks/).
 As you can see Julia is **indeed** fast.

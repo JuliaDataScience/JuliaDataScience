@@ -40,9 +40,19 @@ preferred-citation:
   title: "Julia Data Science"
   date-released: 2021-10-01
   edition: "First edition"
-  isbn: "979-8489859165"
+  isbn: "9798489859165"
   month: 10
   repository: "https://github.com/JuliaDataScience/JuliaDataScience"
   url: "https://juliadatascience.io"
   year: 2021
+  authors:
+  - family-names: Storopoli
+    given-names: Jose
+    orcid: "https://orcid.org/0000-0002-0559-5176"
+  - family-names: Huijzer
+    given-names: Rik
+    orcid: "https://orcid.org/0000-0001-9445-8466"
+  - family-names: Alonso
+    given-names: Lazaro
+    orcid: "https://orcid.org/0000-0001-6979-859X"
 ...

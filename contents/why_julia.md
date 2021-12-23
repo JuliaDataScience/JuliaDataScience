@@ -191,8 +191,8 @@ top:
 
 This is low-level LLVM code showing that the program only does the following:
 
-1. shift the input (3) one bit to the left, which has the same effect as multiplying by 2
-1. add 3
+1. shift the input (3) one bit to the left, which has the same effect as multiplying by 2; and
+1. add 3.
 
 and that's it!
 Julia has realized that calling `inner` can be removed, so that's not part of the calculation anymore!

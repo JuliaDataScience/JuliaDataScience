@@ -1,27 +1,48 @@
-# YAML 1.2
----
+# Based on https://github.com/citation-file-format/citation-file-format/blob/main/examples/1.2.0/pass/key-complete/CITATION.cff.
+
+cff-version: "1.2.0"
+message: "If you use this software, please cite it as below."
+
 authors:
-  -
-    family-names: Storopoli
+  - family-names: Storopoli
     given-names: Jose
     orcid: "https://orcid.org/0000-0002-0559-5176"
-  -
-    family-names: Huijzer
+  - family-names: Huijzer
     given-names: Rik
     orcid: "https://orcid.org/0000-0001-9445-8466"
-  -
-    family-names: Alonso
+  - family-names: Alonso
     given-names: Lazaro
     orcid: "https://orcid.org/0000-0001-6979-859X"
-cff-version: "1.2.0"
+
 date-released: 2021-10-01
+
 identifiers:
-  -
-    type: url
+  - type: url
     value: "https://juliadatascience.io/"
+
+keywords:
+  - "Julia language"
+  - "programming"
+  - "software"
+  - "data manipulation"
+  - "data visualization"
+
 license: "CC-BY-NC-SA-4.0"
-message: "If you use this software, please cite it using these metadata."
+
 repository-code: "https://github.com/JuliaDataScience/JuliaDataScience"
+
 title: "Julia Data Science"
+
 version: 1.0.0
+
+preferred-citation:
+  type: book
+  title: "Julia Data Science"
+  date-released: 2021-10-01
+  edition: "First edition"
+  isbn: "979-8489859165"
+  month: 10
+  repository: "https://github.com/JuliaDataScience/JuliaDataScience"
+  url: "https://juliadatascience.io"
+  year: 2021
 ...

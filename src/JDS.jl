@@ -46,7 +46,9 @@ using Reexport: @reexport
         semijoin,
         subset,
         transform,
-        transform!
+        transform!,
+        dropmissing,
+        names
     using Dates
     using Distributions
     using Downloads
@@ -66,6 +68,11 @@ using Reexport: @reexport
         eachtablerow,
         readxlsx,
         writetable
+    using PalmerPenguins
+    using GLM:
+        lm,
+        predict,
+        @formula
 end # @reexport
 
 const SMALL_IM_ATTR = "width=70%"
@@ -77,6 +84,7 @@ include("showcode_additions.jl")
 include("makie.jl")
 include("stats.jl")
 include("bezier.jl")
+include("ml_linear_regression.jl")
 include("front-cover.jl")
 
 # Showcode additions.
@@ -102,6 +110,9 @@ export plot_normal_lognormal, plot_discrete_continuous
 export plot_pmf, plot_pdf, plot_cdf
 export calculate_pdf
 export anscombe_quartet, plot_anscombe
+
+# machine learning
+export getPenguins
 
 # Book cover.
 export front_cover

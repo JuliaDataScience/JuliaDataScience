@@ -146,7 +146,7 @@ So, in essence, Julia converts your hand written and easy to read code to LLVM m
 For example, if you define a function taking one argument and pass an integer into the function, then Julia will create a _specialized_ `MethodInstance`.
 The next time that you pass an integer to the function, Julia will look up the `MethodInstance` that was created earlier and refer execution to that.
 Now, the **great** trick is that you can also do this inside a function that calls a function.
-For example, if some data type is passed into function `outer` and `outer` calls function `inner` and the data types passed to `inner` are known instead the specialized `outer` instance, then the generated function `inner` can be hardcoded into function `outer`!
+For example, if some data type is passed into function `outer` and `outer` calls function `inner` and the data types passed to `inner` are known inside the specialized `outer` instance, then the generated function `inner` can be hardcoded into function `outer`!
 This means that Julia doesn't even have to lookup `MethodInstances` any more, and the code can run very efficiently.
 
 Let's show this in practice.
@@ -170,8 +170,8 @@ scob("outer(3)")
 
 If you step through this calculation, you'll see that the program needs do do quite a lot of things:
 
-1. calculate `2 * 1`
-1. pass the outcome of `2 * 1` to inner
+1. calculate `2 * 3`
+1. pass the outcome of `2 * 3` to inner
 1. calculate `3 + the outcome of the previous step`
 
 But, if we ask Julia for the optimized code via `@code_typed`, we get what Julia actually does:

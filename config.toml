@@ -23,6 +23,7 @@
     "data_vis_makie_glmakie",
     "ml_intro",
     "ml_linear_regression",
+    "ml_lstmFlux",
     #"stats",
     #"stats_distributions",
     #"stats_vis",

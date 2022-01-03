@@ -73,6 +73,7 @@ using Reexport: @reexport
         lm,
         predict,
         @formula
+    using Flux
 end # @reexport
 
 const SMALL_IM_ATTR = "width=70%"
@@ -85,6 +86,7 @@ include("makie.jl")
 include("stats.jl")
 include("bezier.jl")
 include("ml_linear_regression.jl")
+include("ml_recurrence.jl")
 include("front-cover.jl")
 
 # Showcode additions.
@@ -112,7 +114,7 @@ export calculate_pdf
 export anscombe_quartet, plot_anscombe
 
 # machine learning
-export getPenguins
+export getPenguins, lstmSamplesSequence
 
 # Book cover.
 export front_cover

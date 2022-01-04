@@ -74,6 +74,7 @@ using Reexport: @reexport
         predict,
         @formula
     using Flux
+    using Base.Iterators: partition
 end # @reexport
 
 const SMALL_IM_ATTR = "width=70%"

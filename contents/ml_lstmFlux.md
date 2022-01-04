@@ -81,11 +81,43 @@ Warning: `Flux.reset!(m)` after each batch pass. Also important when defining th
 ```
 function loss(x,y)
     Flux.reset!(model)
-    ŷ = Flux.stack(model.(x), 3)[:, :, end]
+    ŷ = Flux.stack(out, 3)[:, :, end]
     Flux.mse(y, ŷ)
 end
 ```
 
-- Multiple Batches
+- Multiple mini-batches
+
+Then defining our mini-batch function is straightforward:
+
+```
+using Base.Iterators: partition
+```
+
+Taking into account the input and the target (sequence-to-one), namely
+
+```
+xraw = rand(Float32, nfeatures, nsamples, seqlen)
+xdata = [xraw[:, :, t] for t in 1:seqlen]
+ydata = rand(Float32, nsamples)
+```
+
+the mini-batch process can be done with:
+
+```jl
+s = """
+    function rawBatch(xdata, ydata; batchsize=2, partial=false)
+        minibatch = partition(1:size(xdata)[2], batchsize)
+        seqlen = size(xdata)[3]
+        lastmb(p) = partial ? true : size(p)[1] < batchsize
+        xbatch = [[xdata[:,p, t] for t in 1:seqlen] for p in minibatch if lastmb(p)]
+        ybatch = [ydata[p] for p in minibatch]
+        return (xbatch, ybatch)
+    end
+"""
+sc(s)
+```
+
+using this format the `Flux.train!` function will iterate over each mini-batch.
 
 - Training loop

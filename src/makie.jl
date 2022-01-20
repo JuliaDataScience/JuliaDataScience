@@ -362,7 +362,7 @@ function mixed_mode_layout()
 end
 
 function nested_sub_plot!(fig)
-    color = rand(RGBf0)
+    color = rand(RGBf)
     ax1 = Axis(fig[1, 1], backgroundcolor=(color, 0.25))
     ax2 = Axis(fig[1, 2], backgroundcolor=(color, 0.25))
     ax3 = Axis(fig[2, 1:2], backgroundcolor=(color, 0.25))
@@ -387,7 +387,7 @@ end
 
 function nested_Grid_Layouts()
     CairoMakie.activate!() # hide
-    fig = Figure(backgroundcolor=RGBf0(0.96, 0.96, 0.96))
+    fig = Figure(backgroundcolor=RGBf(0.96, 0.96, 0.96))
     ga = fig[1, 1] = GridLayout()
     gb = fig[1, 2] = GridLayout()
     gc = fig[1, 3] = GridLayout()

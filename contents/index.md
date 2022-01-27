@@ -15,8 +15,8 @@
 </style>
 
 <div class="language-switcher">
-<a href="/"><button>🇺🇸</button></a>
-<a href="/pt"><button>🇧🇷</button></a>
+<a href="https://juliadatascience.io"><button>🇺🇸</button></a>
+<a href="https://juliadatascience.io/pt"><button>🇧🇷</button></a>
 </div>
 ```
 

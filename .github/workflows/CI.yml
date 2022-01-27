@@ -23,9 +23,9 @@ jobs:
         shell: bash
         run: |
           git clone --branch=gh-pages https://github.com/JuliaDataScience/JuliaDataScience ~/jds
-          rm -r ~/jds/.git
+          rm -rf ~/jds/.git
           mkdir -p _build/pt
-          cp -r ~/jds/pt/* _build/pt/*
+          cp -rf ~/jds/pt/* _build/pt/*
 
       - uses: julia-actions/cache@v1
 

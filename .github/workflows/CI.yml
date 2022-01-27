@@ -19,7 +19,7 @@ jobs:
         with:
           version: "1.7"
 
-      - name: Copy over the Portugese output
+      - name: Copy over the Portuguese output
         shell: bash
         run: |
           git clone --branch=gh-pages https://github.com/JuliaDataScience/JuliaDataScience ~/jds

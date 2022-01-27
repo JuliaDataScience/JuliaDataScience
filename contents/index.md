@@ -16,7 +16,7 @@
 
 <div class="language-switcher">
 <a href="/"><button>🇺🇸</button></a>
-<a href="/pt"><button>🇧🇷</button></a>
+<a href="/pt/index_pt"><button>🇧🇷</button></a>
 </div>
 ```
 

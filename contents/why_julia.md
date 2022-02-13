@@ -168,23 +168,24 @@ For example, we can now calculate `outer` for, let's say, 3:
 scob("outer(3)")
 ```
 
-If you step through this calculation, you'll see that the program needs do do quite a lot of things:
+If you step through this calculation of `outer`, you'll see that the program needs do do quite a lot of things:
 
 1. calculate `2 * 3`
 1. pass the outcome of `2 * 3` to inner
 1. calculate `3 + the outcome of the previous step`
 
-But, if we ask Julia for the optimized code via `@code_typed`, we get what Julia actually does:
+But, if we ask Julia for the optimized code via `@code_typed`, we see what instructions the computer actually get:
 
 ```julia
-@code_llvm debuginfo=:none inner(3)
+@code_llvm debuginfo=:none outer(3)
 ```
 
 ```output
-define i64 @julia_inner_230(i64 signext %0) #0 {
+define i64 @julia_outer_232(i64 signext %0) #0 {
 top:
-  %1 = add i64 %0, 3
-  ret i64 %1
+  %1 = shl i64 %0, 1
+  %2 = add i64 %1, 3
+  ret i64 %2
 }
 ```
 

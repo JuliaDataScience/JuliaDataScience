@@ -177,15 +177,14 @@ If you step through this calculation, you'll see that the program needs do do qu
 But, if we ask Julia for the optimized code via `@code_typed`, we get what Julia actually does:
 
 ```julia
-@code_llvm inner(3)
+@code_llvm debuginfo=:none inner(3)
 ```
 
 ```output
-define i64 @julia_my_function_3810(i64 signext %0) {
+define i64 @julia_inner_230(i64 signext %0) #0 {
 top:
-    %1 = shl i64 %0, 1
-    %2 = add i64 %1, 3
-    ret i64 %2
+  %1 = add i64 %0, 3
+  ret i64 %1
 }
 ```
 

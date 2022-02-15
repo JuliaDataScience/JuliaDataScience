@@ -394,7 +394,11 @@ Now, it works as expected with any float type:
 ```jl
 s = """
     x_32 = Float32(1.1)
-    round_number(x_32)
+    x_32 = round_number(x_32)
+    io = IOBuffer(); # hide
+    show(io, r) # hide
+    x_32 = String(take!(io)) # hide
+    x_32
     """
 scob(s)
 ```

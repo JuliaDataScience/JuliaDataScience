@@ -396,7 +396,7 @@ s = """
     x_32 = Float32(1.1)
     round_number(x_32)
     """
-scob(s)
+sco(s; process=(x -> sprint(show, x)), post=output_block)
 ```
 
 > **_NOTE:_**

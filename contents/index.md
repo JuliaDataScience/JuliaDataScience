@@ -45,17 +45,6 @@ The book is published at [Amazon.com](https://www.amazon.com/dp/B09KMRKQ96/){onc
 [Amazon.co.uk](https://www.amazon.co.uk/dp/B09KMRKQ96){onclick="pirsch('Click on Amazon.co.uk link')"}
 and many more Amazon stores.
 
-If you want to be notified about updates, please consider **signing up for updates**:
-
-```{=html}
-<form style="margin: 0 auto;" action="https://api.staticforms.xyz/submit" method="post">
-    <input type="hidden" name="accessKey" value="2b78f325-fb4e-44e1-ad2f-4dc714ac402f">
-    <input type="email" name="email">
-    <input type="hidden" name="redirectTo" value="https://juliadatascience.io/thanks">
-    <input type="submit" value="Submit" />
-</form>
-```
-
 ### Citation Info {-}
 
 To cite the content, please use:

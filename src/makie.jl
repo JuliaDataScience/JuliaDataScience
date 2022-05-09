@@ -418,7 +418,7 @@ function add_box_inset(fig; left=100, right=250, bottom=200, top=300,
     return inset_box
 end
 
-function add_axis_inset(pos; halign, valign, width=Relative(0.5),
+function add_axis_inset(pos=fig[1, 1]; halign, valign, width=Relative(0.5),
         height=Relative(0.35), bgcolor=:lightgray)
 
     inset_box = Axis(pos; width, height, halign, valign,

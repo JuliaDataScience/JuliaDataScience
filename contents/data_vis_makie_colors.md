@@ -101,7 +101,7 @@ sco(scat)
 Lastly, the ticks in the colorbar for the categorial case are not centered by default in each color.
 This is fixed by passing custom ticks, as in `cbar.ticks = (positions, ticks)`.
 
-The last situation is when passing a tuple of two colors to `colormap` as symbols, strings or a mix.
+The last situation is when passing a multiple colors to `colormap`.
 You will get an interpolated colormap between these two colors.
 Also, hexadecimal coded colors are accepted. So, on top or our heatmap let's put one semi-transparent point using this.
 
@@ -111,7 +111,7 @@ s2color2 = """
     figure = (; resolution=(600, 400), font="CMU Serif")
     axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
     fig, ax, pltobj = heatmap(rand(20, 20); colorrange=(0, 1),
-        colormap=(:red, "black"), axis=axis, figure=figure)
+        colormap=["red", "black"], axis=axis, figure=figure)
     scatter!(ax, [11], [11], color=("#C0C0C0", 0.5), markersize=150)
     Colorbar(fig[1, 2], pltobj, label="2 colors")
     fig

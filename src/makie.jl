@@ -418,16 +418,13 @@ function add_box_inset(fig; left=100, right=250, bottom=200, top=300,
     return inset_box
 end
 
-function add_axis_inset(; pos=fig[1, 1], halign=0.1, valign=0.5,
-    width=Relative(0.5), height=Relative(0.35), bgcolor=:lightgray)
-    inset_box = Axis(pos, width=width, height=height,
-        halign=halign, valign=valign, xticklabelsize=12, yticklabelsize=12,
-        backgroundcolor=bgcolor)
+function add_axis_inset(pos; halign, valign, width=Relative(0.5),
+        height=Relative(0.35), bgcolor=:lightgray)
+
+    inset_box = Axis(pos; width, height, halign, valign,
+        xticklabelsize=12, yticklabelsize=12, backgroundcolor=bgcolor)
     # bring content upfront
     translate!(inset_box.scene, 0, 0, 10)
-    elements = keys(inset_box.elements)
-    filtered = filter(ele -> ele != :xaxis && ele != :yaxis, elements)
-    foreach(ele -> translate!(inset_box.elements[ele], 0, 0, 9), filtered)
     return inset_box
 end
 
@@ -435,9 +432,9 @@ function figure_axis_inset()
     CairoMakie.activate!() # hide
     fig = Figure(resolution=(600, 400))
     ax = Axis(fig[1, 1], backgroundcolor=:white)
-    inset_ax1 = add_axis_inset(; pos=fig[1, 1], halign=0.1, valign=0.65,
+    inset_ax1 = add_axis_inset(fig[1, 1]; halign=:center, valign=:top,
         width=Relative(0.3), height=Relative(0.3), bgcolor=:grey90)
-    inset_ax2 = add_axis_inset(; pos=fig[1, 1], halign=1, valign=0.25,
+    inset_ax2 = add_axis_inset(fig[1, 1]; halign=:right, valign=:center,
         width=Relative(0.25), height=Relative(0.3), bgcolor=(:white, 0.65))
     lines!(ax, 1:10)
     lines!(inset_ax1, 1:10)

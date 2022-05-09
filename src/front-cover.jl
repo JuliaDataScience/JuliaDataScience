@@ -33,6 +33,8 @@ valsSides = [myrand(ix, iy, iz) for ix in FRONTZ[end], iy in FRONTY, iz in FRONT
 colorTop = vec(valsTop[:, end])
 colorSides = vec(valsSides[end, :])
 
+# Based on https://github.com/JuliaPlots/Makie.jl/pull/1796.
+text_element(label::Makie.Label) = only(label.blockscene.plots)
 
 """
     front_cover()
@@ -144,7 +146,7 @@ function front_cover()
             whiskercolor=JuliaColors.green, whiskerwidth=1, strokewidth=1)
         scatter!(axBubbles, rand(Distributions.Normal(1, 1), 1500), rand(Distributions.Normal(1, 1), 1500);
             color=1:1500, markersize=20 * rand(1500),
-            colormap=tuple.(to_colormap(:thermal), rand(40) .+ 0.15),
+            colormap=tuple.(to_colormap(:thermal), rand(256) .+ 0.15),
             marker=:rect)
         limits!(axBubbles, -2.2, 2, -3.3, 2)
         xlims!(ax44, 0.1, 1.9)
@@ -179,10 +181,10 @@ function front_cover()
 
         legJ = Label(fig[1, 3:5], "Julia", textsize=394,
             tellheight=false, halign=:left, font=NOTO_SANS_BOLD)
-        translate!(legJ.elements[:text], 0, 0, 9)
+        translate!(text_element(legJ), 0, 0, 9)
         legD = Label(fig[1, 3:5], "\n\n\n\nData Science", textsize=126,
             tellheight=false, halign=:left, font=NOTO_SANS_BOLD)
-        translate!(legD.elements[:text], 0, 0, 9)
+        translate!(text_element(legD), 0, 0, 9)
         vspace = "\n\n"
         hspace = "         "
         legJose = Label(fig[2, 3:5], "$(vspace)$(hspace)Jose Storopoli", textsize=80,
@@ -191,9 +193,9 @@ function front_cover()
             tellheight=false, halign=:left, font=NOTO_SANS_BOLD)
         legLaz = Label(fig[2, 3:5], "$(vspace)\n\n\n\n$(hspace)Lazaro Alonso", textsize=80,
             tellheight=false, halign=:left, font=NOTO_SANS_BOLD)
-        translate!(legJose.elements[:text], 0, 0, 9)
-        translate!(legRik.elements[:text], 0, 0, 9)
-        translate!(legLaz.elements[:text], 0, 0, 9)
+        translate!(text_element(legJose), 0, 0, 9)
+        translate!(text_element(legRik), 0, 0, 9)
+        translate!(text_element(legLaz), 0, 0, 9)
         #     textsize = 60, tellheight = false)
         # Final Axis and Figure touches
         [hidedecorations!(ax; grid=false) for ax in axs]

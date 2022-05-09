@@ -415,9 +415,6 @@ function add_box_inset(fig; left=100, right=250, bottom=200, top=300,
         xticklabelsize=12, yticklabelsize=12, backgroundcolor=bgcolor)
     # bring content upfront
     translate!(inset_box.scene, 0, 0, 10)
-    elements = keys(inset_box.elements)
-    filtered = filter(ele -> ele != :xaxis && ele != :yaxis, elements)
-    foreach(ele -> translate!(inset_box.elements[ele], 0, 0, 9), filtered)
     return inset_box
 end
 

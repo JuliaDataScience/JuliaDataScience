@@ -398,7 +398,7 @@ function nested_Grid_Layouts()
     nested_sub_plot!(gb)
     axsc = nested_sub_plot!(gc)
     nested_sub_plot!(gd)
-    [hidedecorations!(axsc[i], grid=false, ticks=false) for i = 1:length(axsc)]
+    hidedecorations!.(axsc, grid=false, ticks=false)
     colgap!(gc, 5)
     rowgap!(gc, 5)
     rowsize!(fig.layout, 2, Auto(0.5))
@@ -421,9 +421,9 @@ function add_box_inset(fig; left=100, right=250, bottom=200, top=300,
 end
 
 function add_axis_inset(pos=fig[1, 1]; halign, valign, width=Relative(0.5),
-        height=Relative(0.35), bgcolor=:lightgray)
+        height=Relative(0.35), alignmode=Mixed(left = 5, right=5), bgcolor=:lightgray)
 
-    inset_box = Axis(pos; width, height, halign, valign,
+    inset_box = Axis(pos; width, height, halign, valign, alignmode,
         xticklabelsize=12, yticklabelsize=12, backgroundcolor=bgcolor)
     # bring content upfront
     translate!(inset_box.scene, 0, 0, 10)
@@ -434,8 +434,10 @@ function figure_axis_inset()
     CairoMakie.activate!() # hide
     fig = Figure(resolution=(600, 400))
     ax = Axis(fig[1, 1], backgroundcolor=:white)
-    inset_ax1 = add_axis_inset(fig[1, 1]; halign=:center, valign=:top,
-        width=Relative(0.3), height=Relative(0.3), bgcolor=:grey90)
+    inset_ax1 = add_axis_inset(fig[1, 1]; halign=:left, valign=:center,
+        width=Relative(0.3), height=Relative(0.35),
+        alignmode=Mixed(left=5, right=5, bottom=15),
+        bgcolor = :grey90)
     inset_ax2 = add_axis_inset(fig[1, 1]; halign=:right, valign=:center,
         width=Relative(0.25), height=Relative(0.3), bgcolor=(:white, 0.65))
     lines!(ax, 1:10)

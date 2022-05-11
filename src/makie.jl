@@ -188,6 +188,7 @@ function set_colors_and_cycle()
         lines!(ax, x(2k, k, θ), y(2k, k, θ); label=latexstring("$(k)")) #cycle
     end
     Legend(fig[1, 2], ax, latexstring("k, r = 2k"), merge=true)
+    colsize!(fig.layout, 1, Aspect(1, 1.0))
     fig
 end
 

@@ -84,6 +84,7 @@ function plot_with_legend_and_colorbar()
         colormap=:Spectral_11)
     axislegend("legend"; position=:lt)
     Colorbar(fig[1, 2], hm, label="values")
+    colsize!(fig.layout, 1, Aspect(1, 1.0))
     ax.title = "my custom theme"
     fig
 end

@@ -114,12 +114,12 @@ Additionally, we can mix spheres and a rectangular plane. Next, we define all th
 ```jl
 sc("""
 seed!(123)
-spheresGrid = [Point3f(i,j,k) for i in 1:2:10 for j in 1:2:10 for k in 1:2:10]
-colorSphere = [RGBA(i * 0.1, j * 0.1, k * 0.1, 0.75) for i in 1:2:10 for j in 1:2:10 for k in 1:2:10]
+spheresGrid = [Point3f(i,j,k) for i in 1:2:12 for j in 1:2:10 for k in 1:2:10]
+colorSphere = [RGBA(i * 0.1, j * 0.1, k * 0.1, 0.75) for i in 1:2:12 for j in 1:2:10 for k in 1:2:10]
 spheresPlane = [Point3f(i,j,k) for i in 1:2.5:20 for j in 1:2.5:10 for k in 1:2.5:4]
 cmap = get(colorschemes[:plasma], LinRange(0, 1, 50))
 colorsPlane = cmap[rand(1:50,50)]
-rectMesh = FRect3D(Vec3f(-1, -1, 2.1), Vec3f(22, 11, 0.5))
+rectMesh = Rect3f(Vec3f(-1, -1, 2.1), Vec3f(22, 11, 0.5))
 recmesh = GeometryBasics.mesh(rectMesh)
 colors = [RGBA(rand(4)...) for v in recmesh.position]
 """)

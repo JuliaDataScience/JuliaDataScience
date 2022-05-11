@@ -84,6 +84,7 @@ function plot_with_legend_and_colorbar()
         colormap=:Spectral_11)
     axislegend("legend"; position=:lt)
     Colorbar(fig[1, 2], hm, label="values")
+    colsize!(fig.layout, 1, Aspect(1, 1.0))
     ax.title = "my custom theme"
     fig
 end
@@ -188,6 +189,7 @@ function set_colors_and_cycle()
         lines!(ax, x(2k, k, θ), y(2k, k, θ); label=latexstring("$(k)")) #cycle
     end
     Legend(fig[1, 2], ax, latexstring("k, r = 2k"), merge=true)
+    colsize!(fig.layout, 1, Aspect(1, 1.0))
     fig
 end
 
@@ -396,7 +398,7 @@ function nested_Grid_Layouts()
     nested_sub_plot!(gb)
     axsc = nested_sub_plot!(gc)
     nested_sub_plot!(gd)
-    [hidedecorations!(axsc[i], grid=false, ticks=false) for i = 1:length(axsc)]
+    hidedecorations!.(axsc, grid=false, ticks=false)
     colgap!(gc, 5)
     rowgap!(gc, 5)
     rowsize!(fig.layout, 2, Auto(0.5))
@@ -419,9 +421,9 @@ function add_box_inset(fig; left=100, right=250, bottom=200, top=300,
 end
 
 function add_axis_inset(pos=fig[1, 1]; halign, valign, width=Relative(0.5),
-        height=Relative(0.35), bgcolor=:lightgray)
+        height=Relative(0.35), alignmode=Mixed(left = 5, right=5), bgcolor=:lightgray)
 
-    inset_box = Axis(pos; width, height, halign, valign,
+    inset_box = Axis(pos; width, height, halign, valign, alignmode,
         xticklabelsize=12, yticklabelsize=12, backgroundcolor=bgcolor)
     # bring content upfront
     translate!(inset_box.scene, 0, 0, 10)
@@ -432,8 +434,10 @@ function figure_axis_inset()
     CairoMakie.activate!() # hide
     fig = Figure(resolution=(600, 400))
     ax = Axis(fig[1, 1], backgroundcolor=:white)
-    inset_ax1 = add_axis_inset(fig[1, 1]; halign=:center, valign=:top,
-        width=Relative(0.3), height=Relative(0.3), bgcolor=:grey90)
+    inset_ax1 = add_axis_inset(fig[1, 1]; halign=:left, valign=:center,
+        width=Relative(0.3), height=Relative(0.35),
+        alignmode=Mixed(left=5, right=5, bottom=15),
+        bgcolor = :grey90)
     inset_ax2 = add_axis_inset(fig[1, 1]; halign=:right, valign=:center,
         width=Relative(0.25), height=Relative(0.3), bgcolor=(:white, 0.65))
     lines!(ax, 1:10)
@@ -469,14 +473,14 @@ function scatters_in_3D()
     seed!(123)
     xyz = randn(10, 3)
     x, y, z = xyz[:, 1], xyz[:, 2], xyz[:, 3]
-    fig = Figure(resolution=(1600, 400))
+    fig = Figure(resolution=(1200, 400))
     ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), perspectiveness=0.5)
     ax2 = Axis3(fig[1, 2]; aspect=(1, 1, 1), perspectiveness=0.5)
     ax3 = Axis3(fig[1, 3]; aspect=:data, perspectiveness=0.5)
-    scatter!(ax1, x, y, z; markersize=50)
+    scatter!(ax1, x, y, z; markersize=15)
     meshscatter!(ax2, x, y, z; markersize=0.25)
     hm = meshscatter!(ax3, x, y, z; markersize=0.25,
-        marker=FRect3D(Vec3f(0), Vec3f(1)), color=1:size(xyz)[2],
+        marker=Rect3f(Vec3f(0), Vec3f(1)), color=1:size(xyz,2),
         colormap=:plasma, transparency=false)
     Colorbar(fig[1, 4], hm, label="values", height=Relative(0.5))
     fig
@@ -487,14 +491,14 @@ function lines_in_3D()
     seed!(123)
     xyz = randn(10, 3)
     x, y, z = xyz[:, 1], xyz[:, 2], xyz[:, 3]
-    fig = Figure(resolution=(1600, 400))
+    fig = Figure(resolution=(1200, 500))
     ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), perspectiveness=0.5)
     ax2 = Axis3(fig[1, 2]; aspect=(1, 1, 1), perspectiveness=0.5)
     ax3 = Axis3(fig[1, 3]; aspect=:data, perspectiveness=0.5)
     lines!(ax1, x, y, z; color=1:size(xyz)[2], linewidth=3)
-    scatterlines!(ax2, x, y, z; markersize=50)
-    hm = meshscatter!(ax3, x, y, z; markersize=0.2, color=1:size(xyz)[2])
-    lines!(ax3, x, y, z; color=1:size(xyz)[2])
+    scatterlines!(ax2, x, y, z; markersize=15)
+    hm = meshscatter!(ax3, x, y, z; markersize=0.2, color=1:size(xyz,2))
+    lines!(ax3, x, y, z; color=1:size(xyz,2))
     Colorbar(fig[2, 1], hm; label="values", height=15, vertical=false,
         flipaxis=false, ticksize=15, tickalign=1, width=Relative(3.55 / 4))
     fig
@@ -520,7 +524,7 @@ function plot_peaks_function()
     GLMakie.activate!() # hide
     x, y, z = peaks()
     x2, y2, z2 = peaks(; n=15)
-    fig = Figure(resolution=(1600, 400), fontsize=26)
+    fig = Figure(resolution=(1200, 400))
     axs = [Axis3(fig[1, i]; aspect=(1, 1, 1)) for i = 1:3]
     hm = surface!(axs[1], x, y, z)
     wireframe!(axs[2], x2, y2, z2)
@@ -532,7 +536,7 @@ end
 function heatmap_contour_and_contourf()
     GLMakie.activate!() # hide
     x, y, z = peaks()
-    fig = Figure(resolution=(1600, 400), fontsize=26)
+    fig = Figure(resolution=(1200, 400))
     axs = [Axis(fig[1, i]; aspect=DataAspect()) for i = 1:3]
     hm = heatmap!(axs[1], x, y, z)
     contour!(axs[2], x, y, z; levels=20)
@@ -544,7 +548,7 @@ end
 function heatmap_contour_and_contourf_in_a_3d_plane()
     GLMakie.activate!() # hide
     x, y, z = peaks()
-    fig = Figure(resolution=(1600, 400), fontsize=26)
+    fig = Figure(resolution=(1200, 400))
     axs = [Axis3(fig[1, i]) for i = 1:3]
     hm = heatmap!(axs[1], x, y, z)
     contour!(axs[2], x, y, z; levels=20)
@@ -597,7 +601,7 @@ function arrows_and_streamplot_in_3d()
     fig = Figure(resolution=(1200, 800), fontsize=26)
     axs = [Axis3(fig[1, i]; aspect=(1, 1, 1), perspectiveness=0.5) for i = 1:2]
     # http://makie.juliaplots.org/stable/plotting_functions/arrows.html # hide
-    arrows!(axs[1], ps, ns, color=lengths, arrowsize=Vec3f0(0.2, 0.2, 0.3),
+    arrows!(axs[1], ps, ns, color=lengths, arrowsize=Vec3f(0.2, 0.2, 0.3),
         linewidth=0.1)
     streamplot!(axs[2], flowField, -4 .. 4, -4 .. 4, -4 .. 4, colormap=:plasma,
         gridsize=(7, 7), arrow_size=0.25, linewidth=1)
@@ -610,7 +614,7 @@ end
 
 function mesh_volume_contour()
     # mesh objects
-    rectMesh = FRect3D(Vec3f(-0.5), Vec3f(1))
+    rectMesh = Rect3f(Vec3f(-0.5), Vec3f(1))
     recmesh = GeometryBasics.mesh(rectMesh)
     sphere = Sphere(Point3f(0), 1)
     # https://juliageometry.github.io/GeometryBasics.jl/stable/primitives/
@@ -620,7 +624,7 @@ function mesh_volume_contour()
     # cloud points for volume
     x = y = z = 1:10
     vals = randn(10, 10, 10)
-    fig = Figure(resolution=(1600, 400))
+    fig = Figure(resolution=(1200, 400))
     axs = [Axis3(fig[1, i]; aspect=(1, 1, 1), perspectiveness=0.5) for i = 1:3]
     mesh!(axs[1], recmesh; color=colors, colormap=:rainbow, shading=false)
     mesh!(axs[1], spheremesh; color=(:white, 0.25), transparency=true)
@@ -647,12 +651,12 @@ end
 
 function grid_spheres_and_rectangle_as_plate()
     seed!(123) # hide
-    spheresGrid = [Point3f(i,j,k) for i in 1:2:10 for j in 1:2:10 for k in 1:2:10] # hide
+    spheresGrid = [Point3f(i,j,k) for i in 1:2:12 for j in 1:2:10 for k in 1:2:10] # hide
     colorSphere = [RGBA(i * 0.1, j * 0.1, k * 0.1, 0.75) for i in 1:2:10 for j in 1:2:10 for k in 1:2:10] # hide
     spheresPlane = [Point3f(i,j,k) for i in 1:2.5:20 for j in 1:2.5:10 for k in 1:2.5:4] # hide
     cmap = get(colorschemes[:plasma], LinRange(0, 1, 50)) # hide
     colorsPlane = cmap[rand(1:50,50)] # hide
-    rectMesh = FRect3D(Vec3f(-1, -1, 2.1), Vec3f(22, 11, 0.5)) # hide
+    rectMesh = Rect3f(Vec3f(-1, -1, 2.1), Vec3f(22, 11, 0.5)) # hide
     recmesh = GeometryBasics.mesh(rectMesh) # hide
     colors = [RGBA(rand(4)...) for v in recmesh.position] # hide
     fig = with_theme(theme_dark()) do
@@ -688,7 +692,7 @@ function histogram_or_bars_in_3d()
     ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), elevation=π/6,
         perspectiveness=0.5)
     ax2 = Axis3(fig[1, 2]; aspect=(1, 1, 1), perspectiveness=0.5)
-    rectMesh = FRect3D(Vec3f0(-0.5, -0.5, 0), Vec3f0(1, 1, 1))
+    rectMesh = Rect3f(Vec3f(-0.5, -0.5, 0), Vec3f(1, 1, 1))
     meshscatter!(ax1, x, y, 0*z, marker = rectMesh, color = z[:],
         markersize = Vec3f.(2δx, 2δy, z[:]), colormap = :Spectral_11,
         shading=false)
@@ -697,7 +701,7 @@ function histogram_or_bars_in_3d()
         markersize = Vec3f.(2δx, 2δy, z[:]), colormap = (:Spectral_11, 0.25),
         shading=false, transparency=true)
     for (idx, i) in enumerate(x), (idy, j) in enumerate(y)
-        rectMesh = FRect3D(Vec3f(i - δx, j - δy, 0), Vec3f(2δx, 2δy, z[idx, idy]))
+        rectMesh = Rect3f(Vec3f(i - δx, j - δy, 0), Vec3f(2δx, 2δy, z[idx, idy]))
         recmesh = GeometryBasics.mesh(rectMesh)
         lines!(ax2, recmesh; color=(cmap2[idx, idy], ztmp2[idx, idy]))
     end

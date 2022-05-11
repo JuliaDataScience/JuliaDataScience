@@ -35,6 +35,7 @@ scolor = """
     fig, ax, pltobj = heatmap(rand(20, 20); colorrange=(0, 1),
         colormap=Reverse(:viridis), axis=axis, figure=figure)
     Colorbar(fig[1, 2], pltobj, label = "Reverse sequential colormap")
+    colsize!(fig.layout, 1, Aspect(1, 1.0))
     fig
     label = "Reverse_colormap_sequential" # hide
     caption = "Reverse sequential colormap and colorrange." # hide
@@ -60,6 +61,7 @@ s = """
         colormap="diverging_rainbow_bgymr_45_85_c67_n256",
         highclip=:black, lowclip=:white, axis=axis, figure=figure)
     Colorbar(fig[1, 2], pltobj, label = "Diverging colormap")
+    colsize!(fig.layout, 1, Aspect(1, 1.0))
     fig
     label = "diverging_colormap" # hide
     caption = "Diverging Colormap with low and high clip." # hide
@@ -89,6 +91,7 @@ scat = """
         axis=axis, figure=figure)
     cbar = Colorbar(fig[1, 2], pltobj, label="Categories")
     cbar.ticks = ([-0.66, 0, 0.66], ["negative", "neutral", "positive"])
+    colsize!(fig.layout, 1, Aspect(1, 1.0))
     fig
     label = "categorical_colormap" # hide
     caption = "Categorical Colormap." # hide
@@ -114,6 +117,7 @@ s2color2 = """
         colormap=["red", "black"], axis=axis, figure=figure)
     scatter!(ax, [11], [11], color=("#C0C0C0", 0.5), markersize=150)
     Colorbar(fig[1, 2], pltobj, label="2 colors")
+    colsize!(fig.layout, 1, Aspect(1, 1.0))
     fig
     label = "colormap_two_colors" # hide
     caption = "Colormap from two colors." # hide

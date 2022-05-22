@@ -21,6 +21,7 @@
     "data_vis_makie_colors",
     "data_vis_makie_layouts",
     "data_vis_makie_glmakie",
+    "data_vis_makie_recipe",
     #"stats",
     #"stats_distributions",
     #"stats_vis",

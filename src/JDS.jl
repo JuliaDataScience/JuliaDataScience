@@ -1,6 +1,7 @@
 module JDS
 
 import Pkg
+import Makie
 
 using Reexport: @reexport
 

@@ -1,10 +1,10 @@
 ## A Makie recipe for a DataFrame {#sec:recipe_df}
 
-Unlike other libraries that already support a wide set of input formats via recipes, i.e. `Plots.jl`, in `Makie.jl` most of the time we need to pass the raw data to our functions.
-However, if we want to define our own `recipe` in Makie we could also do it.
+Unlike other libraries that already support a wide set of input formats via recipes, i.e. `Plots.jl`, in `Makie.jl` most of the time we need to pass the raw data to functions.
+However, we can also define our own  `recipe` in  `Makie.jl`.
 As an example we will code a small **full recipe** for a `DataFrame`. Please refer to the [documentation](https://makie.juliaplots.org/stable/documentation/recipes/) for more details.
 
-A Makie `recipe` consist of two parts, a plot `type` name defined via `@recipe` and a custom `plot!`(`Makie.plot!`) which creates the actual plot via plotting functions already defined.
+A Makie `recipe` consist of two parts, a plot `type` name defined via `@recipe` and a custom `plot!(::Makie.plot)` which creates the actual plot via plotting functions already defined.
 
 ```jl
 s = """
@@ -24,7 +24,9 @@ sc(s)
 ```
 
 with this we will have `dfplot` and `dfplot!` conveniently defined for us.
-Now, let's take care of our plot definition. We will do a simple scatter plot.
+This allows us to plot `DataFrame`s which contains columns named, `x`, `y`, `z`.
+Now, let's take care of our plot definition.
+We will do a simple scatter plot:
 
 ```
 import Makie
@@ -45,7 +47,9 @@ s = """
 sc(s)
 ```
 
-Note the extras `[]` at the end of each variable. Those are due to the fact that *recipes* in Makie are dynamic, meaning that our plots will update if our variables change. See [observables](https://makie.juliaplots.org/stable/documentation/nodes/) to know more.
+Note the extras `[]` at the end of each variable.
+Those are due to the fact that *recipes* in Makie are dynamic, meaning that our plots will update if our variables change.
+See [observables](https://makie.juliaplots.org/stable/documentation/nodes/) to know more.
 Now, we apply our new plotting function to the following `DataFrame`:
 
 ```jl
@@ -67,7 +71,7 @@ s = """
 sco(s)
 ```
 
-The named attributes in the recipe allows us to pass custom names to our new plotting function. Namely,
+The named attributes in the recipe allows us to pass custom names to our new plotting function. Namely:
 
 ```jl
 s = """
@@ -76,7 +80,7 @@ s = """
 sc(s)
 ```
 
-and
+and:
 
 ```jl
 s = """

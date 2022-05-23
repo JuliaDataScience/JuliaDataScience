@@ -2,6 +2,10 @@
 
 Unlike other libraries that already support a wide set of input formats via recipes, i.e. `Plots.jl`, in `Makie.jl` most of the time we need to pass the raw data to functions.
 However, we can also define our own  `recipe` in  `Makie.jl`.
+A `recipe` is your own custom plotting type command.
+This extension is done just in `Makie.jl`, which means that making a new set of plotting rules for your own types is light, namely, you don't need the complete plotting machinery available to define them. This is specially useful if you want to include your own plotting commands in one of your own packages.
+However, in order for them to work you will still need to use one of the backends, i.e., GLMakie.
+
 As an example we will code a small **full recipe** for a `DataFrame`. Please refer to the [documentation](https://makie.juliaplots.org/stable/documentation/recipes/) for more details.
 
 A Makie `recipe` consist of two parts, a plot `type` name defined via `@recipe` and a custom `plot!(::Makie.plot)` which creates the actual plot via plotting functions already defined.

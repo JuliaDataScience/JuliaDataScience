@@ -27,7 +27,7 @@ s = """
 sc(s)
 ```
 
-note that here the macro `@recipe` will automatically create for us two new functions, `dfplot` and `dfplot!`, all lowercase from our type `DfPlot`.
+Note that the macro `@recipe` will automatically create two new functions for us, `dfplot` and `dfplot!`, all lowercase from our type `DfPlot`.
 The first one will create a complete new figure whereas the second one will plot into the current axis or an axis of your choosing.
 This allows us to plot `DataFrame`s which contains columns named, `x`, `y`, `z`.
 Now, let's take care of our plot definition.

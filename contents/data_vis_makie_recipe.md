@@ -20,7 +20,9 @@ s = """
             color = :red,
             colormap = :plasma,
             markersize = 20,
-            marker = :rect
+            marker = :rect,
+            colorrange = (0,1),
+            label = "",
         )
     end
     """
@@ -45,7 +47,8 @@ s = """
         y = getproperty(df, p[:y][])
         c = getproperty(df, p[:c][])
         scatter!(p, x, y; color = c, markersize = p[:markersize][],
-            colormap = p[:colormap][], marker = p[:marker][])
+            colormap = p[:colormap][], marker = p[:marker][],
+            colorrange = (minimum(x), maximum(c)), label = p[:label][])
         return p
     end
     """
@@ -67,11 +70,14 @@ sc(s)
 ```jl
 s = """
     CairoMakie.activate!() # hide
-    dfplot(df_recipe)
+    fig, ax, obj = dfplot(df_recipe; label = "test")
+    axislegend()
+    Colorbar(fig[1,2], obj)
+    fig
     label = "dfRecipe" # hide
     caption = "DataFrames recipe." # hide
     link_attributes = "width=60%" # hide
-    Options(current_figure(); filename=label, caption, label, link_attributes) # hide
+    Options(fig; filename=label, caption, label, link_attributes) # hide
     """
 sco(s)
 ```

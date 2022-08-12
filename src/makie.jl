@@ -1,3 +1,10 @@
+const MAKIE_PLOT_TYPES = Union{CairoMakie.Makie.Figure, CairoMakie.Makie.FigureAxisPlot}
+_makie_save(path::String, p) = CairoMakie.FileIO.save(path, p; px_per_unit=3)
+
+Books.is_image(plot::MAKIE_PLOT_TYPES) = true
+Books.svg(svg_path::String, p::MAKIE_PLOT_TYPES) = _makie_save(svg_path, p)
+Books.png(png_path::String, p::MAKIE_PLOT_TYPES) = _makie_save(png_path, p)
+
 function custom_plot()
     CairoMakie.activate!() # hide
     caption = "An example plot with Makie.jl."

@@ -12,6 +12,7 @@ fi
 
 if [ "$1" == "SERVE" ]; then
   docker run -it --rm \
+    -it \
     --env GKSwstype=nul \
     -p 8006:8006 \
     -v "$HOME/.julia-docker":"/root/.julia" \

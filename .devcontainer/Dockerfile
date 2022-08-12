@@ -23,4 +23,4 @@ ENV DISPLAY=:0
 ENV JULIA_NUM_THREADS=2
 
 ENTRYPOINT ["/bin/sh", "-c", "/usr/bin/xvfb-run -s '-screen 0 1024x768x24' $@", ""]
-CMD ["julia"]
+CMD ["julia", "--project"]

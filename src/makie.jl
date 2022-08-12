@@ -478,16 +478,17 @@ end
 function scatters_in_3D()
     GLMakie.activate!() # hide
     seed!(123)
-    xyz = randn(10, 3)
-    x, y, z = xyz[:, 1], xyz[:, 2], xyz[:, 3]
-    fig = Figure(resolution=(1200, 400))
+    n = 10
+    x, y, z = randn(n), randn(n), randn(n)
+    fig = Figure(; resolution=(1200, 400))
     ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), perspectiveness=0.5)
     ax2 = Axis3(fig[1, 2]; aspect=(1, 1, 1), perspectiveness=0.5)
     ax3 = Axis3(fig[1, 3]; aspect=:data, perspectiveness=0.5)
     scatter!(ax1, x, y, z; markersize=15)
     meshscatter!(ax2, x, y, z; markersize=0.25)
     hm = meshscatter!(ax3, x, y, z; markersize=0.25,
-        marker=Rect3f(Vec3f(0), Vec3f(1)))
+        marker=Rect3f(Vec3f(0), Vec3f(1)), color=1:n,
+        colormap=:plasma, transparency=false)
     Colorbar(fig[1, 4], hm, label="values", height=Relative(0.5))
     fig
 end
@@ -495,16 +496,16 @@ end
 function lines_in_3D()
     GLMakie.activate!() # hide
     seed!(123)
-    xyz = randn(10, 3)
-    x, y, z = xyz[:, 1], xyz[:, 2], xyz[:, 3]
-    fig = Figure(resolution=(1200, 500))
+    n = 10
+    x, y, z = randn(n), randn(n), randn(n)
+    fig = Figure(; resolution=(1200, 500))
     ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), perspectiveness=0.5)
     ax2 = Axis3(fig[1, 2]; aspect=(1, 1, 1), perspectiveness=0.5)
     ax3 = Axis3(fig[1, 3]; aspect=:data, perspectiveness=0.5)
-    lines!(ax1, x, y, z; color=1:size(xyz)[2], linewidth=3)
+    lines!(ax1, x, y, z; color=2, linewidth=3)
     scatterlines!(ax2, x, y, z; markersize=15)
-    hm = meshscatter!(ax3, x, y, z; markersize=0.2, color=1:size(xyz,2))
-    lines!(ax3, x, y, z; color=1:size(xyz,2))
+    hm = meshscatter!(ax3, x, y, z; markersize=0.2, color=1:n)
+    lines!(ax3, x, y, z; color=1:n)
     Colorbar(fig[2, 1], hm; label="values", height=15, vertical=false,
         flipaxis=false, ticksize=15, tickalign=1, width=Relative(3.55 / 4))
     fig

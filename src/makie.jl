@@ -1,5 +1,12 @@
-const MAKIE_PLOT_TYPES = Union{CairoMakie.Makie.Figure, CairoMakie.Makie.FigureAxisPlot}
-_makie_save(path::String, p) = CairoMakie.FileIO.save(path, p; px_per_unit=3)
+const MAKIE_PLOT_TYPES = Union{Figure, Makie.FigureAxisPlot}
+function _makie_save(path::String, p)
+    try
+        # SVG doesn't work with GLMakie.
+        FileIO.save(path, p; px_per_unit=3)
+    catch
+        @warn "Couldn't save $path"
+    end
+end
 
 Books.is_image(plot::MAKIE_PLOT_TYPES) = true
 Books.svg(svg_path::String, p::MAKIE_PLOT_TYPES) = _makie_save(svg_path, p)
@@ -502,7 +509,7 @@ function lines_in_3D()
     ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), perspectiveness=0.5)
     ax2 = Axis3(fig[1, 2]; aspect=(1, 1, 1), perspectiveness=0.5)
     ax3 = Axis3(fig[1, 3]; aspect=:data, perspectiveness=0.5)
-    lines!(ax1, x, y, z; color=2, linewidth=3)
+    lines!(ax1, x, y, z; color=1:n, linewidth=3)
     scatterlines!(ax2, x, y, z; markersize=15)
     hm = meshscatter!(ax3, x, y, z; markersize=0.2, color=1:n)
     lines!(ax3, x, y, z; color=1:n)

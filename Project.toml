@@ -1,7 +1,6 @@
 name = "JDS"
 uuid = "6c596d62-2771-44f8-8373-3ec4b616ee9d"
 authors = ["Jose Storopoli", "Rik Huijzer", "Lazaro Alonso"]
-version = "0.1.0"
 
 [deps]
 Books = "939d5c6b-51ae-42e7-97ca-7564d0d4ad91"

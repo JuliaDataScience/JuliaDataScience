@@ -487,8 +487,7 @@ function scatters_in_3D()
     scatter!(ax1, x, y, z; markersize=15)
     meshscatter!(ax2, x, y, z; markersize=0.25)
     hm = meshscatter!(ax3, x, y, z; markersize=0.25,
-        marker=Rect3f(Vec3f(0), Vec3f(1)), color=1:size(xyz,2),
-        colormap=:plasma, transparency=false)
+        marker=Rect3f(Vec3f(0), Vec3f(1)))
     Colorbar(fig[1, 4], hm, label="values", height=Relative(0.5))
     fig
 end

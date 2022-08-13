@@ -6,7 +6,7 @@ function _makie_save(path::String, p)
         FileIO.save(path, p; px_per_unit=3)
     catch
         # Explicit rm due to https://github.com/JuliaIO/FileIO.jl/issues/338.
-        rm(png_path; force=true)
+        rm(path; force=true)
     end
 end
 

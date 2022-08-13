@@ -1,5 +1,6 @@
 module JDS
 
+import Books
 import Pkg
 import Makie
 

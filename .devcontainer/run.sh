@@ -13,12 +13,14 @@ fi
 if [ "$1" == "SERVE" ]; then
   docker run -it --rm \
     --env GKSwstype=nul \
+    --cpus 2 \
     -p 8006:8006 \
     -v "$HOME/.julia-docker":"/root/.julia" \
     -v "$PWD":/app -w /app jds
 else
   docker run -it --rm \
     --env GKSwstype=nul \
+    --cpus 2 \
     -v "$HOME/.julia-docker":"/root/.julia" \
     -v "$PWD":/app -w /app jds
 fi

@@ -1,11 +1,12 @@
 const MAKIE_PLOT_TYPES = Union{Figure, Makie.FigureAxisPlot}
 function _makie_save(path::String, p)
     try
-        # SVG doesn't work with GLMakie.
-        # Doesn't matter since Books.jl will only show SVG if it is available.
-        # Otherwise, it will show the PNG (HTML).
+        # SVG will fail with GLMakie.
+        # It doesn't matter since Books.jl will only use SVG if available, otherwise PNG.
         FileIO.save(path, p; px_per_unit=3)
     catch
+        # Explicit rm due to https://github.com/JuliaIO/FileIO.jl/issues/338.
+        rm(png_path; force=true)
     end
 end
 

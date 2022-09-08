@@ -30,19 +30,13 @@ Our target audience are researchers from all fields of applied sciences.
 Of course, we hope to be useful for industry too.
 You can navigate through the pages of the ebook by using the arrow keys (left/right) on your keyboard.
 
-```{=html}
-<script defer type="text/javascript"
-    src="https://api.pirsch.io/pirsch-events.js" id="pirscheventsjs"
-    data-code="eB2Isj56H4g6ndupKwaKyHau7lCkTsVV">
-</script>
-```
-The book is also available as [**PDF**](/juliadatascience.pdf){target="_blank" onclick="pirsch('Click on PDF link')"}.
+The book is also available as [**PDF**](/juliadatascience.pdf).
 
-The source code is available at [GitHub](https://github.com/JuliaDataScience/JuliaDataScience){onclick="pirsch('Click on GitHub link')"}.
+The source code is available at [GitHub](https://github.com/JuliaDataScience/JuliaDataScience).
 
-The book is published at [Amazon.com](https://www.amazon.com/dp/B09KMRKQ96/){onclick="pirsch('Click on Amazon.com link')"},
-[Amazon.de](https://www.amazon.de/dp/B09KMRKQ96){onclick="pirsch('Click on Amazon.de link')"},
-[Amazon.co.uk](https://www.amazon.co.uk/dp/B09KMRKQ96){onclick="pirsch('Click on Amazon.co.uk link')"}
+The book is published at [Amazon.com](https://www.amazon.com/dp/B09KMRKQ96/),
+[Amazon.de](https://www.amazon.de/dp/B09KMRKQ96),
+[Amazon.co.uk](https://www.amazon.co.uk/dp/B09KMRKQ96),
 and many more Amazon stores.
 
 ### Citation Info {-}

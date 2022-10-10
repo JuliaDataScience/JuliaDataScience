@@ -57,7 +57,7 @@ s = """
     CairoMakie.activate!() # hide
     figure = (; resolution=(600, 400), font="CMU Serif")
     axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
-    fig, ax, pltobj=heatmap(randn(20, 20); colorrange=(-2, 2),
+    fig, ax, pltobj = heatmap(randn(20, 20); colorrange=(-2, 2),
         colormap="diverging_rainbow_bgymr_45_85_c67_n256",
         highclip=:black, lowclip=:white, axis=axis, figure=figure)
     Colorbar(fig[1, 2], pltobj, label = "Diverging colormap")

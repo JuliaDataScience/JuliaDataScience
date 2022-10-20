@@ -679,7 +679,7 @@ For example, we can create a function that adds 1 to each element in a vector `V
 ```jl
 s = """
     function add_one!(V)
-        for i in 1:length(V)
+        for i in eachindex(V)
             V[i] += 1
         end
         return nothing

@@ -143,7 +143,7 @@ s = """
     values(code) = filter(row -> levelcode.(row.name) == code, df).grade
     fig = Figure(; resolution=(600, 400))
     ax = Axis(fig[1, 1]; yticks = (1:4, categories), limits=((-1, 11), nothing))
-    for i in 1:length(categories)
+    for i in 1:eachindex(categories)
         density!(ax, values(i); offset=i)
     end
     Options(current_figure(); filename=label, caption, label) # hide
@@ -166,10 +166,10 @@ s = """
     fig = Figure(; resolution=(600, 400))
     ax1 = Axis(fig[1, 1]; yticks = (1:4, categories), limits=((-1, 11), nothing))
     ax2 = Axis(fig[1, 2]; yticks = (1:4, categories), limits=((-1, 11), nothing))
-    for i in 1:length(categories)
+    for i in 1:eachindex(categories)
         density!(ax1, values(i); offset=i, color=(:dodgerblue, 0.5))
     end
-    for i in 1:length(categories)
+    for i in 1:eachindex(categories)
         density!(ax2, values(i); offset=i, color=:x, colormap=:viridis)
     end
     Options(current_figure(); filename=label, caption, label) # hide

@@ -5,7 +5,16 @@ author:
   - Jose Storopoli
   - Rik Huijzer
   - Lazaro Alonso
-html-license: '<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>'
+html-license: >-
+  <span style="display: flex; justify-content: center;">
+    <a style="display: flex; align-items: center"
+      href="https://opencollective.com/juliadatascience" target="_blank">
+      <img src="/images/coffee.png" height="18px" style="margin-top:2px; display:inline">
+      <span style="margin-left: 4px;">Support this project</span>
+    </a>
+  </span>
+  <br>
+  <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
 pdf-footer: ""
 tex-license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 lang: en-US

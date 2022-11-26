@@ -49,6 +49,19 @@ In the rest of this chapter, we will show you how you can easily answer these qu
 To do so, we first show why we need a Julia package called `DataFrames.jl`.
 In the next sections, we show how you can use this package and, finally, we show how to write fast data transformations (@sec:df_performance).
 
+> **_NOTE:_**
+> `DataFrames.jl` has some [guiding principles](https://bkamins.github.io/julialang/2021/05/14/nrow.html).
+> Notably, we would like to highlight two principles:
+>
+> 1. Stay **consistent with Julia's `Base`** module functions.
+> 1. **Minimize the number of functions** `DataFrames.jl` provides.
+>
+> Those two principles are really powerful because if you have a good grasp of Julia's basic functions
+> (those defined in the Julia's `Base` module, such as `filter`)
+> you can do powerful operations on tabular data without having to learn a domain-specific language.
+>
+> That is not the case with Python's `pandas` or R's `dplyr`.
+
 ```{=comment}
 TODO: Add a comparison with Excel to see where Julia is better.
 In summary, because it is much easier to structure and reproduce the logic.

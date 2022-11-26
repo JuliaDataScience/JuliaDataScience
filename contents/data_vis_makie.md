@@ -5,7 +5,7 @@
 >
 > _Simon Danisch, Creator of `Makie.jl`_
 
-[`Makie.jl`](http://makie.juliaplots.org/stable/index.html) is a high-performance, extendable, and multi-platform plotting ecosystem for the Julia programming language.
+[`Makie.jl`](https://docs.makie.org/stable/) is a high-performance, extendable, and multi-platform plotting ecosystem for the Julia programming language.
 In our opinion, it is the prettiest, most versatile, and most powerful plotting package.
 
 > **_NOTE:_**

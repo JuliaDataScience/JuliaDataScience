@@ -5,8 +5,19 @@
 >
 > _Simon Danisch, Creator of `Makie.jl`_
 
-[Makie.jl](http://makie.juliaplots.org/stable/index.html) is a high-performance, extendable, and multi-platform plotting ecosystem for the Julia programming language.
-In our opinion, it is the prettiest and most versatile plotting package.
+[`Makie.jl`](http://makie.juliaplots.org/stable/index.html) is a high-performance, extendable, and multi-platform plotting ecosystem for the Julia programming language.
+In our opinion, it is the prettiest, most versatile, and most powerful plotting package.
+
+> **_NOTE:_**
+> There are other plotting packages in the Julia ecosystem.
+> One of the most popular is [`Plots.jl`](https://docs.juliaplots.org/stable/).
+> We believe that the future of the Julia plotting tooling is in `Makie.jl` ecosystem,
+> due to the native Julia codebase and official support from [JuliaHub](https://juliahub.com).
+> Therefore, we'll focus all of our data visualization in the `Makie.jl` ecosystem.
+
+`Makie.jl` deals with arrays (@sec:array), such as vector and matrices.
+This makes `Makie.jl` capable of dealing with any tabular data,
+especially `DataFrames` as we covered in @sec:dataframes.
 
 Like many plotting packages, the code is split into multiple packages.
 `Makie.jl` is the front end package that defines all plotting functions required to create plot objects.

@@ -13,7 +13,7 @@ In our opinion, it is the prettiest, most versatile, and most powerful plotting 
 > One of the most popular ones is [`Plots.jl`](https://docs.juliaplots.org/stable/).
 > We believe that the future of the Julia plotting tooling is in the `Makie.jl` ecosystem,
 > due to the native Julia codebase and official support from [JuliaHub](https://juliahub.com).
-> Therefore, we'll focus all of our data visualization in the `Makie.jl` ecosystem.
+> Therefore, this is where we'll focus all of our data visualization efforts.
 
 `Makie.jl` deals with arrays (@sec:array), such as vector and matrices.
 This makes `Makie.jl` capable of dealing with any tabular data,

@@ -8,7 +8,7 @@ To answer this question, we will address two common backgrounds:
 
 1. **Did not program before** -- see @sec:non-programmers.
 
-2. **Did program before** -- see @sec:programmers.
+1. **Did program before** -- see @sec:programmers.
 
 ## For Non-Programmers {#sec:non-programmers}
 
@@ -49,20 +49,20 @@ Well, let us contemplate some plausible scenarios.
 Well, **in Julia, Python or R minutes can be translated to seconds**^[and sometimes milliseconds.].
 We reserved @sec:julia_wild for displaying successful Julia use cases in both academia and industry.
 
-2. Tried to do something different from `numpy`/`dplyr` conventions and discovered that your code is slow and you'll probably have to learn dark magic^[`numba`, or even `Rcpp` or `cython`?] to make it faster?
+1. Tried to do something different from `numpy`/`dplyr` conventions and discovered that your code is slow and you'll probably have to learn dark magic^[`numba`, or even `Rcpp` or `cython`?] to make it faster?
 **In Julia you can do your custom different stuff without loss of performance**.
 
-3. Had to debug code and somehow you see yourself reading Fortran or C/C++ source code and having no idea what you are trying to accomplish?
+1. Had to debug code and somehow you see yourself reading Fortran or C/C++ source code and having no idea what you are trying to accomplish?
 **In Julia you only read Julia code, no need to learn another language to make your original language fast**.
 This is called the "two-language problem" (see @sec:two_language).
 It also covers the use case for when "you had an interesting idea and wanted to contribute to an open source package and gave up because almost everything is not in Python or R but in C/C++ or Fortran"^[have a look at some deep learning libraries in GitHub and you'll be surprised that Python is only 25%-33% of the codebase.].
 
-4. Wanted to use a data structure defined in another package and found that doesn't work and that you'll probably need to build an interface^[this is mostly a Python ecosystem problem, and while R doesn't suffer heavily from this, it's not blue skies either.].
+1. Wanted to use a data structure defined in another package and found that doesn't work and that you'll probably need to build an interface^[this is mostly a Python ecosystem problem, and while R doesn't suffer heavily from this, it's not blue skies either.].
 **Julia allows users to easily share and reuse code from different packages.**
 Most of Julia user-defined types and functions work right out of the box^[or with little effort necessary.] and some users marvelled upon discovering how their packages are being used by other libraries in ways that they could not have imagined.
 We have some examples in @sec:multiple_dispatch.
 
-5. Needed to have a better project management, with dependencies and version control tightly controlled, manageable, and replicable?
+1. Needed to have a better project management, with dependencies and version control tightly controlled, manageable, and replicable?
 **Julia has an amazing project management solution and a great package manager**.
 Unlike traditional package managers, which install and manage a single global set of packages, Julia's package manager is designed around "environments":
 independent sets of packages that can be local to an individual project or shared between projects.
@@ -418,16 +418,16 @@ We showed simple examples about the main features of Julia.
 If you would like to have a deep dive on how Julia is being used, we have some **interesting use cases**:
 
 1. NASA uses Julia in a supercomputer to analyze the ["Largest Batch of Earth-Sized Planets Ever Found"](https://exoplanets.nasa.gov/news/1669/seven-rocky-trappist-1-planets-may-be-made-of-similar-stuff/) and achieve a whopping **1,000x speedup** to catalog 188 million astronomical objects in 15 minutes.
-2. [The Climate Modeling Alliance (CliMa)](https://clima.caltech.edu/) is using mostly Julia to **model climate in the GPU and CPU**.
+1. [The Climate Modeling Alliance (CliMa)](https://clima.caltech.edu/) is using mostly Julia to **model climate in the GPU and CPU**.
 Launched in 2018 in collaboration with researchers at Caltech, the NASA Jet Propulsion Laboratory, and the Naval Postgraduate School, CliMA is utilizing recent progress in computational science to develop an Earth system model that can predict droughts, heat waves, and rainfall with unprecedented precision and speed.
-3. [US Federal Aviation Administration (FAA) is developing an **Airborne Collision Avoidance System (ACAS-X)** using Julia](https://youtu.be/19zm1Fn0S9M).
+1. [US Federal Aviation Administration (FAA) is developing an **Airborne Collision Avoidance System (ACAS-X)** using Julia](https://youtu.be/19zm1Fn0S9M).
 This is a nice example of the "Two-Language Problem" (see @sec:julia_accomplish).
 Previous solutions used Matlab to develop the algorithms and C++ for a fast implementation.
 Now, FAA is using one language to do all this: Julia.
-4. [**175x speedup** for Pfizer's pharmacology models using GPUs in Julia](https://juliahub.com/case-studies/pfizer/).
+1. [**175x speedup** for Pfizer's pharmacology models using GPUs in Julia](https://juliahub.com/case-studies/pfizer/).
 It was presented as a [poster](https://chrisrackauckas.com/assets/Posters/ACoP11_Poster_Abstracts_2020.pdf) in the 11th American Conference of Pharmacometrics (ACoP11) and [won a quality award](https://web.archive.org/web/20210121164011/https://www.go-acop.org/abstract-awards).
-5. [The Attitude and Orbit Control Subsystem (AOCS) of the Brazilian satellite Amazonia-1 is **written 100% in Julia**](https://discourse.julialang.org/t/julia-and-the-satellite-amazonia-1/57541) by Ronan Arraes Jardim Chagas (<https://ronanarraes.com/>).
-6. [Brazil's national development bank (BNDES) ditched a paid solution and opted for open-source Julia modeling and gained a **10x speedup**.](https://youtu.be/NY0HcGqHj3g)
+1. [The Attitude and Orbit Control Subsystem (AOCS) of the Brazilian satellite Amazonia-1 is **written 100% in Julia**](https://discourse.julialang.org/t/julia-and-the-satellite-amazonia-1/57541) by Ronan Arraes Jardim Chagas (<https://ronanarraes.com/>).
+1. [Brazil's national development bank (BNDES) ditched a paid solution and opted for open-source Julia modeling and gained a **10x speedup**.](https://youtu.be/NY0HcGqHj3g)
 
 If this is not enough, there are more case studies in [JuliaHub website](https://juliahub.com/case-studies/).
 

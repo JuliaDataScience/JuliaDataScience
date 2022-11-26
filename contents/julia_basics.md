@@ -456,7 +456,7 @@ In that case, we can do two things:
    scob(s)
    ```
 
-2. Or we can define just one variable to hold the function's return values and access them with either `first` or `last`:
+1. Or we can define just one variable to hold the function's return values and access them with either `first` or `last`:
 
    ```jl
    s = """
@@ -835,7 +835,7 @@ scob(s)
        scob("""endswith(julia_string, "Julia")""")
        ```
 
-2. `lowercase`, `uppercase`, `titlecase` and `lowercasefirst`:
+1. `lowercase`, `uppercase`, `titlecase` and `lowercasefirst`:
 
      ```jl
      scob("lowercase(julia_string)")
@@ -853,13 +853,13 @@ scob(s)
      scob("lowercasefirst(julia_string)")
      ```
 
-3. `replace`: introduces a new syntax, called the `Pair`
+1. `replace`: introduces a new syntax, called the `Pair`
 
      ```jl
      scob("""replace(julia_string, "amazing" => "awesome")""")
      ```
 
-4. `split`: breaks up a string by a delimiter:
+1. `split`: breaks up a string by a delimiter:
 
      ```jl
      sco("""split(julia_string, " ")""")
@@ -1915,7 +1915,7 @@ using Dates
 The `Dates` standard library module has **two types for working with dates**:
 
 1. `Date`: representing time in days and
-2. `DateTime`: representing time in millisecond precision.
+1. `DateTime`: representing time in millisecond precision.
 
 We can construct `Date` and `DateTime` with the default constructor either by specifying an integer to represent year, month, day, hours and so on:
 

@@ -10,21 +10,34 @@ First, let's create a dataset with multiple columns:
 
 Here, the data represents answers for five questions (`q1`, `q2`, ..., `q5`) in a given questionnaire.
 We will start by "selecting" a few columns from this dataset.
-As usual, we use symbols to specify columns:
+As usual, we use **symbols** to specify columns:
 
 ```jl
 s = "select(responses(), :id, :q1)"
 sco(s, process=without_caption_label)
 ```
 
-We can also use strings if we want:
+We can also use **strings** if we want:
 
 ```jl
 s = """select(responses(), "id", "q1", "q2")"""
 sco(s, process=without_caption_label)
 ```
 
-To select everything _except_ one or more columns, use `Not` with either a single column:
+Additionally, we can use **Regular Expressions** with [Julia's regex string literal](https://docs.julialang.org/en/v1/manual/strings/#man-regex-literals).
+A string literal in Julia is just a prefix you use in a `String` constructor with `""`.
+The regex string literal can be created with `r"..."` where `...` is the Regular Expression.
+For example, suppose you only want to select the columns that start with `q`:
+
+```jl
+s = """select(responses(), r"^q")"""
+sco(s, process=without_caption_label)
+```
+
+> **_NOTE:_**
+We won't cover regular expressions in this book, but you are encouraged to learn about them.
+
+To select **everything _except_ one or more columns**, use **`Not`** with either a single column:
 
 ```jl
 s = """select(responses(), Not(:q5))"""
@@ -70,13 +83,12 @@ sco(s, process=without_caption_label)
 >
 > We can use:
 >
-> * `Symbol`: `select(df, :col)`
->
-> * `String`: `select(df, "col")`
->
-> * `Integer`: `select(df, 1)`
+> * **`Symbol`**: `select(df, :col)`
+> * **`String`**: `select(df, "col")`
+> * **`Integer`**: `select(df, 1)`
+> * **`RegEx`**: `select(df, r"RegEx")`
 
-Even renaming columns is possible via `select` using the `source => target` pair syntax:
+Even renaming columns is possible via `select` using the **`source => target`** pair syntax:
 
 ```jl
 s = """select(responses(), 1 => "participant", :q1 => "age", :q2 => "nationality")"""

@@ -51,7 +51,7 @@ In the next sections, we show how you can use this package and, finally, we show
 
 > **_NOTE:_**
 > `DataFrames.jl` has some [guiding principles](https://bkamins.github.io/julialang/2021/05/14/nrow.html).
-> Notably, we would like to highlight two principles:
+> Notably, we would like to highlight two of them:
 >
 > 1. Stay **consistent with Julia's `Base`** module functions.
 > 1. **Minimize the number of functions** `DataFrames.jl` provides.

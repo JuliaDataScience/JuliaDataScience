@@ -10,8 +10,8 @@ In our opinion, it is the prettiest, most versatile, and most powerful plotting 
 
 > **_NOTE:_**
 > There are other plotting packages in the Julia ecosystem.
-> One of the most popular is [`Plots.jl`](https://docs.juliaplots.org/stable/).
-> We believe that the future of the Julia plotting tooling is in `Makie.jl` ecosystem,
+> One of the most popular ones is [`Plots.jl`](https://docs.juliaplots.org/stable/).
+> We believe that the future of the Julia plotting tooling is in the `Makie.jl` ecosystem,
 > due to the native Julia codebase and official support from [JuliaHub](https://juliahub.com).
 > Therefore, we'll focus all of our data visualization in the `Makie.jl` ecosystem.
 

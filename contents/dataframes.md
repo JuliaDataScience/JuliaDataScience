@@ -56,11 +56,9 @@ In the next sections, we show how you can use this package and, finally, we show
 > 1. Stay **consistent with Julia's `Base`** module functions.
 > 1. **Minimize the number of functions** `DataFrames.jl` provides.
 >
-> Those two principles are really powerful because if you have a good grasp of Julia's basic functions
-> (those defined in the Julia's `Base` module, such as `filter`)
-> you can do powerful operations on tabular data without having to learn a domain-specific language.
+> Those two principles are really powerful because if you have a good grasp of Julia's basic functions, such as `filter`, then you can do powerful operations on tabular data.
 >
-> That is not the case with Python's `pandas` or R's `dplyr`.
+> This is a benefit over Python's `pandas` or R's `dplyr` which differ more from the core languages.
 
 ```{=comment}
 TODO: Add a comparison with Excel to see where Julia is better.

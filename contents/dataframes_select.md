@@ -25,8 +25,8 @@ sco(s, process=without_caption_label)
 ```
 
 Additionally, we can use **Regular Expressions** with [Julia's regex string literal](https://docs.julialang.org/en/v1/manual/strings/#man-regex-literals).
-A string literal in Julia is just a prefix you use in a `String` constructor with `""`.
-The regex string literal can be created with `r"..."` where `...` is the Regular Expression.
+A string literal in Julia is a prefix that you use while constructing a `String`.
+For example, the regex string literal can be created with `r"..."` where `...` is the Regular Expression.
 For example, suppose you only want to select the columns that start with `q`:
 
 ```jl

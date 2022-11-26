@@ -24,9 +24,9 @@ Instead, we will provide you with some pointers to various solutions.
 
 The simplest way is to use the Julia REPL.
 This means starting the Julia executable (`julia` or `julia.exe`) and running code there.
-For example, we can start the REPL and execute some code:
+For example, we can start the Julia REPL and execute some code:
 
-```julia
+```julia-repl
 julia> x = 2
 2
 
@@ -38,14 +38,14 @@ This works all very well, but what if we want to save the code that we wrote?
 To save our code, one can write ".jl" files such as "script.jl" and load these into Julia.
 Say, that "script.jl" contains:
 
-```
+```julia
 x = 3
 y = 4
 ```
 
 We can load this into Julia:
 
-```julia
+```julia-repl
 julia> include("script.jl")
 
 julia> y
@@ -158,7 +158,7 @@ sco("typeof(age)")
 The next question then becomes:
 "What else can I do with integers?"
 There is a nice handy function `methodswith` that spits out every function available, along with its signature, for a certain type.
-Here, I will restrict the output to the first 5 rows:
+Here, we will restrict the output to the first 5 rows:
 
 ```jl
 s = """
@@ -1322,7 +1322,7 @@ Sometimes, we want to inspect only certain parts of an array.
 This is called **indexing** and **slicing**.
 If you want a particular observation of a vector, or a row or column of a matrix, you'll probably need to **index an array**.
 
-First, I will create an example vector and matrix to play around:
+First, we will create an example vector and matrix to play around:
 
 ```jl
 s = """
@@ -2321,7 +2321,7 @@ sco("rand(my_seed, 3)")
 
 ### Downloads {#sec:downloads}
 
-One last thing from Julia's standard library for us to cover is the **`Downloads` module**.
+We'll also cover the standard library's **`Downloads` module**.
 It will be really brief because we will only be covering a single function named `download`.
 
 Suppose you want to **download a file from the internet to your local storage**.
@@ -2360,3 +2360,260 @@ sco(s; process=catch_show)
 
 > **_NOTE:_**
 > For more complex HTTP interactions such as interacting with web APIs, see the [`HTTP.jl` package](https://github.com/JuliaWeb/HTTP.jl).
+
+### Project Management {#sec:project_management}
+
+One last thing from Julia's standard library for us to cover is the **`Pkg` module**.
+As described in @sec:programmers,
+Julia offers a **native project management solution**,
+with dependencies and version control tightly controlled, manageable, and replicable.
+
+Unlike traditional package managers,
+which install and manage a single global set of packages,
+Julia's package manager is designed around "environments":
+independent sets of packages that can be local to an individual project or shared between projects.
+Each project maintains its own independent set of package versions.
+
+#### `Project.toml` and `Manifest.toml` {#sec:project_management_toml}
+
+Inside every project environment there is a simple setup involving [`.toml`](https://toml.io) files in a folder.
+The folder, in this context, can be perceived as a "project" folder.
+The project environment is derived on two `.toml` files:
+
+- **`Project.toml`**: _higher_-level description of the project environment with the package list.
+- **`Manifest.toml`**: _lower_-level description of the project environment with the dependencies list and versions.
+This file is machine-generated, which means that users are not encouraged to edit it.
+
+#### Creating Project Environments {#sec:project_management_creating}
+
+In order to create a new project environment,
+you'll simply **enter the `Pkg` REPL mode by typing `]` (right-bracket) in the Julia REPL**:
+
+```julia-repl
+julia>]
+```
+
+Then it becomes the **`Pkg` REPL mode**:
+
+```julia-repl
+(@v1.8) pkg>
+```
+
+Here we can see that the REPL prompts changes from `julia>` to `pkg>`.
+There's also additional information inside the parentheses regarding which project enviroment is currently active,
+`(@v1.8)`.
+The `v1.8` project environment is the default environment for your currently Julia installation
+(which in our case is Julia version `1.8.X`).
+
+> **_NOTE:_**
+> You can see a list of available commands in the `Pkg` REPL mode with the **`help` command**.
+
+Julia has separate default environments for each minor release, the `X`s in the `1.X` Julia version.
+Anything that we perform in this default environment will impact any fresh Julia session on that version.
+Hence, we need to create a new environment by using the **`activate` command**:
+
+```julia-repl
+(@v1.8) pkg> activate .
+  Activating project at `~/user/folder`
+
+(folder) pkg> 
+```
+
+This activates a project environment in the directory that your Julia REPL is running.
+In my case this is located at `~/user/folder`.
+Now we can start adding packages to our project environment with the **`add` command** in the `Pkg` REPL mode:
+
+```julia-repl
+(folder) pkg> add DataFrames
+    Updating registry at `~/.julia/registries/General.toml`
+   Resolving package versions...
+    Updating `~/user/folder/Project.toml`
+  [a93c6f00] + DataFrames v1.4.3
+    Updating `~/user/folder/Manifest.toml`
+  [34da2185] + Compat v4.4.0
+  [a8cc5b0e] + Crayons v4.1.1
+  [9a962f9c] + DataAPI v1.13.0
+  [a93c6f00] + DataFrames v1.4.3
+  [864edb3b] + DataStructures v0.18.13
+  [e2d170a0] + DataValueInterfaces v1.0.0
+  [59287772] + Formatting v0.4.2
+  [41ab1584] + InvertedIndices v1.1.0
+  [82899510] + IteratorInterfaceExtensions v1.0.0
+  [b964fa9f] + LaTeXStrings v1.3.0
+  [e1d29d7a] + Missings v1.0.2
+  [bac558e1] + OrderedCollections v1.4.1
+  [2dfb63ee] + PooledArrays v1.4.2
+  [08abe8d2] + PrettyTables v2.2.1
+  [189a3867] + Reexport v1.2.2
+  [66db9d55] + SnoopPrecompile v1.0.1
+  [a2af1166] + SortingAlgorithms v1.1.0
+  [892a3eda] + StringManipulation v0.3.0
+  [3783bdb8] + TableTraits v1.0.1
+  [bd369af6] + Tables v1.10.0
+  [56f22d72] + Artifacts
+  [2a0f44e3] + Base64
+  [ade2ca70] + Dates
+  [9fa8497b] + Future
+  [b77e0a4c] + InteractiveUtils
+  [8f399da3] + Libdl
+  [37e2e46d] + LinearAlgebra
+  [56ddb016] + Logging
+  [d6f4376e] + Markdown
+  [de0858da] + Printf
+  [3fa0cd96] + REPL
+  [9a3f8284] + Random
+  [ea8e919c] + SHA v0.7.0
+  [9e88b42a] + Serialization
+  [6462fe0b] + Sockets
+  [2f01184e] + SparseArrays
+  [10745b16] + Statistics
+  [8dfed614] + Test
+  [cf7118a7] + UUIDs
+  [4ec0a83e] + Unicode
+  [e66e0078] + CompilerSupportLibraries_jll v0.5.2+0
+  [4536629a] + OpenBLAS_jll v0.3.20+0
+  [8e850b90] + libblastrampoline_jll v5.1.1+0
+```
+
+From the `add` output we can see that Julia automatically creates _both_ the `Project.toml` and `Manifest.toml` files.
+In the `Project.toml` it adds a new package to the proejct environment package list.
+Here are the contents of the `Project.toml`:
+
+```toml
+[deps]
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+```
+
+This is a `.toml` file where:
+
+- `[deps]`: a TOML table (also know as _hash tables_ or _dictionaries_)
+- `DataFrames`: a key in the TOML `deps` table; this is the name of the package
+- `"a93c6f00-e57d-5684-b7b6-d8193f3e46c0"`: the value for the `DataFrames` key; this is the [universally unique identifier (UUID)](https://en.wikipedia.org/wiki/Universally_unique_identifier) of the package.
+
+Let's also take a peek into the `Manifest.toml`.
+Here we will truncate the output since it is a big machine-generated file:
+
+```toml
+# This file is machine-generated - editing it directly is not advised
+
+julia_version = "1.8.3"
+manifest_format = "2.0"
+project_hash = "376d427149ea94494cc22001edd58d53c9b2bee1"
+
+[[deps.Artifacts]]
+uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
+
+...
+
+[[deps.DataFrames]]
+deps = ["Compat", "DataAPI", "Future", "InvertedIndices", "IteratorInterfaceExtensions", "LinearAlgebra", "Markdown", "Missings", "PooledArrays", "PrettyTables", "Printf", "REPL", "Random", "Reexport", "SnoopPrecompile", "SortingAlgorithms", "Statistics", "TableTraits", "Tables", "Unicode"]
+git-tree-sha1 = "0f44494fe4271cc966ac4fea524111bef63ba86c"
+uuid = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+version = "1.4.3"
+
+...
+
+[[deps.libblastrampoline_jll]]
+deps = ["Artifacts", "Libdl", "OpenBLAS_jll"]
+uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
+version = "5.1.1+0"
+```
+
+The three dots above (`...`) represents truncated output.
+First, the `Manifest.toml` presents us a comment saying that it is machine-generated and discouragin editing it directly.
+Then, there are entries for the Julia version (`julia_version`), `Manifest.toml` format version (`manifest_format`),
+and project environment hash (`project_hash`).
+Finally, it proceeds with a TOML array of tables which are the double brackets entries (`[[...]]`).
+These entries stands for the dependencies of all packages necessary to create the environment described in the `Project.toml`.
+Therefore all of the `DataFrames.jl`'s dependencies and its dependencies' dependencies (and so on...) are listed here with their name, UUID, and version.
+
+> **_NOTE:_**
+> Julia's standard library module do not have a `version` key in the `Manifest.toml`
+> because they are already specified by the Julia version (`julia_version`).
+> This is the case for the `Artifacts` entry in the truncated `Manifest.toml` output above,
+> since it is a module in Julia's standard library.
+
+We can keep adding as many packages as we like with the `add` command.
+To remove a package you can use the **`rm` command** in the `Pkg` REPL mode:
+
+```julia-repl
+(folder) pkg> rm DataFrames
+    Updating `~/user/folder/Project.toml`
+  [a93c6f00] - DataFrames v1.4.3
+    Updating `~/user/folder/Manifest.toml`
+  [34da2185] - Compat v4.4.0
+  [a8cc5b0e] - Crayons v4.1.1
+  [9a962f9c] - DataAPI v1.13.0
+  [a93c6f00] - DataFrames v1.4.3
+  [864edb3b] - DataStructures v0.18.13
+  [e2d170a0] - DataValueInterfaces v1.0.0
+  [59287772] - Formatting v0.4.2
+  [41ab1584] - InvertedIndices v1.1.0
+  [82899510] - IteratorInterfaceExtensions v1.0.0
+  [b964fa9f] - LaTeXStrings v1.3.0
+  [e1d29d7a] - Missings v1.0.2
+  [bac558e1] - OrderedCollections v1.4.1
+  [2dfb63ee] - PooledArrays v1.4.2
+  [08abe8d2] - PrettyTables v2.2.1
+  [189a3867] - Reexport v1.2.2
+  [66db9d55] - SnoopPrecompile v1.0.1
+  [a2af1166] - SortingAlgorithms v1.1.0
+  [892a3eda] - StringManipulation v0.3.0
+  [3783bdb8] - TableTraits v1.0.1
+  [bd369af6] - Tables v1.10.0
+  [56f22d72] - Artifacts
+  [2a0f44e3] - Base64
+  [ade2ca70] - Dates
+  [9fa8497b] - Future
+  [b77e0a4c] - InteractiveUtils
+  [8f399da3] - Libdl
+  [37e2e46d] - LinearAlgebra
+  [56ddb016] - Logging
+  [d6f4376e] - Markdown
+  [de0858da] - Printf
+  [3fa0cd96] - REPL
+  [9a3f8284] - Random
+  [ea8e919c] - SHA v0.7.0
+  [9e88b42a] - Serialization
+  [6462fe0b] - Sockets
+  [2f01184e] - SparseArrays
+  [10745b16] - Statistics
+  [8dfed614] - Test
+  [cf7118a7] - UUIDs
+  [4ec0a83e] - Unicode
+  [e66e0078] - CompilerSupportLibraries_jll v0.5.2+0
+  [4536629a] - OpenBLAS_jll v0.3.20+0
+  [8e850b90] - libblastrampoline_jll v5.1.1+0
+```
+
+> **_NOTE:_**
+> Julia's `Pkg` REPL mode supports autocompletion with `<TAB>`.
+> You can, for example, in the above command start typing `rm DataF<TAB>` and it will autocomplete to `rm DataFrames`.
+
+We can see that `rm DataFrames` undoes `add DataFrame` by removing entries in _both_ `Project.toml` and `Manifest.toml`.
+
+#### Sharing Project Environments {#sec:project_management_sharing}
+
+Once you have a project environment with _both_ the `Project.toml` and `Manifest.toml` files,
+you can **share** it with any user to have a **perfectly reproducible project environment**.
+
+Now let's cover the other end of the process.
+Suppose you received a `Project.toml` and a `Manifest.toml` from someone.
+
+How would you proceed to **instantiate a Julia project environment**?
+
+It is a simple process:
+
+1. Put the `Project.toml` and a `Manifest.toml` files into a folder.
+1. Open a Julia REPL in that folder and activate it as a project environment with `]activate`.
+1. Instantiate the environment with the `]instantiate` command.
+
+That's it!
+Once the project environment finished downloading and instantiating the dependencies listed in the `Project.toml` and `Manifest.toml` files,
+you'll have an exact copy of the project environment sent to you.
+
+> **_NOTE:_**
+> You can also add `[compat]` bounds in the `Project.toml` to specify which package versions your project environment is compatible with.
+> This is an advanced-user functionality which we will not cover.
+> Take a look at the [`Pkg.jl` standard library module documentation on compatibility](https://pkgdocs.julialang.org/v1/compatibility/).
+> For beginners, we recommend sharing _both_ `Project.toml` and `Manifest.toml` for a fully reproducible environment.

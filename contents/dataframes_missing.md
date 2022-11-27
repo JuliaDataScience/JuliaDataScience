@@ -19,7 +19,7 @@ df_missing = DataFrame(;
 """; process=without_caption_label)
 ```
 
-This is ther same `DataFrame` from @sec:dataframes but with some `missing` values added.
+This is the same `DataFrame` from @sec:dataframes but with some `missing` values added.
 
 ### `Missing` type {#sec:missing_type}
 

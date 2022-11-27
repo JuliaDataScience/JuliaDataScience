@@ -11,7 +11,7 @@ Most importantly, we write functions not scripts (see also @sec:engineering).
 Furthermore, we use naming conventions consistent with Julia `base/`, meaning:
 
 - Use camelcase for modules: `module JuliaDataScience`, `struct MyPoint`.
-  (Note that camelcase is so called because the capitalization of words, as in "iPad" or "CamelCase", makes the word look like a camel.)
+  (Note that camel case is so called because the capitalization of words, as in "iPad" or "CamelCase", makes the word look like a camel).
 - Write function names in lowercase letters and separate the words by underscores.
   It is also allowed to omit the separator when naming functions.
   For example, these function names are all in line with the conventions: `my_function`, `myfunction` and `string2int`.
@@ -37,17 +37,22 @@ From the style guide, we attempt to adhere specifically to:
   For example, `func(x; y=3)` instead of `func(x, y=3)`.
 - Avoid using multiple spaces to align things.
   So, write
+
   ```
   a = 1
   lorem = 2
   ```
+
   instead of
+
   ```
   a     = 1
   lorem = 2
   ```
+
 - Whenever appropriate, surround binary operators with a space, for example, `1 == 2` or `y = x + 1`.
 - Indent triple-quotes and triple-backticks:
+
   ```
   s = """
       my long text:
@@ -55,6 +60,7 @@ From the style guide, we attempt to adhere specifically to:
       the end.
       """
   ```
+
 - Do not omit zeros in floats (even though Julia allows it).
   Hence, write `1.0` instead of `1.` and write `0.1` instead of `.1`.
 - Use `in` in for loops and not = or ∈ (even though Julia allows it).

@@ -146,7 +146,7 @@ Instead, we need to use the `StatsBase.jl` package for less common statistical f
 using StatsBase: mode
 ```
 
-In @sec:missing_data, we have the `correct_types` `DataFrame`, which is mainly categorical with `Date`s and `String`s:
+In @sec:types, we have the `correct_types` `DataFrame`, which is mainly categorical with `Date`s and `String`s:
 
 ```jl
 # inside stats content # hide

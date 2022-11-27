@@ -178,7 +178,7 @@ sco(s; process=without_caption_label)
 
 ### Subset {#sec:subset}
 
-The `subset` function was added to make it easier to work with missing values (@sec:missing_data).
+The `subset` function was added to make it easier to work with missing values (@sec:missing).
 In contrast to `filter`, `subset` works on complete columns instead of rows or single values.
 If we want to use our earlier defined functions, we should wrap it inside `ByRow`:
 

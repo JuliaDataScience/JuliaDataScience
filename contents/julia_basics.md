@@ -2416,7 +2416,7 @@ Hence, we need to create a new environment by using the **`activate` command**:
 (@v1.8) pkg> activate .
   Activating project at `~/user/folder`
 
-(folder) pkg> 
+(folder) pkg>
 ```
 
 This activates a project environment in the directory that your Julia REPL is running.

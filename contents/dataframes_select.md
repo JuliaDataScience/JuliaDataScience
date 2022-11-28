@@ -36,6 +36,7 @@ sco(s, process=without_caption_label)
 
 > **_NOTE:_**
 We won't cover regular expressions in this book, but you are encouraged to learn about them.
+To build and test regular expressions interactively, we advice to use online tools for them such as <https://regex101.com/>.
 
 To select **everything _except_ one or more columns**, use **`Not`** with either a single column:
 

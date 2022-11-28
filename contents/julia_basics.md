@@ -2365,7 +2365,7 @@ sco(s; process=catch_show)
 
 One last thing from Julia's standard library for us to cover is the **`Pkg` module**.
 As described in @sec:programmers,
-Julia offers a **native project management solution**,
+Julia offers a **built-in package manager**,
 with dependencies and version control tightly controlled, manageable, and replicable.
 
 Unlike traditional package managers,
@@ -2380,14 +2380,13 @@ Inside every project environment there is a simple setup involving [`.toml`](htt
 The folder, in this context, can be perceived as a "project" folder.
 The project environment is derived on two `.toml` files:
 
-- **`Project.toml`**: _higher_-level description of the project environment with the package list.
-- **`Manifest.toml`**: _lower_-level description of the project environment with the dependencies list and versions.
+- **`Project.toml`**: _higher_-level description of the project environment with the top-level package list.
+- **`Manifest.toml`**: _lower_-level description of the project environment with the full dependencies list and their versions.
 This file is machine-generated, which means that users are not encouraged to edit it.
 
 #### Creating Project Environments {#sec:project_management_creating}
 
-In order to create a new project environment,
-you'll simply **enter the `Pkg` REPL mode by typing `]` (right-bracket) in the Julia REPL**:
+In order to create a new project environment, you can **enter the `Pkg` REPL mode by typing `]` (right-bracket) in the Julia REPL**:
 
 ```julia-repl
 julia>]
@@ -2475,8 +2474,8 @@ Now we can start adding packages to our project environment with the **`add` com
   [8e850b90] + libblastrampoline_jll v5.1.1+0
 ```
 
-From the `add` output we can see that Julia automatically creates _both_ the `Project.toml` and `Manifest.toml` files.
-In the `Project.toml` it adds a new package to the proejct environment package list.
+From the `add` output, we can see that Julia automatically creates _both_ the `Project.toml` and `Manifest.toml` files.
+In the `Project.toml`, it adds a new package to the proejct environment package list.
 Here are the contents of the `Project.toml`:
 
 ```toml
@@ -2616,4 +2615,4 @@ you'll have an exact copy of the project environment sent to you.
 > You can also add `[compat]` bounds in the `Project.toml` to specify which package versions your project environment is compatible with.
 > This is an advanced-user functionality which we will not cover.
 > Take a look at the [`Pkg.jl` standard library module documentation on compatibility](https://pkgdocs.julialang.org/v1/compatibility/).
-> For beginners, we recommend sharing _both_ `Project.toml` and `Manifest.toml` for a fully reproducible environment.
+> For people new to Julia, we recommend sharing _both_ `Project.toml` and `Manifest.toml` for a fully reproducible environment.

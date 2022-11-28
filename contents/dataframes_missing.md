@@ -1,7 +1,7 @@
 ## Missing Data {#sec:missing}
 
 Let's dive into how to **handle missing values** in `DataFrames.jl`.
-We'll cover **three main approaches for dealing with missing data**:
+We'll cover **three** main approaches for dealing with missing data:
 
 1. **filtering missing** values with `ismissing` and `dropmissing`
 1. **filling or replacing missing** values with `coalesce`

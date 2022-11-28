@@ -2,11 +2,11 @@
 
 > **_NOTE:_**
 > In this chapter we cover the basics of Julia as a programming language.
-> Please note that this is not *strictly necessary* for you to use Julia as a tool for data manipulation and data visualization.
-> Having a basic understanding of Julia will definitely make you more *effective* and *efficient* in using Julia.
+> Please note that this is not _strictly necessary_ for you to use Julia as a tool for data manipulation and data visualization.
+> Having a basic understanding of Julia will definitely make you more _effective_ and _efficient_ in using Julia.
 > However, if you prefer to get started straight away, you can jump to @sec:dataframes to learn about tabular data with `DataFrames.jl`.
 
-This is going to be a very brief and *not* an in-depth overview of the Julia language.
+This is going to be a very brief and _not_ an in-depth overview of the Julia language.
 If you are already familiar and comfortable with other programming languages, we highly encourage you to read Julia's documentation (<https://docs.julialang.org/>).
 The docs are an excellent resource for taking a deep dive into Julia.
 It covers all the basics and corner cases, but it can be cumbersome, especially if you aren't familiar with software documentation.
@@ -24,9 +24,9 @@ Instead, we will provide you with some pointers to various solutions.
 
 The simplest way is to use the Julia REPL.
 This means starting the Julia executable (`julia` or `julia.exe`) and running code there.
-For example, we can start the REPL and execute some code:
+For example, we can start the Julia REPL and execute some code:
 
-```julia
+```julia-repl
 julia> x = 2
 2
 
@@ -38,14 +38,14 @@ This works all very well, but what if we want to save the code that we wrote?
 To save our code, one can write ".jl" files such as "script.jl" and load these into Julia.
 Say, that "script.jl" contains:
 
-```
+```julia
 x = 3
 y = 4
 ```
 
 We can load this into Julia:
 
-```julia
+```julia-repl
 julia> include("script.jl")
 
 julia> y
@@ -83,7 +83,7 @@ Julia will guess types for you on the go.
 
 The main differences between Julia and other dynamic languages such as R and Python are the following.
 First, Julia **allows the user to specify type declarations**.
-You already saw some types declarations in *Why Julia?* (@sec:why_julia): they are those double colons `::` that sometimes come after variables.
+You already saw some types declarations in _Why Julia?_ (@sec:why_julia): they are those double colons `::` that sometimes come after variables.
 However, if you don't want to specify the type of your variables or functions, Julia will gladly infer (guess) them for you.
 
 Second, Julia allows users to define function behavior across many combinations of argument types via multiple dispatch.
@@ -95,10 +95,10 @@ We defined a different type behavior by defining new function signatures for arg
 Variables are values that you tell the computer to store with a specific name, so that you can later recover or change its value.
 Julia has several types of variables but, in data science, we mostly use:
 
-* Integers: `Int64`
-* Real Numbers: `Float64`
-* Boolean: `Bool`
-* Strings: `String`
+- Integers: `Int64`
+- Real Numbers: `Float64`
+- Boolean: `Bool`
+- Strings: `String`
 
 Integers and real numbers are stored by using 64 bits by default, that's why they have the `64` suffix in the name of the type.
 If you need more or less precision, there are `Int8` or `Int128` types, for example, where higher means more precision.
@@ -158,7 +158,7 @@ sco("typeof(age)")
 The next question then becomes:
 "What else can I do with integers?"
 There is a nice handy function `methodswith` that spits out every function available, along with its signature, for a certain type.
-Here, I will restrict the output to the first 5 rows:
+Here, we will restrict the output to the first 5 rows:
 
 ```jl
 s = """
@@ -210,7 +210,7 @@ sco(s)
 One thing to note with `struct`s is that we can't change their values once they are instantiated.
 We can solve this with a `mutable struct`.
 Also, note that mutable objects will, generally, be slower and more error prone.
-Whenever possible, make everything *immutable*.
+Whenever possible, make everything _immutable_.
 Let's create a `mutable struct`.
 
 ```jl
@@ -245,9 +245,9 @@ Now that we've covered types, we can move to boolean operators and numeric compa
 
 We have three boolean operators in Julia:
 
-* `!`: **NOT**
-* `&&`: **AND**
-* `||`: **OR**
+- `!`: **NOT**
+- `&&`: **AND**
+- `||`: **OR**
 
 Here are a few examples with some of them:
 
@@ -265,15 +265,15 @@ scob("(6 isa Int64) && (6 isa Real)")
 
 Regarding numeric comparison, Julia has three major types of comparisons:
 
-1. **Equality**: either something is *equal* or *not equal* another
-    * == "equal"
-    * != or ≠ "not equal"
-1. **Less than**: either something is *less than* or *less than or equal to*
-    * <  "less than"
-    * <= or ≤ "less than or equal to"
-1. **Greater than**: either something is *greater than* or *greater than or equal to*
-    * \> "greater than"
-    * \>= or ≥ "greater than or equal to"
+1. **Equality**: either something is _equal_ or _not equal_ another
+    - == "equal"
+    - != or ≠ "not equal"
+1. **Less than**: either something is _less than_ or _less than or equal to_
+    - <  "less than"
+    - <= or ≤ "less than or equal to"
+1. **Greater than**: either something is _greater than_ or _greater than or equal to_
+    - \> "greater than"
+    - \>= or ≥ "greater than or equal to"
 
 Here are some examples:
 
@@ -456,7 +456,7 @@ In that case, we can do two things:
    scob(s)
    ```
 
-2. Or we can define just one variable to hold the function's return values and access them with either `first` or `last`:
+1. Or we can define just one variable to hold the function's return values and access them with either `first` or `last`:
 
    ```jl
    s = """
@@ -574,7 +574,6 @@ s = """
 sco(s)
 ```
 
-
 ### For Loop {#sec:for}
 
 The classical for loop in Julia follows a similar syntax as the conditional statements.
@@ -619,7 +618,7 @@ scob(s)
 As you can see, we have to use the `global` keyword.
 This is because of **variable scope**.
 Variables defined inside conditional statements, loops, and functions exist only inside them.
-This is known as the *scope* of the variable.
+This is known as the _scope_ of the variable.
 Here, we had to tell Julia that the `n` inside `while` loop is in the global scope with the `global` keyword.
 
 Finally, we also used the `+=` operator which is a nice shorthand for `n = n + 1`.
@@ -630,7 +629,7 @@ Julia has several native data structures.
 They are abstractions of data that represent some form of structured data.
 We will cover the most used ones.
 They hold homogeneous or heterogeneous data.
-Since they are collections, they can be *looped* over with the `for` loops.
+Since they are collections, they can be _looped_ over with the `for` loops.
 
 We will cover `String`, `Tuple`, `NamedTuple`, `UnitRange`, `Arrays`, `Pair`, `Dict`, `Symbol`.
 
@@ -647,7 +646,7 @@ sco(s; process=catch_show)
 
 ### Broadcasting Operators and Functions {#sec:broadcasting}
 
-Before we dive into data structures, we need to talk about broadcasting (also known as *vectorization*) and the "dot" operator `.`.
+Before we dive into data structures, we need to talk about broadcasting (also known as _vectorization_) and the "dot" operator `.`.
 
 We can broadcast mathematical operations like `*` (multiplication) or `+` (addition) using the dot operator.
 For example, broadcasted addition would imply a change from `+` to `.+`:
@@ -671,7 +670,7 @@ sco("logarithm.([1, 2, 3])")
 ### Functions with a bang `!` {#sec:function_bang}
 
 It is a Julia convention to append a bang `!` to names of functions that modify one or more of their arguments.
-This convention warns the user that the function is **not pure**, i.e., that it has *side effects*.
+This convention warns the user that the function is **not pure**, i.e., that it has _side effects_.
 A function with side effects is useful when you want to update a large data structure or variable container without having all the overhead from creating a new instance.
 
 For example, we can create a function that adds 1 to each element in a vector `V`:
@@ -805,8 +804,8 @@ scob(s)
 
 There are several functions to manipulate strings in Julia.
 We will demonstrate the most common ones.
-Also, note that most of these functions accept a [Regular Expression (RegEx)](https://docs.julialang.org/en/v1/manual/strings/#Regular-Expressions) as arguments.
-We won't cover RegEx in this book, but you are encouraged to learn about them, especially if most of your work uses textual data.
+Also, note that most of these functions accept a [Regular Expression (regex)](https://docs.julialang.org/en/v1/manual/strings/#Regular-Expressions) as arguments.
+We won't cover Regular Expressions in this book, but you are encouraged to learn about them, especially if most of your work uses textual data.
 
 First, let us define a string for us to play around with:
 
@@ -817,27 +816,26 @@ s = """
 scob(s)
 ```
 
-
 1. `contains`, `startswith` and `endswith`: A conditional (returns either `true` or `false`) if the second argument is a:
-    * **substring** of the first argument
+    - **substring** of the first argument
 
        ```jl
        scob("""contains(julia_string, "Julia")""")
        ```
 
-    * **prefix** of the first argument
+    - **prefix** of the first argument
 
        ```jl
        scob("""startswith(julia_string, "Julia")""")
        ```
 
-    * **suffix** of the first argument
+    - **suffix** of the first argument
 
        ```jl
        scob("""endswith(julia_string, "Julia")""")
        ```
 
-2. `lowercase`, `uppercase`, `titlecase` and `lowercasefirst`:
+1. `lowercase`, `uppercase`, `titlecase` and `lowercasefirst`:
 
      ```jl
      scob("lowercase(julia_string)")
@@ -855,13 +853,13 @@ scob(s)
      scob("lowercasefirst(julia_string)")
      ```
 
-3. `replace`: introduces a new syntax, called the `Pair`
+1. `replace`: introduces a new syntax, called the `Pair`
 
      ```jl
      scob("""replace(julia_string, "amazing" => "awesome")""")
      ```
 
-4. `split`: breaks up a string by a delimiter:
+1. `split`: breaks up a string by a delimiter:
 
      ```jl
      sco("""split(julia_string, " ")""")
@@ -900,7 +898,7 @@ sco("""tryparse(Int64, "A very non-numeric string")""")
 ### Tuple {#sec:tuple}
 
 Julia has a data structure called **tuple**.
-They are really *special* in Julia because they are often used in relation to functions.
+They are really _special_ in Julia because they are often used in relation to functions.
 Since functions are an important feature in Julia, every Julia user should know the basics of tuples.
 
 A tuple is a **fixed-length container that can hold multiple different types**.
@@ -977,7 +975,7 @@ We can access named tuple's values via indexing like regular tuples or, alternat
 scob("my_namedtuple.s")
 ```
 
-To finish our discussion of named tuples, there is one important *quick* syntax that you'll see a lot in Julia code.
+To finish our discussion of named tuples, there is one important _quick_ syntax that you'll see a lot in Julia code.
 Often Julia users create a named tuple by using the familiar parenthesis `()` and commas `,`, but without naming the values.
 To do so you **begin the named tuple construction by specifying first a semicolon `;` before the values**.
 This is especially useful when the values that would compose the named tuple are already defined in variables or when you want to avoid long lines:
@@ -1061,8 +1059,8 @@ Therefore, **Arrays are an essential data structure**.
 Let's start with **array types**.
 There are several, but we will focus on the two most used in data science:
 
-* `Vector{T}`: **one-dimensional** array. Alias for `Array{T, 1}`.
-* `Matrix{T}`: **two-dimensional** array. Alias for `Array{T, 2}`.
+- `Vector{T}`: **one-dimensional** array. Alias for `Array{T, 1}`.
+- `Matrix{T}`: **two-dimensional** array. Alias for `Array{T, 2}`.
 
 Note here that `T` is the type of the underlying array.
 So, for example, `Vector{Int64}` is a `Vector` in which all elements are `Int64`s, and `Matrix{AbstractFloat}` is a `Matrix` in which all elements are subtypes of `AbstractFloat`.
@@ -1103,7 +1101,7 @@ sco(s)
 
 We also have some **syntax aliases** for the most common elements in array construction:
 
-* `zeros` for all elements being initialized to zero.
+- `zeros` for all elements being initialized to zero.
   Note that the default type is `Float64` which can be changed if necessary:
 
      ```jl
@@ -1120,7 +1118,7 @@ We also have some **syntax aliases** for the most common elements in array const
      sco(s)
      ```
 
-* `ones` for all elements being initialized to one:
+- `ones` for all elements being initialized to one:
 
      ```jl
      s = """
@@ -1195,7 +1193,6 @@ s = """
 sco(s)
 ```
 
-
 ```jl
 s = """
     [ones(Int, 2, 2) [1; 2]
@@ -1256,7 +1253,7 @@ sco(s)
 
 And, we can concatenate arrays to create new arrays:
 
-* `cat`: concatenate input arrays along a specific dimension `dims`
+- `cat`: concatenate input arrays along a specific dimension `dims`
 
      ```jl
      sco("cat(ones(2), zeros(2), dims=1)")
@@ -1266,13 +1263,13 @@ And, we can concatenate arrays to create new arrays:
      sco("cat(ones(2), zeros(2), dims=2)")
      ```
 
-* `vcat`: vertical concatenation, a shorthand for `cat(...; dims=1)`
+- `vcat`: vertical concatenation, a shorthand for `cat(...; dims=1)`
 
      ```jl
      sco("vcat(ones(2), zeros(2))")
      ```
 
-* `hcat`: horizontal concatenation, a shorthand for `cat(...; dims=2)`
+- `hcat`: horizontal concatenation, a shorthand for `cat(...; dims=2)`
 
      ```jl
      sco("hcat(ones(2), zeros(2))")
@@ -1293,19 +1290,19 @@ sco("eltype(my_matrix_π)")
 After knowing its types, one might be interested in **array dimensions**.
 Julia has several functions to inspect array dimensions:
 
-* `length`: total number of elements
+- `length`: total number of elements
 
      ```jl
      scob("length(my_matrix_π)")
      ```
 
-* `ndims`: number of dimensions
+- `ndims`: number of dimensions
 
      ```jl
      scob("ndims(my_matrix_π)")
      ```
 
-* `size`: this one is a little tricky.
+- `size`: this one is a little tricky.
     By default it will return a tuple containing the array's dimensions.
 
      ```jl
@@ -1325,7 +1322,7 @@ Sometimes, we want to inspect only certain parts of an array.
 This is called **indexing** and **slicing**.
 If you want a particular observation of a vector, or a row or column of a matrix, you'll probably need to **index an array**.
 
-First, I will create an example vector and matrix to play around:
+First, we will create an example vector and matrix to play around:
 
 ```jl
 s = """
@@ -1347,7 +1344,7 @@ scob("my_example_vector[2]")
 ```
 
 The same syntax follows with matrices.
-But, since matrices are 2-dimensional arrays, we have to specify *both* rows and columns.
+But, since matrices are 2-dimensional arrays, we have to specify _both_ rows and columns.
 Let's retrieve the element from the second row (first dimension) and first column (second dimension):
 
 ```jl
@@ -1616,13 +1613,13 @@ indexes
 
 It is often better to use specialized functions for these loops:
 
-* `eachcol`: iterates over an array column first
+- `eachcol`: iterates over an array column first
 
      ```jl
      sco("first(eachcol(column_major))")
      ```
 
-* `eachrow`: iterates over an array row first
+- `eachrow`: iterates over an array row first
 
      ```jl
      sco("first(eachrow(column_major))")
@@ -1764,7 +1761,7 @@ scob("""name2number_map["three"]""")
 
 ### Symbol {#sec:symbol}
 
-`Symbol` is actually *not* a data structure.
+`Symbol` is actually _not_ a data structure.
 It is a type and behaves a lot like a string.
 Instead of surrounding the text by quotation marks, a symbol starts with a colon (:) and can contain underscores:
 
@@ -1888,7 +1885,7 @@ It's a good habit to pick up, because it's very likely to save problems for you 
 
 ## Julia Standard Library {#sec:standardlibrary}
 
-Julia has a **rich standard library** that is available with *every* Julia installation.
+Julia has a **rich standard library** that is available with _every_ Julia installation.
 Contrary to everything that we have seen so far, e.g. types, data structures and filesystem; you **must load standard library modules into your environment** to use a particular module or function.
 
 This is done via `using` or `import`.
@@ -1903,7 +1900,7 @@ After doing this, you can access all functions and types inside `ModuleName`.
 ### Dates {#sec:dates}
 
 Knowing how to handle dates and timestamps is important in data science.
-As we said in *Why Julia?* (@sec:why_julia) section, Python's `pandas` uses its own `datetime` type to handle dates.
+As we said in _Why Julia?_ (@sec:why_julia) section, Python's `pandas` uses its own `datetime` type to handle dates.
 The same is true in the R tidyverse's `lubridate` package, which also defines its own `datetime` type to handle dates.
 In Julia packages don't need to write their own dates logic, because Julia has a dates module in its standard library called `Dates`.
 
@@ -1918,7 +1915,7 @@ using Dates
 The `Dates` standard library module has **two types for working with dates**:
 
 1. `Date`: representing time in days and
-2. `DateTime`: representing time in millisecond precision.
+1. `DateTime`: representing time in millisecond precision.
 
 We can construct `Date` and `DateTime` with the default constructor either by specifying an integer to represent year, month, day, hours and so on:
 
@@ -2092,7 +2089,7 @@ Yep, Jose was born on the second Sunday of September.
 
 We can perform **operations** in `Dates` instances.
 For example, we can add days to a `Date` or `DateTime` instance.
-Notice that Julia's `Dates` will automatically perform the adjustments necessary for leap years, and for months with 30 or 31 days (this is known as *calendrical* arithmetic).
+Notice that Julia's `Dates` will automatically perform the adjustments necessary for leap years, and for months with 30 or 31 days (this is known as _calendrical_ arithmetic).
 
 ```jl
 sco("my_birthday + Day(90)")
@@ -2131,7 +2128,7 @@ sco("DateTime(today()) - DateTime(my_birthday)")
 One nice thing about `Dates` module is that we can also easily construct **date and time intervals**.
 Julia is clever enough to not have to define the whole interval types and operations that we covered in @sec:ranges.
 It just extends the functions and operations defined for range to `Date`'s types.
-This is known as multiple dispatch and we already covered this in *Why Julia?* (@sec:why_julia).
+This is known as multiple dispatch and we already covered this in _Why Julia?_ (@sec:why_julia).
 
 For example, suppose that you want to create a `Day` interval.
 This is easy done with the colon `:` operator:
@@ -2188,7 +2185,7 @@ Similarly, these examples work for `DateTime` types too.
 Another important module in Julia's standard library is the `Random` module.
 This module deals with **random number generation**.
 `Random` is a rich library and, if you're interested, you should consult [Julia's `Random` documentation](https://docs.julialang.org/en/v1/stdlib/Random/).
-We will cover *only* three functions: `rand`, `randn` and `seed!`.
+We will cover _only_ three functions: `rand`, `randn` and `seed!`.
 
 To begin, we first load the `Random` module.
 Since we know exactly what we want to load, we can just as well do that explicitly:
@@ -2199,8 +2196,8 @@ using Random: seed!
 
 We have **two main functions that generate random numbers**:
 
-* `rand`: samples a **random element** of a data structure or type.
-* `randn`: samples a random number from a **standard normal distribution** (mean 0 and standard deviation 1).
+- `rand`: samples a **random element** of a data structure or type.
+- `randn`: samples a random number from a **standard normal distribution** (mean 0 and standard deviation 1).
 
 #### `rand` {#sec:random_rand}
 
@@ -2324,7 +2321,7 @@ sco("rand(my_seed, 3)")
 
 ### Downloads {#sec:downloads}
 
-One last thing from Julia's standard library for us to cover is the **`Downloads` module**.
+We'll also cover the standard library's **`Downloads` module**.
 It will be really brief because we will only be covering a single function named `download`.
 
 Suppose you want to **download a file from the internet to your local storage**.
@@ -2363,3 +2360,259 @@ sco(s; process=catch_show)
 
 > **_NOTE:_**
 > For more complex HTTP interactions such as interacting with web APIs, see the [`HTTP.jl` package](https://github.com/JuliaWeb/HTTP.jl).
+
+### Project Management {#sec:project_management}
+
+One last thing from Julia's standard library for us to cover is the **`Pkg` module**.
+As described in @sec:programmers,
+Julia offers a **built-in package manager**,
+with dependencies and version control tightly controlled, manageable, and replicable.
+
+Unlike traditional package managers,
+which install and manage a single global set of packages,
+Julia's package manager is designed around "environments":
+independent sets of packages that can be local to an individual project or shared between projects.
+Each project maintains its own independent set of package versions.
+
+#### `Project.toml` and `Manifest.toml` {#sec:project_management_toml}
+
+Inside every project environment there is a simple setup involving [`.toml`](https://toml.io) files in a folder.
+The folder, in this context, can be perceived as a "project" folder.
+The project environment is derived on two `.toml` files:
+
+- **`Project.toml`**: _higher_-level description of the project environment with the top-level package list.
+- **`Manifest.toml`**: _lower_-level description of the project environment with the full dependencies list and their versions.
+This file is machine-generated, which means that users are not encouraged to edit it.
+
+#### Creating Project Environments {#sec:project_management_creating}
+
+In order to create a new project environment, you can **enter the `Pkg` REPL mode by typing `]` (right-bracket) in the Julia REPL**:
+
+```julia-repl
+julia>]
+```
+
+Then it becomes the **`Pkg` REPL mode**:
+
+```julia-repl
+(@v1.8) pkg>
+```
+
+Here we can see that the REPL prompts changes from `julia>` to `pkg>`.
+There's also additional information inside the parentheses regarding which project enviroment is currently active,
+`(@v1.8)`.
+The `v1.8` project environment is the default environment for your currently Julia installation
+(which in our case is Julia version `1.8.X`).
+
+> **_NOTE:_**
+> You can see a list of available commands in the `Pkg` REPL mode with the **`help` command**.
+
+Julia has separate default environments for each minor release, the `X`s in the `1.X` Julia version.
+Anything that we perform in this default environment will impact any fresh Julia session on that version.
+Hence, we need to create a new environment by using the **`activate` command**:
+
+```julia-repl
+(@v1.8) pkg> activate .
+  Activating project at `~/user/folder`
+
+(folder) pkg>
+```
+
+This activates a project environment in the directory that your Julia REPL is running.
+In my case this is located at `~/user/folder`.
+Now we can start adding packages to our project environment with the **`add` command** in the `Pkg` REPL mode:
+
+```julia-repl
+(folder) pkg> add DataFrames
+    Updating registry at `~/.julia/registries/General.toml`
+   Resolving package versions...
+    Updating `~/user/folder/Project.toml`
+  [a93c6f00] + DataFrames v1.4.3
+    Updating `~/user/folder/Manifest.toml`
+  [34da2185] + Compat v4.4.0
+  [a8cc5b0e] + Crayons v4.1.1
+  [9a962f9c] + DataAPI v1.13.0
+  [a93c6f00] + DataFrames v1.4.3
+  [864edb3b] + DataStructures v0.18.13
+  [e2d170a0] + DataValueInterfaces v1.0.0
+  [59287772] + Formatting v0.4.2
+  [41ab1584] + InvertedIndices v1.1.0
+  [82899510] + IteratorInterfaceExtensions v1.0.0
+  [b964fa9f] + LaTeXStrings v1.3.0
+  [e1d29d7a] + Missings v1.0.2
+  [bac558e1] + OrderedCollections v1.4.1
+  [2dfb63ee] + PooledArrays v1.4.2
+  [08abe8d2] + PrettyTables v2.2.1
+  [189a3867] + Reexport v1.2.2
+  [66db9d55] + SnoopPrecompile v1.0.1
+  [a2af1166] + SortingAlgorithms v1.1.0
+  [892a3eda] + StringManipulation v0.3.0
+  [3783bdb8] + TableTraits v1.0.1
+  [bd369af6] + Tables v1.10.0
+  [56f22d72] + Artifacts
+  [2a0f44e3] + Base64
+  [ade2ca70] + Dates
+  [9fa8497b] + Future
+  [b77e0a4c] + InteractiveUtils
+  [8f399da3] + Libdl
+  [37e2e46d] + LinearAlgebra
+  [56ddb016] + Logging
+  [d6f4376e] + Markdown
+  [de0858da] + Printf
+  [3fa0cd96] + REPL
+  [9a3f8284] + Random
+  [ea8e919c] + SHA v0.7.0
+  [9e88b42a] + Serialization
+  [6462fe0b] + Sockets
+  [2f01184e] + SparseArrays
+  [10745b16] + Statistics
+  [8dfed614] + Test
+  [cf7118a7] + UUIDs
+  [4ec0a83e] + Unicode
+  [e66e0078] + CompilerSupportLibraries_jll v0.5.2+0
+  [4536629a] + OpenBLAS_jll v0.3.20+0
+  [8e850b90] + libblastrampoline_jll v5.1.1+0
+```
+
+From the `add` output, we can see that Julia automatically creates _both_ the `Project.toml` and `Manifest.toml` files.
+In the `Project.toml`, it adds a new package to the proejct environment package list.
+Here are the contents of the `Project.toml`:
+
+```toml
+[deps]
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+```
+
+This is a `.toml` file where:
+
+- `[deps]`: a TOML table (also know as _hash tables_ or _dictionaries_)
+- `DataFrames`: a key in the TOML `deps` table; this is the name of the package
+- `"a93c6f00-e57d-5684-b7b6-d8193f3e46c0"`: the value for the `DataFrames` key; this is the [universally unique identifier (UUID)](https://en.wikipedia.org/wiki/Universally_unique_identifier) of the package.
+
+Let's also take a peek into the `Manifest.toml`.
+Here we will truncate the output since it is a big machine-generated file:
+
+```toml
+# This file is machine-generated - editing it directly is not advised
+
+julia_version = "1.8.3"
+manifest_format = "2.0"
+project_hash = "376d427149ea94494cc22001edd58d53c9b2bee1"
+
+[[deps.Artifacts]]
+uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
+
+...
+
+[[deps.DataFrames]]
+deps = ["Compat", "DataAPI", "Future", "InvertedIndices", "IteratorInterfaceExtensions", "LinearAlgebra", "Markdown", "Missings", "PooledArrays", "PrettyTables", "Printf", "REPL", "Random", "Reexport", "SnoopPrecompile", "SortingAlgorithms", "Statistics", "TableTraits", "Tables", "Unicode"]
+git-tree-sha1 = "0f44494fe4271cc966ac4fea524111bef63ba86c"
+uuid = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+version = "1.4.3"
+
+...
+
+[[deps.libblastrampoline_jll]]
+deps = ["Artifacts", "Libdl", "OpenBLAS_jll"]
+uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
+version = "5.1.1+0"
+```
+
+The three dots above (`...`) represents truncated output.
+First, the `Manifest.toml` presents us a comment saying that it is machine-generated and discouragin editing it directly.
+Then, there are entries for the Julia version (`julia_version`), `Manifest.toml` format version (`manifest_format`),
+and project environment hash (`project_hash`).
+Finally, it proceeds with a TOML array of tables which are the double brackets entries (`[[...]]`).
+These entries stands for the dependencies of all packages necessary to create the environment described in the `Project.toml`.
+Therefore all of the `DataFrames.jl`'s dependencies and its dependencies' dependencies (and so on...) are listed here with their name, UUID, and version.
+
+> **_NOTE:_**
+> Julia's standard library module do not have a `version` key in the `Manifest.toml`
+> because they are already specified by the Julia version (`julia_version`).
+> This is the case for the `Artifacts` entry in the truncated `Manifest.toml` output above,
+> since it is a module in Julia's standard library.
+
+We can keep adding as many packages as we like with the `add` command.
+To remove a package you can use the **`rm` command** in the `Pkg` REPL mode:
+
+```julia-repl
+(folder) pkg> rm DataFrames
+    Updating `~/user/folder/Project.toml`
+  [a93c6f00] - DataFrames v1.4.3
+    Updating `~/user/folder/Manifest.toml`
+  [34da2185] - Compat v4.4.0
+  [a8cc5b0e] - Crayons v4.1.1
+  [9a962f9c] - DataAPI v1.13.0
+  [a93c6f00] - DataFrames v1.4.3
+  [864edb3b] - DataStructures v0.18.13
+  [e2d170a0] - DataValueInterfaces v1.0.0
+  [59287772] - Formatting v0.4.2
+  [41ab1584] - InvertedIndices v1.1.0
+  [82899510] - IteratorInterfaceExtensions v1.0.0
+  [b964fa9f] - LaTeXStrings v1.3.0
+  [e1d29d7a] - Missings v1.0.2
+  [bac558e1] - OrderedCollections v1.4.1
+  [2dfb63ee] - PooledArrays v1.4.2
+  [08abe8d2] - PrettyTables v2.2.1
+  [189a3867] - Reexport v1.2.2
+  [66db9d55] - SnoopPrecompile v1.0.1
+  [a2af1166] - SortingAlgorithms v1.1.0
+  [892a3eda] - StringManipulation v0.3.0
+  [3783bdb8] - TableTraits v1.0.1
+  [bd369af6] - Tables v1.10.0
+  [56f22d72] - Artifacts
+  [2a0f44e3] - Base64
+  [ade2ca70] - Dates
+  [9fa8497b] - Future
+  [b77e0a4c] - InteractiveUtils
+  [8f399da3] - Libdl
+  [37e2e46d] - LinearAlgebra
+  [56ddb016] - Logging
+  [d6f4376e] - Markdown
+  [de0858da] - Printf
+  [3fa0cd96] - REPL
+  [9a3f8284] - Random
+  [ea8e919c] - SHA v0.7.0
+  [9e88b42a] - Serialization
+  [6462fe0b] - Sockets
+  [2f01184e] - SparseArrays
+  [10745b16] - Statistics
+  [8dfed614] - Test
+  [cf7118a7] - UUIDs
+  [4ec0a83e] - Unicode
+  [e66e0078] - CompilerSupportLibraries_jll v0.5.2+0
+  [4536629a] - OpenBLAS_jll v0.3.20+0
+  [8e850b90] - libblastrampoline_jll v5.1.1+0
+```
+
+> **_NOTE:_**
+> Julia's `Pkg` REPL mode supports autocompletion with `<TAB>`.
+> You can, for example, in the above command start typing `rm DataF<TAB>` and it will autocomplete to `rm DataFrames`.
+
+We can see that `rm DataFrames` undoes `add DataFrame` by removing entries in _both_ `Project.toml` and `Manifest.toml`.
+
+#### Sharing Project Environments {#sec:project_management_sharing}
+
+Once you have a project environment with _both_ the `Project.toml` and `Manifest.toml` files,
+you can **share** it with any user to have a **perfectly reproducible project environment**.
+
+Now let's cover the other end of the process.
+Suppose you received a `Project.toml` and a `Manifest.toml` from someone.
+
+How would you proceed to **instantiate a Julia project environment**?
+
+It is a simple process:
+
+1. Put the `Project.toml` and a `Manifest.toml` files into a folder.
+1. Open a Julia REPL in that folder and activate it as a project environment with `]activate`.
+1. Instantiate the environment with the `]instantiate` command.
+
+That's it!
+Once the project environment finished downloading and instantiating the dependencies listed in the `Project.toml` and `Manifest.toml` files,
+you'll have an exact copy of the project environment sent to you.
+
+> **_NOTE:_**
+> You can also add `[compat]` bounds in the `Project.toml` to specify which package versions your project environment is compatible with.
+> This is an advanced-user functionality which we will not cover.
+> Take a look at the [`Pkg.jl` standard library module documentation on compatibility](https://pkgdocs.julialang.org/v1/compatibility/).
+> For people new to Julia, we recommend sharing _both_ `Project.toml` and `Manifest.toml` for a fully reproducible environment.

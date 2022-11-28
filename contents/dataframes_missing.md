@@ -61,7 +61,7 @@ sco("missing * 1"; process=without_caption_label)
 sco("missing / 1"; process=without_caption_label)
 ```
 
-They also **propagate through equality and comparison operators**:
+They also propagate **through equality and comparison operators**:
 
 ```jl
 # equal 1 # hide
@@ -84,18 +84,18 @@ sco("missing > missing"; process=without_caption_label)
 ```
 
 That's why we need to be very cautious when comparing and testing equalities in the presence of `missing` values.
-**For equality testing use instead the `ismissing` function**.
+**For equality testing use the `ismissing` function instead**.
 
 ### Filtering Missing Values {#sec:missing_filter}
 
 Most of the time we want to **remove missing values from our data**.
 
-Removing `missing`s can be done with two options:
+Removing `missing`s can be done in two ways:
 
 1. **`dropmissing` function** applied to a whole `DataFrame` or a subset of its columns.
 1. **`ismissing` function** applied to a filtering procedure (see @sec:filter_subset).
 
-The `dropmissing` function takes as first positional argument a `DataFrame` (like all `DataFrames.jl` functions),
+The `dropmissing` function takes as first positional argument a `DataFrame`,
 and as an optional second argument either a single column or vector of columns by which columns you'll want to remove the missing data from.
 
 By default, if you do not specify column(s), as the second positional argument,
@@ -171,8 +171,8 @@ sco("""transform(df_missing, :name => ByRow(x -> coalesce(x, \"John Doe\")); ren
 
 ### Skipping over Missing Values {#sec:missing_skip}
 
-As we've saw on @sec:groupby_combine, we can use `combine` to apply summarizing functions to data.
-However, as explained, **`missing` values propagates through most operations in Julia**.
+As we saw on @sec:groupby_combine, we can use `combine` to apply summarizing functions to data.
+However, as explained, **`missing` values propagate through most operations in Julia**.
 Suppose you want to calculate the mean of `:grade_2020` column in our `df_missing`:
 
 ```jl
@@ -189,7 +189,7 @@ sco("""combine(df_missing, :grade_2020 => mean ∘ skipmissing )"""; process=wit
 
 > **_NOTE:_**
 > We are using the function composition operator `∘` (which you can type with `\circ<TAB>`) to compose two functions into one.
-> It is just like how you probably learned in high school:
+> It is just like the mathematical operator:
 >
 > \$\$f \\circ g (x) = f(g(x))\$\$
 >

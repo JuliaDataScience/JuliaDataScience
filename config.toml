@@ -27,7 +27,6 @@
     #"stats_vis",
     "appendix",
     "notation",
-    #"project_management",
     "references"
   ]
   port = 8006

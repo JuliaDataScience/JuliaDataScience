@@ -58,22 +58,22 @@ In this book we'll cover two aspects of data literacy:
 1. **Data Manipulation** with `DataFrames.jl` (@sec:dataframes).
 In this chapter you will learn how to:
     1. Read CSV and Excel data into Julia.
-    2. Process data in Julia, that is, learn how to answer data questions.
-    3. Filter and subset data.
-    4. Handle missing data.
-    5. Join multiple data sources together.
-    6. Group and summarize data.
-    7. Export data out of Julia to CSV and Excel files.
-2. **Data Visualization** with `Makie.jl` (@sec:DataVisualizationMakie).
+    1. Process data in Julia, that is, learn how to answer data questions.
+    1. Filter and subset data.
+    1. Handle missing data.
+    1. Join multiple data sources together.
+    1. Group and summarize data.
+    1. Export data out of Julia to CSV and Excel files.
+1. **Data Visualization** with `Makie.jl` (@sec:DataVisualizationMakie).
 In this chapter you will learn how to:
     1. Plot data with different `Makie.jl` backends.
-    2. Save visualizations in several formats such as PNG or PDF.
-    3. Use different plotting functions to make diverse data visualizations.
-    4. Customize visualizations with attributes.
-    5. Use and create new plotting themes.
-    6. Add $\LaTeX$ elements to plots.
-    7. Manipulate color and palettes.
-    8. Create complex figure layouts.
+    1. Save visualizations in several formats such as PNG or PDF.
+    1. Use different plotting functions to make diverse data visualizations.
+    1. Customize visualizations with attributes.
+    1. Use and create new plotting themes.
+    1. Add $\LaTeX$ elements to plots.
+    1. Manipulate color and palettes.
+    1. Create complex figure layouts.
 
 ## Software Engineering {#sec:engineering}
 

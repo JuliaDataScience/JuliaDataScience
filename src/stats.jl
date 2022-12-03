@@ -23,11 +23,11 @@ function statistics_graph()
         [0.1], [0], arrowsize=20, lengthscale=0.2)
 
     text!("Data\nGenerating\nProcess", position=(0, 0),
-        align=(:center, :center), textsize=24)
+        align=(:center, :center), fontsize=24)
     text!("Observed\nData", position=(0, -5),
-        align=(:center, :center), textsize=24)
-    text!("Inference", position=(-1.2, -2.5), textsize=24)
-    text!("Probability", position=(0.65, -2.5), textsize=24,
+        align=(:center, :center), fontsize=24)
+    text!("Inference", position=(-1.2, -2.5), fontsize=24)
+    text!("Probability", position=(0.65, -2.5), fontsize=24,
         align=(:center, :center))
     hidedecorations!(ax)
     hidespines!(ax)

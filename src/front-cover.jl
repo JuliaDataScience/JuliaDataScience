@@ -157,46 +157,46 @@ function front_cover()
         ylims!(ax45, -5.6, 5.5)
         # Pipes for First Column
         pipisize = 52
-        Label(fig[1, 1, Bottom()], "|>", textsize=pipisize,
+        Label(fig[1, 1, Bottom()], "|>", fontsize=pipisize,
             rotation=-π / 2, padding=(0, 0, 0, 0), font=NOTO_SANS_BOLD)
-        Label(fig[2, 1, Bottom()], " |>", textsize=pipisize,
+        Label(fig[2, 1, Bottom()], " |>", fontsize=pipisize,
             rotation=-π / 2, padding=(0, 0, 0, 0), font=NOTO_SANS_BOLD)
-        Label(fig[3, 1, Bottom()], " |>", textsize=pipisize,
+        Label(fig[3, 1, Bottom()], " |>", fontsize=pipisize,
             rotation=-π / 2, padding=(0, 0, 0, 0), font=NOTO_SANS_BOLD)
         # Pipes between columns
-        Label(fig[2, 1, Right()], "|>", textsize=pipisize,
+        Label(fig[2, 1, Right()], "|>", fontsize=pipisize,
             rotation=0π, padding=(5, 5, 0, 0), font=NOTO_SANS_BOLD)
-        Label(fig[3, 1, Right()], "|>", textsize=pipisize,
+        Label(fig[3, 1, Right()], "|>", fontsize=pipisize,
             rotation=0π, padding=(5, 5, 0, 0), font=NOTO_SANS_BOLD)
-        Label(fig[3, 2, Right()], "|>", textsize=pipisize,
+        Label(fig[3, 2, Right()], "|>", fontsize=pipisize,
             rotation=0π, padding=(5, 5, 0, 0), font=NOTO_SANS_BOLD)
-        Label(fig[4, 1, Right()], "|>", textsize=pipisize,
+        Label(fig[4, 1, Right()], "|>", fontsize=pipisize,
             rotation=0π, padding=(5, 5, 0, 0), font=NOTO_SANS_BOLD)
-        Label(fig[4, 2, Right()], "|>", textsize=pipisize,
+        Label(fig[4, 2, Right()], "|>", fontsize=pipisize,
             rotation=0π, padding=(5, 5, 0, 0), font=NOTO_SANS_BOLD)
-        Label(fig[4, 3, Right()], "|>", textsize=pipisize,
+        Label(fig[4, 3, Right()], "|>", fontsize=pipisize,
             rotation=0π, padding=(5, 5, 0, 0), font=NOTO_SANS_BOLD)
-        Label(fig[4, 4, Right()], "|>", textsize=pipisize,
+        Label(fig[4, 4, Right()], "|>", fontsize=pipisize,
             rotation=0π, padding=(5, 5, 0, 0), font=NOTO_SANS_BOLD)
 
-        legJ = Label(fig[1, 3:5], "Julia", textsize=394,
+        legJ = Label(fig[1, 3:5], "Julia", fontsize=394,
             tellheight=false, halign=:left, font=NOTO_SANS_BOLD)
         translate!(text_element(legJ), 0, 0, 9)
-        legD = Label(fig[1, 3:5], "\n\n\n\nData Science", textsize=126,
+        legD = Label(fig[1, 3:5], "\n\n\n\nData Science", fontsize=126,
             tellheight=false, halign=:left, font=NOTO_SANS_BOLD)
         translate!(text_element(legD), 0, 0, 9)
         vspace = "\n\n"
         hspace = "         "
-        legJose = Label(fig[2, 3:5], "$(vspace)$(hspace)Jose Storopoli", textsize=80,
+        legJose = Label(fig[2, 3:5], "$(vspace)$(hspace)Jose Storopoli", fontsize=80,
             tellheight=false, halign=:left, font=NOTO_SANS_BOLD)
-        legRik = Label(fig[2, 3:5], "$(vspace)\n\n$(hspace)Rik Huijzer", textsize=80,
+        legRik = Label(fig[2, 3:5], "$(vspace)\n\n$(hspace)Rik Huijzer", fontsize=80,
             tellheight=false, halign=:left, font=NOTO_SANS_BOLD)
-        legLaz = Label(fig[2, 3:5], "$(vspace)\n\n\n\n$(hspace)Lazaro Alonso", textsize=80,
+        legLaz = Label(fig[2, 3:5], "$(vspace)\n\n\n\n$(hspace)Lazaro Alonso", fontsize=80,
             tellheight=false, halign=:left, font=NOTO_SANS_BOLD)
         translate!(text_element(legJose), 0, 0, 9)
         translate!(text_element(legRik), 0, 0, 9)
         translate!(text_element(legLaz), 0, 0, 9)
-        #     textsize = 60, tellheight = false)
+        #     fontsize = 60, tellheight = false)
         # Final Axis and Figure touches
         [hidedecorations!(ax; grid=false) for ax in axs]
         [hidespines!(ax) for ax in axs]

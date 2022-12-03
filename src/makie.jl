@@ -283,9 +283,9 @@ function first_layout_fixed()
     Colorbar(fig[1, 2], pltobj, label="colorbar")
     # additional aesthetics
     Box(fig[1, 1, Right()], color=(:slateblue1, 0.35))
-    Label(fig[1, 1, Right()], "protrusion", textsize=18,
+    Label(fig[1, 1, Right()], "protrusion", fontsize=18,
         rotation=pi / 2, padding=(3, 3, 3, 3))
-    Label(fig[1, 1, TopLeft()], "(a)", textsize=18, padding=(0, 3, 8, 0))
+    Label(fig[1, 1, TopLeft()], "(a)", fontsize=18, padding=(0, 3, 8, 0))
     colgap!(fig.layout, 5)
     rowgap!(fig.layout, 5)
     fig
@@ -313,8 +313,8 @@ function complex_layout_double_axis()
     #layout
     fig[1, 1] = ax1
     fig[1, 2] = ax2
-    Label(fig[1, 1, TopLeft()], "(a)", textsize=18, padding=(0, 6, 8, 0))
-    Label(fig[1, 2, TopLeft()], "(b)", textsize=18, padding=(0, 6, 8, 0))
+    Label(fig[1, 1, TopLeft()], "(a)", fontsize=18, padding=(0, 6, 8, 0))
+    Label(fig[1, 2, TopLeft()], "(b)", fontsize=18, padding=(0, 6, 8, 0))
     Colorbar(fig[2, 1:2], hm, label="colorbar", vertical=false, flipaxis=false)
     Legend(fig[1, 3], ax2, "Legend")
     colgap!(fig.layout, 5)
@@ -336,7 +336,7 @@ function squares_layout()
     hms = [heatmap!(axs[i, j], randn(10, 10), colorrange=(-2, 2))
            for i = 1:2, j = 1:2]
     Colorbar(fig[1:2, 3], hms[1], label="colorbar")
-    [Label(fig[i, j, TopLeft()], "($(letters[i, j]))", textsize=16,
+    [Label(fig[i, j, TopLeft()], "($(letters[i, j]))", fontsize=16,
         padding=(-2, 0, -20, 0)) for i = 1:2, j = 1:2]
     colgap!(fig.layout, 5)
     rowgap!(fig.layout, 5)
@@ -362,9 +362,9 @@ function mixed_mode_layout()
     [lines!(ax, 1:10, rand(10)) for ax in axs]
     hidexdecorations!(ax3; ticks = false, grid = false)
     Box(fig[2:3, 1:2, Right()], color = (:slateblue1, 0.35))
-    Label(fig[2:3, 1:2, Right()], "protrusion", rotation = pi / 2, textsize = 14,
+    Label(fig[2:3, 1:2, Right()], "protrusion", rotation = pi / 2, fontsize = 14,
         padding = (3, 3, 3, 3))
-    Label(fig[1, 1:2, Top()], "Mixed alignmode", textsize = 16,
+    Label(fig[1, 1:2, Top()], "Mixed alignmode", fontsize = 16,
         padding = (0, 0, 15, 0))
     colsize!(fig.layout, 1, Auto(2))
     rowsize!(fig.layout, 2, Auto(0.5))

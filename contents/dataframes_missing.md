@@ -38,7 +38,7 @@ As you can see `missing` is an instance of the type `Missing`.
 > there's a guidance to use camel case for types and modules
 > (see @sec:notation).
 
-The first thing we need to cover of the `missing` values is that they **propagate through several operations**.
+The first thing we need to cover for `missing` values is that they **propagate through several operations**.
 For example, addition, subtraction, multiplication, and division:
 
 ```jl
@@ -96,10 +96,10 @@ Removing `missing`s can be done in two ways:
 1. **`ismissing` function** applied to a filtering procedure (see @sec:filter_subset).
 
 The `dropmissing` function takes as first positional argument a `DataFrame`,
-and as an optional second argument either a single column or vector of columns by which columns you'll want to remove the missing data from.
+and as an optional second argument either a single column or a vector of columns by which you'll want to remove the missing data from.
 
 By default, if you do not specify column(s), as the second positional argument,
-it will remove any observation (row) that have `missing` values:
+it will remove any observation (row) having `missing` values:
 
 ```jl
 # no columns # hide

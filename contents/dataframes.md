@@ -60,12 +60,6 @@ In the next sections, we show how you can use this package and, finally, we show
 >
 > This is a benefit over Python's `pandas` or R's `dplyr` which differ more from the core languages.
 
-```{=comment}
-TODO: Add a comparison with Excel to see where Julia is better.
-In summary, because it is much easier to structure and reproduce the logic.
-(Jose approves)
-```
-
 Let's look at a table of grades like the one in @tbl:grades_for_2020:
 
 ```jl

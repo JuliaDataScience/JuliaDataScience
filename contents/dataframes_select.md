@@ -106,15 +106,7 @@ s = """
 sco(s, process=without_caption_label)
 ```
 
-## Types and Missing Data {#sec:missing_data}
-
-```{=comment}
-Try to combine with transformations
-
-categorical
-allowmissing
-disallowmissing
-```
+## Types and Categorical Data {#sec:types}
 
 As discussed in @sec:load_save, `CSV.jl` will do its best to guess what kind of types your data have as columns.
 However, this won't always work perfectly.
@@ -162,6 +154,8 @@ scsob(s)
 
 This isn't right, because an infant is younger than adults and adolescents.
 The solution for this issue and any sort of categorical data is to use `CategoricalArrays.jl`:
+
+### CategoricalArrays.jl {#sec:categoricalarrays}
 
 ```
 using CategoricalArrays

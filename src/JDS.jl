@@ -37,6 +37,7 @@ using Reexport: @reexport
         antijoin,
         combine,
         crossjoin,
+        dropmissing,
         filter,
         groupby,
         innerjoin,

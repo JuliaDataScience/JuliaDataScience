@@ -1,4 +1,4 @@
-## Variable Transformations
+## Variable Transformations {#sec:transform}
 
 ```{=comment}
 We need to cover `ifelse` and `case_when`

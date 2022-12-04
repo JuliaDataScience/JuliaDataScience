@@ -13,7 +13,10 @@ they are called **macros**.
 > and [Julius Krumbiegel's blog post on Julia macros](https://jkrumbiegel.com/pages/2021-06-07-macros-for-beginners/).
 
 DFM macros behave **similar** as `DataFrames.jl` functions:
-they both take a `DataFrame` as a first positional argument.
+
+- they both take a `DataFrame` as a first positional argument
+- they have in-place _mutating_ functions
+  (as discussed in @sec:df_performance_inplace: the bang `!` functions)
 
 Nevertheless, there are some **differences** on using `DataFrames.jl` functions versus DFM macros.
 
@@ -67,3 +70,37 @@ The above command needs to be changed to:
 
 This tells DFM to treat the `Not(:col)` part of the macro as dynamic.
 It will parse this expression and replace it by all of the columns except `:col`.
+
+Third, most of DFM macros have **two different versions**:
+a **_non-vectorized_**, and a **_vectorized_** form.
+The non-vectorized is the default form and treats arguments as whole columns, i.e. they operate on arrays.
+Whereas the vectorized form has an `r` prefix
+(as in **r**ows) and vectorizes all operators and functions calls.
+This is the same behavior as adding the dot operator `.` into the desired operation.
+Comparing with `DataFrames.jl`,
+this is similar as the `ByRow` function we saw in @sec:subset.
+
+These 3 operations are equivalent:
+
+```julia
+# DataFrames.jl
+transform(df, :col => ByRow(exp))
+```
+
+```julia
+# DFM non-vectorized (default)
+@transform df exp.(:col)
+```
+
+```julia
+# DFM vectorized with r prefix
+@rtransform df exp(:col)
+```
+
+> **_NOTE:_**
+> For most of the DFM macros we have four variants:
+>
+> - `@macro`: non-vectorized
+> - `@rmacro`: vectorized
+> - `@macro!`: non-vectorized in-place
+> - `@rmacro!`: vectorized in-place

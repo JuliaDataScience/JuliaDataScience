@@ -64,6 +64,7 @@ In this chapter you will learn how to:
     1. Join multiple data sources together.
     1. Group and summarize data.
     1. Export data out of Julia to CSV and Excel files.
+1. TODO: Data Manipulation with `DataFramesMeta.jl`
 1. **Data Visualization** with `Makie.jl` (@sec:DataVisualizationMakie).
 In this chapter you will learn how to:
     1. Plot data with different `Makie.jl` backends.

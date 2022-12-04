@@ -55,6 +55,7 @@ using Reexport: @reexport
         @rselect,
         @transform,
         @rtransform,
+        @rtransform!,
         @subset,
         @rsubset,
         @orderby,

@@ -51,6 +51,7 @@ using Reexport: @reexport
         transform,
         transform!
     using DataFramesMeta:
+        DataFramesMeta,
         @select,
         @rselect,
         @transform,

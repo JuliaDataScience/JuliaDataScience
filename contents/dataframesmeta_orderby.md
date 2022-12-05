@@ -1,6 +1,6 @@
 ## Row Sorting {#sec:dataframesmeta_orderby}
 
-**DFM has a macro for sorting rows: `@orderby`**.
+**`DataFramesMeta.jl` has a macro for sorting rows: `@orderby`**.
 `@orderby` do not have an in-place or vectorized variant.
 
 Let's sort our `leftjoined` by grade in 2021:
@@ -23,7 +23,7 @@ sco("""
 )
 ```
 
-Like all the other DFM macros,
+Like all the other `DataFramesMeta.jl` macros,
 `@orderby` also supports multiple operations inside a `begin ... end` statement:
 
 ```jl

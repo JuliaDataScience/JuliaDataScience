@@ -22,7 +22,7 @@ end
 
 > **_NOTE:_**
 > `@chain` will replace the first positional argument while chaining operations.
-> This is not a problem in `DataFrames.jl` and DFM,
+> This is not a problem in `DataFrames.jl` and `DataFramesMeta.jl`,
 > since the `DataFrame` is always the first positional argument.
 
 We can also nest as many as `begin ... end` statements we desired inside the operations:
@@ -41,7 +41,7 @@ end
 )
 ```
 
-To conclude, let's show a `@chain` example with all of the DFM macros we covered so far:
+To conclude, let's show a `@chain` example with all of the `DataFramesMeta.jl` macros we covered so far:
 
 ```jl
 sco("""

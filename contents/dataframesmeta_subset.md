@@ -4,7 +4,7 @@ We already covered two macros that operates on _columns_, `@select` and `@transf
 
 Now let's cover the only macro we need to **operate on _rows_: `@subset`**
 
-It follows the same principes we've seen so far with DFM,
+It follows the same principes we've seen so far with `DataFramesMeta.jl`,
 _except_ that the **operation must return a boolean variable** for row selection.
 
 Let's filter grades above 7:

@@ -17,7 +17,7 @@ sco("""
 As you can see, `@transform` does not perform column selection,
 and the `:grade_100` column is created as a new column and added to the right of our `DataFrame`.
 
-DFM macros also support `begin ... end` statements.
+`DataFramesMeta.jl` macros also support `begin ... end` statements.
 For example, suppose that you are creating two columns in a `@transform` macro:
 
 ```jl
@@ -45,7 +45,7 @@ end
 This makes much easier to analyze code.
 
 We can also use other columns in our transformations,
-which makes DFM more appealing than `DataFrames.jl` due to the easier syntax.
+which makes `DataFramesMeta.jl` more appealing than `DataFrames.jl` due to the easier syntax.
 
 First, let's revisit the leftjoined `DataFrame` from Chapter -@sec:dataframes:
 
@@ -66,7 +66,7 @@ sco("""
 )
 ```
 
-This is how you calculate the mean of grades in both years using DFM:
+This is how you calculate the mean of grades in both years using `DataFramesMeta.jl`:
 
 ```jl
 sco("""
@@ -84,4 +84,4 @@ transform(leftjoined, [:grade_2020, :grade_2021] => ByRow((x, y) -> (x + y) / 2)
 )
 ```
 
-As you can see, the case for easier syntax is not hard to argue for DFM.
+As you can see, the case for easier syntax is not hard to argue for `DataFramesMeta.jl`.

@@ -1,6 +1,6 @@
 ## Macros {#sec:dataframesmeta_macros}
 
-Before we dive into DFM commands,
+Before we dive into `DataFramesMeta.jl` commands,
 you might noticed that all of those start with an "at" `@` symbol.
 These commands have a special category in the Julia language:
 they are called **macros**.
@@ -12,13 +12,13 @@ they are called **macros**.
 > please check the [Julia documentation section on metaprogramming](https://docs.julialang.org/en/v1/manual/metaprogramming/)
 > and [Julius Krumbiegel's blog post on Julia macros](https://jkrumbiegel.com/pages/2021-06-07-macros-for-beginners/).
 
-DFM macros behave **similar** as `DataFrames.jl` functions:
+`DataFramesMeta.jl` macros behave **similar** as `DataFrames.jl` functions:
 
 - they both take a `DataFrame` as a first positional argument
 - they have in-place _mutating_ functions
   (as discussed in @sec:df_performance_inplace: the bang `!` functions)
 
-Nevertheless, there are some **differences** on using `DataFrames.jl` functions versus DFM macros.
+Nevertheless, there are some **differences** on using `DataFrames.jl` functions versus `DataFramesMeta.jl` macros.
 
 First, using parentheses in the macro commands are _optional_, and it can be replaced by _spaces_ instead.
 For example:
@@ -60,17 +60,17 @@ For example:
 Here the columns that we want to select will depend on the actual columns inside `df`.
 This means that Julia cannot treat the command as something that won't change depending on the context.
 Hence, it needs to be parsed dynamically.
-In DFM, we solve this by wrapping parts of the command that needs to be parsed dynamically with `$()`.
+In `DataFramesMeta.jl`, we solve this by wrapping parts of the command that needs to be parsed dynamically with `$()`.
 The above command needs to be changed to:
 
 ```julia
 @select df $(Not(:col))
 ```
 
-This tells DFM to treat the `Not(:col)` part of the macro as dynamic.
+This tells `DataFramesMeta.jl` to treat the `Not(:col)` part of the macro as dynamic.
 It will parse this expression and replace it by all of the columns except `:col`.
 
-Third, most of DFM macros have **two different versions**:
+Third, most of `DataFramesMeta.jl` macros have **two different versions**:
 a **_non-vectorized_**, and a **_vectorized_** form.
 The non-vectorized form is the default form and treats arguments as whole columns, i.e., they operate on arrays whereas the vectorized form has an `r` prefix
 (as in **r**ows) and vectorizes all operators and functions calls.
@@ -85,17 +85,17 @@ transform(df, :col => ByRow(exp))
 ```
 
 ```julia
-# DFM non-vectorized (default)
+# DataFramesMeta.jl non-vectorized (default)
 @transform df exp.(:col)
 ```
 
 ```julia
-# DFM vectorized with r prefix
+# DataFramesMeta.jl vectorized with r prefix
 @rtransform df exp(:col)
 ```
 
 > **_NOTE:_**
-> For most of the DFM macros we have four variants:
+> For most of the `DataFramesMeta.jl` macros we have four variants:
 >
 > - `@macro`: non-vectorized
 > - `@rmacro`: vectorized

@@ -1,7 +1,7 @@
 ## Data Summaries {#sec:dataframesmeta_combine}
 
 Similar to the `combine` `DataFrames.jl` function (@sec:groupby_combine),
-DFM has a **`@combine` macro** that performs similarly.
+`DataFramesMeta.jl` has a **`@combine` macro** that performs similarly.
 
 ```jl
 sco("""

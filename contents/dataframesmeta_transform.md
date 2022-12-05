@@ -42,7 +42,6 @@ end
 )
 ```
 
-This makes much easier to analyze code.
 
 We can also use other columns in our transformations,
 which makes `DataFramesMeta.jl` more appealing than `DataFrames.jl` due to the easier syntax.

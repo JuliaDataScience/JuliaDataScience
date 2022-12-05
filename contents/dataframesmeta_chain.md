@@ -8,7 +8,7 @@ To use it, we start with `@chain` followed by the `DataFrame` and a `begin` stat
 Every operation inside the `begin ... end` statement will be used as input for the next operation,
 therefore chaining operations together.
 
-Here's a simple example with a `groupby` followed by a `@combine`:
+Here is a simple example with a `groupby` followed by a `@combine`:
 
 ```jl
 sco("""

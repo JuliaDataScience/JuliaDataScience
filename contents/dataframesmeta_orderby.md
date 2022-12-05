@@ -1,7 +1,7 @@
 ## Row Sorting {#sec:dataframesmeta_orderby}
 
 **`DataFramesMeta.jl` has a macro for sorting rows: `@orderby`**.
-`@orderby` do not have an in-place or vectorized variant.
+`@orderby` does not have an in-place or vectorized variant.
 
 Let's sort our `leftjoined` by grade in 2021:
 

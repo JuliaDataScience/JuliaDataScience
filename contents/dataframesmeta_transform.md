@@ -18,7 +18,7 @@ As you can see, `@transform` does not perform column selection,
 and the `:grade_100` column is created as a new column and added to the right of our `DataFrame`.
 
 DFM macros also support `begin ... end` statements.
-For example, suppose you are creating two columns in a `@transform` macro:
+For example, suppose that you are creating two columns in a `@transform` macro:
 
 ```jl
 sco("""
@@ -28,8 +28,8 @@ sco("""
 )
 ```
 
-It can be cumbersome and difficult to read the transformations performed.
-To facilitate that, we can use a `begin ... end` statements and fill it with our transformation one per line:
+It can be cumbersome and difficult to read the performed transformations.
+To facilitate that, we can use `begin ... end` statements and put one transformation per line:
 
 ```jl
 sco("""

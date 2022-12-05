@@ -48,18 +48,17 @@ will always work because our intended select column command with the argument `:
 (the time that the Julia is executing code).
 It will always mean the same operation no matter the context.
 
-Now suppose you want to use one of the column selectors presented in @sec:select.
+Now suppose that you want to use one of the column selectors presented in @sec:select.
 Here, the expression inside the `@select` macro needs to be parsed _dynamically_.
-In other words it is _not_ static,
-the operation will change with context.
+In other words, it is _not_ static and the operation will change with context.
 For example:
 
 ```julia
 @select df Not(:col)
 ```
 
-Here the columns we want to select will depend on the actual columns inside `df`.
-This means that Julia cannot treat the command as something static that wont change depending on the context.
+Here the columns that we want to select will depend on the actual columns inside `df`.
+This means that Julia cannot treat the command as something that won't change depending on the context.
 Hence, it needs to be parsed dynamically.
 In DFM, we solve this by wrapping parts of the command that needs to be parsed dynamically with `$()`.
 The above command needs to be changed to:
@@ -73,12 +72,10 @@ It will parse this expression and replace it by all of the columns except `:col`
 
 Third, most of DFM macros have **two different versions**:
 a **_non-vectorized_**, and a **_vectorized_** form.
-The non-vectorized is the default form and treats arguments as whole columns, i.e. they operate on arrays.
-Whereas the vectorized form has an `r` prefix
+The non-vectorized form is the default form and treats arguments as whole columns, i.e., they operate on arrays whereas the vectorized form has an `r` prefix
 (as in **r**ows) and vectorizes all operators and functions calls.
 This is the same behavior as adding the dot operator `.` into the desired operation.
-Comparing with `DataFrames.jl`,
-this is similar as the `ByRow` function we saw in @sec:subset.
+This is similar to the `ByRow` function from `DataFrames.jl` that we saw in @sec:subset.
 
 These 3 operations are equivalent:
 

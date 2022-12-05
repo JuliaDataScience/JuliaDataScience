@@ -18,7 +18,7 @@ sco("""
 
 As you can see, `@subset` has also a vectorized variant `@rsubset`.
 Sometimes we want to mix and match vectorized and non-vectorized function calls.
-Suppose we want to filter out the grades above the mean grade:
+Suppose that we want to filter out the grades above the mean grade:
 
 ```jl
 sco("""
@@ -27,7 +27,7 @@ sco("""
 )
 ```
 
-For this we need a `@subset` macro with the `>` operator vectorized,
+For this, we need a `@subset` macro with the `>` operator vectorized,
 since we want to element-wise comparison,
 but the `mean` function needs to operate on the whole column of values.
 

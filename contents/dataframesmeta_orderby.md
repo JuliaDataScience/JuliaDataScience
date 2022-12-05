@@ -12,7 +12,7 @@ sco("""
 )
 ```
 
-By default `@orderby` will sort in ascending order.
+By default, `@orderby` will sort in ascending order.
 But you can change this to decreasing order with the minus sign `-` in front of the column:
 
 ```jl
@@ -36,5 +36,5 @@ end
 )
 ```
 
-Here we are sorting first by grade in 2020 then by name,
-both in ascending order.
+Here, we are sorting first by grade in 2020 then by name.
+Both in ascending order.

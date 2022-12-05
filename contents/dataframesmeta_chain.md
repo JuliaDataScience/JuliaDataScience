@@ -1,12 +1,10 @@
 ## Piping Operations {#sec:dataframesmeta_chain}
 
-R users are familiar with the pipe operator `%>%`.
-It allows you to **chain operations together**.
+R users are familiar with the pipe operator `%>%` which allows **chaining** operations together.
 That means that the output of an operation will be used as input in the next operation and so on.
 
 This can be accomplished with the `@chain` macro.
-The way it works is quite simple.
-First, we start with `@chain` followed by the `DataFrame` and a `begin` statement.
+To use it, we start with `@chain` followed by the `DataFrame` and a `begin` statement.
 Every operation inside the `begin ... end` statement will be used as input for the next operation,
 therefore chaining operations together.
 

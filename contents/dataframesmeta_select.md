@@ -1,6 +1,6 @@
 ## Column Selection {#sec:dataframesmeta_select}
 
-Let's revisit our example `all_grades()` data defined in Chapter -@sec:dataframes.
+Let's revisit our example `all_grades()` data defined in Chapter -@sec:dataframes:
 
 ```jl
 sco("""
@@ -29,7 +29,7 @@ sco("""
 )
 ```
 
-To use the column selectors (@sec:select) you need to wrap them inside `$()`:
+To use the column selectors (@sec:select), you need to wrap them inside `$()`:
 
 ```jl
 sco("""
@@ -40,7 +40,7 @@ sco("""
 
 The DFM syntax, for some users, is easier and more intuitive than the `DataFrames.jl`'s minilanguage `source => transformation => target`.
 The minilanguage is replaced by `target = transformation(source)`.
-Suppose you want to represent the grades as a number between 0 and 100:
+Suppose that you want to represent the grades as a number between 0 and 100:
 
 ```jl
 sco("""
@@ -50,7 +50,7 @@ sco("""
 )
 ```
 
-Of course the `.*` can be ommited by using the vectorized form of the macro, `@rselect`:
+Of course, the `.*` can be ommited by using the vectorized form of the macro, `@rselect`:
 
 ```jl
 sco("""

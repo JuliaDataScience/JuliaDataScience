@@ -50,6 +50,18 @@ using Reexport: @reexport
         subset,
         transform,
         transform!
+    using DataFramesMeta:
+        DataFramesMeta,
+        @select,
+        @rselect,
+        @transform,
+        @rtransform,
+        @rtransform!,
+        @subset,
+        @rsubset,
+        @orderby,
+        @chain,
+        @combine
     using Dates
     using Distributions
     using Downloads

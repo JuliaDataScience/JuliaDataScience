@@ -55,8 +55,8 @@ We also like the informal idea that, being data literate, you won't feel overwhe
 Data literacy can be seen as a highly competitive skill to possess.
 In this book we'll cover two aspects of data literacy:
 
-1. **Data Manipulation** with `DataFrames.jl` (@sec:dataframes).
-In this chapter you will learn how to:
+1. **Data Manipulation** with `DataFrames.jl` (Chapter -@sec:dataframes) and `DataFramesMeta.jl` (Chapter -@sec:dataframesmeta).
+In these chapters you will learn how to:
     1. Read CSV and Excel data into Julia.
     1. Process data in Julia, that is, learn how to answer data questions.
     1. Filter and subset data.
@@ -64,7 +64,7 @@ In this chapter you will learn how to:
     1. Join multiple data sources together.
     1. Group and summarize data.
     1. Export data out of Julia to CSV and Excel files.
-1. **Data Visualization** with `Makie.jl` (@sec:DataVisualizationMakie).
+1. **Data Visualization** with `Makie.jl` (Chapter -@sec:DataVisualizationMakie).
 In this chapter you will learn how to:
     1. Plot data with different `Makie.jl` backends.
     1. Save visualizations in several formats such as PNG or PDF.

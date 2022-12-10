@@ -17,7 +17,7 @@ they are called **macros**.
 - they have in-place _mutating_ functions
   (as discussed in @sec:df_performance_inplace: the bang `!` functions)
 
-Nevertheless, there are some **differences** on using `DataFrames.jl` functions versus `DataFramesMeta.jl` macros.
+Nevertheless, there are some **differences** between using `DataFrames.jl` functions versus `DataFramesMeta.jl` macros.
 
 First, using parentheses in the macro commands are _optional_, and it can be replaced by _spaces_ instead.
 For example:
@@ -43,8 +43,8 @@ For example:
 @select df :col
 ```
 
-will always work because our intended select column command with the argument `:col` won't change in _runtime_
-(the time that the Julia is executing code).
+will always work because our intended selected column command with the argument `:col` won't change in _runtime_
+(the time that Julia is executing code).
 It will always mean the same operation no matter the context.
 
 Now suppose that you want to use one of the column selectors presented in @sec:select.
@@ -59,7 +59,7 @@ For example:
 Here the columns that we want to select will depend on the actual columns inside `df`.
 This means that Julia cannot treat the command as something that won't change depending on the context.
 Hence, it needs to be parsed dynamically.
-In `DataFramesMeta.jl`, we solve this by wrapping parts of the command that needs to be parsed dynamically with `$()`.
+In `DataFramesMeta.jl`, this is solved by wrapping parts of the command that needs to be parsed dynamically with `$()`.
 The above command needs to be changed to:
 
 ```julia
@@ -74,7 +74,7 @@ a **_non-vectorized_**, and a **_vectorized_** form.
 The non-vectorized form is the default form and treats arguments as whole columns, i.e., they operate on arrays whereas the vectorized form has an `r` prefix
 (as in **r**ows) and vectorizes all operators and functions calls.
 This is the same behavior as adding the dot operator `.` into the desired operation.
-This is similar to the `ByRow` function from `DataFrames.jl` that we saw in @sec:subset.
+Similar to the `ByRow` function from `DataFrames.jl` that we saw in @sec:subset.
 
 These 3 operations are equivalent:
 

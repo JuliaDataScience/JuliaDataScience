@@ -1,6 +1,6 @@
 ## Row Selection {#sec:dataframesmeta_subset}
 
-We already covered two macros that operates on _columns_, `@select` and `@transform`.
+We already covered two macros that operate on _columns_, `@select` and `@transform`.
 
 Now let's cover the only macro we need to **operate on _rows_: `@subset`**
 It follows the same principes we've seen so far with `DataFramesMeta.jl`,
@@ -27,7 +27,7 @@ sco("""
 ```
 
 For this, we need a `@subset` macro with the `>` operator vectorized,
-since we want to element-wise comparison,
+since we want a element-wise comparison,
 but the `mean` function needs to operate on the whole column of values.
 
 `@subset` also supports multiple operations inside a `begin ... end` statement:

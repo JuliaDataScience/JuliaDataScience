@@ -7,11 +7,11 @@ they are called **macros**.
 > **_NOTE:_**
 > Macros are a way to perform [metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) in Julia.
 > We won't cover macro basics here.
-> However, if you want to find more more,
+> However, if you want to find out more,
 > please check the [Julia documentation section on metaprogramming](https://docs.julialang.org/en/v1/manual/metaprogramming/)
 > and [Julius Krumbiegel's blog post on Julia macros](https://jkrumbiegel.com/pages/2021-06-07-macros-for-beginners/).
 
-`DataFramesMeta.jl` macros behave **similar** as `DataFrames.jl` functions:
+`DataFramesMeta.jl` macros behave **similar** to `DataFrames.jl` functions:
 
 - they both take a `DataFrame` as a first positional argument
 - they have in-place _mutating_ functions

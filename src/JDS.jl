@@ -9,6 +9,7 @@ using Reexport: @reexport
 @reexport begin
     using AlgebraOfGraphics:
         data,
+        density,
         draw,
         draw!,
         expectation,

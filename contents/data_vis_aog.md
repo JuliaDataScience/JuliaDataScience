@@ -27,7 +27,7 @@ And, as such, it defines two algebraic properties.
 Let `a`, `b` and `c` be `Layer` objects:
 
 - **associative property**: `(a * b) * c = a * (b * c)`
-- **distributive property**: `(a + b) * c = (a * c) + (b * c)`
+- **distributive property**: `a  * (b + c) = (a * b) + (a + b)`
 
 To get started with `AlgebraOfGraphics.jl`,
 you'll need to load it along with a desired `Makie.jl` backend (Chapter -@sec:DataVisualizationMakie):

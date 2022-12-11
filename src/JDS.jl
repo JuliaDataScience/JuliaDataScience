@@ -8,13 +8,16 @@ using Reexport: @reexport
 
 @reexport begin
     using AlgebraOfGraphics:
+        data,
         draw,
         draw!,
         linear,
+        mapping,
         nonnumeric,
         renamer,
         smooth,
-        sorter
+        sorter,
+        visual
     using Books:
         BUILD_DIR,
         @sc,

@@ -35,6 +35,7 @@
     "data_vis_aog_layouts",
     "data_vis_aog_stats",
     "data_vis_aog_custom",
+    "data_vis_aog_makie",
     #"stats",
     #"stats_distributions",
     #"stats_vis",

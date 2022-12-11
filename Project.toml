@@ -3,6 +3,7 @@ uuid = "6c596d62-2771-44f8-8373-3ec4b616ee9d"
 authors = ["Jose Storopoli", "Rik Huijzer", "Lazaro Alonso"]
 
 [deps]
+AlgebraOfGraphics = "cbdf2221-f076-402e-a563-3d30da359d67"
 Books = "939d5c6b-51ae-42e7-97ca-7564d0d4ad91"
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
@@ -32,6 +33,7 @@ TestImages = "5e47fb64-e119-507b-a336-dd2b206d9990"
 XLSX = "fdbf4ff8-1666-58a4-91e7-1b58723a45e0"
 
 [compat]
+AlgebraOfGraphics = "0.6"
 Books = "2"
 CSV = "0.10"
 CairoMakie = "0.10"

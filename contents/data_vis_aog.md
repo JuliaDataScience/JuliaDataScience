@@ -5,15 +5,18 @@
 
 `AlgebraOfGraphics.jl` is a higher-level plotting package that uses `Makie.jl` under the hood.
 It is geared towards data visualization workflows with support for `DataFrame`s.
-`AlgebraOfGraphics.jl` abstracts away some common patterns in data visualization using an interface that was based on the "grammar of graphics" approach that is used by R's `ggplot2` package.
+`AlgebraOfGraphics.jl` abstracts away some common patterns in data visualization using an interface inspited by R's `ggplot2` package.
 
-The **grammar of graphics** is a framework that follows a layered approach to construct visualizations in a structure manner.
+`AlgebraOfGraphics.jl` follows a layered approach to construct visualizations in a structure manner.
 There are four main types of layers:
 
 - **data** layer
 - **mapping** layer
 - **visual transformation** layer
 - **statistical transformation** layer
+
+> **_NOTE:_**
+> `AlgebraOfGraphics.jl` has some guiding principles described in their [documentation philosophy section](https://aog.makie.org/stable/philosophy/).
 
 `AlgebraOfGraphics.jl` allows you to construct all of these types of layers with functions that returns a `Layer` object,
 in which all of the information necessary will be encoded.
@@ -22,7 +25,7 @@ You can then perform **two operations on layers**:
 - **multiplication with `*`**: this fuses two or more layers into a _single_ layer
 - **addition with `+`**: this superimposes two or more layers into a vector of `Layer`s
 
-Finally, as the name suggests, `AlgebraOfGraphics.jl` is more than a grammar but also an algebra for `Layer` objects.
+Finally, as the name suggests, `AlgebraOfGraphics.jl` is an algebra for `Layer` objects.
 And, as such, it defines two algebraic properties.
 Let `a`, `b` and `c` be `Layer` objects:
 
@@ -51,6 +54,10 @@ data_layer = data(grades_2020())
 As you can see, `data` takes any `DataFrame` and returns a `Layer` type.
 You can see that we do not have any any mapping, visual, or statistical transformations information.
 That will need to be specified in different layer types with different functions.
+
+> **_NOTE:_**
+> `data` layers can use any [`Tables.jl`](https://github.com/JuliaData/Tables.jl/blob/main/INTEGRATIONS.md) data format,
+> which `DataFrame` and `NamedTuples` are included.
 
 Let's see how to encode mapping information oin a **mapping layer** with the `mapping` function.
 This functions has the following signature:

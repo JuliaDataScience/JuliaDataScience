@@ -90,3 +90,6 @@ All of the `Legend`/`axislegend` keyword arguments (@sec:datavisMakie_attributes
 Finally, as the last step, we can the `Figure` to recover it after it was mutated by all of the mutating "bang" functions,
 e.g. `draw!` and `legend!`,
 in order to render our visualization.
+
+> ***NOTE:***
+> Don't forget to check [`AlgebraOfGraphics.jl` documentation](https://aog.makie.org) for additional examples.

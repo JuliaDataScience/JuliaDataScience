@@ -1,8 +1,5 @@
 # Data Visualization with AlgebraOfGraphics.jl {#sec:aog}
 
-> **_NOTE:_**
-> Don't forget to check [`AlgebraOfGraphics.jl` documentation](https://aog.makie.org).
-
 `AlgebraOfGraphics.jl` is a higher-level plotting package that uses `Makie.jl` under the hood.
 It is geared towards data visualization workflows with support for `DataFrame`s.
 `AlgebraOfGraphics.jl` abstracts away some common patterns in data visualization using an interface inspired by R's `ggplot2` package.

@@ -5,9 +5,9 @@
 
 `AlgebraOfGraphics.jl` is a higher-level plotting package that uses `Makie.jl` under the hood.
 It is geared towards data visualization workflows with support for `DataFrame`s.
-`AlgebraOfGraphics.jl` abstracts away some common patterns in data visualization using an interface inspited by R's `ggplot2` package.
+`AlgebraOfGraphics.jl` abstracts away some common patterns in data visualization using an interface inspired by R's `ggplot2` package.
 
-`AlgebraOfGraphics.jl` follows a layered approach to construct visualizations in a structure manner.
+`AlgebraOfGraphics.jl` follows a layered approach to construct visualizations in a structured manner.
 There are four main types of layers:
 
 - **data** layer
@@ -16,7 +16,7 @@ There are four main types of layers:
 - **statistical transformation** layer
 
 > **_NOTE:_**
-> `AlgebraOfGraphics.jl` has some guiding principles described in their [documentation philosophy section](https://aog.makie.org/stable/philosophy/).
+> `AlgebraOfGraphics.jl` has some guiding principles described in their [philosophy section](https://aog.makie.org/stable/philosophy/).
 
 `AlgebraOfGraphics.jl` allows you to construct all of these types of layers with functions that returns a `Layer` object,
 in which all of the information necessary will be encoded.
@@ -27,7 +27,7 @@ You can then perform **two operations on layers**:
 
 Finally, as the name suggests, `AlgebraOfGraphics.jl` is an algebra for `Layer` objects.
 And, as such, it defines two algebraic properties.
-Let `a`, `b` and `c` be `Layer` objects:
+Let `a`, `b` and `c` be `Layer` objects, then the following two properties hold:
 
 - **associative property**: `(a * b) * c = a * (b * c)`
 - **distributive property**: `a  * (b + c) = (a * b) + (a + b)`
@@ -42,7 +42,7 @@ using CairoMakie
 
 ## Layers {#sec:aog_layers}
 
-The first layer we'll cover will be the **data layer**.
+We'll cover the **data layer** first.
 You can create data layers with the `data` function:
 
 ```jl
@@ -59,7 +59,7 @@ That will need to be specified in different layer types with different functions
 > `data` layers can use any [`Tables.jl`](https://github.com/JuliaData/Tables.jl/blob/main/INTEGRATIONS.md) data format,
 > which `DataFrame` and `NamedTuples` are included.
 
-Let's see how to encode mapping information oin a **mapping layer** with the `mapping` function.
+Let's see how to encode mapping information in a **mapping layer** with the `mapping` function.
 This functions has the following signature:
 
 ```julia
@@ -71,8 +71,7 @@ mapping(
 )
 ```
 
-The positional arguments `x`, `y`, and `z` correspond to the X-, Y- and Z-axis mappings.
-Where the keyword arguments `color`, `size`, and so on, correspond to the aesthetics mappings.
+The positional arguments `x`, `y`, and `z` correspond to the X-, Y- and Z-axis mappings where the keyword arguments `color`, `size`, and so on, correspond to the aesthetics mappings.
 The purpose of `mapping` is to encode in a `Layer` information about which columns of the underlying data `AlgebraOfGraphics.jl` will map onto the axis and other visualization aesthetics, e.g. color and size.
 Let's use `mapping` to encode information regarding X- and Y-axis:
 
@@ -83,7 +82,7 @@ mapping_layer = mapping(:name, :grade_2020)
 ```
 
 We pass the columns as `Symbol`s in a similar manner as we did for `DataFrames.jl` (Chapter -@sec:dataframes) and `DataFramesMeta.jl` (Chapter -@sec:dataframesmeta).
-In the ouput, we see that we have sucessfully encoded both `:name` and `:grade_2020` columns as the X- and Y-axis, respectively.
+In the output, we see that we have successfully encoded both `:name` and `:grade_2020` columns as the X- and Y-axis, respectively.
 
 Finally, we can use a **visual transformation layer** to encode which type of plot we want to make.
 This is done with the `visual` function which takes a **`Makie.jl` plotting type** as a single positional argument.
@@ -184,7 +183,7 @@ sco(s)
 We can also perform **transformations** inside the `mapping` function.
 It supports the `DataFrames.jl`'s minilanguage `source => transformation => target`.
 Where `source` is the original column name and `target` is a `String` representing the new desired label.
-If we simply use `source => target`, the underlying transformation will be the `identity` function, i.e. no transformation is performed and the data is passed as it is.
+If we simply use `source => target`, the underlying transformation will be the `identity` function, i.e., no transformation is performed and the data is passed as it is.
 Here's an example:
 
 ```jl

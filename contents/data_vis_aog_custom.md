@@ -10,14 +10,9 @@ We can customize anything that the `Makie.jl`'s plotting types support inside `v
 s = """
     # aog_custom_visual # hide
     CairoMakie.activate!() # hide
-    plt = data(synthetic_df) *
-        mapping(:x, :y) *
-        (
-            visual(Scatter; color=:steelblue, marker=:cross)
-            + (
-                linear() * visual(; color=:red, linestyle=:dot, linewidth=5)
-            )
-        )
+    blue = visual(Scatter; color=:steelblue, marker=:cross)
+    red = linear() * visual(; color=:red, linestyle=:dot, linewidth=5)
+    plt = data(synthetic_df) * mapping(:x, :y) * (blue + red)
     f = draw(plt) # hide
     draw(plt)
     label = "aog_custom_visual" # hide

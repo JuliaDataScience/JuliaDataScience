@@ -3,7 +3,7 @@
 `AlgebraOfGraphics.jl` supports layouts with plots in multiple rows and columns,
 also known as _faceting_.
 These are specified using the keywords arguments `layout`, `row` and `col` inside `mapping`.
-If you use **`layout`** `AlgebraOfGraphics.jl` will try to use the best combinations of rows and columns to layout the visualization:
+If you use **`layout`**, `AlgebraOfGraphics.jl` will try to use the best combinations of rows and columns to layout the visualization:
 
 ```jl
 s = """
@@ -33,10 +33,7 @@ s = """
     # aog_row # hide
     CairoMakie.activate!() # hide
     plt = data(df) *
-        mapping(
-            :name,
-            :grade;
-            row=:year) *
+        mapping(:name, :grade; row=:year) *
         visual(BarPlot)
     f = draw(plt) # hide
     draw(plt)

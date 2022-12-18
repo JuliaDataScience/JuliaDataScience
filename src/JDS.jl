@@ -14,6 +14,7 @@ using Reexport: @reexport
         draw!,
         expectation,
         frequency,
+        legend!,
         linear,
         mapping,
         nonnumeric,

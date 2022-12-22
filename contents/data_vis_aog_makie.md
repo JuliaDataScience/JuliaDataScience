@@ -84,7 +84,7 @@ Each one of these are followed by a `draw!` with the desired `fig`'s `GridPositi
 Furthermore, we use `AlgebraOfGraphics.jl`'s `legend!` to add the legend to the visualization.
 They way `legend!` works is by passing first the desired `fig`'s `GridPosition` for the placement of the legend,
 and the desired legend labels.
-For the desired legend label, we use the output of the `draw!` function that was called in `Layer`s that have legend labels,
+For the legend's label, we use the output of the `draw!` function that was called in the `Layer`s  and that has legend labels already,
 in our case the `plt_barplot`.
 All of the `Legend`/`axislegend` keyword arguments (@sec:datavisMakie_attributes) can be used in `legend!`.
 Finally, as the last step, we call the Figure, `fig`,  to recover it after it was mutated by all of the mutating "bang" functions,

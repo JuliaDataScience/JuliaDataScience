@@ -37,5 +37,5 @@ and has the following keyword arguments:
 - `linewidth`: a number representing the width of our line
 
 You can use as many customizations as you want in your plot.
-Don't forget that if you mapping an aesthetic to a certain feature of your plot, e.g. color,
+Don't forget that if your mapping an aesthetic to a certain feature of your plot, e.g. color,
 that will inhibit further color customizations in your visualization.

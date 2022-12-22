@@ -2,7 +2,7 @@
 
 `AlgebraOfGraphics.jl` is a higher-level plotting package that uses `Makie.jl` under the hood.
 It is geared towards data visualization workflows with support for `DataFrame`s.
-`AlgebraOfGraphics.jl` abstracts away some common patterns in data visualization using an interface inspired by R's `ggplot2` package.
+`AlgebraOfGraphics.jl` abstracts away some common patterns in data visualization using an interface similar to R's `ggplot2` package.
 
 `AlgebraOfGraphics.jl` follows a layered approach to construct visualizations in a structured manner.
 There are four main types of layers:
@@ -15,7 +15,7 @@ There are four main types of layers:
 > **_NOTE:_**
 > `AlgebraOfGraphics.jl` has some guiding principles described in their [philosophy section](https://aog.makie.org/stable/philosophy/).
 
-`AlgebraOfGraphics.jl` allows you to construct all of these types of layers with functions that returns a `Layer` object,
+`AlgebraOfGraphics.jl` allows you to construct all of these types of layers with functions that return a `Layer` object,
 in which all of the information necessary will be encoded.
 You can then perform **two operations on layers**:
 
@@ -49,15 +49,15 @@ data_layer = data(grades_2020())
 ```
 
 As you can see, `data` takes any `DataFrame` and returns a `Layer` type.
-You can see that we do not have any any mapping, visual, or statistical transformations information.
-That will need to be specified in different layer types with different functions.
+You can see that we do not have any mapping, visual, or statistical transformations information yet.
+That will need to be specified in different layer type with different functions.
 
 > **_NOTE:_**
 > `data` layers can use any [`Tables.jl`](https://github.com/JuliaData/Tables.jl/blob/main/INTEGRATIONS.md) data format,
-> which `DataFrame` and `NamedTuples` are included.
+> including `DataFrames` and `NamedTuples`.
 
-Let's see how to encode mapping information in a **mapping layer** with the `mapping` function.
-This functions has the following signature:
+Let's see how to encode data information in a **mapping layer** with the `mapping` function.
+This function has the following signature:
 
 ```julia
 mapping(
@@ -68,7 +68,7 @@ mapping(
 )
 ```
 
-The positional arguments `x`, `y`, and `z` correspond to the X-, Y- and Z-axis mappings where the keyword arguments `color`, `size`, and so on, correspond to the aesthetics mappings.
+The positional arguments `x`, `y`, and `z` correspond to the X-, Y- and Z-axis mappings and the keyword arguments `color`, `size`, and so on, correspond to the aesthetics mappings.
 The purpose of `mapping` is to encode in a `Layer` information about which columns of the underlying data `AlgebraOfGraphics.jl` will map onto the axis and other visualization aesthetics, e.g. color and size.
 Let's use `mapping` to encode information regarding X- and Y-axis:
 
@@ -91,7 +91,7 @@ visual_layer = visual(BarPlot)
 """)
 ```
 
-The `visual_layer` is a visual transformation layer that only encodes information about which type of visual transformation you want to apply to your visualization.
+The `visual_layer` is a visual transformation layer that encodes information about which type of visual transformation you want to use in your visualization plus keyword arguments that might apply to the selected plotting type.
 
 > **_NOTE:_**
 > We are using the plotting _type_ (`BarPlot`) instead of the plotting _function_ (`barplot`).
@@ -100,8 +100,8 @@ The `visual_layer` is a visual transformation layer that only encodes informatio
 
 ### Drawing Layers {#sec:aog_layers_draw}
 
-Once we have all of the necessary layers we can fuse them together with `*` and pass to the `draw` function.
-The **`draw` function** will use all of the information from the layer it is being supplied and will send it as **plottings instructions to the activated `Makie.jl` backend**:
+Once we have all of the necessary layers we can fuse them together with `*` and apply the `draw` function to get a plot.
+The **`draw` function** will use all of the information from the layer it is being supplied and will send it as **plotting instructions to the activated `Makie.jl` backend**:
 
 ```jl
 s = """
@@ -150,7 +150,7 @@ df = @transform all_grades() :year = ["2020", "2020", "2020", "2020", "2021", "2
 )
 ```
 
-Now we can pass the `:year` column to be mapped as a both `color` and `dodge` aesthetics inside `mapping`:
+Now we can pass the `:year` column to be mapped as both a `color` and  `dodge` aesthetic inside `mapping`:
 
 ```jl
 s = """
@@ -227,7 +227,7 @@ s = """
 sco(s)
 ```
 
-As you can see, we can pass both regular functinos or anonymous functions.
+As you can see, we can pass both regular or anonymous functions.
 
 > **_NOTE:_**
 > By default `AlgebraOfGraphics.jl` transformations inside `mapping` are vectorized (broadcasted) by default.

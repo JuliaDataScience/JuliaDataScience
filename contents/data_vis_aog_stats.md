@@ -27,11 +27,11 @@ s = """
 sco(s)
 ```
 
-As expected, `expectation` adds a statistical transformation layer that tells `AlgebraOfGraphics.jl` to compute the mean of the Y-axis values for every unique X-axis values.
+Here, `expectation` adds a statistical transformation layer that tells `AlgebraOfGraphics.jl` to compute the mean of the Y-axis values for every unique X-axis values.
 In our case, it computed the mean of grades for every student.
 Note that we could safely remove the visual transformation layer (`visual(BarPlot)`) since it is the default visual transformation for `expectation`.
 
-Following up, we'll show an example with `frequency`:
+Next, we'll show an example with `frequency`:
 
 ```jl
 s = """

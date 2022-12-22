@@ -24,7 +24,7 @@ draw!(ax, plt)
 ```
 
 As an example, let's create an advanced layout by combining `Makie.jl` with `AlgebraOfGraphics.jl`.
-We'll use visualizations that we've already covered in this chapter:
+We'll use visualizations that had been already covered in this chapter:
 
 ```jl
 s = """
@@ -87,7 +87,7 @@ and the desired legend labels.
 For the desired legend label, we use the output of the `draw!` function that was called in `Layer`s that have legend labels,
 in our case the `plt_barplot`.
 All of the `Legend`/`axislegend` keyword arguments (@sec:datavisMakie_attributes) can be used in `legend!`.
-Finally, as the last step, we can the `Figure` to recover it after it was mutated by all of the mutating "bang" functions,
+Finally, as the last step, we call the Figure, `fig`,  to recover it after it was mutated by all of the mutating "bang" functions,
 e.g. `draw!` and `legend!`,
 in order to render our visualization.
 

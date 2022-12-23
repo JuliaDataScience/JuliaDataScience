@@ -106,7 +106,7 @@ This is fixed by passing custom ticks, as in `cbar.ticks = (positions, ticks)`.
 
 The last situation is when passing a multiple colors to `colormap`.
 You will get an interpolated colormap between these two colors.
-Also, hexadecimal coded colors are accepted. So, on top or our heatmap let's put one semi-transparent point using this.
+Also, hexadecimal coded colors are accepted. So, on top of our heatmap let's put one semi-transparent point using this.
 
 ```jl
 s2color2 = """

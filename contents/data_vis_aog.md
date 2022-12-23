@@ -39,8 +39,8 @@ using CairoMakie
 
 ## Layers {#sec:aog_layers}
 
-We'll cover the **data layer** first.
-You can create data layers with the `data` function:
+We'll cover the **data layer** first,
+which can be created with the `data` function:
 
 ```jl
 sco("""

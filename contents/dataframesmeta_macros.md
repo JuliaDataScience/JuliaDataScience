@@ -1,12 +1,12 @@
 ## Macros {#sec:dataframesmeta_macros}
 
-You might have noticed all `DataFramesMeta.jl` commands start with an "at" `@` symbol.
+You might have noticed that all `DataFramesMeta.jl` commands start with an "at" `@` symbol.
 These commands have a special category in the Julia language:
 they are called **macros**.
 
 > **_NOTE:_**
 > Macros are a way to perform [metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) in Julia.
-> We won't cover macro basics here.
+> We won't cover macro's basics here.
 > However, if you want to find out more,
 > please check the [Julia documentation section on metaprogramming](https://docs.julialang.org/en/v1/manual/metaprogramming/)
 > and [Julius Krumbiegel's blog post on Julia macros](https://jkrumbiegel.com/pages/2021-06-07-macros-for-beginners/).

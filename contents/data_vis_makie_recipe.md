@@ -6,7 +6,7 @@ A `recipe` is your own custom plotting type command.
 This extension is done just in `Makie.jl`, which means that making a new set of plotting rules for your own types is light, namely, you don't need the complete plotting machinery available to define them. This is specially useful if you want to include your own plotting commands in one of your own packages.
 However, in order for them to work you will still need to use one of the backends, i.e., GLMakie or CairoMakie.
 
-As an example we will code a small **full recipe** for a `DataFrame`. Please refer to the [documentation](https://makie.juliaplots.org/stable/documentation/recipes/) for more details.
+As an example we will code a small **full recipe** for a `DataFrame`. Please refer to the [documentation](https://docs.makie.org/stable/documentation/recipes/) for more details.
 
 A Makie `recipe` consist of two parts, a plot `type` name defined via `@recipe` and a custom `plot!(::Makie.plot)` which creates the actual plot via plotting functions already defined.
 
@@ -57,7 +57,7 @@ sc(s)
 
 Note the extras `[]` at the end of each variable.
 Those are due to the fact that *recipes* in Makie are dynamic, meaning that our plots will update if our variables change.
-See [observables](https://makie.juliaplots.org/stable/documentation/nodes/) to know more.
+See [observables](https://docs.makie.org/stable/documentation/nodes/) to know more.
 Now, we apply our new plotting function to the following `DataFrame`:
 
 ```jl

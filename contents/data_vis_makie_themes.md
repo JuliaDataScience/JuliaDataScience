@@ -1,7 +1,7 @@
 ## Themes {#sec:themes}
 
 There are several ways to affect the general appearance of your plots.
-Either, you could use a [predefined theme](http://makie.juliaplots.org/stable/documentation/theming/predefined_themes/index.html) or your own custom theme.
+Either, you could use a [predefined theme](https://docs.makie.org/stable/documentation/theming/predefined_themes/) or your own custom theme.
 For example, use the predefined dark theme via `with_theme(your_plot_function, theme_dark())`.
 Or, build your own with `Theme(kwargs)` or even update the one that is active with `update_theme!(kwargs)`.
 

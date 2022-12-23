@@ -40,6 +40,7 @@ sco("""
 
 The `DataFramesMeta.jl` syntax, for some users, is easier and more intuitive than the `DataFrames.jl`'s minilanguage `source => transformation => target`.
 The minilanguage is replaced by `target = transformation(source)`.
+
 Suppose that you want to represent the grades as a number between 0 and 100:
 
 ```jl

@@ -35,7 +35,7 @@ Where `latexstring` from `LaTeXStrings.jl` has been used to parse the string. An
 
 But, before that there is another problem, some lines have repeated colors and that's no good.
 Adding some markers and line styles usually helps.
-So, let's do that using [Cycles](http://makie.juliaplots.org/stable/documentation/theming/index.html#cycles) for these types.
+So, let's do that using [Cycles](https://docs.makie.org/stable/documentation/theming/#cycles) for these types.
 Setting `covary=true` allows to cycle all elements together:
 
 ```jl
@@ -46,4 +46,4 @@ And voilà.
 A publication quality plot is here.
 What more can we ask for?
 Well, what about different default colors or palettes.
-In our next section, we will see how to use again [Cycles](http://makie.juliaplots.org/stable/documentation/theming/index.html#cycles) and know a little bit more about them, plus some additional keywords in order to achieve this.
+In our next section, we will see how to use again [Cycles](https://docs.makie.org/stable/documentation/theming/#cycles) and know a little bit more about them, plus some additional keywords in order to achieve this.

@@ -11,7 +11,7 @@ In our opinion, it is the prettiest and most powerful plotting package.
 > **_NOTE:_**
 > There are other plotting packages in the Julia ecosystem.
 > One of the most popular ones is [`Plots.jl`](https://docs.juliaplots.org/stable/).
-> We believe that the future of the Julia plotting tooling is in the `Makie.jl` ecosystem,
+> However, we believe that the future of the Julia plotting tooling is in the `Makie.jl` ecosystem,
 > due to the native Julia codebase and official support from [JuliaHub](https://juliahub.com).
 > Therefore, this is where we'll focus all of our data visualization efforts.
 
@@ -20,8 +20,8 @@ This makes `Makie.jl` capable of dealing with any tabular data and especially `D
 
 Like many plotting packages, the code is split into multiple packages.
 `Makie.jl` is the front end package that defines all plotting functions required to create plot objects.
-These objects store all information about the plots, but still need to be converted to an image.
-To convert these plot objects to an image, you need one of the Makie backends.
+These objects store all the information about the plots, but still need to be converted into an image.
+To convert these plot objects into an image, you need one of the Makie backends.
 By default, `Makie.jl` is reexported by every backend, so you only need to install and load the backend that you want to use.
 
 There are three main backends which concretely implement all abstract rendering capabilities defined in Makie.
@@ -31,7 +31,7 @@ These are
 - `GLMakie.jl` for interactive 2D and 3D plotting in standalone `GLFW.jl` windows (also GPU-powered), and
 - `WGLMakie.jl`, a WebGL-based interactive 2D and 3D plotting that runs within browsers.
 
-[See Makie's documentation for more](http://makie.juliaplots.org/stable/documentation/backends_and_output/).
+[See Makie's documentation for more](https://docs.makie.org/stable/documentation/backends/index.html).
 
 In this book we will only show examples for `CairoMakie.jl` and `GLMakie.jl`.
 
@@ -61,7 +61,7 @@ save("filename.pdf", fig; pt_per_unit=0.5)
 ```
 
 For `png`'s you specify `px_per_unit`.
-See [Backends & Output](https://makie.juliaplots.org/stable/documentation/backends_and_output/) for details.
+See [Exporting a Figure with physical dimensions](https://docs.makie.org/stable/documentation/figure_size/) for details.
 
 Another important issue is to actually visualize your output plot.
 Note that for `CairoMakie.jl` the Julia REPL is not able to show plots, so you will need an IDE (Integrated Development Environment) such as VSCode, Jupyter or Pluto that supports `png` or `svg` as output.

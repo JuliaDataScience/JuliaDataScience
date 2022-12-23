@@ -7,6 +7,21 @@ import Makie
 using Reexport: @reexport
 
 @reexport begin
+    using AlgebraOfGraphics:
+        data,
+        density,
+        draw,
+        draw!,
+        expectation,
+        frequency,
+        legend!,
+        linear,
+        mapping,
+        nonnumeric,
+        renamer,
+        smooth,
+        sorter,
+        visual
     using Books:
         BUILD_DIR,
         @sc,
@@ -17,6 +32,7 @@ using Reexport: @reexport
         clean_stacktrace,
         code_block,
         convert_output,
+        entr_gen,
         gen,
         output_block,
         sc,

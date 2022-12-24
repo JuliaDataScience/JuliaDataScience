@@ -97,6 +97,7 @@ using Reexport: @reexport
         eachtablerow,
         readxlsx,
         writetable
+    using SparseArrays
 end # @reexport
 
 const SMALL_IM_ATTR = "width=70%"
@@ -106,6 +107,8 @@ include("df.jl")
 include("environment.jl")
 include("showcode_additions.jl")
 include("makie.jl")
+include("cheatSheet_cairo.jl")
+include("cheatSheet_glmakie.jl")
 include("stats.jl")
 include("bezier.jl")
 include("front-cover.jl")

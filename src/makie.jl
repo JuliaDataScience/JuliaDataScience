@@ -1,4 +1,4 @@
-const MAKIE_PLOT_TYPES = Union{Figure, Makie.FigureAxisPlot}
+const MAKIE_PLOT_TYPES = Union{Figure,Makie.FigureAxisPlot}
 function _makie_save(path::String, p)
     try
         # SVG will fail with GLMakie.
@@ -351,21 +351,21 @@ function mixed_mode_layout()
     CairoMakie.activate!() # hide
     seed!(123)
     longlabels = ["$(today() - Day(1))", "$(today())", "$(today() + Day(1))"]
-    fig = Figure(resolution = (600, 400), fontsize = 12,
-        backgroundcolor = :grey90, font = "CMU Serif")
-    ax1 = Axis(fig[1, 1], xlabel = "x", alignmode = Mixed(bottom = 0))
-    ax2 = Axis(fig[1, 2], xticklabelrotation = pi / 2, alignmode = Mixed(bottom = 0),
-        xticks = ([1, 5, 10], longlabels))
+    fig = Figure(resolution=(600, 400), fontsize=12,
+        backgroundcolor=:grey90, font="CMU Serif")
+    ax1 = Axis(fig[1, 1], xlabel="x", alignmode=Mixed(bottom=0))
+    ax2 = Axis(fig[1, 2], xticklabelrotation=pi / 2, alignmode=Mixed(bottom=0),
+        xticks=([1, 5, 10], longlabels))
     ax3 = Axis(fig[2, 1:2])
     ax4 = Axis(fig[3, 1:2])
     axs = [ax1, ax2, ax3, ax4]
     [lines!(ax, 1:10, rand(10)) for ax in axs]
-    hidexdecorations!(ax3; ticks = false, grid = false)
-    Box(fig[2:3, 1:2, Right()], color = (:slateblue1, 0.35))
-    Label(fig[2:3, 1:2, Right()], "protrusion", rotation = pi / 2, fontsize = 14,
-        padding = (3, 3, 3, 3))
-    Label(fig[1, 1:2, Top()], "Mixed alignmode", fontsize = 16,
-        padding = (0, 0, 15, 0))
+    hidexdecorations!(ax3; ticks=false, grid=false)
+    Box(fig[2:3, 1:2, Right()], color=(:slateblue1, 0.35))
+    Label(fig[2:3, 1:2, Right()], "protrusion", rotation=pi / 2, fontsize=14,
+        padding=(3, 3, 3, 3))
+    Label(fig[1, 1:2, Top()], "Mixed alignmode", fontsize=16,
+        padding=(0, 0, 15, 0))
     colsize!(fig.layout, 1, Auto(2))
     rowsize!(fig.layout, 2, Auto(0.5))
     rowsize!(fig.layout, 3, Auto(0.5))
@@ -437,7 +437,7 @@ function add_box_inset(fig; left=100, right=250, bottom=200, top=300,
 end
 
 function add_axis_inset(pos=fig[1, 1]; halign, valign, width=Relative(0.5),
-        height=Relative(0.35), alignmode=Mixed(left = 5, right=5), bgcolor=:lightgray)
+    height=Relative(0.35), alignmode=Mixed(left=5, right=5), bgcolor=:lightgray)
 
     inset_box = Axis(pos; width, height, halign, valign, alignmode,
         xticklabelsize=12, yticklabelsize=12, backgroundcolor=bgcolor)
@@ -453,7 +453,7 @@ function figure_axis_inset()
     inset_ax1 = add_axis_inset(fig[1, 1]; halign=:left, valign=:center,
         width=Relative(0.3), height=Relative(0.35),
         alignmode=Mixed(left=5, right=5, bottom=15),
-        bgcolor = :grey90)
+        bgcolor=:grey90)
     inset_ax2 = add_axis_inset(fig[1, 1]; halign=:right, valign=:center,
         width=Relative(0.25), height=Relative(0.3), bgcolor=(:white, 0.65))
     lines!(ax, 1:10)
@@ -654,7 +654,7 @@ function filled_line_and_linesegments_in_3D()
     lower = [Point3f(i, -i, 0) for i in LinRange(0, 3, 100)]
     upper = [Point3f(i, -i, sin(i) * exp(-(i + i))) for i in range(0, 3, length=100)]
     fig = Figure(resolution=(1200, 800))
-    axs = [Axis3(fig[1, i]; elevation=pi/6, perspectiveness=0.5) for i = 1:2]
+    axs = [Axis3(fig[1, i]; elevation=pi / 6, perspectiveness=0.5) for i = 1:2]
     band!(axs[1], lower, upper, color=repeat(norm.(upper), outer=2), colormap=:CMRmap)
     lines!(axs[1], upper, color=:black)
     linesegments!(axs[2], cos.(xs), xs, sin.(xs), linewidth=5, color=1:length(xs))
@@ -667,11 +667,11 @@ end
 
 function grid_spheres_and_rectangle_as_plate()
     seed!(123) # hide
-    spheresGrid = [Point3f(i,j,k) for i in 1:2:12 for j in 1:2:10 for k in 1:2:10] # hide
-    colorSphere = [RGBA(i * 0.1, j * 0.1, k * 0.1, 0.75) for i in 1:2:10 for j in 1:2:10 for k in 1:2:10] # hide
-    spheresPlane = [Point3f(i,j,k) for i in 1:2.5:20 for j in 1:2.5:10 for k in 1:2.5:4] # hide
+    spheresGrid = [Point3f(i, j, k) for i = 1:2:12 for j = 1:2:10 for k = 1:2:10] # hide
+    colorSphere = [RGBA(i * 0.1, j * 0.1, k * 0.1, 0.75) for i = 1:2:10 for j = 1:2:10 for k = 1:2:10] # hide
+    spheresPlane = [Point3f(i, j, k) for i = 1:2.5:20 for j = 1:2.5:10 for k = 1:2.5:4] # hide
     cmap = get(colorschemes[:plasma], LinRange(0, 1, 50)) # hide
-    colorsPlane = cmap[rand(1:50,50)] # hide
+    colorsPlane = cmap[rand(1:50, 50)] # hide
     rectMesh = Rect3f(Vec3f(-1, -1, 2.1), Vec3f(22, 11, 0.5)) # hide
     recmesh = GeometryBasics.mesh(rectMesh) # hide
     colors = [RGBA(rand(4)...) for v in recmesh.position] # hide
@@ -679,9 +679,9 @@ function grid_spheres_and_rectangle_as_plate()
         fig = Figure(resolution=(1200, 800))
         ax1 = Axis3(fig[1, 1]; aspect=:data, perspectiveness=0.5, azimuth=0.72)
         ax2 = Axis3(fig[1, 2]; aspect=:data, perspectiveness=0.5)
-        meshscatter!(ax1, spheresGrid; color = colorSphere, markersize = 1,
+        meshscatter!(ax1, spheresGrid; color=colorSphere, markersize=1,
             shading=false)
-        meshscatter!(ax2, spheresPlane; color=colorsPlane, markersize = 0.75,
+        meshscatter!(ax2, spheresPlane; color=colorsPlane, markersize=0.75,
             lightposition=Vec3f(10, 5, 2), ambient=Vec3f(0.95, 0.95, 0.95),
             backlight=1.0f0)
         mesh!(recmesh; color=colors, colormap=:rainbow, shading=false)
@@ -705,16 +705,16 @@ function histogram_or_bars_in_3d()
     cmap2 = reshape(cmap, size(z)) # hide
     ztmp2 = abs.(z) ./ maximum(abs.(z)) .+ 0.15 # hide
     fig = Figure(resolution=(1200, 800), fontsize=26)
-    ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), elevation=π/6,
+    ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), elevation=π / 6,
         perspectiveness=0.5)
     ax2 = Axis3(fig[1, 2]; aspect=(1, 1, 1), perspectiveness=0.5)
     rectMesh = Rect3f(Vec3f(-0.5, -0.5, 0), Vec3f(1, 1, 1))
-    meshscatter!(ax1, x, y, 0*z, marker = rectMesh, color = z[:],
-        markersize = Vec3f.(2δx, 2δy, z[:]), colormap = :Spectral_11,
+    meshscatter!(ax1, x, y, 0 * z, marker=rectMesh, color=z[:],
+        markersize=Vec3f.(2δx, 2δy, z[:]), colormap=:Spectral_11,
         shading=false)
     limits!(ax1, -3.5, 3.5, -3.5, 3.5, -7.45, 7.45)
-    meshscatter!(ax2, x, y, 0*z, marker = rectMesh, color = z[:],
-        markersize = Vec3f.(2δx, 2δy, z[:]), colormap = (:Spectral_11, 0.25),
+    meshscatter!(ax2, x, y, 0 * z, marker=rectMesh, color=z[:],
+        markersize=Vec3f.(2δx, 2δy, z[:]), colormap=(:Spectral_11, 0.25),
         shading=false, transparency=true)
     for (idx, i) in enumerate(x), (idy, j) in enumerate(y)
         rectMesh = Rect3f(Vec3f(i - δx, j - δy, 0), Vec3f(2δx, 2δy, z[idx, idy]))

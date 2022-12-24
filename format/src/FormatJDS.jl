@@ -21,7 +21,7 @@ function source_files()
     subdirs = [
         "contents",
         "pandoc",
-        "src"
+        "src",
     ]
     files = [readdir(joinpath(JDS_DIR, dir); join=true) for dir in subdirs]
     files = collect(Iterators.flatten(files))

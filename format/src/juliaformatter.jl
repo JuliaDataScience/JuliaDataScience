@@ -23,4 +23,3 @@ This method is used in CI.
 function is_formatted!()
     return all(format())
 end
-

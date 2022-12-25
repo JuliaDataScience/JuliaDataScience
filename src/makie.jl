@@ -14,6 +14,139 @@ Books.is_image(plot::MAKIE_PLOT_TYPES) = true
 Books.svg(svg_path::String, p::MAKIE_PLOT_TYPES) = _makie_save(svg_path, p)
 Books.png(png_path::String, p::MAKIE_PLOT_TYPES) = _makie_save(png_path, p)
 
+function figure_canvas()
+    CairoMakie.activate!() # hide
+    fig = Figure(;
+        figure_padding=(5,5,10,10),
+        backgroundcolor=:snow2,
+        resolution=(600,400),
+        )
+    label="fig" # hide
+    link_attributes = "width=60%" # hide
+    caption = "Figure canvas." # hide
+    Options(fig; caption, label, link_attributes) # hide
+end
+
+function figure_axis()
+    CairoMakie.activate!() # hide
+    fig = Figure(;
+        figure_padding=(5,5,10,10),
+        backgroundcolor=:snow2,
+        resolution=(600,400),
+        )
+    ax = Axis(fig[1,1];
+        xlabel="x",
+        ylabel="y",
+        title="Title",
+        )
+    fig
+    label = "fig_axis" # hide
+    link_attributes = "width=60%" # hide
+    caption = "Figure and Axis." # hide
+    Options(fig; caption, label, link_attributes) # hide
+end
+
+function figure_axis_plot()
+    CairoMakie.activate!() # hide
+    fig = Figure(;
+        figure_padding=(5,5,10,10),
+        backgroundcolor=:snow2,
+        resolution=(600,400),
+        )
+    ax = Axis(fig[1,1];
+        xlabel="x",
+        ylabel="y",
+        title="Title",
+        )
+    lines!(ax, 0.5:0.2:3pi, x -> cos(x)/x;
+        color=:black,
+        linewidth=2,
+        linestyle=:dash,
+        )
+    fig
+    label ="fig_axis_plot" # hide
+    link_attributes = "width=60%" # hide
+    caption = "Figure, Axis and plot." # hide
+    Options(fig; caption, label, link_attributes) # hide
+end
+
+function figure_axis_plot_leg()
+    CairoMakie.activate!() # hide
+    fig = Figure(;
+        figure_padding=(5,5,10,10),
+        backgroundcolor=:snow2,
+        resolution=(600,400),
+        )
+    ax = Axis(fig[1,1];
+        xlabel="x",
+        ylabel="y",
+        title="Title",
+        xgridstyle=:dash,
+        ygridstyle=:dash,
+        )
+    lines!(ax, 0.5:0.2:3pi, x -> cos(x)/x;
+        linewidth=2,
+        linestyle=:solid,
+        label = L"\cos(x)/x",
+        )
+    scatterlines!(ax, 0.5:0.2:3pi, x -> -cos(x)/x;
+        color=:black,
+        linewidth=2,
+        linestyle=:dash,
+         label = L"-\cos(x)/x",
+        )
+    axislegend("legend"; position=:rt)
+    fig
+    label = "plot_legend" # hide
+    link_attributes = "width=60%" # hide
+    caption = "Figure, Axis, plot and legend." # hide
+    Options(fig; caption, label, link_attributes) # hide
+end
+
+function fig_theme()
+    CairoMakie.activate!() # hide
+    fig = Figure()
+    ax = Axis(fig[1,1])
+    lines!(ax, 0.5:0.2:3pi, x -> cos(x)/x;
+        linewidth=2,
+        linestyle=:dash,
+        label = L"\cos(x)/x",
+        )
+    scatterlines!(ax, 0.5:0.2:3pi, x -> -cos(x)/x;
+        color=:black,
+        linewidth=2,
+        linestyle=:dash,
+         label = L"-\cos(x)/x",
+        )
+    axislegend("legend"; position=:rt)
+    fig
+    set_theme!()
+    label = "setTheme" # hide
+    link_attributes = "width=60%" # hide
+    caption = "Set theme!() example." # hide
+    Options(fig; caption, label, link_attributes) # hide
+end
+
+function fig_bubbles(xyz)
+    CairoMakie.activate!() # hide
+    fig = Figure(resolution=(600,400))
+    ax = Axis(fig[1,1]; aspect = DataAspect())
+    pltobj = scatter!(xyz[:, 1], xyz[:, 2];
+        color=xyz[:, 3],
+        label="Bubbles",
+        colormap=:plasma,
+        markersize=15 * abs.(xyz[:, 3]),
+        )
+    limits!(-3, 3, -3, 3)
+    Legend(fig[1, 2], ax, valign=:top)
+    Colorbar(fig[1, 2], pltobj, height=Relative(3/4))
+    fig
+    label = "bubble" # hide
+    link_attributes = "width=60%" # hide
+    caption = "Bubble plot." # hide
+    Options(fig; caption, label, link_attributes) # hide
+end
+
 function custom_plot()
     CairoMakie.activate!() # hide
     caption = "An example plot with Makie.jl."

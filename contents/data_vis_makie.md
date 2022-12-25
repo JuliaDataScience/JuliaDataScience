@@ -17,6 +17,8 @@ In our opinion, it is the prettiest and most powerful plotting package.
 
 `Makie.jl` deals with arrays (@sec:array), such as vectors and matrices.
 This makes `Makie.jl` capable of dealing with any tabular data and especially `DataFrames` as we covered in @sec:dataframes.
+Moreover, it uses special point types, i.e. `Point2f` and `Point3f` which come in handy
+when defining vectores of points in 2d or 3d space.
 
 Like many plotting packages, the code is split into multiple packages.
 `Makie.jl` is the front end package that defines all plotting functions required to create plot objects.
@@ -24,18 +26,21 @@ These objects store all the information about the plots, but still need to be co
 To convert these plot objects into an image, you need one of the Makie backends.
 By default, `Makie.jl` is reexported by every backend, so you only need to install and load the backend that you want to use.
 
-There are three main backends which concretely implement all abstract rendering capabilities defined in Makie.
+There are four main backends which concretely implement all abstract rendering capabilities defined in Makie.
 These are
 
 - `CairoMakie.jl` for non-interactive 2D publication-quality vector graphics,
 - `GLMakie.jl` for interactive 2D and 3D plotting in standalone `GLFW.jl` windows (also GPU-powered), and
 - `WGLMakie.jl`, a WebGL-based interactive 2D and 3D plotting that runs within browsers.
+- `RPRMakie.jl`, an experimental ray tracing backend using AMDs
+[RadeonProRender](https://radeon-pro.github.io/RadeonProRenderDocs/en/index.html).
+At the time of writing this book this only works on Windows and Linux.
 
 [See Makie's documentation for more](https://docs.makie.org/stable/documentation/backends/index.html).
 
 In this book we will only show examples for `CairoMakie.jl` and `GLMakie.jl`.
 
-You can activate any backend by using the appropriate package and calling its `activate!` function.
+You can activate any backend by using the appropriate package and calling his corresponding `activate!` function.
 For example:
 
 ```
@@ -43,7 +48,7 @@ using GLMakie
 GLMakie.activate!()
 ```
 
-Now, we will start with publication-quality plots.
+Now, we will start with some basic plots and later one some more advanced publication-quality plots.
 But, before going into plotting it is important to know how to save our plots.
 The easiest option to `save` a figure `fig` is to type `save("filename.png", fig)`.
 Other formats are also available for `CairoMakie.jl`, such as `svg` and `pdf`.

@@ -87,13 +87,13 @@ function figure_axis_plot_leg()
     lines!(ax, 0.5:0.2:3pi, x -> cos(x)/x;
         linewidth=2,
         linestyle=:solid,
-        label = L"\cos(x)/x",
+        label = "cos(x)/x",
         )
     scatterlines!(ax, 0.5:0.2:3pi, x -> -cos(x)/x;
         color=:black,
         linewidth=2,
         linestyle=:dash,
-         label = L"-\cos(x)/x",
+         label = "-cos(x)/x",
         )
     axislegend("legend"; position=:rt)
     fig
@@ -110,13 +110,13 @@ function fig_theme()
     lines!(ax, 0.5:0.2:3pi, x -> cos(x)/x;
         linewidth=2,
         linestyle=:dash,
-        label = L"\cos(x)/x",
+        label = "cos(x)/x",
         )
     scatterlines!(ax, 0.5:0.2:3pi, x -> -cos(x)/x;
         color=:black,
         linewidth=2,
         linestyle=:dash,
-         label = L"-\cos(x)/x",
+         label = "-cos(x)/x",
         )
     axislegend("legend"; position=:rt)
     fig

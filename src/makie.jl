@@ -371,35 +371,30 @@ function themes_gallery()
     aximg = [Axis(fig[i,j], aspect = DataAspect()) for i in 1:3 for j in 1:2]
     img = demo_figure()
     image!(aximg[1], rotr90(img), interpolate=false)
-    aximg[1].title = "demo_figure()"
+    aximg[1].title="demo_figure()"
     imgb = with_theme(demo_figure, theme_light())
     image!(aximg[2], rotr90(imgb), interpolate=false)
-    aximg[2].title = "with_theme(demo_figure, theme_light())"
-    
+    aximg[2].title="with_theme(demo_figure, theme_light())"
     imgb = with_theme(demo_figure, theme_minimal())
     image!(aximg[3], rotr90(imgb), interpolate=false)
-    aximg[3].title = "with_theme(demo_figure, theme_minimal())"
-
+    aximg[3].title="with_theme(demo_figure, theme_minimal())"
     imgb = with_theme(demo_figure, theme_ggplot2())
     image!(aximg[4], rotr90(imgb), interpolate=false)
-    aximg[4].title = "with_theme(demo_figure, theme_ggplot2())"
-
+    aximg[4].title="with_theme(demo_figure, theme_ggplot2())"
     imgb = with_theme(demo_figure, theme_dark())
     image!(aximg[5], rotr90(imgb), interpolate=false)
-    aximg[5].title = "with_theme(demo_figure, theme_dark())"
-
+    aximg[5].title="with_theme(demo_figure, theme_dark())"
     imgb = with_theme(demo_figure, theme_black())
     image!(aximg[6], rotr90(imgb), interpolate=false)
-    aximg[6].title = "with_theme(demo_figure, theme_black())"
-
+    aximg[6].title="with_theme(demo_figure, theme_black())"
     hidedecorations!.(aximg)
     hidespines!.(aximg)
     rowgap!(fig.layout,0)
     colgap!(fig.layout,10)
     fig
-    caption = "Predefined themes." # hide
-    label = "makie_themes" # hide
-    link_attributes = "width=100%" # hide
+    caption="Predefined themes." # hide
+    label="makie_themes" # hide
+    link_attributes="width=100%" # hide
     Options(fig; caption, label, link_attributes) # hide
 end
 

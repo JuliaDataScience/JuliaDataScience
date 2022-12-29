@@ -30,7 +30,7 @@ For a different one, the `position=:ct` argument is called, where `:ct` means le
 
 
 ```jl
-@sco JDS.figure_axis_plot()
+@sco JDS.figure_axis_plot_leg()
 ```
 
 Other positions are also available by combining *left(l), center(c), right(r)* and *bottom(b), center(c), top(t)*.

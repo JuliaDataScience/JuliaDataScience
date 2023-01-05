@@ -8,7 +8,7 @@ function cheatsheet_cairomakie()
     packages = ["Makie", "CairoMakie"]
     seed!(123)
     CairoMakie.activate!()
-    x = 0:0.5:2π
+    x = range(0, 2π, length=12)
     fig = with_theme(theme_light()) do
         fig = Figure(resolution=(1000, 1600))
         axs = [Axis(fig[i, j], aspect=1) for i = 1:7 for j = 1:5]
@@ -25,10 +25,8 @@ function cheatsheet_cairomakie()
         stem!(axs[4], x, sin.(x); color=x)
         axs[4].title = "stem(x, y)"
 
-        linesegments!(axs[5],
-            Point2f.(vec([[x, rand()] for i = 1:2, x in rand(10)]));
-            color=1:20, colormap=:gnuplot)
-        axs[5].title = "linesegments(positions)"
+        linesegments!(axs[5], x, sin.(x); color=1:length(x)/2, colormap=:gnuplot)
+        axs[5].title = "linesegments(x, y)"
 
         series!(axs[6], rand(10, 5); color=resample_cmap(:plasma, 10))
         axs[6].title = "series(curves)"
@@ -47,11 +45,11 @@ function cheatsheet_cairomakie()
 
         vspan!(axs[11], [0, 2pi, 4pi], [pi, 3pi, 5pi];
             color=1:3, colormap=(:blues, 0.5))
-        axs[11].title = "vspan(xs_low, xs_high)"
+        axs[11].title = "vspan(xlow, xhigh)"
 
         hspan!(axs[12], [0, 2pi, 4pi], [pi, 3pi, 5pi];
             color=1:3, colormap=(:reds, 0.5))
-        axs[12].title = "hspan(ys_low, ys_high)"
+        axs[12].title = "hspan(ylow, yhigh)"
 
         spy!(axs[13], 0 .. 1, 0 .. 1, sprand(100, 100, 0.05);
             markersize=4, marker=:rect,
@@ -61,18 +59,18 @@ function cheatsheet_cairomakie()
 
         rangebars!(axs[14], rand(5), -rand(5), rand(5);
             whiskerwidth=10, color=1:5)
-        axs[14].title = "rangebars(vals, lo, hi)"
+        axs[14].title = "rangebars(x, low, high)"
 
         errorbars!(axs[15], rand(5), -rand(5), rand(5);
             whiskerwidth=15)
-        axs[15].title = "errorbars(vals, lo, hi)"
+        axs[15].title = "errorbars(x, y, yerr)"
 
         band!(axs[16], x, sin.(x) .- 0.05 * rand(size(x)),
             sin.(x) .+ 0.05 * rand(size(x)), color=(:black, 0.25))
         axs[16].title = "band(x, y-σ, y+σ)"
 
         crossbar!(axs[17], [1, 2, 3, 4], [1, 2, 3, 4],
-            [1, 2, 3, 4] .- 1, [1, 2, 3, 4] .+ 1;
+            [1, 2, 3, 4] .- rand.(), [1, 2, 3, 4] .+ rand.();
             color=1:4, colormap=[:grey70, :red, :yellow],
             show_notch=true)
         axs[17].title = "crossbar(x,y,ymin,ymax)"
@@ -89,6 +87,7 @@ function cheatsheet_cairomakie()
             color=(:grey90, 0.35), strokewidth=2,
             strokecolor=:black, linestyle=:dash)
         axs[20].title = "density(x)"
+
         xbox = rand(1:3, 1000)
         boxplot!(axs[21], xbox, randn(1000), color=xbox,
             mediancolor=:black, colormap=[:grey, :dodgerblue, :yellow])
@@ -96,7 +95,7 @@ function cheatsheet_cairomakie()
 
         violin!(axs[22], xbox, randn(1000), color=:black,
             show_median=true, mediancolor=:white)
-        axs[22].title = "boxplot(x, y)"
+        axs[22].title = "violin(x, y)"
 
         ecdfplot!(axs[23], randn(1000), color=:black, npoints=10)
         axs[23].title = "ecdfplot(x)"
@@ -127,7 +126,6 @@ function cheatsheet_cairomakie()
         us = [x + y for x in xs, y in ys]
         vs = [y - x for x in xs, y in ys]
         strength = vec(sqrt.(us .^ 2 .+ vs .^ 2))
-
         arrows!(axs[29], xs, ys, us, vs;
             arrowsize=5, lengthscale=0.1,
             arrowcolor=strength, linecolor=strength,
@@ -148,6 +146,7 @@ function cheatsheet_cairomakie()
 
         image!(axs[33], 0 .. 1, 0 .. 1, rotr90(testimage("earth_apollo17")))
         axs[33].title = "image(x,y,img)"
+
         vertices = [
             0.0 0.0
             1.0 0.0
@@ -160,7 +159,7 @@ function cheatsheet_cairomakie()
         ]
         colors = [:black, :red, :dodgerblue, :orange]
         mesh!(axs[34], vertices, facesm; color=colors)
-        axs[34].title = "mesh(v,f)"
+        axs[34].title = "mesh(vertices,faces)"
 
         waterfall!(axs[35], randn(5); show_direction=true,
             color=:black)

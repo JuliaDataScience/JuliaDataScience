@@ -25,8 +25,8 @@ function cheatsheet_cairomakie()
         stem!(axs[4], x, sin.(x); color=x)
         axs[4].title = "stem(x, y)"
 
-        linesegments!(axs[5], x, sin.(x); color=1:length(x)/2, colormap=:gnuplot)
-        axs[5].title = "linesegments(x, y)"
+        linesegments!(axs[5], Point2.(x, sin.(x)); color=1:length(x)/2, colormap=:gnuplot)
+        axs[5].title = "linesegments(points)"
 
         series!(axs[6], rand(10, 5); color=resample_cmap(:plasma, 10))
         axs[6].title = "series(curves)"

@@ -7,87 +7,26 @@ Or, build your own with `Theme(kwargs)` or even update the one that is active wi
 
 You can also do `set_theme!(theme; kwargs...)` to change the current default theme to `theme` and override or add attributes given by `kwargs`.
 If you do this and want to reset all previous settings just do `set_theme!()` with no arguments.
-See the following examples, where we had prepared a test plotting function with different characteristics, such that most attributes for each theme can be appreciated.
+See the following examples, where we had prepared a `demo_figure` with different characteristics, such that most attributes for each theme can be appreciated.
+
+Our `demo_figure` plotting function looks like follows:
 
 ```jl
-sco(
-"""
-using Random: seed!
-seed!(123)
-y = cumsum(randn(6, 6), dims=2)
-"""
-)
+@sc JDS.demo_figure()
 ```
 
-A matrix of size `(20, 20)` with random entries, so that we can plot a heatmap.
-The range in $x$ and $y$ is also specified.
+TODO: Explain all components in figure
+
+Currently, there are five themes:
+
+> - `theme_dark()`
+> - `theme_black()`
+> - `theme_ggplot2()`
+> - `theme_minimal()`
+> - `theme_light()`
 
 ```jl
-sco(
-"""
-using Random: seed!
-seed!(13)
-xv = yv = LinRange(-3, 0.5, 20)
-matrix = randn(20, 20)
-matrix[1:6, 1:6] # first 6 rows and columns
-"""
-)
-```
-
-Hence, our plotting function looks like follows:
-
-```jl
-@sc demo_themes(y, xv, yv, matrix)
-```
-
-Note that the `series` function has been used to plot several lines and scatters at once with their corresponding labels. And since we don't need the axis neither the plotted object we throw them away with the syntax *_*.
-Also, a heatmap with their `Colorbar` has been included.
-Currently, there are two dark themes, one called `theme_dark()` and the other one `theme_black()`, see Figures.
-
-```jl
-s = """
-    CairoMakie.activate!() # hide
-    filenames = ["theme_dark", "theme_black"] # hide
-    objects = [ # hide
-    # Don't indent here because it indent the output incorrectly. # hide
-    with_theme(theme_dark()) do
-        demo_themes(y, xv, yv, matrix)
-    end
-    with_theme(theme_black()) do
-        demo_themes(y, xv, yv, matrix)
-    end
-    ] # hide
-    link_attributes = "width=60%" # hide
-    Options(obj, filename, link_attributes) = Options(obj; filename, link_attributes) # hide
-    Options.(objects, filenames, link_attributes) # hide
-    """
-sco(s)
-```
-
-And three more white-ish themes called, `theme_ggplot2()`, `theme_minimal()` and `theme_light()`. Useful for more standard publication type plots.
-
-```jl
-s = """
-    CairoMakie.activate!() # hide
-    filenames = ["theme_ggplot2", # hide
-        "theme_minimal", "theme_light"] # hide
-    objects = [ # hide
-    # Don't indent here because it indent the output incorrectly. # hide
-    with_theme(theme_ggplot2()) do
-        demo_themes(y, xv, yv, matrix)
-    end
-    with_theme(theme_minimal()) do
-        demo_themes(y, xv, yv, matrix)
-    end
-    with_theme(theme_light()) do
-        demo_themes(y, xv, yv, matrix)
-    end
-    ] # hide
-    link_attributes = "width=60%" # hide
-    Options(obj, filename, link_attributes) = Options(obj; filename, link_attributes) # hide
-    Options.(objects, filenames, link_attributes) # hide
-    """
-sco(s)
+JDS.themes_gallery()
 ```
 
 Another alternative is defining a custom `Theme` by doing `with_theme(your_plot, your_theme())`.

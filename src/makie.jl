@@ -14,6 +14,139 @@ Books.is_image(plot::MAKIE_PLOT_TYPES) = true
 Books.svg(svg_path::String, p::MAKIE_PLOT_TYPES) = _makie_save(svg_path, p)
 Books.png(png_path::String, p::MAKIE_PLOT_TYPES) = _makie_save(png_path, p)
 
+function figure_canvas()
+    CairoMakie.activate!() # hide
+    fig = Figure(;
+        figure_padding=(5,5,10,10),
+        backgroundcolor=:snow2,
+        resolution=(600,400),
+        )
+    label="fig" # hide
+    link_attributes = "width=60%" # hide
+    caption = "Figure canvas." # hide
+    Options(fig; caption, label, link_attributes) # hide
+end
+
+function figure_axis()
+    CairoMakie.activate!() # hide
+    fig = Figure(;
+        figure_padding=(5,5,10,10),
+        backgroundcolor=:snow2,
+        resolution=(600,400),
+        )
+    ax = Axis(fig[1,1];
+        xlabel="x",
+        ylabel="y",
+        title="Title",
+        )
+    fig
+    label = "fig_axis" # hide
+    link_attributes = "width=60%" # hide
+    caption = "Figure and Axis." # hide
+    Options(fig; caption, label, link_attributes) # hide
+end
+
+function figure_axis_plot()
+    CairoMakie.activate!() # hide
+    fig = Figure(;
+        figure_padding=(5,5,10,10),
+        backgroundcolor=:snow2,
+        resolution=(600,400),
+        )
+    ax = Axis(fig[1,1];
+        xlabel="x",
+        ylabel="y",
+        title="Title",
+        )
+    lines!(ax, 0.5:0.2:3pi, x -> cos(x)/x;
+        color=:black,
+        linewidth=2,
+        linestyle=:dash,
+        )
+    fig
+    label ="fig_axis_plot" # hide
+    link_attributes = "width=60%" # hide
+    caption = "Figure, Axis and plot." # hide
+    Options(fig; caption, label, link_attributes) # hide
+end
+
+function figure_axis_plot_leg()
+    CairoMakie.activate!() # hide
+    fig = Figure(;
+        figure_padding=(5,5,10,10),
+        backgroundcolor=:snow2,
+        resolution=(600,400),
+        )
+    ax = Axis(fig[1,1];
+        xlabel="x",
+        ylabel="y",
+        title="Title",
+        xgridstyle=:dash,
+        ygridstyle=:dash,
+        )
+    lines!(ax, 0.5:0.2:3pi, x -> cos(x)/x;
+        linewidth=2,
+        linestyle=:solid,
+        label = "cos(x)/x",
+        )
+    scatterlines!(ax, 0.5:0.2:3pi, x -> -cos(x)/x;
+        color=:black,
+        linewidth=2,
+        linestyle=:dash,
+         label = "-cos(x)/x",
+        )
+    axislegend("legend"; position=:rt)
+    fig
+    label = "plot_legend" # hide
+    link_attributes = "width=60%" # hide
+    caption = "Figure, Axis, plot and legend." # hide
+    Options(fig; caption, label, link_attributes) # hide
+end
+
+function fig_theme()
+    CairoMakie.activate!() # hide
+    fig = Figure()
+    ax = Axis(fig[1,1])
+    lines!(ax, 0.5:0.2:3pi, x -> cos(x)/x;
+        linewidth=2,
+        linestyle=:dash,
+        label = "cos(x)/x",
+        )
+    scatterlines!(ax, 0.5:0.2:3pi, x -> -cos(x)/x;
+        color=:black,
+        linewidth=2,
+        linestyle=:dash,
+         label = "-cos(x)/x",
+        )
+    axislegend("legend"; position=:rt)
+    fig
+    set_theme!()
+    label = "setTheme" # hide
+    link_attributes = "width=60%" # hide
+    caption = "Set theme!() example." # hide
+    Options(fig; caption, label, link_attributes) # hide
+end
+
+function fig_bubbles(xyz)
+    CairoMakie.activate!() # hide
+    fig = Figure(resolution=(600,400))
+    ax = Axis(fig[1,1]; aspect = DataAspect())
+    pltobj = scatter!(xyz[:, 1], xyz[:, 2];
+        color=xyz[:, 3],
+        label="Bubbles",
+        colormap=:plasma,
+        markersize=15 * abs.(xyz[:, 3]),
+        )
+    limits!(-3, 3, -3, 3)
+    Legend(fig[1, 2], ax, valign=:top)
+    Colorbar(fig[1, 2], pltobj, height=Relative(3/4))
+    fig
+    label = "bubble" # hide
+    link_attributes = "width=60%" # hide
+    caption = "Bubble plot." # hide
+    Options(fig; caption, label, link_attributes) # hide
+end
+
 function custom_plot()
     CairoMakie.activate!() # hide
     caption = "An example plot with Makie.jl."
@@ -186,6 +319,83 @@ function multiple_example_themes()
         with_theme(demo_theme, theme_light())
     ]
     #Options.(objects, filenames) # hide
+end
+
+function demo_figure()
+    GLMakie.activate!() # hide
+    seed!(123)
+    # contourf
+    x=y= range(-2.3, 2.3, length=100)
+    z=-2x .* exp.(-x .^ 2 .- (y') .^ 2)
+    # density
+    μσpairs=[[4,2],[2,0.5],[-1,2],[0.25,1],[-4, 2],[8, 1.5]]
+    # lines
+    xs=range(0, 4π, 100)
+    ys=[sin.(xs),cos.(xs),-sin.(xs),-cos.(xs),0.5cos.(xs),-0.5cos.(xs)]
+    labs=["sin(x)","cos(x)","-sin(x)","-cos(x)","cos(x)/2","-cos(x)/2"]
+    # figure
+    fig = Figure(figure_padding=(10,15,5,35),
+        resolution = (900,600), fontsize = 20)
+    ax1 = Axis(fig[1,1], xlabel="x", ylabel="y")
+    ax2 = Axis(fig[1,2], xlabel="x", ylabel="pdf")
+    ax3 = Axis(fig[2,1:2], xlabel="x", ylabel="y")
+    obj = contourf!(ax1, x,y,z; levels=30)
+    Colorbar(fig[1,1, Top()], obj;
+        vertical=false,
+        tellheight=false,
+        tellwidth=false,
+        valign=:top
+        )
+    for μσ in μσpairs
+        density!(ax2, rand(Distributions.Normal(μσ...),1000);
+            label="$(μσ[1]),$(μσ[2])")
+    end
+    Legend(fig[1,2, Top()], ax2;
+        orientation=:horizontal,
+        nbanks=2,
+        bgcolor =:transparent,
+        tellheight=false,
+        valign=:center,
+        )
+    limits!(ax2, -10,15,0,1)
+    [lines!(ax3, xs, y, label = "$(labs[i])") for (i,y) in enumerate(ys)]
+    limits!(ax3, 0,4π,-1,1)
+    Legend(fig[2,1:2, Top()], ax3, orientation=:horizontal)
+    fig
+    Makie.colorbuffer(fig.scene) # hide
+end
+
+function themes_gallery()
+    GLMakie.activate!() # hide
+    fig = Figure(resolution=(1200, 1250))
+    aximg = [Axis(fig[i,j], aspect = DataAspect()) for i in 1:3 for j in 1:2]
+    img = demo_figure()
+    image!(aximg[1], rotr90(img), interpolate=false)
+    aximg[1].title="demo_figure()"
+    imgb = with_theme(demo_figure, theme_light())
+    image!(aximg[2], rotr90(imgb), interpolate=false)
+    aximg[2].title="with_theme(demo_figure, theme_light())"
+    imgb = with_theme(demo_figure, theme_minimal())
+    image!(aximg[3], rotr90(imgb), interpolate=false)
+    aximg[3].title="with_theme(demo_figure, theme_minimal())"
+    imgb = with_theme(demo_figure, theme_ggplot2())
+    image!(aximg[4], rotr90(imgb), interpolate=false)
+    aximg[4].title="with_theme(demo_figure, theme_ggplot2())"
+    imgb = with_theme(demo_figure, theme_dark())
+    image!(aximg[5], rotr90(imgb), interpolate=false)
+    aximg[5].title="with_theme(demo_figure, theme_dark())"
+    imgb = with_theme(demo_figure, theme_black())
+    image!(aximg[6], rotr90(imgb), interpolate=false)
+    aximg[6].title="with_theme(demo_figure, theme_black())"
+    hidedecorations!.(aximg)
+    hidespines!.(aximg)
+    rowgap!(fig.layout,0)
+    colgap!(fig.layout,10)
+    fig
+    caption="Predefined themes." # hide
+    label="makie_themes" # hide
+    link_attributes="width=100%" # hide
+    Options(fig; caption, label, link_attributes) # hide
 end
 
 function set_colors_and_cycle()

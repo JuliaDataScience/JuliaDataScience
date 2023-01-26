@@ -21,9 +21,9 @@ Now, we add a plotting function into our new Axis:
 @sco JDS.figure_axis_plot()
 ```
 
-This example has already most of the attributes that most users will normally use.
-Probably, a `legend` will also be good to have.
-Which for more than one function will make more sense.
+This example already includes many of the attributes that are typically used.
+Additionally, it would be beneficial to include a "legend" for reference, especially if the example has more than one function.
+This will make it easier to understand.
 So, let's `append` another mutation `plot` object and add the corresponding legends by calling `axislegend`.
 This will collect all the `labels` you might have passed to your plotting functions and by default will be located in the right top position.
 For a different one, the `position=:ct` argument is called, where `:ct` means let's put our label in the `center` and at the `top`,  see Figure @fig:plot_legend:

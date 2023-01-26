@@ -2,7 +2,7 @@
 
 What are all the possible plotting functions available in `Makie.jl`?
 To answer this question, a _CHEAT SHEET_ is shown in @fig:cheat_sheet_cairo.
-These work especially well with `CairoMakie.jl` backend.
+These work especially well with the `CairoMakie.jl` backend:
 
 ```jl
 JDS.cheatsheet_cairomakie()

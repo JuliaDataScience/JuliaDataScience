@@ -18,7 +18,7 @@ In our opinion, it is the prettiest and most powerful plotting package.
 `Makie.jl` deals with arrays (@sec:array), such as vectors and matrices.
 This makes `Makie.jl` capable of dealing with any tabular data and especially `DataFrames` as we covered in @sec:dataframes.
 Moreover, it uses special point types, i.e. `Point2f` and `Point3f` which come in handy
-when defining vectores of points in 2d or 3d space.
+when defining vectors of points in 2d or 3d space.
 
 Like many plotting packages, the code is split into multiple packages.
 `Makie.jl` is the front end package that defines all plotting functions required to create plot objects.

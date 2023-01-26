@@ -1,6 +1,6 @@
 ## CairoMakie.jl {#sec:cairomakie}
 
-Let's start with our first plot, some scatter points with a line across them.
+Let's start with our first plot: some scatter points with a line across them.
 Remember, first we call the backend and activate it, namely
 
 ```

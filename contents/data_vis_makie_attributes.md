@@ -149,22 +149,3 @@ sco(s)
 
 where we have decomposed the tuple `FigureAxisPlot` into `fig, ax, pltobj`, in order to be able to add a `Legend` and `Colorbar` outside of the plotted object.
 We will discuss layout options in more detail in @sec:makie_layouts.
-
-We have done some basic but still interesting examples to show how to use `Makie.jl` and by now you might be wondering: what else can we do?
-What are all the possible plotting functions available in `Makie.jl`?
-To answer this question, a _CHEAT SHEET_ is shown in @fig:cheat_sheet_cairo.
-These work especially well with `CairoMakie.jl` backend.
-
-```jl
-JDS.cheatsheet_cairomakie()
-```
-
-For completeness, in @fig:cheat_sheet_glmakie, we show the corresponding functions _CHEAT SHEET_ for `GLMakie.jl`, which supports mostly 3D plots.
-Those will be explained in detail in @sec:glmakie.
-
-```jl
-JDS.cheatsheet_glmakie()
-```
-
-Now, that we have an idea of all the things we can do, let's go back and continue with the basics.
-It's time to learn how to change the general appearance of our plots.

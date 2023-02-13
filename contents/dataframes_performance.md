@@ -10,7 +10,7 @@ Like we explained in @sec:function_bang, functions that end with a bang `!` are 
 In the context of high performance Julia code, this *means* that **functions** with `!` will just change in-place the objects that we have supplied as arguments.
 
 Almost all the `DataFrames.jl` functions that we've seen have a \"`!` twin\".
-For example, `filter` has an *in-place* `filter!`, `select` has `select!`, `subset` has `subset!`,  `dropmissing` has ``dropmissing!`, and so on.
+For example, `filter` has an *in-place* `filter!`, `select` has `select!`, `subset` has `subset!`,  `dropmissing` has `dropmissing!`, and so on.
 Notice that these functions **do not** return a new`DataFrame`, but instead they **update** the`DataFrame` that they act upon.
 Additionally, `DataFrames.jl` (version 1.3 onwards) supports in-place `leftjoin` with the function `leftjoin!`.
 This function updates the left `DataFrame` with the joined columns from the right`DataFrame`.

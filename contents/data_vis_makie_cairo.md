@@ -25,12 +25,18 @@ sco(s)
 
 Note that the previous plot is the default output, which we probably need to tweak by using axis names and labels.
 
-Every plotting function like `scatterlines` creates and returns a new `Figure`, `Axis` and `plot object` in a collection called `FigureAxisPlot`.
+Every plotting function like `scatterlines` creates and returns a new
+
+- `Figure`
+- `Axis` 
+- `plot object` 
+
+in a collection called `FigureAxisPlot`.
 These are known as the `non-mutating` methods.
 On the other hand, the `mutating` methods (e.g. `scatterlines!`, note the `!`) just return a plot object which can be appended into a given `axis` or the `current_axis()`.
 
 The next question that one might have is: how do I change the color or the marker type?
-This can be done via `attributes`, which we do in the next section.
+This can be done via `attributes`, which we explain in the next section.
 
 ## Attributes {#sec:datavisMakie_attributes}
 

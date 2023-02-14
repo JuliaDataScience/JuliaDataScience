@@ -43,46 +43,12 @@ See below how these options are being used:
 Here, having the label `(a)` in the `TopLeft()` is probably not necessary, this will only make sense for more than one plot.
 For our next example let's keep using the previous tools and some more to create a richer and complex figure.
 
-You can hide decorations and axis' spines with:
-
-> - `hidedecorations!(ax; kwargs...)`
-> - `hidexdecorations!(ax; kwargs...)`
-> - `hideydecorations!(ax; kwargs...)`
-> - `hidespines!(ax; kwargs...)`
-
-Remember, we can always ask for help to see what kind of arguments we can use, e.g.,
-
-```jl
-s = """
-    help(hidespines!)
-    """
-sco(s)
-```
-
-Alternatively, for decorations
-
-```jl
-s = """
-    help(hidedecorations!)
-    """
-sco(s)
-```
-
-For elements that **you don't want to hide**, just pass them with `false`, i.e. `hideydecorations!(ax; ticks=false, grid=false)`.
-
-
-Synchronizing your `Axis` is done via:
+Having the same limits across different plots can be done via your `Axis` with:
 
 > - `linkaxes!`, `linkyaxes!` and `linkxaxes!`
 >
 > This could be useful when shared axis are desired.
 > Another way of getting shared axis will be by setting `limits!`.
-
-Setting `limits` at once or independently for each axis is done by calling
-
-> - `limits!(ax; l, r, b, t)`, where `l` is left, `r` right, `b` bottom, and `t` top.
->
-> You can also do `ylims!(low, high)` or `xlims!(low, high)`, and even open ones by doing `ylims!(low=0)` or `xlims!(high=1)`.
 
 Now, the example:
 

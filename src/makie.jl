@@ -116,7 +116,7 @@ function fig_theme()
         color=:black,
         linewidth=2,
         linestyle=:dash,
-         label = "-cos(x)/x",
+        label = "-cos(x)/x",
         )
     axislegend("legend"; position=:rt)
     fig
@@ -208,8 +208,10 @@ end
 function LaTeX_Strings()
     CairoMakie.activate!() # hide
     x = 0:0.05:4π
-    lines(x, x -> sin(3x) / (cos(x) + 2) / x; label=L"\frac{\sin(3x)}{x(\cos(x)+2)}",
-        figure=(; resolution=(600, 400)), axis=(; xlabel=L"x"))
+    lines(x, x -> sin(3x) / (cos(x) + 2) / x;
+        label=L"\frac{\sin(3x)}{x(\cos(x)+2)}",
+        figure=(; resolution=(600, 400)), axis=(; xlabel=L"x")
+        )
     lines!(x, x -> cos(x) / x; label=L"\cos(x)/x")
     lines!(x, x -> exp(-x); label=L"e^{-x}")
     limits!(-0.5, 13, -0.6, 1.05)
@@ -218,10 +220,15 @@ function LaTeX_Strings()
 end
 
 publication_theme() = Theme(
-    fontsize=16, font="CMU Serif",
-    Axis=(xlabelsize=20, xgridstyle=:dash, ygridstyle=:dash,
-        xtickalign=1, ytickalign=1, yticksize=10, xticksize=10,
-        xlabelpadding=-5, xlabel="x", ylabel="y"),
+    fontsize=16,
+    font="CMU Serif",
+    Axis=(
+        xlabelsize=20,xlabelpadding=-5,
+        xgridstyle=:dash, ygridstyle=:dash,
+        xtickalign=1, ytickalign=1,
+        yticksize=10, xticksize=10,
+        xlabel="x", ylabel="y"
+        ),
     Legend=(framecolor=(:black, 0.5), bgcolor=(:white, 0.5)),
     Colorbar=(ticksize=16, tickalign=1, spinewidth=0.5),
 )
@@ -229,7 +236,7 @@ publication_theme() = Theme(
 function plot_with_legend_and_colorbar()
     CairoMakie.activate!() # hide
     fig, ax, _ = scatterlines(1:10; label="line")
-    hm = heatmap!(ax, LinRange(6, 9, 15), LinRange(2, 5, 15), randn(15, 15);
+    hm = heatmap!(ax, range(6, 9, 15), range(2, 5, 15), randn(15, 15);
         colormap=:Spectral_11)
     axislegend("legend"; position=:lt)
     Colorbar(fig[1, 2], hm, label="values")
@@ -322,8 +329,7 @@ function multiple_example_themes()
 end
 
 function demo_figure()
-    GLMakie.activate!() # hide
-    seed!(123)
+    CairoMakie.activate!() # hide
     # contourf
     x=y= range(-2.3, 2.3, length=100)
     z=-2x .* exp.(-x .^ 2 .- (y') .^ 2)
@@ -336,9 +342,9 @@ function demo_figure()
     # figure
     fig = Figure(figure_padding=(10,15,5,35),
         resolution = (900,600), fontsize = 20)
-    ax1 = Axis(fig[1,1], xlabel="x", ylabel="y")
-    ax2 = Axis(fig[1,2], xlabel="x", ylabel="pdf")
-    ax3 = Axis(fig[2,1:2], xlabel="x", ylabel="y")
+    ax1 = Axis(fig[1,1]; xlabel="x", ylabel="y")
+    ax2 = Axis(fig[1,2]; xlabel="x", ylabel="pdf")
+    ax3 = Axis(fig[2,1:2]; xlabel="x", ylabel="y")
     obj = contourf!(ax1, x,y,z; levels=30)
     Colorbar(fig[1,1, Top()], obj;
         vertical=false,
@@ -403,10 +409,12 @@ function set_colors_and_cycle()
     # Epicycloid lines
     x(r, k, θ) = r * (k .+ 1.0) .* cos.(θ) .- r * cos.((k .+ 1.0) .* θ)
     y(r, k, θ) = r * (k .+ 1.0) .* sin.(θ) .- r * sin.((k .+ 1.0) .* θ)
-    θ = LinRange(0, 6.2π, 1000)
+    θ = range(0, 6.2π, 1000)
+
     axis = (; xlabel=L"x(\theta)", ylabel=L"y(\theta)",
         title="Epicycloid", aspect=DataAspect())
     figure = (; resolution=(600, 400), font="CMU Serif")
+
     fig, ax, _ = lines(x(1, 1, θ), y(1, 1, θ); color="firebrick1", # string
         label=L"1.0", axis=axis, figure=figure)
     lines!(ax, x(4, 2, θ), y(4, 2, θ); color=:royalblue1, #symbol
@@ -426,15 +434,18 @@ function new_cycle_theme()
     cycle = Cycle([:color, :linestyle, :marker], covary=true) # alltogether
     my_markers = [:circle, :rect, :utriangle, :dtriangle, :diamond,
         :pentagon, :cross, :xcross]
-    my_linestyle = [nothing, :dash, :dot, :dashdot, :dashdotdot]
+    my_linestyle = [:solid, :dash, :dot, :dashdot, :dashdotdot]
     Theme(
         fontsize=16, font="CMU Serif",
         colormap=:linear_bmy_10_95_c78_n256,
         palette=(color=my_colors, marker=my_markers, linestyle=my_linestyle),
-        Lines=(cycle=cycle,), Scatter=(cycle=cycle,),
-        Axis=(xlabelsize=20, xgridstyle=:dash, ygridstyle=:dash,
-            xtickalign=1, ytickalign=1, yticksize=10, xticksize=10,
-            xlabelpadding=-5, xlabel="x", ylabel="y"),
+        Lines=(cycle=cycle,),
+        Scatter=(cycle=cycle,),
+        Axis=(xlabelsize=20,xlabelpadding=-5,
+            xgridstyle=:dash, ygridstyle=:dash,
+            xtickalign=1, ytickalign=1,
+            yticksize=10, xticksize=10,
+            xlabel="x", ylabel="y"),
         Legend=(framecolor=(:black, 0.5), bgcolor=(:white, 0.5)),
         Colorbar=(ticksize=16, tickalign=1, spinewidth=0.5),
     )
@@ -443,11 +454,11 @@ end
 function scatters_and_lines()
     CairoMakie.activate!() # hide
     x = collect(0:10)
-    xh = LinRange(4, 6, 25)
-    yh = LinRange(70, 95, 25)
+    xh = range(4, 6, 25)
+    yh = range(70, 95, 25)
     h = randn(25, 25)
     fig = Figure(resolution=(600, 400), font="CMU Serif")
-    ax = Axis(fig[1, 1], xlabel=L"x", ylabel=L"f(x,a)")
+    ax = Axis(fig[1, 1]; xlabel=L"x", ylabel=L"f(x,a)")
     for i in x
         lines!(ax, x, i .* x; label=latexstring("$(i) x"))
         scatter!(ax, x, i .* x; markersize=13, strokewidth=0.25,

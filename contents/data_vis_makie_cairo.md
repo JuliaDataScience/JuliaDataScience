@@ -29,7 +29,7 @@ Every plotting function like `scatterlines` creates and returns a new
 
 - `Figure`
 - `Axis` 
-- `plot object` 
+- `plot object`
 
 in a collection called `FigureAxisPlot`.
 These are known as the `non-mutating` methods.

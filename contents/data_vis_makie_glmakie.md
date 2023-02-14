@@ -1,15 +1,15 @@
 ## GLMakie.jl {#sec:glmakie}
 
-`CairoMakie.jl` supplies all our needs for static 2D images.
+`CairoMakie.jl` fulfills all our needs for static 2D images.
 But sometimes we want interactivity, especially when we are dealing with 3D images.
 Visualizing data in 3D is also a common practice to gain insight from your data.
-This is where `GLMakie.jl` might be helpful, since it uses [OpenGL](http://www.opengl.org/) as a backend that adds interactivity and responsiveness to plots.
+This is where `GLMakie.jl` comes into play, since it uses [OpenGL](http://www.opengl.org/) as a backend that adds interactivity and responsiveness to plots.
 Like before, a simple plot includes, of course, lines and points. So, we will start with those and since we already know how layouts work, we will put that into practice.
 
 ### Scatters and Lines
 
 For scatter plots we have two options, the first one is `scatter(x, y, z)` and the second one is `meshscatter(x, y, z)`.
-In the first one markers don't scale in the axis directions, but in the latter they do because they are actual geometries in 3D space.
+In the former markers don't scale in the axis directions and in the latter they do because they are actual geometries in 3D space.
 See the next example:
 
 ```
@@ -52,7 +52,7 @@ But, it can also be plotted with a `heatmap(x, y, z)`, `contour(x, y, z)` or `co
 @sco JDS.heatmap_contour_and_contourf()
 ```
 
-Additionally, by changing `Axis` to an `Axis3`, these plots will be automatically be in the x-y plane:
+Additionally, by changing `Axis` to an `Axis3`, these plots will be automatically be in the x-y plane at `z=0`:
 
 ```jl
 @sco JDS.heatmap_contour_and_contourf_in_a_3d_plane()
@@ -68,7 +68,7 @@ using TestImages
 @sco JDS.mixing_surface_contour3d_contour_and_contourf()
 ```
 
-Not bad, right? From there is clear that  any `heatmap`'s, `contour`'s, `contourf`'s or `image` can be plotted into any plane.
+Not bad, right? From there is clear that  any `heatmap`'s, `contour`'s, `contourf`'s or `image` can be plotted into any plane via a `transformation` and that the `planes` can be coloured, i.e. `xzpanelcolor=:black`.
 
 ### Arrows and Streamplots
 
@@ -99,7 +99,7 @@ using GeometryBasics
 @sco JDS.mesh_volume_contour()
 ```
 
-Note that here we are plotting two meshes in the same axis, one transparent sphere and a cube.
+Note that here we are plotting two meshes into the same axis, one transparent sphere and a cube.
 So far, we have covered most of the 3D use-cases.
 
 Taking as reference the previous example one can do the following custom plot with spheres and rectangles:
@@ -114,12 +114,15 @@ Additionally, we can mix spheres and a rectangular plane. Next, we define all th
 ```jl
 sc("""
 seed!(123)
-spheresGrid = [Point3f(i,j,k) for i in 1:2:12 for j in 1:2:10 for k in 1:2:10]
-colorSphere = [RGBA(i * 0.1, j * 0.1, k * 0.1, 0.75) for i in 1:2:12 for j in 1:2:10 for k in 1:2:10]
-spheresPlane = [Point3f(i,j,k) for i in 1:2.5:20 for j in 1:2.5:10 for k in 1:2.5:4]
-cmap = get(colorschemes[:plasma], LinRange(0, 1, 50))
+spheresGrid = [Point3f(i,j,k) for i in 1:2:10 for j in 1:2:10
+    for k in 1:2:10]
+colorSphere = [RGBA(i * 0.1, j * 0.1, k * 0.1, 0.75) for i in 1:2:10
+    for j in 1:2:10 for k in 1:2:10]
+spheresPlane = [Point3f(i,j,k) for i in 1:2.5:23 for j in 1:2.5:10
+    for k in 1:2.5:4]
+cmap = get(colorschemes[:plasma], range(0, 1, 50))
 colorsPlane = cmap[rand(1:50,50)]
-rectMesh = Rect3f(Vec3f(-1, -1, 2.1), Vec3f(22, 11, 0.5))
+rectMesh = Rect3f(Vec3f(-1, -1, 2.1), Vec3f(16, 11, 0.5))
 recmesh = GeometryBasics.mesh(rectMesh)
 colors = [RGBA(rand(4)...) for v in recmesh.position]
 """)
@@ -133,7 +136,7 @@ Then, the plot is simply done with:
 
 Here, the rectangle is semi-transparent due to the alpha channel added to the RGB color.
 The rectangle function is quite versatile, for instance 3D boxes are easy to implement which in turn could be used for plotting a 3D histogram.
-See our next example, where we are using again our `peaks` function and some additional definitions:
+See our next example, where we are using again the `peaks` function and some additional definitions:
 
 ```jl
 sc("""
@@ -148,7 +151,7 @@ ztmp2 = abs.(z) ./ maximum(abs.(z)) .+ 0.15
 """)
 ```
 
-here $\delta x, \delta y$ are used to specify our boxes size. `cmap2` will be the color for each box and `ztmp2` will be used as a transparency parameter. See the output in the next figure.
+here $\delta x, \delta y$ are used to specify the box sizes. `cmap2` will be the color for each box and `ztmp2` will be used as a transparency parameter. See the output in the next figure.
 
 ```jl
 @sco JDS.histogram_or_bars_in_3d()

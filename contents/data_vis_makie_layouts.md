@@ -40,7 +40,8 @@ See below how these options are being used:
 @sco JDS.first_layout_fixed()
 ```
 
-Here, having the label `(a)` in the `TopLeft()` is probably not necessary, this will only make sense for more than one plot.
+Here, having the label `(a)` in the `TopLeft()` is probably not necessary, this will only make sense for more than one plot. Also, note the use of `padding`, which allows more fine control over his postion.
+
 For our next example let's keep using the previous tools and some more to create a richer and complex figure.
 
 Having the same limits across different plots can be done via your `Axis` with:
@@ -56,7 +57,7 @@ Now, the example:
 @sco JDS.complex_layout_double_axis()
 ```
 
-So, now our `Colorbar` needs to be horizontal and the bar ticks need to be in the lower part.
+So, now our `Colorbar` is horizontal and the bar ticks are in the lower part.
 This is done by setting `vertical=false` and `flipaxis=false`.
 Additionally, note that we can call many `Axis` into `fig`, or even `Colorbar`'s and `Legend`'s, and then afterwards build the layout.
 

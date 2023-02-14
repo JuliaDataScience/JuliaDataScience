@@ -28,7 +28,7 @@ Note that the previous plot is the default output, which we probably need to twe
 Every plotting function like `scatterlines` creates and returns a new
 
 - `Figure`
-- `Axis` 
+- `Axis`
 - `plot object`
 
 in a collection called `FigureAxisPlot`.

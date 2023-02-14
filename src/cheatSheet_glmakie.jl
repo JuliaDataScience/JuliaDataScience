@@ -1,8 +1,3 @@
-function dep_version(depname)
-    deps = Pkg.dependencies()
-    version = first(d for d in deps if d.second.name == depname).second.version
-    "$depname: v$version"
-end
 function cheatsheet_glmakie()
     packages = ["Makie", "GLMakie"]
 

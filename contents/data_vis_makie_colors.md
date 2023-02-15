@@ -9,9 +9,11 @@ and obtain a transparent color or colormap with `color=(:red,0.5)` and `colormap
 
 Different use cases will be shown next. Then we will define a custom theme with new colors and a colorbar palette.
 
+### Colors
+
 By default `Makie.jl` has a predefined set of colors in order to cycle through them automatically, as shown in the previous figures, where no specific color was set.
 Overwriting these defaults is done by calling the keyword `color` in the plotting function and specifying a new color via a `Symbol` or `String`.
-See this in action in the following example:
+See this in the following example:
 
 ```jl
 @sco JDS.set_colors_and_cycle()
@@ -20,6 +22,8 @@ See this in action in the following example:
 Where, in the first two lines we have used the keyword `color` to specify our color.
 The rest is using the default cycle set of colors.
 Later, we will learn how to do a custom cycle.
+
+### Colormap, Reverse
 
 Regarding colormaps, we are already familiar with the keyword `colormap` for heatmaps and scatters.
 Here, we show that a colormap can also be specified via a `Symbol` or a `String`, similar to colors.
@@ -44,6 +48,8 @@ scolor = """
     """
 sco(scolor)
 ```
+
+### Colormap, highclip, lowclip
 
 When setting a `colorrange` usually the values outside this range are colored with the first and last color from  the colormap.
 However, sometimes is better to specify the color you want at both ends. We do that with `highclip` and `lowclip`:
@@ -72,6 +78,9 @@ sco(s)
 ```
 
 But we mentioned that also `RGB` vectors are valid options.
+
+### Colormap, categorical
+
 For our next example you could pass the custom colormap _perse_ or use `cgrad` to force a categorical `Colorbar`.
 
 ```
@@ -104,8 +113,8 @@ sco(scat)
 Lastly, the ticks in the colorbar for the categorial case are not centered by default in each color.
 This is fixed by passing custom ticks, as in `cbar.ticks = (positions, ticks)`.
 
-The last situation is when passing a multiple colors to `colormap`.
-You will get an interpolated colormap between these two colors.
+The last case is when passing multiple colors to `colormap`.
+You will get an interpolated colormap between those colors.
 Also, hexadecimal coded colors are accepted. So, on top of our heatmap let's put one semi-transparent point using this.
 
 ```jl
@@ -115,7 +124,7 @@ s2color2 = """
     axis = (; xlabel=L"x", ylabel=L"y", aspect=DataAspect())
     fig, ax, pltobj = heatmap(rand(20, 20); colorrange=(0, 1),
         colormap=["red", "black"], axis=axis, figure=figure)
-    scatter!(ax, [11], [11], color=("#C0C0C0", 0.5), markersize=150)
+    scatter!(ax, [11], [11]; color=("#C0C0C0", 0.5), markersize=150)
     Colorbar(fig[1, 2], pltobj, label="2 colors")
     colsize!(fig.layout, 1, Aspect(1, 1.0))
     fig

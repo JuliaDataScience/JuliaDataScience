@@ -25,7 +25,7 @@ s = """
 sco(s)
 ```
 
-A more involved example will be one with some equation as `text` and increasing legend numbering for curves in a plot:
+A more involved example will be one with an equation as `text` and increasing legend numbering for curves in a plot:
 
 ```jl
 @sco JDS.multiple_lines()
@@ -33,7 +33,7 @@ A more involved example will be one with some equation as `text` and increasing 
 
 Where `latexstring` from `LaTeXStrings.jl` has been used to parse the string. An alternative to this simple case is `L"%$i x"`, which is used in the next example.
 
-But, before that there is another problem, some lines have repeated colors and that's no good.
+But, before that, there is another problem, some lines have repeated colors and that's no good.
 Adding some markers and line styles usually helps.
 So, let's do that using [Cycles](https://docs.makie.org/stable/documentation/theming/#cycles) for these types.
 Setting `covary=true` allows to cycle all elements together:
@@ -46,4 +46,4 @@ And voilà.
 A publication quality plot is here.
 What more can we ask for?
 Well, what about different default colors or palettes.
-In our next section, we will see how to use again [Cycles](https://docs.makie.org/stable/documentation/theming/#cycles) and know a little bit more about them, plus some additional keywords in order to achieve this.
+In our next section, we will see how to use again [Cycles](https://docs.makie.org/stable/documentation/theming/#cycles) and learn a little bit more about them, plus some additional keywords in order to achieve this.

@@ -15,7 +15,8 @@ Our `demo_figure` plotting function looks like follows:
 @sc JDS.demo_figure()
 ```
 
-TODO: Explain all components in figure
+Where we had use several keyword arguments for `Axis`, `Legend` and `Colorbar`,
+please play with them and see how they work.
 
 Currently, there are five themes:
 
@@ -42,7 +43,7 @@ Which, for simplicity we use it to plot `scatterlines` and a `heatmap`.
 @sc plot_with_legend_and_colorbar()
 ```
 
-Then, using the previously define `Theme` the output is shown in Figure (@fig:plot_with_legend_and_colorbar).
+Then, using the previously defined `Theme` the output is shown in Figure (@fig:plot_with_legend_and_colorbar).
 
 ```jl
 s = """
@@ -78,5 +79,5 @@ s = """
 sco(s)
 ```
 
-Where the x and y labels have a Latex format due to `L"..."`.
+Where the $x$ and $y$ labels have a Latex format due to `L"..."`.
 Most basic Latex strings are already supported by Makie, however to fully exploit this integration is recommend to also load the package LaTeXStrings as stated in the next section.

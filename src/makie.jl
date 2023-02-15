@@ -116,7 +116,7 @@ function fig_theme()
         color=:black,
         linewidth=2,
         linestyle=:dash,
-         label = "-cos(x)/x",
+        label = "-cos(x)/x",
         )
     axislegend("legend"; position=:rt)
     fig
@@ -208,8 +208,10 @@ end
 function LaTeX_Strings()
     CairoMakie.activate!() # hide
     x = 0:0.05:4π
-    lines(x, x -> sin(3x) / (cos(x) + 2) / x; label=L"\frac{\sin(3x)}{x(\cos(x)+2)}",
-        figure=(; resolution=(600, 400)), axis=(; xlabel=L"x"))
+    lines(x, x -> sin(3x) / (cos(x) + 2) / x;
+        label=L"\frac{\sin(3x)}{x(\cos(x)+2)}",
+        figure=(; resolution=(600, 400)), axis=(; xlabel=L"x")
+        )
     lines!(x, x -> cos(x) / x; label=L"\cos(x)/x")
     lines!(x, x -> exp(-x); label=L"e^{-x}")
     limits!(-0.5, 13, -0.6, 1.05)
@@ -218,10 +220,15 @@ function LaTeX_Strings()
 end
 
 publication_theme() = Theme(
-    fontsize=16, font="CMU Serif",
-    Axis=(xlabelsize=20, xgridstyle=:dash, ygridstyle=:dash,
-        xtickalign=1, ytickalign=1, yticksize=10, xticksize=10,
-        xlabelpadding=-5, xlabel="x", ylabel="y"),
+    fontsize=16,
+    font="CMU Serif",
+    Axis=(
+        xlabelsize=20,xlabelpadding=-5,
+        xgridstyle=:dash, ygridstyle=:dash,
+        xtickalign=1, ytickalign=1,
+        yticksize=10, xticksize=10,
+        xlabel="x", ylabel="y"
+        ),
     Legend=(framecolor=(:black, 0.5), bgcolor=(:white, 0.5)),
     Colorbar=(ticksize=16, tickalign=1, spinewidth=0.5),
 )
@@ -229,7 +236,7 @@ publication_theme() = Theme(
 function plot_with_legend_and_colorbar()
     CairoMakie.activate!() # hide
     fig, ax, _ = scatterlines(1:10; label="line")
-    hm = heatmap!(ax, LinRange(6, 9, 15), LinRange(2, 5, 15), randn(15, 15);
+    hm = heatmap!(ax, range(6, 9, 15), range(2, 5, 15), randn(15, 15);
         colormap=:Spectral_11)
     axislegend("legend"; position=:lt)
     Colorbar(fig[1, 2], hm, label="values")
@@ -322,8 +329,7 @@ function multiple_example_themes()
 end
 
 function demo_figure()
-    GLMakie.activate!() # hide
-    seed!(123)
+    CairoMakie.activate!() # hide
     # contourf
     x=y= range(-2.3, 2.3, length=100)
     z=-2x .* exp.(-x .^ 2 .- (y') .^ 2)
@@ -336,9 +342,9 @@ function demo_figure()
     # figure
     fig = Figure(figure_padding=(10,15,5,35),
         resolution = (900,600), fontsize = 20)
-    ax1 = Axis(fig[1,1], xlabel="x", ylabel="y")
-    ax2 = Axis(fig[1,2], xlabel="x", ylabel="pdf")
-    ax3 = Axis(fig[2,1:2], xlabel="x", ylabel="y")
+    ax1 = Axis(fig[1,1]; xlabel="x", ylabel="y")
+    ax2 = Axis(fig[1,2]; xlabel="x", ylabel="pdf")
+    ax3 = Axis(fig[2,1:2]; xlabel="x", ylabel="y")
     obj = contourf!(ax1, x,y,z; levels=30)
     Colorbar(fig[1,1, Top()], obj;
         vertical=false,
@@ -403,10 +409,12 @@ function set_colors_and_cycle()
     # Epicycloid lines
     x(r, k, θ) = r * (k .+ 1.0) .* cos.(θ) .- r * cos.((k .+ 1.0) .* θ)
     y(r, k, θ) = r * (k .+ 1.0) .* sin.(θ) .- r * sin.((k .+ 1.0) .* θ)
-    θ = LinRange(0, 6.2π, 1000)
+    θ = range(0, 6.2π, 1000)
+
     axis = (; xlabel=L"x(\theta)", ylabel=L"y(\theta)",
         title="Epicycloid", aspect=DataAspect())
     figure = (; resolution=(600, 400), font="CMU Serif")
+
     fig, ax, _ = lines(x(1, 1, θ), y(1, 1, θ); color="firebrick1", # string
         label=L"1.0", axis=axis, figure=figure)
     lines!(ax, x(4, 2, θ), y(4, 2, θ); color=:royalblue1, #symbol
@@ -426,15 +434,18 @@ function new_cycle_theme()
     cycle = Cycle([:color, :linestyle, :marker], covary=true) # alltogether
     my_markers = [:circle, :rect, :utriangle, :dtriangle, :diamond,
         :pentagon, :cross, :xcross]
-    my_linestyle = [nothing, :dash, :dot, :dashdot, :dashdotdot]
+    my_linestyle = [:solid, :dash, :dot, :dashdot, :dashdotdot]
     Theme(
         fontsize=16, font="CMU Serif",
         colormap=:linear_bmy_10_95_c78_n256,
         palette=(color=my_colors, marker=my_markers, linestyle=my_linestyle),
-        Lines=(cycle=cycle,), Scatter=(cycle=cycle,),
-        Axis=(xlabelsize=20, xgridstyle=:dash, ygridstyle=:dash,
-            xtickalign=1, ytickalign=1, yticksize=10, xticksize=10,
-            xlabelpadding=-5, xlabel="x", ylabel="y"),
+        Lines=(cycle=cycle,),
+        Scatter=(cycle=cycle,),
+        Axis=(xlabelsize=20,xlabelpadding=-5,
+            xgridstyle=:dash, ygridstyle=:dash,
+            xtickalign=1, ytickalign=1,
+            yticksize=10, xticksize=10,
+            xlabel="x", ylabel="y"),
         Legend=(framecolor=(:black, 0.5), bgcolor=(:white, 0.5)),
         Colorbar=(ticksize=16, tickalign=1, spinewidth=0.5),
     )
@@ -443,11 +454,11 @@ end
 function scatters_and_lines()
     CairoMakie.activate!() # hide
     x = collect(0:10)
-    xh = LinRange(4, 6, 25)
-    yh = LinRange(70, 95, 25)
+    xh = range(4, 6, 25)
+    yh = range(70, 95, 25)
     h = randn(25, 25)
     fig = Figure(resolution=(600, 400), font="CMU Serif")
-    ax = Axis(fig[1, 1], xlabel=L"x", ylabel=L"f(x,a)")
+    ax = Axis(fig[1, 1]; xlabel=L"x", ylabel=L"f(x,a)")
     for i in x
         lines!(ax, x, i .* x; label=latexstring("$(i) x"))
         scatter!(ax, x, i .* x; markersize=13, strokewidth=0.25,
@@ -465,7 +476,7 @@ function first_layout()
     CairoMakie.activate!() # hide
     seed!(123)
     x, y, z = randn(6), randn(6), randn(6)
-    fig = Figure(resolution=(600, 400), backgroundcolor=:grey90)
+    fig = Figure(resolution=(600, 400), backgroundcolor=:snow2)
     ax = Axis(fig[1, 1], backgroundcolor=:white)
     pltobj = scatter!(ax, x, y; color=z, label="scatters")
     lines!(ax, x, 1.1y; label="line")
@@ -483,16 +494,16 @@ function first_layout_fixed()
     seed!(123)
     x, y, z = randn(6), randn(6), randn(6)
     fig = Figure(figure_padding=(0, 3, 5, 2), resolution=(600, 400),
-        backgroundcolor=:grey90, font="CMU Serif")
+        backgroundcolor=:snow2, font="CMU Serif")
     ax = Axis(fig[1, 1], xlabel=L"x", ylabel=L"y",
         title="Layout example", backgroundcolor=:white)
     pltobj = scatter!(ax, x, y; color=z, label="scatters")
-    lines!(ax, x, 1.1y, label="line")
+    lines!(ax, x, 1.1y; label="line")
     Legend(fig[2, 1:2], ax, "Labels", orientation=:horizontal,
         tellheight=true, titleposition=:left)
     Colorbar(fig[1, 2], pltobj, label="colorbar")
     # additional aesthetics
-    Box(fig[1, 1, Right()], color=(:slateblue1, 0.35))
+    Box(fig[1, 1, Right()], color=(:snow4, 0.35))
     Label(fig[1, 1, Right()], "protrusion", fontsize=18,
         rotation=pi / 2, padding=(3, 3, 3, 3))
     Label(fig[1, 1, TopLeft()], "(a)", fontsize=18, padding=(0, 3, 8, 0))
@@ -509,14 +520,18 @@ end
 function complex_layout_double_axis()
     CairoMakie.activate!() # hide
     seed!(123)
-    x = LinRange(0, 1, 10)
-    y = LinRange(0, 1, 10)
+    x = range(0, 1, 10)
+    y = range(0, 1, 10)
     z = rand(10, 10)
-    fig = Figure(resolution=(600, 400), font="CMU Serif", backgroundcolor=:grey90)
+    fig = Figure(resolution=(700, 400),
+        font="CMU Serif",
+        backgroundcolor=:snow2
+        )
     ax1 = Axis(fig, xlabel=L"x", ylabel=L"y")
     ax2 = Axis(fig, xlabel=L"x")
     heatmap!(ax1, x, y, z; colorrange=(0, 1))
-    series!(ax2, abs.(z[1:4, :]); labels=["lab $i" for i = 1:4], color=:Set1_4)
+    series!(ax2, abs.(z[1:4, :]);
+        labels=["lab $i" for i = 1:4], color=:Set1_4)
     hm = scatter!(10x, y; color=z[1, :], label="dots", colorrange=(0, 1))
     hideydecorations!(ax2, ticks=false, grid=false)
     linkyaxes!(ax1, ax2)
@@ -525,7 +540,9 @@ function complex_layout_double_axis()
     fig[1, 2] = ax2
     Label(fig[1, 1, TopLeft()], "(a)", fontsize=18, padding=(0, 6, 8, 0))
     Label(fig[1, 2, TopLeft()], "(b)", fontsize=18, padding=(0, 6, 8, 0))
-    Colorbar(fig[2, 1:2], hm, label="colorbar", vertical=false, flipaxis=false)
+    Colorbar(fig[2, 1:2], hm, label="colorbar",
+        vertical=false, flipaxis=false
+        )
     Legend(fig[1, 3], ax2, "Legend")
     colgap!(fig.layout, 5)
     rowgap!(fig.layout, 5)
@@ -541,7 +558,7 @@ function squares_layout()
     seed!(123)
     letters = reshape(collect('a':'d'), (2, 2))
     fig = Figure(resolution=(600, 400), fontsize=14, font="CMU Serif",
-        backgroundcolor=:grey90)
+        backgroundcolor=:snow2)
     axs = [Axis(fig[i, j], aspect=DataAspect()) for i = 1:2, j = 1:2]
     hms = [heatmap!(axs[i, j], randn(10, 10), colorrange=(-2, 2))
            for i = 1:2, j = 1:2]
@@ -562,17 +579,17 @@ function mixed_mode_layout()
     seed!(123)
     longlabels = ["$(today() - Day(1))", "$(today())", "$(today() + Day(1))"]
     fig = Figure(resolution=(600, 400), fontsize=12,
-        backgroundcolor=:grey90, font="CMU Serif")
+        backgroundcolor=:snow2, font="CMU Serif")
     ax1 = Axis(fig[1, 1], xlabel="x", alignmode=Mixed(bottom=0))
-    ax2 = Axis(fig[1, 2], xticklabelrotation=pi / 2, alignmode=Mixed(bottom=0),
+    ax2 = Axis(fig[1, 2], xticklabelrotation=π/2, alignmode=Mixed(bottom=0),
         xticks=([1, 5, 10], longlabels))
     ax3 = Axis(fig[2, 1:2])
     ax4 = Axis(fig[3, 1:2])
     axs = [ax1, ax2, ax3, ax4]
     [lines!(ax, 1:10, rand(10)) for ax in axs]
     hidexdecorations!(ax3; ticks=false, grid=false)
-    Box(fig[2:3, 1:2, Right()], color=(:slateblue1, 0.35))
-    Label(fig[2:3, 1:2, Right()], "protrusion", rotation=pi / 2, fontsize=14,
+    Box(fig[2:3, 1:2, Right()], color=(:snow4, 0.35))
+    Label(fig[2:3, 1:2, Right()], "protrusion", rotation=π/2, fontsize=14,
         padding=(3, 3, 3, 3))
     Label(fig[1, 1:2, Top()], "Mixed alignmode", fontsize=16,
         padding=(0, 0, 15, 0))
@@ -589,12 +606,12 @@ function mixed_mode_layout()
     Options(fig; caption, label, link_attributes) # hide
 end
 
-function nested_sub_plot!(fig)
-    color = rand(RGBf)
-    ax1 = Axis(fig[1, 1], backgroundcolor=(color, 0.25))
-    ax2 = Axis(fig[1, 2], backgroundcolor=(color, 0.25))
-    ax3 = Axis(fig[2, 1:2], backgroundcolor=(color, 0.25))
-    ax4 = Axis(fig[1:2, 3], backgroundcolor=(color, 0.25))
+function nested_sub_plot!(f)
+    backgroundcolor = rand(resample_cmap(:Pastel1_6, 6, alpha=0.25))
+    ax1 = Axis(f[1, 1]; backgroundcolor)
+    ax2 = Axis(f[1, 2]; backgroundcolor)
+    ax3 = Axis(f[2, 1:2]; backgroundcolor)
+    ax4 = Axis(f[1:2, 3]; backgroundcolor)
     return (ax1, ax2, ax3, ax4)
 end
 
@@ -636,19 +653,18 @@ function nested_Grid_Layouts()
     Options(fig; caption, label, link_attributes) # hide
 end
 
-function add_box_inset(fig; left=100, right=250, bottom=200, top=300,
-    bgcolor=:grey90)
+function add_box_inset(fig; bgcolor=:snow2,
+    left=100, right=250, bottom=200, top=300)
     # https://discourse.julialang.org/t/makie-inset-axes-and-their-drawing-order/60987 # hide
     inset_box = Axis(fig, bbox=BBox(left, right, bottom, top),
         xticklabelsize=12, yticklabelsize=12, backgroundcolor=bgcolor)
-    # bring content upfront
-    translate!(inset_box.scene, 0, 0, 10)
+    translate!(inset_box.scene, 0, 0, 10)  # bring content upfront
     return inset_box
 end
 
-function add_axis_inset(pos=fig[1, 1]; halign, valign, width=Relative(0.5),
-    height=Relative(0.35), alignmode=Mixed(left=5, right=5), bgcolor=:lightgray)
-
+function add_axis_inset(pos=fig[1, 1]; bgcolor=:snow2,
+    halign, valign, width=Relative(0.5),height=Relative(0.35),
+    alignmode=Mixed(left=5, right=5))
     inset_box = Axis(pos; width, height, halign, valign, alignmode,
         xticklabelsize=12, yticklabelsize=12, backgroundcolor=bgcolor)
     # bring content upfront
@@ -660,12 +676,13 @@ function figure_axis_inset()
     CairoMakie.activate!() # hide
     fig = Figure(resolution=(600, 400))
     ax = Axis(fig[1, 1], backgroundcolor=:white)
-    inset_ax1 = add_axis_inset(fig[1, 1]; halign=:left, valign=:center,
+    inset_ax1 = add_axis_inset(fig[1, 1]; bgcolor=:snow2,
+        halign=:left, valign=:center,
         width=Relative(0.3), height=Relative(0.35),
-        alignmode=Mixed(left=5, right=5, bottom=15),
-        bgcolor=:grey90)
-    inset_ax2 = add_axis_inset(fig[1, 1]; halign=:right, valign=:center,
-        width=Relative(0.25), height=Relative(0.3), bgcolor=(:white, 0.65))
+        alignmode=Mixed(left=5, right=5, bottom=15))
+    inset_ax2 = add_axis_inset(fig[1, 1]; bgcolor=(:white, 0.85),
+        halign=:right, valign=:center,
+        width=Relative(0.25), height=Relative(0.3))
     lines!(ax, 1:10)
     lines!(inset_ax1, 1:10)
     scatter!(inset_ax2, 1:10, color=:black)
@@ -680,10 +697,10 @@ function figure_box_inset()
     CairoMakie.activate!() # hide
     fig = Figure(resolution=(600, 400))
     ax = Axis(fig[1, 1], backgroundcolor=:white)
-    inset_ax1 = add_box_inset(fig; left=100, right=250, bottom=200, top=300,
-        bgcolor=:grey90)
-    inset_ax2 = add_box_inset(fig; left=500, right=580, bottom=100, top=200,
-        bgcolor=(:white, 0.65))
+    inset_ax1 = add_box_inset(fig; bgcolor=:snow2,
+        left=100, right=250, bottom=200, top=300)
+    inset_ax2 = add_box_inset(fig; bgcolor=(:white, 0.85),
+        left=500, right=580, bottom=100, top=200)
     lines!(ax, 1:10)
     lines!(inset_ax1, 1:10)
     scatter!(inset_ax2, 1:10, color=:black)
@@ -699,16 +716,20 @@ function scatters_in_3D()
     seed!(123)
     n = 10
     x, y, z = randn(n), randn(n), randn(n)
+    aspect=(1, 1, 1)
+    perspectiveness=0.5
+    # the figure
     fig = Figure(; resolution=(1200, 400))
-    ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), perspectiveness=0.5)
-    ax2 = Axis3(fig[1, 2]; aspect=(1, 1, 1), perspectiveness=0.5)
-    ax3 = Axis3(fig[1, 3]; aspect=:data, perspectiveness=0.5)
+    ax1 = Axis3(fig[1, 1]; aspect, perspectiveness)
+    ax2 = Axis3(fig[1, 2]; aspect, perspectiveness)
+    ax3 = Axis3(fig[1, 3]; aspect=:data, perspectiveness)
     scatter!(ax1, x, y, z; markersize=15)
     meshscatter!(ax2, x, y, z; markersize=0.25)
     hm = meshscatter!(ax3, x, y, z; markersize=0.25,
         marker=Rect3f(Vec3f(0), Vec3f(1)), color=1:n,
         colormap=:plasma, transparency=false)
     Colorbar(fig[1, 4], hm, label="values", height=Relative(0.5))
+    colgap!(fig.layout, 5)
     fig
 end
 
@@ -717,16 +738,19 @@ function lines_in_3D()
     seed!(123)
     n = 10
     x, y, z = randn(n), randn(n), randn(n)
+    aspect=(1, 1, 1)
+    perspectiveness=0.5
+    # the figure
     fig = Figure(; resolution=(1200, 500))
-    ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), perspectiveness=0.5)
-    ax2 = Axis3(fig[1, 2]; aspect=(1, 1, 1), perspectiveness=0.5)
-    ax3 = Axis3(fig[1, 3]; aspect=:data, perspectiveness=0.5)
+    ax1 = Axis3(fig[1, 1]; aspect, perspectiveness)
+    ax2 = Axis3(fig[1, 2]; aspect, perspectiveness)
+    ax3 = Axis3(fig[1, 3]; aspect=:data, perspectiveness)
     lines!(ax1, x, y, z; color=1:n, linewidth=3)
     scatterlines!(ax2, x, y, z; markersize=15)
     hm = meshscatter!(ax3, x, y, z; markersize=0.2, color=1:n)
     lines!(ax3, x, y, z; color=1:n)
     Colorbar(fig[2, 1], hm; label="values", height=15, vertical=false,
-        flipaxis=false, ticksize=15, tickalign=1, width=Relative(3.55 / 4))
+        flipaxis=false, ticksize=15, tickalign=1, width=Relative(3.55/4))
     fig
 end
 
@@ -738,8 +762,8 @@ Return a nonlinear function on a grid.  Useful for test cases.
 x, y, z
 """
 function peaks(; n=49)
-    x = LinRange(-3, 3, n)
-    y = LinRange(-3, 3, n)
+    x = range(-3, 3, n)
+    y = range(-3, 3, n)
     a = 3 * (1 .- x') .^ 2 .* exp.(-(x' .^ 2) .- (y .+ 1) .^ 2)
     b = 10 * (x' / 5 .- x' .^ 3 .- y .^ 5) .* exp.(-x' .^ 2 .- y .^ 2)
     c = 1 / 3 * exp.(-(x' .+ 1) .^ 2 .- y .^ 2)
@@ -789,22 +813,32 @@ function mixing_surface_contour3d_contour_and_contourf()
     x, y, z = peaks()
     cmap = :Spectral_11
     fig = Figure(resolution=(1200, 800), fontsize=26)
-    ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), elevation=pi / 6, xzpanelcolor=(:black, 0.75),
-        perspectiveness=0.5, yzpanelcolor=:black, zgridcolor=:grey70,
-        ygridcolor=:grey70, xgridcolor=:grey70)
-    ax2 = Axis3(fig[1, 3]; aspect=(1, 1, 1), elevation=pi / 6, perspectiveness=0.5)
+    ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1),
+        elevation=π/6, perspectiveness=0.5,
+        xzpanelcolor=(:black, 0.75), yzpanelcolor=:black,
+        zgridcolor=:grey70, ygridcolor=:grey70, xgridcolor=:grey70)
+    ax2 = Axis3(fig[1, 3]; aspect=(1, 1, 1),
+        elevation=π/6, perspectiveness=0.5)
     hm = surface!(ax1, x, y, z; colormap=(cmap, 0.95), shading=true)
     contour3d!(ax1, x, y, z .+ 0.02; colormap=cmap, levels=20, linewidth=2)
+    # get final limits
     xmin, ymin, zmin = minimum(ax1.finallimits[])
     xmax, ymax, zmax = maximum(ax1.finallimits[])
-    contour!(ax1, x, y, z; colormap=cmap, levels=20, transformation=(:xy, zmax))
-    contourf!(ax1, x, y, z; colormap=cmap, transformation=(:xy, zmin))
-    Colorbar(fig[1, 2], hm, width=15, ticksize=15, tickalign=1, height=Relative(0.35))
+    contour!(ax1, x, y, z; colormap=cmap, levels=20,
+        transformation=(:xy, zmax))
+    contourf!(ax1, x, y, z; colormap=cmap,
+        transformation=(:xy, zmin))
+    Colorbar(fig[1, 2], hm, width=15, ticksize=15, tickalign=1,
+        height=Relative(0.35))
     # transformations into planes
-    heatmap!(ax2, x, y, z; colormap=:viridis, transformation=(:yz, 3.5))
-    contourf!(ax2, x, y, z; colormap=:CMRmap, transformation=(:xy, -3.5))
-    contourf!(ax2, x, y, z; colormap=:bone_1, transformation=(:xz, 3.5))
-    image!(ax2, -3 .. 3, -3 .. 2, rotr90(img); transformation=(:xy, 3.8))
+    heatmap!(ax2, x, y, z; colormap=:viridis,
+        transformation=(:yz, 3.5))
+    contourf!(ax2, x, y, z; colormap=:CMRmap,
+        transformation=(:xy, -3.5))
+    contourf!(ax2, x, y, z; colormap=:bone_1,
+        transformation=(:xz, 3.5))
+    image!(ax2, -3 .. 3, -3 .. 2, rotr90(img);
+        transformation=(:xy, 3.8))
     xlims!(ax2, -3.8, 3.8)
     ylims!(ax2, -3.8, 3.8)
     zlims!(ax2, -3.8, 3.8)
@@ -819,18 +853,18 @@ url = "https://raw.githubusercontent.com/JuliaImages/TestImages.jl/images/images
 img = load(Downloads.download(url))
 
 function arrows_and_streamplot_in_3d()
-    ps = [Point3f(x, y, z) for x = -3:1:3 for y = -3:1:3 for z = -3:1:3]
+    ps = [Point3f(x, y, z) for x=-3:1:3 for y=-3:1:3 for z=-3:1:3]
     ns = map(p -> 0.1 * rand() * Vec3f(p[2], p[3], p[1]), ps)
     lengths = norm.(ns)
-    flowField(x, y, z) = Point(-y + x * (-1 + x^2 + y^2)^2, x + y * (-1 + x^2 + y^2)^2,
-        z + x * (y - z^2))
+    flowField(x, y, z) = Point(-y + x * (-1 + x^2 + y^2)^2,
+        x + y * (-1 + x^2 + y^2)^2, z + x * (y - z^2))
     fig = Figure(resolution=(1200, 800), fontsize=26)
-    axs = [Axis3(fig[1, i]; aspect=(1, 1, 1), perspectiveness=0.5) for i = 1:2]
+    axs = [Axis3(fig[1, i]; aspect=(1,1,1), perspectiveness=0.5) for i=1:2]
     # http://makie.juliaplots.org/stable/plotting_functions/arrows.html # hide
     arrows!(axs[1], ps, ns, color=lengths, arrowsize=Vec3f(0.2, 0.2, 0.3),
         linewidth=0.1)
-    streamplot!(axs[2], flowField, -4 .. 4, -4 .. 4, -4 .. 4, colormap=:plasma,
-        gridsize=(7, 7), arrow_size=0.25, linewidth=1)
+    streamplot!(axs[2], flowField, -4 .. 4, -4 .. 4, -4 .. 4,
+        colormap=:plasma, gridsize=(7, 7), arrow_size=0.25, linewidth=1)
     fig
     caption = "Arrows and streamplot in 3d." # hide
     label = "arrows_and_streamplot_in_3d" # hide
@@ -851,7 +885,7 @@ function mesh_volume_contour()
     x = y = z = 1:10
     vals = randn(10, 10, 10)
     fig = Figure(resolution=(1200, 400))
-    axs = [Axis3(fig[1, i]; aspect=(1, 1, 1), perspectiveness=0.5) for i = 1:3]
+    axs = [Axis3(fig[1, i]; aspect=(1,1,1), perspectiveness=0.5) for i=1:3]
     mesh!(axs[1], recmesh; color=colors, colormap=:rainbow, shading=false)
     mesh!(axs[1], spheremesh; color=(:white, 0.25), transparency=true)
     volume!(axs[2], x, y, z, vals; colormap=Reverse(:plasma))
@@ -860,14 +894,17 @@ function mesh_volume_contour()
 end
 
 function filled_line_and_linesegments_in_3D()
-    xs = LinRange(-3, 3, 10)
-    lower = [Point3f(i, -i, 0) for i in LinRange(0, 3, 100)]
-    upper = [Point3f(i, -i, sin(i) * exp(-(i + i))) for i in range(0, 3, length=100)]
+    xs = range(-3, 3, 10)
+    lower = [Point3f(i, -i, 0) for i in range(0, 3, 100)]
+    upper = [Point3f(i, -i, sin(i) * exp(-(i + i)))
+        for i in range(0, 3, length=100)]
     fig = Figure(resolution=(1200, 800))
-    axs = [Axis3(fig[1, i]; elevation=pi / 6, perspectiveness=0.5) for i = 1:2]
-    band!(axs[1], lower, upper, color=repeat(norm.(upper), outer=2), colormap=:CMRmap)
+    axs = [Axis3(fig[1, i]; elevation=π/6, perspectiveness=0.5) for i=1:2]
+    band!(axs[1], lower, upper; color=repeat(norm.(upper), outer=2),
+        colormap=:CMRmap)
     lines!(axs[1], upper, color=:black)
-    linesegments!(axs[2], cos.(xs), xs, sin.(xs), linewidth=5, color=1:length(xs))
+    linesegments!(axs[2], cos.(xs), xs, sin.(xs); linewidth=5,
+        color=1:length(xs))
     fig
     caption = "Filled line and linesegments in 3D." # hide
     label = "filled_line_and_linesegments_in_3D" # hide
@@ -877,22 +914,26 @@ end
 
 function grid_spheres_and_rectangle_as_plate()
     seed!(123) # hide
-    spheresGrid = [Point3f(i, j, k) for i = 1:2:12 for j = 1:2:10 for k = 1:2:10] # hide
+    spheresGrid = [Point3f(i, j, k) for i = 1:2:10 for j = 1:2:10 for k = 1:2:10] # hide
     colorSphere = [RGBA(i * 0.1, j * 0.1, k * 0.1, 0.75) for i = 1:2:10 for j = 1:2:10 for k = 1:2:10] # hide
     spheresPlane = [Point3f(i, j, k) for i = 1:2.5:20 for j = 1:2.5:10 for k = 1:2.5:4] # hide
-    cmap = get(colorschemes[:plasma], LinRange(0, 1, 50)) # hide
+    cmap = get(colorschemes[:plasma], range(0, 1, 50)) # hide
     colorsPlane = cmap[rand(1:50, 50)] # hide
-    rectMesh = Rect3f(Vec3f(-1, -1, 2.1), Vec3f(22, 11, 0.5)) # hide
+    rectMesh = Rect3f(Vec3f(-1, -1, 2.1), Vec3f(16, 11, 0.5)) # hide
     recmesh = GeometryBasics.mesh(rectMesh) # hide
     colors = [RGBA(rand(4)...) for v in recmesh.position] # hide
+    perspectiveness=0.5
+    aspect = :data
+    # now the figure
     fig = with_theme(theme_dark()) do
         fig = Figure(resolution=(1200, 800))
-        ax1 = Axis3(fig[1, 1]; aspect=:data, perspectiveness=0.5, azimuth=0.72)
-        ax2 = Axis3(fig[1, 2]; aspect=:data, perspectiveness=0.5)
+        ax1 = Axis3(fig[1, 1]; aspect, perspectiveness, azimuth=0.72)
+        ax2 = Axis3(fig[1, 2]; aspect, perspectiveness)
         meshscatter!(ax1, spheresGrid; color=colorSphere, markersize=1,
             shading=false)
         meshscatter!(ax2, spheresPlane; color=colorsPlane, markersize=0.75,
-            lightposition=Vec3f(10, 5, 2), ambient=Vec3f(0.95, 0.95, 0.95),
+            lightposition=Vec3f(10, 5, 2),
+            ambient=Vec3f(0.95, 0.95, 0.95),
             backlight=1.0f0)
         mesh!(recmesh; color=colors, colormap=:rainbow, shading=false)
         limits!(ax1, 0, 10, 0, 10, 0, 10)
@@ -915,20 +956,20 @@ function histogram_or_bars_in_3d()
     cmap2 = reshape(cmap, size(z)) # hide
     ztmp2 = abs.(z) ./ maximum(abs.(z)) .+ 0.15 # hide
     fig = Figure(resolution=(1200, 800), fontsize=26)
-    ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1), elevation=π / 6,
+    ax1 = Axis3(fig[1, 1]; aspect=(1,1,1), elevation=π/6,
         perspectiveness=0.5)
-    ax2 = Axis3(fig[1, 2]; aspect=(1, 1, 1), perspectiveness=0.5)
+    ax2 = Axis3(fig[1, 2]; aspect=(1,1,1), perspectiveness=0.5)
     rectMesh = Rect3f(Vec3f(-0.5, -0.5, 0), Vec3f(1, 1, 1))
-    meshscatter!(ax1, x, y, 0 * z, marker=rectMesh, color=z[:],
+    meshscatter!(ax1, x, y, 0 * z; marker=rectMesh, color=z[:],
         markersize=Vec3f.(2δx, 2δy, z[:]), colormap=:Spectral_11,
         shading=false)
     limits!(ax1, -3.5, 3.5, -3.5, 3.5, -7.45, 7.45)
-    meshscatter!(ax2, x, y, 0 * z, marker=rectMesh, color=z[:],
+    meshscatter!(ax2, x, y, 0 * z; marker=rectMesh, color=z[:],
         markersize=Vec3f.(2δx, 2δy, z[:]), colormap=(:Spectral_11, 0.25),
         shading=false, transparency=true)
     for (idx, i) in enumerate(x), (idy, j) in enumerate(y)
-        rectMesh = Rect3f(Vec3f(i - δx, j - δy, 0), Vec3f(2δx, 2δy, z[idx, idy]))
-        recmesh = GeometryBasics.mesh(rectMesh)
+        rectMesh=Rect3f(Vec3f(i-δx, j-δy, 0), Vec3f(2δx, 2δy, z[idx,idy]))
+        recmesh=GeometryBasics.mesh(rectMesh)
         lines!(ax2, recmesh; color=(cmap2[idx, idy], ztmp2[idx, idy]))
     end
     fig

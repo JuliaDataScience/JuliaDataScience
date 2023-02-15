@@ -1,12 +1,16 @@
 ## Create Plot Figure {#sec:datavisMakie_create_Figure}
-The basic container object in Makie is `Figure`, a canvas where we can add objects like `Axis`, `Colorbar`s, `Legend`s, etc.
+The basic container object in Makie is `Figure`, a canvas where we can add objects like `Axis`, `Colorbar`, `Legend`, etc.
 
 For `Figure`, we have have attributes like `backgroundcolor`, `resolution`, `font` and `fontsize` as well as the `figure_padding` which changes the amount of space around the figure content, see the colored area in @fig:fig_axis.
-It can take one number for all sides, or a tuple of four numbers for left, right, bottom and top.
+It can take one number for all sides, or a tuple of four numbers for left, right, bottom and top. Let's dive into these components.
+
+### Figure
 
 ```jl
 @sco JDS.figure_canvas()
 ```
+
+### Figure + Axis
 
 `Axis` has a lot more, some of them are  `backgroundcolor`, `xgridcolor` and `title`.
 For a full list just type `help(Axis)`.
@@ -14,6 +18,41 @@ For a full list just type `help(Axis)`.
 ```jl
 @sco JDS.figure_axis()
 ```
+
+You can hide decorations and axis' spines with:
+
+> - `hidedecorations!(ax; kwargs...)`
+> - `hidexdecorations!(ax; kwargs...)`
+> - `hideydecorations!(ax; kwargs...)`
+> - `hidespines!(ax; kwargs...)`
+
+Remember, we can always ask for help to see what kind of arguments we can use, e.g.,
+
+```jl
+s = """
+    help(hidespines!)
+    """
+sco(s)
+```
+
+Alternatively, for decorations
+
+```jl
+s = """
+    help(hidedecorations!)
+    """
+sco(s)
+```
+
+For elements that **you don't want to hide**, pass `false`, e.g., `hideydecorations!(ax; ticks=false, grid=false)`.
+
+Setting `limits` at once or independently for each axis is done by calling
+
+> - `limits!(ax; l, r, b, t)`, where `l` is left, `r` right, `b` bottom, and `t` top.
+>
+> You can also do `ylims!(low, high)` or `xlims!(low, high)`, and even open ones by doing `ylims!(low=0)` or `xlims!(high=1)`.
+
+### Figure + Axis + plot
 
 Now, we add a plotting function into our new Axis:
 
@@ -24,6 +63,9 @@ Now, we add a plotting function into our new Axis:
 This example already includes many of the attributes that are typically used.
 Additionally, it would be beneficial to include a "legend" for reference, especially if the example has more than one function.
 This will make it easier to understand.
+
+### Figure + Axis + plot + axislegend
+
 So, let's `append` another mutation `plot` object and add the corresponding legends by calling `axislegend`.
 This will collect all the `labels` you might have passed to your plotting functions and by default will be located in the right top position.
 For a different one, the `position=:ct` argument is called, where `:ct` means let's put our label in the `center` and at the `top`,  see Figure @fig:plot_legend:
@@ -70,6 +112,8 @@ Plotting the previous figure should take the new default settings defined by `se
 
 Note that the last line is `set_theme!()`, will reset the default's settings of Makie.
 For more on `themes` please go to @sec:themes.
+
+### Figure + Axis + plot + Legend + Colorbar
 
 Before moving on into the next section, it's worthwhile to see an example where an `array` of attributes is passed at once to a plotting function.
 For this example, we will use the `scatter` plotting function to do a bubble plot.

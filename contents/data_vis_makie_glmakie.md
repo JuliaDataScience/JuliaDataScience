@@ -9,7 +9,7 @@ Like before, a simple plot includes, of course, lines and points. So, we will st
 ### Scatters and Lines
 
 For scatter plots we have two options, the first one is `scatter(x, y, z)` and the second one is `meshscatter(x, y, z)`.
-In the former markers don't scale in the axis directions and in the latter they do because they are actual geometries in 3D space.
+In the former, markers don't scale in the axis directions and in the latter they do because they are actual geometries in 3D space.
 See the next example:
 
 ```

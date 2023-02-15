@@ -44,7 +44,7 @@ s = """
 sco(s)
 ```
 
-For elements that **you don't want to hide**, just pass them with `false`, i.e. `hideydecorations!(ax; ticks=false, grid=false)`.
+For elements that **you don't want to hide**, pass `false`, e.g., `hideydecorations!(ax; ticks=false, grid=false)`.
 
 Setting `limits` at once or independently for each axis is done by calling
 

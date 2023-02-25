@@ -78,13 +78,13 @@ Additionally, we only need to pass a single continuous variable as the only posi
 
 For the last two statistical transformations, `linear` and `smooth`, they cannot be used with the `*` operator.
 This is because `*` fuses two or more layers into a _single_ layer.
-`AlgebraOfGraphics.jl` cannot represent these transformatinos with a _single_ layer.
+`AlgebraOfGraphics.jl` cannot represent these transformations with a _single_ layer.
 Hence, we need to **superimpose layers with the `+` operator**.
 First, let's generate some data:
 
 ```jl
 sco("""
-# aog syntethic data # hide
+# aog synthetic data # hide
 x = rand(1:5, 100)
 y = x + rand(100) .* 2
 synthetic_df = DataFrame(; x, y)

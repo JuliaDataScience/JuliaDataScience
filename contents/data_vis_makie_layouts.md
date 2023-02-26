@@ -40,7 +40,7 @@ See below how these options are being used:
 @sco JDS.first_layout_fixed()
 ```
 
-Here, having the label `(a)` in the `TopLeft()` is probably not necessary, this will only make sense for more than one plot. Also, note the use of `padding`, which allows more fine control over his postion.
+Here, having the label `(a)` in the `TopLeft()` is probably not necessary, this will only make sense for more than one plot. Also, note the use of `padding`, which allows more fine control over his position.
 
 For our next example let's keep using the previous tools and some more to create a richer and complex figure.
 

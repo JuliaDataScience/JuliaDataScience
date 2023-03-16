@@ -25,7 +25,7 @@ s = """
 sco(s)
 ```
 
-However, you can override that by using either `row` or `col` for mutiple row or multiple columns layouts, respectively.
+However, you can override that by using either `row` or `col` for multiple rows or multiple columns layouts, respectively.
 Here's an example with `row`:
 
 ```jl

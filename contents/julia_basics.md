@@ -2399,7 +2399,7 @@ Then it becomes the **`Pkg` REPL mode**:
 ```
 
 Here we can see that the REPL prompts changes from `julia>` to `pkg>`.
-There's also additional information inside the parentheses regarding which project enviroment is currently active,
+There's also additional information inside the parentheses regarding which project environment is currently active,
 `(@v1.8)`.
 The `v1.8` project environment is the default environment for your currently Julia installation
 (which in our case is Julia version `1.8.X`).

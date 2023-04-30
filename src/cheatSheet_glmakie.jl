@@ -4,7 +4,7 @@ function cheatsheet_glmakie()
     seed!(123)
     GLMakie.activate!()
     fig = with_theme(theme_light()) do
-        fig = Figure(resolution=(1000, 1600))
+       fig = Figure(resolution=(1000, 1600))
         axs1 = Axis(fig[1, 1], aspect=1)
         axs2 = Axis(fig[1, 2], aspect=1)
         axs3 = Axis(fig[1, 3], aspect=1, xscale=log10, yscale=log10)
@@ -37,11 +37,11 @@ function cheatsheet_glmakie()
         heatmap!(axs3, 1:100, 1:100, rand(100, 100); colormap=:tableau_sunset_sunrise)
         axs3.title = "heatmap(x,y,z) : scales"
 
-        text!(axs4, "Say something\n funny 😄"; color=:black,
+        text!(axs4, 0.5, 0.5; text="Say something\n funny 😄", color=:black,
             rotation=π / 4, align=(:center, :center))
         axs4.title = "text(string)"
 
-        text!(axs5, rich("Say", rich(" something", color=:red), "\nfunny !", color=:black, font=:bold);
+        text!(axs5, 0.5, 0.5; text=rich("Say", rich(" something", color=:red), "\nfunny !", color=:black, font=:bold),
             rotation=π / 4, align=(:center, :center))
         axs5.title = "text(rich(string))"
 

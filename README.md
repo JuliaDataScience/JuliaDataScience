@@ -14,7 +14,10 @@
 
 You can read the full book on <https://juliadatascience.io>.
 
-This book is also published at [Amazon.com](https://www.amazon.com/dp/B09KMRKQ96/).
+This book was once available on Amazon, but due to an absurd reason, our publishing account was terminated, and our book was removed.
+Interestingly, all Amazon customer accounts remain functional.
+It seems that our removal may have been a result of not selling enough books.
+Nevertheless, the book and its PDF version can still be accessed in their entirety on this website.
 
 ## LICENSE
 

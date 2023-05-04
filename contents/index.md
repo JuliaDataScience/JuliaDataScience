@@ -34,11 +34,6 @@ The book is also available as [**PDF**](/juliadatascience.pdf).
 
 The source code is available at [GitHub](https://github.com/JuliaDataScience/JuliaDataScience).
 
-The book is published at [Amazon.com](https://www.amazon.com/dp/B09KMRKQ96/),
-[Amazon.de](https://www.amazon.de/dp/B09KMRKQ96),
-[Amazon.co.uk](https://www.amazon.co.uk/dp/B09KMRKQ96),
-and many more Amazon stores.
-
 ### Citation Info {-}
 
 To cite the content, please use:

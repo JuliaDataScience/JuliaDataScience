@@ -14,11 +14,10 @@
 
 You can read the full book on <https://juliadatascience.io>.
 
-This book used to be published on Amazon.
-However, Amazon kicked us out of our Amazon publishing account for some ridiculous reason and they removed our book.
-Interestingly enough, all Amazon customer accounts still work...
-So, it sounds like we were kicked out because we didn't sell enough books.
-The book and PDF remain fully available on this website.
+This book was once available on Amazon, but due to an absurd reason, our publishing account was terminated, and our book was removed.
+Interestingly, all Amazon customer accounts remain functional.
+It seems that our removal may have been a result of not selling enough books.
+Nevertheless, the book and its PDF version can still be accessed in their entirety on this website.
 
 ## LICENSE
 

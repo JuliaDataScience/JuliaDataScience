@@ -2,7 +2,7 @@
 
 Data comes mostly in a tabular format.
 By tabular, we mean that the data consists of a table containing rows and columns.
-Columns are usually of the same data type, whereas rows have different types.
+Entries within any one column are usually of the same data type, whereas entries within a given row typically have different types.
 The rows, in practice, denote observations while columns denote variables.
 For example, we can have a table of TV shows containing the country in which each was produced and our personal rating, see @tbl:TV_shows.
 

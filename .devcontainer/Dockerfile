@@ -1,4 +1,4 @@
-FROM julia:1.8
+FROM julia:1
 
 # Extra dependencies for GLMakie.
 RUN set -eux; \
@@ -20,7 +20,4 @@ RUN set -eux; \
       rm -rf /var/lib/apt/lists/*
 
 ENV DISPLAY=:0
-ENV JULIA_NUM_THREADS=2
-
-ENTRYPOINT ["/bin/sh", "-c", "/usr/bin/xvfb-run -s '-screen 0 1024x768x24' $@", ""]
-CMD ["julia", "--project"]
+ENV JULIA_NUM_THREADS=auto

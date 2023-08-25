@@ -1,7 +1,6 @@
 {
     "extensions": [
       "julialang.language-julia",
-      "ms-vscode.cpptools"
     ],
 
     "dockerFile": "Dockerfile"

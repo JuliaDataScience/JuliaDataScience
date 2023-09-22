@@ -47,7 +47,7 @@ s = """
         y = getproperty(df, p[:y][])
         c = getproperty(df, p[:c][])
         scatter!(p, x, y; color = c, markersize = p[:markersize][],
-            colormap = p[:colormap][], colorscale = p[:colormap][], marker = p[:marker][],
+            colormap = p[:colormap][], marker = p[:marker][],
             colorrange = (minimum(x), maximum(c)), label = p[:label][])
         return p
     end

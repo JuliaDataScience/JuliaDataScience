@@ -46,3 +46,16 @@ jobs:
           force_orphan: true
           publish_dir: ./_build/
 
+      - name: Make preview PDF available
+        if: ${{ github.event_name == 'pull_request ' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: pdf-preview
+          path: ./_build/juliadatascience.pdf
+
+      - name: Create a comment to say that the artifact is ready
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          issue-number: ${{ github.event.number }}
+          body: |
+            The PDF was created and uploaded as an artifact.

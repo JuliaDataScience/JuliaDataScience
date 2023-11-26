@@ -96,7 +96,7 @@ s = """
             ygridstyle=:dash,
             ),
         Legend=(;
-            bgcolor=(:grey, 0.1),
+            backgroundcolor=(:grey, 0.1),
             framecolor=:orangered,
             ),
         )

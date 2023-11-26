@@ -229,7 +229,7 @@ publication_theme() = Theme(
         yticksize=10, xticksize=10,
         xlabel="x", ylabel="y"
         ),
-    Legend=(framecolor=(:black, 0.5), bgcolor=(:white, 0.5)),
+    Legend=(framecolor=(:black, 0.5), backgroundcolor=(:white, 0.5)),
     Colorbar=(ticksize=16, tickalign=1, spinewidth=0.5),
 )
 
@@ -359,7 +359,7 @@ function demo_figure()
     Legend(fig[1,2, Top()], ax2;
         orientation=:horizontal,
         nbanks=2,
-        bgcolor =:transparent,
+        backgroundcolor =:transparent,
         tellheight=false,
         valign=:center,
         )
@@ -446,7 +446,7 @@ function new_cycle_theme()
             xtickalign=1, ytickalign=1,
             yticksize=10, xticksize=10,
             xlabel="x", ylabel="y"),
-        Legend=(framecolor=(:black, 0.5), bgcolor=(:white, 0.5)),
+        Legend=(framecolor=(:black, 0.5), backgroundcolor=(:white, 0.5)),
         Colorbar=(ticksize=16, tickalign=1, spinewidth=0.5),
     )
 end
@@ -653,20 +653,20 @@ function nested_Grid_Layouts()
     Options(fig; caption, label, link_attributes) # hide
 end
 
-function add_box_inset(fig; bgcolor=:snow2,
+function add_box_inset(fig; backgroundcolor=:snow2,
     left=100, right=250, bottom=200, top=300)
     # https://discourse.julialang.org/t/makie-inset-axes-and-their-drawing-order/60987 # hide
     inset_box = Axis(fig, bbox=BBox(left, right, bottom, top),
-        xticklabelsize=12, yticklabelsize=12, backgroundcolor=bgcolor)
+        xticklabelsize=12, yticklabelsize=12, backgroundcolor=backgroundcolor)
     translate!(inset_box.scene, 0, 0, 10)  # bring content upfront
     return inset_box
 end
 
-function add_axis_inset(pos=fig[1, 1]; bgcolor=:snow2,
+function add_axis_inset(pos=fig[1, 1]; backgroundcolor=:snow2,
     halign, valign, width=Relative(0.5),height=Relative(0.35),
     alignmode=Mixed(left=5, right=5))
     inset_box = Axis(pos; width, height, halign, valign, alignmode,
-        xticklabelsize=12, yticklabelsize=12, backgroundcolor=bgcolor)
+        xticklabelsize=12, yticklabelsize=12, backgroundcolor=backgroundcolor)
     # bring content upfront
     translate!(inset_box.scene, 0, 0, 10)
     return inset_box
@@ -676,11 +676,11 @@ function figure_axis_inset()
     CairoMakie.activate!() # hide
     fig = Figure(size=(600, 400))
     ax = Axis(fig[1, 1], backgroundcolor=:white)
-    inset_ax1 = add_axis_inset(fig[1, 1]; bgcolor=:snow2,
+    inset_ax1 = add_axis_inset(fig[1, 1]; backgroundcolor=:snow2,
         halign=:left, valign=:center,
         width=Relative(0.3), height=Relative(0.35),
         alignmode=Mixed(left=5, right=5, bottom=15))
-    inset_ax2 = add_axis_inset(fig[1, 1]; bgcolor=(:white, 0.85),
+    inset_ax2 = add_axis_inset(fig[1, 1]; backgroundcolor=(:white, 0.85),
         halign=:right, valign=:center,
         width=Relative(0.25), height=Relative(0.3))
     lines!(ax, 1:10)
@@ -697,9 +697,9 @@ function figure_box_inset()
     CairoMakie.activate!() # hide
     fig = Figure(size=(600, 400))
     ax = Axis(fig[1, 1], backgroundcolor=:white)
-    inset_ax1 = add_box_inset(fig; bgcolor=:snow2,
+    inset_ax1 = add_box_inset(fig; backgroundcolor=:snow2,
         left=100, right=250, bottom=200, top=300)
-    inset_ax2 = add_box_inset(fig; bgcolor=(:white, 0.85),
+    inset_ax2 = add_box_inset(fig; backgroundcolor=(:white, 0.85),
         left=500, right=580, bottom=100, top=200)
     lines!(ax, 1:10)
     lines!(inset_ax1, 1:10)

@@ -19,7 +19,7 @@ function figure_canvas()
     fig = Figure(;
         figure_padding=(5,5,10,10),
         backgroundcolor=:snow2,
-        resolution=(600,400),
+        size=(600,400),
         )
     label="fig" # hide
     link_attributes = "width=60%" # hide
@@ -32,7 +32,7 @@ function figure_axis()
     fig = Figure(;
         figure_padding=(5,5,10,10),
         backgroundcolor=:snow2,
-        resolution=(600,400),
+        size=(600,400),
         )
     ax = Axis(fig[1,1];
         xlabel="x",
@@ -51,7 +51,7 @@ function figure_axis_plot()
     fig = Figure(;
         figure_padding=(5,5,10,10),
         backgroundcolor=:snow2,
-        resolution=(600,400),
+        size=(600,400),
         )
     ax = Axis(fig[1,1];
         xlabel="x",
@@ -75,7 +75,7 @@ function figure_axis_plot_leg()
     fig = Figure(;
         figure_padding=(5,5,10,10),
         backgroundcolor=:snow2,
-        resolution=(600,400),
+        size=(600,400),
         )
     ax = Axis(fig[1,1];
         xlabel="x",
@@ -129,7 +129,7 @@ end
 
 function fig_bubbles(xyz)
     CairoMakie.activate!() # hide
-    fig = Figure(resolution=(600,400))
+    fig = Figure(size=(600,400))
     ax = Axis(fig[1,1]; aspect = DataAspect())
     pltobj = scatter!(xyz[:, 1], xyz[:, 2];
         color=xyz[:, 3],
@@ -153,7 +153,7 @@ function custom_plot()
     label = missing
     x = 1:10
     fig, ax, _ = lines(x, x .^ 2, color=:black, linewidth=2, linestyle=".-",
-        label="x²", figure=(; resolution=(700, 450), fontsize=18,
+        label="x²", figure=(; size=(700, 450), fontsize=18,
             backgroundcolor="#D0DFE6FF"), axis=(xlabel="x", ylabel="x²",
             backgroundcolor=:white))
     axislegend("legend", position=:lt)
@@ -167,7 +167,7 @@ function custom_plot2()
     CairoMakie.activate!() # hide
     x = 1:10
     lines(x, x .^ 2, color=:black, linewidth=2, linestyle=".-",
-        label="x²", figure=(; resolution=(700, 450), fontsize=18,
+        label="x²", figure=(; size=(700, 450), fontsize=18,
             backgroundcolor="#D0DFE6FF"), axis=(xlabel="x", ylabel="x²",
             backgroundcolor=:white))
     axislegend("legend", position=:lt)
@@ -181,7 +181,7 @@ function areaUnder()
     CairoMakie.activate!() # hide
     x = 0:0.05:1
     y = x .^ 2
-    fig = Figure(resolution=(700, 450))
+    fig = Figure(size=(700, 450))
     ax = Axis(fig, xlabel="x", ylabel="y")
     linea = lines!(x, y, color=:dodgerblue)
     fillB = band!(x, fill(0, length(x)), y; color=(:dodgerblue, 0.1))
@@ -210,7 +210,7 @@ function LaTeX_Strings()
     x = 0:0.05:4π
     lines(x, x -> sin(3x) / (cos(x) + 2) / x;
         label=L"\frac{\sin(3x)}{x(\cos(x)+2)}",
-        figure=(; resolution=(600, 400)), axis=(; xlabel=L"x")
+        figure=(; size=(600, 400)), axis=(; xlabel=L"x")
         )
     lines!(x, x -> cos(x) / x; label=L"\cos(x)/x")
     lines!(x, x -> exp(-x); label=L"e^{-x}")
@@ -248,7 +248,7 @@ end
 function multiple_lines()
     CairoMakie.activate!() # hide
     x = collect(0:10)
-    fig = Figure(resolution=(600, 400), font="CMU Serif")
+    fig = Figure(size=(600, 400), font="CMU Serif")
     ax = Axis(fig[1, 1], xlabel=L"x", ylabel=L"f(x,a)")
     for i = 0:10
         lines!(ax, x, i .* x; label=latexstring("$(i) x"))
@@ -267,7 +267,7 @@ function multiple_scatters_and_lines()
     x = collect(0:10)
     cycle = Cycle([:color, :linestyle, :marker], covary=true)
     set_theme!(Lines=(cycle=cycle,), Scatter=(cycle=cycle,))
-    fig = Figure(resolution=(600, 400), font="CMU Serif")
+    fig = Figure(size=(600, 400), font="CMU Serif")
     ax = Axis(fig[1, 1], xlabel=L"x", ylabel=L"f(x,a)")
     for i in x
         lines!(ax, x, i .* x; label=L"%$i x")
@@ -287,7 +287,7 @@ end
 function demo_themes(y, xv, yv, matrix)
     CairoMakie.activate!() # hide
     fig, _ = series(y; labels=["$i" for i = 1:6], markersize=10,
-        color=:Set1, figure=(; resolution=(600, 300)),
+        color=:Set1, figure=(; size=(600, 300)),
         axis=(; xlabel="time (s)", ylabel="Amplitude",
             title="Measurements"))
     hmap = heatmap!(xv, yv, matrix; colormap=:plasma)
@@ -308,7 +308,7 @@ function multiple_example_themes()
         labels = ["$i" for i = 1:n]
         fig, _ = series(y; labels=labels, markersize=10, color=:Set1,
             axis=(; xlabel="time (s)", ylabel="Amplitude",
-                title="Measurements"), figure=(; resolution=(600, 300)))
+                title="Measurements"), figure=(; size=(600, 300)))
         xh = LinRange(-3, 0.5, 20)
         yh = LinRange(-3.5, 3.5, 20)
         hmap = heatmap!(xh, yh, randn(20, 20); colormap=:plasma)
@@ -341,7 +341,7 @@ function demo_figure()
     labs=["sin(x)","cos(x)","-sin(x)","-cos(x)","cos(x)/2","-cos(x)/2"]
     # figure
     fig = Figure(figure_padding=(10,15,5,35),
-        resolution = (900,600), fontsize = 20)
+        size = (900,600), fontsize = 20)
     ax1 = Axis(fig[1,1]; xlabel="x", ylabel="y")
     ax2 = Axis(fig[1,2]; xlabel="x", ylabel="pdf")
     ax3 = Axis(fig[2,1:2]; xlabel="x", ylabel="y")
@@ -373,7 +373,7 @@ end
 
 function themes_gallery()
     GLMakie.activate!() # hide
-    fig = Figure(resolution=(1200, 1250))
+    fig = Figure(size=(1200, 1250))
     aximg = [Axis(fig[i,j], aspect = DataAspect()) for i in 1:3 for j in 1:2]
     img = demo_figure()
     image!(aximg[1], rotr90(img), interpolate=false)
@@ -413,7 +413,7 @@ function set_colors_and_cycle()
 
     axis = (; xlabel=L"x(\theta)", ylabel=L"y(\theta)",
         title="Epicycloid", aspect=DataAspect())
-    figure = (; resolution=(600, 400), font="CMU Serif")
+    figure = (; size=(600, 400), font="CMU Serif")
 
     fig, ax, _ = lines(x(1, 1, θ), y(1, 1, θ); color="firebrick1", # string
         label=L"1.0", axis=axis, figure=figure)
@@ -457,7 +457,7 @@ function scatters_and_lines()
     xh = range(4, 6, 25)
     yh = range(70, 95, 25)
     h = randn(25, 25)
-    fig = Figure(resolution=(600, 400), font="CMU Serif")
+    fig = Figure(size=(600, 400), font="CMU Serif")
     ax = Axis(fig[1, 1]; xlabel=L"x", ylabel=L"f(x,a)")
     for i in x
         lines!(ax, x, i .* x; label=latexstring("$(i) x"))
@@ -476,7 +476,7 @@ function first_layout()
     CairoMakie.activate!() # hide
     seed!(123)
     x, y, z = randn(6), randn(6), randn(6)
-    fig = Figure(resolution=(600, 400), backgroundcolor=:snow2)
+    fig = Figure(size=(600, 400), backgroundcolor=:snow2)
     ax = Axis(fig[1, 1], backgroundcolor=:white)
     pltobj = scatter!(ax, x, y; color=z, label="scatters")
     lines!(ax, x, 1.1y; label="line")
@@ -493,7 +493,7 @@ function first_layout_fixed()
     CairoMakie.activate!() # hide
     seed!(123)
     x, y, z = randn(6), randn(6), randn(6)
-    fig = Figure(figure_padding=(0, 3, 5, 2), resolution=(600, 400),
+    fig = Figure(figure_padding=(0, 3, 5, 2), size=(600, 400),
         backgroundcolor=:snow2, font="CMU Serif")
     ax = Axis(fig[1, 1], xlabel=L"x", ylabel=L"y",
         title="Layout example", backgroundcolor=:white)
@@ -523,7 +523,7 @@ function complex_layout_double_axis()
     x = range(0, 1, 10)
     y = range(0, 1, 10)
     z = rand(10, 10)
-    fig = Figure(resolution=(700, 400),
+    fig = Figure(size=(700, 400),
         font="CMU Serif",
         backgroundcolor=:snow2
         )
@@ -557,7 +557,7 @@ function squares_layout()
     CairoMakie.activate!() # hide
     seed!(123)
     letters = reshape(collect('a':'d'), (2, 2))
-    fig = Figure(resolution=(600, 400), fontsize=14, font="CMU Serif",
+    fig = Figure(size=(600, 400), fontsize=14, font="CMU Serif",
         backgroundcolor=:snow2)
     axs = [Axis(fig[i, j], aspect=DataAspect()) for i = 1:2, j = 1:2]
     hms = [heatmap!(axs[i, j], randn(10, 10), colorrange=(-2, 2))
@@ -578,7 +578,7 @@ function mixed_mode_layout()
     CairoMakie.activate!() # hide
     seed!(123)
     longlabels = ["$(today() - Day(1))", "$(today())", "$(today() + Day(1))"]
-    fig = Figure(resolution=(600, 400), fontsize=12,
+    fig = Figure(size=(600, 400), fontsize=12,
         backgroundcolor=:snow2, font="CMU Serif")
     ax1 = Axis(fig[1, 1], xlabel="x", alignmode=Mixed(bottom=0))
     ax2 = Axis(fig[1, 2], xticklabelrotation=π/2, alignmode=Mixed(bottom=0),
@@ -674,7 +674,7 @@ end
 
 function figure_axis_inset()
     CairoMakie.activate!() # hide
-    fig = Figure(resolution=(600, 400))
+    fig = Figure(size=(600, 400))
     ax = Axis(fig[1, 1], backgroundcolor=:white)
     inset_ax1 = add_axis_inset(fig[1, 1]; bgcolor=:snow2,
         halign=:left, valign=:center,
@@ -695,7 +695,7 @@ end
 
 function figure_box_inset()
     CairoMakie.activate!() # hide
-    fig = Figure(resolution=(600, 400))
+    fig = Figure(size=(600, 400))
     ax = Axis(fig[1, 1], backgroundcolor=:white)
     inset_ax1 = add_box_inset(fig; bgcolor=:snow2,
         left=100, right=250, bottom=200, top=300)
@@ -719,7 +719,7 @@ function scatters_in_3D()
     aspect=(1, 1, 1)
     perspectiveness=0.5
     # the figure
-    fig = Figure(; resolution=(1200, 400))
+    fig = Figure(; size=(1200, 400))
     ax1 = Axis3(fig[1, 1]; aspect, perspectiveness)
     ax2 = Axis3(fig[1, 2]; aspect, perspectiveness)
     ax3 = Axis3(fig[1, 3]; aspect=:data, perspectiveness)
@@ -741,7 +741,7 @@ function lines_in_3D()
     aspect=(1, 1, 1)
     perspectiveness=0.5
     # the figure
-    fig = Figure(; resolution=(1200, 500))
+    fig = Figure(; size=(1200, 500))
     ax1 = Axis3(fig[1, 1]; aspect, perspectiveness)
     ax2 = Axis3(fig[1, 2]; aspect, perspectiveness)
     ax3 = Axis3(fig[1, 3]; aspect=:data, perspectiveness)
@@ -774,7 +774,7 @@ function plot_peaks_function()
     GLMakie.activate!() # hide
     x, y, z = peaks()
     x2, y2, z2 = peaks(; n=15)
-    fig = Figure(resolution=(1200, 400))
+    fig = Figure(size=(1200, 400))
     axs = [Axis3(fig[1, i]; aspect=(1, 1, 1)) for i = 1:3]
     hm = surface!(axs[1], x, y, z)
     wireframe!(axs[2], x2, y2, z2)
@@ -786,7 +786,7 @@ end
 function heatmap_contour_and_contourf()
     GLMakie.activate!() # hide
     x, y, z = peaks()
-    fig = Figure(resolution=(1200, 400))
+    fig = Figure(size=(1200, 400))
     axs = [Axis(fig[1, i]; aspect=DataAspect()) for i = 1:3]
     hm = heatmap!(axs[1], x, y, z)
     contour!(axs[2], x, y, z; levels=20)
@@ -798,7 +798,7 @@ end
 function heatmap_contour_and_contourf_in_a_3d_plane()
     GLMakie.activate!() # hide
     x, y, z = peaks()
-    fig = Figure(resolution=(1200, 400))
+    fig = Figure(size=(1200, 400))
     axs = [Axis3(fig[1, i]) for i = 1:3]
     hm = heatmap!(axs[1], x, y, z)
     contour!(axs[2], x, y, z; levels=20)
@@ -812,7 +812,7 @@ function mixing_surface_contour3d_contour_and_contourf()
     img = testimage("coffee.png")
     x, y, z = peaks()
     cmap = :Spectral_11
-    fig = Figure(resolution=(1200, 800), fontsize=26)
+    fig = Figure(size=(1200, 800), fontsize=26)
     ax1 = Axis3(fig[1, 1]; aspect=(1, 1, 1),
         elevation=π/6, perspectiveness=0.5,
         xzpanelcolor=(:black, 0.75), yzpanelcolor=:black,
@@ -858,7 +858,7 @@ function arrows_and_streamplot_in_3d()
     lengths = norm.(ns)
     flowField(x, y, z) = Point(-y + x * (-1 + x^2 + y^2)^2,
         x + y * (-1 + x^2 + y^2)^2, z + x * (y - z^2))
-    fig = Figure(resolution=(1200, 800), fontsize=26)
+    fig = Figure(size=(1200, 800), fontsize=26)
     axs = [Axis3(fig[1, i]; aspect=(1,1,1), perspectiveness=0.5) for i=1:2]
     # http://makie.juliaplots.org/stable/plotting_functions/arrows.html # hide
     arrows!(axs[1], ps, ns, color=lengths, arrowsize=Vec3f(0.2, 0.2, 0.3),
@@ -884,7 +884,7 @@ function mesh_volume_contour()
     # cloud points for volume
     x = y = z = 1:10
     vals = randn(10, 10, 10)
-    fig = Figure(resolution=(1200, 400))
+    fig = Figure(size=(1200, 400))
     axs = [Axis3(fig[1, i]; aspect=(1,1,1), perspectiveness=0.5) for i=1:3]
     mesh!(axs[1], recmesh; color=colors, colormap=:rainbow, shading=false)
     mesh!(axs[1], spheremesh; color=(:white, 0.25), transparency=true)
@@ -898,7 +898,7 @@ function filled_line_and_linesegments_in_3D()
     lower = [Point3f(i, -i, 0) for i in range(0, 3, 100)]
     upper = [Point3f(i, -i, sin(i) * exp(-(i + i)))
         for i in range(0, 3, length=100)]
-    fig = Figure(resolution=(1200, 800))
+    fig = Figure(size=(1200, 800))
     axs = [Axis3(fig[1, i]; elevation=π/6, perspectiveness=0.5) for i=1:2]
     band!(axs[1], lower, upper; color=repeat(norm.(upper), outer=2),
         colormap=:CMRmap)
@@ -926,7 +926,7 @@ function grid_spheres_and_rectangle_as_plate()
     aspect = :data
     # now the figure
     fig = with_theme(theme_dark()) do
-        fig = Figure(resolution=(1200, 800))
+        fig = Figure(size=(1200, 800))
         ax1 = Axis3(fig[1, 1]; aspect, perspectiveness, azimuth=0.72)
         ax2 = Axis3(fig[1, 2]; aspect, perspectiveness)
         meshscatter!(ax1, spheresGrid; color=colorSphere, markersize=1,
@@ -955,7 +955,7 @@ function histogram_or_bars_in_3d()
     cmap = get(colorschemes[cbarPal], ztmp) # hide
     cmap2 = reshape(cmap, size(z)) # hide
     ztmp2 = abs.(z) ./ maximum(abs.(z)) .+ 0.15 # hide
-    fig = Figure(resolution=(1200, 800), fontsize=26)
+    fig = Figure(size=(1200, 800), fontsize=26)
     ax1 = Axis3(fig[1, 1]; aspect=(1,1,1), elevation=π/6,
         perspectiveness=0.5)
     ax2 = Axis3(fig[1, 2]; aspect=(1,1,1), perspectiveness=0.5)

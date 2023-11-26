@@ -4,7 +4,7 @@ function cheatsheet_glmakie()
     seed!(123)
     GLMakie.activate!()
     fig = with_theme(theme_light()) do
-       fig = Figure(resolution=(1000, 1600))
+       fig = Figure(; size=(1000, 1600))
         axs1 = Axis(fig[1, 1], aspect=1)
         axs2 = Axis(fig[1, 2], aspect=1)
         axs3 = Axis(fig[1, 3], aspect=1, xscale=log10, yscale=log10)

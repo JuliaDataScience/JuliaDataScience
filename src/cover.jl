@@ -6,7 +6,7 @@ Return the book cover.
 function cover()
     width = 2 * 2016
     height = (10 / 7) * width # Ratio 7 * 10 inch.
-    fig = Figure(; resolution=(width, height))
+    fig = Figure(; size=(width, height))
     # fig[1, 2] = Scene(front_cover())
     # return fig
 

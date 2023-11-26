@@ -8,9 +8,9 @@ function cheatsheet_cairomakie()
     packages = ["Makie", "CairoMakie"]
     seed!(123)
     CairoMakie.activate!()
-    x = range(0, 2π, length=12)
+    x = range(0, 2π; length=12)
     fig = with_theme(theme_light()) do
-        fig = Figure(resolution=(1000, 1600))
+        fig = Figure(; size=(1000, 1600))
         axs = [Axis(fig[i, j], aspect=1) for i = 1:7 for j = 1:5]
 
         lines!(axs[1], x, sin.(x))

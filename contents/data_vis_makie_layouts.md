@@ -135,7 +135,7 @@ Then, the `inset` is easily done, as in:
 @sco JDS.figure_box_inset()
 ```
 
-where the `Box` dimensions are bound by the `Figure`'s `resolution`.
+where the `Box` dimensions are bound by the `Figure`'s `size`.
 Note, that an inset can be also outside the `Axis`.
 The other approach, is by defining a new `Axis` into a position `fig[i, j]` specifying his `width`, `height`, `halign` and `valign`.
 We do that in the following function:

@@ -1,7 +1,7 @@
 ## Create Plot Figure {#sec:datavisMakie_create_Figure}
 The basic container object in Makie is `Figure`, a canvas where we can add objects like `Axis`, `Colorbar`, `Legend`, etc.
 
-For `Figure`, we have have attributes like `backgroundcolor`, `resolution`, `font` and `fontsize` as well as the `figure_padding` which changes the amount of space around the figure content, see the colored area in @fig:fig_axis.
+For `Figure`, we have have attributes like `backgroundcolor`, `size`, `font` and `fontsize` as well as the `figure_padding` which changes the amount of space around the figure content, see the colored area in @fig:fig_axis.
 It can take one number for all sides, or a tuple of four numbers for left, right, bottom and top. Let's dive into these components.
 
 ### Figure
@@ -85,7 +85,7 @@ We can do this with `set_theme!()` as follows:
 ```jl
 s = """
     set_theme!(;
-        resolution=(600,400),
+        size=(600,400),
         backgroundcolor=(:mistyrose, 0.1),
         fontsize=16,
         Axis=(;

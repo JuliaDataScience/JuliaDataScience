@@ -12,7 +12,7 @@ function statistics_graph()
     points = hcat(points...)'
     ##
     fig, ax, = lines(ellipse.(u);
-        figure=(; resolution=(600, 400)),
+        figure=(; size=(600, 400)),
         axis=(; aspect=1))
     lines!(ellipse.(u; a=1.5, b=3, k=-5))
     lines!(points[:, 1], points[:, 2])
@@ -57,7 +57,7 @@ dens(ax, rand_d, color) = density!(ax, rand_d; color=color, strokewidth=1.5, str
 
 function plot_central()
     CairoMakie.activate!() # hide
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     ax1 = Axis(fig[1, 1]; limits=((3, 20), nothing))
     ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
     d1, rand_d1 = normal_dist(10, 1)
@@ -136,7 +136,7 @@ end
 
 function plot_dispersion_std()
     CairoMakie.activate!() # hide
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     ax1 = Axis(fig[1, 1]; limits=((3, 20), nothing))
     ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
     d1, rand_d1 = normal_dist(10, 1)
@@ -198,7 +198,7 @@ end
 
 function plot_dispersion_mad()
     CairoMakie.activate!() # hide
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     ax1 = Axis(fig[1, 1]; limits=((3, 20), nothing))
     ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
     d1, rand_d1 = normal_dist(10, 1)
@@ -259,7 +259,7 @@ end
 
 function plot_dispersion_iqr()
     CairoMakie.activate!() # hide
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     ax1 = Axis(fig[1, 1]; limits=((3, 20), nothing))
     ax2 = Axis(fig[2, 1]; limits=((3, 20), nothing))
     d1, rand_d1 = normal_dist(10, 1)
@@ -357,7 +357,7 @@ end
 function plot_corr()
     seed!(123)
     CairoMakie.activate!() # hide
-    fig = Figure(; resolution=(600, 600))
+    fig = Figure(; size=(600, 600))
     corrs = [0.5, -0.5, 0.8, -0.8]
     ds = [MvNormal([1 i; i 1]) for i in corrs]
     d0 = MvNormal(2, 1)
@@ -398,7 +398,7 @@ end
 
 function plot_normal_lognormal()
     CairoMakie.activate!() # hide
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     ax = Axis(fig[1, 1]; limits=((3, 20), nothing))
     _, rand_d1 = normal_dist(10, 1)
     _, rand_d2 = lognormal_dist(10, 1.3)
@@ -414,7 +414,7 @@ function plot_discrete_continuous()
     discrete = Binomial(10, 0.6)
     continuous = Distributions.Normal(6, 2)
     CairoMakie.activate!() # hide
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     ax1 = Axis(fig[1, 1]; limits=((0.5, 10.5), nothing), title="Discrete", titlesize=20)
     ax2 = Axis(fig[1, 2]; limits=((-1, 13), nothing), title="Continuous", titlesize=20)
     hist!(ax1, rand(discrete, 1_000); color=(:dodgerblue, 0.5), strokewidth=1.5, strokecolor=(:black, 0.5), bins=10, normalization=:pdf)
@@ -427,7 +427,7 @@ end
 function plot_pmf()
     dice = DiscreteUniform(1, 6)
     CairoMakie.activate!() # hide
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     ax = Axis(fig[1, 1]; xticks=1:6, limits=(nothing, (0, 0.2)), ylabel="pmf")
     barplot!(ax, 1:6, Distributions.pdf(dice, 1:6); color=(:grey, 0.25), strokewidth=1.5, strokecolor=(:black, 0.5))
     return fig
@@ -436,7 +436,7 @@ end
 function plot_pdf()
     d = Distributions.Normal()
     CairoMakie.activate!() # hide
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     ax = Axis(fig[1, 1]; xticks=-3:3, ylabel="pdf")
     range = -3:0.01:3.0
     subset = 1:0.01:2.0
@@ -447,7 +447,7 @@ end
 
 function plot_cdf(type::AbstractString)
     CairoMakie.activate!() # hide
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     if type == "discrete"
         d = Distributions.DiscreteUniform(1, 6)
         range = 1:6
@@ -499,7 +499,7 @@ function plot_anscombe()
     df = anscombe_quartet()
     filter_anscombe(idx) = filter(row -> row.dataset == idx, df)
     CairoMakie.activate!() # hide
-    fig = Figure(; resolution=(600, 600))
+    fig = Figure(; size=(600, 600))
     axs = [Axis(fig[i, j]; limits=((3, 20), (2.5, 14)),
         xticks=4:2:20, yticks=2:14)
            for i = 1:2, j = 1:2]

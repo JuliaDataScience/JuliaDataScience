@@ -44,7 +44,7 @@ We can create a scatter plot for these numbers:
 ```jl
 s = """
     CairoMakie.activate!() # hide
-    figure = (; resolution=(600, 400))
+    figure = (; size=(600, 400))
     xlabel = "number of times fallen to the right"
     axis = (; xlabel, ylabel="ball")
     scatter(X, 1:n_repeats; figure, axis)
@@ -68,7 +68,7 @@ This is called a **hist**ogram:
 
 ```jl
 s = """
-    figure = (; resolution=(600, 400))
+    figure = (; size=(600, 400))
     axis = (; xlabel, ylabel="balls per bin")
     hist(X; figure, axis)
     label = "first_histogram" # hide

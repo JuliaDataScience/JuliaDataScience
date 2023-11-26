@@ -50,7 +50,7 @@ function front_cover()
 
         width = 2016
         height = (10 / 7) * width # Ratio 7 * 10 inch.
-        fig = Figure(figure_padding=(50, 15, 5, 5), resolution=(width, height))
+        fig = Figure(; figure_padding=(50, 15, 5, 5), size=(width, height))
         # Colors
         colors = ColorSchemes.Set1_6
         #colors = Makie.wong_colors()

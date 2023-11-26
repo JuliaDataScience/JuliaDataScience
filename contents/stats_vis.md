@@ -19,7 +19,7 @@ s = """
     label = "histogram" # hide
     caption = "Histogram" # hide
     df = more_grades()
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     ax = Axis(fig[1, 1], xticks=1:10)
     hist!(ax, df.grade; color=(:dodgerblue, 0.5))
     Options(current_figure(); filename=label, caption, label) # hide
@@ -36,7 +36,7 @@ s = """
     label = "histogram_bins" # hide
     caption = "Histogram with Custom Bins" # hide
     df = more_grades()
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     ax = Axis(fig[1, 1], xticks=1:10)
     hist!(ax, df.grade; color=(:dodgerblue, 0.5), bins=10)
     Options(current_figure(); filename=label, caption, label) # hide
@@ -69,7 +69,7 @@ s = """
     caption = "Box Plot" # hide
     df = more_grades()
     transform!(df, :name => categorical; renamecols=false)
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     ax = Axis(fig[1, 1]; xticks = (1:4, levels(df.name)))
     boxplot!(ax, levelcode.(df.name), df.grade)
     Options(current_figure(); filename=label, caption, label) # hide
@@ -88,7 +88,7 @@ s = """
     caption = "Box Plot with different IQR and Whiskers Vertical Bars" # hide
     df = more_grades()
     transform!(df, :name => categorical; renamecols=false)
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     ax = Axis(fig[1, 1]; xticks = (1:4, levels(df.name)))
     boxplot!(ax, levelcode.(df.name), df.grade; range=2.0, whiskerwidth=0.5)
     Options(current_figure(); filename=label, caption, label) # hide
@@ -106,7 +106,7 @@ s = """
     caption = "Box Plot with Outliers" # hide
     df = more_grades()
     transform!(df, :name => categorical; renamecols=false)
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     ax = Axis(fig[1, 1]; xticks = (1:4, levels(df.name)))
     boxplot!(ax, levelcode.(df.name), df.grade; range=0.5, show_outliers=true)
     Options(current_figure(); filename=label, caption, label) # hide
@@ -141,7 +141,7 @@ s = """
     transform!(df, :name => categorical; renamecols=false)
     categories = levels(df.name)
     values(code) = filter(row -> levelcode.(row.name) == code, df).grade
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     ax = Axis(fig[1, 1]; yticks = (1:4, categories), limits=((-1, 11), nothing))
     for i in 1:eachindex(categories)
         density!(ax, values(i); offset=i)
@@ -163,7 +163,7 @@ s = """
     transform!(df, :name => categorical; renamecols=false)
     categories = levels(df.name)
     values(code) = filter(row -> levelcode.(row.name) == code, df).grade
-    fig = Figure(; resolution=(600, 400))
+    fig = Figure(; size=(600, 400))
     ax1 = Axis(fig[1, 1]; yticks = (1:4, categories), limits=((-1, 11), nothing))
     ax2 = Axis(fig[1, 2]; yticks = (1:4, categories), limits=((-1, 11), nothing))
     for i in 1:eachindex(categories)

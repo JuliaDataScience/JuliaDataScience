@@ -169,7 +169,7 @@ function cheatsheet_glmakie()
         rectMesh = Rect3f(Vec3f(-0.5), Vec3f(1))
         recmesh = GeometryBasics.mesh(rectMesh)
         colors = [rand() for v in recmesh.position]
-        mesh!(axs[15], recmesh; color=colors, colormap=:rainbow, shading=false)
+        mesh!(axs[15], recmesh; color=colors, colormap=:rainbow, shading=NoShading)
         axs[15].title = "mesh(Rect3f; color)"
 
         meshscatter!(axs[16], [Point3f(rand(3)...) for i = 1:4];
@@ -196,19 +196,19 @@ function cheatsheet_glmakie()
 
         #pos = [Point3f(i, j, 0) for i in 1:10 for j in 1:10]
         #z = rand(10,10)
-        mesh!(axs[19], rectmesh, color=colors, shading=false,
+        mesh!(axs[19], rectmesh, color=colors, shading=NoShading,
             colormap=:tableau_blue_green, #[:black, :yellow, :red]
         )
         axs[19].title = "mesh(;color)"
 
         #zlims!(axs[19], 0, 1)
         mesh!(axs[20], rectMesh, color=testimage("monarch_color_256"),
-            shading=false, interpolate=false)
+            shading=NoShading, interpolate=false)
         axs[20].title = "mesh(;color=img)"
 
         mesh!(axs[21], Sphere(Point3f(0), 1);
             color=testimage("mandril_color"),
-            shading=false)
+            shading=NoShading)
         axs[21].title = "mesh(;color=img)"
 
         wireframe!(axs[22], Rect3f(Vec3f(-0.5), Vec3f(1));
@@ -258,7 +258,7 @@ function cheatsheet_glmakie()
             markersize=0.9,
             colormap=:seaborn_icefire_gradient, #Reverse(:linear_protanopic_deuteranopic_kbw_5_98_c40_n256),
             colorrange=(minimum(vals), maximum(vals)),
-            shading=true,
+            shading=MultiLightShading,
             transparency=true,
         )
         axs[25].title = "meshscatter(pos;\nmarker=Rect3f)"

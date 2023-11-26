@@ -85,32 +85,32 @@ function front_cover()
             marker=FRect3D(Vec3f0(0), Vec3f0(7)), # here, if you use less than 10, you will see smaller squares.
             colormap=:linear_grey_10_95_c0_n256, colorrange=(-2, 2),
             transparency=false,
-            shading=false)
+            shading=NoShading)
         meshscatter!(ax11, posTops, color=vec(valsTop), marker=FRect3D(Vec3f0(0), Vec3f0(7)),
             transparency=false, colormap=(:plasma, 0.65),
-            shading=false, colorrange=(0, 1))
+            shading=NoShading, colorrange=(0, 1))
         meshscatter!(ax11, posSides, color=vec(valsSides), marker=FRect3D(Vec3f0(0), Vec3f0(7)),
             transparency=false, colormap=(:viridis, 0.65),
-            shading=false)
-        meshscatter!(ax21, vec(arrTop[:, end]), color=colorTop[end:-1:1], shading=false,
+            shading=NoShading)
+        meshscatter!(ax21, vec(arrTop[:, end]), color=colorTop[end:-1:1], shading=NoShading,
             marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:plasma, colorrange=(0, 1))
-        meshscatter!(ax21, vec([(0, i) for i = 0:9]), color=colorSides, shading=false,
+        meshscatter!(ax21, vec([(0, i) for i = 0:9]), color=colorSides, shading=NoShading,
             marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:viridis, colorrange=(0, 1))
-        meshscatter!(ax21, vec([(j, i) for i = 0:9, j = 1:10]), shading=false,
+        meshscatter!(ax21, vec([(j, i) for i = 0:9, j = 1:10]), shading=NoShading,
             color=vec(vals[end:-1:1, end, :]'),
             marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:linear_grey_10_95_c0_n256, colorrange=(-2, 2))
-        meshscatter!(ax31, vec(arrTop[1:2, end]), color=colorTop[end:-1:1][1:2], shading=false,
+        meshscatter!(ax31, vec(arrTop[1:2, end]), color=colorTop[end:-1:1][1:2], shading=NoShading,
             marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:plasma, colorrange=(0, 1))
-        meshscatter!(ax31, vec([(0, i) for i = 0:9]), color=colorSides, shading=false,
+        meshscatter!(ax31, vec([(0, i) for i = 0:9]), color=colorSides, shading=NoShading,
             marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:viridis, colorrange=(0, 1))
-        meshscatter!(ax31, vec([(j, i) for i = 0:9, j = 1:2]), shading=false,
+        meshscatter!(ax31, vec([(j, i) for i = 0:9, j = 1:2]), shading=NoShading,
             color=vec(vals[end:-1:1, end, :]')[1:20],
             marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:linear_grey_10_95_c0_n256, colorrange=(-2, 2))
-        meshscatter!(ax41, vec(arrTop[1:1, end]), color=colorTop[end:-1:1][1:1], shading=false,
+        meshscatter!(ax41, vec(arrTop[1:1, end]), color=colorTop[end:-1:1][1:1], shading=NoShading,
             marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:plasma, colorrange=(0, 1))
-        meshscatter!(ax41, vec([(0, i) for i = 0:9]), color=colorSides, shading=false,
+        meshscatter!(ax41, vec([(0, i) for i = 0:9]), color=colorSides, shading=NoShading,
             marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:viridis, colorrange=(0, 1))
-        meshscatter!(ax41, vec([(j, i) for i = 0:9, j = 1:1]), shading=false,
+        meshscatter!(ax41, vec([(j, i) for i = 0:9, j = 1:1]), shading=NoShading,
             color=vec(vals[end:-1:1, end, :]')[1:10],
             marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:linear_grey_10_95_c0_n256, colorrange=(-2, 2))
         # Limits

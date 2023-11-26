@@ -819,7 +819,7 @@ function mixing_surface_contour3d_contour_and_contourf()
         zgridcolor=:grey70, ygridcolor=:grey70, xgridcolor=:grey70)
     ax2 = Axis3(fig[1, 3]; aspect=(1, 1, 1),
         elevation=π/6, perspectiveness=0.5)
-    hm = surface!(ax1, x, y, z; colormap=(cmap, 0.95), shading=true)
+    hm = surface!(ax1, x, y, z; colormap=(cmap, 0.95), shading=MultiLightShading)
     contour3d!(ax1, x, y, z .+ 0.02; colormap=cmap, levels=20, linewidth=2)
     # get final limits
     xmin, ymin, zmin = minimum(ax1.finallimits[])
@@ -886,7 +886,7 @@ function mesh_volume_contour()
     vals = randn(10, 10, 10)
     fig = Figure(size=(1200, 400))
     axs = [Axis3(fig[1, i]; aspect=(1,1,1), perspectiveness=0.5) for i=1:3]
-    mesh!(axs[1], recmesh; color=colors, colormap=:rainbow, shading=false)
+    mesh!(axs[1], recmesh; color=colors, colormap=:rainbow, shading=NoShading)
     mesh!(axs[1], spheremesh; color=(:white, 0.25), transparency=true)
     volume!(axs[2], x, y, z, vals; colormap=Reverse(:plasma))
     contour!(axs[3], x, y, z, vals; colormap=Reverse(:plasma))
@@ -930,12 +930,12 @@ function grid_spheres_and_rectangle_as_plate()
         ax1 = Axis3(fig[1, 1]; aspect, perspectiveness, azimuth=0.72)
         ax2 = Axis3(fig[1, 2]; aspect, perspectiveness)
         meshscatter!(ax1, spheresGrid; color=colorSphere, markersize=1,
-            shading=false)
+            shading=NoShading)
         meshscatter!(ax2, spheresPlane; color=colorsPlane, markersize=0.75,
             lightposition=Vec3f(10, 5, 2),
             ambient=Vec3f(0.95, 0.95, 0.95),
             backlight=1.0f0)
-        mesh!(recmesh; color=colors, colormap=:rainbow, shading=false)
+        mesh!(recmesh; color=colors, colormap=:rainbow, shading=NoShading)
         limits!(ax1, 0, 10, 0, 10, 0, 10)
         fig
     end
@@ -962,11 +962,11 @@ function histogram_or_bars_in_3d()
     rectMesh = Rect3f(Vec3f(-0.5, -0.5, 0), Vec3f(1, 1, 1))
     meshscatter!(ax1, x, y, 0 * z; marker=rectMesh, color=z[:],
         markersize=Vec3f.(2δx, 2δy, z[:]), colormap=:Spectral_11,
-        shading=false)
+        shading=NoShading)
     limits!(ax1, -3.5, 3.5, -3.5, 3.5, -7.45, 7.45)
     meshscatter!(ax2, x, y, 0 * z; marker=rectMesh, color=z[:],
         markersize=Vec3f.(2δx, 2δy, z[:]), colormap=(:Spectral_11, 0.25),
-        shading=false, transparency=true)
+        shading=NoShading, transparency=true)
     for (idx, i) in enumerate(x), (idy, j) in enumerate(y)
         rectMesh=Rect3f(Vec3f(i-δx, j-δy, 0), Vec3f(2δx, 2δy, z[idx,idy]))
         recmesh=GeometryBasics.mesh(rectMesh)

@@ -6,7 +6,6 @@ extend-ignore-re = [
 ]
 
 [default.extend-words]
-# code stuff
 Tesselation = "Tesselation"
 tesselation = "tesselation"
 Missings = "Missings"

@@ -1,4 +1,4 @@
-FROM julia:1.8
+FROM julia:latest
 
 # Extra dependencies for GLMakie.
 RUN set -eux; \

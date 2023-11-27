@@ -5,7 +5,6 @@ extend-ignore-re = [
   "\\b[0-9A-Za-z+/]{33,}(=|==)?\\b", # SHA/tpub/adresses etc strings
 ]
 
-
 [default.extend-words]
 # code stuff
 Tesselation = "Tesselation"
@@ -19,6 +18,3 @@ check-file = false
 [type.bib]
 extend-glob = ["*.bib"]
 check-file = false
-
-[files]
-extend-exclude = ["themes/*"]

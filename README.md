@@ -19,6 +19,35 @@ Interestingly, all Amazon customer accounts remain functional.
 It seems that our removal may have been a result of not selling enough books.
 Nevertheless, the book and its PDF version can still be accessed in their entirety on this website.
 
+## Contributing
+
+Pull requests are welcomed.
+Note that we do have some checks on CI using [GitHub Actions](.github/workflows).
+Here is the full list of checks:
+
+- [Typos](.github/workflows/typos.yml):
+  We automate typos check with [`typos`](https://github.com/crate-ci/typos).
+  Regarding the typos check, there might be some false positives.
+  In that case you can add a regex rule to filter out the typos in the `_typos.toml` file.
+  We already included all the false positives we've found so far with some explainable comments.
+  Hence, you should be able to follow the examples and add your own.
+  You can make `typos` a [`pre-commit`](https://pre-commit.com) check,
+  where it will check before the commit is executed for typos.
+  The configuration is already provided in the
+  [`.pre-commit-config.yaml`](.pre-commit-config.yaml) file.
+  Just install [`pre-commit`](https://pre-commit.com) and
+  run:
+
+  ```bash
+  pre-commit install --install-hooks
+  ```
+
+- [Format](.github/workflows/Format.yml):
+  We check Julia code format using
+  [`JuliaFormatter.jl`](https://github.com/domluna/JuliaFormatter.jl)
+- [Build and Deploy](.github/workflows/CI.yml):
+  Julia Data Science book, both website and PDF, is built in a CI job.
+
 ## LICENSE
 
 This book is licensed under [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International][cc-by-nc-sa].

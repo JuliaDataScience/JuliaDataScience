@@ -52,7 +52,7 @@ Now, we will start with some basic plots and later one some more advanced public
 But, before going into plotting it is important to know how to save our plots.
 The easiest option to `save` a figure `fig` is to type `save("filename.png", fig)`.
 Other formats are also available for `CairoMakie.jl`, such as `svg` and `pdf`.
-The resolution of the output image can easily be adjusted by passing extra arguments.
+The size of the output image can easily be adjusted by passing extra arguments.
 For example, for vector formats you specify `pt_per_unit`:
 
 ```
@@ -66,7 +66,7 @@ save("filename.pdf", fig; pt_per_unit=0.5)
 ```
 
 For `png`'s you specify `px_per_unit`.
-See [Exporting a Figure with physical dimensions](https://docs.makie.org/stable/documentation/figure_size/) for details.
+See [Exporting a Figure with physical dimensions](https://docs.makie.org/stable/explanations/figure/#figure_size_and_units) for details.
 
 Another important issue is to actually visualize your output plot.
 Note that for `CairoMakie.jl` the Julia REPL is not able to show plots, so you will need an IDE (Integrated Development Environment) such as VSCode, Jupyter or Pluto that supports `png` or `svg` as output.

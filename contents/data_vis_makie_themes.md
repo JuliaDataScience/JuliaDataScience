@@ -59,13 +59,13 @@ sco(s)
 
 Here we have use `with_theme` which is more convenient for the direct application of a theme than the `do` syntax. You should use the latter if you want to include extra arguments to the theme that is going to be applied.
 
-Now, if something needs to be changed after `set_theme!(your_theme)`, we can do it with `update_theme!(resolution=(500, 400), fontsize=18)`, for example.
+Now, if something needs to be changed after `set_theme!(your_theme)`, we can do it with `update_theme!(size=(500, 400), fontsize=18)`, for example.
 Another approach will be to pass additional arguments to the `with_theme` function:
 
 ```jl
 s = """
     CairoMakie.activate!() # hide
-    fig = (resolution=(600, 400), figure_padding=1, backgroundcolor=:grey90)
+    fig = (size=(600, 400), figure_padding=1, backgroundcolor=:grey90)
     ax = (; aspect=DataAspect(), xlabel=L"x", ylabel=L"y")
     cbar = (; height=Relative(4 / 5))
     with_theme(publication_theme(); fig..., Axis=ax, Colorbar=cbar) do

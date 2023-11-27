@@ -12,7 +12,7 @@ line_has_trailing_whitespace(line::AbstractString) = endswith(line, ' ')
 Check for trailing whitespace in a naive but reasonably effective way for the file at `path`.
 Return whether the file contains trailing whitespace.
 
-Not using exising tools for this simple procedure, because it's easier to fine tune this
+Not using existing tools for this simple procedure, because it's easier to fine tune this
 code to our use-case.
 """
 function file_has_trailing_whitespace(path)::Bool

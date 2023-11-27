@@ -431,7 +431,7 @@ function new_cycle_theme()
     # https://nanx.me/ggsci/reference/pal_locuszoom.html
     my_colors = ["#D43F3AFF", "#EEA236FF", "#5CB85CFF", "#46B8DAFF",
         "#357EBDFF", "#9632B8FF", "#B8B8B8FF"]
-    cycle = Cycle([:color, :linestyle, :marker], covary=true) # alltogether
+    cycle = Cycle([:color, :linestyle, :marker], covary=true) # altogether
     my_markers = [:circle, :rect, :utriangle, :dtriangle, :diamond,
         :pentagon, :cross, :xcross]
     my_linestyle = [:solid, :dash, :dot, :dashdot, :dashdotdot]

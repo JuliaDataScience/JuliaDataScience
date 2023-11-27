@@ -20,7 +20,7 @@ sco("""
 )
 ```
 
-We can add as many colums as we want to `@select`:
+We can add as many columns as we want to `@select`:
 
 ```jl
 sco("""
@@ -51,7 +51,7 @@ sco("""
 )
 ```
 
-Of course, the `.*` can be ommited by using the vectorized form of the macro, `@rselect`:
+Of course, the `.*` can be omitted by using the vectorized form of the macro, `@rselect`:
 
 ```jl
 sco("""

@@ -2475,7 +2475,7 @@ Now we can start adding packages to our project environment with the **`add` com
 ```
 
 From the `add` output, we can see that Julia automatically creates _both_ the `Project.toml` and `Manifest.toml` files.
-In the `Project.toml`, it adds a new package to the proejct environment package list.
+In the `Project.toml`, it adds a new package to the project environment package list.
 Here are the contents of the `Project.toml`:
 
 ```toml

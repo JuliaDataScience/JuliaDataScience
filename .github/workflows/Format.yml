@@ -1,36 +1,12 @@
 name: Format
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
   workflow_dispatch:
 
 jobs:
-  docs:
-    name: CheckFormatting
+  code-style:
+    name: FormattingSuggestions
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - shell: julia --project=format --color=yes {0}
-        run: |
-          using Pkg
-          Pkg.instantiate()
-
-      - shell: julia --project=format --color=yes {0}
-        run: |
-          using FormatJDS:
-              project_has_trailing_whitespace,
-              remove_trailing_whitespace
-
-          exitcode = project_has_trailing_whitespace() ? 1 : 0
-          println(exitcode == 1 ? "Trailing whitespace found" : "No trailing whitespace found")
-          if exitcode == 1
-              # Show where the trailing whitespace occurs.
-              remove_trailing_whitespace()
-              run(`git config --global color.diff true`)
-              run(`git diff`)
-          end
-          exit(exitcode)
+      - uses: julia-actions/julia-format@v2.0.0

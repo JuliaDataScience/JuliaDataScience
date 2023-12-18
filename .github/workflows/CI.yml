@@ -10,7 +10,8 @@ on:
 jobs:
   BuildAndDeploy:
     runs-on: ubuntu-latest
-    permissions: write-all
+    permissions:
+      pull-requests: write
     env:
       JULIA_NUM_THREADS: "auto"
     steps:

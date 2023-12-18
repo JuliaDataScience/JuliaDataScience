@@ -10,6 +10,7 @@ on:
 jobs:
   BuildAndDeploy:
     runs-on: ubuntu-latest
+    permissions: write-all
     env:
       JULIA_NUM_THREADS: "auto"
     steps:
@@ -62,5 +63,5 @@ jobs:
         with:
           issue-number: ${{ github.event.number }}
           body: |
-            The PDF was created and uploaded as an artifact.
+            The PDF was created and uploaded as an artifact. \
             You can find it on the GitHub Actions Summary page for the GitHub Actions Runs in this PR.

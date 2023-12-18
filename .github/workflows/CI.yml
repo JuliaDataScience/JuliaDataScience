@@ -11,6 +11,9 @@ jobs:
   BuildAndDeploy:
     runs-on: ubuntu-latest
     permissions:
+      # For the push to `gh-pages` branch.
+      contents: write
+      # For the comment in the PRs saying that the PDF is ready.
       pull-requests: write
     env:
       JULIA_NUM_THREADS: "auto"
@@ -41,15 +44,6 @@ jobs:
       - run: >
           DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' julia --project -e 'using JDS; JDS.build()'
 
-      - name: Deploy to secondary branch
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          cname: juliadatascience.io
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force_orphan: true
-          publish_dir: ./_build/
-
       - name: Make preview PDF available
         if: ${{ github.event_name == 'pull_request' }}
         uses: actions/upload-artifact@v4
@@ -66,3 +60,12 @@ jobs:
           body: |
             The PDF was created and uploaded as an artifact. \
             You can find it on the GitHub Actions Summary page for the GitHub Actions Runs in this PR.
+
+      - name: Deploy to secondary branch
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          cname: juliadatascience.io
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force_orphan: true
+          publish_dir: ./_build/

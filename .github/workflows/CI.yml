@@ -6,6 +6,9 @@ on:
       - main
   pull_request:
   workflow_dispatch:
+  schedule:
+    # Runs every month on day 1 at 17:29 UTC.
+    - cron: "29 17 1 * *"
 
 jobs:
   BuildAndDeploy:

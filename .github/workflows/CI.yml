@@ -14,10 +14,13 @@ jobs:
   BuildAndDeploy:
     runs-on: ubuntu-latest
     permissions:
+      # Required by julia-actions/cache.
+      actions: write
       # For the push to `gh-pages` branch.
       contents: write
       # For the comment in the PRs saying that the PDF is ready.
       pull-requests: write
+      permissions:
     env:
       JULIA_NUM_THREADS: "auto"
     steps:

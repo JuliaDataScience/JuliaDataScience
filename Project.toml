@@ -34,7 +34,7 @@ TestImages = "5e47fb64-e119-507b-a336-dd2b206d9990"
 XLSX = "fdbf4ff8-1666-58a4-91e7-1b58723a45e0"
 
 [compat]
-AlgebraOfGraphics = "0.7"
+AlgebraOfGraphics = "0.8"
 Books = "2"
 CSV = "0.10"
 CairoMakie = "0.11"

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+    <loc>https://juliadatascience.io/welcome</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/preface</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/why_data_science</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/engineering</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/acknowledgements</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/why_julia</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/non-programmers</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/programmers</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/julia_accomplish</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/julia_wild</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/julia_basics</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/ide</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/syntax</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/data_structures</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/filesystem</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/standardlibrary</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/dataframes</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/load_save</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/index-and-summarize</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/filter_subset</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/select</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/types</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/join</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/transform</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/groupby_combine</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/missing</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/df_performance</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/dataframesmeta</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/dataframesmeta_macros</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/dataframesmeta_select</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/dataframesmeta_transform</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/dataframesmeta_subset</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/dataframesmeta_orderby</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/dataframesmeta_combine</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/dataframesmeta_chain</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/DataVisualizationMakie</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/cairomakie</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/datavisMakie_attributes</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/datavisMakie_create_Figure</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/makie_cheat_sheets</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/themes</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/using-latexstrings.jl</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/makie_colors</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/makie_layouts</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/glmakie</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/recipe_df</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/aog</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/aog_layers</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/aog_layouts</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/aog_stats</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/aog_custom</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/aog_makie</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/appendix</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/appendix_pkg</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/notation</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/references</loc>
+    <lastmod>2024-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+</urlset>

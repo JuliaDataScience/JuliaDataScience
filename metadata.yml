@@ -28,7 +28,7 @@ allow-subsubsections: true
 
 # Only used in PDF.
 titlepage: true
-titlepage-top: >
+titlepage-top: |
   ```{=typst}
   Jose Storopoli\
   Universidade Nove de Julho - UNINOVE\

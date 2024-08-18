@@ -79,11 +79,10 @@ function cheatsheet_cairomakie()
             colormap=[:black, :dodgerblue, :gold])
         axs[18].title = "barplot(x,y)"
 
-        hist!(axs[19], randn(1000); color=:values,
-            colormap=[:black, :dodgerblue, :grey95])
+        hist!(axs[19], randn(1000); color=:values)
         axs[19].title = "hist(x)"
 
-        density!(axs[20], randn(1000); normalization=:pdf,
+        density!(axs[20], randn(1000);
             color=(:grey90, 0.35), strokewidth=2,
             strokecolor=:black, linestyle=:dash)
         axs[20].title = "density(x)"

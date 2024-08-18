@@ -157,8 +157,8 @@ function cheatsheet_glmakie()
         y = -1.7:0.05:1.7
         z = -1.7:0.05:1.7
         r(i, j, k) = sqrt(i^2 + j^2 + k^2)
-        vol = [rand() / r(i, j, k)^(2) for i in x, j in y, k in z]
-        volume!(axs[13], x, y, z, vol;
+        vol = [rand() / r(i, j, k)^(0.5) for i in x, j in y, k in z]
+        volume!(axs[13], -1.7 .. 1.7, -1.7 .. 1.7, -1.7 .. 1.7, vol;
             colormap=[:dodgerblue, :orange, :yellow, :white, :gold])
         axs[13].title = "volume(x,y,z,vol)"
 

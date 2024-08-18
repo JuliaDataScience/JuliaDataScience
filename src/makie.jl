@@ -932,8 +932,6 @@ function grid_spheres_and_rectangle_as_plate()
         meshscatter!(ax1, spheresGrid; color=colorSphere, markersize=1,
             shading=NoShading)
         meshscatter!(ax2, spheresPlane; color=colorsPlane, markersize=0.75,
-            lightposition=Vec3f(10, 5, 2),
-            ambient=Vec3f(0.95, 0.95, 0.95),
             backlight=1.0f0)
         mesh!(recmesh; color=colors, colormap=:rainbow, shading=NoShading)
         limits!(ax1, 0, 10, 0, 10, 0, 10)

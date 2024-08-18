@@ -7,7 +7,7 @@ end
 function cheatsheet_cairomakie()
     packages = ["Makie", "CairoMakie"]
     seed!(123)
-    CairoMakie.activate!()
+    CairoMakie.activate!(type="png")
     x = range(0, 2π; length=12)
     fig = with_theme(theme_light()) do
         fig = Figure(; size=(1000, 1600))
@@ -51,11 +51,11 @@ function cheatsheet_cairomakie()
             color=1:3, colormap=(:reds, 0.5))
         axs[12].title = "hspan(ylow, yhigh)"
 
-        spy!(axs[13], 0 .. 1, 0 .. 1, sprand(100, 100, 0.05);
+        spy!(axs[13], sprand(100, 100, 0.05); #  0 .. 1, 0 .. 1, Makie bug!
             markersize=4, marker=:rect,
             framecolor=:lightgrey,
             colormap=[:black, :red])
-        axs[13].title = "spy(x, y, sparseArray)"
+        axs[13].title = "spy(sparseArray)" # x,y,s -> Makie bug!
 
         rangebars!(axs[14], rand(5), -rand(5), rand(5);
             whiskerwidth=10, color=1:5)

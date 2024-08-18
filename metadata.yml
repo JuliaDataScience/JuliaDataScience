@@ -17,37 +17,38 @@ html-license: >-
   <br>
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
 pdf-footer: ""
-tex-license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
-lang: en-US
+pdf-license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 tags: [JuliaLang, Data Science, Data Visualization, Data Manipulation, Data Analysis]
 repo: https://github.com/JuliaDataScience/JuliaDataScience
 secPrefix: Section
 figPrefix: Figure
 tblPrefix: Table
-titlepage: true
 bibliography: pandoc/references.bib
 allow-subsubsections: true
 
 # Only used in PDF.
+titlepage: true
 titlepage-top: >
-  \begin{tabular}{l}
-  Jose Storopoli\\
-  Universidade Nove de Julho - UNINOVE\\
-  Brazil\\
-  \\
-  Rik Huijzer\\
-  University of Groningen\\
-  the Netherlands\\
-  \\
-  Lazaro Alonso\\
-  Max Planck Institute for Biogeochemistry\\
+  ```{=typst}
+  Jose Storopoli\
+  Universidade Nove de Julho - UNINOVE\
+  Brazil\
+  \
+  Rik Huijzer\
+  University of Groningen\
+  the Netherlands\
+  \
+  Lazaro Alonso\
+  Max Planck Institute for Biogeochemistry\
   Germany
-  \end{tabular}
+  ```
 
 titlepage-bottom: |
+  ```{=typst}
   First edition published 2021
 
-  \url{https://juliadatascience.io}
+  #link("https://juliadatascience.io")
 
   ISBN: 9798489859165
+  ```
 ---

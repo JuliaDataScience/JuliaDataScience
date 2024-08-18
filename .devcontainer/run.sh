@@ -10,6 +10,11 @@ else
   echo 'println("Revise is not available.")' > "$DEPOT_PATH/config/startup.jl"
 fi
 
+if sysctl -n machdep.cpu.brand_string | grep -q "Apple M"; then
+  echo "Apple Silicon detected; forcing linux/amd64 due to pandoc_crossref."
+  export DOCKER_DEFAULT_PLATFORM=linux/amd64
+fi
+
 if [ "$1" == "SERVE" ]; then
   docker run -it --rm \
     --env GKSwstype=nul \

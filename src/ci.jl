@@ -28,7 +28,7 @@ function patch_large_svg()
     @assert html_text != new_html_text
     write(html_path, new_html_text)
 
-    svg_path = joinpath(build_dir, svg_filename)
+    svg_path = joinpath(build_dir, "im", svg_filename)
     @assert isfile(svg_path)
     rm(svg_path)
 end

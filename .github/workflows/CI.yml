@@ -46,7 +46,8 @@ jobs:
 
       - run: julia --color=yes --project -e 'using Pkg; Pkg.instantiate()'
 
-      - run: >
+      - name: JDS.build()
+        run: >
           DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' julia --project -e 'using JDS; JDS.build()'
 
       - name: Make preview PDF available
@@ -67,7 +68,8 @@ jobs:
             You can find it on the GitHub Actions Summary page for the GitHub Actions Runs in this PR.
 
       - name: Patch JDS_cheatsheet_cairomakie_.svg
-        run: julia --project -e 'using JDS; JDS.patch_large_svg()'
+        run: >
+          DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' julia --project -e 'using JDS; JDS.patch_large_svg()'
 
       - name: Deploy to secondary branch
         if: ${{ github.event_name != 'pull_request' }}

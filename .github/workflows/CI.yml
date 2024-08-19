@@ -66,6 +66,9 @@ jobs:
             The PDF was created and uploaded as an artifact. \
             You can find it on the GitHub Actions Summary page for the GitHub Actions Runs in this PR.
 
+      - name: Patch JDS_cheatsheet_cairomakie_.svg
+        run: julia --project -e 'using JDS; JDS.patch_large_svg()'
+
       - name: Deploy to secondary branch
         if: ${{ github.event_name != 'pull_request' }}
         uses: peaceiris/actions-gh-pages@v4

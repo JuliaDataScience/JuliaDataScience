@@ -207,5 +207,3 @@ function front_cover()
         return fig
     end
 end
-
-front_cover()

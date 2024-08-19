@@ -20,7 +20,7 @@ function cover()
 
     fig = front_cover()
     png_path = joinpath(dir, "front_cover.png")
-    FileIO.save(png_path, fig; px_per_unit=1)
+    FileIO.save(png_path, fig; px_per_unit=1) # maybe do 3 here?
 
     # See https://kdp.amazon.com/cover-calculator for details.
     tex = raw"""

@@ -43,19 +43,22 @@ Return the Julia Data Science book front cover.
 """
 function front_cover()
     # Probably it will be good to have two versions, one black and one white.
-    CairoMakie.activate!()
+    GLMakie.activate!()
+    # font sizes
+    pipisize = 16
+    titlefontsize = 48
+    authorfontsize = 28
+    # Markers
+    ms = 14
     with_theme(theme_black(); Axis=(; ygridcolor=:grey70, xgridcolor=:grey70,
             xgridstyle=:dashdot, ygridstyle=:dashdot),
         Axis3=(; xgridcolor=:grey70, ygridcolor=:grey70, zgridcolor=:grey70)) do
 
-        width = 2016
+        width = 2016 ÷ 3
         height = (10 / 7) * width # Ratio 7 * 10 inch.
         fig = Figure(; figure_padding=(50, 15, 5, 5), size=(width, height))
         # Colors
         colors = ColorSchemes.Set1_6
-        #colors = Makie.wong_colors()
-        # Markers
-        ms = 20
         # Axis
         ax11 = Axis3(fig[1, 1], perspectiveness=0.5, azimuth=7.19, elevation=0.57,
             xlabel="x label", ylabel="y label", zlabel="z label",
@@ -145,7 +148,7 @@ function front_cover()
         boxplot!(ax45, fill(1, 1000), randn(1000); color=JuliaColors.green, strokecolor=:grey80,
             whiskercolor=JuliaColors.green, whiskerwidth=1, strokewidth=1)
         scatter!(axBubbles, rand(Distributions.Normal(1, 1), 1500), rand(Distributions.Normal(1, 1), 1500);
-            color=1:1500, markersize=20 * rand(1500),
+            color=1:1500, markersize=8 * rand(1500),
             colormap=tuple.(to_colormap(:thermal), rand(256) .+ 0.15),
             marker=:rect)
         limits!(axBubbles, -2.2, 2, -3.3, 2)
@@ -156,12 +159,11 @@ function front_cover()
         ylims!(ax44, -5.6, 5.5)
         ylims!(ax45, -5.6, 5.5)
         # Pipes for First Column
-        pipisize = 52
         Label(fig[1, 1, Bottom()], "|>", fontsize=pipisize,
             rotation=-π / 2, padding=(0, 0, 0, 0), font=NOTO_SANS_BOLD)
-        Label(fig[2, 1, Bottom()], " |>", fontsize=pipisize,
+        Label(fig[2, 1, Bottom()], "|>", fontsize=pipisize,
             rotation=-π / 2, padding=(0, 0, 0, 0), font=NOTO_SANS_BOLD)
-        Label(fig[3, 1, Bottom()], " |>", fontsize=pipisize,
+        Label(fig[3, 1, Bottom()], "|>", fontsize=pipisize,
             rotation=-π / 2, padding=(0, 0, 0, 0), font=NOTO_SANS_BOLD)
         # Pipes between columns
         Label(fig[2, 1, Right()], "|>", fontsize=pipisize,
@@ -179,19 +181,19 @@ function front_cover()
         Label(fig[4, 4, Right()], "|>", fontsize=pipisize,
             rotation=0π, padding=(5, 5, 0, 0), font=NOTO_SANS_BOLD)
 
-        legJ = Label(fig[1, 3:5], "Julia", fontsize=394,
+        legJ = Label(fig[1, 3:5], "Julia", fontsize=titlefontsize*3,
             tellheight=false, halign=:left, font=NOTO_SANS_BOLD)
         translate!(text_element(legJ), 0, 0, 9)
-        legD = Label(fig[1, 3:5], "\n\n\n\nData Science", fontsize=126,
+        legD = Label(fig[1, 3:5], "\n\n\n\nData Science", fontsize=titlefontsize,
             tellheight=false, halign=:left, font=NOTO_SANS_BOLD)
         translate!(text_element(legD), 0, 0, 9)
         vspace = "\n\n"
         hspace = "         "
-        legJose = Label(fig[2, 3:5], "$(vspace)$(hspace)Jose Storopoli", fontsize=80,
+        legJose = Label(fig[2, 3:5], "$(vspace)$(hspace)Jose Storopoli", fontsize=authorfontsize,
             tellheight=false, halign=:left, font=NOTO_SANS_BOLD)
-        legRik = Label(fig[2, 3:5], "$(vspace)\n\n$(hspace)Rik Huijzer", fontsize=80,
+        legRik = Label(fig[2, 3:5], "$(vspace)\n\n$(hspace)Rik Huijzer", fontsize=authorfontsize,
             tellheight=false, halign=:left, font=NOTO_SANS_BOLD)
-        legLaz = Label(fig[2, 3:5], "$(vspace)\n\n\n\n$(hspace)Lazaro Alonso", fontsize=80,
+        legLaz = Label(fig[2, 3:5], "$(vspace)\n\n\n\n$(hspace)Lazaro Alonso", fontsize=authorfontsize,
             tellheight=false, halign=:left, font=NOTO_SANS_BOLD)
         translate!(text_element(legJose), 0, 0, 9)
         translate!(text_element(legRik), 0, 0, 9)

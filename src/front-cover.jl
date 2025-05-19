@@ -85,37 +85,37 @@ function front_cover()
         ]
         # First Column 1,1 to 4,1
         meshscatter!(ax11, positions, color=vec(vals),
-            marker=FRect3D(Vec3f0(0), Vec3f0(7)), # here, if you use less than 10, you will see smaller squares.
+            marker=Rect3d(Vec3f(0), Vec3f(7)), # here, if you use less than 10, you will see smaller squares.
             colormap=:linear_grey_10_95_c0_n256, colorrange=(-2, 2),
             transparency=false,
             shading=NoShading)
-        meshscatter!(ax11, posTops, color=vec(valsTop), marker=FRect3D(Vec3f0(0), Vec3f0(7)),
+        meshscatter!(ax11, posTops, color=vec(valsTop), marker=Rect3d(Vec3f(0), Vec3f(7)),
             transparency=false, colormap=(:plasma, 0.65),
             shading=NoShading, colorrange=(0, 1))
-        meshscatter!(ax11, posSides, color=vec(valsSides), marker=FRect3D(Vec3f0(0), Vec3f0(7)),
+        meshscatter!(ax11, posSides, color=vec(valsSides), marker=Rect3d(Vec3f(0), Vec3f(7)),
             transparency=false, colormap=(:viridis, 0.65),
             shading=NoShading)
         meshscatter!(ax21, vec(arrTop[:, end]), color=colorTop[end:-1:1], shading=NoShading,
-            marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:plasma, colorrange=(0, 1))
+            marker=Rect3d(Vec3f(0), Vec3f(7)), colormap=:plasma, colorrange=(0, 1))
         meshscatter!(ax21, vec([(0, i) for i = 0:9]), color=colorSides, shading=NoShading,
-            marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:viridis, colorrange=(0, 1))
+            marker=Rect3d(Vec3f(0), Vec3f(7)), colormap=:viridis, colorrange=(0, 1))
         meshscatter!(ax21, vec([(j, i) for i = 0:9, j = 1:10]), shading=NoShading,
             color=vec(vals[end:-1:1, end, :]'),
-            marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:linear_grey_10_95_c0_n256, colorrange=(-2, 2))
+            marker=Rect3d(Vec3f(0), Vec3f(7)), colormap=:linear_grey_10_95_c0_n256, colorrange=(-2, 2))
         meshscatter!(ax31, vec(arrTop[1:2, end]), color=colorTop[end:-1:1][1:2], shading=NoShading,
-            marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:plasma, colorrange=(0, 1))
+            marker=Rect3d(Vec3f(0), Vec3f(7)), colormap=:plasma, colorrange=(0, 1))
         meshscatter!(ax31, vec([(0, i) for i = 0:9]), color=colorSides, shading=NoShading,
-            marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:viridis, colorrange=(0, 1))
+            marker=Rect3d(Vec3f(0), Vec3f(7)), colormap=:viridis, colorrange=(0, 1))
         meshscatter!(ax31, vec([(j, i) for i = 0:9, j = 1:2]), shading=NoShading,
             color=vec(vals[end:-1:1, end, :]')[1:20],
-            marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:linear_grey_10_95_c0_n256, colorrange=(-2, 2))
+            marker=Rect3d(Vec3f(0), Vec3f(7)), colormap=:linear_grey_10_95_c0_n256, colorrange=(-2, 2))
         meshscatter!(ax41, vec(arrTop[1:1, end]), color=colorTop[end:-1:1][1:1], shading=NoShading,
-            marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:plasma, colorrange=(0, 1))
+            marker=Rect3d(Vec3f(0), Vec3f(7)), colormap=:plasma, colorrange=(0, 1))
         meshscatter!(ax41, vec([(0, i) for i = 0:9]), color=colorSides, shading=NoShading,
-            marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:viridis, colorrange=(0, 1))
+            marker=Rect3d(Vec3f(0), Vec3f(7)), colormap=:viridis, colorrange=(0, 1))
         meshscatter!(ax41, vec([(j, i) for i = 0:9, j = 1:1]), shading=NoShading,
             color=vec(vals[end:-1:1, end, :]')[1:10],
-            marker=FRect3D(Vec3f0(0), Vec3f0(7)), colormap=:linear_grey_10_95_c0_n256, colorrange=(-2, 2))
+            marker=Rect3d(Vec3f(0), Vec3f(7)), colormap=:linear_grey_10_95_c0_n256, colorrange=(-2, 2))
         # Limits
         xlims!(ax11, -1, 12)
         ylims!(ax11, -1, 11)
@@ -181,7 +181,7 @@ function front_cover()
         Label(fig[4, 4, Right()], "|>", fontsize=pipisize,
             rotation=0π, padding=(5, 5, 0, 0), font=NOTO_SANS_BOLD)
 
-        legJ = Label(fig[1, 3:5], "Julia", fontsize=titlefontsize*3,
+        legJ = Label(fig[1, 3:5], "Julia", fontsize=titlefontsize * 3,
             tellheight=false, halign=:left, font=NOTO_SANS_BOLD)
         translate!(text_element(legJ), 0, 0, 9)
         legD = Label(fig[1, 3:5], "\n\n\n\nData Science", fontsize=titlefontsize,

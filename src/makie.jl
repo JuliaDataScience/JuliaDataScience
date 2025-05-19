@@ -882,7 +882,7 @@ function mesh_volume_contour()
     # uses 64 for tesselation, a smoother sphere
     colors = [rand() for v in recmesh.position]
     # cloud points for volume
-    x = y = z = 1:10
+    x = y = z = 1..10
     vals = randn(10, 10, 10)
     fig = Figure(size=(1200, 400))
     axs = [Axis3(fig[1, i]; aspect=(1,1,1), perspectiveness=0.5) for i=1:3]

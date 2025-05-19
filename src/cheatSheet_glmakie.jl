@@ -4,7 +4,7 @@ function cheatsheet_glmakie()
     seed!(123)
     GLMakie.activate!()
     fig = with_theme(theme_light()) do
-       fig = Figure(; size=(1000, 1600))
+        fig = Figure(; size=(1000, 1600))
         axs1 = Axis(fig[1, 1], aspect=1)
         axs2 = Axis(fig[1, 2], aspect=1)
         axs3 = Axis(fig[1, 3], aspect=1, xscale=log10, yscale=log10)
@@ -20,7 +20,7 @@ function cheatsheet_glmakie()
 
         axs = [Axis3(fig[i, j], aspect=(1, 1, 1),
             perspectiveness=0.5, elevation=pi / 6, protrusions=0)
-            for i = 3:7 for j = 1:5]
+               for i = 3:7 for j = 1:5]
         [axs[i].titlegap = -15 for i = 1:25]
         #length(axs)
 
@@ -49,7 +49,7 @@ function cheatsheet_glmakie()
             [Vec2f(1), Vec2f(1, -1)], [Vec2f(1, 0), Vec2f(0, 1)]]
         colors = [:white, :red, (:green, 0.5), :white, (:navy, 0.85), :black]
         patterns = [Makie.LinePattern(direction=hatch; width=2, tilesize=(5, 5),
-            linecolor=colors[indx], background_color=colors[end-indx+1])
+            linecolor=colors[indx], backgroundcolor=colors[end-indx+1])
                     for (indx, hatch) in enumerate(directions)]
         for (idx, pattern) in enumerate(patterns)
             barplot!(axs6, [idx], [idx * (2rand() + 1)], color=pattern, strokewidth=2)

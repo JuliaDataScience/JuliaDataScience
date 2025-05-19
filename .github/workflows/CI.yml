@@ -42,13 +42,13 @@ jobs:
       - uses: julia-actions/cache@v2
 
       - name: Install GLMakie dependencies
-        run: sudo apt-get update && sudo apt-get install -y xorg-dev mesa-utils xvfb libgl1 freeglut3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev
+        run: sudo apt-get update && sudo apt-get install -y xorg-dev mesa-utils xvfb libgl1 freeglut3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev xsettingsd x11-xserver-utils
 
       - run: julia --color=yes --project -e 'using Pkg; Pkg.instantiate()'
 
       - name: JDS.build()
         run: >
-          DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' julia --project -e 'using JDS; JDS.build()'
+          DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' julia --color=yes --project -e 'using JDS; JDS.build()'
 
       - name: Make preview PDF available
         if: ${{ github.event_name == 'pull_request' }}
@@ -69,7 +69,7 @@ jobs:
 
       - name: Patch JDS_cheatsheet_cairomakie_.svg
         run: >
-          DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' julia --project -e 'using JDS; JDS.patch_large_svg()'
+          DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' julia --color=yes --project -e 'using JDS; JDS.patch_large_svg()'
 
       - name: Deploy to secondary branch
         if: ${{ github.event_name != 'pull_request' }}

@@ -4,5 +4,6 @@ alias b := build
 default:
   just --list
 
+# Build JDS
 build:
   julia --color=yes --project -e 'using JDS; JDS.build()'

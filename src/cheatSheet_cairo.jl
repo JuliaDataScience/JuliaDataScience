@@ -125,11 +125,11 @@ function cheatsheet_cairomakie()
         us = [x + y for x in xs, y in ys]
         vs = [y - x for x in xs, y in ys]
         strength = vec(sqrt.(us .^ 2 .+ vs .^ 2))
-        arrows!(axs[29], xs, ys, us, vs;
-            arrowsize=5, lengthscale=0.1,
-            arrowcolor=strength, linecolor=strength,
+        arrows2d!(axs[29], xs, ys, us, vs;
+            tiplength=5, lengthscale=0.1,
+            tipcolor=strength, shaftcolor=strength,
             colormap=:Hiroshige)
-        axs[29].title = "arrows(x,y,u,v)"
+        axs[29].title = "arrows2d(x,y,u,v)"
 
         semiStable(x, y) = Point2f(-y + x * (-1 + x^2 + y^2)^2, x + y * (-1 + x^2 + y^2)^2)
         streamplot!(axs[30], semiStable, -4 .. 4, -4 .. 4,

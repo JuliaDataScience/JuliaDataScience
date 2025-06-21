@@ -86,11 +86,11 @@ function cheatsheet_glmakie()
         vs = [y - x for x in xs, y in ys]
         strength = vec(sqrt.(us .^ 2 .+ vs .^ 2))
 
-        arrows!(axs[2], xs, ys, us, vs;
-            arrowsize=5, lengthscale=0.1,
-            arrowcolor=strength, linecolor=strength,
+        arrows2d!(axs[2], xs, ys, us, vs;
+            tiplength=5, lengthscale=0.1,
+            tipcolor=strength, shaftcolor=strength,
             colormap=:Hiroshige)
-        axs[2].title = "arrows(x,y,u,v)"
+        axs[2].title = "arrows2d(x,y,u,v)"
 
         semiStable(x, y) = Point2f(-y + x * (-1 + x^2 + y^2)^2, x + y * (-1 + x^2 + y^2)^2)
         streamplot!(axs[3], semiStable, -4 .. 4, -4 .. 4,
@@ -107,10 +107,9 @@ function cheatsheet_glmakie()
         ps = [Point3f(x, y, z) for x = -3:1:3 for y = -3:1:3 for z = -3:1:3]
         ns = map(p -> 0.1 * Vec3f(p[2], p[1], p[3]), ps)
         lengths = norm.(ns)
-        arrows!(axs[6], ps, ns; color=lengths,
-            linewidth=0.1, arrowsize=Vec3f(0.3, 0.3, 0.4),
-            align=:center)
-        axs[6].title = "arrows(pos, dirs)"
+        arrows3d!(axs[6], ps, ns; color=lengths,
+            tiplength=0.3, align=:center)
+        axs[6].title = "arrows3d(pos, dirs)"
 
         semiStable3(x, y, z) = Point3f(-y + x * (-1 + x^2 + y^2)^2, x + y * (-1 + x^2 + y^2)^2, -x + z * (-1 + x^2 - y^2)^2)
         streamplot!(axs[7], semiStable3, -3 .. 3, -3 .. 3, -3 .. 3,
@@ -235,11 +234,11 @@ function cheatsheet_glmakie()
         normals = [Point3f(-J(ps[i]...)...) for i in eachindex(ps)]
 
         lengths = norm.(normals)
-        arrows!(axs[24], ps, normals ./7;
+        arrows3d!(axs[24], ps, normals ./7;
             color=lengths,
             colormap = [:black, :red, :dodgerblue],
             linewidth = 0.05,
-            arrowsize = Vec3f(0.15, 0.15, 0.2)
+            tiplength = 0.2,
             )
         =#
         text!(axs[24], Point3f(0, 0, -1),

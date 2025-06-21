@@ -72,7 +72,7 @@ Not bad, right? From there is clear that  any `heatmap`'s, `contour`'s, `contour
 
 ### Arrows and Streamplots
 
-`arrows` and `streamplot` are plots that might be useful when we want to know the directions that a given variable will follow.
+`arrows2d`/`arrows3d` and `streamplot` are plots that might be useful when we want to know the directions that a given variable will follow.
 See a demonstration below^[we are using the `LinearAlgebra` module from Julia's standard library.]:
 
 ```

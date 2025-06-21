@@ -861,8 +861,7 @@ function arrows_and_streamplot_in_3d()
     fig = Figure(size=(1200, 800), fontsize=26)
     axs = [Axis3(fig[1, i]; aspect=(1,1,1), perspectiveness=0.5) for i=1:2]
     # http://makie.juliaplots.org/stable/plotting_functions/arrows.html # hide
-    arrows!(axs[1], ps, ns, color=lengths, arrowsize=Vec3f(0.2, 0.2, 0.3),
-        linewidth=0.1)
+    arrows3d!(axs[1], ps, ns, color=lengths, tiplength=0.25)
     streamplot!(axs[2], flowField, -4 .. 4, -4 .. 4, -4 .. 4,
         colormap=:plasma, gridsize=(7, 7), arrow_size=0.25, linewidth=1)
     fig

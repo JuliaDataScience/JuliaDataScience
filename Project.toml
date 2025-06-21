@@ -1,6 +1,10 @@
 name = "JDS"
 uuid = "6c596d62-2771-44f8-8373-3ec4b616ee9d"
-authors = ["Jose Storopoli", "Rik Huijzer", "Lazaro Alonso"]
+authors = [
+  "Jose Storopoli <jose@storopoli.com>",
+  "Rik Huijzer <huijzer.xyzcontact.stylishly377@passmail.net>",
+  "Lazaro Alonso <lazarus.alon@gmail.com>",
+]
 
 [deps]
 AlgebraOfGraphics = "cbdf2221-f076-402e-a563-3d30da359d67"

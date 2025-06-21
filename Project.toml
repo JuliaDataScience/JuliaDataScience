@@ -1,6 +1,10 @@
 name = "JDS"
 uuid = "6c596d62-2771-44f8-8373-3ec4b616ee9d"
-authors = ["Jose Storopoli", "Rik Huijzer", "Lazaro Alonso"]
+authors = [
+  "Jose Storopoli <jose@storopoli.com>",
+  "Rik Huijzer <huijzer.xyzcontact.stylishly377@passmail.net>",
+  "Lazaro Alonso <lazarus.alon@gmail.com>",
+]
 
 [deps]
 AlgebraOfGraphics = "cbdf2221-f076-402e-a563-3d30da359d67"
@@ -34,23 +38,23 @@ TestImages = "5e47fb64-e119-507b-a336-dd2b206d9990"
 XLSX = "fdbf4ff8-1666-58a4-91e7-1b58723a45e0"
 
 [compat]
-AlgebraOfGraphics = "0.10"
+AlgebraOfGraphics = "0.11"
 Books = "3"
 CSV = "0.10"
-CairoMakie = "0.13"
+CairoMakie = "0.14"
 CategoricalArrays = "0.10"
 ColorSchemes = "3"
 Colors = "0.13"
-DataFrames = "1.1"
+DataFrames = "1.7"
 DataFramesMeta = "0.15"
 Distributions = "0.25"
 Downloads = "1"
 FileIO = "1"
-GLMakie = "0.11"
+GLMakie = "0.12"
 GeometryBasics = "0.5"
 ImageMagick = "1"
 LaTeXStrings = "1"
-Makie = "0.22"
+Makie = "0.23"
 QuartzImageIO = "0.7"
 Reexport = "1.1"
 Statistics = "1"

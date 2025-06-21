@@ -17,10 +17,10 @@ function statistics_graph()
     lines!(ellipse.(u; a=1.5, b=3, k=-5))
     lines!(points[:, 1], points[:, 2])
     lines!(-points[:, 1], points[:, 2])
-    arrows!([points[end-5, 1]], [points[end-5, 2]],
-        [-0.1], [0], arrowsize=20, lengthscale=0.2)
-    arrows!([-points[5, 1]], [points[5, 2]],
-        [0.1], [0], arrowsize=20, lengthscale=0.2)
+    arrows2d!([points[end-5, 1]], [points[end-5, 2]],
+        [-0.1], [0], tiplength=20, lengthscale=0.2)
+    arrows2d!([-points[5, 1]], [points[5, 2]],
+        [0.1], [0], tiplength=20, lengthscale=0.2)
 
     text!("Data\nGenerating\nProcess", position=(0, 0),
         align=(:center, :center), fontsize=24)

@@ -399,7 +399,7 @@ So, in summary, the code that was written with only Fox and Chicken in mind work
 In practice, this means that Julia makes it often easy to re-use code from other projects.
 
 If you are excited as much as we are by multiple dispatch, here are two more in-depth examples.
-The first is a [fast and elegant implementation of a one-hot vector](https://storopoli.io/Bayesian-Julia/pages/1_why_Julia/#example_one-hot_vector) by @storopoli2021bayesianjulia.
+The first is a [fast and elegant implementation of a one-hot vector](https://storopoli.github.io/Bayesian-Julia/pages/01_why_Julia/#example_one-hot_vector) by @storopoli2021bayesianjulia.
 The second is an interview with [Christopher Rackauckas](https://www.chrisrackauckas.com/) at [Tanmay Bakshi YouTube's Channel](https://youtu.be/moyPIhvw4Nk?t=2107) (see from time 35:07 onwards) [@tanmaybakshiBakingKnowledgeMachine2021].
 Chris mentions that, while using [`DifferentialEquations.jl`](https://diffeq.sciml.ai/dev/), a package that he developed and currently maintains, a user filed an issue that his GPU-based quaternion ODE solver didn't work.
 Chris was quite surprised by this request since he would never have expected that someone would combine GPU computations with quaternions and solving ODEs.

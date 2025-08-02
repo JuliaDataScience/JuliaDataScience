@@ -1,0 +1,4 @@
+Sitemap: https://juliadatascience.io/sitemap.xml
+
+User-agent: *
+Disallow:

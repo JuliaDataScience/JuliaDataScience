@@ -30,7 +30,7 @@ jobs:
 
       - uses: julia-actions/setup-julia@v2
         with:
-          version: "1.10" # LTS
+          version: "1"
 
       - name: Copy over the Portuguese output
         shell: bash

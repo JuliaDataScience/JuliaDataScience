@@ -24,7 +24,7 @@ jobs:
       JULIA_NUM_THREADS: "auto"
       DISPLAY: ":0"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           persist-credentials: false
 

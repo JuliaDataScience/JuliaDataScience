@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jose Storopoli" />
+  <meta name="author" content="Rik Huijzer" />
+  <meta name="author" content="Lazaro Alonso" />
+  <title>DataFrames.jl - Julia Data Science</title>
+  <link rel="shortcut icon" type="image/png" href="/pt/favicon.png"/>
+  <link rel="stylesheet" href="/pt/style.css"/>
+    <script src="/pt/mousetrap.min.js"></script>
+    <style>
+  @font-face {
+    font-family: JuliaMono-Regular;
+    src: url("/pt/JuliaMono-Regular.woff2");
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/pt/github.min.css">
+<script src="/pt/highlight.min.js"></script>
+<script src="/pt/julia.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre').forEach((el) => {
+        hljs.highlightElement(el);
+    });
+});
+</script>
+ 
+</head>
+<body>
+<script>
+function click_next() {
+  var next = document.getElementById('nav-next');
+  next.firstElementChild.nextElementSibling.click();
+}
+function click_prev() {
+  var prev = document.getElementById('nav-prev');
+  prev.firstElementChild.click();
+}
+Mousetrap.bind('right', click_next);
+Mousetrap.bind('h', click_prev);
+Mousetrap.bind('left', click_prev);
+Mousetrap.bind('l', click_next);
+</script>
+
+<div class="books-container">
+<aside class="books-menu">
+<input type="checkbox" id="menu">
+<label for="menu">☰</label>
+<div class="books-title">
+<a href="/pt/">Julia Data Science</a>
+</div><br />
+<span class="books-subtitle">
+
+</span>
+<div class="books-menu-content">
+<li><a class="menu-level-1" href="/pt/preface"><b>1</b> Prefácio</a></li>
+<li><a class="menu-level-2" href="/pt/why_data_science"><b>1.1</b> O que é Ciência de Dad..</a></li>
+<li><a class="menu-level-2" href="/pt/engineering"><b>1.2</b> Engenharia de software</a></li>
+<li><a class="menu-level-2" href="/pt/agradecimentos"><b>1.3</b> Agradecimentos</a></li>
+<li><a class="menu-level-1" href="/pt/why_julia"><b>2</b> Por que Julia?</a></li>
+<li><a class="menu-level-2" href="/pt/non-programmers"><b>2.1</b> Para os que nunca progra..</a></li>
+<li><a class="menu-level-2" href="/pt/programmers"><b>2.2</b> Para programadores</a></li>
+<li><a class="menu-level-2" href="/pt/julia_accomplish"><b>2.3</b> O que Julia pretende alc..</a></li>
+<li><a class="menu-level-2" href="/pt/julia_wild"><b>2.4</b> Julia Por Aí</a></li>
+<li><a class="menu-level-1" href="/pt/julia_basics"><b>3</b> Básico de Julia</a></li>
+<li><a class="menu-level-2" href="/pt/syntax"><b>3.1</b> Sintaxe da linguagem</a></li>
+<li><a class="menu-level-2" href="/pt/data_structures"><b>3.2</b> Estruturas Nativas de Da..</a></li>
+<li><a class="menu-level-2" href="/pt/filesystem"><b>3.3</b> Sistema de Arquivos</a></li>
+<li><a class="menu-level-2" href="/pt/standardlibrary"><b>3.4</b> Biblioteca Padrão de Ju..</a></li>
+<li><a class="menu-level-1" href="/pt/dataframes"><b>4</b> DataFrames.jl</a></li>
+<li><a class="menu-level-2" href="/pt/load_save"><b>4.1</b> Carregar e salvar arquiv..</a></li>
+<li><a class="menu-level-2" href="/pt/indexação-e-sumarização"><b>4.2</b> Indexação e Sumarização</a></li>
+<li><a class="menu-level-2" href="/pt/filter_subset"><b>4.3</b> Filtro e Subconjunto</a></li>
+<li><a class="menu-level-2" href="/pt/select"><b>4.4</b> Select</a></li>
+<li><a class="menu-level-2" href="/pt/missing_data"><b>4.5</b> Tipos de Dados e Dados F..</a></li>
+<li><a class="menu-level-2" href="/pt/join"><b>4.6</b> Join</a></li>
+<li><a class="menu-level-2" href="/pt/transformações-de-variáveis"><b>4.7</b> Transformações de Vari..</a></li>
+<li><a class="menu-level-2" href="/pt/groupby_combine"><b>4.8</b> Groupby e Combine</a></li>
+<li><a class="menu-level-2" href="/pt/df_performance"><b>4.9</b> Desempenho</a></li>
+<li><a class="menu-level-1" href="/pt/DataVisualizationMakie"><b>5</b> Visualização de dados co..</a></li>
+<li><a class="menu-level-2" href="/pt/cairomakie"><b>5.1</b> CairoMakie.jl</a></li>
+<li><a class="menu-level-2" href="/pt/datavisMakie_attributes"><b>5.2</b> Atributos</a></li>
+<li><a class="menu-level-2" href="/pt/themes"><b>5.3</b> Temas</a></li>
+<li><a class="menu-level-2" href="/pt/usando-latexstrings.jl"><b>5.4</b> Usando LaTeXStrings.jl</a></li>
+<li><a class="menu-level-2" href="/pt/makie_colors"><b>5.5</b> Cores e mapas de cores</a></li>
+<li><a class="menu-level-2" href="/pt/makie_layouts"><b>5.6</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/pt/glmakie"><b>5.7</b> GLMakie.jl</a></li>
+<li><a class="menu-level-1" href="/pt/appendix"><b>6</b> Apêndice</a></li>
+<li><a class="menu-level-2" href="/pt/appendix_pkg"><b>6.1</b> Versões dos Pacotes</a></li>
+<li><a class="menu-level-2" href="/pt/notation"><b>6.2</b> Formatação</a></li>
+<li><a class="menu-level-1" href="/pt/referências"><b></b> Referências</a></li>
+</div>
+</aside>
+
+<div class="books-content">
+<h1 data-number="4" id="sec:dataframes"><span class="header-section-number">4</span> DataFrames.jl</h1>
+<p>Em geral, os dados vêm em formato tabular. Por tabular, queremos dizer que os dados consistem em uma tabela que contém linhas e colunas. As colunas normalmente contêm o mesmo tipo de dados, enquanto as linhas são de tipos diferentes. As linhas, na prática, denotam observações enquanto as colunas indicam variáveis. Por exemplo, podemos ter uma tabela de programas de TV contendo o país em que cada um foi produzido e nossa classificação pessoal, acesse Table <a href="/pt#tbl:TV_shows">1</a>.</p>
+<div id="tbl:TV_shows">
+<table>
+<caption>Table 1: TV shows.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">country</th>
+<th style="text-align: right;">rating</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Game of Thrones</td>
+<td style="text-align: right;">United States</td>
+<td style="text-align: right;">8.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">The Crown</td>
+<td style="text-align: right;">England</td>
+<td style="text-align: right;">7.3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Friends</td>
+<td style="text-align: right;">United States</td>
+<td style="text-align: right;">7.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">…</td>
+<td style="text-align: right;">…</td>
+<td style="text-align: right;">…</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Aqui, as reticências significam que esta pode ser uma tabela muito longa e mostramos apenas algumas linhas. Ao analisar dados, muitas vezes levantamos questões interessantes sobre eles, também chamadas de <em>queries</em> (ou consultas) de dados. Para tabelas grandes, os computadores são capazes de responder a perguntas desse tipo muito mais rápido do que você faria manualmente. Alguns exemplos de questões para os dados seriam:</p>
+<ul>
+<li>Qual programa de TV recebeu a nota mais alta?</li>
+<li>Quais programas de TV foram produzidos nos Estados Unidos?</li>
+<li>Quais programas de TV foram produzidos no mesmo país?</li>
+</ul>
+<p>Mas, como pesquisador, você verá que a ciência real muitas vezes começa com várias tabelas ou fontes de dados. Por exemplo, se também tivéssemos dados das classificações de outra pessoa para os programas de TV (Table <a href="/pt#tbl:ratings">2</a>):</p>
+<div id="tbl:ratings">
+<table>
+<caption>Table 2: Ratings.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">rating</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Game of Thrones</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Friends</td>
+<td style="text-align: right;">6.4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">…</td>
+<td style="text-align: right;">…</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Agora, poderíamos fazer as seguintes perguntas:</p>
+<ul>
+<li>Qual é a avaliação média de Game of Thrones?</li>
+<li>Quem deu a classificação mais alta para Friends?</li>
+<li>Quais programas de TV foram avaliados por você, mas não pela outra pessoa?</li>
+</ul>
+<p>Ao longo deste capítulo, mostraremos como você pode responder facilmente a essas perguntas em Julia. Para fazer isso, primeiro mostramos porque precisamos de um pacote Julia chamado <code>DataFrames.jl</code>. Nas próximas seções, mostraremos como você pode usar este pacote e também como escrever transformações de dados (Section <a href="/pt/df_performance#sec:df_performance">4.9</a>).</p>
+<p>Vejamos uma tabela de notas escolares como a Table <a href="/pt#tbl:grades_for_2020">3</a>:</p>
+<div id="tbl:grades_for_2020">
+<table>
+<caption>Table 3: Grades for 2020.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">age</th>
+<th style="text-align: right;">grade_2020</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">8.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Aqui, o nome da coluna tem um tipo <code>string</code>, idade tem um tipo <code>integer</code> e nota um tipo <code>float</code>.</p>
+<p>Até agora, este livro tratou apenas do básico de Julia. Esse básico é bom para muitas coisas, mas não para tabelas. Para mostrar que precisamos de mais, vamos tentar armazenar os dados tabulares em arrays:</p>
+<pre class="language-julia"><code>function grades_array()
+    name = [&quot;Bob&quot;, &quot;Sally&quot;, &quot;Alice&quot;, &quot;Hank&quot;]
+    age = [17, 18, 20, 19]
+    grade_2020 = [5.0, 1.0, 8.5, 4.0]
+    (; name, age, grade_2020)
+end</code></pre>
+<p>Agora, os dados são armazenados na chamada forma colunar, o que é complicado quando queremos obter dados de uma linha:</p>
+<pre class="language-julia"><code>function second_row()
+    name, age, grade_2020 = grades_array()
+    i = 2
+    row = (name[i], age[i], grade_2020[i])
+end
+second_row()</code></pre>
+<pre class="output"><code>(&quot;Sally&quot;, 18, 1.0)</code></pre>
+<p>Ou ainda, se você quiser ver a nota de Alice, primeiro você precisa descobrir em que linha Alice está:</p>
+<pre class="language-julia"><code>function row_alice()
+    names = grades_array().name
+    i = findfirst(names .== &quot;Alice&quot;)
+end
+row_alice()</code></pre>
+<pre class="output"><code>3</code></pre>
+<p>e então podemos obter o valor:</p>
+<pre class="language-julia"><code>function value_alice()
+    grades = grades_array().grade_2020
+    i = row_alice()
+    grades[i]
+end
+value_alice()</code></pre>
+<pre class="output"><code>8.5</code></pre>
+<p><code>DataFrames.jl</code> é capaz de resolver esse tipo de problemas com facilidade. Você pode começar carregando <code>DataFrames.jl</code> com <code>using</code>:</p>
+<pre><code>using DataFrames</code></pre>
+<p>Com <code>DataFrames.jl</code>, podemos definir uma <code>DataFrame</code> para armazenar nossos dados tabulares:</p>
+<pre class="language-julia"><code>names = [&quot;Sally&quot;, &quot;Bob&quot;, &quot;Alice&quot;, &quot;Hank&quot;]
+grades = [1, 5, 8.5, 4]
+df = DataFrame(; name=names, grade_2020=grades)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+</tbody>
+</table>
+<p>o que nos dá uma variável <code>df</code> que contém nossos dados em formato de tabela.</p>
+<blockquote>
+<p><strong><em>OBSERVAÇÃO:</em></strong> Isso funciona, mas há uma coisa que precisamos mudar imediatamente. Neste exemplo, definimos as variáveis <code>name</code>, <code>grade_2020</code> e <code>df</code> em escopo global. Isso significa que essas variáveis podem ser acessadas e editadas de qualquer lugar. Se continuássemos escrevendo o livro assim, teríamos algumas centenas de variáveis no final do livro, embora os dados que colocamos na variável <code>name</code> só deveriam ser acessados via <code>DataFrame</code>! As variáveis <code>name</code> e <code>grade_2020</code> não foram feitas para serem mantidas por muito tempo! Agora, imagine se mudássemos o conteúdo de <code>grade_2020</code> algumas vezes nesse livro. Dado apenas o livro como PDF, seria quase impossível descobrir o conteúdo da variável ao final.</p>
+<p>Podemos resolver isso facilmente usando funções.</p>
+</blockquote>
+<p>Vamos fazer a mesma coisa de antes, mas agora em uma função:</p>
+<pre class="language-julia"><code>function grades_2020()
+    name = [&quot;Sally&quot;, &quot;Bob&quot;, &quot;Alice&quot;, &quot;Hank&quot;]
+    grade_2020 = [1, 5, 8.5, 4]
+    DataFrame(; name, grade_2020)
+end
+grades_2020()</code></pre>
+<div id="tbl:grades_2020">
+<table>
+<caption>Table 4: Grades 2020.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Note que <code>name</code> e <code>grade_2020</code> são destruídas depois que a função retorna, ou seja, só estão disponíveis na função. Existem dois outros benefícios ao fazer isso. Primeiro, agora está claro para o leitor onde <code>name</code> e <code>grade_2020</code> pertencem: eles pertencem às notas de 2020. Em segundo lugar, é fácil determinar qual seria a saída de <code>grades_2020()</code> em qualquer ponto do livro. Por exemplo, agora podemos atribuir os dados a uma variável <code>df</code>:</p>
+<pre class="language-julia"><code>df = grades_2020()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+</tbody>
+</table>
+<p>Podemos também mudar os conteúdos de <code>df</code>:</p>
+<pre class="language-julia"><code>df = DataFrame(name = [&quot;Malice&quot;], grade_2020 = [&quot;10&quot;])</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Malice</td>
+<td style="text-align: right;">10</td>
+</tr>
+</tbody>
+</table>
+<p>E ainda assim recuperar os dados originais de volta sem nenhum problema:</p>
+<pre class="language-julia"><code>df = grades_2020()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+</tbody>
+</table>
+<p>Claro, pressupondo que a função não seja redefinida. Prometemos não fazer isso neste livro, porque é uma má ideia exatamente por este motivo. Ao invés de “mudarmos” a função, vamos fazer uma nova e lhe daremos um nome claro.</p>
+<p>Portanto, retornemos ao construtor <code>DataFrames</code>. Como você deve ter visto, a maneira de criar um é simplesmente passar vetores como argumentos para o construtor <code>DataFrame</code>. Você pode aparecer com qualquer vetor de Julia válido e ele funcionará <strong>contanto que os vetores tenham o mesmo comprimento</strong>. Valores duplicados, símbolos Unicode e qualquer tipo de número são aceitos:</p>
+<pre class="language-julia"><code>DataFrame(σ = [&quot;a&quot;, &quot;a&quot;, &quot;a&quot;], δ = [π, π/2, π/3])</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">σ</th>
+<th style="text-align: right;">δ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">a</td>
+<td style="text-align: right;">3.141592653589793</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">a</td>
+<td style="text-align: right;">1.5707963267948966</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">a</td>
+<td style="text-align: right;">1.0471975511965976</td>
+</tr>
+</tbody>
+</table>
+<p>Normalmente, em seu código, você criaria uma função que envelopa uma ou mais funções <code>DataFrame</code>s. Por exemplo, podemos fazer uma função para obter as notas de um ou mais <code>names</code>:</p>
+<pre class="language-julia"><code>function grades_2020(names::Vector{Int})
+    df = grades_2020()
+    df[names, :]
+end
+grades_2020([3, 4])</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+</tbody>
+</table>
+<p>Esta forma de usar funções para envelopar funcionalidades básicas em linguagens de programação e pacotes é bastante comum. Basicamente, você pode pensar em Julia e <code>DataFrames.jl</code> como peças de Lego. Eles fornecem peças muito <strong>genéricas</strong> que permitem que você crie coisas para seu caso de uso <strong>específico</strong> como neste exemplo de notas. Usando essas peças, você pode fazer um script de análise de dados, controlar um robô ou o que você quiser construir.</p>
+<p>Até agora, os exemplos eram bastante complicados, porque tínhamos que usar índices. Nas próximas seções, mostraremos como carregar e salvar dados, e muitas outras peças de Lego poderosas fornecidas por <code>DataFrames.jl</code>.</p>
+
+
+<div class="bottom-nav">
+    <p id="nav-prev" style="text-align: left;">
+        <a class="menu-level-2" href="/pt/standardlibrary"><b>3.4</b> Biblioteca Padrão de Ju..</a> <kbd>←</kbd>
+        <span id="nav-next" style="float: right;">
+            <kbd>→</kbd> <a class="menu-level-2" href="/pt/load_save"><b>4.1</b> Carregar e salvar arquiv..</a>
+        </span>
+    </p>
+</div>
+
+
+<div class="license">
+    <br/>
+  <br/>
+  <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+    Jose Storopoli, Rik Huijzer, Lazaro Alonso
+</div>
+</div>
+</div>
+</body>
+</html>

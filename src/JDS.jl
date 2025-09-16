@@ -1,10 +1,9 @@
 module JDS
 
-import Books
 import Pkg
-import Makie
-
+using Makie
 using Reexport: @reexport
+
 
 @reexport begin
     using AlgebraOfGraphics:
@@ -22,26 +21,7 @@ using Reexport: @reexport
         smooth,
         sorter,
         visual
-    using Books:
-        BUILD_DIR,
-        @sc,
-        @sco,
-        Options,
-        build_all,
-        catch_show,
-        clean_stacktrace,
-        code_block,
-        convert_output,
-        entr_gen,
-        gen,
-        output_block,
-        sc,
-        sco,
-        scob,
-        serve,
-        without_caption_label
     using CSV
-    using CairoMakie
     using CategoricalArrays
     using ColorSchemes
     using Colors
@@ -82,7 +62,6 @@ using Reexport: @reexport
     using Distributions
     using Downloads
     using FileIO
-    using GLMakie
     using GeometryBasics
     using InteractiveUtils
     using LaTeXStrings
@@ -99,6 +78,17 @@ using Reexport: @reexport
         writetable
     using SparseArrays
 end # @reexport
+
+using Bonito
+
+struct Options
+    arg::Any
+    function Options(arg; kwargs...)
+        new(arg)
+    end
+end
+
+Bonito.jsrender(s::Session, options::Options) = Bonito.jsrender(s, options.arg)
 
 const SMALL_IM_ATTR = "width=70%"
 
@@ -123,7 +113,7 @@ export nested_sub_plot!, add_box_inset, add_axis_inset, peaks
 
 # DataFrames.
 export grades_2020, grades_2021, all_grades, grades_array, grade_2020
-export convert_output, equals_alice, write_grades_csv, grades_with_commas
+export equals_alice, write_grades_csv, grades_with_commas
 export write_grades_xlsx, write_xlsx, salaries, responses, wrong_types
 export only_pass, correct_types, fix_age_column, fix_date_column
 

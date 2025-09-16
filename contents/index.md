@@ -1,6 +1,6 @@
 # Welcome
 
-```julia (editor=true, logging=false, output=true)
+```html
 <style>
 .language-switcher {
     font-size: 22px;
@@ -19,9 +19,6 @@
 <a href="/pt"><button>🇧🇷</button></a>
 <a href="https://cn.julialang.org/JuliaDataScience"><button>🇨🇳</button></a>
 </div>
-```
-```{=comment}
-This file is only included on the website.
 ```
 
 Welcome! This is an open source and open access book on how to do **Data Science using [Julia](https://julialang.org)**. Our target audience are researchers from all fields of applied sciences. Of course, we hope to be useful for industry too. You can navigate through the pages of the ebook by using the arrow keys (left/right) on your keyboard.

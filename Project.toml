@@ -59,3 +59,6 @@ StatsBase = "0.34"
 TestImages = "1"
 WGLMakie = "0.13.5"
 XLSX = "0.10"
+
+[sources]
+BonitoBook = {rev = "sd/extensions", url = "https://github.com/SimonDanisch/BonitoBook.jl"}

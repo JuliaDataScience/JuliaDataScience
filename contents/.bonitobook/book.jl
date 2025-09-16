@@ -80,7 +80,9 @@ function JuliaDataScienceBook(
     book_kwargs...
 )
     # Create the underlying Book from the markdown file
-    book = BonitoBook.Book(filename; all_blocks_as_cell=true, book_kwargs...)
+    folder = joinpath(dirname(filename), ".bonitobook")
+    book = BonitoBook.Book(filename; folder=folder, book_kwargs...)
+    book.runner.mod.eval(book.runner.mod, :(using ..JDS))
     if auto_execute
         # Execute all cells on load
         for cell in book.cells

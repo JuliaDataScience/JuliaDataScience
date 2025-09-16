@@ -7,6 +7,8 @@ using BonitoBook, Makie
 using BonitoBook.Bonito
 
 # Include the book configuration
+# TODO, make this a proper BonitoBook plugin
+include("src/JDS.jl")
 include("contents/.bonitobook/book.jl")
 
 # Function to get all chapter files from contents directory
@@ -45,10 +47,8 @@ end
 
 function create_routes()
     routes = Routes()
-
     # Add individual chapter pages (including root route for first chapter)
     add_chapter_routes!(routes)
-
     return routes
 end
 
@@ -78,4 +78,5 @@ function serve_book(url="127.0.0.1", port=8080)
     server
 end
 
+# Interactive version:
 server = serve_book()

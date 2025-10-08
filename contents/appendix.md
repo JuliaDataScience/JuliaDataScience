@@ -4,11 +4,10 @@
 
 This book is built with Julia `jl string(VERSION)` and the following packages:
 
-```jl
+```julia (editor=true, logging=false, output=true)
 JDS.pkg_deps()
 ```
-
-```jl
+```julia (editor=true, logging=false, output=true)
 let
     date = today()
     hour = Dates.hour(now())

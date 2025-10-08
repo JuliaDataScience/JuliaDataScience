@@ -1,6 +1,6 @@
-# Welcome {-}
+# Welcome
 
-```{=html}
+```html
 <style>
 .language-switcher {
     font-size: 22px;
@@ -21,14 +21,7 @@
 </div>
 ```
 
-```{=comment}
-This file is only included on the website.
-```
-
-Welcome! This is an open source and open access book on how to do **Data Science using [Julia](https://julialang.org)**.
-Our target audience are researchers from all fields of applied sciences.
-Of course, we hope to be useful for industry too.
-You can navigate through the pages of the ebook by using the arrow keys (left/right) on your keyboard.
+Welcome! This is an open source and open access book on how to do **Data Science using [Julia](https://julialang.org)**. Our target audience are researchers from all fields of applied sciences. Of course, we hope to be useful for industry too. You can navigate through the pages of the ebook by using the arrow keys (left/right) on your keyboard.
 
 The book is also available as [**PDF**](/juliadatascience.pdf).
 
@@ -56,7 +49,7 @@ Or in BibTeX format:
 
 ### Front Cover {-}
 
-```jl
+```julia (editor=true, logging=false, output=true)
 let
     fig = front_cover()
     # Use lazy loading to keep homepage speed high.
@@ -67,4 +60,3 @@ let
     Options(fig; filename, label=filename)
 end
 ```
-

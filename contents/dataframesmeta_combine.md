@@ -1,37 +1,25 @@
 ## Data Summaries {#sec:dataframesmeta_combine}
 
-Similar to the `combine` `DataFrames.jl` function (@sec:groupby_combine),
-`DataFramesMeta.jl` has a **`@combine` macro**.
+Similar to the `combine` `DataFrames.jl` function (@sec:groupby_combine), `DataFramesMeta.jl` has a **`@combine` macro**.
 
-```jl
-sco("""
+```julia (editor=true, logging=false, output=true)
 @combine leftjoined :mean_grade_2020 = mean(:grade_2020)
-"""; process=without_caption_label
-)
 ```
-
 `@combine` also supports multiple operations inside a `begin ... end` statement:
 
-```jl
-sco("""
+```julia (editor=true, logging=false, output=true)
 # @combine begin end # hide
 @combine leftjoined begin
     :mean_grade_2020 = mean(:grade_2020)
     :mean_grade_2021 = mean(:grade_2021)
 end
-"""; process=without_caption_label
-)
 ```
-
 Most of the time we would use `@combine` in a grouped dataframe by pairing it with `groupby`:
 
-```jl
-sco("""
+```julia (editor=true, logging=false, output=true)
 gdf = groupby(leftjoined, :name)
 @combine gdf begin
     :mean_grade_2020 = mean(:grade_2020)
     :mean_grade_2021 = mean(:grade_2021)
 end
-"""; process=without_caption_label
-)
 ```

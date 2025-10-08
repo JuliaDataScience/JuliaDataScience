@@ -1,4 +1,3 @@
-const MAKIE_PLOT_TYPES = Union{Figure,Makie.FigureAxisPlot}
 function _makie_save(path::String, p)
     try
         # SVG will fail with GLMakie.
@@ -10,12 +9,8 @@ function _makie_save(path::String, p)
     end
 end
 
-Books.is_image(plot::MAKIE_PLOT_TYPES) = true
-Books.svg(svg_path::String, p::MAKIE_PLOT_TYPES) = _makie_save(svg_path, p)
-Books.png(png_path::String, p::MAKIE_PLOT_TYPES) = _makie_save(png_path, p)
-
 function figure_canvas()
-    CairoMakie.activate!() # hide
+
     fig = Figure(;
         figure_padding=(5,5,10,10),
         backgroundcolor=:snow2,
@@ -28,7 +23,7 @@ function figure_canvas()
 end
 
 function figure_axis()
-    CairoMakie.activate!() # hide
+
     fig = Figure(;
         figure_padding=(5,5,10,10),
         backgroundcolor=:snow2,
@@ -47,7 +42,7 @@ function figure_axis()
 end
 
 function figure_axis_plot()
-    CairoMakie.activate!() # hide
+
     fig = Figure(;
         figure_padding=(5,5,10,10),
         backgroundcolor=:snow2,
@@ -71,7 +66,7 @@ function figure_axis_plot()
 end
 
 function figure_axis_plot_leg()
-    CairoMakie.activate!() # hide
+
     fig = Figure(;
         figure_padding=(5,5,10,10),
         backgroundcolor=:snow2,
@@ -104,7 +99,7 @@ function figure_axis_plot_leg()
 end
 
 function fig_theme()
-    CairoMakie.activate!() # hide
+
     fig = Figure()
     ax = Axis(fig[1,1])
     lines!(ax, 0.5:0.2:3pi, x -> cos(x)/x;
@@ -128,7 +123,7 @@ function fig_theme()
 end
 
 function fig_bubbles(xyz)
-    CairoMakie.activate!() # hide
+
     fig = Figure(size=(600,400))
     ax = Axis(fig[1,1]; aspect = DataAspect())
     pltobj = scatter!(xyz[:, 1], xyz[:, 2];
@@ -148,7 +143,7 @@ function fig_bubbles(xyz)
 end
 
 function custom_plot()
-    CairoMakie.activate!() # hide
+
     caption = "An example plot with Makie.jl."
     label = missing
     x = 1:10
@@ -164,7 +159,7 @@ function custom_plot()
 end
 
 function custom_plot2()
-    CairoMakie.activate!() # hide
+
     x = 1:10
     lines(x, x .^ 2, color=:black, linewidth=2, linestyle=".-",
         label="x²", figure=(; size=(700, 450), fontsize=18,
@@ -178,7 +173,7 @@ function custom_plot2()
 end
 
 function areaUnder()
-    CairoMakie.activate!() # hide
+
     x = 0:0.05:1
     y = x .^ 2
     fig = Figure(size=(700, 450))
@@ -196,7 +191,7 @@ function areaUnder()
 end
 
 function makiejl()
-    CairoMakie.activate!() # hide
+
     x = range(0, 10, length=100)
     y = sin.(x)
     p = lines(x, y)
@@ -206,7 +201,7 @@ function makiejl()
 end
 
 function LaTeX_Strings()
-    CairoMakie.activate!() # hide
+
     x = 0:0.05:4π
     lines(x, x -> sin(3x) / (cos(x) + 2) / x;
         label=L"\frac{\sin(3x)}{x(\cos(x)+2)}",
@@ -234,7 +229,7 @@ publication_theme() = Theme(
 )
 
 function plot_with_legend_and_colorbar()
-    CairoMakie.activate!() # hide
+
     fig, ax, _ = scatterlines(1:10; label="line")
     hm = heatmap!(ax, range(6, 9, 15), range(2, 5, 15), randn(15, 15);
         colormap=:Spectral_11)
@@ -246,7 +241,7 @@ function plot_with_legend_and_colorbar()
 end
 
 function multiple_lines()
-    CairoMakie.activate!() # hide
+
     x = collect(0:10)
     fig = Figure(size=(600, 400), font="CMU Serif")
     ax = Axis(fig[1, 1], xlabel=L"x", ylabel=L"f(x,a)")
@@ -263,7 +258,7 @@ function multiple_lines()
 end
 
 function multiple_scatters_and_lines()
-    CairoMakie.activate!() # hide
+
     x = collect(0:10)
     cycle = Cycle([:color, :linestyle, :marker], covary=true)
     set_theme!(Lines=(cycle=cycle,), Scatter=(cycle=cycle,))
@@ -285,7 +280,7 @@ function multiple_scatters_and_lines()
 end
 
 function demo_themes(y, xv, yv, matrix)
-    CairoMakie.activate!() # hide
+
     fig, _ = series(y; labels=["$i" for i = 1:6], markersize=10,
         color=:Set1, figure=(; size=(600, 300)),
         axis=(; xlabel="time (s)", ylabel="Amplitude",
@@ -298,7 +293,7 @@ function demo_themes(y, xv, yv, matrix)
 end
 
 function multiple_example_themes()
-    CairoMakie.activate!() # hide
+
     filenames = ["theme_dark()", "theme_black()", "theme_ggplot2()", # hide
         "theme_minimal()", "theme_light()"] # hide
     function demo_theme()
@@ -329,7 +324,7 @@ function multiple_example_themes()
 end
 
 function demo_figure()
-    CairoMakie.activate!() # hide
+
     # contourf
     x=y= range(-2.3, 2.3, length=100)
     z=-2x .* exp.(-x .^ 2 .- (y') .^ 2)
@@ -372,7 +367,7 @@ function demo_figure()
 end
 
 function themes_gallery()
-    GLMakie.activate!() # hide
+
     fig = Figure(size=(1200, 1250))
     aximg = [Axis(fig[i,j], aspect = DataAspect()) for i in 1:3 for j in 1:2]
     img = demo_figure()
@@ -405,7 +400,7 @@ function themes_gallery()
 end
 
 function set_colors_and_cycle()
-    CairoMakie.activate!() # hide
+
     # Epicycloid lines
     x(r, k, θ) = r * (k .+ 1.0) .* cos.(θ) .- r * cos.((k .+ 1.0) .* θ)
     y(r, k, θ) = r * (k .+ 1.0) .* sin.(θ) .- r * sin.((k .+ 1.0) .* θ)
@@ -452,7 +447,7 @@ function new_cycle_theme()
 end
 
 function scatters_and_lines()
-    CairoMakie.activate!() # hide
+
     x = collect(0:10)
     xh = range(4, 6, 25)
     yh = range(70, 95, 25)
@@ -473,7 +468,7 @@ function scatters_and_lines()
 end
 
 function first_layout()
-    CairoMakie.activate!() # hide
+
     seed!(123)
     x, y, z = randn(6), randn(6), randn(6)
     fig = Figure(size=(600, 400), backgroundcolor=:snow2)
@@ -490,7 +485,7 @@ function first_layout()
 end
 
 function first_layout_fixed()
-    CairoMakie.activate!() # hide
+
     seed!(123)
     x, y, z = randn(6), randn(6), randn(6)
     fig = Figure(figure_padding=(0, 3, 5, 2), size=(600, 400),
@@ -518,7 +513,7 @@ end
 
 
 function complex_layout_double_axis()
-    CairoMakie.activate!() # hide
+
     seed!(123)
     x = range(0, 1, 10)
     y = range(0, 1, 10)
@@ -554,7 +549,7 @@ function complex_layout_double_axis()
 end
 
 function squares_layout()
-    CairoMakie.activate!() # hide
+
     seed!(123)
     letters = reshape(collect('a':'d'), (2, 2))
     fig = Figure(size=(600, 400), fontsize=14, font="CMU Serif",
@@ -575,7 +570,7 @@ function squares_layout()
 end
 
 function mixed_mode_layout()
-    CairoMakie.activate!() # hide
+
     seed!(123)
     longlabels = ["$(today() - Day(1))", "$(today())", "$(today() + Day(1))"]
     fig = Figure(size=(600, 400), fontsize=12,
@@ -617,7 +612,7 @@ end
 
 function main_figure()
     seed!(123) # hide
-    CairoMakie.activate!() # hide
+
     fig = Figure()
     Axis(fig[1, 1])
     nested_sub_plot!(fig[1, 2])
@@ -631,7 +626,7 @@ function main_figure()
 end
 
 function nested_Grid_Layouts()
-    CairoMakie.activate!() # hide
+
     fig = Figure(backgroundcolor=RGBf(0.96, 0.96, 0.96))
     ga = fig[1, 1] = GridLayout()
     gb = fig[1, 2] = GridLayout()
@@ -673,7 +668,7 @@ function add_axis_inset(pos=fig[1, 1]; backgroundcolor=:snow2,
 end
 
 function figure_axis_inset()
-    CairoMakie.activate!() # hide
+
     fig = Figure(size=(600, 400))
     ax = Axis(fig[1, 1], backgroundcolor=:white)
     inset_ax1 = add_axis_inset(fig[1, 1]; backgroundcolor=:snow2,
@@ -694,7 +689,7 @@ function figure_axis_inset()
 end
 
 function figure_box_inset()
-    CairoMakie.activate!() # hide
+
     fig = Figure(size=(600, 400))
     ax = Axis(fig[1, 1], backgroundcolor=:white)
     inset_ax1 = add_box_inset(fig; backgroundcolor=:snow2,
@@ -712,7 +707,7 @@ function figure_box_inset()
 end
 
 function scatters_in_3D()
-    GLMakie.activate!() # hide
+
     seed!(123)
     n = 10
     x, y, z = randn(n), randn(n), randn(n)
@@ -734,7 +729,7 @@ function scatters_in_3D()
 end
 
 function lines_in_3D()
-    GLMakie.activate!() # hide
+
     seed!(123)
     n = 10
     x, y, z = randn(n), randn(n), randn(n)
@@ -771,7 +766,7 @@ function peaks(; n=49)
 end
 
 function plot_peaks_function()
-    GLMakie.activate!() # hide
+
     x, y, z = peaks()
     x2, y2, z2 = peaks(; n=15)
     fig = Figure(size=(1200, 400))
@@ -784,7 +779,7 @@ function plot_peaks_function()
 end
 
 function heatmap_contour_and_contourf()
-    GLMakie.activate!() # hide
+
     x, y, z = peaks()
     fig = Figure(size=(1200, 400))
     axs = [Axis(fig[1, i]; aspect=DataAspect()) for i = 1:3]
@@ -796,7 +791,7 @@ function heatmap_contour_and_contourf()
 end
 
 function heatmap_contour_and_contourf_in_a_3d_plane()
-    GLMakie.activate!() # hide
+
     x, y, z = peaks()
     fig = Figure(size=(1200, 400))
     axs = [Axis3(fig[1, i]) for i = 1:3]
@@ -807,8 +802,11 @@ function heatmap_contour_and_contourf_in_a_3d_plane()
     fig
 end
 
+
+
+
 function mixing_surface_contour3d_contour_and_contourf()
-    GLMakie.activate!() # hide
+
     img = testimage("coffee.png")
     x, y, z = peaks()
     cmap = :Spectral_11

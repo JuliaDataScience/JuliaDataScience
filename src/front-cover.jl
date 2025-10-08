@@ -43,7 +43,6 @@ Return the Julia Data Science book front cover.
 """
 function front_cover()
     # Probably it will be good to have two versions, one black and one white.
-    GLMakie.activate!()
     # font sizes
     pipisize = 16
     titlefontsize = 48

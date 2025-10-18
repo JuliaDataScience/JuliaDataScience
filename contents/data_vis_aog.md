@@ -13,7 +13,7 @@ There are four main types of layers:
 - **statistical transformation** layer
 
 > **_NOTE:_**
-> `AlgebraOfGraphics.jl` has some guiding principles described in their [philosophy section](https://aog.makie.org/stable/philosophy/).
+> `AlgebraOfGraphics.jl` has some guiding principles described in their [philosophy section](https://aog.makie.org/stable/philosophy).
 
 `AlgebraOfGraphics.jl` allows you to construct all of these types of layers with functions that return a `Layer` object,
 in which all of the information necessary will be encoded.

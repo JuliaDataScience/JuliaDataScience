@@ -54,7 +54,7 @@ jobs:
 
       - name: Make preview PDF available
         if: ${{ github.event_name == 'pull_request' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: pdf-preview
           path: ./_build/juliadatascience.pdf

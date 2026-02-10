@@ -39,7 +39,7 @@ The source code is available at [GitHub](https://github.com/JuliaDataScience/Jul
 To cite the content, please use:
 
 ```plaintext
-Storopoli, Huijzer and Alonso (2021). Julia Data Science. https://juliadatascience.io. ISBN: 9798489859165.
+Storopoli, Huijzer and Alonso (2021). Julia Data Science. https://juliadatascience.github.io/JuliaDataScience. ISBN: 9798489859165.
 ```
 
 Or in BibTeX format:
@@ -48,7 +48,7 @@ Or in BibTeX format:
 @book{storopolihuijzeralonso2021juliadatascience,
   title = {Julia Data Science},
   author = {Jose Storopoli and Rik Huijzer and Lazaro Alonso},
-  url = {https://juliadatascience.io},
+  url = {https://juliadatascience.github.io/JuliaDataScience},
   year = {2021},
   isbn = {9798489859165}
 }

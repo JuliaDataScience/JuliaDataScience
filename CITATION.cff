@@ -18,7 +18,7 @@ date-released: 2021-10-01
 
 identifiers:
   - type: url
-    value: "https://juliadatascience.io/"
+    value: "https://juliadatascience.github.io/JuliaDataScience/"
 
 keywords:
   - "Julia language"
@@ -31,7 +31,7 @@ license: "CC-BY-NC-SA-4.0"
 isbn: "9798489859165"
 title: "Julia Data Science"
 repository-code: "https://github.com/JuliaDataScience/JuliaDataScience"
-url: "https://juliadatascience.io"
+url: "https://juliadatascience.github.io/JuliaDataScience"
 
 version: 1.0.0
 ...

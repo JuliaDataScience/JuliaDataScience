@@ -266,7 +266,7 @@ function cheatsheet_glmakie()
         hidedecorations!.(axs, grid=false, ticks=false)
 
 
-        Label(fig[end+1, :], rich("Learn more at ", rich("https://juliadatascience.io,", fontsize=18, color=:dodgerblue, font=:bold), " https://docs.makie.org, " * join([dep_version(x) for x in packages], " ") * ", Updated: $(today())"))
+        Label(fig[end+1, :], rich("Learn more at ", rich("https://juliadatascience.github.io/JuliaDataScience,", fontsize=18, color=:dodgerblue, font=:bold), " https://docs.makie.org, " * join([dep_version(x) for x in packages], " ") * ", Updated: $(today())"))
         Label(fig[0, :], rich("Plotting Functions in Makie.jl ::", rich(" CHEAT SHEET", fontsize=32, font=:bold, color=:black), fontsize=32))
         ax0 = Axis(fig[0, 1], aspect=1, height=50)
         image!(ax0, rotr90(load(joinpath("images", "logoMakie.png"))))

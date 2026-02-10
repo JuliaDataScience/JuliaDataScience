@@ -51,6 +51,6 @@
     "images"
   ]
 
-  online_url = "https://juliadatascience.io"
+  online_url = "https://juliadatascience.github.io/JuliaDataScience"
 
   output_filename = "juliadatascience"

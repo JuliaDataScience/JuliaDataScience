@@ -21,6 +21,7 @@ using Reexport: @reexport
         renamer,
         smooth,
         sorter,
+        subvisual,
         visual
     using Books:
         BUILD_DIR,

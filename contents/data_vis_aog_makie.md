@@ -49,7 +49,9 @@ s = """
         (
             visual(Scatter; color=:steelblue, marker=:cross)
             + (
-                linear() * visual(; color=:red, linestyle=:dot, linewidth=5)
+                linear() *
+                    subvisual(:prediction; color=:red, linestyle=:dot, linewidth=5) *
+                    subvisual(:ci; color=(:red, 0.15))
             )
         )
     subfig2 = draw!(fig[2, 1:2], plt_custom)

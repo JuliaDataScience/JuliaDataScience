@@ -11,7 +11,9 @@ s = """
     # aog_custom_visual # hide
     CairoMakie.activate!() # hide
     blue = visual(Scatter; color=:steelblue, marker=:cross)
-    red = linear() * visual(; color=:red, linestyle=:dot, linewidth=5)
+    red = linear() *
+        subvisual(:prediction; color=:red, linestyle=:dot, linewidth=5) *
+        subvisual(:ci; color=(:red, 0.15))
     plt = data(synthetic_df) * mapping(:x, :y) * (blue + red)
     f = draw(plt) # hide
     draw(plt)
@@ -28,12 +30,10 @@ As you can see we are adding the following keyword arguments to `visual(Scatter)
 - `color`: a `Symbol` for a light blue color, `:steelblue`
 - `marker`: a `Symbol` for a vertical cross marker type, `:cross`
 
-Inside the `linear` statistical transformation we are adding a new layer to be fused into it with the `*` operation,
-that does not have a positional argument for plotting type since `linear` already provides a default plotting type,
-and has the following keyword arguments:
+The `linear` transformation creates two labeled layers: `:prediction` (the trend line) and `:ci` (the confidence band).
+We use `subvisual` to style each layer independently, applying attributes that are valid for each plot type:
 
-- `color`: a `Symbol` for the red color, `:red`
-- `linestyle`: a `Symbol` for a dotted line style, `:dot`
-- `linewidth`: a number representing the width of our line
+- `:prediction` line: `color=:red`, `linestyle=:dot`, `linewidth=5`
+- `:ci` band: `color=(:red, 0.15)` (semi-transparent red)
 
 You can use as many customizations as you want in your plot.

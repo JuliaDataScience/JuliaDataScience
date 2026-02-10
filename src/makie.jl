@@ -819,7 +819,7 @@ function mixing_surface_contour3d_contour_and_contourf()
         zgridcolor=:grey70, ygridcolor=:grey70, xgridcolor=:grey70)
     ax2 = Axis3(fig[1, 3]; aspect=(1, 1, 1),
         elevation=π/6, perspectiveness=0.5)
-    hm = surface!(ax1, x, y, z; colormap=(cmap, 0.95), shading=MultiLightShading)
+    hm = surface!(ax1, x, y, z; colormap=(cmap, 0.95), shading=true)
     contour3d!(ax1, x, y, z .+ 0.02; colormap=cmap, levels=20, linewidth=2)
     # get final limits
     xmin, ymin, zmin = minimum(ax1.finallimits[])

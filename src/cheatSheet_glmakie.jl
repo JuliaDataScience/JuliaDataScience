@@ -257,7 +257,7 @@ function cheatsheet_glmakie()
             markersize=0.9,
             colormap=:seaborn_icefire_gradient, #Reverse(:linear_protanopic_deuteranopic_kbw_5_98_c40_n256),
             colorrange=(minimum(vals), maximum(vals)),
-            shading=MultiLightShading,
+            shading=true,
             transparency=true,
         )
         axs[25].title = "meshscatter(pos;\nmarker=Rect3f)"

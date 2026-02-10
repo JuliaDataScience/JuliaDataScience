@@ -30,7 +30,9 @@ jobs:
 
       - uses: julia-actions/setup-julia@v2
         with:
-          version: "1"
+          # Pin to 1.11 until Makie supports Julia 1.12
+          # (Core.TypeName.mt was removed, see MakieOrg/Makie.jl#5496)
+          version: "1.11"
 
       - name: Copy over the Portuguese output
         shell: bash
@@ -46,7 +48,8 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y xorg-dev mesa-utils xvfb libgl1 freeglut3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev xsettingsd x11-xserver-utils
 
       - name: Instantiate Julia environment
-        run: julia --color=yes --project -e 'using Pkg; Pkg.instantiate()'
+        run: >
+          xvfb-run -s '-screen 0 1024x768x24' julia --color=yes --project -e 'using Pkg; Pkg.instantiate()'
 
       - name: JDS.build()
         run: >
@@ -54,7 +57,7 @@ jobs:
 
       - name: Make preview PDF available
         if: ${{ github.event_name == 'pull_request' }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: pdf-preview
           path: ./_build/juliadatascience.pdf
@@ -77,7 +80,6 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         uses: peaceiris/actions-gh-pages@v4
         with:
-          cname: juliadatascience.io
           github_token: ${{ secrets.GITHUB_TOKEN }}
           force_orphan: true
           publish_dir: ./_build/

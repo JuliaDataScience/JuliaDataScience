@@ -47,7 +47,7 @@ titlepage-bottom: |
   ```{=typst}
   First edition published 2021
 
-  #link("https://juliadatascience.io")
+  #link("https://juliadatascience.github.io/JuliaDataScience")
 
   ISBN: 9798489859165
   ```

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jose Storopoli" />
+  <meta name="author" content="Rik Huijzer" />
+  <meta name="author" content="Lazaro Alonso" />
+  <title>Join - Julia Data Science</title>
+  <link rel="shortcut icon" type="image/png" href="/JuliaDataScience/favicon.png"/>
+  <link rel="stylesheet" href="/JuliaDataScience/style.css"/>
+    <script src="/JuliaDataScience/mousetrap.min.js"></script>
+    <style>
+  @font-face {
+    font-family: JuliaMono-Regular;
+    src: url("/JuliaDataScience/JuliaMono-Regular.woff2");
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/JuliaDataScience/github.min.css">
+<script src="/JuliaDataScience/highlight.min.js"></script>
+<script src="/JuliaDataScience/julia.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre').forEach((el) => {
+        if (!el.classList.contains('output')) {
+            hljs.highlightElement(el);
+        }
+    });
+});
+</script>
+ 
+</head>
+<body>
+<script>
+function click_next() {
+  var next = document.getElementById('nav-next');
+  next.firstElementChild.nextElementSibling.click();
+}
+function click_prev() {
+  var prev = document.getElementById('nav-prev');
+  prev.firstElementChild.click();
+}
+Mousetrap.bind('right', click_next);
+Mousetrap.bind('h', click_prev);
+Mousetrap.bind('left', click_prev);
+Mousetrap.bind('l', click_next);
+</script>
+
+<div class="books-container">
+<aside class="books-menu">
+<input type="checkbox" id="menu">
+<label for="menu">☰</label>
+<div class="books-title">
+<a href="/JuliaDataScience/">Julia Data Science</a>
+</div><br />
+<span class="books-subtitle">
+
+</span>
+<div class="books-menu-content">
+<li><a class="menu-level-1" href="/JuliaDataScience/preface"><b>1</b> Preface</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/why_data_science"><b>1.1</b> What is Data Science?</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/engineering"><b>1.2</b> Software Engineering</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/acknowledgements"><b>1.3</b> Acknowledgements</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/why_julia"><b>2</b> Why Julia?</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/non-programmers"><b>2.1</b> For Non-Programmers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/programmers"><b>2.2</b> For Programmers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/julia_accomplish"><b>2.3</b> What Julia Aims to Accom..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/julia_wild"><b>2.4</b> Julia in the Wild</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/julia_basics"><b>3</b> Julia Basics</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/ide"><b>3.1</b> Development Environments</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/syntax"><b>3.2</b> Language Syntax</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/data_structures"><b>3.3</b> Native Data Structures</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/filesystem"><b>3.4</b> Filesystem</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/standardlibrary"><b>3.5</b> Julia Standard Library</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/dataframes"><b>4</b> DataFrames.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/load_save"><b>4.1</b> Load and Save Files</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/index-and-summarize"><b>4.2</b> Index and Summarize</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/filter_subset"><b>4.3</b> Filter and Subset</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/select"><b>4.4</b> Select</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/types"><b>4.5</b> Types and Categorical Da..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/join"><b>4.6</b> Join</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/transform"><b>4.7</b> Variable Transformations</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/groupby_combine"><b>4.8</b> Groupby and Combine</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/missing"><b>4.9</b> Missing Data</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/df_performance"><b>4.10</b> Performance</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/dataframesmeta"><b>5</b> DataFramesMeta.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_macros"><b>5.1</b> Macros</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_select"><b>5.2</b> Column Selection</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_transform"><b>5.3</b> Column Transformation</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_subset"><b>5.4</b> Row Selection</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_orderby"><b>5.5</b> Row Sorting</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_combine"><b>5.6</b> Data Summaries</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_chain"><b>5.7</b> Piping Operations</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/DataVisualizationMakie"><b>6</b> Data Visualization with Ma..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/cairomakie"><b>6.1</b> CairoMakie.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/datavisMakie_attributes"><b>6.2</b> Attributes</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/datavisMakie_create_Figure"><b>6.3</b> Create Plot Figure</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_cheat_sheets"><b>6.4</b> Cheat Sheets</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/themes"><b>6.5</b> Themes</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/using-latexstrings.jl"><b>6.6</b> Using LaTeXStrings.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_colors"><b>6.7</b> Colors and Colormaps</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_layouts"><b>6.8</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/glmakie"><b>6.9</b> GLMakie.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/recipe_df"><b>6.10</b> A Makie recipe for a Da..</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/aog"><b>7</b> Data Visualization with Al..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_layers"><b>7.1</b> Layers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_layouts"><b>7.2</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_stats"><b>7.3</b> Statistical Visualizatio..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_custom"><b>7.4</b> Plot Customizations</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_makie"><b>7.5</b> Makie.jl and AlgebraOfGr..</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/appendix"><b>8</b> Appendix</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/appendix_pkg"><b>8.1</b> Packages Versions</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/notation"><b>8.2</b> Notation</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/references"><b></b> References</a></li>
+</div>
+</aside>
+
+<div class="books-content">
+<h2 data-number="4.6" id="sec:join"><span class="header-section-number">4.6</span> Join</h2>
+<p>At the start of this chapter, we showed multiple tables and raised questions also related to multiple tables. However, we haven’t talked about combining tables yet, which we will do in this section. In <code>DataFrames.jl</code>, combining multiple tables is done via <em>joins</em>. Joins are extremely powerful, but it might take a while to wrap your head around them. It is not necessary to know the joins below by heart, because the <a href="https://DataFrames.juliadata.org/stable/man/joins/"><code>DataFrames.jl</code> documentation</a>, along with this book, will list them for you. But, it’s essential to know that joins exist. If you ever find yourself looping over rows in a <code>DataFrame</code> and comparing it with other data, then you probably need one of the joins below.</p>
+<p>In Section <a href="/JuliaDataScience/dataframes#sec:dataframes">4</a>, we’ve introduced the grades for 2020 with <code>grades_2020</code>:</p>
+<pre class="language-julia"><code>grades_2020()</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr>
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr>
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+</tbody>
+</table>
+<p>Now, we’re going to combine <code>grades_2020</code> with grades from 2021:</p>
+<pre class="language-julia"><code>grades_2021()</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2021</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+</tbody>
+</table>
+<p>To do this, we are going to use joins. <code>DataFrames.jl</code> lists no less than seven kinds of join. This might seem daunting at first, but hang on because they are all useful and we will showcase them all.</p>
+<h3 data-number="4.6.1" id="sec:innerjoin"><span class="header-section-number">4.6.1</span> innerjoin</h3>
+<p>This first is <strong><code>innerjoin</code></strong>. Suppose that we have two datasets <code>A</code> and <code>B</code> with respectively columns <code>A_1, A_2, ..., A_n</code> and <code>B_1, B_2, ..., B_m</code> <strong>and</strong> one of the columns has the same name, say <code>A_1</code> and <code>B_1</code> are both called <code>:id</code>. Then, the inner join on <code>:id</code> will go through all the elements in <code>A_1</code> and compare it to the elements in <code>B_1</code>. If the elements are <strong>the same</strong>, then it will add all the information from <code>A_2, ..., A_n</code> and <code>B_2, ..., B_m</code> after the <code>:id</code> column.</p>
+<p>Okay, so no worries if you didn’t get this description. The result on the grades datasets looks like this:</p>
+<pre class="language-julia"><code>innerjoin(grades_2020(), grades_2021(); on=:name)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+<th style="text-align: right;">grade_2021</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+</tbody>
+</table>
+<p>Note that only “Sally” and “Hank” are in both datasets. The name <em>inner</em> join makes sense since, in mathematics, the <em>set intersection</em> is defined by “all elements in <span class="math inline">\(A\)</span>, that are also in <span class="math inline">\(B\)</span>, or all elements in <span class="math inline">\(B\)</span> that are also in <span class="math inline">\(A\)</span>”.</p>
+<h3 data-number="4.6.2" id="sec:outerjoin"><span class="header-section-number">4.6.2</span> outerjoin</h3>
+<p>Maybe you’re now thinking “aha, if we have an <em>inner</em>, then we probably also have an <em>outer</em>”. Yes, you’ve guessed right!</p>
+<p>The <strong><code>outerjoin</code></strong> is much less strict than the <code>innerjoin</code> and just takes any row it can find which contains a name in <strong>at least one of the datasets</strong>:</p>
+<pre class="language-julia"><code>outerjoin(grades_2020(), grades_2021(); on=:name)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+<th style="text-align: right;">grade_2021</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+<tr>
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">missing</td>
+</tr>
+<tr>
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+<td style="text-align: right;">missing</td>
+</tr>
+<tr>
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">missing</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+</tbody>
+</table>
+<p>So, this method can create <code>missing</code> data even though none of the original datasets had missing values.</p>
+<h3 data-number="4.6.3" id="sec:crossjoin"><span class="header-section-number">4.6.3</span> crossjoin</h3>
+<p>We can get even more <code>missing</code> data if we use the <strong><code>crossjoin</code></strong>. This gives the <strong>Cartesian product of the rows</strong>, which is basically multiplication of rows, that is, for every row create a combination with any other row:</p>
+<pre class="language-julia"><code>crossjoin(grades_2020(), grades_2021(); on=:id)</code></pre>
+<pre class="output"><code>MethodError: no method matching crossjoin(::DataFrame, ::DataFrame; on::Symbol)
+This error has been manually thrown, explicitly, so the method may exist but be intentionally marked as unimplemented.
+
+Closest candidates are:
+  crossjoin(::DataFrames.AbstractDataFrame, ::DataFrames.AbstractDataFrame; makeunique, renamecols) got unsupported keyword argument &quot;on&quot;
+   @ DataFrames ~/.julia/packages/DataFrames/b4w9K/src/join/composer.jl:1567
+  crossjoin(::DataFrames.AbstractDataFrame, ::DataFrames.AbstractDataFrame, DataFrames.AbstractDataFrame...; makeunique) got unsupported keyword argument &quot;on&quot;
+   @ DataFrames ~/.julia/packages/DataFrames/b4w9K/src/join/composer.jl:1591
+
+  ...</code></pre>
+<p>Oops. Since <code>crossjoin</code> doesn’t take the elements in the row into account, we don’t need to specify the <code>on</code> argument for what we want to join:</p>
+<pre class="language-julia"><code>crossjoin(grades_2020(), grades_2021())</code></pre>
+<pre class="output"><code>ArgumentError: Duplicate variable names: :name. Pass makeunique=true to make them unique using a suffix automatically.
+Stacktrace:
+  [1] make_unique!(names::Vector{Symbol}, src::Vector{Symbol}; makeunique::Bool)
+    @ DataFrames ~/.julia/packages/DataFrames/b4w9K/src/other/utils.jl:99
+  [2] make_unique!
+    @ ~/.julia/packages/DataFrames/b4w9K/src/other/utils.jl:77 [inlined]
+  [3] #make_unique#4
+    @ ~/.julia/packages/DataFrames/b4w9K/src/other/utils.jl:121 [inlined]
+  [4] make_unique
+    @ ~/.julia/packages/DataFrames/b4w9K/src/other/utils.jl:120 [inlined]
+  [5] #Index#7
+    @ ~/.julia/packages/DataFrames/b4w9K/src/other/index.jl:27 [inlined]
+  [6] Index
+  ...</code></pre>
+<p>Oops again. This is a very common error with <code>DataFrame</code>s and <code>join</code>s. The tables for the 2020 and 2021 grades have a duplicate column name, namely <code>:name</code>. Like before, the error that <code>DataFrames.jl</code> outputs shows a simple suggestion that might fix the issue. We can just pass <code>makeunique=true</code> to solve this:</p>
+<pre class="language-julia"><code>crossjoin(grades_2020(), grades_2021(); makeunique=true)</code></pre>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 32%" />
+<col style="width: 27%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+<th style="text-align: right;">name_1</th>
+<th style="text-align: right;">grade_2021</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+<tr>
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+<tr>
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+<tr>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+</tbody>
+</table>
+<p>So, now, we have one row for each grade from everyone in grades 2020 and grades 2021 datasets. For direct queries, such as “who has the highest grade?”, the Cartesian product is usually not so useful, but for “statistical” queries, it can be.</p>
+<h3 data-number="4.6.4" id="sec:leftjoin_rightjoin"><span class="header-section-number">4.6.4</span> leftjoin and rightjoin</h3>
+<p><strong>More useful for scientific data projects are the <code>leftjoin</code> and <code>rightjoin</code></strong>. The left join gives all the elements in the <em>left</em> <code>DataFrame</code>:</p>
+<pre class="language-julia"><code>leftjoin(grades_2020(), grades_2021(); on=:name)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+<th style="text-align: right;">grade_2021</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+<tr>
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">missing</td>
+</tr>
+<tr>
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+<td style="text-align: right;">missing</td>
+</tr>
+</tbody>
+</table>
+<p>Here, grades for “Bob” and “Alice” were <code>missing</code> in the grades 2021 table, so that’s why there are also <code>missing</code> elements. The right join does sort of the opposite:</p>
+<pre class="language-julia"><code>rightjoin(grades_2020(), grades_2021(); on=:name)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+<th style="text-align: right;">grade_2021</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+<tr>
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">missing</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+</tbody>
+</table>
+<p>Now, grades in 2020 are missing.</p>
+<p>Note that <strong><code>leftjoin(A, B) != rightjoin(B, A)</code></strong>, because the order of the columns will differ. For example, compare the output below to the previous output:</p>
+<pre class="language-julia"><code>leftjoin(grades_2021(), grades_2020(); on=:name)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2021</th>
+<th style="text-align: right;">grade_2020</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">9.5</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr>
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">9.5</td>
+<td style="text-align: right;">missing</td>
+</tr>
+</tbody>
+</table>
+<h3 data-number="4.6.5" id="sec:semijoin_antijoin"><span class="header-section-number">4.6.5</span> semijoin and antijoin</h3>
+<p>Lastly, we have the <strong><code>semijoin</code></strong> and <strong><code>antijoin</code></strong>.</p>
+<p>The semi join is even more restrictive than the inner join. It returns <strong>only the elements from the left <code>DataFrame</code> which are in both <code>DataFrame</code>s</strong>. This is like a combination of the left join with the inner join.</p>
+<pre class="language-julia"><code>semijoin(grades_2020(), grades_2021(); on=:name)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+</tbody>
+</table>
+<p>The opposite of the semi join is the anti join. It returns <strong>only the elements from the left <code>DataFrame</code> which are <em>not</em> in the right <code>DataFrame</code></strong>:</p>
+<pre class="language-julia"><code>antijoin(grades_2020(), grades_2021(); on=:name)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr>
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+</tr>
+</tbody>
+</table>
+
+
+<div class="bottom-nav">
+    <p id="nav-prev" style="text-align: left;">
+        <a class="menu-level-2" href="/JuliaDataScience/types"><b>4.5</b> Types and Categorical Da..</a> <kbd>←</kbd>
+        <span id="nav-next" style="float: right;">
+            <kbd>→</kbd> <a class="menu-level-2" href="/JuliaDataScience/transform"><b>4.7</b> Variable Transformations</a>
+        </span>
+    </p>
+</div>
+
+
+<div class="license">
+    <br/>
+  <br/>
+  <span style="display: flex; justify-content: center;"> <a
+      style="display: flex; align-items: center; border: 1.5px solid black; border-radius: 10px;"
+      href="https://opencollective.com/juliadatascience" target="_blank"> <img src="/images/coffee.png" height="18px" style="margin: 5px; display:inline"> <span style="margin-left: 4px; color: black !important">Support this project</span> </a> </span> <br> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+    Jose Storopoli, Rik Huijzer, Lazaro Alonso
+</div>
+</div>
+</div>
+</body>
+</html>

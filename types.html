@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jose Storopoli" />
+  <meta name="author" content="Rik Huijzer" />
+  <meta name="author" content="Lazaro Alonso" />
+  <title>Types and Categorical Data - Julia Data Science</title>
+  <link rel="shortcut icon" type="image/png" href="/JuliaDataScience/favicon.png"/>
+  <link rel="stylesheet" href="/JuliaDataScience/style.css"/>
+    <script src="/JuliaDataScience/mousetrap.min.js"></script>
+    <style>
+  @font-face {
+    font-family: JuliaMono-Regular;
+    src: url("/JuliaDataScience/JuliaMono-Regular.woff2");
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/JuliaDataScience/github.min.css">
+<script src="/JuliaDataScience/highlight.min.js"></script>
+<script src="/JuliaDataScience/julia.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre').forEach((el) => {
+        if (!el.classList.contains('output')) {
+            hljs.highlightElement(el);
+        }
+    });
+});
+</script>
+ 
+</head>
+<body>
+<script>
+function click_next() {
+  var next = document.getElementById('nav-next');
+  next.firstElementChild.nextElementSibling.click();
+}
+function click_prev() {
+  var prev = document.getElementById('nav-prev');
+  prev.firstElementChild.click();
+}
+Mousetrap.bind('right', click_next);
+Mousetrap.bind('h', click_prev);
+Mousetrap.bind('left', click_prev);
+Mousetrap.bind('l', click_next);
+</script>
+
+<div class="books-container">
+<aside class="books-menu">
+<input type="checkbox" id="menu">
+<label for="menu">☰</label>
+<div class="books-title">
+<a href="/JuliaDataScience/">Julia Data Science</a>
+</div><br />
+<span class="books-subtitle">
+
+</span>
+<div class="books-menu-content">
+<li><a class="menu-level-1" href="/JuliaDataScience/preface"><b>1</b> Preface</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/why_data_science"><b>1.1</b> What is Data Science?</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/engineering"><b>1.2</b> Software Engineering</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/acknowledgements"><b>1.3</b> Acknowledgements</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/why_julia"><b>2</b> Why Julia?</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/non-programmers"><b>2.1</b> For Non-Programmers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/programmers"><b>2.2</b> For Programmers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/julia_accomplish"><b>2.3</b> What Julia Aims to Accom..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/julia_wild"><b>2.4</b> Julia in the Wild</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/julia_basics"><b>3</b> Julia Basics</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/ide"><b>3.1</b> Development Environments</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/syntax"><b>3.2</b> Language Syntax</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/data_structures"><b>3.3</b> Native Data Structures</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/filesystem"><b>3.4</b> Filesystem</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/standardlibrary"><b>3.5</b> Julia Standard Library</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/dataframes"><b>4</b> DataFrames.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/load_save"><b>4.1</b> Load and Save Files</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/index-and-summarize"><b>4.2</b> Index and Summarize</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/filter_subset"><b>4.3</b> Filter and Subset</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/select"><b>4.4</b> Select</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/types"><b>4.5</b> Types and Categorical Da..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/join"><b>4.6</b> Join</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/transform"><b>4.7</b> Variable Transformations</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/groupby_combine"><b>4.8</b> Groupby and Combine</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/missing"><b>4.9</b> Missing Data</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/df_performance"><b>4.10</b> Performance</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/dataframesmeta"><b>5</b> DataFramesMeta.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_macros"><b>5.1</b> Macros</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_select"><b>5.2</b> Column Selection</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_transform"><b>5.3</b> Column Transformation</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_subset"><b>5.4</b> Row Selection</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_orderby"><b>5.5</b> Row Sorting</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_combine"><b>5.6</b> Data Summaries</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_chain"><b>5.7</b> Piping Operations</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/DataVisualizationMakie"><b>6</b> Data Visualization with Ma..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/cairomakie"><b>6.1</b> CairoMakie.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/datavisMakie_attributes"><b>6.2</b> Attributes</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/datavisMakie_create_Figure"><b>6.3</b> Create Plot Figure</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_cheat_sheets"><b>6.4</b> Cheat Sheets</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/themes"><b>6.5</b> Themes</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/using-latexstrings.jl"><b>6.6</b> Using LaTeXStrings.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_colors"><b>6.7</b> Colors and Colormaps</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_layouts"><b>6.8</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/glmakie"><b>6.9</b> GLMakie.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/recipe_df"><b>6.10</b> A Makie recipe for a Da..</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/aog"><b>7</b> Data Visualization with Al..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_layers"><b>7.1</b> Layers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_layouts"><b>7.2</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_stats"><b>7.3</b> Statistical Visualizatio..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_custom"><b>7.4</b> Plot Customizations</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_makie"><b>7.5</b> Makie.jl and AlgebraOfGr..</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/appendix"><b>8</b> Appendix</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/appendix_pkg"><b>8.1</b> Packages Versions</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/notation"><b>8.2</b> Notation</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/references"><b></b> References</a></li>
+</div>
+</aside>
+
+<div class="books-content">
+<h2 data-number="4.5" id="sec:types"><span class="header-section-number">4.5</span> Types and Categorical Data</h2>
+<p>As discussed in Section <a href="/JuliaDataScience/load_save#sec:load_save">4.1</a>, <code>CSV.jl</code> will do its best to guess what kind of types your data have as columns. However, this won’t always work perfectly. In this section, we show why suitable types are important and we fix wrong data types. To be more clear about the types, we show the text output for <code>DataFrame</code>s instead of a pretty-formatted table. In this section, we work with the following dataset:</p>
+<pre class="language-julia"><code>function wrong_types()
+    id = 1:4
+    date = [&quot;28-01-2018&quot;, &quot;03-04-2019&quot;, &quot;01-08-2018&quot;, &quot;22-11-2020&quot;]
+    age = [&quot;adolescent&quot;, &quot;adult&quot;, &quot;infant&quot;, &quot;adult&quot;]
+    DataFrame(; id, date, age)
+end
+wrong_types()</code></pre>
+<pre class="output"><code>4×3 DataFrame
+ Row │ id     date        age
+     │ Int64  String      String
+─────┼───────────────────────────────
+   1 │     1  28-01-2018  adolescent
+   2 │     2  03-04-2019  adult
+   3 │     3  01-08-2018  infant
+   4 │     4  22-11-2020  adult</code></pre>
+<p>Because the date column has the wrong type, sorting won’t work correctly:</p>
+<pre class="language-julia"><code>sort(wrong_types(), :date)</code></pre>
+<pre class="output"><code>4×3 DataFrame
+ Row │ id     date        age
+     │ Int64  String      String
+─────┼───────────────────────────────
+   1 │     3  01-08-2018  infant
+   2 │     2  03-04-2019  adult
+   3 │     4  22-11-2020  adult
+   4 │     1  28-01-2018  adolescent</code></pre>
+<p>To fix the sorting, we can use the <code>Date</code> module from Julia’s standard library as described in Section <a href="/JuliaDataScience/standardlibrary#sec:dates">3.5.1</a>:</p>
+<pre class="language-julia"><code>function fix_date_column(df::DataFrame)
+    strings2dates(dates::Vector) = Date.(dates, dateformat&quot;dd-mm-yyyy&quot;)
+    dates = strings2dates(df[!, :date])
+    df[!, :date] = dates
+    df
+end
+fix_date_column(wrong_types())</code></pre>
+<pre class="output"><code>4×3 DataFrame
+ Row │ id     date        age
+     │ Int64  Date        String
+─────┼───────────────────────────────
+   1 │     1  2018-01-28  adolescent
+   2 │     2  2019-04-03  adult
+   3 │     3  2018-08-01  infant
+   4 │     4  2020-11-22  adult</code></pre>
+<p>Now, sorting will work as intended:</p>
+<pre class="language-julia"><code>df = fix_date_column(wrong_types())
+sort(df, :date)</code></pre>
+<pre class="output"><code>4×3 DataFrame
+ Row │ id     date        age
+     │ Int64  Date        String
+─────┼───────────────────────────────
+   1 │     1  2018-01-28  adolescent
+   2 │     3  2018-08-01  infant
+   3 │     2  2019-04-03  adult
+   4 │     4  2020-11-22  adult</code></pre>
+<p>For the age column, we have a similar problem:</p>
+<pre class="language-julia"><code>sort(wrong_types(), :age)</code></pre>
+<pre class="output"><code>4×3 DataFrame
+ Row │ id     date        age
+     │ Int64  String      String
+─────┼───────────────────────────────
+   1 │     1  28-01-2018  adolescent
+   2 │     2  03-04-2019  adult
+   3 │     4  22-11-2020  adult
+   4 │     3  01-08-2018  infant</code></pre>
+<p>This isn’t right, because an infant is younger than adults and adolescents. The solution for this issue and any sort of categorical data is to use <code>CategoricalArrays.jl</code>:</p>
+<h3 data-number="4.5.1" id="sec:categoricalarrays"><span class="header-section-number">4.5.1</span> CategoricalArrays.jl</h3>
+<pre><code>using CategoricalArrays</code></pre>
+<p>With the <code>CategoricalArrays.jl</code> package, we can add levels that represent the ordering of our categorical variable to our data:</p>
+<pre class="language-julia"><code>function fix_age_column(df)
+    levels = [&quot;infant&quot;, &quot;adolescent&quot;, &quot;adult&quot;]
+    ages = categorical(df[!, :age]; levels, ordered=true)
+    df[!, :age] = ages
+    df
+end
+fix_age_column(wrong_types())</code></pre>
+<pre class="output"><code>4×3 DataFrame
+ Row │ id     date        age
+     │ Int64  String      Cat…
+─────┼───────────────────────────────
+   1 │     1  28-01-2018  adolescent
+   2 │     2  03-04-2019  adult
+   3 │     3  01-08-2018  infant
+   4 │     4  22-11-2020  adult</code></pre>
+<blockquote>
+<p><strong><em>NOTE:</em></strong> Also note that we are passing the argument <code>ordered=true</code> which tells <code>CategoricalArrays.jl</code>’s <code>categorical</code> function that our categorical data is “ordered”. Without this any type of sorting or bigger/smaller comparisons would not be possible.</p>
+</blockquote>
+<p>Now, we can sort the data correctly on the age column:</p>
+<pre class="language-julia"><code>df = fix_age_column(wrong_types())
+sort(df, :age)</code></pre>
+<pre class="output"><code>4×3 DataFrame
+ Row │ id     date        age
+     │ Int64  String      Cat…
+─────┼───────────────────────────────
+   1 │     3  01-08-2018  infant
+   2 │     1  28-01-2018  adolescent
+   3 │     2  03-04-2019  adult
+   4 │     4  22-11-2020  adult</code></pre>
+<p>Because we have defined convenient functions, we can now define our fixed data by just performing the function calls:</p>
+<pre class="language-julia"><code>function correct_types()
+    df = wrong_types()
+    df = fix_date_column(df)
+    df = fix_age_column(df)
+end
+correct_types()</code></pre>
+<pre class="output"><code>4×3 DataFrame
+ Row │ id     date        age
+     │ Int64  Date        Cat…
+─────┼───────────────────────────────
+   1 │     1  2018-01-28  adolescent
+   2 │     2  2019-04-03  adult
+   3 │     3  2018-08-01  infant
+   4 │     4  2020-11-22  adult</code></pre>
+<p>Since age in our data is ordinal (<code>ordered=true</code>), we can properly compare categories of age:</p>
+<pre class="language-julia"><code>df = correct_types()
+a = df[1, :age]
+b = df[2, :age]
+a &lt; b</code></pre>
+<pre class="output"><code>
+true
+</code></pre>
+<p>which would give wrong comparisons if the element type were strings:</p>
+<pre class="language-julia"><code>&quot;infant&quot; &lt; &quot;adult&quot;</code></pre>
+<pre class="output"><code>
+false
+</code></pre>
+
+
+<div class="bottom-nav">
+    <p id="nav-prev" style="text-align: left;">
+        <a class="menu-level-2" href="/JuliaDataScience/select"><b>4.4</b> Select</a> <kbd>←</kbd>
+        <span id="nav-next" style="float: right;">
+            <kbd>→</kbd> <a class="menu-level-2" href="/JuliaDataScience/join"><b>4.6</b> Join</a>
+        </span>
+    </p>
+</div>
+
+
+<div class="license">
+    <br/>
+  <br/>
+  <span style="display: flex; justify-content: center;"> <a
+      style="display: flex; align-items: center; border: 1.5px solid black; border-radius: 10px;"
+      href="https://opencollective.com/juliadatascience" target="_blank"> <img src="/images/coffee.png" height="18px" style="margin: 5px; display:inline"> <span style="margin-left: 4px; color: black !important">Support this project</span> </a> </span> <br> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+    Jose Storopoli, Rik Huijzer, Lazaro Alonso
+</div>
+</div>
+</div>
+</body>
+</html>

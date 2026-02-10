@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jose Storopoli" />
+  <meta name="author" content="Rik Huijzer" />
+  <meta name="author" content="Lazaro Alonso" />
+  <title>Temas - Julia Data Science</title>
+  <link rel="shortcut icon" type="image/png" href="/pt/favicon.png"/>
+  <link rel="stylesheet" href="/pt/style.css"/>
+    <script src="/pt/mousetrap.min.js"></script>
+    <style>
+  @font-face {
+    font-family: JuliaMono-Regular;
+    src: url("/pt/JuliaMono-Regular.woff2");
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/pt/github.min.css">
+<script src="/pt/highlight.min.js"></script>
+<script src="/pt/julia.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre').forEach((el) => {
+        hljs.highlightElement(el);
+    });
+});
+</script>
+ 
+</head>
+<body>
+<script>
+function click_next() {
+  var next = document.getElementById('nav-next');
+  next.firstElementChild.nextElementSibling.click();
+}
+function click_prev() {
+  var prev = document.getElementById('nav-prev');
+  prev.firstElementChild.click();
+}
+Mousetrap.bind('right', click_next);
+Mousetrap.bind('h', click_prev);
+Mousetrap.bind('left', click_prev);
+Mousetrap.bind('l', click_next);
+</script>
+
+<div class="books-container">
+<aside class="books-menu">
+<input type="checkbox" id="menu">
+<label for="menu">☰</label>
+<div class="books-title">
+<a href="/pt/">Julia Data Science</a>
+</div><br />
+<span class="books-subtitle">
+
+</span>
+<div class="books-menu-content">
+<li><a class="menu-level-1" href="/pt/preface"><b>1</b> Prefácio</a></li>
+<li><a class="menu-level-2" href="/pt/why_data_science"><b>1.1</b> O que é Ciência de Dad..</a></li>
+<li><a class="menu-level-2" href="/pt/engineering"><b>1.2</b> Engenharia de software</a></li>
+<li><a class="menu-level-2" href="/pt/agradecimentos"><b>1.3</b> Agradecimentos</a></li>
+<li><a class="menu-level-1" href="/pt/why_julia"><b>2</b> Por que Julia?</a></li>
+<li><a class="menu-level-2" href="/pt/non-programmers"><b>2.1</b> Para os que nunca progra..</a></li>
+<li><a class="menu-level-2" href="/pt/programmers"><b>2.2</b> Para programadores</a></li>
+<li><a class="menu-level-2" href="/pt/julia_accomplish"><b>2.3</b> O que Julia pretende alc..</a></li>
+<li><a class="menu-level-2" href="/pt/julia_wild"><b>2.4</b> Julia Por Aí</a></li>
+<li><a class="menu-level-1" href="/pt/julia_basics"><b>3</b> Básico de Julia</a></li>
+<li><a class="menu-level-2" href="/pt/syntax"><b>3.1</b> Sintaxe da linguagem</a></li>
+<li><a class="menu-level-2" href="/pt/data_structures"><b>3.2</b> Estruturas Nativas de Da..</a></li>
+<li><a class="menu-level-2" href="/pt/filesystem"><b>3.3</b> Sistema de Arquivos</a></li>
+<li><a class="menu-level-2" href="/pt/standardlibrary"><b>3.4</b> Biblioteca Padrão de Ju..</a></li>
+<li><a class="menu-level-1" href="/pt/dataframes"><b>4</b> DataFrames.jl</a></li>
+<li><a class="menu-level-2" href="/pt/load_save"><b>4.1</b> Carregar e salvar arquiv..</a></li>
+<li><a class="menu-level-2" href="/pt/indexação-e-sumarização"><b>4.2</b> Indexação e Sumarização</a></li>
+<li><a class="menu-level-2" href="/pt/filter_subset"><b>4.3</b> Filtro e Subconjunto</a></li>
+<li><a class="menu-level-2" href="/pt/select"><b>4.4</b> Select</a></li>
+<li><a class="menu-level-2" href="/pt/missing_data"><b>4.5</b> Tipos de Dados e Dados F..</a></li>
+<li><a class="menu-level-2" href="/pt/join"><b>4.6</b> Join</a></li>
+<li><a class="menu-level-2" href="/pt/transformações-de-variáveis"><b>4.7</b> Transformações de Vari..</a></li>
+<li><a class="menu-level-2" href="/pt/groupby_combine"><b>4.8</b> Groupby e Combine</a></li>
+<li><a class="menu-level-2" href="/pt/df_performance"><b>4.9</b> Desempenho</a></li>
+<li><a class="menu-level-1" href="/pt/DataVisualizationMakie"><b>5</b> Visualização de dados co..</a></li>
+<li><a class="menu-level-2" href="/pt/cairomakie"><b>5.1</b> CairoMakie.jl</a></li>
+<li><a class="menu-level-2" href="/pt/datavisMakie_attributes"><b>5.2</b> Atributos</a></li>
+<li><a class="menu-level-2" href="/pt/themes"><b>5.3</b> Temas</a></li>
+<li><a class="menu-level-2" href="/pt/usando-latexstrings.jl"><b>5.4</b> Usando LaTeXStrings.jl</a></li>
+<li><a class="menu-level-2" href="/pt/makie_colors"><b>5.5</b> Cores e mapas de cores</a></li>
+<li><a class="menu-level-2" href="/pt/makie_layouts"><b>5.6</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/pt/glmakie"><b>5.7</b> GLMakie.jl</a></li>
+<li><a class="menu-level-1" href="/pt/appendix"><b>6</b> Apêndice</a></li>
+<li><a class="menu-level-2" href="/pt/appendix_pkg"><b>6.1</b> Versões dos Pacotes</a></li>
+<li><a class="menu-level-2" href="/pt/notation"><b>6.2</b> Formatação</a></li>
+<li><a class="menu-level-1" href="/pt/referências"><b></b> Referências</a></li>
+</div>
+</aside>
+
+<div class="books-content">
+<h2 data-number="5.3" id="sec:themes"><span class="header-section-number">5.3</span> Temas</h2>
+<p>Existem várias maneiras de modificar a aparência geral de seus <em>plots</em>. Você pode usar um <a href="http://makie.juliaplots.org/stable/documentation/theming/predefined_themes/index.html">tema predefinido</a> ou seu próprio tema personalizado. Por exemplo, use um tema escuro predefinido via <code>with_theme(your_plot_function, theme_dark())</code>. Ou construa o seu próprio com <code>Theme(kwargs)</code> ou até mesmo atualize o que está ativo com <code>update_theme!(kwargs)</code>.</p>
+<p>Você também pode fazer <code>set_theme!(theme; kwargs...)</code> para alterar o tema do padrão atual para <code>theme</code> e substituir ou adicionar atributos fornecidos por <code>kwargs</code>. Se você fizer isso e quiser redefinir todas as configurações anteriores, faça <code>set_theme!()</code> sem argumentos. Veja os exemplos a seguir, onde preparamos uma função de plotagem de teste com características diferentes, de forma que a maioria dos atributos para cada tema possa ser apreciada.</p>
+<pre class="language-julia"><code>using Random: seed!
+seed!(123)
+y = cumsum(randn(6, 6), dims=2)</code></pre>
+<pre class="output"><code>6×6 Matrix{Float64}:
+  0.808288   0.386519   0.355371   0.0365011  -0.0911358   1.8115
+ -1.12207   -2.47766   -2.16183   -2.49928    -2.02981    -1.37017
+ -1.10464   -1.03518   -3.19756   -1.18944    -2.71633    -3.80455
+ -0.416993  -0.534315  -1.42439   -0.659362   -0.0592298   0.644529
+  0.287588   1.50687    2.36111    2.54137     0.48751     0.630836
+  0.229819   0.522733   0.864515   2.89343     2.06537     2.21375</code></pre>
+<p>Uma matrix de tamanho <code>(20, 20)</code> com entradas aleatórias, para que possamos plotar um mapa de calor. O intervalo em <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> também é especificado.</p>
+<pre class="language-julia"><code>using Random: seed!
+seed!(13)
+xv = yv = LinRange(-3, 0.5, 20)
+matrix = randn(20, 20)
+matrix[1:6, 1:6] # first 6 rows and columns</code></pre>
+<pre class="output"><code>6×6 Matrix{Float64}:
+ -0.271257   0.894952   0.728865  -0.293849   -0.449277   -0.0948871
+ -0.193033  -0.421286  -0.455905  -0.0576092  -0.756621   -1.47419
+ -0.123177   0.762254   0.773921  -0.38526    -0.0659695  -0.599284
+ -1.47327    0.770122   1.20725    0.257913    0.111979    0.875439
+ -1.82913   -0.603888   0.164083  -0.118504    1.46723     0.0948876
+  1.09769    0.178207   0.110243  -0.543203    0.592245    0.328993</code></pre>
+<p>Portanto, nossa função de plotagem se parece com o seguinte:</p>
+<pre class="language-julia"><code>function demo_themes(y, xv, yv, matrix)
+    fig, _ = series(y; labels=[&quot;$i&quot; for i = 1:6], markersize=10,
+        color=:Set1, figure=(; resolution=(600, 300)),
+        axis=(; xlabel=&quot;time (s)&quot;, ylabel=&quot;Amplitude&quot;,
+            title=&quot;Measurements&quot;))
+    hmap = heatmap!(xv, yv, matrix; colormap=:plasma)
+    limits!(-3.1, 8.5, -6, 5.1)
+    axislegend(&quot;legend&quot;; merge=true)
+    Colorbar(fig[1, 2], hmap)
+    fig
+end</code></pre>
+<p>Observe que a função <code>series</code> foi usada para plotar várias linhas e dispersões de uma só vez com seus rótulos correspondentes. Além disso, um mapa de calor com sua barra de cores foi incluído. Atualmente, existem dois temas escuros, um chamado <code>theme_dark()</code> e outro <code>theme_black()</code>:</p>
+<pre class="language-julia"><code>with_theme(theme_dark()) do
+    demo_themes(y, xv, yv, matrix)
+end
+with_theme(theme_black()) do
+    demo_themes(y, xv, yv, matrix)
+end</code></pre>
+<figure>
+<img src="/pt/im/theme_dark.svg" id="fig:theme_dark" style="width:60.0%" alt="Figure 11: Theme dark." /><figcaption aria-hidden="true">Figure 11: Theme dark.</figcaption>
+</figure>
+<figure>
+<img src="/pt/im/theme_black.svg" id="fig:theme_black" style="width:60.0%" alt="Figure 12: Theme black." /><figcaption aria-hidden="true">Figure 12: Theme black.</figcaption>
+</figure>
+<p>E mais três temas claros chamados, <code>theme_ggplot2()</code>, <code>theme_minimal()</code> e <code>theme_light()</code>. Útil para <em>plots</em> de tipo de publicação mais padrão.</p>
+<pre class="language-julia"><code>with_theme(theme_ggplot2()) do
+    demo_themes(y, xv, yv, matrix)
+end
+with_theme(theme_minimal()) do
+    demo_themes(y, xv, yv, matrix)
+end
+with_theme(theme_light()) do
+    demo_themes(y, xv, yv, matrix)
+end</code></pre>
+<figure>
+<img src="/pt/im/theme_ggplot2.svg" id="fig:theme_ggplot2" style="width:60.0%" alt="Figure 13: Theme ggplot2." /><figcaption aria-hidden="true">Figure 13: Theme ggplot2.</figcaption>
+</figure>
+<figure>
+<img src="/pt/im/theme_minimal.svg" id="fig:theme_minimal" style="width:60.0%" alt="Figure 14: Theme minimal." /><figcaption aria-hidden="true">Figure 14: Theme minimal.</figcaption>
+</figure>
+<figure>
+<img src="/pt/im/theme_light.svg" id="fig:theme_light" style="width:60.0%" alt="Figure 15: Theme light." /><figcaption aria-hidden="true">Figure 15: Theme light.</figcaption>
+</figure>
+<p>Outra alternativa é definir um <code>Theme</code> fazendo <code>with_theme(your_plot, your_theme())</code>. Por exemplo, o tema a seguir pode ser uma versão simples para um modelo de qualidade de publicação:</p>
+<pre class="language-julia"><code>publication_theme() = Theme(
+    fontsize=16, font=&quot;CMU Serif&quot;,
+    Axis=(xlabelsize=20, xgridstyle=:dash, ygridstyle=:dash,
+        xtickalign=1, ytickalign=1, yticksize=10, xticksize=10,
+        xlabelpadding=-5, xlabel=&quot;x&quot;, ylabel=&quot;y&quot;),
+    Legend=(framecolor=(:black, 0.5), bgcolor=(:white, 0.5)),
+    Colorbar=(ticksize=16, tickalign=1, spinewidth=0.5),
+)</code></pre>
+<p>Que, por simplicidade, usamos para plotar <code>scatterlines</code> e um <code>heatmap</code>.</p>
+<pre class="language-julia"><code>function plot_with_legend_and_colorbar()
+    fig, ax, _ = scatterlines(1:10; label=&quot;line&quot;)
+    hm = heatmap!(ax, LinRange(6, 9, 15), LinRange(2, 5, 15), randn(15, 15);
+        colormap=:Spectral_11)
+    axislegend(&quot;legend&quot;; position=:lt)
+    Colorbar(fig[1, 2], hm, label=&quot;values&quot;)
+    ax.title = &quot;my custom theme&quot;
+    fig
+end</code></pre>
+<p>Então, usando o <code>Theme</code> definido anteriormente, a saída é mostrada na Figura (Figure <a href="/pt#fig:plot_with_legend_and_colorbar">16</a>).</p>
+<pre class="language-julia"><code>with_theme(plot_with_legend_and_colorbar, publication_theme())</code></pre>
+<figure>
+<img src="/pt/im/plot_with_legend_and_colorbar.svg" id="fig:plot_with_legend_and_colorbar" style="width:60.0%" alt="Figure 16: Themed plot with Legend and Colorbar." /><figcaption aria-hidden="true">Figure 16: Themed plot with Legend and Colorbar.</figcaption>
+</figure>
+<p>Agora, se algo precisar ser alterado após <code>set_theme!(your_theme)</code>, podemos fazer isso com <code>update_theme!(resolution=(500, 400), fontsize=18)</code>, por exemplo. Outra abordagem será passar argumentos adicionais para a função <code>with_theme</code>:</p>
+<pre class="language-julia"><code>fig = (resolution=(600, 400), figure_padding=1, backgroundcolor=:grey90)
+ax = (; aspect=DataAspect(), xlabel=L&quot;x&quot;, ylabel=L&quot;y&quot;)
+cbar = (; height=Relative(4 / 5))
+with_theme(publication_theme(); fig..., Axis=ax, Colorbar=cbar) do
+    plot_with_legend_and_colorbar()
+end</code></pre>
+<figure>
+<img src="/pt/im/plot_theme_extra_args.svg" id="fig:plot_theme_extra_args" style="width:60.0%" alt="Figure 17: Theme with extra args." /><figcaption aria-hidden="true">Figure 17: Theme with extra args.</figcaption>
+</figure>
+<p>Agora, vamos seguir em frente e fazer um <em>plot</em> com strings em LaTeX e um tema personalizado.</p>
+
+
+<div class="bottom-nav">
+    <p id="nav-prev" style="text-align: left;">
+        <a class="menu-level-2" href="/pt/datavisMakie_attributes"><b>5.2</b> Atributos</a> <kbd>←</kbd>
+        <span id="nav-next" style="float: right;">
+            <kbd>→</kbd> <a class="menu-level-2" href="/pt/usando-latexstrings.jl"><b>5.4</b> Usando LaTeXStrings.jl</a>
+        </span>
+    </p>
+</div>
+
+
+<div class="license">
+    <br/>
+  <br/>
+  <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+    Jose Storopoli, Rik Huijzer, Lazaro Alonso
+</div>
+</div>
+</div>
+</body>
+</html>

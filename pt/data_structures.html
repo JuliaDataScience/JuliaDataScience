@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jose Storopoli" />
+  <meta name="author" content="Rik Huijzer" />
+  <meta name="author" content="Lazaro Alonso" />
+  <title>Estruturas Nativas de Dados - Julia Data Science</title>
+  <link rel="shortcut icon" type="image/png" href="/pt/favicon.png"/>
+  <link rel="stylesheet" href="/pt/style.css"/>
+    <script src="/pt/mousetrap.min.js"></script>
+    <style>
+  @font-face {
+    font-family: JuliaMono-Regular;
+    src: url("/pt/JuliaMono-Regular.woff2");
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/pt/github.min.css">
+<script src="/pt/highlight.min.js"></script>
+<script src="/pt/julia.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre').forEach((el) => {
+        hljs.highlightElement(el);
+    });
+});
+</script>
+ 
+</head>
+<body>
+<script>
+function click_next() {
+  var next = document.getElementById('nav-next');
+  next.firstElementChild.nextElementSibling.click();
+}
+function click_prev() {
+  var prev = document.getElementById('nav-prev');
+  prev.firstElementChild.click();
+}
+Mousetrap.bind('right', click_next);
+Mousetrap.bind('h', click_prev);
+Mousetrap.bind('left', click_prev);
+Mousetrap.bind('l', click_next);
+</script>
+
+<div class="books-container">
+<aside class="books-menu">
+<input type="checkbox" id="menu">
+<label for="menu">☰</label>
+<div class="books-title">
+<a href="/pt/">Julia Data Science</a>
+</div><br />
+<span class="books-subtitle">
+
+</span>
+<div class="books-menu-content">
+<li><a class="menu-level-1" href="/pt/preface"><b>1</b> Prefácio</a></li>
+<li><a class="menu-level-2" href="/pt/why_data_science"><b>1.1</b> O que é Ciência de Dad..</a></li>
+<li><a class="menu-level-2" href="/pt/engineering"><b>1.2</b> Engenharia de software</a></li>
+<li><a class="menu-level-2" href="/pt/agradecimentos"><b>1.3</b> Agradecimentos</a></li>
+<li><a class="menu-level-1" href="/pt/why_julia"><b>2</b> Por que Julia?</a></li>
+<li><a class="menu-level-2" href="/pt/non-programmers"><b>2.1</b> Para os que nunca progra..</a></li>
+<li><a class="menu-level-2" href="/pt/programmers"><b>2.2</b> Para programadores</a></li>
+<li><a class="menu-level-2" href="/pt/julia_accomplish"><b>2.3</b> O que Julia pretende alc..</a></li>
+<li><a class="menu-level-2" href="/pt/julia_wild"><b>2.4</b> Julia Por Aí</a></li>
+<li><a class="menu-level-1" href="/pt/julia_basics"><b>3</b> Básico de Julia</a></li>
+<li><a class="menu-level-2" href="/pt/syntax"><b>3.1</b> Sintaxe da linguagem</a></li>
+<li><a class="menu-level-2" href="/pt/data_structures"><b>3.2</b> Estruturas Nativas de Da..</a></li>
+<li><a class="menu-level-2" href="/pt/filesystem"><b>3.3</b> Sistema de Arquivos</a></li>
+<li><a class="menu-level-2" href="/pt/standardlibrary"><b>3.4</b> Biblioteca Padrão de Ju..</a></li>
+<li><a class="menu-level-1" href="/pt/dataframes"><b>4</b> DataFrames.jl</a></li>
+<li><a class="menu-level-2" href="/pt/load_save"><b>4.1</b> Carregar e salvar arquiv..</a></li>
+<li><a class="menu-level-2" href="/pt/indexação-e-sumarização"><b>4.2</b> Indexação e Sumarização</a></li>
+<li><a class="menu-level-2" href="/pt/filter_subset"><b>4.3</b> Filtro e Subconjunto</a></li>
+<li><a class="menu-level-2" href="/pt/select"><b>4.4</b> Select</a></li>
+<li><a class="menu-level-2" href="/pt/missing_data"><b>4.5</b> Tipos de Dados e Dados F..</a></li>
+<li><a class="menu-level-2" href="/pt/join"><b>4.6</b> Join</a></li>
+<li><a class="menu-level-2" href="/pt/transformações-de-variáveis"><b>4.7</b> Transformações de Vari..</a></li>
+<li><a class="menu-level-2" href="/pt/groupby_combine"><b>4.8</b> Groupby e Combine</a></li>
+<li><a class="menu-level-2" href="/pt/df_performance"><b>4.9</b> Desempenho</a></li>
+<li><a class="menu-level-1" href="/pt/DataVisualizationMakie"><b>5</b> Visualização de dados co..</a></li>
+<li><a class="menu-level-2" href="/pt/cairomakie"><b>5.1</b> CairoMakie.jl</a></li>
+<li><a class="menu-level-2" href="/pt/datavisMakie_attributes"><b>5.2</b> Atributos</a></li>
+<li><a class="menu-level-2" href="/pt/themes"><b>5.3</b> Temas</a></li>
+<li><a class="menu-level-2" href="/pt/usando-latexstrings.jl"><b>5.4</b> Usando LaTeXStrings.jl</a></li>
+<li><a class="menu-level-2" href="/pt/makie_colors"><b>5.5</b> Cores e mapas de cores</a></li>
+<li><a class="menu-level-2" href="/pt/makie_layouts"><b>5.6</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/pt/glmakie"><b>5.7</b> GLMakie.jl</a></li>
+<li><a class="menu-level-1" href="/pt/appendix"><b>6</b> Apêndice</a></li>
+<li><a class="menu-level-2" href="/pt/appendix_pkg"><b>6.1</b> Versões dos Pacotes</a></li>
+<li><a class="menu-level-2" href="/pt/notation"><b>6.2</b> Formatação</a></li>
+<li><a class="menu-level-1" href="/pt/referências"><b></b> Referências</a></li>
+</div>
+</aside>
+
+<div class="books-content">
+<h2 data-number="3.2" id="sec:data_structures"><span class="header-section-number">3.2</span> Estruturas Nativas de Dados</h2>
+<p>Julia possui diversas estruturas de dados nativas. Elas são abstrações de dados que representam alguma forma de dado estruturado. Vamos cobrir os mais usados. Eles contém dados homogêneos ou heterogêneos. Uma vez que são coleções, podemos iterar sobre eles com os laços <code>for</code>.</p>
+<p>Nós cobriremos <code>String</code>, <code>Tuple</code>, <code>NamedTuple</code>, <code>UnitRange</code>, <code>Arrays</code>, <code>Pair</code>, <code>Dict</code>, <code>Symbol</code>.</p>
+<p>Quando você se depara com uma estrutura de dados em Julia, você pode encontrar métodos que a aceitam como um argumento por meio da função <code>methodswith</code>. Em Julia, a distinção entre métodos e funções é a seguinte: Cada função pode ter mútiplos métodos, como mostramos anteriormente. A função <code>methodswith</code> é boa de se ter por perto. Vejamos o que podemos fazer com uma <code>String</code>, por exemplo:</p>
+<pre class="language-julia"><code>first(methodswith(String), 5)</code></pre>
+<pre class="output"><code>[1] write(iod::HTTP.DebugRequest.IODebug, x::String) in HTTP.DebugRequest at /home/runner/.julia/packages/HTTP/aTjcj/src/IODebug.jl:38
+[2] write(fp::FilePathsBase.SystemPath, x::Union{String, Vector{UInt8}}) in FilePathsBase at /home/runner/.julia/packages/FilePathsBase/qgXdE/src/system.jl:380
+[3] write(fp::FilePathsBase.SystemPath, x::Union{String, Vector{UInt8}}, mode) in FilePathsBase at /home/runner/.julia/packages/FilePathsBase/qgXdE/src/system.jl:380
+[4] write(buffer::FilePathsBase.FileBuffer, x::String) in FilePathsBase at /home/runner/.julia/packages/FilePathsBase/qgXdE/src/buffer.jl:84
+[5] write(io::IO, s::Union{SubString{String}, String}) in Base at strings/io.jl:244</code></pre>
+<h3 data-number="3.2.1" id="sec:broadcasting"><span class="header-section-number">3.2.1</span> Fazendo Broadcasting de Operadores e Funções</h3>
+<p>Antes de mergulharmos nas estruturas de dados, precisamos conversar sobre broadcasting (também conhecido como <em>vetorização</em>) e o operador “dot” <code>.</code>.</p>
+<p>Podemos vetorizar operações matemáticas como <code>*</code> (multiplicação) ou <code>+</code> (adição) usando o operador dot. Por exemplo, vetorizar adição implica em mudar <code>+</code> para <code>.+</code>:</p>
+<pre class="language-julia"><code>[1, 2, 3] .+ 1</code></pre>
+<pre class="output"><code>[2, 3, 4]</code></pre>
+<p>Também funciona automaticamente com funções. (Tecnicamente, as operações matemáticas, ou operadores infixos, também são funções, mas isso não é tão importante saber.) Lembra da nossa função <code>logarithm</code>?</p>
+<pre class="language-julia"><code>logarithm.([1, 2, 3])</code></pre>
+<pre class="output"><code>[0.0, 0.6931471805599569, 1.0986122886681282]</code></pre>
+<h4 data-number="3.2.1.1" id="sec:function_bang"><span class="header-section-number">3.2.1.1</span> Funções com exclamação <code>!</code></h4>
+<p>É uma convenção de Julia acrescentar uma exclamação <code>!</code> a nomes de funções que modificam um ou mais de seus argumentos. Esta convenção avisa o usuário que a função <strong>não é pura</strong>, ou seja, que tem <em>efeitos colaterais</em>. Uma função com efeitos colaterais é útil quando você deseja atualizar uma grande estrutura de dados ou coleção de variáveis sem ter toda a sobrecarga da criação de uma nova instância.</p>
+<p>Por exemplo, podemos criar uma função que adiciona 1 a cada elemento de um vetor <code>V</code>:</p>
+<pre class="language-julia"><code>function add_one!(V)
+    for i in 1:length(V)
+        V[i] += 1
+    end
+    return nothing
+end</code></pre>
+<pre class="language-julia"><code>my_data = [1, 2, 3]
+
+add_one!(my_data)
+
+my_data</code></pre>
+<pre class="output"><code>[2, 3, 4]</code></pre>
+<h3 data-number="3.2.2" id="sec:string"><span class="header-section-number">3.2.2</span> String</h3>
+<p><strong>Strings</strong> são representadas delimitadas por aspas duplas:</p>
+<pre class="language-julia"><code>typeof(&quot;This is a string&quot;)</code></pre>
+<pre class="output"><code>String</code></pre>
+<p>Também podemos escrever uma string multilinha:</p>
+<pre class="language-julia"><code>text = &quot;
+This is a big multiline string.
+As you can see.
+It is still a String to Julia.
+&quot;</code></pre>
+<pre class="output"><code>
+This is a big multiline string.
+As you can see.
+It is still a String to Julia.
+</code></pre>
+<p>Mas, geralmente, é mais claro usar aspas triplas:</p>
+<pre class="language-julia"><code>s = &quot;&quot;&quot;
+    This is a big multiline string with a nested &quot;quotation&quot;.
+    As you can see.
+    It is still a String to Julia.
+    &quot;&quot;&quot;</code></pre>
+<pre class="output"><code>This is a big multiline string with a nested &quot;quotation&quot;.
+As you can see.
+It is still a String to Julia.
+</code></pre>
+<p>Ao usar crases triplas, a tabulação e o marcador de nova linha no início são ignorados por Julia. Isso melhora a legibilidade do código porque você pode indentar o bloco em seu código-fonte sem que esses espaços acabem em sua string.</p>
+<h4 data-number="3.2.2.1" id="sec:string_concatenation"><span class="header-section-number">3.2.2.1</span> Concatenação de Strings</h4>
+<p>Uma operação comum de string é a <strong>concatenação de string</strong>. Suponha que você queira construir uma nova string que é a concatenação de duas ou mais strings. Isso é realizado em Julia com o operador <code>*</code> ou a função <code>join</code>. Este símbolo pode soar como uma escolha estranha e realmente é. Por enquanto, muitas bases de código em Julia estão usando este símbolo, então ele permanecerá na linguagem. Se você estiver interessado, pode ler uma discussão de 2015 sobre isso em <a href="https://github.com/JuliaLang/julia/issues/11030" class="uri">https://github.com/JuliaLang/julia/issues/11030</a>.</p>
+<pre class="language-julia"><code>hello = &quot;Hello&quot;
+goodbye = &quot;Goodbye&quot;
+
+hello * goodbye</code></pre>
+<pre class="output"><code>HelloGoodbye</code></pre>
+<p>Como você pode ver, está faltando um espaço entre <code>hello</code> e <code>goodbye</code>. Poderíamos concatenar uma string adicional <code>" "</code> com <code>*</code>, mas isso seria complicado para mais de duas strings. É onde a função <code>join</code> vem a calhar. Nós apenas passamos como argumentos as strings dentro dos colchetes <code>[]</code> e, em seguida, o separador:</p>
+<pre class="language-julia"><code>join([hello, goodbye], &quot; &quot;)</code></pre>
+<pre class="output"><code>Hello Goodbye</code></pre>
+<h4 data-number="3.2.2.2" id="sec:string_interpolation"><span class="header-section-number">3.2.2.2</span> Interpolação de String</h4>
+<p>Concatenar strings pode ser complicado. Podemos ser muito mais expressivos com <strong>interpolação de string</strong>. Funciona assim: você especifica o que quer que seja incluído em sua string com o cifrão <code>$</code>. Aqui está o exemplo anterior, mas agora usando interpolação:</p>
+<pre class="language-julia"><code>&quot;$hello $goodbye&quot;</code></pre>
+<pre class="output"><code>Hello Goodbye</code></pre>
+<p>Isso funciona mesmo dentro de funções. Vamos revisitar nossa função <code>test</code> que foi definida em Section <a href="/pt/syntax#sec:conditionals">3.1.5</a>:</p>
+<pre class="language-julia"><code>function test_interpolated(a, b)
+    if a &lt; b
+        &quot;$a is less than $b&quot;
+    elseif a &gt; b
+        &quot;$a is greater than $b&quot;
+    else
+        &quot;$a is equal to $b&quot;
+    end
+end
+
+test_interpolated(3.14, 3.14)</code></pre>
+<pre class="output"><code>3.14 is equal to 3.14</code></pre>
+<h4 data-number="3.2.2.3" id="sec:string_manipulations"><span class="header-section-number">3.2.2.3</span> Manipulações de Strings</h4>
+<p>Existem várias funções para manipular strings em Julia. Vamos demonstrar as mais comuns. Além disso, observe que a maioria dessas funções aceita uma <a href="https://docs.julialang.org/en/v1/manual/strings/#Regular-Expressions">Expressão Regular (RegEx)</a> como argumentos. Não cobriremos RegEx neste livro, mas te encorajamos a aprender sobre elas, especialmente se a maior parte de seu trabalho usa dados textuais.</p>
+<p>Primeiro, vamos definir uma string para brincarmos:</p>
+<pre class="language-julia"><code>julia_string = &quot;Julia is an amazing opensource programming language&quot;</code></pre>
+<pre class="output"><code>Julia is an amazing opensource programming language</code></pre>
+<ol type="1">
+<li><p><code>occursin</code>, <code>startswith</code> e <code>endswith</code>: São condicionais (retornam <code>true</code> ou <code>false</code>) se o primeiro argumento é um:</p>
+<ul>
+<li><p><strong>substring</strong> do segundo argumento</p>
+<pre class="language-julia"><code>occursin(&quot;Julia&quot;, julia_string)</code></pre>
+<pre class="output"><code>true</code></pre></li>
+<li><p><strong>prefixo</strong> do segundo argumento</p>
+<pre class="language-julia"><code>startswith(&quot;Julia&quot;, julia_string)</code></pre>
+<pre class="output"><code>false</code></pre></li>
+<li><p><strong>sufixo</strong> do segundo argumento</p>
+<pre class="language-julia"><code>endswith(&quot;Julia&quot;, julia_string)</code></pre>
+<pre class="output"><code>false</code></pre></li>
+</ul></li>
+<li><p><code>lowercase</code>, <code>uppercase</code>, <code>titlecase</code> e <code>lowercasefirst</code>:</p>
+<pre class="language-julia"><code>lowercase(julia_string)</code></pre>
+<pre class="output"><code>julia is an amazing opensource programming language</code></pre>
+<pre class="language-julia"><code>uppercase(julia_string)</code></pre>
+<pre class="output"><code>JULIA IS AN AMAZING OPENSOURCE PROGRAMMING LANGUAGE</code></pre>
+<pre class="language-julia"><code>titlecase(julia_string)</code></pre>
+<pre class="output"><code>Julia Is An Amazing Opensource Programming Language</code></pre>
+<pre class="language-julia"><code>lowercasefirst(julia_string)</code></pre>
+<pre class="output"><code>julia is an amazing opensource programming language</code></pre></li>
+<li><p><code>replace</code>: introduz uma nova sintaxe, chamada de <code>Pair</code></p>
+<pre class="language-julia"><code>replace(julia_string, &quot;amazing&quot; =&gt; &quot;awesome&quot;)</code></pre>
+<pre class="output"><code>Julia is an awesome opensource programming language</code></pre></li>
+<li><p><code>split</code>: fatia uma string por um delimitador:</p>
+<pre class="language-julia"><code>split(julia_string, &quot; &quot;)</code></pre>
+<pre class="output"><code>SubString{String}[&quot;Julia&quot;, &quot;is&quot;, &quot;an&quot;, &quot;amazing&quot;, &quot;opensource&quot;, &quot;programming&quot;, &quot;language&quot;]</code></pre></li>
+</ol>
+<h4 data-number="3.2.2.4" id="sec:string_conversions"><span class="header-section-number">3.2.2.4</span> Convertendo em/parseando Strings</h4>
+<p>Muitas vezes, precisamos <strong>converter</strong> tipos de variáveis em Julia. Para converter um número em uma string, podemos usar a função <code>string</code>:</p>
+<pre class="language-julia"><code>my_number = 123
+typeof(string(my_number))</code></pre>
+<pre class="output"><code>String</code></pre>
+<p>Às vezes, queremos o oposto: converter uma string em um número (ou, como se diz no jargão, parsear essa string). Julia tem uma função útil para isso: <code>parse</code>.</p>
+<pre class="language-julia"><code>typeof(parse(Int64, &quot;123&quot;))</code></pre>
+<pre class="output"><code>Int64</code></pre>
+<p>Às vezes, queremos jogar pelo seguro com essas conversões. É aí que entra a função <code>tryparse</code>. Tem a mesma funcionalidade que <code>parse</code> mas retorna um valor do tipo solicitado ou <code>nothing</code>. Isso faz com que a <code>tryparse</code> seja útil quando buscamos evitar erros. Claro, você precisará lidar com todos aqueles valores <code>nothing</code> depois.</p>
+<pre class="language-julia"><code>tryparse(Int64, &quot;A very non-numeric string&quot;)</code></pre>
+<pre class="output"><code>nothing</code></pre>
+<h3 data-number="3.2.3" id="sec:tuple"><span class="header-section-number">3.2.3</span> Tupla</h3>
+<p>Julia tem uma estrutura de dados chamada <strong>tupla</strong>. Ela é muito <em>especial</em> em Julia porque ela é frequentemente usada em relação às funções. Uma vez que as funções são um recurso importante em Julia, todo usuário precisa saber o básico das tuplas.</p>
+<p>Uma tupla é um <strong>contâiner de tamanho fixo que pode conter vários tipos diferentes</strong>. Uma tupla é um <strong>objeto imutável</strong>, o que significa que não pode ser modificado após a instanciação. Para construir uma tupla, use parênteses <code>()</code> para delimitar o início e o fim, junto com vírgulas <code>,</code> como delimitadores entre valores:</p>
+<pre class="language-julia"><code>my_tuple = (1, 3.14, &quot;Julia&quot;)</code></pre>
+<pre class="output"><code>(1, 3.14, &quot;Julia&quot;)</code></pre>
+<p>Aqui, estamos criando uma tupla com três valores. Cada um dos valores é um tipo diferente. Podemos acessá-los por meio de indexação. Assim:</p>
+<pre class="language-julia"><code>my_tuple[2]</code></pre>
+<pre class="output"><code>3.14</code></pre>
+<p>Também podemos iterar sobre tuplas com a palavra-chave <code>for</code>. E até mesmo aplicar funções sobre tuplas. Mas nós nunca podemos <strong>mudar qualquer valor de uma tupla</strong> já que elas são <strong>imutáveis</strong>.</p>
+<p>Você se lembra funções que retornam vários valores em Section <a href="/pt/syntax#sec:function_multiple">3.1.4.2</a>? Vamos inspecionar o que nossa função <code>add_multiply</code> retorna:</p>
+<pre class="language-julia"><code>return_multiple = add_multiply(1, 2)
+typeof(return_multiple)</code></pre>
+<pre class="output"><code>Tuple{Int64, Int64}</code></pre>
+<p>Isso ocorre porque <code>return a, b</code> é o mesmo que <code>return (a, b)</code>:</p>
+<pre class="language-julia"><code>1, 2</code></pre>
+<pre class="output"><code>(1, 2)</code></pre>
+<p>Agora você pode ver porque tuplas e funções são frequentemente relacionadas.</p>
+<p>Mais uma coisa para pensarmos sobre as tuplas. <strong>Quando você deseja passar mais de uma variável para uma função anônima, adivinhe o que você precisa usar? Tuplas!</strong></p>
+<pre class="language-julia"><code>map((x, y) -&gt; x^y, 2, 3)</code></pre>
+<pre class="output"><code>8</code></pre>
+<p>Ou ainda, mais do que dois argumentos:</p>
+<pre class="language-julia"><code>map((x, y, z) -&gt; x^y + z, 2, 3, 1)</code></pre>
+<pre class="output"><code>9</code></pre>
+<h3 data-number="3.2.4" id="sec:namedtuple"><span class="header-section-number">3.2.4</span> Tupla Nomeada</h3>
+<p>Às vezes, você deseja nomear os valores contidos nas tuplas. É aí que entram as <strong>tuplas nomeadas</strong>. Sua funcionalidade é praticamente a mesma das tuplas: são <strong>imutáveis</strong> e podem conter <strong>todo tipo de valor</strong>.</p>
+<p>A construção das tuplas nomeadas é ligeiramente diferente das tuplas. Você tem os familiares parênteses <code>()</code> e a vírgula <code>,</code> separadora de valor. Mas agora, você <strong>nomeia os valores</strong>:</p>
+<pre class="language-julia"><code>my_namedtuple = (i=1, f=3.14, s=&quot;Julia&quot;)</code></pre>
+<pre class="output"><code>(i = 1, f = 3.14, s = &quot;Julia&quot;)</code></pre>
+<p>Podemos acessar os valores de uma tupla nomeada por meio da indexação como em tuplas regulares ou, alternativamente, <strong>acessá-los por seus nomes</strong> com o <code>.</code>:</p>
+<pre class="language-julia"><code>my_namedtuple.s</code></pre>
+<pre class="output"><code>Julia</code></pre>
+<p>Encerrando nossa discussão sobre tuplas nomeadas, há uma sintaxe <em>rápida</em> importante que você verá muito no código de Julia. Frequentemente, os usuários de Julia criam uma tupla nomeada usando o parêntese familiar <code>()</code> e vírgulas <code>,</code>, mas sem nomear os valores. Para fazer isso, <strong>comece a construção da tupla nomeada especificando primeiro um ponto e vírgula <code>;</code> antes dos valores</strong>. Isto é especialmente útil quando os valores que iriam compor a tupla nomeada já estão definidos em variáveis ou quando você deseja evitar linhas longas:</p>
+<pre class="language-julia"><code>i = 1
+f = 3.14
+s = &quot;Julia&quot;
+
+my_quick_namedtuple = (; i, f, s)</code></pre>
+<pre class="output"><code>(i = 1, f = 3.14, s = &quot;Julia&quot;)</code></pre>
+<h3 data-number="3.2.5" id="sec:ranges"><span class="header-section-number">3.2.5</span> Ranges</h3>
+<p>Uma <strong>range</strong> em Julia representa um intervalo entre os limites de início e parada. A sintaxe é <code>start:stop</code>:</p>
+<pre class="language-julia"><code>1:10</code></pre>
+<pre class="output"><code>1:10</code></pre>
+<p>Como você pode ver, nosso range instanciado é do tipo <code>UnitRange{T}</code> onde <code>T</code> é o tipo de dados contido dentro de <code>UnitRange</code>:</p>
+<pre class="language-julia"><code>typeof(1:10)</code></pre>
+<pre class="output"><code>UnitRange{Int64}</code></pre>
+<p>E, se recolhermos todos os valores, temos:</p>
+<pre class="language-julia"><code>[x for x in 1:10]</code></pre>
+<pre class="output"><code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code></pre>
+<p>Também podemos construir ranges para outros tipos:</p>
+<pre class="language-julia"><code>typeof(1.0:10.0)</code></pre>
+<pre class="output"><code>StepRangeLen{Float64, Base.TwicePrecision{Float64}, Base.TwicePrecision{Float64}, Int64}</code></pre>
+<p>Às vezes, queremos mudar o comportamento padrão do incremento do intervalo. Podemos fazer isso adicionando um incremento específico por meio da sintaxe da range <code>start:step:stop</code>. Por exemplo, suponha que queremos um range de <code>Float64</code> que vá de 0 a 1 com passos do tamanho de 0.2:</p>
+<pre class="language-julia"><code>0.0:0.2:1.0</code></pre>
+<pre class="output"><code>0.0:0.2:1.0</code></pre>
+<p>Se você quer “materializar” a range, transformando-a em uma coleção, você pode usar a função <code>collect</code>:</p>
+<pre class="language-julia"><code>collect(1:10)</code></pre>
+<pre class="output"><code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code></pre>
+<p>Assim, temos uma array do tipo especificado no range entre os limites que definimos. Já que estamos falando de arrays, vamos conversar sobre eles.</p>
+<h3 data-number="3.2.6" id="sec:array"><span class="header-section-number">3.2.6</span> Array</h3>
+<p>Na sua forma mais básica, <strong>arrays</strong> contém múltiplos objetos. Por exemplo, elas podem armazenar múltiplos números em uma dimensão:</p>
+<pre class="language-julia"><code>myarray = [1, 2, 3]</code></pre>
+<pre class="output"><code>[1, 2, 3]</code></pre>
+<p>Na maioria das vezes você quer ter <strong>arrays de tipo único para evitar problemas de performance</strong>, mas observe que elas também podem conter objetos de diferentes tipos:</p>
+<pre class="language-julia"><code>myarray = [&quot;text&quot;, 1, :symbol]</code></pre>
+<pre class="output"><code>Any[&quot;text&quot;, 1, :symbol]</code></pre>
+<p>Elas são o “pão com manteiga” da ciência de dados, porque as arrays são o que está por trás da maior parte do fluxo de trabalho em <strong>manipulação de dados</strong> e <strong>visualização de dados</strong>.</p>
+<p>Portanto, <strong>arrays são uma estrutura de dados essencial</strong>.</p>
+<h4 data-number="3.2.6.1" id="sec:array_types"><span class="header-section-number">3.2.6.1</span> Tipos de array</h4>
+<p>Vamos começar com os <strong>tipos de arrays</strong>. Existem vários, mas vamos nos concentrar nos dois mais usados em ciência de dados:</p>
+<ul>
+<li><code>Vector{T}</code>: array <strong>unidimensional</strong>. Escrita alternativa para <code>Array{T, 1}</code>.</li>
+<li><code>Matrix{T}</code>: array<strong>bidimensional</strong>. Escrita alternativa para <code>Array{T, 2}</code>.</li>
+</ul>
+<p>Observe aqui que <code>T</code> é o tipo da array subjacente. Então, por exemplo, <code>Vector{Int64}</code> é um <code>Vector</code> no qual todos os elementos são <code>Int64</code>, e <code>Matrix{AbstractFloat}</code> é uma <code>Matrix</code> em que todos os elementos são subtipos de <code>AbstractFloat</code>.</p>
+<p>Na maioria das vezes, especialmente ao lidar com dados tabulares, estamos usando arrays unidimensionais ou bidimensionais. Ambos são tipos <code>Array</code> para Julia. Mas, podemos usar os apelidos úteis <code>Vector</code> e <code>Matrix</code> para uma sintaxe clara e concisa.</p>
+<h4 data-number="3.2.6.2" id="sec:array_construction"><span class="header-section-number">3.2.6.2</span> Construção de Array</h4>
+<p>Como <strong>construímos</strong> uma array? Nesta seção, começamos construindo arrays de uma forma mais baixo-nível. Isso pode ser necessário para escrever código de alto desempenho em algumas situações. No entanto, isso não é necessário na maioria das situações, e podemos, com segurança, usar métodos mais convenientes para criar arrays. Esses métodos mais convenientes serão descritos posteriormente nesta seção.</p>
+<p>O construtor de baixo nível para arrays em Julia é o <strong>construtor padrão</strong>. Ele aceita o tipo de elemento como o parâmetro de tipo dentro dos colchetes <code>{}</code> e dentro do construtor você passará o tipo de elemento seguido pelas dimensões desejadas. É comum inicializar vetores e matrizes com elementos indefinidos usando o argumento para tipo <code>undef</code>. Um vetor de 10 elementos <code>undef</code> <code>Float64</code> pode ser construído como:</p>
+<pre class="language-julia"><code>my_vector = Vector{Float64}(undef, 10)</code></pre>
+<pre class="output"><code>[0.0, 6.91151961776797e-310, 6.91151961245736e-310, 0.0, 6.91151961776797e-310, 6.91151961245736e-310, 0.0, 6.91151961776797e-310, 6.91151961245736e-310, 0.0]</code></pre>
+<p>Para matrizes, uma vez que estamos lidando com objetos bidimensionais, precisamos passar dois argumentos de dimensão dentro do construtor: um para <strong>linhas</strong> e outro para <strong>colunas</strong>. Por exemplo, uma matriz com 10 linhas e 2 colunas de elementos indefinidos <code>undef</code> pode ser instanciada como:</p>
+<pre class="language-julia"><code>my_matrix = Matrix{Float64}(undef, 10, 2)</code></pre>
+<pre class="output"><code>10×2 Matrix{Float64}:
+ 8.72578e-311  2.0237e-320
+ 1.28823e-231  3.40846e-313
+ 8.69183e-311  2.22507e-308
+ 2.23377e-308  3.39525e-313
+ 1.28825e-231  2.0316e-320
+ 2.2338e-308   0.0
+ 2.5765e-231   0.0
+ 8.69183e-311  0.0
+ 2.5765e-231   0.0
+ 1.33145e-315  6.91152e-310</code></pre>
+<p>Nós também temos algumas <strong>apelidos sintáticos</strong> para os elementos mais comuns na construção de arrays:</p>
+<ul>
+<li><p><code>zeros</code> para todos os elementos inicializados em zero. Observe que o tipo padrão é <code>Float64</code> que pode ser alterado se necessário:</p>
+<pre class="language-julia"><code>my_vector_zeros = zeros(10)</code></pre>
+<pre class="output"><code>[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]</code></pre>
+<pre class="language-julia"><code>my_matrix_zeros = zeros(Int64, 10, 2)</code></pre>
+<pre class="output"><code>10×2 Matrix{Int64}:
+ 0  0
+ 0  0
+ 0  0
+ 0  0
+ 0  0
+ 0  0
+ 0  0
+ 0  0
+ 0  0
+ 0  0</code></pre></li>
+<li><p><code>ones</code> para todos os elementos inicializados em um:</p>
+<pre class="language-julia"><code>my_vector_ones = ones(Int64, 10)</code></pre>
+<pre class="output"><code>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]</code></pre>
+<pre class="language-julia"><code>my_matrix_ones = ones(10, 2)</code></pre>
+<pre class="output"><code>10×2 Matrix{Float64}:
+ 1.0  1.0
+ 1.0  1.0
+ 1.0  1.0
+ 1.0  1.0
+ 1.0  1.0
+ 1.0  1.0
+ 1.0  1.0
+ 1.0  1.0
+ 1.0  1.0
+ 1.0  1.0</code></pre></li>
+</ul>
+<p>Para outros elementos, podemos primeiro instanciar uma array com elementos <code>undef</code> e usar a função <code>fill!</code> para preencher todos os elementos de uma array com o elemento desejado. Segue um exemplo com <code>3.14</code> (<span class="math inline">\(\pi\)</span>):</p>
+<pre class="language-julia"><code>my_matrix_π = Matrix{Float64}(undef, 2, 2)
+fill!(my_matrix_π, 3.14)</code></pre>
+<pre class="output"><code>2×2 Matrix{Float64}:
+ 3.14  3.14
+ 3.14  3.14</code></pre>
+<p>Também podemos criar arrays com <strong>literais de array</strong>. Por exemplo, segue uma matriz 2x2 de inteiros:</p>
+<pre class="language-julia"><code>[[1 2]
+ [3 4]]</code></pre>
+<pre class="output"><code>2×2 Matrix{Int64}:
+ 1  2
+ 3  4</code></pre>
+<p>Literais de array também aceitam uma especificação de tipo antes dos colchetes <code>[]</code>. Então, se quisermos a mesma array 2x2 de antes mas agora como floats, podemos:</p>
+<pre class="language-julia"><code>Float64[[1 2]
+        [3 4]]</code></pre>
+<pre class="output"><code>2×2 Matrix{Float64}:
+ 1.0  2.0
+ 3.0  4.0</code></pre>
+<p>Também funciona para vetores:</p>
+<pre class="language-julia"><code>Bool[0, 1, 0, 1]</code></pre>
+<pre class="output"><code>Bool[0, 1, 0, 1]</code></pre>
+<p>Você pode até <strong>misturar e combinar</strong> literais de array com os construtores:</p>
+<pre class="language-julia"><code>[ones(Int, 2, 2) zeros(Int, 2, 2)]</code></pre>
+<pre class="output"><code>2×4 Matrix{Int64}:
+ 1  1  0  0
+ 1  1  0  0</code></pre>
+<pre class="language-julia"><code>[zeros(Int, 2, 2)
+ ones(Int, 2, 2)]</code></pre>
+<pre class="output"><code>4×2 Matrix{Int64}:
+ 0  0
+ 0  0
+ 1  1
+ 1  1</code></pre>
+<pre class="language-julia"><code>[ones(Int, 2, 2) [1; 2]
+ [3 4]            5]</code></pre>
+<pre class="output"><code>3×3 Matrix{Int64}:
+ 1  1  1
+ 1  1  2
+ 3  4  5</code></pre>
+<p>Outra maneira poderosa de criar uma array é escrever uma <strong>compreensão de array</strong>. Esta maneira de criar arrays é melhor na maioria dos casos: evita loops, indexação e outras operações sujeitas a erros. Você especifica o que deseja fazer dentro dos colchetes <code>[]</code>. Por exemplo, digamos que queremos criar um vetor de quadrados de 1 a 10:</p>
+<pre class="language-julia"><code>[x^2 for x in 1:10]</code></pre>
+<pre class="output"><code>[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</code></pre>
+<p>Eles também suportam múltiplas entradas:</p>
+<pre class="language-julia"><code>[x*y for x in 1:10 for y in 1:2]</code></pre>
+<pre class="output"><code>[1, 2, 2, 4, 3, 6, 4, 8, 5, 10, 6, 12, 7, 14, 8, 16, 9, 18, 10, 20]</code></pre>
+<p>E condicionais:</p>
+<pre class="language-julia"><code>[x^2 for x in 1:10 if isodd(x)]</code></pre>
+<pre class="output"><code>[1, 9, 25, 49, 81]</code></pre>
+<p>Tal como acontece com literais de array, você pode especificar o tipo desejado antes dos colchetes <code>[]</code>:</p>
+<pre class="language-julia"><code>Float64[x^2 for x in 1:10 if isodd(x)]</code></pre>
+<pre class="output"><code>[1.0, 9.0, 25.0, 49.0, 81.0]</code></pre>
+<p>Finalmente, também podemos criar arrays com <strong>funções de concatenação</strong>. Concatenação é um termo padrão em programação e significa “acorrentar juntos.” Por exemplo, podemos concatenar strings com “aa” e “bb” para conseguir “aabb”:</p>
+<pre class="language-julia"><code>&quot;aa&quot; * &quot;bb&quot;</code></pre>
+<p>aabb</p>
+<p>E podemos concatenar arrays para criar novas arrays:</p>
+<ul>
+<li><p><code>cat</code>: concatenar arrays de entrada ao longo de uma dimensão específica <code>dims</code></p>
+<pre class="language-julia"><code>cat(ones(2), zeros(2), dims=1)</code></pre>
+<pre class="output"><code>[1.0, 1.0, 0.0, 0.0]</code></pre>
+<pre class="language-julia"><code>cat(ones(2), zeros(2), dims=2)</code></pre>
+<pre class="output"><code>2×2 Matrix{Float64}:
+ 1.0  0.0
+ 1.0  0.0</code></pre></li>
+<li><p><code>vcat</code>: concatenação vertical, uma abreviatura para <code>cat(...; dims=1)</code></p>
+<pre class="language-julia"><code>vcat(ones(2), zeros(2))</code></pre>
+<pre class="output"><code>[1.0, 1.0, 0.0, 0.0]</code></pre></li>
+<li><p><code>hcat</code>: concatenação horizontal, uma abreviatura para <code>cat(...; dims=2)</code></p>
+<pre class="language-julia"><code>hcat(ones(2), zeros(2))</code></pre>
+<pre class="output"><code>2×2 Matrix{Float64}:
+ 1.0  0.0
+ 1.0  0.0</code></pre></li>
+</ul>
+<h4 data-number="3.2.6.3" id="sec:array_inspection"><span class="header-section-number">3.2.6.3</span> Inspeção de Arrays</h4>
+<p>Assim que tivermos arrays, o próximo passo lógico seria <strong>inspeciona-las</strong>. Existem várias funções úteis que permitem ao usuário ter uma visão de qualquer array.</p>
+<p>É muito útil saber que <strong>tipo de elementos</strong> existem dentro de uma array. Fazemos isso com <code>eltype</code>:</p>
+<pre class="language-julia"><code>eltype(my_matrix_π)</code></pre>
+<pre class="output"><code>Float64</code></pre>
+<p>Depois de conhecer seus tipos, alguém pode se interessar nas <strong>dimensões da array</strong>. Julia tem várias funções para inspecionar as dimensões da array:</p>
+<ul>
+<li><p><code>length</code>: número total de elementos</p>
+<pre class="language-julia"><code>length(my_matrix_π)</code></pre>
+<pre class="output"><code>4</code></pre></li>
+<li><p><code>ndims</code>: número de dimensões</p>
+<pre class="language-julia"><code>ndims(my_matrix_π)</code></pre>
+<pre class="output"><code>2</code></pre></li>
+<li><p><code>size</code>: esse é um pouco complicado. Por padrão, ele retornará uma tupla contendo as dimensões da array.</p>
+<pre class="language-julia"><code>size(my_matrix_π)</code></pre>
+<pre class="output"><code>(2, 2)</code></pre>
+<p>Você pode obter uma dimensão específica com um segundo argumento para <code>size</code>. Aqui, o segundo eixo são as colunas</p>
+<pre class="language-julia"><code>size(my_matrix_π, 2)</code></pre>
+<pre class="output"><code>2</code></pre></li>
+</ul>
+<h4 data-number="3.2.6.4" id="sec:array_indexing"><span class="header-section-number">3.2.6.4</span> Indexação e Fatiamento de Array</h4>
+<p>Às vezes, queremos inspecionar apenas certas partes de uma array. Chamamos isso de <strong>indexação</strong> e <strong>fatiamento</strong>. Se você quiser uma observação particular de um vetor, ou uma linha ou coluna de uma matriz, você provavelmente precisará <strong>indexar uma array</strong>.</p>
+<p>Primeiro, vou criar um vetor e uma matriz de exemplo para brincar:</p>
+<pre class="language-julia"><code>my_example_vector = [1, 2, 3, 4, 5]
+
+my_example_matrix = [[1 2 3]
+                     [4 5 6]
+                     [7 8 9]]</code></pre>
+<p>Vamos começar com vetores. Supondo que você queira o segundo elemento de um vetor. Você usa colchetes <code>[]</code> com o <strong>índice</strong> desejado dentro:</p>
+<pre class="language-julia"><code>my_example_vector[2]</code></pre>
+<pre class="output"><code>2</code></pre>
+<p>A mesma sintaxe segue com as matrizes. Mas, como as matrizes são arrays bidimensionais, temos que especificar <em>ambas</em> linhas e colunas. Vamos recuperar o elemento da segunda linha (primeira dimensão) e primeira coluna (segunda dimensão):</p>
+<pre class="language-julia"><code>my_example_matrix[2, 1]</code></pre>
+<pre class="output"><code>4</code></pre>
+<p>Júlia também possui palavras-chave convencionais para o <strong>primeiro</strong> e <strong>último</strong> elementos de uma array: <code>begin</code> e <code>end</code>. Por exemplo, o penúltimo elemento de um vetor pode ser recuperado como:</p>
+<pre class="language-julia"><code>my_example_vector[end-1]</code></pre>
+<pre class="output"><code>4</code></pre>
+<p>Isso também funciona para matrizes. Vamos recuperar o elemento da última linha e segunda coluna:</p>
+<pre class="language-julia"><code>my_example_matrix[end, begin+1]</code></pre>
+<pre class="output"><code>8</code></pre>
+<p>Muitas vezes, não estamos só interessados em apenas um elemento da array, mas em todo um <strong>subconjunto de elementos da array</strong>. Podemos fazer isso <strong>fatiando</strong> uma array. Usamos a mesma sintaxe de índice, mas adicionando dois pontos <code>:</code> para denotar os limites a partir dos quais estamos fatiando a array. Por exemplo, suponha que queremos obter do 2º ao 4º elemento de um vetor:</p>
+<pre class="language-julia"><code>my_example_vector[2:4]</code></pre>
+<pre class="output"><code>[2, 3, 4]</code></pre>
+<p>Poderíamos fazer o mesmo com matrizes. Particularmente com matrizes, se quisermos selecionar <strong>todos os elementos</strong> em uma dimensão seguinte, podemos fazer isso com apenas dois pontos <code>:</code>. Por exemplo, para obter todos os elementos da segunda linha:</p>
+<pre class="language-julia"><code>my_example_matrix[2, :]</code></pre>
+<pre class="output"><code>[4, 5, 6]</code></pre>
+<p>Você pode interpretar isso com algo como “pegue a 2ª linha e todas as colunas.”</p>
+<p>Também suporta <code>begin</code> e <code>end</code>:</p>
+<pre class="language-julia"><code>my_example_matrix[begin+1:end, end]</code></pre>
+<pre class="output"><code>[6, 9]</code></pre>
+<h4 data-number="3.2.6.5" id="sec:array_manipulation"><span class="header-section-number">3.2.6.5</span> Manipulações de Array</h4>
+<p>Existem várias formas para <strong>manipular</strong> uma array. O primeiro seria manipular um <strong>único elemento da array</strong>. Nós apenas indexamos a array pelo elemento desejado e procedemos com uma atribuição <code>=</code>:</p>
+<pre class="language-julia"><code>my_example_matrix[2, 2] = 42
+my_example_matrix</code></pre>
+<pre class="output"><code>3×3 Matrix{Int64}:
+ 1   2  3
+ 4  42  6
+ 7   8  9</code></pre>
+<p>Ou, você pode manipular um determinado <strong>subconjunto de elementos da array</strong>. Nesse caso, precisamos fatiar a array e, em seguida, atribuir com <code>=</code>:</p>
+<pre class="language-julia"><code>my_example_matrix[3, :] = [17, 16, 15]
+my_example_matrix</code></pre>
+<pre class="output"><code>3×3 Matrix{Int64}:
+  1   2   3
+  4  42   6
+ 17  16  15</code></pre>
+<p>Observe que tivemos que atribuir um vetor porque nossa array fatiada é do tipo <code>Vector</code>:</p>
+<pre class="language-julia"><code>typeof(my_example_matrix[3, :])</code></pre>
+<pre class="output"><code>Vector{Int64} (alias for Array{Int64, 1})</code></pre>
+<p>A segunda maneira de manipular uma array é <strong>alterando suas dimensões</strong>. Suponha que você tenha um vetor de 6 elementos e deseja torná-lo uma matriz 3x2. Você pode fazer isso com <code>reshape</code>, usando a array como o primeiro argumento e uma tupla de dimensões como segundo argumento:</p>
+<pre class="language-julia"><code>six_vector = [1, 2, 3, 4, 5, 6]
+tree_two_matrix = reshape(six_vector, (3, 2))
+tree_two_matrix</code></pre>
+<pre class="output"><code>3×2 Matrix{Int64}:
+ 1  4
+ 2  5
+ 3  6</code></pre>
+<p>Você pode convertê-la de volta em um vetor especificando uma tupla com apenas uma dimensão como o segundo argumento:</p>
+<pre class="language-julia"><code>reshape(tree_two_matrix, (6, ))</code></pre>
+<pre class="output"><code>[1, 2, 3, 4, 5, 6]</code></pre>
+<p>A terceira forma pela qual podemos manipular uma array é <strong>aplicando uma função sobre cada elemento da array</strong>. Aqui é onde o operador “dot” <code>.</code>, também conhecido como <em>broadcasting</em>, entra.</p>
+<pre class="language-julia"><code>logarithm.(my_example_matrix)</code></pre>
+<pre class="output"><code>3×3 Matrix{Float64}:
+ 0.0      0.693147  1.09861
+ 1.38629  3.73767   1.79176
+ 2.83321  2.77259   2.70805</code></pre>
+<p>O operador dot em Julia é extremamente versátil. Você pode até mesmo usá-lo para vetorizar operadores infixos:</p>
+<pre class="language-julia"><code>my_example_matrix .+ 100</code></pre>
+<pre class="output"><code>3×3 Matrix{Int64}:
+ 101  102  103
+ 104  142  106
+ 117  116  115</code></pre>
+<p>Uma alternativa para fazer o broadcasting de função sobre um vetor é usar <code>map</code>:</p>
+<pre class="language-julia"><code>map(logarithm, my_example_matrix)</code></pre>
+<pre class="output"><code>3×3 Matrix{Float64}:
+ 0.0      0.693147  1.09861
+ 1.38629  3.73767   1.79176
+ 2.83321  2.77259   2.70805</code></pre>
+<p>Para funções anônimas, <code>map</code> geralmente é mais legível. Por exemplo,</p>
+<pre class="language-julia"><code>map(x -&gt; 3x, my_example_matrix)</code></pre>
+<pre class="output"><code>3×3 Matrix{Int64}:
+  3    6   9
+ 12  126  18
+ 51   48  45</code></pre>
+<p>é bastante claro. No entanto, a mesma operação utilizando o operador de broadcast fica da seguinte forma:</p>
+<pre class="language-julia"><code>(x -&gt; 3x).(my_example_matrix)</code></pre>
+<pre class="output"><code>3×3 Matrix{Int64}:
+  3    6   9
+ 12  126  18
+ 51   48  45</code></pre>
+<p>Além disso, <code>map</code> funciona com fatiamento:</p>
+<pre class="language-julia"><code>map(x -&gt; x + 100, my_example_matrix[:, 3])</code></pre>
+<pre class="output"><code>[103, 106, 115]</code></pre>
+<p>Finalmente, às vezes, e especialmente ao lidar com dados tabulares, queremos aplicar uma <strong>função sobre todos os elementos em uma dimensão específica de uma array</strong>. Isso pode ser feito com a função <code>mapslices</code>. Parecido com <code>map</code>, o primeiro argumento é a função e o segundo argumento é a array. A única mudança é que precisamos especificar o argumento <code>dims</code> para sinalizar em qual dimensão queremos transformar os elementos.</p>
+<p>Por exemplo, vamos usar <code>mapslice</code> com a função <code>sum</code> em ambas as linhas (<code>dims=1</code>) e colunas (<code>dims=2</code>):</p>
+<pre class="language-julia"><code># rows
+mapslices(sum, my_example_matrix; dims=1)</code></pre>
+<pre class="output"><code>1×3 Matrix{Int64}:
+ 22  60  24</code></pre>
+<pre class="language-julia"><code># columns
+mapslices(sum, my_example_matrix; dims=2)</code></pre>
+<pre class="output"><code>3×1 Matrix{Int64}:
+  6
+ 52
+ 48</code></pre>
+<h4 data-number="3.2.6.6" id="sec:array_iteration"><span class="header-section-number">3.2.6.6</span> Iteração de array</h4>
+<p>Uma operação comum é <strong>iterar sobre uma array com um laço <code>for</code></strong>. O <strong>laço <code>for</code> regular, quando aplicado sobre uma array retorna cada elemento</strong>.</p>
+<p>O exemplo mais simples é com um vetor.</p>
+<pre class="language-julia"><code>simple_vector = [1, 2, 3]
+
+empty_vector = Int64[]
+
+for i in simple_vector
+    push!(empty_vector, i + 1)
+end
+
+empty_vector</code></pre>
+<pre class="output"><code>[2, 3, 4]</code></pre>
+<p>Às vezes, você não quer iterar sobre cada elemento, mas sim sobre cada índice da array. <strong>Podemos usar a função <code>eachindex</code> combinada com um loop <code>for</code> para iterar sobre cada índice de array</strong>.</p>
+<p>Novamente, vamos mostrar um exemplo com um vetor:</p>
+<pre class="language-julia"><code>forty_twos = [42, 42, 42]
+
+empty_vector = Int64[]
+
+for i in eachindex(forty_twos)
+    push!(empty_vector, i)
+end
+
+empty_vector</code></pre>
+<pre class="output"><code>[1, 2, 3]</code></pre>
+<p>Nesse exemplo, o <code>eachindex(forty_twos)</code> retorna os índices de <code>forty_twos</code>, nomeadamente <code>[1, 2, 3]</code>.</p>
+<p>Da mesma forma, podemos iterar sobre matrizes. O laço <code>for</code> padrão itera primeiro sobre as colunas e depois sobre as linhas. Ele irá primeiro percorrer todos os elementos na coluna 1, da primeira à última linha, em seguida, ele se moverá para a coluna 2 de maneira semelhante até cobrir todas as colunas.</p>
+<p>Para aqueles familiarizados com outras linguagens de programação: Julia, como a maioria das linguagens de programação científica, é “colunar.” Colunar significa que os elementos da coluna são armazenados lado a lado na memória<a href="/pt#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a>. Isso também significa que iterar sobre os elementos em uma coluna é muito mais rápido do que sobre os elementos em uma linha.</p>
+<p>Ok, vamos mostrar isso em um exemplo:</p>
+<pre class="language-julia"><code>column_major = [[1 3]
+                [2 4]]
+
+row_major = [[1 2]
+             [3 4]]</code></pre>
+<p>Se fizermos um loop sobre o vetor armazenado de forma ordenada para as colunas, então o resultado também é ordenado:</p>
+<pre class="language-julia"><code>indexes = Int64[]
+
+for i in column_major
+    push!(indexes, i)
+end
+
+indexes</code></pre>
+<pre class="output"><code>[1, 2, 3, 4]</code></pre>
+<p>No entanto, o resultado não fica ordenado ao interarmos sobre a outra matriz:</p>
+<pre class="language-julia"><code>indexes = Int64[]
+
+for i in row_major
+    push!(indexes, i)
+end
+
+indexes</code></pre>
+<pre class="output"><code>[1, 3, 2, 4]</code></pre>
+<p>Muitas vezes é melhor usar funções especializadas para esses loops:</p>
+<ul>
+<li><p><code>eachcol</code>: itera sobre uma array coluna a coluna</p>
+<pre class="language-julia"><code>first(eachcol(column_major))</code></pre>
+<pre class="output"><code>[1, 2]</code></pre></li>
+<li><p><code>eachrow</code>: itera sobre uma array linha a linha</p>
+<pre class="language-julia"><code>first(eachrow(column_major))</code></pre>
+<pre class="output"><code>[1, 3]</code></pre></li>
+</ul>
+<h3 data-number="3.2.7" id="sec:pair"><span class="header-section-number">3.2.7</span> Par</h3>
+<p>Em comparação com a enorme seção sobre arrays, esta seção sobre pares será breve. <strong><code>Par</code> é uma estrutura de dados que contém dois objetos</strong> (que em geral estão relacionados um ao outro). Construímos um par em Julia usando a seguinte sintaxe:</p>
+<pre class="language-julia"><code>my_pair = &quot;Julia&quot; =&gt; 42</code></pre>
+<pre class="output"><code>&quot;Julia&quot; =&gt; 42</code></pre>
+<p>Os elementos são armazenados nos campos <code>first</code> e <code>second</code>.</p>
+<pre class="language-julia"><code>my_pair.first</code></pre>
+<pre class="output"><code>Julia</code></pre>
+<pre class="language-julia"><code>my_pair.second</code></pre>
+<pre class="output"><code>42</code></pre>
+<p>Mas, na maioria dos casos, é mais fácil usar <code>first</code> e <code>last</code><a href="/pt#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a>:</p>
+<pre class="language-julia"><code>first(my_pair)</code></pre>
+<pre class="output"><code>Julia</code></pre>
+<pre class="language-julia"><code>last(my_pair)</code></pre>
+<pre class="output"><code>42</code></pre>
+<p>Os pares serão muito usados na manipulação e visualização de dados, uma vez que ambos <code>DataFrames.jl</code> (Section <a href="/pt/dataframes#sec:dataframes">4</a>) e <code>Makie.jl</code> (Section <a href="/pt/DataVisualizationMakie#sec:DataVisualizationMakie">5</a>) aceitam objetos do tipo <code>Pair</code> em suas funções principais. Por exemplo, com <code>DataFrames.jl</code> veremos que <code>:a =&gt; :b</code> pode ser usado para renomear a coluna <code>:a</code> para <code>:b</code>.</p>
+<h3 data-number="3.2.8" id="sec:dict"><span class="header-section-number">3.2.8</span> Dict</h3>
+<p>Se você entendeu o que é um <code>Pair</code>, então <code>Dict</code> não será um problema. Para todos os propósitos práticos, <strong><code>Dict</code>s são mapeamentos de chaves para valores</strong>. Por mapeamento, queremos dizer que se você der alguma chave a um <code>Dict</code>, então o <code>Dict</code> poderá lhe dizer qual valor pertence àquela chave. Chaves (<code>key</code>s) e valores (<code>value</code>s) podem ser de qualquer tipo, mas normalmente <code>key</code>s são strings.</p>
+<p>Existem duas maneiras de construir <code>Dict</code>s em Julia. A primeira é passando um vetor de tuplas como <code>(key, value)</code> para o construtor <code>Dict</code>:</p>
+<pre class="language-julia"><code>name2number_map = Dict([(&quot;one&quot;, 1), (&quot;two&quot;, 2)])</code></pre>
+<pre class="output"><code>Dict{String, Int64} with 2 entries:
+  &quot;two&quot; =&gt; 2
+  &quot;one&quot; =&gt; 1</code></pre>
+<p>Existe uma sintaxe mais legível com base no tipo <code>Pair</code> descrito acima. Você também pode passar <code>Pair</code>s de <code>key =&gt; value</code>s para o construtor <code>Dict</code>:</p>
+<pre class="language-julia"><code>name2number_map = Dict(&quot;one&quot; =&gt; 1, &quot;two&quot; =&gt; 2)</code></pre>
+<pre class="output"><code>Dict{String, Int64} with 2 entries:
+  &quot;two&quot; =&gt; 2
+  &quot;one&quot; =&gt; 1</code></pre>
+<p>Você pode recuperar um <code>value</code> de um <code>Dict</code>s ao indexá-lo pela <code>key</code> correspondente:</p>
+<pre class="language-julia"><code>name2number_map[&quot;one&quot;]</code></pre>
+<pre class="output"><code>1</code></pre>
+<p>Para adicionar uma nova entrada, você indexa o <code>Dict</code> pela <code>key</code> desejada e atribui um <code>value</code> com o operador de atribuição <code>=</code>:</p>
+<pre class="language-julia"><code>name2number_map[&quot;three&quot;] = 3</code></pre>
+<pre class="output"><code>3</code></pre>
+<p>Se você quer checar se um <code>Dict</code> tem uma certa <code>key</code> você pode usar <code>keys</code> e <code>in</code>:</p>
+<pre class="language-julia"><code>&quot;two&quot; in keys(name2number_map)</code></pre>
+<pre class="output"><code>true</code></pre>
+<p>Para deletar uma <code>key</code> você pode usar a função <code>delete!</code>:</p>
+<pre class="language-julia"><code>delete!(name2number_map, &quot;three&quot;)</code></pre>
+<pre class="output"><code>Dict{String, Int64} with 2 entries:
+  &quot;two&quot; =&gt; 2
+  &quot;one&quot; =&gt; 1</code></pre>
+<p>Ou, para excluir uma chave enquanto retorna seu valor, você pode usar <code>pop!</code>:</p>
+<pre class="language-julia"><code>popped_value = pop!(name2number_map, &quot;two&quot;)</code></pre>
+<pre class="output"><code>2</code></pre>
+<p>Agora, nosso <code>name2number_map</code> tem apenas uma <code>key</code>:</p>
+<pre class="language-julia"><code>name2number_map</code></pre>
+<pre class="output"><code>Dict{String, Int64} with 1 entry:
+  &quot;one&quot; =&gt; 1</code></pre>
+<p><code>Dict</code>s também são usados para manipulação de dados por <code>DataFrames.jl</code> (Section <a href="/pt/dataframes#sec:dataframes">4</a>) e para visualização de dados por <code>Makie.jl</code> (Section <a href="/pt/DataVisualizationMakie#sec:DataVisualizationMakie">5</a>). Logo, é importante conhecer suas funcionalidades básicas.</p>
+<p>Existe outra maneira útil de construir <code>Dict</code>s. Suponha que você tenha dois vetores e deseja construir um <code>Dict</code> com um deles como se fosse <code>key</code>s e outro como se fosse <code>value</code>s. Você pode fazer isso com uma função <code>zip</code> que “junta” dois objetos (como um zíper):</p>
+<pre class="language-julia"><code>A = [&quot;one&quot;, &quot;two&quot;, &quot;three&quot;]
+B = [1, 2, 3]
+
+name2number_map = Dict(zip(A, B))</code></pre>
+<pre class="output"><code>Dict{String, Int64} with 3 entries:
+  &quot;two&quot; =&gt; 2
+  &quot;one&quot; =&gt; 1
+  &quot;three&quot; =&gt; 3</code></pre>
+<p>Por exemplo, agora podemos obter o número 3 via:</p>
+<pre class="language-julia"><code>name2number_map[&quot;three&quot;]</code></pre>
+<pre class="output"><code>3</code></pre>
+<h3 data-number="3.2.9" id="sec:symbol"><span class="header-section-number">3.2.9</span> Símbolo</h3>
+<p><code>Symbol</code> na verdade <em>não</em> é uma estrutura de dados. É um tipo e se comporta de modo muito parecido com uma string. Em vez de colocar o texto entre aspas, um símbolo começa com dois pontos (:) e pode conter sublinhados:</p>
+<pre class="language-julia"><code>sym = :some_text</code></pre>
+<pre class="output"><code>:some_text</code></pre>
+<p>Podemos facilmente converter um símbolo em string e vice-versa:</p>
+<pre class="language-julia"><code>s = string(sym)</code></pre>
+<pre class="output"><code>some_text</code></pre>
+<pre class="language-julia"><code>sym = Symbol(s)</code></pre>
+<pre class="output"><code>:some_text</code></pre>
+<p>Um benefício simples dos símbolos é que você digita um caractere a menos, ou seja, <code>:some_text</code> versus <code>"some text"</code>. Usamos muito <code>Symbol</code>s na manipulação de dados com o package <code>DataFrames.jl</code> (Section <a href="/pt/dataframes#sec:dataframes">4</a>) e em visualização de dados com o package <code>Makie.jl</code> (Section <a href="/pt/DataVisualizationMakie#sec:DataVisualizationMakie">5</a>).</p>
+<h3 data-number="3.2.10" id="sec:splat"><span class="header-section-number">3.2.10</span> Operador Splat</h3>
+<p>Em Julia, temos o operador “splat” <code>...</code> que é usado em chamadas de função como uma <strong>sequência de argumentos</strong>. Ocasionalmente, usaremos o splat em algumas chamadas de função nos capítulos sobre <strong>manipulação de dados</strong> e <strong>visualização de dados</strong>.</p>
+<p>A maneira mais intuitiva de aprender sobre o splat é com um exemplo. A função <code>add_elements</code> abaixo leva três argumentos para serem somados:</p>
+<pre class="language-julia"><code>add_elements(a, b, c) = a + b + c</code></pre>
+<pre class="output"><code>add_elements (generic function with 1 method)</code></pre>
+<p>Agora, suponha que temos uma coleção com três elementos. A maneira ingênua de fazer isso seria fornecer à função todos os três elementos como argumentos de função:</p>
+<pre class="language-julia"><code>my_collection = [1, 2, 3]
+
+add_elements(my_collection[1], my_collection[2], my_collection[3])</code></pre>
+<pre class="output"><code>6</code></pre>
+<p>Aqui é que usamos o operador “splat” <code>...</code> que pega uma coleção (geralmente uma array, vetor, tupla ou range) e a converte em uma sequência de argumentos:</p>
+<pre class="language-julia"><code>add_elements(my_collection...)</code></pre>
+<pre class="output"><code>6</code></pre>
+<p>O <code>...</code> deve ser incluído após a coleção que queremos espalhar ou “splat” em uma sequência de argumentos. Ambos os exemplos apresentados acima têm o mesmo resultado:</p>
+<pre class="language-julia"><code>add_elements(my_collection...) == add_elements(my_collection[1], my_collection[2], my_collection[3])</code></pre>
+<pre class="output"><code>true</code></pre>
+<p>Sempre que Julia vê um operador splat dentro de uma chamada de função, ele será convertido em uma sequência de argumentos para todos os elementos da coleção separados por vírgulas.</p>
+<p>Também funciona para ranges:</p>
+<pre class="language-julia"><code>add_elements(1:3...)</code></pre>
+<pre class="output"><code>6</code></pre>
+
+
+<div class="bottom-nav">
+    <p id="nav-prev" style="text-align: left;">
+        <a class="menu-level-2" href="/pt/syntax"><b>3.1</b> Sintaxe da linguagem</a> <kbd>←</kbd>
+        <span id="nav-next" style="float: right;">
+            <kbd>→</kbd> <a class="menu-level-2" href="/pt/filesystem"><b>3.3</b> Sistema de Arquivos</a>
+        </span>
+    </p>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn13" role="doc-endnote"><p> 13. ou, que os ponteiros de endereço de memória para os elementos na coluna são armazenados um ao lado do outro.<a href="/pt#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14" role="doc-endnote"><p> 14. é mais fácil porque <code>first</code> e <code>last</code> também funcionam em muitas outras coleções, então você não precisa se lembrar de tanta coisa.<a href="/pt#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+
+<div class="license">
+    <br/>
+  <br/>
+  <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+    Jose Storopoli, Rik Huijzer, Lazaro Alonso
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jose Storopoli" />
+  <meta name="author" content="Rik Huijzer" />
+  <meta name="author" content="Lazaro Alonso" />
+  <title>Colors and Colormaps - Julia Data Science</title>
+  <link rel="shortcut icon" type="image/png" href="/JuliaDataScience/favicon.png"/>
+  <link rel="stylesheet" href="/JuliaDataScience/style.css"/>
+    <script src="/JuliaDataScience/mousetrap.min.js"></script>
+    <style>
+  @font-face {
+    font-family: JuliaMono-Regular;
+    src: url("/JuliaDataScience/JuliaMono-Regular.woff2");
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/JuliaDataScience/github.min.css">
+<script src="/JuliaDataScience/highlight.min.js"></script>
+<script src="/JuliaDataScience/julia.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre').forEach((el) => {
+        if (!el.classList.contains('output')) {
+            hljs.highlightElement(el);
+        }
+    });
+});
+</script>
+ 
+</head>
+<body>
+<script>
+function click_next() {
+  var next = document.getElementById('nav-next');
+  next.firstElementChild.nextElementSibling.click();
+}
+function click_prev() {
+  var prev = document.getElementById('nav-prev');
+  prev.firstElementChild.click();
+}
+Mousetrap.bind('right', click_next);
+Mousetrap.bind('h', click_prev);
+Mousetrap.bind('left', click_prev);
+Mousetrap.bind('l', click_next);
+</script>
+
+<div class="books-container">
+<aside class="books-menu">
+<input type="checkbox" id="menu">
+<label for="menu">☰</label>
+<div class="books-title">
+<a href="/JuliaDataScience/">Julia Data Science</a>
+</div><br />
+<span class="books-subtitle">
+
+</span>
+<div class="books-menu-content">
+<li><a class="menu-level-1" href="/JuliaDataScience/preface"><b>1</b> Preface</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/why_data_science"><b>1.1</b> What is Data Science?</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/engineering"><b>1.2</b> Software Engineering</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/acknowledgements"><b>1.3</b> Acknowledgements</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/why_julia"><b>2</b> Why Julia?</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/non-programmers"><b>2.1</b> For Non-Programmers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/programmers"><b>2.2</b> For Programmers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/julia_accomplish"><b>2.3</b> What Julia Aims to Accom..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/julia_wild"><b>2.4</b> Julia in the Wild</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/julia_basics"><b>3</b> Julia Basics</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/ide"><b>3.1</b> Development Environments</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/syntax"><b>3.2</b> Language Syntax</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/data_structures"><b>3.3</b> Native Data Structures</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/filesystem"><b>3.4</b> Filesystem</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/standardlibrary"><b>3.5</b> Julia Standard Library</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/dataframes"><b>4</b> DataFrames.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/load_save"><b>4.1</b> Load and Save Files</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/index-and-summarize"><b>4.2</b> Index and Summarize</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/filter_subset"><b>4.3</b> Filter and Subset</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/select"><b>4.4</b> Select</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/types"><b>4.5</b> Types and Categorical Da..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/join"><b>4.6</b> Join</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/transform"><b>4.7</b> Variable Transformations</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/groupby_combine"><b>4.8</b> Groupby and Combine</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/missing"><b>4.9</b> Missing Data</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/df_performance"><b>4.10</b> Performance</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/dataframesmeta"><b>5</b> DataFramesMeta.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_macros"><b>5.1</b> Macros</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_select"><b>5.2</b> Column Selection</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_transform"><b>5.3</b> Column Transformation</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_subset"><b>5.4</b> Row Selection</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_orderby"><b>5.5</b> Row Sorting</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_combine"><b>5.6</b> Data Summaries</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_chain"><b>5.7</b> Piping Operations</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/DataVisualizationMakie"><b>6</b> Data Visualization with Ma..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/cairomakie"><b>6.1</b> CairoMakie.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/datavisMakie_attributes"><b>6.2</b> Attributes</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/datavisMakie_create_Figure"><b>6.3</b> Create Plot Figure</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_cheat_sheets"><b>6.4</b> Cheat Sheets</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/themes"><b>6.5</b> Themes</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/using-latexstrings.jl"><b>6.6</b> Using LaTeXStrings.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_colors"><b>6.7</b> Colors and Colormaps</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_layouts"><b>6.8</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/glmakie"><b>6.9</b> GLMakie.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/recipe_df"><b>6.10</b> A Makie recipe for a Da..</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/aog"><b>7</b> Data Visualization with Al..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_layers"><b>7.1</b> Layers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_layouts"><b>7.2</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_stats"><b>7.3</b> Statistical Visualizatio..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_custom"><b>7.4</b> Plot Customizations</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_makie"><b>7.5</b> Makie.jl and AlgebraOfGr..</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/appendix"><b>8</b> Appendix</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/appendix_pkg"><b>8.1</b> Packages Versions</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/notation"><b>8.2</b> Notation</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/references"><b></b> References</a></li>
+</div>
+</aside>
+
+<div class="books-content">
+<h2 data-number="6.7" id="sec:makie_colors"><span class="header-section-number">6.7</span> Colors and Colormaps</h2>
+<p>Choosing an appropriate set of colors or colorbar for your plot is an essential part when presenting results. Using <a href="https://github.com/JuliaGraphics/Colors.jl">Colors.jl</a> is supported in <code>Makie.jl</code> so that you can use <a href="https://juliagraphics.github.io/Colors.jl/latest/namedcolors/">named colors</a> or pass <code>RGB</code> or <code>RGBA</code> values. Additionally, colormaps from <a href="https://github.com/JuliaGraphics/ColorSchemes.jl">ColorSchemes.jl</a> and <a href="https://github.com/peterkovesi/PerceptualColourMaps.jl">PerceptualColourMaps.jl</a> can also be used. It is worth knowing that you can reverse a colormap by doing <code>Reverse(:colormap_name)</code> and obtain a transparent color or colormap with <code>color=(:red,0.5)</code> and <code>colormap=(:viridis, 0.5)</code>.</p>
+<p>Different use cases will be shown next. Then we will define a custom theme with new colors and a colorbar palette.</p>
+<h3 data-number="6.7.1" id="colors"><span class="header-section-number">6.7.1</span> Colors</h3>
+<p>By default <code>Makie.jl</code> has a predefined set of colors in order to cycle through them automatically, as shown in the previous figures, where no specific color was set. Overwriting these defaults is done by calling the keyword <code>color</code> in the plotting function and specifying a new color via a <code>Symbol</code> or <code>String</code>. See this in the following example:</p>
+<pre class="language-julia"><code>function set_colors_and_cycle()
+    # Epicycloid lines
+    x(r, k, θ) = r * (k .+ 1.0) .* cos.(θ) .- r * cos.((k .+ 1.0) .* θ)
+    y(r, k, θ) = r * (k .+ 1.0) .* sin.(θ) .- r * sin.((k .+ 1.0) .* θ)
+    θ = range(0, 6.2π, 1000)
+
+    axis = (; xlabel=L&quot;x(\theta)&quot;, ylabel=L&quot;y(\theta)&quot;,
+        title=&quot;Epicycloid&quot;, aspect=DataAspect())
+    figure = (; size=(600, 400), font=&quot;CMU Serif&quot;)
+
+    fig, ax, _ = lines(x(1, 1, θ), y(1, 1, θ); color=&quot;firebrick1&quot;, # string
+        label=L&quot;1.0&quot;, axis=axis, figure=figure)
+    lines!(ax, x(4, 2, θ), y(4, 2, θ); color=:royalblue1, #symbol
+        label=L&quot;2.0&quot;)
+    for k = 2.5:0.5:5.5
+        lines!(ax, x(2k, k, θ), y(2k, k, θ); label=latexstring(&quot;$(k)&quot;)) #cycle
+    end
+    Legend(fig[1, 2], ax, latexstring(&quot;k, r = 2k&quot;), merge=true)
+    colsize!(fig.layout, 1, Aspect(1, 1.0))
+    fig
+end
+JDS.set_colors_and_cycle()</code></pre>
+<figure id="fig:set_colors_and_cycle">
+<img src="/JuliaDataScience/im/JDS_set_colors_and_cycle_.svg" alt="Figure 19: Set colors and cycle." />
+<figcaption aria-hidden="true">Figure 19: Set colors and cycle.</figcaption>
+</figure>
+<p>Where, in the first two lines we have used the keyword <code>color</code> to specify our color. The rest is using the default cycle set of colors. Later, we will learn how to do a custom cycle.</p>
+<h3 data-number="6.7.2" id="colormap-reverse"><span class="header-section-number">6.7.2</span> Colormap, Reverse</h3>
+<p>Regarding colormaps, we are already familiar with the keyword <code>colormap</code> for heatmaps and scatters. Here, we show that a colormap can also be specified via a <code>Symbol</code> or a <code>String</code>, similar to colors. Or, even a vector of <code>RGB</code> colors. Let’s do our first example by calling colormaps as a <code>Symbol</code>, <code>String</code> and <code>cgrad</code> for categorical values. See <code>?cgrad</code> for more information.</p>
+<pre class="language-julia"><code>figure = (; size=(600, 400), font=&quot;CMU Serif&quot;)
+axis = (; xlabel=L&quot;x&quot;, ylabel=L&quot;y&quot;, aspect=DataAspect())
+fig, ax, pltobj = heatmap(rand(20, 20); colorrange=(0, 1),
+    colormap=Reverse(:viridis), axis=axis, figure=figure)
+Colorbar(fig[1, 2], pltobj, label = &quot;Reverse sequential colormap&quot;)
+colsize!(fig.layout, 1, Aspect(1, 1.0))
+fig</code></pre>
+<figure id="fig:Reverse_colormap_sequential">
+<img src="/JuliaDataScience/im/Reverse_colormap_sequential.svg" style="width:60.0%" alt="Figure 20: Reverse sequential colormap and colorrange." />
+<figcaption aria-hidden="true">Figure 20: Reverse sequential colormap and colorrange.</figcaption>
+</figure>
+<h3 data-number="6.7.3" id="colormap-highclip-lowclip"><span class="header-section-number">6.7.3</span> Colormap, highclip, lowclip</h3>
+<p>When setting a <code>colorrange</code> usually the values outside this range are colored with the first and last color from the colormap. However, sometimes is better to specify the color you want at both ends. We do that with <code>highclip</code> and <code>lowclip</code>:</p>
+<pre><code>using ColorSchemes</code></pre>
+<pre class="language-julia"><code>figure = (; size=(600, 400), font=&quot;CMU Serif&quot;)
+axis = (; xlabel=L&quot;x&quot;, ylabel=L&quot;y&quot;, aspect=DataAspect())
+fig, ax, pltobj = heatmap(randn(20, 20); colorrange=(-2, 2),
+    colormap=&quot;diverging_rainbow_bgymr_45_85_c67_n256&quot;,
+    highclip=:black, lowclip=:white, axis=axis, figure=figure)
+Colorbar(fig[1, 2], pltobj, label = &quot;Diverging colormap&quot;)
+colsize!(fig.layout, 1, Aspect(1, 1.0))
+fig</code></pre>
+<figure id="fig:diverging_colormap">
+<img src="/JuliaDataScience/im/diverging_colormap.svg" style="width:60.0%" alt="Figure 21: Diverging Colormap with low and high clip." />
+<figcaption aria-hidden="true">Figure 21: Diverging Colormap with low and high clip.</figcaption>
+</figure>
+<p>But we mentioned that also <code>RGB</code> vectors are valid options.</p>
+<h3 data-number="6.7.4" id="colormap-categorical"><span class="header-section-number">6.7.4</span> Colormap, categorical</h3>
+<p>For our next example you could pass the custom colormap <em>perse</em> or use <code>cgrad</code> to force a categorical <code>Colorbar</code>.</p>
+<pre><code>using Colors, ColorSchemes</code></pre>
+<pre class="language-julia"><code>figure = (; size=(600, 400), font=&quot;CMU Serif&quot;)
+axis = (; xlabel=L&quot;x&quot;, ylabel=L&quot;y&quot;, aspect=DataAspect())
+#cmap = ColorScheme(range(colorant&quot;red&quot;, colorant&quot;green&quot;, length=3))
+# this is another way to obtain a colormap, not used here, but try it.
+mycmap = ColorScheme([RGB{Float64}(i, 1.5i, 2i) for i in [0.0, 0.25, 0.35, 0.5]])
+fig, ax, pltobj = heatmap(rand(-1:1, 20, 20);
+    colormap=cgrad(mycmap, 3, categorical=true, rev=true), # cgrad and Symbol, mycmap
+    axis=axis, figure=figure)
+cbar = Colorbar(fig[1, 2], pltobj, label=&quot;Categories&quot;)
+cbar.ticks = ([-0.66, 0, 0.66], [&quot;negative&quot;, &quot;neutral&quot;, &quot;positive&quot;])
+colsize!(fig.layout, 1, Aspect(1, 1.0))
+fig</code></pre>
+<figure id="fig:categorical_colormap">
+<img src="/JuliaDataScience/im/categorical_colormap.svg" style="width:60.0%" alt="Figure 22: Categorical Colormap." />
+<figcaption aria-hidden="true">Figure 22: Categorical Colormap.</figcaption>
+</figure>
+<p>Lastly, the ticks in the colorbar for the categorial case are not centered by default in each color. This is fixed by passing custom ticks, as in <code>cbar.ticks = (positions, ticks)</code>.</p>
+<p>The last case is when passing multiple colors to <code>colormap</code>. You will get an interpolated colormap between those colors. Also, hexadecimal coded colors are accepted. So, on top of our heatmap let’s put one semi-transparent point using this.</p>
+<pre class="language-julia"><code>figure = (; size=(600, 400), font=&quot;CMU Serif&quot;)
+axis = (; xlabel=L&quot;x&quot;, ylabel=L&quot;y&quot;, aspect=DataAspect())
+fig, ax, pltobj = heatmap(rand(20, 20); colorrange=(0, 1),
+    colormap=[&quot;red&quot;, &quot;black&quot;], axis=axis, figure=figure)
+scatter!(ax, [11], [11]; color=(&quot;#C0C0C0&quot;, 0.5), markersize=150)
+Colorbar(fig[1, 2], pltobj, label=&quot;2 colors&quot;)
+colsize!(fig.layout, 1, Aspect(1, 1.0))
+fig</code></pre>
+<figure id="fig:colormap_two_colors">
+<img src="/JuliaDataScience/im/colormap_two_colors.svg" style="width:60.0%" alt="Figure 23: Colormap from two colors." />
+<figcaption aria-hidden="true">Figure 23: Colormap from two colors.</figcaption>
+</figure>
+<h3 data-number="6.7.5" id="custom-cycle"><span class="header-section-number">6.7.5</span> Custom cycle</h3>
+<p>Here, we could define a global <code>Theme</code> with a new cycle for colors, however that is <strong>not the recommend way</strong> to do it. It’s better to define a new theme and use as shown before. Let’s define a new one with a <code>cycle</code> for <code>:color</code>, <code>:linestyle</code>, <code>:marker</code> and a new <code>colormap</code> default. And add these new attributes to our previous <code>publication_theme</code>.</p>
+<pre class="language-julia"><code>function new_cycle_theme()
+    # https://nanx.me/ggsci/reference/pal_locuszoom.html
+    my_colors = [&quot;#D43F3AFF&quot;, &quot;#EEA236FF&quot;, &quot;#5CB85CFF&quot;, &quot;#46B8DAFF&quot;,
+        &quot;#357EBDFF&quot;, &quot;#9632B8FF&quot;, &quot;#B8B8B8FF&quot;]
+    cycle = Cycle([:color, :linestyle, :marker], covary=true) # altogether
+    my_markers = [:circle, :rect, :utriangle, :dtriangle, :diamond,
+        :pentagon, :cross, :xcross]
+    my_linestyle = [:solid, :dash, :dot, :dashdot, :dashdotdot]
+    Theme(
+        fontsize=16, font=&quot;CMU Serif&quot;,
+        colormap=:linear_bmy_10_95_c78_n256,
+        palette=(color=my_colors, marker=my_markers, linestyle=my_linestyle),
+        Lines=(cycle=cycle,),
+        Scatter=(cycle=cycle,),
+        Axis=(xlabelsize=20,xlabelpadding=-5,
+            xgridstyle=:dash, ygridstyle=:dash,
+            xtickalign=1, ytickalign=1,
+            yticksize=10, xticksize=10,
+            xlabel=&quot;x&quot;, ylabel=&quot;y&quot;),
+        Legend=(framecolor=(:black, 0.5), backgroundcolor=(:white, 0.5)),
+        Colorbar=(ticksize=16, tickalign=1, spinewidth=0.5),
+    )
+end</code></pre>
+<p>And apply it to a plotting function like the following:</p>
+<pre class="language-julia"><code>function scatters_and_lines()
+    x = collect(0:10)
+    xh = range(4, 6, 25)
+    yh = range(70, 95, 25)
+    h = randn(25, 25)
+    fig = Figure(size=(600, 400), font=&quot;CMU Serif&quot;)
+    ax = Axis(fig[1, 1]; xlabel=L&quot;x&quot;, ylabel=L&quot;f(x,a)&quot;)
+    for i in x
+        lines!(ax, x, i .* x; label=latexstring(&quot;$(i) x&quot;))
+        scatter!(ax, x, i .* x; markersize=13, strokewidth=0.25,
+            label=latexstring(&quot;$(i) x&quot;))
+    end
+    hm = heatmap!(xh, yh, h)
+    axislegend(L&quot;f(x)&quot;; merge=true, position=:lt, nbanks=2, labelsize=14)
+    Colorbar(fig[1, 2], hm, label=&quot;new default colormap&quot;)
+    limits!(ax, -0.5, 10.5, -5, 105)
+    colgap!(fig.layout, 5)
+    fig
+end</code></pre>
+<pre class="language-julia"><code>with_theme(scatters_and_lines, new_cycle_theme())</code></pre>
+<figure id="fig:custom_cycle">
+<img src="/JuliaDataScience/im/custom_cycle.svg" style="width:60.0%" alt="Figure 24: Custom theme with new cycle and colormap." />
+<figcaption aria-hidden="true">Figure 24: Custom theme with new cycle and colormap.</figcaption>
+</figure>
+<p>At this point you should be able to have <strong>complete control</strong> over your colors, line styles, markers and colormaps for your plots. Next, we will dive into how to manage and control <strong>layouts</strong>.</p>
+
+
+<div class="bottom-nav">
+    <p id="nav-prev" style="text-align: left;">
+        <a class="menu-level-2" href="/JuliaDataScience/using-latexstrings.jl"><b>6.6</b> Using LaTeXStrings.jl</a> <kbd>←</kbd>
+        <span id="nav-next" style="float: right;">
+            <kbd>→</kbd> <a class="menu-level-2" href="/JuliaDataScience/makie_layouts"><b>6.8</b> Layouts</a>
+        </span>
+    </p>
+</div>
+
+
+<div class="license">
+    <br/>
+  <br/>
+  <span style="display: flex; justify-content: center;"> <a
+      style="display: flex; align-items: center; border: 1.5px solid black; border-radius: 10px;"
+      href="https://opencollective.com/juliadatascience" target="_blank"> <img src="/images/coffee.png" height="18px" style="margin: 5px; display:inline"> <span style="margin-left: 4px; color: black !important">Support this project</span> </a> </span> <br> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+    Jose Storopoli, Rik Huijzer, Lazaro Alonso
+</div>
+</div>
+</div>
+</body>
+</html>

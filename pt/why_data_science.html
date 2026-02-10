@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jose Storopoli" />
+  <meta name="author" content="Rik Huijzer" />
+  <meta name="author" content="Lazaro Alonso" />
+  <title>O que é Ciência de Dados? - Julia Data Science</title>
+  <link rel="shortcut icon" type="image/png" href="/pt/favicon.png"/>
+  <link rel="stylesheet" href="/pt/style.css"/>
+    <script src="/pt/mousetrap.min.js"></script>
+    <style>
+  @font-face {
+    font-family: JuliaMono-Regular;
+    src: url("/pt/JuliaMono-Regular.woff2");
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/pt/github.min.css">
+<script src="/pt/highlight.min.js"></script>
+<script src="/pt/julia.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre').forEach((el) => {
+        hljs.highlightElement(el);
+    });
+});
+</script>
+ 
+</head>
+<body>
+<script>
+function click_next() {
+  var next = document.getElementById('nav-next');
+  next.firstElementChild.nextElementSibling.click();
+}
+function click_prev() {
+  var prev = document.getElementById('nav-prev');
+  prev.firstElementChild.click();
+}
+Mousetrap.bind('right', click_next);
+Mousetrap.bind('h', click_prev);
+Mousetrap.bind('left', click_prev);
+Mousetrap.bind('l', click_next);
+</script>
+
+<div class="books-container">
+<aside class="books-menu">
+<input type="checkbox" id="menu">
+<label for="menu">☰</label>
+<div class="books-title">
+<a href="/pt/">Julia Data Science</a>
+</div><br />
+<span class="books-subtitle">
+
+</span>
+<div class="books-menu-content">
+<li><a class="menu-level-1" href="/pt/preface"><b>1</b> Prefácio</a></li>
+<li><a class="menu-level-2" href="/pt/why_data_science"><b>1.1</b> O que é Ciência de Dad..</a></li>
+<li><a class="menu-level-2" href="/pt/engineering"><b>1.2</b> Engenharia de software</a></li>
+<li><a class="menu-level-2" href="/pt/agradecimentos"><b>1.3</b> Agradecimentos</a></li>
+<li><a class="menu-level-1" href="/pt/why_julia"><b>2</b> Por que Julia?</a></li>
+<li><a class="menu-level-2" href="/pt/non-programmers"><b>2.1</b> Para os que nunca progra..</a></li>
+<li><a class="menu-level-2" href="/pt/programmers"><b>2.2</b> Para programadores</a></li>
+<li><a class="menu-level-2" href="/pt/julia_accomplish"><b>2.3</b> O que Julia pretende alc..</a></li>
+<li><a class="menu-level-2" href="/pt/julia_wild"><b>2.4</b> Julia Por Aí</a></li>
+<li><a class="menu-level-1" href="/pt/julia_basics"><b>3</b> Básico de Julia</a></li>
+<li><a class="menu-level-2" href="/pt/syntax"><b>3.1</b> Sintaxe da linguagem</a></li>
+<li><a class="menu-level-2" href="/pt/data_structures"><b>3.2</b> Estruturas Nativas de Da..</a></li>
+<li><a class="menu-level-2" href="/pt/filesystem"><b>3.3</b> Sistema de Arquivos</a></li>
+<li><a class="menu-level-2" href="/pt/standardlibrary"><b>3.4</b> Biblioteca Padrão de Ju..</a></li>
+<li><a class="menu-level-1" href="/pt/dataframes"><b>4</b> DataFrames.jl</a></li>
+<li><a class="menu-level-2" href="/pt/load_save"><b>4.1</b> Carregar e salvar arquiv..</a></li>
+<li><a class="menu-level-2" href="/pt/indexação-e-sumarização"><b>4.2</b> Indexação e Sumarização</a></li>
+<li><a class="menu-level-2" href="/pt/filter_subset"><b>4.3</b> Filtro e Subconjunto</a></li>
+<li><a class="menu-level-2" href="/pt/select"><b>4.4</b> Select</a></li>
+<li><a class="menu-level-2" href="/pt/missing_data"><b>4.5</b> Tipos de Dados e Dados F..</a></li>
+<li><a class="menu-level-2" href="/pt/join"><b>4.6</b> Join</a></li>
+<li><a class="menu-level-2" href="/pt/transformações-de-variáveis"><b>4.7</b> Transformações de Vari..</a></li>
+<li><a class="menu-level-2" href="/pt/groupby_combine"><b>4.8</b> Groupby e Combine</a></li>
+<li><a class="menu-level-2" href="/pt/df_performance"><b>4.9</b> Desempenho</a></li>
+<li><a class="menu-level-1" href="/pt/DataVisualizationMakie"><b>5</b> Visualização de dados co..</a></li>
+<li><a class="menu-level-2" href="/pt/cairomakie"><b>5.1</b> CairoMakie.jl</a></li>
+<li><a class="menu-level-2" href="/pt/datavisMakie_attributes"><b>5.2</b> Atributos</a></li>
+<li><a class="menu-level-2" href="/pt/themes"><b>5.3</b> Temas</a></li>
+<li><a class="menu-level-2" href="/pt/usando-latexstrings.jl"><b>5.4</b> Usando LaTeXStrings.jl</a></li>
+<li><a class="menu-level-2" href="/pt/makie_colors"><b>5.5</b> Cores e mapas de cores</a></li>
+<li><a class="menu-level-2" href="/pt/makie_layouts"><b>5.6</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/pt/glmakie"><b>5.7</b> GLMakie.jl</a></li>
+<li><a class="menu-level-1" href="/pt/appendix"><b>6</b> Apêndice</a></li>
+<li><a class="menu-level-2" href="/pt/appendix_pkg"><b>6.1</b> Versões dos Pacotes</a></li>
+<li><a class="menu-level-2" href="/pt/notation"><b>6.2</b> Formatação</a></li>
+<li><a class="menu-level-1" href="/pt/referências"><b></b> Referências</a></li>
+</div>
+</aside>
+
+<div class="books-content">
+<h2 data-number="1.1" id="sec:why_data_science"><span class="header-section-number">1.1</span> O que é Ciência de Dados?</h2>
+<p>Ciência de dados não se trata apenas de aprendizado de máquina e estatística, também não é somente sobre predição. Também não é uma disciplina totalmente contida nos campos STEM (Ciências, Tecnologia, Engenharia e Matemática) <span class="citation" data-cites="Meng2019Data">(<a href="/pt/references#ref-Meng2019Data" role="doc-biblioref">Meng, 2019</a>)</span>. Entretanto, podemos afirmar com certeza que ciência de dados é sempre sobre <strong>dados</strong>. Nossos objetivos com este livro são dois:</p>
+<ul>
+<li>Focar na espinha dorsal da ciência de dados: <strong>dados</strong>.</li>
+<li>E o uso da linguagem de programação <strong>Julia</strong> para o processamento de dados.</li>
+</ul>
+<p>Explicamos porque Julia é uma linguagem extremamente eficaz para a ciência de dados em Section <a href="/pt/why_julia#sec:why_julia">2</a>. Por enquanto, vamos focar nos dados.</p>
+<h3 data-number="1.1.1" id="sec:data_literacy"><span class="header-section-number">1.1.1</span> Alfabetização de dados</h3>
+<p>De acordo com a <a href="https://pt.wikipedia.org/wiki/Alfabetiza%C3%A7%C3%A3o_de_dados">Wikipedia</a>, a definição formal para <strong>alfabetização de dados é “a habilidade de ler, entender, criar e comunicar dados enquanto informação.”</strong>. Também gostamos da concepção informal de que, ao se tornar alfabetizado em dados, você não se sentirá sufocado pelos dados, mas sim, saberá utilizá-los na tomada correta de decisões. Alfabetização de dados é uma habilidade extremamente competitiva. Neste livro iremos abordar dois importantes aspectos da alfabetização de dados:</p>
+<ol type="1">
+<li><strong>Manipulação de dados</strong> com <code>DataFrames.jl</code> (Section <a href="/pt/dataframes#sec:dataframes">4</a>). Neste capítulo, você aprenderá a:
+<ol type="1">
+<li>Ler dados em CSV e Excel com Julia.</li>
+<li>Processar dados em Julia, ou seja, aprender a responder questões com dados.</li>
+<li>Filtrar dados e criar subconjuntos de dados.</li>
+<li>Lidar com dados faltantes.</li>
+<li>Unir e combinar dados provenientes de várias fontes.</li>
+<li>Agrupar e resumir dados.</li>
+<li>Exportar dados do Julia para arquivos CSV e Excel.</li>
+</ol></li>
+<li><strong>Visualização de dados</strong> com <code>Makie.jl</code> (Section <a href="/pt/DataVisualizationMakie#sec:DataVisualizationMakie">5</a>). Neste capítulo você entenderá como:
+<ol type="1">
+<li>Plotar dados utilizando diversos backends do <code>Makie.jl</code>.</li>
+<li>Salvar visualizações nos mais diferentes formatos, como PNG ou PDF.</li>
+<li>Usar diferentes funções de plotagem para criar diversas formas de visualização dos dados.</li>
+<li>Customizar visualizações por meio de atributos.</li>
+<li>Usar e criar novos temas para suas plotagens.</li>
+<li>Adicionar elementos <span class="math inline">\(\LaTeX\)</span> aos plots.</li>
+<li>Manipular cores e paletas.</li>
+<li>Criar layouts de figuras complexas.</li>
+</ol></li>
+</ol>
+
+
+<div class="bottom-nav">
+    <p id="nav-prev" style="text-align: left;">
+        <a class="menu-level-1" href="/pt/preface"><b>1</b> Prefácio</a> <kbd>←</kbd>
+        <span id="nav-next" style="float: right;">
+            <kbd>→</kbd> <a class="menu-level-2" href="/pt/engineering"><b>1.2</b> Engenharia de software</a>
+        </span>
+    </p>
+</div>
+
+
+<div class="license">
+    <br/>
+  <br/>
+  <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+    Jose Storopoli, Rik Huijzer, Lazaro Alonso
+</div>
+</div>
+</div>
+</body>
+</html>

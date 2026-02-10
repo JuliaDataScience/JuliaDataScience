@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jose Storopoli" />
+  <meta name="author" content="Rik Huijzer" />
+  <meta name="author" content="Lazaro Alonso" />
+  <title>Layouts - Julia Data Science</title>
+  <link rel="shortcut icon" type="image/png" href="/pt/favicon.png"/>
+  <link rel="stylesheet" href="/pt/style.css"/>
+    <script src="/pt/mousetrap.min.js"></script>
+    <style>
+  @font-face {
+    font-family: JuliaMono-Regular;
+    src: url("/pt/JuliaMono-Regular.woff2");
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/pt/github.min.css">
+<script src="/pt/highlight.min.js"></script>
+<script src="/pt/julia.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre').forEach((el) => {
+        hljs.highlightElement(el);
+    });
+});
+</script>
+ 
+</head>
+<body>
+<script>
+function click_next() {
+  var next = document.getElementById('nav-next');
+  next.firstElementChild.nextElementSibling.click();
+}
+function click_prev() {
+  var prev = document.getElementById('nav-prev');
+  prev.firstElementChild.click();
+}
+Mousetrap.bind('right', click_next);
+Mousetrap.bind('h', click_prev);
+Mousetrap.bind('left', click_prev);
+Mousetrap.bind('l', click_next);
+</script>
+
+<div class="books-container">
+<aside class="books-menu">
+<input type="checkbox" id="menu">
+<label for="menu">☰</label>
+<div class="books-title">
+<a href="/pt/">Julia Data Science</a>
+</div><br />
+<span class="books-subtitle">
+
+</span>
+<div class="books-menu-content">
+<li><a class="menu-level-1" href="/pt/preface"><b>1</b> Prefácio</a></li>
+<li><a class="menu-level-2" href="/pt/why_data_science"><b>1.1</b> O que é Ciência de Dad..</a></li>
+<li><a class="menu-level-2" href="/pt/engineering"><b>1.2</b> Engenharia de software</a></li>
+<li><a class="menu-level-2" href="/pt/agradecimentos"><b>1.3</b> Agradecimentos</a></li>
+<li><a class="menu-level-1" href="/pt/why_julia"><b>2</b> Por que Julia?</a></li>
+<li><a class="menu-level-2" href="/pt/non-programmers"><b>2.1</b> Para os que nunca progra..</a></li>
+<li><a class="menu-level-2" href="/pt/programmers"><b>2.2</b> Para programadores</a></li>
+<li><a class="menu-level-2" href="/pt/julia_accomplish"><b>2.3</b> O que Julia pretende alc..</a></li>
+<li><a class="menu-level-2" href="/pt/julia_wild"><b>2.4</b> Julia Por Aí</a></li>
+<li><a class="menu-level-1" href="/pt/julia_basics"><b>3</b> Básico de Julia</a></li>
+<li><a class="menu-level-2" href="/pt/syntax"><b>3.1</b> Sintaxe da linguagem</a></li>
+<li><a class="menu-level-2" href="/pt/data_structures"><b>3.2</b> Estruturas Nativas de Da..</a></li>
+<li><a class="menu-level-2" href="/pt/filesystem"><b>3.3</b> Sistema de Arquivos</a></li>
+<li><a class="menu-level-2" href="/pt/standardlibrary"><b>3.4</b> Biblioteca Padrão de Ju..</a></li>
+<li><a class="menu-level-1" href="/pt/dataframes"><b>4</b> DataFrames.jl</a></li>
+<li><a class="menu-level-2" href="/pt/load_save"><b>4.1</b> Carregar e salvar arquiv..</a></li>
+<li><a class="menu-level-2" href="/pt/indexação-e-sumarização"><b>4.2</b> Indexação e Sumarização</a></li>
+<li><a class="menu-level-2" href="/pt/filter_subset"><b>4.3</b> Filtro e Subconjunto</a></li>
+<li><a class="menu-level-2" href="/pt/select"><b>4.4</b> Select</a></li>
+<li><a class="menu-level-2" href="/pt/missing_data"><b>4.5</b> Tipos de Dados e Dados F..</a></li>
+<li><a class="menu-level-2" href="/pt/join"><b>4.6</b> Join</a></li>
+<li><a class="menu-level-2" href="/pt/transformações-de-variáveis"><b>4.7</b> Transformações de Vari..</a></li>
+<li><a class="menu-level-2" href="/pt/groupby_combine"><b>4.8</b> Groupby e Combine</a></li>
+<li><a class="menu-level-2" href="/pt/df_performance"><b>4.9</b> Desempenho</a></li>
+<li><a class="menu-level-1" href="/pt/DataVisualizationMakie"><b>5</b> Visualização de dados co..</a></li>
+<li><a class="menu-level-2" href="/pt/cairomakie"><b>5.1</b> CairoMakie.jl</a></li>
+<li><a class="menu-level-2" href="/pt/datavisMakie_attributes"><b>5.2</b> Atributos</a></li>
+<li><a class="menu-level-2" href="/pt/themes"><b>5.3</b> Temas</a></li>
+<li><a class="menu-level-2" href="/pt/usando-latexstrings.jl"><b>5.4</b> Usando LaTeXStrings.jl</a></li>
+<li><a class="menu-level-2" href="/pt/makie_colors"><b>5.5</b> Cores e mapas de cores</a></li>
+<li><a class="menu-level-2" href="/pt/makie_layouts"><b>5.6</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/pt/glmakie"><b>5.7</b> GLMakie.jl</a></li>
+<li><a class="menu-level-1" href="/pt/appendix"><b>6</b> Apêndice</a></li>
+<li><a class="menu-level-2" href="/pt/appendix_pkg"><b>6.1</b> Versões dos Pacotes</a></li>
+<li><a class="menu-level-2" href="/pt/notation"><b>6.2</b> Formatação</a></li>
+<li><a class="menu-level-1" href="/pt/referências"><b></b> Referências</a></li>
+</div>
+</aside>
+
+<div class="books-content">
+<h2 data-number="5.6" id="sec:makie_layouts"><span class="header-section-number">5.6</span> Layouts</h2>
+<p>Um <em>canvas</em>/<em>layout</em> completo é definido por <code>Figure</code>, que pode ser preenchido com conteúdo após ser criado. Começaremos com um arranjo simples de um <code>Axis</code>, uma <code>Legend</code> e uma <code>Colorbar</code>. Para esta tarefa, podemos pensar no canvas como um arranjo de <code>rows</code> e <code>columns</code> na indexação de uma <code>Figure</code> bem como um <code>Array</code>/<code>Matrix</code> regular. O conteúdo do <code>Axis</code> estará na <em>linha 1, coluna 1</em>, por exemplo <code>fig[1, 1]</code>, a <code>Colorbar</code> na <em>linha 1, coluna 2</em>, ou seja, <code>fig[1, 2]</code>. E a <code>Legend</code> na <em>linha 2</em> e nas <em>colunas 1 e 2</em>, ou seja, <code>fig[2, 1:2]</code>.</p>
+<pre class="language-julia"><code>function first_layout()
+    seed!(123)
+    x, y, z = randn(6), randn(6), randn(6)
+    fig = Figure(resolution=(600, 400), backgroundcolor=:grey90)
+    ax = Axis(fig[1, 1], backgroundcolor=:white)
+    pltobj = scatter!(ax, x, y; color=z, label=&quot;scatters&quot;)
+    lines!(ax, x, 1.1y; label=&quot;line&quot;)
+    Legend(fig[2, 1:2], ax, &quot;labels&quot;, orientation=:horizontal)
+    Colorbar(fig[1, 2], pltobj, label=&quot;colorbar&quot;)
+    fig
+end
+first_layout()</code></pre>
+<figure>
+<img src="/pt/im/JDS_first_layout_.svg" id="fig:first_layout" style="width:60.0%" alt="Figure 27: First Layout." /><figcaption aria-hidden="true">Figure 27: First Layout.</figcaption>
+</figure>
+<p>Isso já parece bom, mas poderia ser melhor. Podemos corrigir problemas de espaçamento usando as seguintes palavras-chave e métodos:</p>
+<ul>
+<li><code>figure_padding=(left, right, bottom, top)</code></li>
+<li><code>padding=(left, right, bottom, top)</code></li>
+</ul>
+<p>Levar em consideração o tamanho real de uma <code>Legend</code> ou <code>Colorbar</code> é feito por:</p>
+<blockquote>
+<ul>
+<li><code>tellheight=true</code> ou <code>false</code></li>
+<li><code>tellwidth=true</code> ou <code>false</code></li>
+</ul>
+<p><em>Definir como <code>true</code> levará em consideração o tamanho real (altura ou largura) para uma <code>Legend</code> ou <code>Colorbar</code></em>. Consequentemente, as coisas serão redimensionadas de acordo.</p>
+</blockquote>
+<p>O espaço entre colunas e linhas é especificado como:</p>
+<blockquote>
+<ul>
+<li><code>colgap!(fig.layout, col, separation)</code></li>
+<li><code>rowgap!(fig.layout, row, separation)</code></li>
+</ul>
+<p><em>Column gap</em> (<code>colgap!</code>), se <code>col</code> for fornecido, a lacuna será aplicada a essa coluna específica. <em>Row gap</em> (<code>rowgap!</code>) , se a <code>linha</code> for fornecido, a lacuna será aplicada a essa linha específica.</p>
+</blockquote>
+<p>Além disso, veremos como colocar conteúdo nas <strong>protrusões</strong>, <em>i.e.</em> o espaço reservado para título: <code>x</code> e <code>y</code>; ou <code>ticks</code> ou <code>label</code>. Fazemos isso plotando em <code>fig[i, j, protrusion]</code> onde <code>protrusion</code> pode ser <code>Left()</code>, <code>Right()</code>, <code>Bottom()</code> e <code>Top()</code>, ou para cada canto <code>TopLeft()</code>, <code>TopRight()</code>, <code>BottomRight()</code>, <code>BottomLeft()</code>. Veja abaixo como essas opções estão sendo utilizadas:</p>
+<pre class="language-julia"><code>function first_layout_fixed()
+    seed!(123)
+    x, y, z = randn(6), randn(6), randn(6)
+    fig = Figure(figure_padding=(0, 3, 5, 2), resolution=(600, 400),
+        backgroundcolor=:grey90, font=&quot;CMU Serif&quot;)
+    ax = Axis(fig[1, 1], xlabel=L&quot;x&quot;, ylabel=L&quot;y&quot;,
+        title=&quot;Layout example&quot;, backgroundcolor=:white)
+    pltobj = scatter!(ax, x, y; color=z, label=&quot;scatters&quot;)
+    lines!(ax, x, 1.1y, label=&quot;line&quot;)
+    Legend(fig[2, 1:2], ax, &quot;Labels&quot;, orientation=:horizontal,
+        tellheight=true, titleposition=:left)
+    Colorbar(fig[1, 2], pltobj, label=&quot;colorbar&quot;)
+    # additional aesthetics
+    Box(fig[1, 1, Right()], color=(:slateblue1, 0.35))
+    Label(fig[1, 1, Right()], &quot;protrusion&quot;, textsize=18,
+        rotation=pi / 2, padding=(3, 3, 3, 3))
+    Label(fig[1, 1, TopLeft()], &quot;(a)&quot;, textsize=18, padding=(0, 3, 8, 0))
+    colgap!(fig.layout, 5)
+    rowgap!(fig.layout, 5)
+    fig
+end
+first_layout_fixed()</code></pre>
+<figure>
+<img src="/pt/im/JDS_first_layout_fixed_.svg" id="fig:first_layout_fixed" style="width:60.0%" alt="Figure 28: First Layout Fixed." /><figcaption aria-hidden="true">Figure 28: First Layout Fixed.</figcaption>
+</figure>
+<p>Aqui, ter o rótulo <code>(a)</code> no <code>TopLeft()</code> provavelmente não é necessário, isso só fará sentido para mais de dois <em>plots</em>. Para o nosso próximo exemplo vamos continuar usando as ferramentas anteriores e mais algumas para criar uma figura mais rica e complexa.</p>
+<p>Você pode ocultar decorações e espinhas de eixos com:</p>
+<blockquote>
+<ul>
+<li><code>hidedecorations!(ax; kwargs...)</code></li>
+<li><code>hidexdecorations!(ax; kwargs...)</code></li>
+<li><code>hideydecorations!(ax; kwargs...)</code></li>
+<li><code>hidespines!(ax; kwargs...)</code></li>
+</ul>
+</blockquote>
+<p>Lembre-se, sempre podemos pedir ajuda para ver que tipo de argumentos podemos usar, por exemplo,</p>
+<pre class="language-julia"><code>help(hidespines!)</code></pre>
+<pre class="output"><code>  hidespines!(la::Axis, spines::Symbol... = (:l, :r, :b, :t)...)
+
+  Hide all specified axis spines. Hides all spines by default, otherwise
+  choose with the symbols :l, :r, :b and :t.
+
+  hidespines! has the following function signatures:
+
+    (Vector, Vector)
+    (Vector, Vector, Vector)
+    (Matrix)
+
+  Available attributes for Combined{Makie.MakieLayout.hidespines!} are:
+
+  </code></pre>
+<p>Alternativamente, para decorações:</p>
+<pre class="language-julia"><code>help(hidedecorations!)</code></pre>
+<pre class="output"><code>  hidedecorations!(la::Axis)
+
+  Hide decorations of both x and y-axis: label, ticklabels, ticks and grid.
+
+  hidedecorations! has the following function signatures:
+
+    (Vector, Vector)
+    (Vector, Vector, Vector)
+    (Matrix)
+
+  Available attributes for Combined{Makie.MakieLayout.hidedecorations!} are:
+
+  </code></pre>
+<p>Para elementos que <strong>você não deseja ocultar</strong>, apenas passe-os com <code>false</code>, ou seja, <code>hideydecorations!(ax; ticks=false, grid=false)</code>.</p>
+<p>A sincronização do seu <code>Axis</code> é feita via:</p>
+<blockquote>
+<ul>
+<li><code>linkaxes!</code>, <code>linkyaxes!</code> e <code>linkxaxes!</code></li>
+</ul>
+<p>Isso pode ser útil quando eixos compartilhados são desejados. Outra maneira de obter eixos compartilhados será definindo <code>limites!</code>.</p>
+</blockquote>
+<p>Definir limites de uma vez ou independentemente para cada eixo é feito chamando</p>
+<blockquote>
+<ul>
+<li><code>limits!(ax; l, r, b, t)</code>, onde <code>l</code> é esquerda, <code>r</code> direita, <code>b</code> inferior e <code>t</code> superior.</li>
+</ul>
+<p>Você também pode fazer <code>ylims!(low, high)</code> ou <code>xlims!(low, high)</code>, e até mesmo abrir fazendo <code>ylims!(low=0)</code> ou <code>xlims!(high=1)</code>.</p>
+</blockquote>
+<p>Agora, o exemplo:</p>
+<pre class="language-julia"><code>function complex_layout_double_axis()
+    seed!(123)
+    x = LinRange(0, 1, 10)
+    y = LinRange(0, 1, 10)
+    z = rand(10, 10)
+    fig = Figure(resolution=(600, 400), font=&quot;CMU Serif&quot;, backgroundcolor=:grey90)
+    ax1 = Axis(fig, xlabel=L&quot;x&quot;, ylabel=L&quot;y&quot;)
+    ax2 = Axis(fig, xlabel=L&quot;x&quot;)
+    heatmap!(ax1, x, y, z; colorrange=(0, 1))
+    series!(ax2, abs.(z[1:4, :]); labels=[&quot;lab $i&quot; for i = 1:4], color=:Set1_4)
+    hm = scatter!(10x, y; color=z[1, :], label=&quot;dots&quot;, colorrange=(0, 1))
+    hideydecorations!(ax2, ticks=false, grid=false)
+    linkyaxes!(ax1, ax2)
+    #layout
+    fig[1, 1] = ax1
+    fig[1, 2] = ax2
+    Label(fig[1, 1, TopLeft()], &quot;(a)&quot;, textsize=18, padding=(0, 6, 8, 0))
+    Label(fig[1, 2, TopLeft()], &quot;(b)&quot;, textsize=18, padding=(0, 6, 8, 0))
+    Colorbar(fig[2, 1:2], hm, label=&quot;colorbar&quot;, vertical=false, flipaxis=false)
+    Legend(fig[1, 3], ax2, &quot;Legend&quot;)
+    colgap!(fig.layout, 5)
+    rowgap!(fig.layout, 5)
+    fig
+end
+complex_layout_double_axis()</code></pre>
+<figure>
+<img src="/pt/im/JDS_complex_layout_double_axis_.svg" id="fig:complex_layout_double_axis" style="width:60.0%" alt="Figure 29: Complex layout double axis." /><figcaption aria-hidden="true">Figure 29: Complex layout double axis.</figcaption>
+</figure>
+<p>Então, agora nosso <code>Colorbar</code> precisa ser horizontal e as marcações da barra precisam estar na parte inferior. Isso é feito configurando <code>vertical=false</code> e <code>flipaxis=false</code>. Além disso, observe que podemos chamar muitos <code>Axis</code> em <code>fig</code>, ou mesmo <code>Colorbar</code> e <code>Legend</code>, e depois construir o layout.</p>
+<p>Outro layout comum é uma grade de quadrados para mapas de calor:</p>
+<pre class="language-julia"><code>function squares_layout()
+    seed!(123)
+    letters = reshape(collect(&#39;a&#39;:&#39;d&#39;), (2, 2))
+    fig = Figure(resolution=(600, 400), fontsize=14, font=&quot;CMU Serif&quot;,
+        backgroundcolor=:grey90)
+    axs = [Axis(fig[i, j], aspect=DataAspect()) for i = 1:2, j = 1:2]
+    hms = [heatmap!(axs[i, j], randn(10, 10), colorrange=(-2, 2))
+           for i = 1:2, j = 1:2]
+    Colorbar(fig[1:2, 3], hms[1], label=&quot;colorbar&quot;)
+    [Label(fig[i, j, TopLeft()], &quot;($(letters[i, j]))&quot;, textsize=16,
+        padding=(-2, 0, -20, 0)) for i = 1:2, j = 1:2]
+    colgap!(fig.layout, 5)
+    rowgap!(fig.layout, 5)
+    fig
+end
+squares_layout()</code></pre>
+<figure>
+<img src="/pt/im/JDS_squares_layout_.svg" id="fig:squares_layout" style="width:60.0%" alt="Figure 30: Squares layout." /><figcaption aria-hidden="true">Figure 30: Squares layout.</figcaption>
+</figure>
+<p>onde todos os rótulos estão em <strong>protrusões</strong> e cada <code>Axis</code> tem uma razão <code>AspectData()</code>. A <code>Colorbar</code> está localizada na terceira coluna e se expande da linha 1 até a linha 2.</p>
+<p>O próximo caso usa o chamado <strong>modo de alinhamento</strong> <code>Mixed()</code>, o que é especialmente útil ao lidar com grandes espaços vazios entre <code>Axis</code> devido a tiques longos. Ainda, o módulo <code>Dates</code> da biblioteca padrão de Julia será necessário para esse exemplo.</p>
+<pre><code>using Dates</code></pre>
+<pre class="language-julia"><code>function mixed_mode_layout()
+    seed!(123)
+    longlabels = [&quot;$(today() - Day(1))&quot;, &quot;$(today())&quot;, &quot;$(today() + Day(1))&quot;]
+    fig = Figure(resolution=(600, 400), fontsize=12,
+        backgroundcolor=:grey90, font=&quot;CMU Serif&quot;)
+    ax1 = Axis(fig[1, 1])
+    ax2 = Axis(fig[1, 2], xticklabelrotation=pi / 2, alignmode=Mixed(bottom=0),
+        xticks=([1, 5, 10], longlabels))
+    ax3 = Axis(fig[2, 1:2])
+    ax4 = Axis(fig[3, 1:2])
+    axs = [ax1, ax2, ax3, ax4]
+    [lines!(ax, 1:10, rand(10)) for ax in axs]
+    hidexdecorations!(ax3; ticks=false, grid=false)
+    Box(fig[2:3, 1:2, Right()], color=(:slateblue1, 0.35))
+    Label(fig[2:3, 1:2, Right()], &quot;protrusion&quot;, rotation=pi / 2, textsize=14,
+        padding=(3, 3, 3, 3))
+    Label(fig[1, 1:2, Top()], &quot;Mixed alignmode&quot;, textsize=16,
+        padding=(0, 0, 15, 0))
+    colsize!(fig.layout, 1, Auto(2))
+    rowsize!(fig.layout, 2, Auto(0.5))
+    rowsize!(fig.layout, 3, Auto(0.5))
+    rowgap!(fig.layout, 1, 15)
+    rowgap!(fig.layout, 2, 0)
+    colgap!(fig.layout, 5)
+    fig
+end
+mixed_mode_layout()</code></pre>
+<figure>
+<img src="/pt/im/JDS_mixed_mode_layout_.svg" id="fig:mixed_mode_layout" style="width:60.0%" alt="Figure 31: Mixed mode layout." /><figcaption aria-hidden="true">Figure 31: Mixed mode layout.</figcaption>
+</figure>
+<p>Aqui, o argumento <code>alignmode=Mixed(bottom=0)</code> desloca a caixa delimitadora para a parte inferior, de forma a alinhar com o painel à esquerda preenchendo o espaço.</p>
+<p>Também, veja como <code>colsize!</code> e <code>rowsize!</code> estão sendo usados para diferentes colunas e linhas. Você também pode colocar um número ao invés de <code>Auto()</code> mas então tudo vai ser corrigido. E, além disso, pode-se também dar um <code>height</code> ou <code>width</code> ao definir o <code>Axis</code>, como em <code>Axis(fig, heigth=50)</code> que será corrigido também.</p>
+<h3 data-number="5.6.1" id="axis-aninhado-subplots"><span class="header-section-number">5.6.1</span> <code>Axis</code> aninhado (<em>subplots</em>)</h3>
+<p>Também é possível definir um conjunto de <code>Axis</code> (<em>subplots</em>) explicitamente e use-o para construir uma figura principal com várias linhas e colunas. Por exemplo, o seguinte é um arranjo “complicado” de <code>Axis</code>:</p>
+<pre class="language-julia"><code>function nested_sub_plot!(fig)
+    color = rand(RGBf)
+    ax1 = Axis(fig[1, 1], backgroundcolor=(color, 0.25))
+    ax2 = Axis(fig[1, 2], backgroundcolor=(color, 0.25))
+    ax3 = Axis(fig[2, 1:2], backgroundcolor=(color, 0.25))
+    ax4 = Axis(fig[1:2, 3], backgroundcolor=(color, 0.25))
+    return (ax1, ax2, ax3, ax4)
+end</code></pre>
+<p>que, quando usado para construir uma figura mais complexa fazendo várias chamadas, obtemos:</p>
+<pre class="language-julia"><code>function main_figure()
+    fig = Figure()
+    Axis(fig[1, 1])
+    nested_sub_plot!(fig[1, 2])
+    nested_sub_plot!(fig[1, 3])
+    nested_sub_plot!(fig[2, 1:3])
+    fig
+end
+main_figure()</code></pre>
+<figure>
+<img src="/pt/im/JDS_main_figure_.svg" id="fig:main_figure" style="width:60.0%" alt="Figure 32: Main figure." /><figcaption aria-hidden="true">Figure 32: Main figure.</figcaption>
+</figure>
+<p>Observe que diferentes funções de <em>subplot</em> podem ser chamadas aqui. Também, cada <code>Axis</code> aqui é uma parte independente de <code>Figure</code>. Então, se você precisar fazer alguma operação <code>rowgap!</code> ou <code>colsize!</code>, você precisará fazê-lo em cada um deles de forma independente ou em todos eles juntos.</p>
+<p>Para <code>Axis</code> (<em>subplots</em>) agrupados podemos usar <code>GridLayout()</code> que, então, poderia ser usado para compor um <code>Figure</code>.</p>
+<h3 data-number="5.6.2" id="gridlayout-aninhado"><span class="header-section-number">5.6.2</span> GridLayout aninhado</h3>
+<p>Ao usar o <code>GridLayout()</code> podemos agrupar <em>subplots</em>, permitindo mais liberdade na construção de figuras complexas. Aqui, usando nosso <code>nested_sub_plot!</code> anterior, definimos três subgrupos e um <code>Axis</code> normal:</p>
+<pre class="language-julia"><code>function nested_Grid_Layouts()
+    fig = Figure(backgroundcolor=RGBf(0.96, 0.96, 0.96))
+    ga = fig[1, 1] = GridLayout()
+    gb = fig[1, 2] = GridLayout()
+    gc = fig[1, 3] = GridLayout()
+    gd = fig[2, 1:3] = GridLayout()
+    gA = Axis(ga[1, 1])
+    nested_sub_plot!(gb)
+    axsc = nested_sub_plot!(gc)
+    nested_sub_plot!(gd)
+    [hidedecorations!(axsc[i], grid=false, ticks=false) for i = 1:length(axsc)]
+    colgap!(gc, 5)
+    rowgap!(gc, 5)
+    rowsize!(fig.layout, 2, Auto(0.5))
+    colsize!(fig.layout, 1, Auto(0.5))
+    fig
+end
+nested_Grid_Layouts()</code></pre>
+<figure>
+<img src="/pt/im/JDS_nested_Grid_Layouts_.svg" id="fig:nested_Grid_Layouts" style="width:60.0%" alt="Figure 33: Nested Grid Layouts." /><figcaption aria-hidden="true">Figure 33: Nested Grid Layouts.</figcaption>
+</figure>
+<p>Agora, usando <code>rowgap!</code> ou <code>colsize!</code> sobre cada grupo é possível <code>rowsize!, colsize!</code> também pode ser aplicado ao conjunto de <code>GridLayout()</code>.</p>
+<h3 data-number="5.6.3" id="plots-inset"><span class="header-section-number">5.6.3</span> <em>Plots</em> <code>inset</code></h3>
+<p>Atualmente, fazer gráficos <code>inset</code> é um pouco complicado. Aqui, mostramos duas maneiras possíveis de fazer isso definindo inicialmente as funções auxiliares. A primeira é fazendo um <code>BBox</code>, que fica em todo o espaço <code>Figure</code>:</p>
+<pre class="language-julia"><code>function add_box_inset(fig; left=100, right=250, bottom=200, top=300,
+    bgcolor=:grey90)
+    inset_box = Axis(fig, bbox=BBox(left, right, bottom, top),
+        xticklabelsize=12, yticklabelsize=12, backgroundcolor=bgcolor)
+    # bring content upfront
+    translate!(inset_box.scene, 0, 0, 10)
+    elements = keys(inset_box.elements)
+    filtered = filter(ele -&gt; ele != :xaxis &amp;&amp; ele != :yaxis, elements)
+    foreach(ele -&gt; translate!(inset_box.elements[ele], 0, 0, 9), filtered)
+    return inset_box
+end</code></pre>
+<p>Então, o <code>inset</code> é feito facilmente, como em:</p>
+<pre class="language-julia"><code>function figure_box_inset()
+    fig = Figure(resolution=(600, 400))
+    ax = Axis(fig[1, 1], backgroundcolor=:white)
+    inset_ax1 = add_box_inset(fig; left=100, right=250, bottom=200, top=300,
+        bgcolor=:grey90)
+    inset_ax2 = add_box_inset(fig; left=500, right=600, bottom=100, top=200,
+        bgcolor=(:white, 0.65))
+    lines!(ax, 1:10)
+    lines!(inset_ax1, 1:10)
+    scatter!(inset_ax2, 1:10, color=:black)
+    fig
+end
+figure_box_inset()</code></pre>
+<figure>
+<img src="/pt/im/JDS_figure_box_inset_.svg" id="fig:figure_box_inset" style="width:60.0%" alt="Figure 34: Figure box inset." /><figcaption aria-hidden="true">Figure 34: Figure box inset.</figcaption>
+</figure>
+<p>onde as dimensões <code>Box</code> estão vinculadas ao <code>resolution</code> <code>Figure</code>. Observe que um inset também pode estar fora do <code>Axis</code>. A outra abordagem é definir um novo <code>Axis</code> em uma posição <code>fig[i, j]</code> especificando seu <code>width</code>, <code>height</code>, <code>halign</code> and <code>valign</code>. Fazemos isso na seguinte função:</p>
+<pre class="language-julia"><code>function add_axis_inset(; pos=fig[1, 1], halign=0.1, valign=0.5,
+    width=Relative(0.5), height=Relative(0.35), bgcolor=:lightgray)
+    inset_box = Axis(pos, width=width, height=height,
+        halign=halign, valign=valign, xticklabelsize=12, yticklabelsize=12,
+        backgroundcolor=bgcolor)
+    # bring content upfront
+    translate!(inset_box.scene, 0, 0, 10)
+    elements = keys(inset_box.elements)
+    filtered = filter(ele -&gt; ele != :xaxis &amp;&amp; ele != :yaxis, elements)
+    foreach(ele -&gt; translate!(inset_box.elements[ele], 0, 0, 9), filtered)
+    return inset_box
+end</code></pre>
+<p>Veja que no exemplo a seguir o <code>Axis</code> com fundo cinza será redimensionado se o tamanho total da figura for alterado. Os <em>insets</em> são limitados pelo posicionamento do <code>Axis</code>.</p>
+<pre class="language-julia"><code>function figure_axis_inset()
+    fig = Figure(resolution=(600, 400))
+    ax = Axis(fig[1, 1], backgroundcolor=:white)
+    inset_ax1 = add_axis_inset(; pos=fig[1, 1], halign=0.1, valign=0.65,
+        width=Relative(0.3), height=Relative(0.3), bgcolor=:grey90)
+    inset_ax2 = add_axis_inset(; pos=fig[1, 1], halign=1, valign=0.25,
+        width=Relative(0.25), height=Relative(0.3), bgcolor=(:white, 0.65))
+    lines!(ax, 1:10)
+    lines!(inset_ax1, 1:10)
+    scatter!(inset_ax2, 1:10, color=:black)
+    fig
+end
+figure_axis_inset()</code></pre>
+<figure>
+<img src="/pt/im/JDS_figure_axis_inset_.svg" id="fig:figure_axis_inset" style="width:60.0%" alt="Figure 35: Figure axis inset." /><figcaption aria-hidden="true">Figure 35: Figure axis inset.</figcaption>
+</figure>
+<p>E isso deve cobrir os casos mais usados para layout com Makie. Agora, vamos fazer alguns bons exemplos 3D com <code>GLMakie.jl</code>.</p>
+
+
+<div class="bottom-nav">
+    <p id="nav-prev" style="text-align: left;">
+        <a class="menu-level-2" href="/pt/makie_colors"><b>5.5</b> Cores e mapas de cores</a> <kbd>←</kbd>
+        <span id="nav-next" style="float: right;">
+            <kbd>→</kbd> <a class="menu-level-2" href="/pt/glmakie"><b>5.7</b> GLMakie.jl</a>
+        </span>
+    </p>
+</div>
+
+
+<div class="license">
+    <br/>
+  <br/>
+  <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+    Jose Storopoli, Rik Huijzer, Lazaro Alonso
+</div>
+</div>
+</div>
+</body>
+</html>

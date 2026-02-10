@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jose Storopoli" />
+  <meta name="author" content="Rik Huijzer" />
+  <meta name="author" content="Lazaro Alonso" />
+  <title>Layouts - Julia Data Science</title>
+  <link rel="shortcut icon" type="image/png" href="/JuliaDataScience/favicon.png"/>
+  <link rel="stylesheet" href="/JuliaDataScience/style.css"/>
+    <script src="/JuliaDataScience/mousetrap.min.js"></script>
+    <style>
+  @font-face {
+    font-family: JuliaMono-Regular;
+    src: url("/JuliaDataScience/JuliaMono-Regular.woff2");
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/JuliaDataScience/github.min.css">
+<script src="/JuliaDataScience/highlight.min.js"></script>
+<script src="/JuliaDataScience/julia.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre').forEach((el) => {
+        if (!el.classList.contains('output')) {
+            hljs.highlightElement(el);
+        }
+    });
+});
+</script>
+ 
+</head>
+<body>
+<script>
+function click_next() {
+  var next = document.getElementById('nav-next');
+  next.firstElementChild.nextElementSibling.click();
+}
+function click_prev() {
+  var prev = document.getElementById('nav-prev');
+  prev.firstElementChild.click();
+}
+Mousetrap.bind('right', click_next);
+Mousetrap.bind('h', click_prev);
+Mousetrap.bind('left', click_prev);
+Mousetrap.bind('l', click_next);
+</script>
+
+<div class="books-container">
+<aside class="books-menu">
+<input type="checkbox" id="menu">
+<label for="menu">☰</label>
+<div class="books-title">
+<a href="/JuliaDataScience/">Julia Data Science</a>
+</div><br />
+<span class="books-subtitle">
+
+</span>
+<div class="books-menu-content">
+<li><a class="menu-level-1" href="/JuliaDataScience/preface"><b>1</b> Preface</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/why_data_science"><b>1.1</b> What is Data Science?</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/engineering"><b>1.2</b> Software Engineering</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/acknowledgements"><b>1.3</b> Acknowledgements</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/why_julia"><b>2</b> Why Julia?</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/non-programmers"><b>2.1</b> For Non-Programmers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/programmers"><b>2.2</b> For Programmers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/julia_accomplish"><b>2.3</b> What Julia Aims to Accom..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/julia_wild"><b>2.4</b> Julia in the Wild</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/julia_basics"><b>3</b> Julia Basics</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/ide"><b>3.1</b> Development Environments</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/syntax"><b>3.2</b> Language Syntax</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/data_structures"><b>3.3</b> Native Data Structures</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/filesystem"><b>3.4</b> Filesystem</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/standardlibrary"><b>3.5</b> Julia Standard Library</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/dataframes"><b>4</b> DataFrames.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/load_save"><b>4.1</b> Load and Save Files</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/index-and-summarize"><b>4.2</b> Index and Summarize</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/filter_subset"><b>4.3</b> Filter and Subset</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/select"><b>4.4</b> Select</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/types"><b>4.5</b> Types and Categorical Da..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/join"><b>4.6</b> Join</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/transform"><b>4.7</b> Variable Transformations</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/groupby_combine"><b>4.8</b> Groupby and Combine</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/missing"><b>4.9</b> Missing Data</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/df_performance"><b>4.10</b> Performance</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/dataframesmeta"><b>5</b> DataFramesMeta.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_macros"><b>5.1</b> Macros</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_select"><b>5.2</b> Column Selection</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_transform"><b>5.3</b> Column Transformation</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_subset"><b>5.4</b> Row Selection</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_orderby"><b>5.5</b> Row Sorting</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_combine"><b>5.6</b> Data Summaries</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_chain"><b>5.7</b> Piping Operations</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/DataVisualizationMakie"><b>6</b> Data Visualization with Ma..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/cairomakie"><b>6.1</b> CairoMakie.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/datavisMakie_attributes"><b>6.2</b> Attributes</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/datavisMakie_create_Figure"><b>6.3</b> Create Plot Figure</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_cheat_sheets"><b>6.4</b> Cheat Sheets</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/themes"><b>6.5</b> Themes</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/using-latexstrings.jl"><b>6.6</b> Using LaTeXStrings.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_colors"><b>6.7</b> Colors and Colormaps</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_layouts"><b>6.8</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/glmakie"><b>6.9</b> GLMakie.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/recipe_df"><b>6.10</b> A Makie recipe for a Da..</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/aog"><b>7</b> Data Visualization with Al..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_layers"><b>7.1</b> Layers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_layouts"><b>7.2</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_stats"><b>7.3</b> Statistical Visualizatio..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_custom"><b>7.4</b> Plot Customizations</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_makie"><b>7.5</b> Makie.jl and AlgebraOfGr..</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/appendix"><b>8</b> Appendix</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/appendix_pkg"><b>8.1</b> Packages Versions</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/notation"><b>8.2</b> Notation</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/references"><b></b> References</a></li>
+</div>
+</aside>
+
+<div class="books-content">
+<h2 data-number="6.8" id="sec:makie_layouts"><span class="header-section-number">6.8</span> Layouts</h2>
+<p>A complete <em>canvas/layout</em> is defined by <code>Figure</code>, which can be filled with content after creation. We will start with a simple arrangement of one <code>Axis</code>, one <code>Legend</code> and one <code>Colorbar</code>. For this task we can think of the canvas as an arrangement of <code>rows</code> and <code>columns</code> in indexing a <code>Figure</code> much like a regular <code>Array</code>/<code>Matrix</code>. The <code>Axis</code> content will be in <em>row 1, column 1</em>, e.g. <code>fig[1, 1]</code>, the <code>Colorbar</code> in <em>row 1, column 2</em>, namely <code>fig[1, 2]</code>. And the <code>Legend</code> in <em>row 2</em> and across <em>column 1 and 2</em>, namely <code>fig[2, 1:2]</code>.</p>
+<pre class="language-julia"><code>function first_layout()
+    seed!(123)
+    x, y, z = randn(6), randn(6), randn(6)
+    fig = Figure(size=(600, 400), backgroundcolor=:snow2)
+    ax = Axis(fig[1, 1], backgroundcolor=:white)
+    pltobj = scatter!(ax, x, y; color=z, label=&quot;scatters&quot;)
+    lines!(ax, x, 1.1y; label=&quot;line&quot;)
+    Legend(fig[2, 1:2], ax, &quot;labels&quot;, orientation=:horizontal)
+    Colorbar(fig[1, 2], pltobj, label=&quot;colorbar&quot;)
+    fig
+end
+JDS.first_layout()</code></pre>
+<figure id="fig:first_layout">
+<img src="/JuliaDataScience/im/JDS_first_layout_.svg" style="width:60.0%" alt="Figure 25: First Layout." />
+<figcaption aria-hidden="true">Figure 25: First Layout.</figcaption>
+</figure>
+<p>This does look good already, but it could be better. We could fix spacing problems using the following keywords and methods:</p>
+<ul>
+<li><code>figure_padding=(left, right, bottom, top)</code></li>
+<li><code>padding=(left, right, bottom, top)</code></li>
+</ul>
+<p>Taking into account the actual size for a <code>Legend</code> or <code>Colorbar</code> is done by</p>
+<blockquote>
+<ul>
+<li><code>tellheight=true</code> or <code>false</code></li>
+<li><code>tellwidth=true</code> or <code>false</code></li>
+</ul>
+<p><em>Setting these to <code>true</code> will take into account the actual size (height or width) for a <code>Legend</code> or <code>Colorbar</code></em>. Consequently, things will be resized accordingly.</p>
+</blockquote>
+<p>The space between columns and rows is specified as</p>
+<blockquote>
+<ul>
+<li><code>colgap!(fig.layout, col, separation)</code></li>
+<li><code>rowgap!(fig.layout, row, separation)</code></li>
+</ul>
+<p><em>Column gap</em> (<code>colgap!</code>), if <code>col</code> is given then the gap will be applied to that specific column. <em>Row gap</em> (<code>rowgap!</code>), if <code>row</code> is given then the gap will be applied to that specific row.</p>
+</blockquote>
+<p>Also, we will see how to put content into the <strong>protrusions</strong>, <em>i.e.</em> the space reserved for <em>title: <code>x</code> and <code>y</code>; either <code>ticks</code> or <code>label</code></em>. We do this by plotting into <code>fig[i, j, protrusion]</code> where <em><code>protrusion</code></em> can be <code>Left()</code>, <code>Right()</code>, <code>Bottom()</code> and <code>Top()</code>, or for each corner <code>TopLeft()</code>, <code>TopRight()</code>, <code>BottomRight()</code>, <code>BottomLeft()</code>. See below how these options are being used:</p>
+<pre class="language-julia"><code>function first_layout_fixed()
+    seed!(123)
+    x, y, z = randn(6), randn(6), randn(6)
+    fig = Figure(figure_padding=(0, 3, 5, 2), size=(600, 400),
+        backgroundcolor=:snow2, font=&quot;CMU Serif&quot;)
+    ax = Axis(fig[1, 1], xlabel=L&quot;x&quot;, ylabel=L&quot;y&quot;,
+        title=&quot;Layout example&quot;, backgroundcolor=:white)
+    pltobj = scatter!(ax, x, y; color=z, label=&quot;scatters&quot;)
+    lines!(ax, x, 1.1y; label=&quot;line&quot;)
+    Legend(fig[2, 1:2], ax, &quot;Labels&quot;, orientation=:horizontal,
+        tellheight=true, titleposition=:left)
+    Colorbar(fig[1, 2], pltobj, label=&quot;colorbar&quot;)
+    # additional aesthetics
+    Box(fig[1, 1, Right()], color=(:snow4, 0.35))
+    Label(fig[1, 1, Right()], &quot;protrusion&quot;, fontsize=18,
+        rotation=pi / 2, padding=(3, 3, 3, 3))
+    Label(fig[1, 1, TopLeft()], &quot;(a)&quot;, fontsize=18, padding=(0, 3, 8, 0))
+    colgap!(fig.layout, 5)
+    rowgap!(fig.layout, 5)
+    fig
+end
+JDS.first_layout_fixed()</code></pre>
+<figure id="fig:first_layout_fixed">
+<img src="/JuliaDataScience/im/JDS_first_layout_fixed_.svg" style="width:60.0%" alt="Figure 26: First Layout Fixed." />
+<figcaption aria-hidden="true">Figure 26: First Layout Fixed.</figcaption>
+</figure>
+<p>Here, having the label <code>(a)</code> in the <code>TopLeft()</code> is probably not necessary, this will only make sense for more than one plot. Also, note the use of <code>padding</code>, which allows more fine control over his position.</p>
+<p>For our next example let’s keep using the previous tools and some more to create a richer and complex figure.</p>
+<p>Having the same limits across different plots can be done via your <code>Axis</code> with:</p>
+<blockquote>
+<ul>
+<li><code>linkaxes!</code>, <code>linkyaxes!</code> and <code>linkxaxes!</code></li>
+</ul>
+<p>This could be useful when shared axis are desired. Another way of getting shared axis will be by setting <code>limits!</code>.</p>
+</blockquote>
+<p>Now, the example:</p>
+<pre class="language-julia"><code>function complex_layout_double_axis()
+    seed!(123)
+    x = range(0, 1, 10)
+    y = range(0, 1, 10)
+    z = rand(10, 10)
+    fig = Figure(size=(700, 400),
+        font=&quot;CMU Serif&quot;,
+        backgroundcolor=:snow2
+        )
+    ax1 = Axis(fig, xlabel=L&quot;x&quot;, ylabel=L&quot;y&quot;)
+    ax2 = Axis(fig, xlabel=L&quot;x&quot;)
+    heatmap!(ax1, x, y, z; colorrange=(0, 1))
+    series!(ax2, abs.(z[1:4, :]);
+        labels=[&quot;lab $i&quot; for i = 1:4], color=:Set1_4)
+    hm = scatter!(10x, y; color=z[1, :], label=&quot;dots&quot;, colorrange=(0, 1))
+    hideydecorations!(ax2, ticks=false, grid=false)
+    linkyaxes!(ax1, ax2)
+    #layout
+    fig[1, 1] = ax1
+    fig[1, 2] = ax2
+    Label(fig[1, 1, TopLeft()], &quot;(a)&quot;, fontsize=18, padding=(0, 6, 8, 0))
+    Label(fig[1, 2, TopLeft()], &quot;(b)&quot;, fontsize=18, padding=(0, 6, 8, 0))
+    Colorbar(fig[2, 1:2], hm, label=&quot;colorbar&quot;,
+        vertical=false, flipaxis=false
+        )
+    Legend(fig[1, 3], ax2, &quot;Legend&quot;)
+    colgap!(fig.layout, 5)
+    rowgap!(fig.layout, 5)
+    fig
+end
+JDS.complex_layout_double_axis()</code></pre>
+<figure id="fig:complex_layout_double_axis">
+<img src="/JuliaDataScience/im/JDS_complex_layout_double_axis_.svg" style="width:60.0%" alt="Figure 27: Complex layout double axis." />
+<figcaption aria-hidden="true">Figure 27: Complex layout double axis.</figcaption>
+</figure>
+<p>So, now our <code>Colorbar</code> is horizontal and the bar ticks are in the lower part. This is done by setting <code>vertical=false</code> and <code>flipaxis=false</code>. Additionally, note that we can call many <code>Axis</code> into <code>fig</code>, or even <code>Colorbar</code>’s and <code>Legend</code>’s, and then afterwards build the layout.</p>
+<p>Another common layout is a grid of squares for heatmaps:</p>
+<pre class="language-julia"><code>function squares_layout()
+    seed!(123)
+    letters = reshape(collect(&#39;a&#39;:&#39;d&#39;), (2, 2))
+    fig = Figure(size=(600, 400), fontsize=14, font=&quot;CMU Serif&quot;,
+        backgroundcolor=:snow2)
+    axs = [Axis(fig[i, j], aspect=DataAspect()) for i = 1:2, j = 1:2]
+    hms = [heatmap!(axs[i, j], randn(10, 10), colorrange=(-2, 2))
+           for i = 1:2, j = 1:2]
+    Colorbar(fig[1:2, 3], hms[1], label=&quot;colorbar&quot;)
+    [Label(fig[i, j, TopLeft()], &quot;($(letters[i, j]))&quot;, fontsize=16,
+        padding=(-2, 0, -20, 0)) for i = 1:2, j = 1:2]
+    colgap!(fig.layout, 5)
+    rowgap!(fig.layout, 5)
+    fig
+end
+JDS.squares_layout()</code></pre>
+<figure id="fig:squares_layout">
+<img src="/JuliaDataScience/im/JDS_squares_layout_.svg" style="width:60.0%" alt="Figure 28: Squares layout." />
+<figcaption aria-hidden="true">Figure 28: Squares layout.</figcaption>
+</figure>
+<p>where all labels are in the <strong>protrusions</strong> and each <code>Axis</code> has an <code>AspectData()</code> ratio. The <code>Colorbar</code> is located in the third column and expands from row 1 up to row 2.</p>
+<p>The next case uses the so called <code>Mixed()</code> <strong>alignmode</strong>, which is especially useful when dealing with large empty spaces between <code>Axis</code> due to long ticks. Also, the <code>Dates</code> module from Julia’s standard library will be needed for this example.</p>
+<pre><code>using Dates</code></pre>
+<pre class="language-julia"><code>function mixed_mode_layout()
+    seed!(123)
+    longlabels = [&quot;$(today() - Day(1))&quot;, &quot;$(today())&quot;, &quot;$(today() + Day(1))&quot;]
+    fig = Figure(size=(600, 400), fontsize=12,
+        backgroundcolor=:snow2, font=&quot;CMU Serif&quot;)
+    ax1 = Axis(fig[1, 1], xlabel=&quot;x&quot;, alignmode=Mixed(bottom=0))
+    ax2 = Axis(fig[1, 2], xticklabelrotation=π/2, alignmode=Mixed(bottom=0),
+        xticks=([1, 5, 10], longlabels))
+    ax3 = Axis(fig[2, 1:2])
+    ax4 = Axis(fig[3, 1:2])
+    axs = [ax1, ax2, ax3, ax4]
+    [lines!(ax, 1:10, rand(10)) for ax in axs]
+    hidexdecorations!(ax3; ticks=false, grid=false)
+    Box(fig[2:3, 1:2, Right()], color=(:snow4, 0.35))
+    Label(fig[2:3, 1:2, Right()], &quot;protrusion&quot;, rotation=π/2, fontsize=14,
+        padding=(3, 3, 3, 3))
+    Label(fig[1, 1:2, Top()], &quot;Mixed alignmode&quot;, fontsize=16,
+        padding=(0, 0, 15, 0))
+    colsize!(fig.layout, 1, Auto(2))
+    rowsize!(fig.layout, 2, Auto(0.5))
+    rowsize!(fig.layout, 3, Auto(0.5))
+    rowgap!(fig.layout, 1, 15)
+    rowgap!(fig.layout, 2, 0)
+    colgap!(fig.layout, 5)
+    fig
+end
+JDS.mixed_mode_layout()</code></pre>
+<figure id="fig:mixed_mode_layout">
+<img src="/JuliaDataScience/im/JDS_mixed_mode_layout_.svg" style="width:60.0%" alt="Figure 29: Mixed mode layout." />
+<figcaption aria-hidden="true">Figure 29: Mixed mode layout.</figcaption>
+</figure>
+<p>Here, the argument <code>alignmode=Mixed(bottom=0)</code> is shifting the bounding box to the bottom, so that this will align with the panel on the left filling the space.</p>
+<p>Also, see how <code>colsize!</code> and <code>rowsize!</code> are being used for different columns and rows. You could also put a number instead of <code>Auto()</code> but then everything will be fixed. And, additionally, one could also give a <code>height</code> or <code>width</code> when defining the <code>Axis</code>, as in <code>Axis(fig, height=50)</code> which will be fixed as well.</p>
+<h3 data-number="6.8.1" id="nested-axis-subplots"><span class="header-section-number">6.8.1</span> Nested <code>Axis</code> (<em>subplots</em>)</h3>
+<p>It is also possible to define a set of <code>Axis</code> (<em>subplots</em>) explicitly, and use it to build a main figure with several rows and columns. For instance, the following is a “complicated” arrangement of <code>Axis</code>:</p>
+<pre class="language-julia"><code>function nested_sub_plot!(f)
+    backgroundcolor = rand(resample_cmap(:Pastel1_6, 6, alpha=0.25))
+    ax1 = Axis(f[1, 1]; backgroundcolor)
+    ax2 = Axis(f[1, 2]; backgroundcolor)
+    ax3 = Axis(f[2, 1:2]; backgroundcolor)
+    ax4 = Axis(f[1:2, 3]; backgroundcolor)
+    return (ax1, ax2, ax3, ax4)
+end</code></pre>
+<p>which, when used to build a more complex figure by doing several calls, we obtain:</p>
+<pre class="language-julia"><code>function main_figure()
+    fig = Figure()
+    Axis(fig[1, 1])
+    nested_sub_plot!(fig[1, 2])
+    nested_sub_plot!(fig[1, 3])
+    nested_sub_plot!(fig[2, 1:3])
+    fig
+end
+JDS.main_figure()</code></pre>
+<figure id="fig:main_figure">
+<img src="/JuliaDataScience/im/JDS_main_figure_.svg" style="width:60.0%" alt="Figure 30: Main figure." />
+<figcaption aria-hidden="true">Figure 30: Main figure.</figcaption>
+</figure>
+<p>Note that different subplot functions can be called here. Also, each <code>Axis</code> here is an independent part of <code>Figure</code>. So that, if you need to do some <code>rowgap!</code>’s or <code>colsize!</code>’s operations, you will need to do it in each one of them independently or to all of them together.</p>
+<p>For grouped <code>Axis</code> (<em>subplots</em>) we can use <code>GridLayout()</code> which, then, could be used to compose a more complicated <code>Figure</code>.</p>
+<h3 data-number="6.8.2" id="nested-gridlayout"><span class="header-section-number">6.8.2</span> Nested GridLayout</h3>
+<p>By using <code>GridLayout()</code> we can group subplots, allowing more freedom to build complex figures. Here, using our previous <code>nested_sub_plot!</code> we define three sub-groups and one normal <code>Axis</code>:</p>
+<pre class="language-julia"><code>function nested_Grid_Layouts()
+    fig = Figure(backgroundcolor=RGBf(0.96, 0.96, 0.96))
+    ga = fig[1, 1] = GridLayout()
+    gb = fig[1, 2] = GridLayout()
+    gc = fig[1, 3] = GridLayout()
+    gd = fig[2, 1:3] = GridLayout()
+    gA = Axis(ga[1, 1])
+    nested_sub_plot!(gb)
+    axsc = nested_sub_plot!(gc)
+    nested_sub_plot!(gd)
+    hidedecorations!.(axsc, grid=false, ticks=false)
+    colgap!(gc, 5)
+    rowgap!(gc, 5)
+    rowsize!(fig.layout, 2, Auto(0.5))
+    colsize!(fig.layout, 1, Auto(0.5))
+    fig
+end
+JDS.nested_Grid_Layouts()</code></pre>
+<figure id="fig:nested_Grid_Layouts">
+<img src="/JuliaDataScience/im/JDS_nested_Grid_Layouts_.svg" style="width:60.0%" alt="Figure 31: Nested Grid Layouts." />
+<figcaption aria-hidden="true">Figure 31: Nested Grid Layouts.</figcaption>
+</figure>
+<p>Now, using <code>rowgap!</code> or <code>colsize!</code> over each group is possible and <code>rowsize!, colsize!</code> can also be applied to the set of <code>GridLayout()</code>s.</p>
+<h3 data-number="6.8.3" id="inset-plots"><span class="header-section-number">6.8.3</span> Inset plots</h3>
+<p>Currently, doing <code>inset</code> plots is a little bit tricky. Here, we show two possible ways of doing it by initially defining auxiliary functions. The first one is by doing a <code>BBox</code>, which lives in the whole <code>Figure</code> space:</p>
+<pre class="language-julia"><code>function add_box_inset(fig; backgroundcolor=:snow2,
+    left=100, right=250, bottom=200, top=300)
+    inset_box = Axis(fig, bbox=BBox(left, right, bottom, top),
+        xticklabelsize=12, yticklabelsize=12, backgroundcolor=backgroundcolor)
+    translate!(inset_box.scene, 0, 0, 10)  # bring content upfront
+    return inset_box
+end</code></pre>
+<p>Then, the <code>inset</code> is easily done, as in:</p>
+<pre class="language-julia"><code>function figure_box_inset()
+    fig = Figure(size=(600, 400))
+    ax = Axis(fig[1, 1], backgroundcolor=:white)
+    inset_ax1 = add_box_inset(fig; backgroundcolor=:snow2,
+        left=100, right=250, bottom=200, top=300)
+    inset_ax2 = add_box_inset(fig; backgroundcolor=(:white, 0.85),
+        left=500, right=580, bottom=100, top=200)
+    lines!(ax, 1:10)
+    lines!(inset_ax1, 1:10)
+    scatter!(inset_ax2, 1:10, color=:black)
+    fig
+end
+JDS.figure_box_inset()</code></pre>
+<figure id="fig:figure_box_inset">
+<img src="/JuliaDataScience/im/JDS_figure_box_inset_.svg" style="width:60.0%" alt="Figure 32: Figure box inset." />
+<figcaption aria-hidden="true">Figure 32: Figure box inset.</figcaption>
+</figure>
+<p>where the <code>Box</code> dimensions are bound by the <code>Figure</code>’s <code>size</code>. Note, that an inset can be also outside the <code>Axis</code>. The other approach, is by defining a new <code>Axis</code> into a position <code>fig[i, j]</code> specifying his <code>width</code>, <code>height</code>, <code>halign</code> and <code>valign</code>. We do that in the following function:</p>
+<pre class="language-julia"><code>function add_axis_inset(pos=fig[1, 1]; backgroundcolor=:snow2,
+    halign, valign, width=Relative(0.5),height=Relative(0.35),
+    alignmode=Mixed(left=5, right=5))
+    inset_box = Axis(pos; width, height, halign, valign, alignmode,
+        xticklabelsize=12, yticklabelsize=12, backgroundcolor=backgroundcolor)
+    # bring content upfront
+    translate!(inset_box.scene, 0, 0, 10)
+    return inset_box
+end</code></pre>
+<p>See that in the following example the <code>Axis</code> with gray background will be rescaled if the total figure size changes. The <em>insets</em> are bound by the <code>Axis</code> positioning.</p>
+<pre class="language-julia"><code>function figure_axis_inset()
+    fig = Figure(size=(600, 400))
+    ax = Axis(fig[1, 1], backgroundcolor=:white)
+    inset_ax1 = add_axis_inset(fig[1, 1]; backgroundcolor=:snow2,
+        halign=:left, valign=:center,
+        width=Relative(0.3), height=Relative(0.35),
+        alignmode=Mixed(left=5, right=5, bottom=15))
+    inset_ax2 = add_axis_inset(fig[1, 1]; backgroundcolor=(:white, 0.85),
+        halign=:right, valign=:center,
+        width=Relative(0.25), height=Relative(0.3))
+    lines!(ax, 1:10)
+    lines!(inset_ax1, 1:10)
+    scatter!(inset_ax2, 1:10, color=:black)
+    fig
+end
+JDS.figure_axis_inset()</code></pre>
+<figure id="fig:figure_axis_inset">
+<img src="/JuliaDataScience/im/JDS_figure_axis_inset_.svg" style="width:60.0%" alt="Figure 33: Figure axis inset." />
+<figcaption aria-hidden="true">Figure 33: Figure axis inset.</figcaption>
+</figure>
+<p>And this should cover most used cases for layouting with Makie. Now, let’s do some nice 3D examples with <code>GLMakie.jl</code>.</p>
+
+
+<div class="bottom-nav">
+    <p id="nav-prev" style="text-align: left;">
+        <a class="menu-level-2" href="/JuliaDataScience/makie_colors"><b>6.7</b> Colors and Colormaps</a> <kbd>←</kbd>
+        <span id="nav-next" style="float: right;">
+            <kbd>→</kbd> <a class="menu-level-2" href="/JuliaDataScience/glmakie"><b>6.9</b> GLMakie.jl</a>
+        </span>
+    </p>
+</div>
+
+
+<div class="license">
+    <br/>
+  <br/>
+  <span style="display: flex; justify-content: center;"> <a
+      style="display: flex; align-items: center; border: 1.5px solid black; border-radius: 10px;"
+      href="https://opencollective.com/juliadatascience" target="_blank"> <img src="/images/coffee.png" height="18px" style="margin: 5px; display:inline"> <span style="margin-left: 4px; color: black !important">Support this project</span> </a> </span> <br> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+    Jose Storopoli, Rik Huijzer, Lazaro Alonso
+</div>
+</div>
+</div>
+</body>
+</html>

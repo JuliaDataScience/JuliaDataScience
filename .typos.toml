@@ -10,6 +10,10 @@ Tesselation = "Tesselation"
 tesselation = "tesselation"
 Missings = "Missings"
 iy = "iy"
+iz = "iz"
+indx = "indx"
+alues = "alues"
+edian = "edian"
 
 [type.gitignore]
 extend-glob = [".gitignore"]

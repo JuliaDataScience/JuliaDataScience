@@ -12,7 +12,7 @@
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 [![Code Style: Blue](https://img.shields.io/badge/code%20style-blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
 
-You can read the full book on <https://juliadatascience.io>.
+You can read the full book on <https://juliadatascience.github.io/JuliaDataScience>.
 
 This book was once available on Amazon, but due to an absurd reason, our publishing account was terminated, and our book was removed.
 Interestingly, all Amazon customer accounts remain functional.

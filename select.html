@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jose Storopoli" />
+  <meta name="author" content="Rik Huijzer" />
+  <meta name="author" content="Lazaro Alonso" />
+  <title>Select - Julia Data Science</title>
+  <link rel="shortcut icon" type="image/png" href="/JuliaDataScience/favicon.png"/>
+  <link rel="stylesheet" href="/JuliaDataScience/style.css"/>
+    <script src="/JuliaDataScience/mousetrap.min.js"></script>
+    <style>
+  @font-face {
+    font-family: JuliaMono-Regular;
+    src: url("/JuliaDataScience/JuliaMono-Regular.woff2");
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/JuliaDataScience/github.min.css">
+<script src="/JuliaDataScience/highlight.min.js"></script>
+<script src="/JuliaDataScience/julia.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre').forEach((el) => {
+        if (!el.classList.contains('output')) {
+            hljs.highlightElement(el);
+        }
+    });
+});
+</script>
+ 
+</head>
+<body>
+<script>
+function click_next() {
+  var next = document.getElementById('nav-next');
+  next.firstElementChild.nextElementSibling.click();
+}
+function click_prev() {
+  var prev = document.getElementById('nav-prev');
+  prev.firstElementChild.click();
+}
+Mousetrap.bind('right', click_next);
+Mousetrap.bind('h', click_prev);
+Mousetrap.bind('left', click_prev);
+Mousetrap.bind('l', click_next);
+</script>
+
+<div class="books-container">
+<aside class="books-menu">
+<input type="checkbox" id="menu">
+<label for="menu">☰</label>
+<div class="books-title">
+<a href="/JuliaDataScience/">Julia Data Science</a>
+</div><br />
+<span class="books-subtitle">
+
+</span>
+<div class="books-menu-content">
+<li><a class="menu-level-1" href="/JuliaDataScience/preface"><b>1</b> Preface</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/why_data_science"><b>1.1</b> What is Data Science?</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/engineering"><b>1.2</b> Software Engineering</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/acknowledgements"><b>1.3</b> Acknowledgements</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/why_julia"><b>2</b> Why Julia?</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/non-programmers"><b>2.1</b> For Non-Programmers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/programmers"><b>2.2</b> For Programmers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/julia_accomplish"><b>2.3</b> What Julia Aims to Accom..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/julia_wild"><b>2.4</b> Julia in the Wild</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/julia_basics"><b>3</b> Julia Basics</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/ide"><b>3.1</b> Development Environments</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/syntax"><b>3.2</b> Language Syntax</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/data_structures"><b>3.3</b> Native Data Structures</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/filesystem"><b>3.4</b> Filesystem</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/standardlibrary"><b>3.5</b> Julia Standard Library</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/dataframes"><b>4</b> DataFrames.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/load_save"><b>4.1</b> Load and Save Files</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/index-and-summarize"><b>4.2</b> Index and Summarize</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/filter_subset"><b>4.3</b> Filter and Subset</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/select"><b>4.4</b> Select</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/types"><b>4.5</b> Types and Categorical Da..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/join"><b>4.6</b> Join</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/transform"><b>4.7</b> Variable Transformations</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/groupby_combine"><b>4.8</b> Groupby and Combine</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/missing"><b>4.9</b> Missing Data</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/df_performance"><b>4.10</b> Performance</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/dataframesmeta"><b>5</b> DataFramesMeta.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_macros"><b>5.1</b> Macros</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_select"><b>5.2</b> Column Selection</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_transform"><b>5.3</b> Column Transformation</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_subset"><b>5.4</b> Row Selection</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_orderby"><b>5.5</b> Row Sorting</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_combine"><b>5.6</b> Data Summaries</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_chain"><b>5.7</b> Piping Operations</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/DataVisualizationMakie"><b>6</b> Data Visualization with Ma..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/cairomakie"><b>6.1</b> CairoMakie.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/datavisMakie_attributes"><b>6.2</b> Attributes</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/datavisMakie_create_Figure"><b>6.3</b> Create Plot Figure</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_cheat_sheets"><b>6.4</b> Cheat Sheets</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/themes"><b>6.5</b> Themes</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/using-latexstrings.jl"><b>6.6</b> Using LaTeXStrings.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_colors"><b>6.7</b> Colors and Colormaps</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_layouts"><b>6.8</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/glmakie"><b>6.9</b> GLMakie.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/recipe_df"><b>6.10</b> A Makie recipe for a Da..</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/aog"><b>7</b> Data Visualization with Al..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_layers"><b>7.1</b> Layers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_layouts"><b>7.2</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_stats"><b>7.3</b> Statistical Visualizatio..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_custom"><b>7.4</b> Plot Customizations</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_makie"><b>7.5</b> Makie.jl and AlgebraOfGr..</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/appendix"><b>8</b> Appendix</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/appendix_pkg"><b>8.1</b> Packages Versions</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/notation"><b>8.2</b> Notation</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/references"><b></b> References</a></li>
+</div>
+</aside>
+
+<div class="books-content">
+<h2 data-number="4.4" id="sec:select"><span class="header-section-number">4.4</span> Select</h2>
+<p>Whereas <strong><code>filter</code> removes rows</strong>, <strong><code>select</code> removes columns</strong>. However, <code>select</code> is much more versatile than just removing columns, as we will discuss in this section. First, let’s create a dataset with multiple columns:</p>
+<pre class="language-julia"><code>function responses()
+    id = [1, 2]
+    q1 = [28, 61]
+    q2 = [:us, :fr]
+    q3 = [&quot;F&quot;, &quot;B&quot;]
+    q4 = [&quot;B&quot;, &quot;C&quot;]
+    q5 = [&quot;A&quot;, &quot;E&quot;]
+    DataFrame(; id, q1, q2, q3, q4, q5)
+end
+responses()</code></pre>
+<div id="tbl:responses">
+<table>
+<caption>Table 7: Responses.</caption>
+<thead>
+<tr>
+<th style="text-align: right;">id</th>
+<th style="text-align: right;">q1</th>
+<th style="text-align: right;">q2</th>
+<th style="text-align: right;">q3</th>
+<th style="text-align: right;">q4</th>
+<th style="text-align: right;">q5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">us</td>
+<td style="text-align: right;">F</td>
+<td style="text-align: right;">B</td>
+<td style="text-align: right;">A</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">fr</td>
+<td style="text-align: right;">B</td>
+<td style="text-align: right;">C</td>
+<td style="text-align: right;">E</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Here, the data represents answers for five questions (<code>q1</code>, <code>q2</code>, …, <code>q5</code>) in a given questionnaire. We will start by “selecting” a few columns from this dataset. As usual, we use <strong>symbols</strong> to specify columns:</p>
+<pre class="language-julia"><code>select(responses(), :id, :q1)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">id</th>
+<th style="text-align: right;">q1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">28</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">61</td>
+</tr>
+</tbody>
+</table>
+<p>We can also use <strong>strings</strong> if we want:</p>
+<pre class="language-julia"><code>select(responses(), &quot;id&quot;, &quot;q1&quot;, &quot;q2&quot;)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">id</th>
+<th style="text-align: right;">q1</th>
+<th style="text-align: right;">q2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">us</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">fr</td>
+</tr>
+</tbody>
+</table>
+<p>Additionally, we can use <strong>Regular Expressions</strong> with <a href="https://docs.julialang.org/en/v1/manual/strings/#man-regex-literals">Julia’s regex string literal</a>. A string literal in Julia is a prefix that you use while constructing a <code>String</code>. For example, the regex string literal can be created with <code>r"..."</code> where <code>...</code> is the Regular Expression. For example, suppose you only want to select the columns that start with <code>q</code>:</p>
+<pre class="language-julia"><code>select(responses(), r&quot;^q&quot;)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">q1</th>
+<th style="text-align: right;">q2</th>
+<th style="text-align: right;">q3</th>
+<th style="text-align: right;">q4</th>
+<th style="text-align: right;">q5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">us</td>
+<td style="text-align: right;">F</td>
+<td style="text-align: right;">B</td>
+<td style="text-align: right;">A</td>
+</tr>
+<tr>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">fr</td>
+<td style="text-align: right;">B</td>
+<td style="text-align: right;">C</td>
+<td style="text-align: right;">E</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong><em>NOTE:</em></strong> We won’t cover regular expressions in this book, but you are encouraged to learn about them. To build and test regular expressions interactively, we advice to use online tools for them such as <a href="https://regex101.com/" class="uri">https://regex101.com/</a>.</p>
+</blockquote>
+<p>To select <strong>everything <em>except</em> one or more columns</strong>, use <strong><code>Not</code></strong> with either a single column:</p>
+<pre class="language-julia"><code>select(responses(), Not(:q5))</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">id</th>
+<th style="text-align: right;">q1</th>
+<th style="text-align: right;">q2</th>
+<th style="text-align: right;">q3</th>
+<th style="text-align: right;">q4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">us</td>
+<td style="text-align: right;">F</td>
+<td style="text-align: right;">B</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">fr</td>
+<td style="text-align: right;">B</td>
+<td style="text-align: right;">C</td>
+</tr>
+</tbody>
+</table>
+<p>Or, with multiple columns:</p>
+<pre class="language-julia"><code>select(responses(), Not([:q4, :q5]))</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">id</th>
+<th style="text-align: right;">q1</th>
+<th style="text-align: right;">q2</th>
+<th style="text-align: right;">q3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">us</td>
+<td style="text-align: right;">F</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">fr</td>
+<td style="text-align: right;">B</td>
+</tr>
+</tbody>
+</table>
+<p>It’s also fine to mix and match columns that we want to preserve with columns that we do <code>Not</code> want to select:</p>
+<pre class="language-julia"><code>select(responses(), :q5, Not(:q5))</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">q5</th>
+<th style="text-align: right;">id</th>
+<th style="text-align: right;">q1</th>
+<th style="text-align: right;">q2</th>
+<th style="text-align: right;">q3</th>
+<th style="text-align: right;">q4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">A</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">us</td>
+<td style="text-align: right;">F</td>
+<td style="text-align: right;">B</td>
+</tr>
+<tr>
+<td style="text-align: right;">E</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">fr</td>
+<td style="text-align: right;">B</td>
+<td style="text-align: right;">C</td>
+</tr>
+</tbody>
+</table>
+<p>Note how <code>q5</code> is now the first column in the <code>DataFrame</code> returned by <code>select</code>. There is a more clever way to achieve the same using <code>:</code>. The colon <code>:</code> can be thought of as “all the columns that we didn’t include yet”. For example:</p>
+<pre class="language-julia"><code>select(responses(), :q5, :)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">q5</th>
+<th style="text-align: right;">id</th>
+<th style="text-align: right;">q1</th>
+<th style="text-align: right;">q2</th>
+<th style="text-align: right;">q3</th>
+<th style="text-align: right;">q4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">A</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">us</td>
+<td style="text-align: right;">F</td>
+<td style="text-align: right;">B</td>
+</tr>
+<tr>
+<td style="text-align: right;">E</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">fr</td>
+<td style="text-align: right;">B</td>
+<td style="text-align: right;">C</td>
+</tr>
+</tbody>
+</table>
+<p>Or, to put <code>q5</code> at the second position<a href="/JuliaDataScience#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a>:</p>
+<pre class="language-julia"><code>select(responses(), 1, :q5, :)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">id</th>
+<th style="text-align: right;">q5</th>
+<th style="text-align: right;">q1</th>
+<th style="text-align: right;">q2</th>
+<th style="text-align: right;">q3</th>
+<th style="text-align: right;">q4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">A</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">us</td>
+<td style="text-align: right;">F</td>
+<td style="text-align: right;">B</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">E</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">fr</td>
+<td style="text-align: right;">B</td>
+<td style="text-align: right;">C</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong><em>NOTE:</em></strong> As you might have observed there are several ways to select a column. These are known as <a href="https://bkamins.github.io/julialang/2021/02/06/colsel.html"><em>column selectors</em></a>.</p>
+<p>We can use:</p>
+<ul>
+<li><strong><code>Symbol</code></strong>: <code>select(df, :col)</code></li>
+<li><strong><code>String</code></strong>: <code>select(df, "col")</code></li>
+<li><strong><code>Integer</code></strong>: <code>select(df, 1)</code></li>
+<li><strong><code>RegEx</code></strong>: <code>select(df, r"RegEx")</code></li>
+</ul>
+</blockquote>
+<p>Even renaming columns is possible via <code>select</code> using the <strong><code>source =&gt; target</code></strong> pair syntax:</p>
+<pre class="language-julia"><code>select(responses(), 1 =&gt; &quot;participant&quot;, :q1 =&gt; &quot;age&quot;, :q2 =&gt; &quot;nationality&quot;)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">participant</th>
+<th style="text-align: right;">age</th>
+<th style="text-align: right;">nationality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">us</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">fr</td>
+</tr>
+</tbody>
+</table>
+<p>Additionally, thanks to the “splat” operator <code>...</code> (see Section <a href="/JuliaDataScience/data_structures#sec:splat">3.3.11</a>), we can also write:</p>
+<pre class="language-julia"><code>renames = (1 =&gt; &quot;participant&quot;, :q1 =&gt; &quot;age&quot;, :q2 =&gt; &quot;nationality&quot;)
+select(responses(), renames...)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">participant</th>
+<th style="text-align: right;">age</th>
+<th style="text-align: right;">nationality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">us</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">fr</td>
+</tr>
+</tbody>
+</table>
+
+
+<div class="bottom-nav">
+    <p id="nav-prev" style="text-align: left;">
+        <a class="menu-level-2" href="/JuliaDataScience/filter_subset"><b>4.3</b> Filter and Subset</a> <kbd>←</kbd>
+        <span id="nav-next" style="float: right;">
+            <kbd>→</kbd> <a class="menu-level-2" href="/JuliaDataScience/types"><b>4.5</b> Types and Categorical Da..</a>
+        </span>
+    </p>
+</div>
+
+
+<div class="license">
+    <br/>
+  <br/>
+  <span style="display: flex; justify-content: center;"> <a
+      style="display: flex; align-items: center; border: 1.5px solid black; border-radius: 10px;"
+      href="https://opencollective.com/juliadatascience" target="_blank"> <img src="/images/coffee.png" height="18px" style="margin: 5px; display:inline"> <span style="margin-left: 4px; color: black !important">Support this project</span> </a> </span> <br> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+    Jose Storopoli, Rik Huijzer, Lazaro Alonso
+</div>
+</div>
+</div>
+</body>
+</html>

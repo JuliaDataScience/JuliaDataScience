@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jose Storopoli" />
+  <meta name="author" content="Rik Huijzer" />
+  <meta name="author" content="Lazaro Alonso" />
+  <title>Create Plot Figure - Julia Data Science</title>
+  <link rel="shortcut icon" type="image/png" href="/JuliaDataScience/favicon.png"/>
+  <link rel="stylesheet" href="/JuliaDataScience/style.css"/>
+    <script src="/JuliaDataScience/mousetrap.min.js"></script>
+    <style>
+  @font-face {
+    font-family: JuliaMono-Regular;
+    src: url("/JuliaDataScience/JuliaMono-Regular.woff2");
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/JuliaDataScience/github.min.css">
+<script src="/JuliaDataScience/highlight.min.js"></script>
+<script src="/JuliaDataScience/julia.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre').forEach((el) => {
+        if (!el.classList.contains('output')) {
+            hljs.highlightElement(el);
+        }
+    });
+});
+</script>
+ 
+</head>
+<body>
+<script>
+function click_next() {
+  var next = document.getElementById('nav-next');
+  next.firstElementChild.nextElementSibling.click();
+}
+function click_prev() {
+  var prev = document.getElementById('nav-prev');
+  prev.firstElementChild.click();
+}
+Mousetrap.bind('right', click_next);
+Mousetrap.bind('h', click_prev);
+Mousetrap.bind('left', click_prev);
+Mousetrap.bind('l', click_next);
+</script>
+
+<div class="books-container">
+<aside class="books-menu">
+<input type="checkbox" id="menu">
+<label for="menu">☰</label>
+<div class="books-title">
+<a href="/JuliaDataScience/">Julia Data Science</a>
+</div><br />
+<span class="books-subtitle">
+
+</span>
+<div class="books-menu-content">
+<li><a class="menu-level-1" href="/JuliaDataScience/preface"><b>1</b> Preface</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/why_data_science"><b>1.1</b> What is Data Science?</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/engineering"><b>1.2</b> Software Engineering</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/acknowledgements"><b>1.3</b> Acknowledgements</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/why_julia"><b>2</b> Why Julia?</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/non-programmers"><b>2.1</b> For Non-Programmers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/programmers"><b>2.2</b> For Programmers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/julia_accomplish"><b>2.3</b> What Julia Aims to Accom..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/julia_wild"><b>2.4</b> Julia in the Wild</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/julia_basics"><b>3</b> Julia Basics</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/ide"><b>3.1</b> Development Environments</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/syntax"><b>3.2</b> Language Syntax</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/data_structures"><b>3.3</b> Native Data Structures</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/filesystem"><b>3.4</b> Filesystem</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/standardlibrary"><b>3.5</b> Julia Standard Library</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/dataframes"><b>4</b> DataFrames.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/load_save"><b>4.1</b> Load and Save Files</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/index-and-summarize"><b>4.2</b> Index and Summarize</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/filter_subset"><b>4.3</b> Filter and Subset</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/select"><b>4.4</b> Select</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/types"><b>4.5</b> Types and Categorical Da..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/join"><b>4.6</b> Join</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/transform"><b>4.7</b> Variable Transformations</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/groupby_combine"><b>4.8</b> Groupby and Combine</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/missing"><b>4.9</b> Missing Data</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/df_performance"><b>4.10</b> Performance</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/dataframesmeta"><b>5</b> DataFramesMeta.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_macros"><b>5.1</b> Macros</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_select"><b>5.2</b> Column Selection</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_transform"><b>5.3</b> Column Transformation</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_subset"><b>5.4</b> Row Selection</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_orderby"><b>5.5</b> Row Sorting</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_combine"><b>5.6</b> Data Summaries</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_chain"><b>5.7</b> Piping Operations</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/DataVisualizationMakie"><b>6</b> Data Visualization with Ma..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/cairomakie"><b>6.1</b> CairoMakie.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/datavisMakie_attributes"><b>6.2</b> Attributes</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/datavisMakie_create_Figure"><b>6.3</b> Create Plot Figure</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_cheat_sheets"><b>6.4</b> Cheat Sheets</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/themes"><b>6.5</b> Themes</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/using-latexstrings.jl"><b>6.6</b> Using LaTeXStrings.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_colors"><b>6.7</b> Colors and Colormaps</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_layouts"><b>6.8</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/glmakie"><b>6.9</b> GLMakie.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/recipe_df"><b>6.10</b> A Makie recipe for a Da..</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/aog"><b>7</b> Data Visualization with Al..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_layers"><b>7.1</b> Layers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_layouts"><b>7.2</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_stats"><b>7.3</b> Statistical Visualizatio..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_custom"><b>7.4</b> Plot Customizations</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_makie"><b>7.5</b> Makie.jl and AlgebraOfGr..</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/appendix"><b>8</b> Appendix</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/appendix_pkg"><b>8.1</b> Packages Versions</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/notation"><b>8.2</b> Notation</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/references"><b></b> References</a></li>
+</div>
+</aside>
+
+<div class="books-content">
+<h2 data-number="6.3" id="sec:datavisMakie_create_Figure"><span class="header-section-number">6.3</span> Create Plot Figure</h2>
+<p>The basic container object in Makie is <code>Figure</code>, a canvas where we can add objects like <code>Axis</code>, <code>Colorbar</code>, <code>Legend</code>, etc.</p>
+<p>For <code>Figure</code>, we have have attributes like <code>backgroundcolor</code>, <code>size</code>, <code>font</code> and <code>fontsize</code> as well as the <code>figure_padding</code> which changes the amount of space around the figure content, see the colored area in Figure <a href="/JuliaDataScience#fig:fig_axis">6</a>. It can take one number for all sides, or a tuple of four numbers for left, right, bottom and top. Let’s dive into these components.</p>
+<h3 data-number="6.3.1" id="figure"><span class="header-section-number">6.3.1</span> Figure</h3>
+<pre class="language-julia"><code>function figure_canvas()
+    fig = Figure(;
+        figure_padding=(5,5,10,10),
+        backgroundcolor=:snow2,
+        size=(600,400),
+        )
+end
+JDS.figure_canvas()</code></pre>
+<figure id="fig:fig">
+<img src="/JuliaDataScience/im/JDS_figure_canvas_.svg" style="width:60.0%" alt="Figure 5: Figure canvas." />
+<figcaption aria-hidden="true">Figure 5: Figure canvas.</figcaption>
+</figure>
+<h3 data-number="6.3.2" id="figure-axis"><span class="header-section-number">6.3.2</span> Figure + Axis</h3>
+<p><code>Axis</code> has a lot more, some of them are <code>backgroundcolor</code>, <code>xgridcolor</code> and <code>title</code>. For a full list just type <code>help(Axis)</code>.</p>
+<pre class="language-julia"><code>function figure_axis()
+    fig = Figure(;
+        figure_padding=(5,5,10,10),
+        backgroundcolor=:snow2,
+        size=(600,400),
+        )
+    ax = Axis(fig[1,1];
+        xlabel=&quot;x&quot;,
+        ylabel=&quot;y&quot;,
+        title=&quot;Title&quot;,
+        )
+    fig
+end
+JDS.figure_axis()</code></pre>
+<figure id="fig:fig_axis">
+<img src="/JuliaDataScience/im/JDS_figure_axis_.svg" style="width:60.0%" alt="Figure 6: Figure and Axis." />
+<figcaption aria-hidden="true">Figure 6: Figure and Axis.</figcaption>
+</figure>
+<p>You can hide decorations and axis’ spines with:</p>
+<blockquote>
+<ul>
+<li><code>hidedecorations!(ax; kwargs...)</code></li>
+<li><code>hidexdecorations!(ax; kwargs...)</code></li>
+<li><code>hideydecorations!(ax; kwargs...)</code></li>
+<li><code>hidespines!(ax; kwargs...)</code></li>
+</ul>
+</blockquote>
+<p>Remember, we can always ask for help to see what kind of arguments we can use, e.g.,</p>
+<pre class="language-julia"><code>help(hidespines!)</code></pre>
+<pre class="output"><code>  hidespines!(la::Axis, spines::Symbol... = (:l, :r, :b, :t)...)
+
+  Hide all specified axis spines. Hides all spines by default, otherwise
+  choose which sides to hide with the symbols :l (left), :r (right), :b
+  (bottom) and :t (top).
+
+  hidespines! has the following function signatures:
+
+    (Vector, Vector)
+    (Vector, Vector, Vector)
+    (Matrix)
+
+  Available attributes for Plot{Makie.hidespines!} are:
+
+  </code></pre>
+<p>Alternatively, for decorations</p>
+<pre class="language-julia"><code>help(hidedecorations!)</code></pre>
+<pre class="output"><code>  hidedecorations!(la::Axis; label = true, ticklabels = true, ticks = true,
+                   grid = true, minorgrid = true, minorticks = true)
+
+  Hide decorations of both x and y-axis: label, ticklabels, ticks and grid.
+  Keyword arguments can be used to disable hiding of certain types of
+  decorations.
+
+  See also [hidexdecorations!], [hideydecorations!], [hidezdecorations!]
+
+  hidedecorations!(ax::PolarAxis; ticklabels = true, grid = true, minorgrid = true)
+
+  Hide decorations of both r and theta-axis: label, ticklabels, ticks and
+  grid. Keyword arguments can be used to disable hiding of certain types of
+  decorations.
+
+  See also [hiderdecorations!], [hidethetadecorations!], [hidezdecorations!]
+
+  hidedecorations! has the following function signatures:
+
+    (Vector, Vector)
+    (Vector, Vector, Vector)
+    (Matrix)
+
+  Available attributes for Plot{Makie.hidedecorations!} are:
+
+  </code></pre>
+<p>For elements that <strong>you don’t want to hide</strong>, pass <code>false</code>, e.g., <code>hideydecorations!(ax; ticks=false, grid=false)</code>.</p>
+<p>Setting <code>limits</code> at once or independently for each axis is done by calling</p>
+<blockquote>
+<ul>
+<li><code>limits!(ax; l, r, b, t)</code>, where <code>l</code> is left, <code>r</code> right, <code>b</code> bottom, and <code>t</code> top.</li>
+</ul>
+<p>You can also do <code>ylims!(low, high)</code> or <code>xlims!(low, high)</code>, and even open ones by doing <code>ylims!(low=0)</code> or <code>xlims!(high=1)</code>.</p>
+</blockquote>
+<h3 data-number="6.3.3" id="figure-axis-plot"><span class="header-section-number">6.3.3</span> Figure + Axis + plot</h3>
+<p>Now, we add a plotting function into our new Axis:</p>
+<pre class="language-julia"><code>function figure_axis_plot()
+    fig = Figure(;
+        figure_padding=(5,5,10,10),
+        backgroundcolor=:snow2,
+        size=(600,400),
+        )
+    ax = Axis(fig[1,1];
+        xlabel=&quot;x&quot;,
+        ylabel=&quot;y&quot;,
+        title=&quot;Title&quot;,
+        )
+    lines!(ax, 0.5:0.2:3pi, x -&gt; cos(x)/x;
+        color=:black,
+        linewidth=2,
+        linestyle=:dash,
+        )
+    fig
+end
+JDS.figure_axis_plot()</code></pre>
+<figure id="fig:fig_axis_plot">
+<img src="/JuliaDataScience/im/JDS_figure_axis_plot_.svg" style="width:60.0%" alt="Figure 7: Figure, Axis and plot." />
+<figcaption aria-hidden="true">Figure 7: Figure, Axis and plot.</figcaption>
+</figure>
+<p>This example already includes many of the attributes that are typically used. Additionally, it would be beneficial to include a “legend” for reference, especially if the example has more than one function. This will make it easier to understand.</p>
+<h3 data-number="6.3.4" id="figure-axis-plot-axislegend"><span class="header-section-number">6.3.4</span> Figure + Axis + plot + axislegend</h3>
+<p>So, let’s <code>append</code> another mutation <code>plot</code> object and add the corresponding legends by calling <code>axislegend</code>. This will collect all the <code>labels</code> you might have passed to your plotting functions and by default will be located in the right top position. For a different one, the <code>position=:ct</code> argument is called, where <code>:ct</code> means let’s put our label in the <code>center</code> and at the <code>top</code>, see Figure Figure <a href="/JuliaDataScience#fig:plot_legend">8</a>:</p>
+<pre class="language-julia"><code>function figure_axis_plot_leg()
+    fig = Figure(;
+        figure_padding=(5,5,10,10),
+        backgroundcolor=:snow2,
+        size=(600,400),
+        )
+    ax = Axis(fig[1,1];
+        xlabel=&quot;x&quot;,
+        ylabel=&quot;y&quot;,
+        title=&quot;Title&quot;,
+        xgridstyle=:dash,
+        ygridstyle=:dash,
+        )
+    lines!(ax, 0.5:0.2:3pi, x -&gt; cos(x)/x;
+        linewidth=2,
+        linestyle=:solid,
+        label = &quot;cos(x)/x&quot;,
+        )
+    scatterlines!(ax, 0.5:0.2:3pi, x -&gt; -cos(x)/x;
+        color=:black,
+        linewidth=2,
+        linestyle=:dash,
+         label = &quot;-cos(x)/x&quot;,
+        )
+    axislegend(&quot;legend&quot;; position=:rt)
+    fig
+end
+JDS.figure_axis_plot_leg()</code></pre>
+<figure id="fig:plot_legend">
+<img src="/JuliaDataScience/im/JDS_figure_axis_plot_leg_.svg" style="width:60.0%" alt="Figure 8: Figure, Axis, plot and legend." />
+<figcaption aria-hidden="true">Figure 8: Figure, Axis, plot and legend.</figcaption>
+</figure>
+<p>Other positions are also available by combining <em>left(l), center(c), right(r)</em> and <em>bottom(b), center(c), top(t)</em>. For instance, for left top, use <code>:lt</code>.</p>
+<p>However, having to write this much code just for two lines is cumbersome. So, if you plan on doing a lot of plots with the same general aesthetics, then setting a theme will be better. We can do this with <code>set_theme!()</code> as follows:</p>
+<pre class="language-julia"><code>set_theme!(;
+    size=(600,400),
+    backgroundcolor=(:mistyrose, 0.1),
+    fontsize=16,
+    Axis=(;
+        xlabel=&quot;x&quot;,
+        ylabel=&quot;y&quot;,
+        title=&quot;Title&quot;,
+        xgridstyle=:dash,
+        ygridstyle=:dash,
+        ),
+    Legend=(;
+        backgroundcolor=(:grey, 0.1),
+        framecolor=:orangered,
+        ),
+    )</code></pre>
+<pre class="output"><code>nothing</code></pre>
+<p>Plotting the previous figure should take the new default settings defined by <code>set_theme!(kwargs)</code>:</p>
+<pre class="language-julia"><code>function fig_theme()
+    fig = Figure()
+    ax = Axis(fig[1,1])
+    lines!(ax, 0.5:0.2:3pi, x -&gt; cos(x)/x;
+        linewidth=2,
+        linestyle=:dash,
+        label = &quot;cos(x)/x&quot;,
+        )
+    scatterlines!(ax, 0.5:0.2:3pi, x -&gt; -cos(x)/x;
+        color=:black,
+        linewidth=2,
+        linestyle=:dash,
+        label = &quot;-cos(x)/x&quot;,
+        )
+    axislegend(&quot;legend&quot;; position=:rt)
+    fig
+    set_theme!()
+end
+JDS.fig_theme()</code></pre>
+<figure id="fig:setTheme">
+<img src="/JuliaDataScience/im/JDS_fig_theme_.svg" style="width:60.0%" alt="Figure 9: Set theme!() example." />
+<figcaption aria-hidden="true">Figure 9: Set theme!() example.</figcaption>
+</figure>
+<p>Note that the last line is <code>set_theme!()</code>, will reset the default’s settings of Makie. For more on <code>themes</code> please go to Section <a href="/JuliaDataScience/themes#sec:themes">6.5</a>.</p>
+<h3 data-number="6.3.5" id="figure-axis-plot-legend-colorbar"><span class="header-section-number">6.3.5</span> Figure + Axis + plot + Legend + Colorbar</h3>
+<p>Before moving on into the next section, it’s worthwhile to see an example where an <code>array</code> of attributes is passed at once to a plotting function. For this example, we will use the <code>scatter</code> plotting function to do a bubble plot.</p>
+<p>The data for this could be an <code>array</code> with 100 rows and 3 columns, which we generated at random from a normal distribution. Here, the first column could be the positions in the <code>x</code> axis, the second one the positions in <code>y</code> and the third one an intrinsic associated value for each point. The latter could be represented in a plot by a different <code>color</code> or with a different marker size. In a bubble plot we can do both.</p>
+<pre class="language-julia"><code>using Random: seed!
+seed!(28)
+xyz = randn(100, 3)
+xyz[1:4, :]</code></pre>
+<pre class="output"><code>4×3 Matrix{Float64}:
+  0.550992   1.27614    -0.659886
+ -1.06587   -0.0287242   0.175126
+ -0.721591  -1.84423     0.121052
+  0.801169   0.862781   -0.221599</code></pre>
+<p>Next, the corresponding plot can be seen in Figure <a href="/JuliaDataScience#fig:bubble">10</a>:</p>
+<pre class="language-julia"><code>function fig_bubbles(xyz)
+    fig = Figure(size=(600,400))
+    ax = Axis(fig[1,1]; aspect = DataAspect())
+    pltobj = scatter!(xyz[:, 1], xyz[:, 2];
+        color=xyz[:, 3],
+        label=&quot;Bubbles&quot;,
+        colormap=:plasma,
+        markersize=15 * abs.(xyz[:, 3]),
+        )
+    limits!(-3, 3, -3, 3)
+    Legend(fig[1, 2], ax, valign=:top)
+    Colorbar(fig[1, 2], pltobj, height=Relative(3/4))
+    fig
+end
+JDS.fig_bubbles(xyz)</code></pre>
+<figure id="fig:bubble">
+<img src="/JuliaDataScience/im/JDS_fig_bubbles_xyz_.svg" style="width:60.0%" alt="Figure 10: Bubble plot." />
+<figcaption aria-hidden="true">Figure 10: Bubble plot.</figcaption>
+</figure>
+<p>where we have decomposed the tuple <code>FigureAxisPlot</code> into <code>fig, ax, pltobj</code>, in order to be able to add a <code>Legend</code> and <code>Colorbar</code> outside of the plotted object. We will discuss layout options in more detail in Section <a href="/JuliaDataScience/makie_layouts#sec:makie_layouts">6.8</a>.</p>
+<p>We have done some basic but still interesting examples to show how to use <code>Makie.jl</code> and by now you might be wondering: what else can we do?</p>
+
+
+<div class="bottom-nav">
+    <p id="nav-prev" style="text-align: left;">
+        <a class="menu-level-2" href="/JuliaDataScience/datavisMakie_attributes"><b>6.2</b> Attributes</a> <kbd>←</kbd>
+        <span id="nav-next" style="float: right;">
+            <kbd>→</kbd> <a class="menu-level-2" href="/JuliaDataScience/makie_cheat_sheets"><b>6.4</b> Cheat Sheets</a>
+        </span>
+    </p>
+</div>
+
+
+<div class="license">
+    <br/>
+  <br/>
+  <span style="display: flex; justify-content: center;"> <a
+      style="display: flex; align-items: center; border: 1.5px solid black; border-radius: 10px;"
+      href="https://opencollective.com/juliadatascience" target="_blank"> <img src="/images/coffee.png" height="18px" style="margin: 5px; display:inline"> <span style="margin-left: 4px; color: black !important">Support this project</span> </a> </span> <br> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+    Jose Storopoli, Rik Huijzer, Lazaro Alonso
+</div>
+</div>
+</div>
+</body>
+</html>

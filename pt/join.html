@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jose Storopoli" />
+  <meta name="author" content="Rik Huijzer" />
+  <meta name="author" content="Lazaro Alonso" />
+  <title>Join - Julia Data Science</title>
+  <link rel="shortcut icon" type="image/png" href="/pt/favicon.png"/>
+  <link rel="stylesheet" href="/pt/style.css"/>
+    <script src="/pt/mousetrap.min.js"></script>
+    <style>
+  @font-face {
+    font-family: JuliaMono-Regular;
+    src: url("/pt/JuliaMono-Regular.woff2");
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/pt/github.min.css">
+<script src="/pt/highlight.min.js"></script>
+<script src="/pt/julia.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre').forEach((el) => {
+        hljs.highlightElement(el);
+    });
+});
+</script>
+ 
+</head>
+<body>
+<script>
+function click_next() {
+  var next = document.getElementById('nav-next');
+  next.firstElementChild.nextElementSibling.click();
+}
+function click_prev() {
+  var prev = document.getElementById('nav-prev');
+  prev.firstElementChild.click();
+}
+Mousetrap.bind('right', click_next);
+Mousetrap.bind('h', click_prev);
+Mousetrap.bind('left', click_prev);
+Mousetrap.bind('l', click_next);
+</script>
+
+<div class="books-container">
+<aside class="books-menu">
+<input type="checkbox" id="menu">
+<label for="menu">☰</label>
+<div class="books-title">
+<a href="/pt/">Julia Data Science</a>
+</div><br />
+<span class="books-subtitle">
+
+</span>
+<div class="books-menu-content">
+<li><a class="menu-level-1" href="/pt/preface"><b>1</b> Prefácio</a></li>
+<li><a class="menu-level-2" href="/pt/why_data_science"><b>1.1</b> O que é Ciência de Dad..</a></li>
+<li><a class="menu-level-2" href="/pt/engineering"><b>1.2</b> Engenharia de software</a></li>
+<li><a class="menu-level-2" href="/pt/agradecimentos"><b>1.3</b> Agradecimentos</a></li>
+<li><a class="menu-level-1" href="/pt/why_julia"><b>2</b> Por que Julia?</a></li>
+<li><a class="menu-level-2" href="/pt/non-programmers"><b>2.1</b> Para os que nunca progra..</a></li>
+<li><a class="menu-level-2" href="/pt/programmers"><b>2.2</b> Para programadores</a></li>
+<li><a class="menu-level-2" href="/pt/julia_accomplish"><b>2.3</b> O que Julia pretende alc..</a></li>
+<li><a class="menu-level-2" href="/pt/julia_wild"><b>2.4</b> Julia Por Aí</a></li>
+<li><a class="menu-level-1" href="/pt/julia_basics"><b>3</b> Básico de Julia</a></li>
+<li><a class="menu-level-2" href="/pt/syntax"><b>3.1</b> Sintaxe da linguagem</a></li>
+<li><a class="menu-level-2" href="/pt/data_structures"><b>3.2</b> Estruturas Nativas de Da..</a></li>
+<li><a class="menu-level-2" href="/pt/filesystem"><b>3.3</b> Sistema de Arquivos</a></li>
+<li><a class="menu-level-2" href="/pt/standardlibrary"><b>3.4</b> Biblioteca Padrão de Ju..</a></li>
+<li><a class="menu-level-1" href="/pt/dataframes"><b>4</b> DataFrames.jl</a></li>
+<li><a class="menu-level-2" href="/pt/load_save"><b>4.1</b> Carregar e salvar arquiv..</a></li>
+<li><a class="menu-level-2" href="/pt/indexação-e-sumarização"><b>4.2</b> Indexação e Sumarização</a></li>
+<li><a class="menu-level-2" href="/pt/filter_subset"><b>4.3</b> Filtro e Subconjunto</a></li>
+<li><a class="menu-level-2" href="/pt/select"><b>4.4</b> Select</a></li>
+<li><a class="menu-level-2" href="/pt/missing_data"><b>4.5</b> Tipos de Dados e Dados F..</a></li>
+<li><a class="menu-level-2" href="/pt/join"><b>4.6</b> Join</a></li>
+<li><a class="menu-level-2" href="/pt/transformações-de-variáveis"><b>4.7</b> Transformações de Vari..</a></li>
+<li><a class="menu-level-2" href="/pt/groupby_combine"><b>4.8</b> Groupby e Combine</a></li>
+<li><a class="menu-level-2" href="/pt/df_performance"><b>4.9</b> Desempenho</a></li>
+<li><a class="menu-level-1" href="/pt/DataVisualizationMakie"><b>5</b> Visualização de dados co..</a></li>
+<li><a class="menu-level-2" href="/pt/cairomakie"><b>5.1</b> CairoMakie.jl</a></li>
+<li><a class="menu-level-2" href="/pt/datavisMakie_attributes"><b>5.2</b> Atributos</a></li>
+<li><a class="menu-level-2" href="/pt/themes"><b>5.3</b> Temas</a></li>
+<li><a class="menu-level-2" href="/pt/usando-latexstrings.jl"><b>5.4</b> Usando LaTeXStrings.jl</a></li>
+<li><a class="menu-level-2" href="/pt/makie_colors"><b>5.5</b> Cores e mapas de cores</a></li>
+<li><a class="menu-level-2" href="/pt/makie_layouts"><b>5.6</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/pt/glmakie"><b>5.7</b> GLMakie.jl</a></li>
+<li><a class="menu-level-1" href="/pt/appendix"><b>6</b> Apêndice</a></li>
+<li><a class="menu-level-2" href="/pt/appendix_pkg"><b>6.1</b> Versões dos Pacotes</a></li>
+<li><a class="menu-level-2" href="/pt/notation"><b>6.2</b> Formatação</a></li>
+<li><a class="menu-level-1" href="/pt/referências"><b></b> Referências</a></li>
+</div>
+</aside>
+
+<div class="books-content">
+<h2 data-number="4.6" id="sec:join"><span class="header-section-number">4.6</span> Join</h2>
+<p>No início deste capítulo, mostramos várias tabelas e levantamos questões também relacionadas às várias tabelas. No entanto, não falamos sobre como combinar de tabelas ainda, o que faremos nesta seção. Em <code>DataFrames.jl</code>, a combinação de várias tabelas é feita via <em>joins</em>. Os joins são extremamente poderosos, mas pode demorar um pouco para você entendê-los. Não é necessário saber os joins abaixo de cor, porque a <a href="https://DataFrames.juliadata.org/stable/man/joins/">documentação <code>DataFrames.jl</code></a>, juntamente com este livro, listará-los para você. Mas, é essencial saber que os joins existem. Se você alguma vez se pegar dando voltas sobre as linhas de um <code>DataFrame</code> e comparando-o com outros dados, então você provavelmente precisará de um dos joins abaixo.</p>
+<p>No Section <a href="/pt/dataframes#sec:dataframes">4</a>, introduzimos as notas escolares para o ano de 2020 com <code>grades_2020</code>:</p>
+<pre class="language-julia"><code>grades_2020()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+</tbody>
+</table>
+<p>Agora, vamos combinar <code>grades_2020</code> com as notas de 2021:</p>
+<pre class="language-julia"><code>grades_2021()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2021</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+</tbody>
+</table>
+<p>Para fazer isso, vamos utilizar os joins. <code>DataFrames.jl</code> lista não menos que sete tipos de join. Isso pode parecer assustador no início, mas espere porque todos eles são úteis e vamos mostrá-los.</p>
+<h3 data-number="4.6.1" id="sec:innerjoin"><span class="header-section-number">4.6.1</span> innerjoin</h3>
+<p>O primeiro é <strong><code>innerjoin</code></strong>. Suponha que temos dois datasets <code>A</code> e <code>B</code> com as respectivas colunas <code>A_1, A_2, ..., A_n</code> e <code>B_1, B_2, ..., B_m</code> <strong>e</strong> uma das colunas tem o mesmo nome, digamos <code>A_1</code> e <code>B_1</code> são ambas chamadas <code>:id</code>. Então, o inner join em <code>:id</code> irá percorrer todos os elementos em <code>A_1</code> e compará-lo aos elementos em <code>B_1</code>. Se os elementos são <strong>os mesmos</strong>, então ele irá adicionar todas as informações de <code>A_2, ..., A_n</code> e <code>B_2, ..., B_m</code> depois da coluna <code>:id</code>.</p>
+<p>Ok, não se preocupe se você ainda não compreendeu esta descrição. O resultado do join nos datasets de notas será assim:</p>
+<pre class="language-julia"><code>innerjoin(grades_2020(), grades_2021(); on=:name)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+<th style="text-align: right;">grade_2021</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+</tbody>
+</table>
+<p>Observe que apenas “Sally” e “Hank” estão em ambos datasets. O nome <em>inner</em> join faz sentido, uma vez que, em matemática, o <em>set intersection</em> (ou a intersecção de conjuntos) é definido por “todos os elementos em <span class="math inline">\(A\)</span>, que também estão em <span class="math inline">\(B\)</span>, ou todos os elementos em <span class="math inline">\(B\)</span> que também estão em <span class="math inline">\(A\)</span>.”</p>
+<h3 data-number="4.6.2" id="sec:outerjoin"><span class="header-section-number">4.6.2</span> outerjoin</h3>
+<p>Talvez você esteja pensando agora “se temos um <em>inner</em> (interno), provavelmente também temos um <em>outer</em> (externo).” Sim, você adivinhou certo!</p>
+<p>O <strong><code>outerjoin</code></strong> é muito menos rigoroso do que o <code>innerjoin</code> e pega qualquer linha que encontrar que contenha um nome <strong>em pelo menos um dos datasets</strong>:</p>
+<pre class="language-julia"><code>outerjoin(grades_2020(), grades_2021(); on=:name)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+<th style="text-align: right;">grade_2021</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">missing</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+<td style="text-align: right;">missing</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">missing</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+</tbody>
+</table>
+<p>Portanto, este método pode criar dados <code>faltantes</code> mesmo que nenhum dos datasets originais tivesse valores ausentes.</p>
+<h3 data-number="4.6.3" id="sec:crossjoin"><span class="header-section-number">4.6.3</span> crossjoin</h3>
+<p>Podemos obter ainda mais dados <code>faltantes</code> se usarmos o <strong><code>crossjoin</code></strong>. Esse tipo de join retorna o <strong>produto cartesiano das linhas</strong>, que é basicamente a multiplicação das linhas, ou seja, para cada linha crie uma combinação com qualquer outra linha:</p>
+<pre class="language-julia"><code>crossjoin(grades_2020(), grades_2021(); on=:id)</code></pre>
+<pre class="output"><code>MethodError: no method matching crossjoin(::DataFrame, ::DataFrame; on=:id)
+Closest candidates are:
+  crossjoin(::DataFrames.AbstractDataFrame, ::DataFrames.AbstractDataFrame; makeunique) at ~/.julia/packages/DataFrames/MA4YO/src/join/composer.jl:1319 got unsupported keyword argument &quot;on&quot;
+  crossjoin(::DataFrames.AbstractDataFrame, ::DataFrames.AbstractDataFrame, !Matched::DataFrames.AbstractDataFrame...; makeunique) at ~/.julia/packages/DataFrames/MA4YO/src/join/composer.jl:1330 got unsupported keyword argument &quot;on&quot;
+  ...</code></pre>
+<p>Ops! Já que <code>crossjoin</code> não leva os elementos na linha em consideração, não precisamos especificar o argumento <code>on</code> para o que queremos juntar:</p>
+<pre class="language-julia"><code>crossjoin(grades_2020(), grades_2021())</code></pre>
+<pre class="output"><code>ArgumentError: Duplicate variable names: :name. Pass makeunique=true to make them unique using a suffix automatically.
+Stacktrace:
+  [1] add_names(ind::DataFrames.Index, add_ind::DataFrames.Index; makeunique::Bool)
+    @ DataFrames ~/.julia/packages/DataFrames/MA4YO/src/other/index.jl:427
+  [2] merge!(x::DataFrames.Index, y::DataFrames.Index; makeunique::Bool)
+  ...</code></pre>
+<p>Ops de novo! Esse é um erro bastante comum com <code>DataFrames</code> e <code>joins</code>. As tabelas para as notas de 2020 e 2021 têm um nome de coluna duplicado, a saber <code>:name</code>. Como antes, o erro do output de <code>DataFrames.jl</code> mostra uma sugestão simples que pode corrigir o problema. Podemos apenas passar <code>makeunique=true</code> para resolver isso:</p>
+<pre class="language-julia"><code>crossjoin(grades_2020(), grades_2021(); makeunique=true)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+<th style="text-align: right;">name_1</th>
+<th style="text-align: right;">grade_2021</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+</tbody>
+</table>
+<p>Então, agora, temos uma linha para cada nota de todos nos datasets de notas de 2020 e 2021. Para consultas diretas, como “quem tem a nota mais alta?” o produto cartesiano geralmente não é tão útil, mas para consultas “estatísticas,” pode ser.</p>
+<h3 data-number="4.6.4" id="sec:leftjoin_rightjoin"><span class="header-section-number">4.6.4</span> leftjoin e rightjoin</h3>
+<p><strong>Mais úteis para projetos de dados científicos são os <code>leftjoin</code> e <code>rightjoin</code></strong>. O left join (ou join à esquerda) fornece todos os elementos do <code>DataFrame</code> à <em>esquerda</em>:</p>
+<pre class="language-julia"><code>leftjoin(grades_2020(), grades_2021(); on=:name)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+<th style="text-align: right;">grade_2021</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">missing</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+<td style="text-align: right;">missing</td>
+</tr>
+</tbody>
+</table>
+<p>Aqui, as notas para “Bob” e “Alice” estavam faltando na tabela de notas de 2021, então é por isso que também existem elementos <code>faltantes</code>. A join à direita faz quase que o oposto:</p>
+<pre class="language-julia"><code>rightjoin(grades_2020(), grades_2021(); on=:name)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+<th style="text-align: right;">grade_2021</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">missing</td>
+<td style="text-align: right;">9.5</td>
+</tr>
+</tbody>
+</table>
+<p>Agora, as notas de 2020 estão faltando.</p>
+<p>Perceba que <strong><code>leftjoin(A, B) != rightjoin(B, A)</code></strong>, porque a ordem das colunas será diferente. Por exemplo, compare o output abaixo com o output anterior:</p>
+<pre class="language-julia"><code>leftjoin(grades_2021(), grades_2020(); on=:name)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2021</th>
+<th style="text-align: right;">grade_2020</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">9.5</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Bob 2</td>
+<td style="text-align: right;">9.5</td>
+<td style="text-align: right;">missing</td>
+</tr>
+</tbody>
+</table>
+<h3 data-number="4.6.5" id="sec:semijoin_antijoin"><span class="header-section-number">4.6.5</span> semijoin e antijoin</h3>
+<p>Por último, temos <strong><code>semijoin</code></strong> e <strong><code>antijoin</code></strong>.</p>
+<p>O semi join é ainda mais restritivo que o inner join. Retorna <strong>apenas elementos do <code>DataFrame</code> da esquerda que estão em ambos <code>DataFrames</code></strong>. Ele é como se fosse uma combinação do join da esquerda com o inner join.</p>
+<pre class="language-julia"><code>semijoin(grades_2020(), grades_2021(); on=:name)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Sally</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Hank</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+</tbody>
+</table>
+<p>O oposto do semi join é o anti join. Ele retorna <strong>apenas os elementos do <code>DataFrame</code> da esquerda que <em>não</em> estão no <code>DataFrame</code> da direita</strong>:</p>
+<pre class="language-julia"><code>antijoin(grades_2020(), grades_2021(); on=:name)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">name</th>
+<th style="text-align: right;">grade_2020</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Bob</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Alice</td>
+<td style="text-align: right;">8.5</td>
+</tr>
+</tbody>
+</table>
+
+
+<div class="bottom-nav">
+    <p id="nav-prev" style="text-align: left;">
+        <a class="menu-level-2" href="/pt/missing_data"><b>4.5</b> Tipos de Dados e Dados F..</a> <kbd>←</kbd>
+        <span id="nav-next" style="float: right;">
+            <kbd>→</kbd> <a class="menu-level-2" href="/pt/transformações-de-variáveis"><b>4.7</b> Transformações de Vari..</a>
+        </span>
+    </p>
+</div>
+
+
+<div class="license">
+    <br/>
+  <br/>
+  <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+    Jose Storopoli, Rik Huijzer, Lazaro Alonso
+</div>
+</div>
+</div>
+</body>
+</html>

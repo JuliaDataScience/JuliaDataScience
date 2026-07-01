@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+    <loc>https://juliadatascience.io/pt/bem-vindoa</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/preface</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/why_data_science</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/engineering</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/agradecimentos</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/why_julia</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/non-programmers</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/programmers</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/julia_accomplish</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/julia_wild</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/julia_basics</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/syntax</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/data_structures</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/filesystem</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/standardlibrary</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/dataframes</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/load_save</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/indexação-e-sumarização</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/filter_subset</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/select</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/missing_data</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/join</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/transformações-de-variáveis</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/groupby_combine</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/df_performance</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/DataVisualizationMakie</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/cairomakie</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/datavisMakie_attributes</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/themes</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/usando-latexstrings.jl</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/makie_colors</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/makie_layouts</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/glmakie</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/appendix</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/appendix_pkg</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/notation</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://juliadatascience.io/pt/referências</loc>
+    <lastmod>2022-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+</urlset>

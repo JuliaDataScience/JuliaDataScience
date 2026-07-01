@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jose Storopoli" />
+  <meta name="author" content="Rik Huijzer" />
+  <meta name="author" content="Lazaro Alonso" />
+  <title>Themes - Julia Data Science</title>
+  <link rel="shortcut icon" type="image/png" href="/JuliaDataScience/favicon.png"/>
+  <link rel="stylesheet" href="/JuliaDataScience/style.css"/>
+    <script src="/JuliaDataScience/mousetrap.min.js"></script>
+    <style>
+  @font-face {
+    font-family: JuliaMono-Regular;
+    src: url("/JuliaDataScience/JuliaMono-Regular.woff2");
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/JuliaDataScience/github.min.css">
+<script src="/JuliaDataScience/highlight.min.js"></script>
+<script src="/JuliaDataScience/julia.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre').forEach((el) => {
+        if (!el.classList.contains('output')) {
+            hljs.highlightElement(el);
+        }
+    });
+});
+</script>
+ 
+</head>
+<body>
+<script>
+function click_next() {
+  var next = document.getElementById('nav-next');
+  next.firstElementChild.nextElementSibling.click();
+}
+function click_prev() {
+  var prev = document.getElementById('nav-prev');
+  prev.firstElementChild.click();
+}
+Mousetrap.bind('right', click_next);
+Mousetrap.bind('h', click_prev);
+Mousetrap.bind('left', click_prev);
+Mousetrap.bind('l', click_next);
+</script>
+
+<div class="books-container">
+<aside class="books-menu">
+<input type="checkbox" id="menu">
+<label for="menu">☰</label>
+<div class="books-title">
+<a href="/JuliaDataScience/">Julia Data Science</a>
+</div><br />
+<span class="books-subtitle">
+
+</span>
+<div class="books-menu-content">
+<li><a class="menu-level-1" href="/JuliaDataScience/preface"><b>1</b> Preface</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/why_data_science"><b>1.1</b> What is Data Science?</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/engineering"><b>1.2</b> Software Engineering</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/acknowledgements"><b>1.3</b> Acknowledgements</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/why_julia"><b>2</b> Why Julia?</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/non-programmers"><b>2.1</b> For Non-Programmers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/programmers"><b>2.2</b> For Programmers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/julia_accomplish"><b>2.3</b> What Julia Aims to Accom..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/julia_wild"><b>2.4</b> Julia in the Wild</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/julia_basics"><b>3</b> Julia Basics</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/ide"><b>3.1</b> Development Environments</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/syntax"><b>3.2</b> Language Syntax</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/data_structures"><b>3.3</b> Native Data Structures</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/filesystem"><b>3.4</b> Filesystem</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/standardlibrary"><b>3.5</b> Julia Standard Library</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/dataframes"><b>4</b> DataFrames.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/load_save"><b>4.1</b> Load and Save Files</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/index-and-summarize"><b>4.2</b> Index and Summarize</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/filter_subset"><b>4.3</b> Filter and Subset</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/select"><b>4.4</b> Select</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/types"><b>4.5</b> Types and Categorical Da..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/join"><b>4.6</b> Join</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/transform"><b>4.7</b> Variable Transformations</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/groupby_combine"><b>4.8</b> Groupby and Combine</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/missing"><b>4.9</b> Missing Data</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/df_performance"><b>4.10</b> Performance</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/dataframesmeta"><b>5</b> DataFramesMeta.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_macros"><b>5.1</b> Macros</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_select"><b>5.2</b> Column Selection</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_transform"><b>5.3</b> Column Transformation</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_subset"><b>5.4</b> Row Selection</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_orderby"><b>5.5</b> Row Sorting</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_combine"><b>5.6</b> Data Summaries</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/dataframesmeta_chain"><b>5.7</b> Piping Operations</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/DataVisualizationMakie"><b>6</b> Data Visualization with Ma..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/cairomakie"><b>6.1</b> CairoMakie.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/datavisMakie_attributes"><b>6.2</b> Attributes</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/datavisMakie_create_Figure"><b>6.3</b> Create Plot Figure</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_cheat_sheets"><b>6.4</b> Cheat Sheets</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/themes"><b>6.5</b> Themes</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/using-latexstrings.jl"><b>6.6</b> Using LaTeXStrings.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_colors"><b>6.7</b> Colors and Colormaps</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/makie_layouts"><b>6.8</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/glmakie"><b>6.9</b> GLMakie.jl</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/recipe_df"><b>6.10</b> A Makie recipe for a Da..</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/aog"><b>7</b> Data Visualization with Al..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_layers"><b>7.1</b> Layers</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_layouts"><b>7.2</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_stats"><b>7.3</b> Statistical Visualizatio..</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_custom"><b>7.4</b> Plot Customizations</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/aog_makie"><b>7.5</b> Makie.jl and AlgebraOfGr..</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/appendix"><b>8</b> Appendix</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/appendix_pkg"><b>8.1</b> Packages Versions</a></li>
+<li><a class="menu-level-2" href="/JuliaDataScience/notation"><b>8.2</b> Notation</a></li>
+<li><a class="menu-level-1" href="/JuliaDataScience/references"><b></b> References</a></li>
+</div>
+</aside>
+
+<div class="books-content">
+<h2 data-number="6.5" id="sec:themes"><span class="header-section-number">6.5</span> Themes</h2>
+<p>There are several ways to affect the general appearance of your plots. Either, you could use a <a href="https://docs.makie.org/stable/documentation/theming/predefined_themes/">predefined theme</a> or your own custom theme. For example, use the predefined dark theme via <code>with_theme(your_plot_function, theme_dark())</code>. Or, build your own with <code>Theme(kwargs)</code> or even update the one that is active with <code>update_theme!(kwargs)</code>.</p>
+<p>You can also do <code>set_theme!(theme; kwargs...)</code> to change the current default theme to <code>theme</code> and override or add attributes given by <code>kwargs</code>. If you do this and want to reset all previous settings just do <code>set_theme!()</code> with no arguments. See the following examples, where we had prepared a <code>demo_figure</code> with different characteristics, such that most attributes for each theme can be appreciated.</p>
+<p>Our <code>demo_figure</code> plotting function looks like follows:</p>
+<pre class="language-julia"><code>function demo_figure()
+    # contourf
+    x=y= range(-2.3, 2.3, length=100)
+    z=-2x .* exp.(-x .^ 2 .- (y&#39;) .^ 2)
+    # density
+    μσpairs=[[4,2],[2,0.5],[-1,2],[0.25,1],[-4, 2],[8, 1.5]]
+    # lines
+    xs=range(0, 4π, 100)
+    ys=[sin.(xs),cos.(xs),-sin.(xs),-cos.(xs),0.5cos.(xs),-0.5cos.(xs)]
+    labs=[&quot;sin(x)&quot;,&quot;cos(x)&quot;,&quot;-sin(x)&quot;,&quot;-cos(x)&quot;,&quot;cos(x)/2&quot;,&quot;-cos(x)/2&quot;]
+    # figure
+    fig = Figure(figure_padding=(10,15,5,35),
+        size = (900,600), fontsize = 20)
+    ax1 = Axis(fig[1,1]; xlabel=&quot;x&quot;, ylabel=&quot;y&quot;)
+    ax2 = Axis(fig[1,2]; xlabel=&quot;x&quot;, ylabel=&quot;pdf&quot;)
+    ax3 = Axis(fig[2,1:2]; xlabel=&quot;x&quot;, ylabel=&quot;y&quot;)
+    obj = contourf!(ax1, x,y,z; levels=30)
+    Colorbar(fig[1,1, Top()], obj;
+        vertical=false,
+        tellheight=false,
+        tellwidth=false,
+        valign=:top
+        )
+    for μσ in μσpairs
+        density!(ax2, rand(Distributions.Normal(μσ...),1000);
+            label=&quot;$(μσ[1]),$(μσ[2])&quot;)
+    end
+    Legend(fig[1,2, Top()], ax2;
+        orientation=:horizontal,
+        nbanks=2,
+        backgroundcolor =:transparent,
+        tellheight=false,
+        valign=:center,
+        )
+    limits!(ax2, -10,15,0,1)
+    [lines!(ax3, xs, y, label = &quot;$(labs[i])&quot;) for (i,y) in enumerate(ys)]
+    limits!(ax3, 0,4π,-1,1)
+    Legend(fig[2,1:2, Top()], ax3, orientation=:horizontal)
+    fig
+end</code></pre>
+<p>Where we had use several keyword arguments for <code>Axis</code>, <code>Legend</code> and <code>Colorbar</code>, please play with them and see how they work.</p>
+<p>Currently, there are five themes:</p>
+<blockquote>
+<ul>
+<li><code>theme_dark()</code></li>
+<li><code>theme_black()</code></li>
+<li><code>theme_ggplot2()</code></li>
+<li><code>theme_minimal()</code></li>
+<li><code>theme_light()</code></li>
+</ul>
+</blockquote>
+<figure id="fig:makie_themes">
+<img src="/JuliaDataScience/im/JDS_themes_gallery_.svg" style="width:100.0%" alt="Figure 13: Predefined themes." />
+<figcaption aria-hidden="true">Figure 13: Predefined themes.</figcaption>
+</figure>
+<p>Another alternative is defining a custom <code>Theme</code> by doing <code>with_theme(your_plot, your_theme())</code>. For instance, the following theme could be a simple version for a publication quality template:</p>
+<pre class="language-julia"><code>publication_theme() = Theme(
+    fontsize=16,
+    font=&quot;CMU Serif&quot;,
+    Axis=(
+        xlabelsize=20,xlabelpadding=-5,
+        xgridstyle=:dash, ygridstyle=:dash,
+        xtickalign=1, ytickalign=1,
+        yticksize=10, xticksize=10,
+        xlabel=&quot;x&quot;, ylabel=&quot;y&quot;
+        ),
+    Legend=(framecolor=(:black, 0.5), backgroundcolor=(:white, 0.5)),
+    Colorbar=(ticksize=16, tickalign=1, spinewidth=0.5),
+)</code></pre>
+<p>Which, for simplicity we use it to plot <code>scatterlines</code> and a <code>heatmap</code>.</p>
+<pre class="language-julia"><code>function plot_with_legend_and_colorbar()
+    fig, ax, _ = scatterlines(1:10; label=&quot;line&quot;)
+    hm = heatmap!(ax, range(6, 9, 15), range(2, 5, 15), randn(15, 15);
+        colormap=:Spectral_11)
+    axislegend(&quot;legend&quot;; position=:lt)
+    Colorbar(fig[1, 2], hm, label=&quot;values&quot;)
+    colsize!(fig.layout, 1, Aspect(1, 1.0))
+    ax.title = &quot;my custom theme&quot;
+    fig
+end</code></pre>
+<p>Then, using the previously defined <code>Theme</code> the output is shown in Figure (Figure <a href="/JuliaDataScience#fig:plot_with_legend_and_colorbar">14</a>).</p>
+<pre class="language-julia"><code>with_theme(plot_with_legend_and_colorbar, publication_theme())</code></pre>
+<figure id="fig:plot_with_legend_and_colorbar">
+<img src="/JuliaDataScience/im/plot_with_legend_and_colorbar.svg" style="width:60.0%" alt="Figure 14: Themed plot with Legend and Colorbar." />
+<figcaption aria-hidden="true">Figure 14: Themed plot with Legend and Colorbar.</figcaption>
+</figure>
+<p>Here we have use <code>with_theme</code> which is more convenient for the direct application of a theme than the <code>do</code> syntax. You should use the latter if you want to include extra arguments to the theme that is going to be applied.</p>
+<p>Now, if something needs to be changed after <code>set_theme!(your_theme)</code>, we can do it with <code>update_theme!(size=(500, 400), fontsize=18)</code>, for example. Another approach will be to pass additional arguments to the <code>with_theme</code> function:</p>
+<pre class="language-julia"><code>fig = (size=(600, 400), figure_padding=1, backgroundcolor=:grey90)
+ax = (; aspect=DataAspect(), xlabel=L&quot;x&quot;, ylabel=L&quot;y&quot;)
+cbar = (; height=Relative(4 / 5))
+with_theme(publication_theme(); fig..., Axis=ax, Colorbar=cbar) do
+    plot_with_legend_and_colorbar()
+end</code></pre>
+<figure id="fig:plot_theme_extra_args">
+<img src="/JuliaDataScience/im/plot_theme_extra_args.svg" style="width:60.0%" alt="Figure 15: Theme with extra args." />
+<figcaption aria-hidden="true">Figure 15: Theme with extra args.</figcaption>
+</figure>
+<p>Where the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> labels have a Latex format due to <code>L"..."</code>. Most basic Latex strings are already supported by Makie, however to fully exploit this integration is recommend to also load the package LaTeXStrings as stated in the next section.</p>
+
+
+<div class="bottom-nav">
+    <p id="nav-prev" style="text-align: left;">
+        <a class="menu-level-2" href="/JuliaDataScience/makie_cheat_sheets"><b>6.4</b> Cheat Sheets</a> <kbd>←</kbd>
+        <span id="nav-next" style="float: right;">
+            <kbd>→</kbd> <a class="menu-level-2" href="/JuliaDataScience/using-latexstrings.jl"><b>6.6</b> Using LaTeXStrings.jl</a>
+        </span>
+    </p>
+</div>
+
+
+<div class="license">
+    <br/>
+  <br/>
+  <span style="display: flex; justify-content: center;"> <a
+      style="display: flex; align-items: center; border: 1.5px solid black; border-radius: 10px;"
+      href="https://opencollective.com/juliadatascience" target="_blank"> <img src="/images/coffee.png" height="18px" style="margin: 5px; display:inline"> <span style="margin-left: 4px; color: black !important">Support this project</span> </a> </span> <br> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+    Jose Storopoli, Rik Huijzer, Lazaro Alonso
+</div>
+</div>
+</div>
+</body>
+</html>

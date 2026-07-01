@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jose Storopoli" />
+  <meta name="author" content="Rik Huijzer" />
+  <meta name="author" content="Lazaro Alonso" />
+  <title>Desempenho - Julia Data Science</title>
+  <link rel="shortcut icon" type="image/png" href="/pt/favicon.png"/>
+  <link rel="stylesheet" href="/pt/style.css"/>
+    <script src="/pt/mousetrap.min.js"></script>
+    <style>
+  @font-face {
+    font-family: JuliaMono-Regular;
+    src: url("/pt/JuliaMono-Regular.woff2");
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/pt/github.min.css">
+<script src="/pt/highlight.min.js"></script>
+<script src="/pt/julia.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre').forEach((el) => {
+        hljs.highlightElement(el);
+    });
+});
+</script>
+ 
+</head>
+<body>
+<script>
+function click_next() {
+  var next = document.getElementById('nav-next');
+  next.firstElementChild.nextElementSibling.click();
+}
+function click_prev() {
+  var prev = document.getElementById('nav-prev');
+  prev.firstElementChild.click();
+}
+Mousetrap.bind('right', click_next);
+Mousetrap.bind('h', click_prev);
+Mousetrap.bind('left', click_prev);
+Mousetrap.bind('l', click_next);
+</script>
+
+<div class="books-container">
+<aside class="books-menu">
+<input type="checkbox" id="menu">
+<label for="menu">☰</label>
+<div class="books-title">
+<a href="/pt/">Julia Data Science</a>
+</div><br />
+<span class="books-subtitle">
+
+</span>
+<div class="books-menu-content">
+<li><a class="menu-level-1" href="/pt/preface"><b>1</b> Prefácio</a></li>
+<li><a class="menu-level-2" href="/pt/why_data_science"><b>1.1</b> O que é Ciência de Dad..</a></li>
+<li><a class="menu-level-2" href="/pt/engineering"><b>1.2</b> Engenharia de software</a></li>
+<li><a class="menu-level-2" href="/pt/agradecimentos"><b>1.3</b> Agradecimentos</a></li>
+<li><a class="menu-level-1" href="/pt/why_julia"><b>2</b> Por que Julia?</a></li>
+<li><a class="menu-level-2" href="/pt/non-programmers"><b>2.1</b> Para os que nunca progra..</a></li>
+<li><a class="menu-level-2" href="/pt/programmers"><b>2.2</b> Para programadores</a></li>
+<li><a class="menu-level-2" href="/pt/julia_accomplish"><b>2.3</b> O que Julia pretende alc..</a></li>
+<li><a class="menu-level-2" href="/pt/julia_wild"><b>2.4</b> Julia Por Aí</a></li>
+<li><a class="menu-level-1" href="/pt/julia_basics"><b>3</b> Básico de Julia</a></li>
+<li><a class="menu-level-2" href="/pt/syntax"><b>3.1</b> Sintaxe da linguagem</a></li>
+<li><a class="menu-level-2" href="/pt/data_structures"><b>3.2</b> Estruturas Nativas de Da..</a></li>
+<li><a class="menu-level-2" href="/pt/filesystem"><b>3.3</b> Sistema de Arquivos</a></li>
+<li><a class="menu-level-2" href="/pt/standardlibrary"><b>3.4</b> Biblioteca Padrão de Ju..</a></li>
+<li><a class="menu-level-1" href="/pt/dataframes"><b>4</b> DataFrames.jl</a></li>
+<li><a class="menu-level-2" href="/pt/load_save"><b>4.1</b> Carregar e salvar arquiv..</a></li>
+<li><a class="menu-level-2" href="/pt/indexação-e-sumarização"><b>4.2</b> Indexação e Sumarização</a></li>
+<li><a class="menu-level-2" href="/pt/filter_subset"><b>4.3</b> Filtro e Subconjunto</a></li>
+<li><a class="menu-level-2" href="/pt/select"><b>4.4</b> Select</a></li>
+<li><a class="menu-level-2" href="/pt/missing_data"><b>4.5</b> Tipos de Dados e Dados F..</a></li>
+<li><a class="menu-level-2" href="/pt/join"><b>4.6</b> Join</a></li>
+<li><a class="menu-level-2" href="/pt/transformações-de-variáveis"><b>4.7</b> Transformações de Vari..</a></li>
+<li><a class="menu-level-2" href="/pt/groupby_combine"><b>4.8</b> Groupby e Combine</a></li>
+<li><a class="menu-level-2" href="/pt/df_performance"><b>4.9</b> Desempenho</a></li>
+<li><a class="menu-level-1" href="/pt/DataVisualizationMakie"><b>5</b> Visualização de dados co..</a></li>
+<li><a class="menu-level-2" href="/pt/cairomakie"><b>5.1</b> CairoMakie.jl</a></li>
+<li><a class="menu-level-2" href="/pt/datavisMakie_attributes"><b>5.2</b> Atributos</a></li>
+<li><a class="menu-level-2" href="/pt/themes"><b>5.3</b> Temas</a></li>
+<li><a class="menu-level-2" href="/pt/usando-latexstrings.jl"><b>5.4</b> Usando LaTeXStrings.jl</a></li>
+<li><a class="menu-level-2" href="/pt/makie_colors"><b>5.5</b> Cores e mapas de cores</a></li>
+<li><a class="menu-level-2" href="/pt/makie_layouts"><b>5.6</b> Layouts</a></li>
+<li><a class="menu-level-2" href="/pt/glmakie"><b>5.7</b> GLMakie.jl</a></li>
+<li><a class="menu-level-1" href="/pt/appendix"><b>6</b> Apêndice</a></li>
+<li><a class="menu-level-2" href="/pt/appendix_pkg"><b>6.1</b> Versões dos Pacotes</a></li>
+<li><a class="menu-level-2" href="/pt/notation"><b>6.2</b> Formatação</a></li>
+<li><a class="menu-level-1" href="/pt/referências"><b></b> Referências</a></li>
+</div>
+</aside>
+
+<div class="books-content">
+<h2 data-number="4.9" id="sec:df_performance"><span class="header-section-number">4.9</span> Desempenho</h2>
+<p>Até agora, não pensamos em fazer nosso código <code>DataFrames.jl</code> <strong>rápido</strong>. Como tudo em Julia, <code>DataFrames.jl</code> pode ser bem veloz. Nesta seção, daremos algumas dicas e truques de desempenho.</p>
+<h3 data-number="4.9.1" id="sec:df_performance_inplace"><span class="header-section-number">4.9.1</span> Operações in-loco</h3>
+<p>Como explicamos em Section <a href="/pt/data_structures#sec:function_bang">3.2.1.1</a>, funções que terminam com uma exclamação <code>!</code> são um padrão comum para denotar funções que modificam um ou mais de seus argumentos. O contexto do código de alta performance em Julia, <em>significa</em> que **funções com <code>!</code> apenas mudarão no local os objetos que fornecemos como argumentos.</p>
+<p>Quase todas as funções <code>DataFrames.jl</code> que vimos tem uma "<code>!</code> gêmea". Por exemplo, <code>filter</code> tem um <em>in-loco</em> <code>filter!</code>, <code>select</code> tem <code>select!</code>, <code>subset</code> tem <code>subset!</code>, e assim por diante. Observe que essas funções <strong>não</strong> retornam um novo <code>DataFrame</code>, mas, ao invés vez disso, elas <strong>atualizam</strong> o <code>DataFrame</code> sobre o qual atuam. Além disso, <code>DataFrames.jl</code> (versão 1.3 em diante) suporta in-loco <code>leftjoin</code> com a função <code>leftjoin!</code>. Essa função atualiza o <code>DataFrame</code> esquerdo com as colunas unidas do <code>DataFrame</code> direito. Há uma ressalva de que cada linha da tabela esquerda deve corresponder a <em>no máximo</em> uma linha da tabela direita.</p>
+<p>Se você deseja a mais alta velocidade e desempenho em seu código, definitivamente deve usar as funções <code>!</code> ao invés das funções regulares de <code>DataFrames.jl</code>.</p>
+<p>Vamos voltar para o exemplo da função <code>select</code> no começo de Section <a href="/pt/select#sec:select">4.4</a>. Aqui está o <code>DataFrame</code> responses:</p>
+<pre class="language-julia"><code>responses()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">id</th>
+<th style="text-align: right;">q1</th>
+<th style="text-align: right;">q2</th>
+<th style="text-align: right;">q3</th>
+<th style="text-align: right;">q4</th>
+<th style="text-align: right;">q5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">us</td>
+<td style="text-align: right;">F</td>
+<td style="text-align: right;">B</td>
+<td style="text-align: right;">A</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">fr</td>
+<td style="text-align: right;">B</td>
+<td style="text-align: right;">C</td>
+<td style="text-align: right;">E</td>
+</tr>
+</tbody>
+</table>
+<p>Agora vamos desempenhar a seleção com a função <code>select</code>, como fizemos antes:</p>
+<pre class="language-julia"><code>select(responses(), :id, :q1)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">id</th>
+<th style="text-align: right;">q1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">28</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">61</td>
+</tr>
+</tbody>
+</table>
+<p>Aqui está a função <em>in-loco</em>:</p>
+<pre class="language-julia"><code>select!(responses(), :id, :q1)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">id</th>
+<th style="text-align: right;">q1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">28</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">61</td>
+</tr>
+</tbody>
+</table>
+<p>O macro <code>@allocated</code> nos diz quanta memória foi alocada. Em outras palavras, <strong>quanta informação nova o computador teve que armazenar em sua memória enquanto executava o código</strong>. Vamos ver qual será o desempenho:</p>
+<pre class="language-julia"><code>df = responses()
+@allocated select(df, :id, :q1)</code></pre>
+<pre class="language-plain"><code>7296</code></pre>
+<pre class="language-julia"><code>df = responses()
+@allocated select!(df, :id, :q1)</code></pre>
+<pre class="language-plain"><code>7088</code></pre>
+<p>Como pudemos ver, <code>select!</code> aloca menos que <code>select</code>. Portanto, é mais rápido e consome menos memória.</p>
+<h3 data-number="4.9.2" id="sec:df_performance_df_copy"><span class="header-section-number">4.9.2</span> Copiar vs Não Copiar Colunas</h3>
+<p>Existem <strong>duas formas de acessar a coluna DataFrame</strong>. Elas diferem na forma como são acessadas: uma cria uma “visualização” para a coluna sem copiar e a outra cria uma coluna totalmente nova copiando a coluna original.</p>
+<p>A primeira usa o operador dot regular <code>.</code> seguido pelo nome da coluna, como em <code>df.col</code>. Essa forma de acesso <strong>não copia</strong> a coluna <code>col</code>. Ao invés disso <code>df.col</code> cria uma “visualização” que é um link para a coluna original sem realizar nenhuma alocação. Além do mais, a sintaxe <code>df.col</code> é a mesma que <code>df[!, :col]</code> com a exclamação <code>!</code> como a seletora de linha.</p>
+<p>A segunda forma de acessar uma coluna <code>DataFrame</code> é a <code>df[:, :col]</code> com os dois pontos <code>:</code> como o seletor de linha. Esse tipo de acesso <strong>copia</strong> a coluna <code>col</code>, portanto, tenha cuidado, pois isso pode produzir alocações indesejadas.</p>
+<p>Como antes, vamos experimentar essas duas maneiras de acessar uma coluna no <code>DataFrame</code> responses:</p>
+<pre class="language-julia"><code>df = responses()
+@allocated col = df[:, :id]</code></pre>
+<pre class="language-plain"><code>517788</code></pre>
+<pre class="language-julia"><code>df = responses()
+@allocated col = df[!, :id]</code></pre>
+<pre class="language-plain"><code>0</code></pre>
+<p>Quando acessamos uma coluna sem copiá-la estamos fazendo alocações zero e nosso código deve ser mais rápido. Então, se você não precisa de uma cópia, sempre acesse suas colunas <code>DataFrame</code>s com <code>df.col</code> ou <code>df[!, :col]</code> ao invés de <code>df[:, :col]</code>.</p>
+<h3 data-number="4.9.3" id="sec:df_performance_csv_read_file"><span class="header-section-number">4.9.3</span> CSV.read versus CSV.File</h3>
+<p>Se você der uma olhada no output ajuda para <code>CSV.read</code>, você verá que existe uma função de conveniência idêntica à função chamada <code>CSV.File</code> com os mesmos argumentos de palavras-chave. Ambos <code>CSV.read</code> e <code>CSV.File</code> vão ler o conteúdo de um arquivo CSV, mas eles se diferem no comportamento padrão. <strong><code>CSV.read</code>, por padrão, não fará cópias</strong> dos dados de entrada. Ao invés disso, <code>CSV.read</code> irá passar todos os dados para o segundo argumento (conhecido como “sink”).</p>
+<p>Então, algo assim:</p>
+<pre class="julia"><code>df = CSV.read(&quot;file.csv&quot;, DataFrame)</code></pre>
+<p>passará todos os dados recebidos de <code>file.csv</code> para o sink <code>DataFrame</code>, retornando assim um tipo <code>DataFrame</code> que vamos armazenar na variável <code>df</code>.</p>
+<p>Para o caso do <strong><code>CSV.File</code>, o comportamento padrão é o oposto: ele fará cópias de todas as colunas contidas no arquivo CSV</strong>. Além disso, a sintaxe é um pouco diferente. Precisamos embrulhar tudo que o <code>CSV.File</code> retorna em uma função construtora <code>DataFrame</code>:</p>
+<pre class="julia"><code>df = DataFrame(CSV.File(&quot;file.csv&quot;))</code></pre>
+<p>Ou, com o operador pipe <code>|&gt;</code>:</p>
+<pre class="julia"><code>df = CSV.File(&quot;file.csv&quot;) |&gt; DataFrame</code></pre>
+<p>Como dissemos, <code>CSV.File</code> fará cópias de cada coluna no arquivo CSV subjacente. Em última análise, se você quiser o máximo de desempenho, você definitivamente usaria <code>CSV.read</code> em vez de <code>CSV.File</code>. É por isso que cobrimos apenas <code>CSV.read</code> em Section <a href="/pt/load_save#sec:csv">4.1.1</a>.</p>
+<h3 data-number="4.9.4" id="sec:df_performance_csv_multiple"><span class="header-section-number">4.9.4</span> Múltiplos Arquivos CSV.jl</h3>
+<p>Agora vamos voltar nossa atenção para o <code>CSV.jl</code>. Especificamente, o caso em que temos vários arquivos CSV para ler em um único <code>DataFrame</code>. Desde a versão 0.9 do <code>CSV.jl</code> podemos fornecer um vetor de strings representando nomes de arquivos. Antes, precisávamos realizar algum tipo de leitura de vários arquivos e, em seguida, concatenar verticalmente os resultados em um único <code>DataFrame</code>. Para exemplificar, o código abaixo lê vários arquivos CSV e os concatena verticalmente usando <code>vcat</code> em um único <code>DataFrame</code> com a função <code>reduce</code>:</p>
+<pre class="julia"><code>files = filter(endswith(&quot;.csv&quot;), readdir())
+df = reduce(vcat, CSV.read(file, DataFrame) for file in files)</code></pre>
+<p>Uma característica adicional é que <code>reduce</code> não será paralelizado porque precisa manter a ordem de <code>vcat</code> que segue a mesma ordem do vetor <code>files</code>.</p>
+<p>Com esta funcionalidade em <code>CSV.jl</code> nós simplesmente passamos o vetor <code>files</code> para a função <code>CSV.read</code>:</p>
+<pre class="julia"><code>files = filter(endswith(&quot;.csv&quot;), readdir())
+df = CSV.read(files, DataFrame)</code></pre>
+<p><code>CSV.jl</code> designará um arquivo para cada thread disponível no computador enquanto ele concatena lentamente cada saída analisada por thread em um <code>DataFrame</code>. Portanto, temos o <strong>benefício adicional do multithreading</strong> que não temos com a opção <code>reduce</code>.</p>
+<h3 data-number="4.9.5" id="sec:df_performance_categorical_compression"><span class="header-section-number">4.9.5</span> Compressão CategoricalArrays.jl</h3>
+<p>Se você estiver lidando com dados com muitos valores categóricos, ou seja, muitas colunas com dados textuais que representam dados qualitativos de alguma forma diferentes, você provavelmente se beneficiaria usando a compressão <code>CategoricalArrays.jl</code>.</p>
+<p>Por padrão, <strong><code>CategoricalArrays.jl</code> usará um inteiro sem sinal no tamanho de 32 bits <code>UInt32</code> para representar as categorias subjacentes</strong>:</p>
+<pre class="language-julia"><code>typeof(categorical([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]))</code></pre>
+<pre class="language-plain"><code>CategoricalVector{String, UInt32, String, CategoricalValue{String, UInt32}, Union{}}</code></pre>
+<p>Isso significa que <code>CategoricalArrays.jl</code> pode representar até <span class="math inline">\(2^{32}\)</span> categorias diferentes em um determinado vetor ou coluna, o que é um valor enorme (perto de 4,3 bilhões). Você provavelmente nunca precisaria ter esse tipo de capacidade para lidar com dados regulares<a href="/pt#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a>. É por isso que <code>categorical</code> tem um argumento <code>compress</code> que aceita <code>true</code> ou <code>false</code> para determinar se os dados categóricos subjacentes são compactados ou não. Se você passar <strong><code>compress=true</code>, <code>CategoricalArrays.jl</code> tentará compactar os dados categóricos subjacentes para a menor representação possível em <code>UInt</code></strong>. Por exemplo, o vetor <code>categorical</code> anterior seria representado como um inteiro sem sinal de tamanho 8 bits <code>UInt8</code> (principalmente porque este é o menor inteiro sem sinal disponível em Julia):</p>
+<pre class="language-julia"><code>typeof(categorical([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]; compress=true))</code></pre>
+<pre class="language-plain"><code>CategoricalVector{String, UInt8, String, CategoricalValue{String, UInt8}, Union{}}</code></pre>
+<p>O que tudo isso significa? Suponha que você tenha um grande vetor. Por exemplo, considere um vetor com um milhão de entradas, mas apenas 4 categorias subjacentes: A, B, C ou D. Se você não compactar o vetor categórico resultante, você terá um milhão de entradas armazenadas como <code>UInt32</code>. Por outro lado, se você compactar, você terá um milhão de entradas armazenadas como <code>UInt8</code>. Usando a função <code>Base.summarysize</code> podemos obter o tamanho subjacente, em bytes, de um determinado objeto. Então, vamos quantificar quanta memória mais precisaríamos ter se não comprimissemos nosso um milhão de vetores categóricos:</p>
+<pre class="julia"><code>using Random</code></pre>
+<pre class="language-julia"><code>one_mi_vec = rand([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;], 1_000_000)
+Base.summarysize(categorical(one_mi_vec))</code></pre>
+<pre class="language-plain"><code>4000612</code></pre>
+<p>4 milhões de bytes, que é aproximadamente 3,8 MB. Não nos entenda mal, esta é uma boa melhoria em relação ao tamanho da string bruta:</p>
+<pre class="language-julia"><code>Base.summarysize(one_mi_vec)</code></pre>
+<pre class="language-plain"><code>8000076</code></pre>
+<p>Reduzimos 50% do tamanho dos dados brutos usando uma representação subjacente padrão <code>CategoricalArrays.jl</code> como <code>UInt32</code>.</p>
+<p>Agora vamos ver como nos sairíamos com a compressão:</p>
+<pre class="language-julia"><code>Base.summarysize(categorical(one_mi_vec; compress=true))</code></pre>
+<pre class="language-plain"><code>1000564</code></pre>
+<p>Reduzimos o tamanho para 25% (um quarto) do tamanho original do vetor não compactado sem perder informações. Nosso vetor categórico compactado agora tem 1 milhão de bytes, que é aproximadamente 1,0 MB.</p>
+<p>Portanto, sempre que possível, no interesse do desempenho, considere usar <code>compress=true</code> em seus dados categóricos.</p>
+
+
+<div class="bottom-nav">
+    <p id="nav-prev" style="text-align: left;">
+        <a class="menu-level-2" href="/pt/groupby_combine"><b>4.8</b> Groupby e Combine</a> <kbd>←</kbd>
+        <span id="nav-next" style="float: right;">
+            <kbd>→</kbd> <a class="menu-level-1" href="/pt/DataVisualizationMakie"><b>5</b> Visualização de dados co..</a>
+        </span>
+    </p>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn17" role="doc-endnote"><p> 17. observe também que dados regulares (até 10.000 linhas) não são big data (mais de 100.000 linhas). Portanto, se você estiver lidando principalmente com big data, tenha cuidado ao limitar seus valores categóricos.<a href="/pt#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+
+<div class="license">
+    <br/>
+  <br/>
+  <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+    Jose Storopoli, Rik Huijzer, Lazaro Alonso
+</div>
+</div>
+</div>
+</body>
+</html>
